@@ -1,0 +1,228 @@
+Things we really should fix before rc3:
+
+	- figure out WTF to do about new 2.4 powerpc kernels
+	- debootstrap NMU for parted (steve)
+	- fix last few source/udeb inconsistencies
+
+Things that would be nice for rc3, but can't block it:
+
+	- vmelilo-installer needs to remove no_bootloader
+	  from /target/etc/kernel-img.conf (still relevant?)
+
+This TODO list can only touch on some larger issues, but there are a great
+many open bugs on various components of the installer. See all bugs tagged
+d-i in the BTS. Also, there are many unprocessed installation-reports.
+
+
+Status for different parts of debian-installer.  The numbers are
+approximate (as in +/- 50%) and may change in any direction, at any
+time.
+
+[0%] Not begun
+---------------------------------------------------------------------
+	- some architectures
+		hurd-i386 (we will ship w/o this)
+		sh (we will ship w/o this)
+
+[30%] Might need large rewrites. Current implementation might
+      work by accident
+---------------------------------------------------------------------
+        - GUI frontend to cdebconf.
+		There are some basic implementations. The trick is to make
+		it a GUI that does not suck, while still using debconf
+		underneath.
+	- ppp support
+		  Not as important for analog dialup, as for ISDN, pppoe.
+
+	
+[60%] Needs some work, but does its grunt work
+---------------------------------------------------------------------
+	- I18N
+		Mostly done, still filling in minor holes.
+	- translations
+		Varying languages translated to varying degrees.
+		http://people.debian.org/~seppy/d-i/translation-status.html
+        - boot loader installers (lilo, grub, etc)
+		Work, except for when they don't. See BTS.
+	- anna
+		Works, mostly.  Needs support for Release files.
+		Support for signed Release files would be cool, but
+		needs gpgv-udeb.
+		Needs to have load-installer properly split out of the anna
+		binary to save space on root floppy. Or removed, not used
+		anymore.
+        - disk selector, partitioner
+		We have switched to partman everything except a couple of
+		subarches and s390.
+	- bugreporter-udeb
+		only supports saving to floppy, which many lack
+		should offer a way to save via network or to usb stick
+	- post-reboot configuration
+		base-config is stable, though it could use more polish
+		Some questions repeat questions from d-i.
+	- web site
+		http://www.debian.org/devel/debian-installer/
+		Could be better laid out, lacking some sections, other
+		parts are quite good.
+	- archive integration
+		No automatic propagation to testing.
+		No source propagation for udeb sources!
+	- pcmcia support
+		Much improved, generally works now.
+		Automatic PCI resource range exclusion based on probing
+		still needed, work in progress.
+	- low memory support
+		Where "low" is 24-46 mb!
+		Works, but user must be careful to set up swap ASAP.
+		There is no sanity checking, and some bad failure modes.
+        - user documentation
+		Installation manual is up-to-date for i386.
+		Needs sanity checking for other architectures.
+	- developer documentation
+		We understand it, but it could be improved.
+	- 2.6 support
+		Works on i386, with minor bugs.
+		Works on powerpc, at least newworld. Testing on
+		other subarches needed, especially G5 and oldworld (with
+		mkvmlinuz).
+	- preseeding
+		Works pretty well.
+		Some things still cannot be preseeded. This is generally a
+		bug in the udeb's use of debconf.
+		Some problems with kernel command line limits.
+		Too many things need to be set at the kernel command line
+		for netboot preseeding.
+	- most architectures
+		i386
+		ia64
+		powerpc
+		mips
+		mipsel
+		m68k (some subarches)
+			- bvme floppies need root to build
+		alpha
+		sparc
+			- floppies need root to build
+		arm (some subarches)
+		hppa
+		amd64 (unofficial)
+		s/390
+
+[90%] Single missing important feature or bug.
+---------------------------------------------------------------------
+	- hw-detect
+		Working but needs to be switched over to discover2 or hotplug
+	- iso-scan
+		Works, but does not flag the disk the iso is mounted from
+		as unusable by the rest of the installer.
+        - netcfg
+		Working, pending rewrite for IPv6.
+	- bts
+		Still need a non-manual way to tag our bugs.
+	- language-chooser
+		The perennial problem is how to order/present the list of
+		languages. Many complaints, but it works.
+        - base system installer
+		It can break due to testing package churn. cdebootstrap
+		would fix this; also debootstrap/apt/archive changes in
+		progress to add Base: overrides to Packages files.
+		Needs more granular progress during debootstrp run (ubuntu
+		patches)
+
+[100%] Those shouldn't need to be touched any more 
+       (famous last words)
+---------------------------------------------------------------------
+        - udpkg
+	- cd installs
+ 	- net retriever
+	- cdrom retriever
+        - ethdetect
+        - cdebconf
+	- floppy retriever
+        - main-menu
+        - choose-mirror
+        - busybox integration
+        - install media build system
+	- kernel-package integration
+        - library reduction
+	- wireless support
+
+
+Post-sarge goals
+================
+
+	- remove skolelinux/woody compatability code (after careful
+	  consideration and making sure it's ok) (joeyh)
+	- switch to discover 2 (joeyh)
+	- switch to cdebootstrap (joeyh)
+	- 2.6 as default kernel on i386 (joeyh)
+	- 2.6 floppies on i386 (joeyh)
+	- fix pkg-lists names to match images (joeyh)
+	- improve udeb dependancies and use fully in pkg-lists (joeyh)
+	- consistent indentation of all shell scripts
+	  (with a style that minimises size on initrd! :-) (joeyh)
+	- drop devfs! (joeyh)
+	- improve base-installer kernel robustness (Kamion)
+	- improve base-installer progress bar granularity (Kamion)
+	- merged/rewritten localechooser (Bubulle)
+	- 16 mb installs
+	- graphical installer (markos, kamion)
+	- finish partman (anton)
+	- handle debian upgrades in partman (anton)
+	- fai integration (markos)
+	- cloning from installer system (luther)
+	- base-installer test suite (kamion)
+	- discover2 (gaudenz)
+	- hotplug (gaudenz, kamion)
+	- udev (kamion)
+	- use same device names in installer and installed
+	  system (kamion)
+	- non-linux d-i (jbailey)
+	- libc udeb renamed to include version number (jbailey)
+	- "vague thoughts of making debian-cd my bitch" (jbailey)
+	- moon-buggy udeb (cts@debian)
+	- britney and udebs
+	- fai disk config files in d-i (holger)
+	- low(er) mem (zboob)
+	- etch in 2005 (or bust) (jvw)
+	- uml for testing d-i (anton)
+	- udebs and debs of same name (joeyh, gaudenz)
+	- post reboot network configuration (kamion)
+	- real deb from archdetect udeb (luther)
+	- getting rid of hardcoded paths in d-i (kamion)
+
+Common problems and transitions
+===============================
+
+This is a list of common mistakes that need to be corrected throughout the
+code base:
+
+  * All debconf commands that INPUT, GO, GET or SET questions should check
+    their return value. This is pure evil:
+
+    debconf->command(debconf, "GET", "mirror/suite", NULL); /* unchecked return code ! */
+    asprintf(&command, "foo %s", debconf->value);
+    system(command);
+
+  * cdebconf's debconfclient.h has a set of macros for calling debconf
+    (debconf_get() and so on)
+    These should perhaps be used consistently throughout the code for
+    clarity.
+
+  * There needs to be a centralised logging method. Syslog will do, but
+    we currently have a lot of nasty code that appends messages to
+    /var/log/messages directly. All of that would be converted to pipe it
+    to logger. However, this is a problem, because piping a command to
+    logger loses the exit status of the command. Need some way to run a
+    command, logging the ouput to syslog, w/o losing exit status.
+
+    (Several exist in the bts/archives, none have been used yet.)
+
+  * udebs should not include md5sums files, or postrm, prerm, preinst
+    scripts. This includes ones generated by debhelper. Linda will find
+    these pretty well.
+
+  * There is no need to set the seen flag anymore. All code that does so
+    should be removed, unless that code is expected to also possibly run on
+    a normal debian system (choose-mirror). Seen flag munging can break
+    preseeding.
