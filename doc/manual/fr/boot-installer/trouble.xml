@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 14602 -->
+
+ <sect1 id="boot-troubleshooting">
+ <title>Dysfonctionnements pendant la procédure d'installation</title>
+<para>
+</para>
+
+  <sect2 id="unreliable-floppies">
+  <title>Fiabilité des disquettes</title>
+
+<para>
+
+Le plus gros problème pour les gens qui installent Debian pour la première 
+fois semble être la fiabilité des disquettes.
+
+</para><para>
+
+La disquette d'amorçage est celle qui pose les problèmes les plus embêtants
+car elle accède directement au matériel, avant que Linux ne se charge. 
+Souvent, le matériel n'est pas détecté aussi sûrement qu'avec un lecteur de 
+disquette Linux et peut s'arrêter sans message d'erreur quand il lit
+des données incorrectes. Il peut aussi y avoir des erreurs dans les 
+disquettes de pilotes et la plupart d'entre elles se signalent par des 
+messages sur des erreurs d'entrées/sorties.
+
+</para><para>
+
+Si vous êtes bloqué pendant l'installation avec une disquette, la première 
+chose à faire est de télécharger à nouveau l'image de la disquette et de la 
+réécrire sur une <emphasis>nouvelle</emphasis> disquette. Reformater 
+simplement l'ancienne disquette peut être insuffisant, même si la disquette est
+reformatée et écrite sans erreur. Il est parfois utile d'écrire les disquette 
+sur un autre système.
+
+</para><para>
+
+Un utilisateur a rapporté qu'il avait dû réécrire les
+images sur la disquette <emphasis>trois</emphasis> fois avant qu'elle
+fonctionne&nbsp;; ensuite, tout s'est bien déroulé avec cette
+troisième disquette.
+
+</para><para>
+
+D'autres utilisateurs ont signalé qu'en redémarrant plusieurs fois avec la 
+même disquette, on arrive parfois à faire amorcer le système. Tout cela est 
+dû à des défaillances matérielles ou à des défaillances du micro-programme
+de contrôle des lecteurs de disquettes.
+
+</para>
+  </sect2>
+
+  <sect2><title>Configuration d'amorçage</title>
+
+<para>
+
+Si vous avez des problèmes et que le noyau se bloque pendant
+la phase d'amorçage, qu'il ne reconnaisse pas vos périphériques ou bien que 
+les disques ne soient pas reconnus correctement, la première chose à faire 
+est de vérifier les paramètres d'amorçage, ainsi qu'il a été discuté 
+dans&nbsp;: <xref linkend="boot-parms"/>.
+
+</para><para>
+
+Si vous amorcez avec votre propre noyau plutôt que celui fourni par 
+l'installateur, assurez-vous que <userinput>CONFIG_DEVFS</userinput> ne soit 
+pas déclaré dans le noyau. L'installateur n'est pas compatible avec
+<userinput>CONFIG_DEVFS</userinput>.
+
+</para><para>
+
+Les problèmes peuvent être souvent résolus en retirant périphériques et 
+extensions et en essayant de réamorcer. <phrase arch="i386">Modems internes, 
+cartes son et périphériques Plug'n Play peuvent être particulièrement
+problématiques.</phrase>
+
+</para><para>
+
+Il existe des limitations dans notre jeu de disquettes d'amorçage en ce qui 
+concerne le matériel. Certaines plateformes reconnues par Linux ne le
+seront pas directement par nos disquettes. Si c'est le cas, vous aurez à 
+créer votre propre disquette d'amorçage
+(voir&nbsp;: <xref linkend="rescue-replace-kernel"/>) ou à choisir une 
+installation par le réseau.
+
+</para><para>
+
+Si vous avez une machine avec beaucoup de mémoire, plus de 512&nbsp;Mo, et si 
+l'installateur se bloque lors de l'amorçage du noyau, vous pouvez donner un
+paramètre d'amorçage pour limiter le total de la mémoire que le noyau devra 
+voir, par exemple <userinput>mem=512m</userinput>.
+
+</para>
+  </sect2>
+
+  <sect2 id="kernel-msgs">
+  <title>Comprendre les messages du noyau au démarrage</title>
+
+<para>
+
+Durant la séquence de démarrage, vous pourriez voir beaucoup de messages du 
+genre 
+<computeroutput>can't find <replaceable>something</replaceable></computeroutput>, 
+ou <computeroutput><replaceable>something</replaceable> not present</computeroutput>, 
+<computeroutput>can't initialize <replaceable>something</replaceable></computeroutput> ou même
+<computeroutput>this driver release depends on <replaceable>something</replaceable> </computeroutput>. La plupart de ces messages sont sans conséquence. 
+Vous les voyez parce que le noyau du système d'installation est conçu pour 
+tourner sur des ordinateurs avec un grand nombre de périphériques très
+différents. Évidemment, aucun ordinateur ne possède tous les
+périphériques possibles, et le système d'exploitation pourrait se plaindre 
+alors qu'il recherche un périphérique que vous ne possédez pas. Vous pourriez 
+également voir le système s'arrêter pendant un moment. Cela arrive quand il 
+attend la réponse d'un périphérique qui n'est pas présent sur votre système. 
+Si vous trouvez le temps de démarrage du système exagérément long, vous 
+pourrez créer un noyau personnalisé plus tard (voyez&nbsp;: 
+<xref linkend="kernel-baking"/>).
+
+</para>
+  </sect2>
+
+
+  <sect2 id="problem-report">
+  <title>Rapporteur de bogues</title>
+<para>
+
+Si vous parvenez à la fin de la phase d'amorçage mais que vous ne parveniez 
+pas à terminer l'installation, le choix «&nbsp;Rapporteur de bogues&nbsp;»
+du menu peut vous aider. Il copie les journaux contenant les erreurs système
+et des informations sur la configuration sur une disquette. Toutes ces 
+informations peuvent donner des indications sur ce qui s'est mal déroulé et 
+sur la manière de le corriger. Si vous envoyez un rapport de bogue, vous
+pouvez attacher cette information au rapport.
+
+</para><para>
+
+Pendant l'installation, d'autres messages intéressants se trouvent dans le 
+fichier <filename>/target/var/log/debian-installer/</filename>, et, quand
+l'ordinateur a démarré le nouveau système installé, ces messages se trouvent
+dans le fichier <filename>/var/log/debian-installer/</filename>.
+
+</para>
+  </sect2>
+
+  <sect2 id="submit-bug">
+  <title>Faire un rapport de bogue</title>
+<para>
+
+Si vous avez toujours des ennuis, faites un rapport de bogue. Envoyez un 
+courriel à <email>submit@bugs.debian.org</email>. 
+Vous <emphasis>devez</emphasis> inclure les lignes suivantes en tête de votre
+message&nbsp;:
+
+<informalexample><screen>
+
+Package: installation-reports
+Version: <replaceable>version</replaceable>
+
+</screen></informalexample>
+
+Assurez-vous que le champ <replaceable>version</replaceable> soit bien
+identique à la version de l'installateur Debian que vous utilisez. 
+Le numéro de version peut être trouvé en pressant la touche <keycap>F1</keycap>
+à l'invite <prompt>boot:</prompt> du support d'installation. Vous mentionnerez
+aussi où vous avez téléchargé ce support d'installation, ou bien la source du
+cédérom que vous avez acheté.
+
+</para><para>
+
+Vous devrez aussi inclure les informations suivantes dans votre rapport de 
+bogue, et si vous utilisez le programme <command>reportbug</command> elles
+le seront automatiquement&nbsp;:
+
+<informalexample><screen>
+
+<phrase arch="i386">
+saveur :        <replaceable>image que vous utilisez</replaceable>
+</phrase>
+architecture:  &architecture; 
+modèle :         <replaceable>le modèle et le fabricant de matériel</replaceable>
+memoire :        <replaceable>quantité de RAM</replaceable>
+scsi :          <replaceable>adapteur SCSI, s'il y en a</replaceable>
+cd-rom :        <replaceable>modèle de cédérom et type d'interface, p. ex. ATAPI</replaceable>
+carte réseau :  <replaceable>carte d'interface réseau, si nécessaire</replaceable>
+pcmcia :        <replaceable>Précisions sur les périphériques PCMCIA</replaceable>
+
+</screen></informalexample>
+
+</para><para>
+
+Suivant la nature du bogue, il peut être souhaitable d'indiquer si vous 
+avez des disques IDE ou SCSI, les autres périphériques comme l'audio, la taille
+des disques et le modèle des cartes vidéo.
+
+</para><para>
+
+Dans le rapport de bogue, décrivez le problème en incluant les derniers 
+messages visibles du noyau dans le cas d'un plantage du noyau. Décrivez les 
+étapes que vous avez effectuées pour arriver dans cet état.
+
+</para>
+
+  </sect2>
+
+ </sect1>

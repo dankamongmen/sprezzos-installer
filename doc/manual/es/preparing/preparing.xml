@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 16192 -->
+
+<chapter id="preparing">
+ <title>Antes de instalar &debian;</title>
+
+&install-overview.xml;
+&backup.xml;
+&needed-info.xml;
+&minimum-hardware-reqts.xml;
+&non-debian-partitioning.xml;
+&pre-install-bios-setup.xml;
+
+Este capítulo describe la preparación de la instalación antes de que
+haya siquiera arrancado el instalador. Esto incluye efectuar copias de
+seguridad de su información, reunir información sobre su hardware y 
+ubicar cualquier información necesaria.
+
+</chapter>

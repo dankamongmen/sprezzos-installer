@@ -1,0 +1,41 @@
+<!-- original version: 14559 -->
+
+   <sect2 id="kbd-chooser"><title>Auswahl des Keyboards</title>
+<para>
+
+Wählen Sie ein Keyboard aus, das dem Layout, das für Ihre nationale
+Sprache verwendet wird, entspricht, oder wählen Sie etwas ähnliches aus,
+wenn das gewünschte Keyboard-Layout nicht verfügbar ist. Wenn die
+System-Installation abgeschlossen ist, können Sie aus einer größeren
+Auswahl an wählen (führen Sie <command>kbdconfig</command> als root aus,
+wenn die Installation abgeschlossen ist).
+
+</para><para>
+
+Setzen Sie die Markierung auf die Keyboard Auswahl, die Sie wünschen
+und drücken Sie &enterkey;. Benutzen Sie die Pfeiltasten, um die Markierung
+zu bewegen &mdash; sie befinden sich auf allen nationalsprachlichen
+Keyboard-Layouts an der gleichen stelle, daher sind sie von der
+Keyboard-Konfiguration unabhängig. Ein 'extended' Keyboard ist eine mit
+den Tasten <keycap>F1</keycap> bis <keycap>F10</keycap> in der oberen Reihe.
+
+</para><para arch="mipsel">
+
+Auf DECstations sind ist momentan keine ladbaren Keypams verfügbar,
+daher müssen Sie die Keyboard-Auswahl überspringen und die
+Standard-Kernel-Keymap (LK201 US) beibehalten. Das kann sich in Zukunft ändern,
+da es von der weiteren Linux/MIPS Kernel-Entwicklung abhängt.
+
+</para><para arch="powerpc">
+
+Es gibt zwei Keyboard-Layouts für US Keyboards; das qwerty/mac-usb-us
+(Apple USB) Layout platziert die Alt Funktion auf der
+<keycap>Command/Apple</keycap> Taste (am Keyboard neben der
+<keycap>Leertaste</keycap> platziert, ähnlich zu <keycap>Alt</keycap>
+auf PC Keyboards), während das qwerty/us (Standard) Layout die Alt Funktion
+auf die <keycap>Option</keycap>-Taste platziert (auf den meisten Mac
+Keyboards mit 'alt' beschriftet). In anderer Hinsicht sind die zwei Layouts
+ähnlich.
+
+</para>
+   </sect2>

@@ -1,0 +1,349 @@
+<!-- original version: 14559 -->
+
+
+ <chapter id="d-i-intro"><title>Den Debian Installer verwenden</title>
+
+ <sect1><title>Wie der Installer funktioniert</title>
+<para>
+
+Der Debian Installer besteht aus einer Reihe von Komponenten für spezielle
+Zwecke, die die einzelnen Installationsaufgaben übernehmen. Jede Komponente
+führt seine Aufgabe aus, und fragt vom Benutzer die dazu nötigen Informationen
+ab. Wenn kein Problem aufgetreten ist, wird die nächste Komponente im
+Ablauf aufgerufen, ohne dass der Benutzer eingreifen muss (other than
+various progress messages). Wenn ein Problem auftritt, wird eine Fehlermeldung
+angezeigt, und das Installer Menü kann aufgerufen werden, um alternative
+Aktionen auszuwählen. Wenn keine Probleme auftreten, wird der Benutzer
+das Installer Menü nicht zu sehen bekommen, sondern einfach die
+Fragen für jede Komponente der Reihe nach beantworten.
+
+</para><para>
+
+Den Fragen selbst werden Prioritäten zugeteilt, und die Prioritätsstufe der
+Fragen, die gestellt werden, kann eingestellt werden. Wenn der Installer
+weiß, was zu tun ist, und der Benutzer nicht über die anderen
+Auswahlmöglichkeiten informiert werden muss, trifft der Installer die
+Auswahl und zeigt die Frage nicht an. Gravierende Fehlermitteilungen
+sind auf die Prioritätsstufe 'critical' gesetzt, so dass der Benutzer
+diese immer angezeigt bekommt.
+
+</para><para>
+
+Fortgeschrittene Benutzer werden mit einer Menü-basierten Oberfläche
+leichter zurecht kommen, wo jeder Schritt vielmehr vom Benutzer kontrolliert
+wird als dass der Installer diese Schritte automatisch der Reihe nach
+ausführt. Um den Installer auf die händische, Menü-basierte Art zu verwenden,
+fügen Sie den Boot-Parameter <userinput>DEBCONF_PRIORITY=medium</userinput>
+hinzu.
+
+</para><para>
+
+Die normale Installer-Anzeige ist Zeichen-basiert (im Gegensatz zu den
+heutzutage verbreiteteren grafischen Oberflächen). Die Maus funktioniert
+in dieser Umgebung nicht. Die folgenden Tasten können zum Navigieren durch
+die verschiedenen Dialoge benutzt werden. Der Pfeil nach
+<keycap>rechts</keycap> oder die <keycap>Tab</keycap> Taste springen
+`vorwärts', und der Pfeil nach <keycap>links</keycap> oder
+<keycombo> <keycap>Shift</keycap> <keycap>Tab</keycap> </keycombo> springen
+`rückwärts' zwischen den angezeigten Schaltflächen und Auswahlfeldern.
+Die Pfeile nach <keycap>oben</keycap> und <keycap>unten</keycap> wählen
+verschiedene Elemente in scrollbaren Listen aus, und scrollen auch die Liste
+selbst. Zusätzlich können Sie einen Buchstaben tippen, um direkt zu dem
+Bereich mit Elementen zu springen, die mit diesem Buchstaben beginnen, oder
+<keycap>Page-Up</keycap> und <keycap>Page-Down</keycap> zum Scrollen der
+Liste in Abschnitten verwenden. Die <keycap>Leertaste</keycap> aktiviert
+Elemente Checkboxen. Verwenden Sie &enterkey; zum Aktivieren von Auswahlen.
+
+
+</para><para arch="s390">
+
+S/390 unterstützt keine virtuellen Konsolen. Sie können eine zweite und
+dritte Telnet Sitzung starten, um die Logs wie weiter unten beschrieben
+anzusehen.
+
+</para><para>
+
+Fehlermeldungen werden auf die dritte Konsole umgeleitet (auch als
+<userinput>tty3</userinput> bekannt). Sie können auf diese Konsole durch
+Drücken von
+<keycombo><keycap>Linke Alt-Taste</keycap><keycap>F3</keycap></keycombo>
+wechseln (halten Sie die <keycap>Alt-Taste</keycap> gedrückt, während Sie die
+<keycap>F3</keycap> Funktionstaste drücken); zum Installer können Sie mit
+<keycombo><keycap>Linke Alt-Taste</keycap><keycap>F1</keycap></keycombo> wechseln.
+
+</para><para>
+
+Diese Meldungen können auch unter
+<filename>/var/log/messages</filename> gefunden werden. Nach der Installation
+wird diese Datei nach <filename>/var/log/installer.log</filename> auf dem
+neuen System kopiert. Andere Installationsmeldungen können während der
+Installation unter <filename>/target/var/log/debian-installer/</filename>
+und nach dem Start in das neu installierte System unter
+<filename>/var/log/debian-installer/</filename> gefunden werden.
+
+</para>
+ </sect1>
+
+
+  <sect1 id="modules-list"><title>Components Introduction</title>
+<para>
+
+Hier ist eine Liste der Installer-Komponenten mit einer kurzen
+Beschreibung der Aufgabe jeder Komponente. Details, die Sie über die
+Verwendung einer speziellen Komponente wissen wollen, finden Sie in
+<xref linked="module-details"/>.
+
+</para>
+
+<variablelist>
+<varlistentry>
+
+<term>Hauptmenü</term><listitem><para>
+
+Zeigt die Liste der Komponenten während des Installationsvorgangs an,
+und startet eine ausgewählte Komponente, wenn diese aktiviert wird.
+Die Fragen des Hauptmenüs sind auf die Prioritätsstufe MEDIUM gesetzt,
+so dass Sie dieses Menü nicht sehen, wenn die Prioritätsstufe auf
+HIGH oder CRITICAL (HIGH ist der Standard) gesetzt ist. Andernseits
+kann die Prioritätsstufe vorübergehend heruntergesetzt werden,
+wenn ein Fehler vorkommt, der einen Eingriff verlangt, um Ihnen
+zu ermöglichen, das Problem zu lösen, und in diesem Fall kann das
+Menü erscheinen.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>languagechooser</term><listitem><para>
+
+Zeigt eine Liste der Sprachen und Sprachvarianten. Der Installer zeigt
+die Meldungen in der ausgewählten Sprache an, es sei denn die Übersetzung
+für diese Sprache ist nicht komplett. Ist dies der Fall, so werden die
+Meldungen auf Englisch angezeigt.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>countrychooser</term><listitem><para>
+
+Zeigt eine Liste der Länder. Der Benutzer kann hier das Land auswählen, in
+dem er lebt.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>ddetect</term><listitem><para>
+
+Erkennt Festplatten, die entweder im Computer eingebaut oder am Computer
+angeschlossen sind.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>pcmcia</term><listitem><para>
+
+Ermöglicht dem Benutzer, in Laptops für das Netzwerk verwendete PCMCIA-Karten
+zu konfigurieren. 
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>kbd-chooser</term><listitem><para>
+
+Zeigt eine Liste der Keyboards, aus der der Benutzer sein Modell auswählt.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>netcfg</term><listitem><para>
+
+Konfiguriert die Netzwerkverbindungen des Computers, damit er über das
+Internet kommunizieren kann.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>iso-scan</term><listitem><para>
+
+Sucht nach ISO-Datei-Systemen, die sich auf einer CD-ROM oder auf der Festplatte
+befinden können.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>choose-mirror</term><listitem><para>
+
+Präsentiert eine Liste von Debian-Archiv-Mirrors. Der Benutzer kann
+die Installationsquelle für seine Installationspakete auswählen. Üblicherweise
+wird hier eine CD-ROM oder ein Netzwerk-Mirror ausgewählt.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>cdrom-detect</term><listitem><para>
+
+Erkennt CD-ROM Laufwerke, die im Computer eingebaut oder an den Computer
+angeschlossen sind.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>anna</term><listitem><para>
+
+Anna's Not Nearly APT. Installiert Pakete, die von dem ausgewählten Mirror
+geholt worden sind.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>partman</term><listitem><para>
+
+Ermöglicht dem Benutzer, die am System angeschlossenen Festplatten zu
+partitionieren, Dateisysteme darauf zu erstellen und sie in die Mount-Points
+einzuhängen. Interessante Features wie ein komplett automatischer Modus
+oder LVM Unterstützung sind inkludiert. Dies ist das bevorzuge
+Partitionierungsprogramm unter Debian.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>autopartkit</term><listitem><para>
+
+Partitioniert eine komplette Platte nach vorgegebenen Benutzer-Einstellungen.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>partitioner</term><listitem><para>
+
+Ermöglicht dem Benutzer, die an das System angeschlossenen Platten zu
+partitionieren. Ein von der Architektur Ihres Computers abhängiges
+Partitionierungsprogramm wird verwendet.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>partconf</term><listitem><para>
+
+Zeigt eine Liste von Partitionen an, und erzeugt Dateisysteme auf den
+ausgewählten Partitionen entsprechend den Benutzereingaben.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>base-installer</term><listitem><para>
+
+Installiert die wichtigste Reihe von Paketen, die dem Computer nach dem
+Neustart den Betrieb unter Linux ermöglichen.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>kernel-chooser</term><listitem><para>
+
+Ermöglicht dem Benutzer die Auswahl einer Betriebssystem-Kernel-Version,
+wenn mehr als eine einzige verfügbar sind.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>bootloader-installer</term><listitem><para>
+
+Installiert ein Boot-Loader-Programm auf der Festplatte, welches zum
+Hochstarten des Computers ohne Verwendung einer Diskette oder CD-ROM
+notwendig ist. Viele Boot-Loader erlauben dem Benutzer die Auswahl eines
+alternativen Betriebssystems bei jedem Hochstart des Computers.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>baseconfig</term><listitem><para>
+
+Bietet Dialoge zum Einstellen der Basis-System-Pakete entsprechend
+den Benutzer-Einstellungen. Das wird normalerweise nach dem Neustart
+des Computers durchgeführt; es wird beim ersten Hochstarten des neuen
+Debian Systems ausgeführt.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>shell</term><listitem><para>
+
+Erlaubt dem Benutzer das Ausführen einer Shell aus dem Menü, oder auf der
+zweiten Konsole.
+
+</para></listitem>
+</varlistentry>
+<varlistentry>
+
+<term>bugreporter</term><listitem><para>
+
+Bietet dem Benutzer die Möglichkeit, beim Auftauchen von Problemen
+Informationen auf einer Diskette abzuspeichern, um von Probleme
+mit der Installer Software den Debian-Entwicklern später präzise
+zu berichten.
+
+</para></listitem>
+</varlistentry>
+
+</variablelist>
+
+ </sect1>
+
+ <sect1 id="module-details"><title>Verwenden der einzelnen Komponenten</title>
+
+&module-languagechooser.xml;
+&module-countrychooser.xml;
+&module-s390-netdevice.xml;
+&module-s390-dasd.xml;
+&module-ddetect.xml;
+&module-pcmcia.xml;
+&module-kbd-chooser.xml;
+&module-netcfg.xml;
+&module-iso-scan.xml;
+&module-choose-mirror.xml;
+&module-cdrom-detect.xml;
+&module-anna.xml;
+&module-partman.xml;
+&module-autopartkit.xml;
+&module-partitioner.xml;
+&module-partconf.xml;
+&module-prebaseconfig.xml;
+&module-base-installer.xml;
+&module-kernel-chooser.xml;
+
+&module-mips-arcboot-installer.xml;
+&module-alpha-aboot-installer.xml;
+&module-i386-grub-installer.xml;
+&module-i386-lilo-installer.xml;
+&module-hppa-palo-installer.xml;
+&module-ia64-elilo-installer.xml;
+&module-s390-zipl-installer.xml;
+&module-powerpc-yaboot-installer.xml;
+&module-sparc-silo-installer.xml;
+
+&module-baseconfig.xml;
+&module-bugreporter.xml;
+&module-shell.xml;
+
+ </sect1>
+</chapter>
+

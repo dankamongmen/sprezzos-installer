@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="EUC-JP"?>
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 11648 -->
+
+ <sect1 id="automatic-install">
+ <title>自動インストール</title>
+<para>
+
+<!--
+For installing on multiple computers it's possible to do fully
+automatic installations. Debian packages intended for this include
+<classname>fai</classname> (which uses an install server),
+<classname>replicator</classname>,
+<classname>systemimager</classname>,
+<classname>autoinstall</classname>, and
+<classname>debian-installer</classname>.
+-->
+複数のコンピュータにインストールするため、完全自動インストールが可能です。
+このための Debian パッケージは、
+<classname>fai</classname> (インストールサーバを使う場合),
+<classname>replicator</classname>,
+<classname>systemimager</classname>,
+<classname>autoinstall</classname>, 
+<classname>debian-installer</classname> です。
+
+</para>
+
+<sect2>
+<title>debian-installer</title>
+<!-- the information from Sesse
+> IIRC you are the person that did various automated installs with d-i.
+>
+> Where do I read more about it?
+
+Well, there isn't really much to read; I think I've summarized my experiences
+a few times, but of course I can do it again (a bit short, though):
+
+- cdebconf preseeding works very well; the latest cdebconf should also work
+  correctly wrt. automated installs (debconf/showold = false by default), it
+  was broken for a while. I just add the cdebconf database to the
+  installation media, and use a custom udeb or two (which can be found at
+  http://people.debian.org/~sesse/, but should probably be cleaned up some).
+  The simplest way to get this database is to install manually once, then
+  prune the cdebconf database manually and just insert it in the right place.
+- Partitioning is done with autopartkit, also works well at least for my
+  purposes. I think partman can do something like this as well.
+- Likewise, debconf preseeding works well; one of my udebs drop some
+  base-config fragments in the right place which skip the root password
+  generation etc. and pop the right info into the debconf database, as well
+  as install a metapackage depending on whatever I want. (In the future, I'll
+  probably use pkgsync for this; see my ITP on `pkgsync'. :-) )
+
+Let me know if you're wondering about something more specific. Note that I
+haven't been able to touch d-i in a month or two, so I don't know how
+broken/working automated installs are ATM. :-)
+
+/* Steinar */
+-->
+
+<!--
+<para>this section needs love &amp; care</para>
+-->
+<para>本節に愛と配慮を。</para>
+
+<para>
+<!--
+Do a Manual install
+-->
+手で入れてください。
+</para>
+
+<para>
+Save the answers from the debconf database,
+ <filename>/var/log/debian-installer/cdebconf</filename>,
+ into a file.
+debconf データベース (<filename>/var/log/debian-installer/cdebconf</filename>)
+の答えをファイルに保存してください。
+</para>
+
+<para>
+<!--
+Put the file in <filename>preseeding udeb</filename>
+-->
+<filename>preseeding udeb</filename> というファイルです。
+<!--nabetaro まだ書けてないみたい -->
+</para>
+</sect2>
+
+ </sect1>

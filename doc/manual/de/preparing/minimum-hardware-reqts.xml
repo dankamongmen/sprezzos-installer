@@ -1,0 +1,132 @@
+<!-- original version: 14559 -->
+
+ <sect1 id="minimum-hardware-reqts">
+<title>Minimale Hardwareanforderungen</title>
+<para>
+
+Sobald Sie Informationen über die Hardware Ihres Computers herausgefunden
+haben, überprüfen Sie, dass diese Hardware ihnen die Art der Installation
+zulässt, die Sie durchführen wollen.
+
+</para><para arch="not-s390">
+
+Abhängig von Ihren Bedürfnissen können Sie auch mit weniger als der unten
+aufgelisteten Hardware auskommen. In den meisten Fällen riskieren Sie
+jedoch, im Nachhinein frustriert zu sein, wenn Sie diese Empfehlungen
+ignorieren.
+
+</para><para arch="i386">
+
+Für Desktop Systeme wird mindestens ein Pentium 100 empfohlen, und für
+einen Server mindestens ein Pentium II-300.
+
+</para><para arch="m68k">
+
+Ein 68030 oder besserer Prozessor wird für m68k Installationen empfohlen.
+Es kann sein, dass Sie weniger Speicherplatz als unten angegeben benötigen.
+
+</para><para arch="powerpc">
+
+Jeder OldWorld oder NewWorld PowerPC eignet sich für ein Desktop-System.
+Für Server wird mindestens ein 132-MHz Rechner empfohlen.
+
+</para>
+
+<table>
+<title>Empfohlene minimale Systemanforderungen</title>
+<tgroup cols="3">
+<thead>
+<row>
+  <entry>Art der Installation</entry><entry>Arbeitsspeicher</entry><entry>Festplatte</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry>Kein Desktop</entry>
+  <entry>16 Megabyte</entry>
+  <entry>450 Megabyte</entry>
+</row><row>
+  <entry>Mit Desktop</entry>
+  <entry>64 Megabyte</entry>
+  <entry>1 Gigabyte</entry>
+</row><row>
+  <entry>Server</entry>
+  <entry>128 Megabyte</entry>
+  <entry>4 Gigabyte</entry>
+</row>
+
+</tbody></tgroup></table>
+
+<para>
+
+Hier ist eine Auflistung einiger üblicher Debian Systemkonfigurationen.
+Sie können auch eine Übersicht über den benötigten Speicherplatz von
+miteinander verwandten Programmgruppen erhalten, indem Sie
+<xref linkend="tasksel-size-list"/> lesen.
+
+</para>
+<variablelist>
+
+<varlistentry>
+ <term>Standard Server</term>
+ <listitem><para>
+
+Das ist ein kleines Server-Profil, nützlich für einen minimalen Server,
+der nicht viele Nettigkeiten für Shell Benutzer hat. Er inkludiert einen
+FTP Server, einen Web Server, DNS, NIS und POP. Hierfür sollten 50MB
+Speicherplatz ausreichen, und darüber hinaus der Speicherplatz für die
+von Ihnen bereitgestellten Daten.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry arch="not-s390">
+ <term>Einwahl</term>
+ <listitem><para>
+
+Ein Standard Desktoprechner mit X-Window System, Grafikprogrammen,
+Anwendungsprogrammen, Sound, Editoren etc. Der benötigte Speicherplatz
+beläuft sich in etwa auf 500MB.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry arch="not-s390">
+ <term>Arbeitskonsole</term>
+ <listitem><para>
+
+Ein minimaleres End-Benutzer Gerät, ohne X-Window System oder X Anwendungen.
+Möglicherweise nützlich für einen Laptop oder mobilen Computer. Die Größe
+beläuft sich in etwa auf 140MB.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+ <term>Entwickler</term>
+ <listitem><para>
+
+Ein Desktopsystem mit allen Paketen für Entwickler, wie Perl, C, C++
+etc. Die Größe beläuft sich in etwa auf 475MB. Angenommen, Sie installieren
+noch X11 und einige andere Pakete für andere Benutzer, sollten Sie in
+etwa 800MB für dieses Gerät einplanen.
+
+</para></listitem>
+</varlistentry>
+
+</variablelist><para>
+
+Beachten Sie, dass bei diesen Größen noch keine anderen Daten wie die
+Dateien der Benutzer oder die E-Mails eingerechnet sind. Es ist immer
+das beste, beim Speicherplatz für die eigenen Daten etwas großzügiger zu
+sein. Speziell die <filename>/var</filename> Partition enthält viele
+Informationen. Die <command>dpkg</command> Dateien (mit Informationen
+über alle installierten Pakete) können leicht 20MB belegen; mit den
+Logdateien und dem Rest sollten Sie üblicherweise mindestens
+50MB für <filename>/var</filename> einplanen.
+
+</para>
+
+ </sect1>
+

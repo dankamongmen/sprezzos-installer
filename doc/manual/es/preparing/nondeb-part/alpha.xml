@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 11648 -->
+
+
+  <sect2 arch="alpha"><title>Particionar en Tru64 UNIX</title>
+<para>
+
+Tru64 UNIX, anteriormente conocido como Digital UNIX, que en su
+momento fue conocido como OSF/1, usa el esquema de particionado similar
+al `disk label' de BSD, que le permite hasta ocho particiones por disco
+duro. Las particiones son numeradas desde `1' hasta `8' en Linux y
+"nombradas" desde 'a' hasta 'h' en UNIX. Los núcleos Linux versión 2.2 y
+superiores siempre corresponden '1' a 'a', y '2' a 'b' y sucesivamente.
+Por ejemplo <filename>rz0e</filename> en UNIX Tru64 es bastante probable
+que sea llamado <filename>sda5</filename> en Linux.
+
+</para><para>
+
+Las particiones en el disk label podrían sobreponerse. Además, la 
+partición 'c' es requerida para albergar el disco entero (esto es
+sobreponer todas las otras particiones no vacías). Bajo Linux esto
+convierte a <filename>sda3</filename> idéntico a <filename>sda</filename>
+(<filename>sdb3</filename> a <filename>sdb</filename>, si esta presente,
+y en adelante). Además de satisfacer este requerimiento, debe evitar
+cuidadosamente el sobreponer una partición.
+
+</para><para>
+
+Otro requerimiento convencional es que la partición 'a' debe empezar
+en el principio del disco, de modo que siempre incluya el bloque de
+arranque con la etiqueta del disco. Si pretende arranca Debian desde
+este disco, necesita definirlo con un tamaño de por lo menos 2MB para
+que pueda caber aboot y tal vez un núcleo.
+
+</para><para>
+
+Note que estas dos particiones son requeridas únicamente para
+compatibilidad, usted no debe crear un sistema de ficheros en
+ellos o destruirá la información. Si usted no va a compartir el
+disco con Unix Tru64 o alguno de los sistemas operativos derivados
+de 4.4BSD-Lite (FreeBSD, OpenBSD o NetBSD), puede ignorar estos
+requerimientos y usar la herramienta de particionado de los discos
+de arranque de Debian. Vea <xref linkend="partition-programs"/>
+para mas detalles.
+
+</para><para>
+
+Los discos pueden ser particionados con la herramienta de configuración
+gráfica que es accesible a través del Application Manager o con utilidad
+de línea de órdenes <command>disklabel</command>. El tipo de partición
+para el sistema de ficheros de Linux debe ser configurado como 'resrvd8'.
+Esto solamente puede ser hecho a través de <command>disklabel</command>;
+sin embargo, todas las otras configuraciones pueden realizarse fácilmente
+con la herramienta gráfica.
+
+</para><para>
+
+Es posible, y de hecho razonable, compartir una partición swap entre
+UNIX y Linux. En este caso sera necesario efectuar un 
+<command>mkswap</command> en esta partición cada vez que se reinicie el
+sistema de UNIX a Linux, puesto que UNIX podría dañar la firma swap.
+Podría querer ejecutar <command>mkswap</command> desde los programas
+de arranque de Linux antes de añadir espacio swap con 
+<command>swapon -a</command>.
+
+</para><para>
+
+Si usted desea montar particiones UNIX bajo Linux, note que Digital UNIX
+puede usar dos tipos de sistemas de ficheros, UFS y AdvFS, de los que
+Linux solamente entiende el anterior.
+
+</para>
+  </sect2>
+
+  <sect2 arch="alpha"><title>Particionado en Windows NT</title>
+
+<para>
+
+Windows NT usa el estilo de tabla de particiones PC. Si usted está
+manipulando particiones FAT o NTFS, se recomienda que use las 
+herramientas nativas de Windows NT (o, mas convenientemente, también 
+puede reparticionar su disco desde el menú de configuración de
+AlphaBIOS). De otro manera, no es necesario particionar desde Windows,
+las herramientas de particionado de Linux generalmente hacen un mejor
+trabajo. Note que cuando ejecute NT, el Administrador de disco puede
+ofrecerle escribir una "firma dañina" en discos no-Windows si usted
+tiene alguno. <emphasis>Nunca</emphasis> permita que lo haga, puesto
+que esta firma destruirá la información de la partición.
+
+</para><para>
+
+Si usted planea arrancar Linux desde una consola ARC/AlphaBIOS/ARCBIOS,
+necesitará una (pequeña) partición para MILO. 5Mb es prácticamente
+suficiente. Si Windows NT está intalado, su partición de arranque de 6Mb
+puede ser empleada para este propósito.
+
+</para>
+  </sect2>

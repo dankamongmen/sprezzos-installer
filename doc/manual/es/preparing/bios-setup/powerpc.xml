@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 11648 -->
+
+
+  <sect2 arch="powerpc" id="invoking-openfirmware">
+  <title>Invocar al OpenFirmware</title>
+<para>
+
+Normalmente no hay necesidad de configurar el BIOS (llamado
+OpenFirmware) en los sistemas &arch-title;. PReP y CHRP están
+equipados con OpenFirmware, pero desafortunadamente, los modos
+que debe usar para invocarlos varían de fabricante a fabricante. 
+Necesitará consultar la documentación de hardware que vino con
+su máquina.
+
+</para><para>
+
+En Macintoshes &arch-title; puede invocar al OpenFirmware con
+<keycombo><keycap>Command</keycap> <keycap>option</keycap>
+<keycap>O</keycap> <keycap>F</keycap></keycombo> mientras inicia.
+Generalmente verificará por estas teclas luego del sonido de encendido,
+pero el tiempo de espera exacto varia de modelo a modelo. Vea
+<ulink url="&url-netbsd-powerpc-faq;"></ulink> para mas consejos.
+
+</para><para>
+
+El cursor de OpenFirmware prompt es como el siguiente:
+
+<informalexample><screen>
+
+ok
+0 >
+
+</screen></informalexample>
+
+</para><para>
+
+Note que en modelos antiguos de Macs &arch-title; el I/O
+predeterminado y muchas veces conectado permanentemente que
+se usa para la interacción de usuario con el OpenFirmware es a 
+través del puerto serie (módem). Si usted invoca al OpenFirmware 
+en una de estas máquinas, simplemente verá una pantalla blanca. 
+En este caso, se necesita un programa de terminal ejecutándose en
+otro computador y conectado al puerto de módem para interactuar 
+con el OpenFirmware.
+
+</para><para>
+
+El OpenFirmware en máquinas OldWorld Beige G3, OF versión 2.0f1 y
+2.4 tiene fallo. Es bastante probable que estas máquinas no sean
+capaces de arrancar desde el disco duro a menos que el firmware
+sea parchado. Un parche del firmware esta incluido en la
+utilidad <application>System Disk 2.3.1</application>,
+disponible desde Apple en 
+<ulink url="ftp://ftp.apple.com/developer/macosxserver/utilities/SystemDisk2.3.1.smi.bin"></ulink>.
+Después de desempaquetar la utilidad en MacOS y ejecutarla,
+elija el botón Sabe para instalar los parches de firmware en
+la nvram.
+
+</para>
+  </sect2>

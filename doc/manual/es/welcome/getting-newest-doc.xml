@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 12756 -->
+
+ <sect1 id="getting-newest-doc">
+ <title>Obteniendo la útlima versión de este Documento</title>
+
+<para>
+
+Este documento está en constante revisión. Asegúrese de revisar
+las páginas relacionadas al <ulink url="&url-release-area;">
+lanzamiento de Debian</ulink> por cualquier información de último
+minuto acerca de este tópico.
+Las últimas versiones de este documento se encuentran en
+las <ulink url="&url-install-manual;">páginas oficiales del 
+manual.</ulink>.
+
+</para>
+
+ </sect1>

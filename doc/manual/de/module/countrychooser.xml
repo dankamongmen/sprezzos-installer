@@ -1,0 +1,21 @@
+<!-- original version: 14559 -->
+
+
+  <sect2 id="country-chooser"><title>Länderauswahl</title>
+<para>
+
+Wenn Sie im <xref linkend="lang-chooser"/> eine Sprache ausgewählt haben,
+die in mehr als einem Land gesprochen wird (das gilt für Chinesisch, Englisch,
+Französisch, und viele andere Sprachen), können Sie Ihr Land hier angeben.
+
+</para><para>
+
+Diese Auswahl beeinflusst die lokalen Einstellungen und wird später im
+Prozess verwendet, um die Standard-Zeitzone sowie den passenden
+Debian-Mirror-Server für Ihre wahrscheinliche geographische Position
+auszuwählen. Wenn die vom Installer ausgewählten Entscheidungen nicht
+passen, können Sie hier eine andere Auswahl treffen.
+
+</para>
+
+  </sect2>

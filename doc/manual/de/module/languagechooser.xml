@@ -1,0 +1,19 @@
+<!-- original version: 14559 -->
+
+
+  <sect2 id="lang-chooser"><title>Sprachauswahl</title>
+<para>
+
+Als ersten Schritt der Installation wählen Sie die Sprache aus, in der
+der Installationsprozess durchgeführt werden soll. Einige Sprachen
+gibt es in verschiedenen Varianten. Wählen Sie die Variante, die Ihrer
+geographischen Region entspricht.
+
+</para><para>
+
+Die Auswahl, die Sie treffen, wird für die Auswahl der Sprache, die der
+Installer verwendet sowie für die Auswahl des Keyboard Layouts verwendet.
+
+</para>
+
+  </sect2>

@@ -1,0 +1,37 @@
+Release testing checklist. Successful installs should be reported with the
+release candidate for each of the following before release.
+
+							pass/fail (details)
+i386
+	netinst cd install taking the defaults		ok
+	businesscard cd install taking the defaults	
+	usb keychain					
+	floppy + cd install				
+	floppy + network install			
+	netboot install					
+	pcmcia network install (any boot media)		
+	lvm install					
+	software raid install				
+	32 mb ram install				
+	48 mb ram install				
+	2.6 install					
+	2.6 pcmcia install				
+	2.6 lvm install					
+	2.6 software raid install			
+	2.6 usb keychain				
+	
+powerpc	
+        basic netinst cd				
+        basic businesscard cd				
+        floppy + cd [not newworld]			
+        floppy + network [not newworld]			
+        netboot						
+        using pcmcia network card			
+        32 mb ram					
+        48 mb ram					
+
+sparc
+	sparc32 install from CD				
+	sparc64 install from CD				
+	sparc32 netboot					
+	sparc64 netboot					

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 14388 -->
+
+ <sect1 id="what-is-debian-linux">
+ <title>¿Qué es &debian;?</title>
+<para>
+
+La combinación de la filosofía y metodología de Debian, las herramientas 
+GNU, el núcleo de Linux, y otro software libre importante, forma una 
+distribución de software única llamada &debian;. 
+Esta distribución está formada por un gran número de 
+<emphasis>paquetes</emphasis>.  Cada paquete en la distribución contiene
+ejecutables, scripts, documentación, e información de configuración y
+tiene un <emphasis>mantenedor</emphasis>, que es el principal responsable 
+de mantener el paquete al día, seguir informes de error, y comunicar con
+los autores principales del software empaquetado. Nuestra gran base de
+usuarios, combinado con nuestro sistema de seguimiento de errores se
+asegura de que los errores se encuentren y arreglen rápidamente.
+
+</para><para>
+
+La atención de Debian al detalle nos permite producir un distribución
+de alta calidad, estable y escalable. La instalación puede
+configurarse fácilmente para servir muchos perfiles, desde cortafuegos
+reducidos a lo mínimo, estaciones de trabajo científicas a servidores
+de red de alta gama.
+
+</para><para>
+
+Debian es especialmente popular entre los usuarios avanzados debido
+a su excelencia técnica y a sus comites siempre atentos a las
+necesidades y expectativas de la comunidad de Linux.
+Debian también introdujo muchas características a Linux
+que ahora son comunes.
+
+</para><para>
+
+Por ejemplo, Debian fué la primera distribución de Linux en incluir
+un sistema de paquetes para una fácil instalación y mantenimiento
+de software. Además, la primera que podía ser actualizada sin la
+necesidad de re-instalar el sistema.
+
+</para><para>
+
+Debian continua siendo el líder en el desarrollo de Linux. Su
+proceso de desarrollo es un claro ejemplo de cuan bien puede funcionar
+el modelo del Open Source, aún así para las tareas más complejas,
+tales como mantener un sistema operativo por completo.
+
+</para><para>
+
+
+Lo que más distingue a Debian de otras distribuciones GNU/Linux es
+su sistema de gestión de paquetes. Estas heramientas dan al administrador 
+de un sistema Debian control completo sobre los paquetes instalados en su
+sistema, incluyendo la capacidad de instalar un sólo paquete o
+actualizar el sistema operativo por completo. Los paquetes
+individuales también pueden protegerse para no ser actualizados.
+También puede decir al sistema de gestión de paquetes qué software ha
+compilado vd. mismo y qué dependencias cumple.
+
+</para><para>
+
+Para proteger su sistema contra <quote>caballos de troya</quote> y otros 
+programas malévolos, Debian verifica que los paquetes provienen de sus 
+mantenedores Debian auténticos. Los empaquetadores de Debian también 
+ponen gran cuidado en configurarlos de forma segura. Si se declara un 
+problema de seguridad con los paquetes entregados, los parches están 
+por lo general rápidamente disponibles. Con el sencillo sistema de 
+actualización de Debian, se pueden descargar e instalar arreglos de 
+seguridad automáticamente a través de Internet.
+
+</para><para>
+
+El principal, y mejor método para obtener soporte de su sistema
+&debian; y comunicarse con los Desarrolladores Debian, es a través de
+las muchas listas de distribución mantenidas por el Proyecto Debian
+(hay más de &num-of-debian-maillists; en el momento de escribir estas líneas). 
+La manera más fácil de subscribirse a una de estas listas es visitar la
+<ulink url="&url-debian-lists-subscribe;">página de subscripción a
+las listas de correo de Debian</ulink> y rellenar el formulario que 
+encontrará allí.
+
+</para>
+
+ </sect1>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 11648 -->
+
+ <sect1 id="automatic-install">
+ <title>Installation automatisée</title>
+<para>
+
+Pour installer sur de nombreux ordinateurs, il est possible
+d'automatiser complètement l'installation en utilisant les 
+paquets Debian suivants&nbsp;:
+<classname>fai</classname> (qui utilise un serveur d'installation),
+<classname>replicator</classname>,
+<classname>systemimager</classname>, et
+<classname>autoinstall</classname>.
+
+</para>
+ </sect1>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 11648 -->
+
+ <sect1 id="minimum-hardware-reqts">
+<title>Cumpliendo con los requerimientos mínimos de hardware</title>
+<para>
+
+Una vez que usted ha reunido información sobre el hardware de su
+computador, verifique que su hardware le permita realizar el tipo de
+instalación que usted desea hacer.
+
+</para><para arch="not-s390">
+
+Dependiendo de sus necesidades, usted podría arreglarse con menos de
+el hardware recomendado listado en la siguiente tabla. Sin 
+embargo, algunos usuarios se arriesgan a terminar frustrados si ignoran 
+estas sugerencias.
+
+</para><para arch="i386">
+
+Un Pentium de 100 Mhz es lo mínimo recomendado para un sistema
+de escritorio y un Pentium II de 300 Mhz para un servidor.
+
+</para><para arch="m68k">
+
+Un procesador 68030 o mejor es recomendado para instalaciones
+en sistemas m68k. Usted puede realizar la instalación con un poco
+menos del espacio de disco mostrado.
+
+</para><para arch="powerpc">
+
+Cualquier máquina PowerPC o OldWorld o NewWorld puede servir bien
+como un sistema de escritorio. Para servidores se recomienda un una 
+máquina de 132 Mhz.
+
+</para>
+
+<table>
+<title>Requerimientos mínimos de sistema recomendados</title>
+<tgroup cols="3">
+<thead>
+<row>
+  <entry>Tipo de instalación</entry><entry>RAM</entry><entry>Disco duro</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry>Sin escritorio</entry>
+  <entry>16 megabytes</entry>
+  <entry>450 megabytes</entry>
+</row><row>
+  <entry>Con escritorio</entry>
+  <entry>64 megabytes</entry>
+  <entry>1 gigabyte</entry>
+</row><row>
+  <entry>Servidor</entry>
+  <entry>128 megabytes</entry>
+  <entry>4 gigabytes</entry>
+</row>
+
+</tbody></tgroup></table>
+
+<para>
+
+Aquí un ejemplo de algunas configuraciones de sistemas Debian.
+Usted puede hacerse una idea del espacio de disco usado para
+grupos relacionados de programas refiriéndose a 
+<xref linkend="tasksel-size-list"/>.
+
+</para>
+<variablelist>
+
+<varlistentry>
+ <term>Servidor estándar</term>
+ <listitem><para>
+
+Este es un perfil de servidor pequeño, útil para un servidor 
+mínimo que no tiene grandes necesidades de shell para usuarios.
+Éste incluye un servidor FTP, un servidor Web, DNS, NIS y POP. Para
+esto 50MB de espacio en disco serán suficientes y luego podría 
+necesitar añadir espacio para cualquier data que usted sirva.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry arch="not-s390">
+ <term>Acceso telefónico</term>
+ <listitem><para>
+
+Un sistema de escritorio estándar, incluyendo el sistema X,
+aplicaciones gráficas, sonido, editores, etc. El tamaño de los
+paquetes será cerca de 500MB.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry arch="not-s390">
+ <term>Consola de trabajo</term>
+ <listitem><para>
+
+La máquina mas mínima para un usuario, sin el sistema X o aplicaciones
+para X. Posiblemente se ajuste para una portátil o computador móvil.
+El tamaño es cerca de 140MB.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+ <term>Desarrollador</term>
+ <listitem><para>
+
+Una instalación de escritorio con todos los paquetes de desarrollo,
+como Perl, C, C++. El tamaño será cerca de 475MB. Asumiendo que 
+usted está añadiendo X11 y algunos paquetes adicionales para otros
+usos, debería planear cerca de 800MB para este tipo de máquina.
+
+</para></listitem>
+</varlistentry>
+
+</variablelist><para>
+
+Recuerde que estos tamaños no incluyen todos los otros materiales
+que son usualmente encontrados, como ficheros de usuarios, correo y
+data. Siempre es mejor ser generoso cuando se considere el espacio
+para sus propios ficheros y data. Notablemente, la partición 
+<filename>/var</filename> de Debian contiene mucha información de
+estado de las cosas. Los ficheros de <command>dpkg</command> 
+(con información sobre los paquetes instalados) puede fácilmente
+consumir 20MB, con ficheros de registro y el resto, usted debería
+usualmente asignar por lo menos 50MB para <filename>/var</filename>.
+
+</para>
+
+ </sect1>
+

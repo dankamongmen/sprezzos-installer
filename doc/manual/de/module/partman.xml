@@ -1,0 +1,63 @@
+<!-- original version: 14559 -->
+
+   <sect2 id="partman"><title>Partitionierung Ihrer Platten</title>
+<para>
+
+Nun ist es Zeit, Ihre Platten zu partitionieren. Wenn sich mit
+Paritionierung nicht auskennen, oder einfach mehr Details wissen
+wollen, siehe <xref linkend="partitioning"/>.
+
+</para><para>
+
+Zuerst wird Ihnen die Auswahl geboten, automatisch entweder eine gesamte Platte
+zu partitionieren, oder nur den freien Speicherplatz auf einer Platte
+zu verwenden. Wenn Sie keine automatische Partitionierung wollen, wählen Sie
+<guimenuitem>Partitionierungstabelle von Hand eingeben</guimenuitem> aus dem
+Menü und überspringen Sie den nächsten Absatz. Ansonsten werden Sie gefragt,
+ob Sie <guimenuitem>Alle Dateien auf eine Partition</guimenuitem> kopieren
+wollen, oder ob Sie lieber eine <guimenuitem>Separate Partition für die
+Home-Verzeichnisse</guimenuitem> wollen. Beide Einstellungen haben ihre
+Vor- und Nachteile, von denen einige in <xref linkend="partitioning"/>
+behandelt werden. Wenn Sie unsicher sind, wählen Sie ersteres.
+
+</para><para>
+
+Auf dem nächsten Schirm sehen Sie Ihre Partitionstabelle, wie die Partitionen
+formatiert werden, und wo sie eingehängt werden. Wenn Sie die automatische
+Partitionierung durchgeführt haben, sollten Sie nur
+<guimenuitem>Finished partitioning</guimenuitem> zur Auswahl haben,
+um zu verwenden, was eingestellt wurde.
+
+</para><para>
+
+Wählen Sie Partitionen aus der Liste, um sie zu modifizieren oder zu löschen.
+Wenn Sie freien Speicherplatz haben, wird er ebenfalls unter einer Platte
+aufgelistet sein, und Sie können ihn auswählen, um neue Partitionen zu erzeugen.
+Beim Ändern einer Partition haben Sie die Auswahlmöglichkeit, welches
+Dateisystem verwendet werden soll, und die Partition gemountet werden soll.
+Das Partitionierungsmenü bietet unten auch eine Auswahl, eine Platte
+oder den darauf befindlichen freien Speicherplatz automatisch zu partitionieren,
+wenn Ihnen das lieber ist. Gehen Sie auf jeden Fall sicher, dass Sie mindestens
+zwei Partitionen erstellen, eine für <emphasis>swap</emphasis> und eine für
+das <emphasis>Root</emphasis>-Dateisystem (das unter <filename>/</filename>
+gemounted werden muss). Wenn Sie vergessen, das Root-Dateisystem zu
+mounten, wird <command>partman</command> Sie nicht fortfahren lassen, bis
+Sie dieses Problem behoben haben.
+
+</para><para>
+
+Die Möglichkeiten von <command>partman</command> können mittels
+Installer-Modulen erweitert werden, also wenn Sie nicht alle der
+versprochenen Möglichkeiten sehen können, überprüfen Sie, ob Sie alle
+benötigten Module geladen haben (z.B. <filename>partman-ext3</filename>,
+<filename>partman-xfs</filename> oder
+<filename>partman-lvm</filename>).
+
+</para><para>
+
+Nach dem Beenden der Partitionierung wählen Sie <guimenuitem>Finished
+partitioning</guimenuitem> aus dem Menü, und bestätigen Sie, dass alle
+Dateisysteme wie angegeben erstellt werden sollen.
+
+</para>
+   </sect2>

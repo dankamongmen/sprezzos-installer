@@ -1,0 +1,23 @@
+<!-- original version: 14559  -->
+
+  <sect2 id="base-installer">
+  <title>Installation des Basis-Systems</title>
+
+<para>
+
+Während der Basis-Installation werden Entpakcungs- und Setupmeldungen
+auf <userinput>tty4</userinput> umgeleitet. Sie können auf dieses
+Terminal durch Drücken von
+<keycombo><keycap>Linke Alt-Taste</keycap> <keycap>F4</keycap></keycombo>
+wechseln; um wieder zum Haupt-Installationsprozess zurück zu kehren, drücken
+Sie <keycombo><keycap>Linke Alt-Taste</keycap><keycap>F1</keycap></keycombo>.
+
+</para><para>
+
+Die von der Basis-Installation erzeugten Entpackungs- und Setupmeldungen
+werden in <filename>/target/tmp/debootstrap.log</filename> gespeichert,
+wenn die Installation über eine serielle Konsole erfolgt.
+
+</para>
+  </sect2>
+
