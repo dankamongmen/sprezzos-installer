@@ -1,0 +1,6 @@
+files
+*.dirs
+*.install
+tmp
+debian-installer-demo
+INSTALLATION-HOWTO
