@@ -1,0 +1,117 @@
+<!-- original document: 11648 -->
+
+
+  <sect2 arch="mipsel"><title>CPU, Main Boards, und Video Unterstützung</title>
+<para>
+
+Komplette Informationen über unterstützte mips/mipsel Maschinen können im
+<ulink url="&url-mips-howto;">Linux MIPS HOWTO</ulink> gefunden werden.
+Der Zweck dieses Abschnitts ist, die Systeme zu behandeln,
+die von den Boot Disketten unterstützt werden.
+
+</para>
+
+   <sect3><title>CPU/Maschinentypen</title>
+
+<para>
+
+Momentan werden nur DECstations mit R3000 und R4000/R4400 CPUs
+vom Debian Installationssystem auf Little-Endian MIPS unterstützt.
+Das Debian Installationssystem funktioniert auf den folgenden
+Maschinen:
+
+</para><para>
+
+<informaltable>
+<tgroup cols="4">
+<thead>
+<row>
+  <entry>System Typ</entry><entry>CPU</entry><entry>Codename</entry>
+  <entry>Debian Unterarchitektur</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry>DECstation 5000/1xx</entry>
+  <entry>R3000</entry>
+  <entry>3MIN</entry>
+  <entry>r3k-kn02</entry>
+</row><row>
+  <entry>DECstation 5000/150</entry>
+  <entry>R4000</entry>
+  <entry>3MIN</entry>
+  <entry>r4k-kn04</entry>
+</row><row>
+  <entry>DECstation 5000/240</entry>
+  <entry>R3000</entry>
+  <entry>3MAX+</entry>
+  <entry>r3k-kn02</entry>
+</row><row>
+  <entry>DECstation 5000/260</entry>
+  <entry>R4400</entry>
+  <entry>3MAX+</entry>
+  <entry>r4k-kn04</entry>
+</row><row>
+  <entry>Personal DECstation 5000/xx</entry>
+  <entry>R3000</entry>
+  <entry>Maxine</entry>
+  <entry>r3k-kn02</entry>
+</row><row>
+  <entry>Personal DECstation 5000/50</entry>
+  <entry>R4000</entry>
+  <entry>Maxine</entry>
+  <entry>r4k-kn04</entry>
+</row>
+</tbody></tgroup></informaltable>
+
+</para><para>
+
+Linux/MIPS funktioniert auch auf der DECstation 5000/200, wird jedoch
+momentan vom Debian Installationssystem nicht unterstützt.
+
+</para>
+   </sect3>
+
+   <sect3><title>Unterstützte Konsolen-Optionen</title>
+<para>
+
+Die serielle Konsole ist auf allen unterstützten DECstations (9600 bps,
+8N1) verfügbar. Um die serielle Konsole zu verwenden, müssen Sie das
+Installer Image mit dem "console=ttySx" Kernel-Parameter (wobei "x" die
+Nummer des seriellen Ports ist, mit dem das Terminal verbunden ist -
+normalerweise "2", für die Personal DECstations jedoch "0").
+Auf 3MIN und 3MAX+ (DECstation 5000/1xx, 5000/240 und 5000/260)
+ist die lokale Konsole nur mit der PMAG-BA und der PMAGB-B Grafikoption
+verfügbar.
+
+</para><para>
+
+Falls Sie Unterstützung für andere Subarchitekturen haben wollen,
+kontaktieren Sie bitte die
+<ulink url="&url-list-subscribe;">debian-mips Mailing-Liste</ulink>.
+
+</para><para>
+
+Wenn Sie ein Linux System als serielles Terminal verwenden, ist
+ein einfacher Weg, cu darauf zu starten (Teil des <classname>uucp</classname>
+Pakets).
+Beispiel:
+
+<informalexample><screen>
+
+cu -l /dev/ttyS1 -s 9600
+
+</screen></informalexample>
+
+</para><para>
+
+wobei die Option "-l" (line) den zu verwendenden seriellen Port und
+"-s" (speed) die Verbindungsgeschwindigkeit angibt (9600 bits pro Sekunde).
+
+</para>
+   </sect3>
+  </sect2>
+
+
+

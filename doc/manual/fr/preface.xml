@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 12756 -->
+
+<bookinfo>
+<title>&debian; Guide d'installation</title>
+<authorgroup>
+  <author>
+    <firstname>Bruce</firstname>
+    <surname>Perens</surname>
+  </author>
+  <author>
+    <firstname>Sven</firstname>
+    <surname>Rudolph</surname>
+  </author>
+  <author>
+    <firstname>Igor</firstname>
+    <surname>Grobman</surname>
+  </author>
+  <author>
+    <firstname>James</firstname>
+    <surname>Treacy</surname>
+  </author>
+  <author>
+    <firstname>Adam</firstname>
+    <surname>Di Carlo</surname>
+  </author>
+</authorgroup>
+
+<abstract>
+<para>
+Ce document contient les instructions d'installation du système
+&debian; sur l'architecture &arch-title; (<quote>&architecture;</quote>).
+Des pointeurs vers d'autres sources d'informations vous permettront de tirer 
+le meilleur parti de votre nouveau système Debian.
+</para>
+</abstract>
+
+<copyright>
+ <year>1996
+ <trademark class="copyright">
+ </trademark>
+ </year>
+ <holder>Bruce Perens</holder>
+</copyright>
+<copyright>
+ <year>1996, 1997
+ <trademark class="copyright"></trademark>
+ </year>
+ <holder>Sven Rudolph</holder>
+</copyright>
+<copyright>
+ <year>1998
+ <trademark class="copyright"></trademark>
+ </year>
+ <holder>Igor Grobman, James Treacy</holder>
+</copyright>
+<copyright>
+ <year>1998-2002
+ <trademark class="copyright"></trademark>
+ </year>
+ <holder>Adam Di Carlo</holder>
+</copyright>
+<copyright>
+ <year>2003
+ <trademark class="copyright"></trademark>
+ </year>
+ <holder>Chris Tillman</holder>
+</copyright>
+
+<legalnotice>
+<para>
+Ce manuel est un logiciel libre&nbsp;; vous pouvez le distribuer ou le
+modifier selon les termes de la Licence publique générale GNU. Veuillez
+consulter la licence sur <xref linkend="appendix-gpl"/>.
+</para>
+
+</legalnotice>
+</bookinfo>
+
+<preface>
+<title>Installer Debian GNU/Linux &release; sur &architecture;</title>
+
+<para>
+Nous vous demandons de mentionner Debian ainsi que les auteurs de ce
+document dans tout travail qui dériverait de ce document. Si vous modifiez 
+ou si vous améliorez ce document, nous vous demandons de bien vouloir
+en informer les auteurs, via <email>&email-debian-boot-list;</email>.
+</para>
+</preface>
