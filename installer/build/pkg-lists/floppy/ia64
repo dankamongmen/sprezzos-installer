@@ -1,9 +1,0 @@
-countrychooser
-iso-3166-udeb
-efi-reader
-
-# This is dhcp client we're using on ia64, but it may vary for other
-# arches, which is why it is not in common.
-dhcp-client-udeb
-discover1-udeb
-discover1-data-udeb
