@@ -1,0 +1,34 @@
+# These udebs are needed on a single-floppy system that currently serves two
+# purposes:
+# 1. load the rest of the installer modules from driver floppies
+# 2. get up on the network with just this single floppy (for common network
+#    setups)
+# If space becomes tight again, #2 will be relegated to a third floppy..
+
+#include "base"
+# Note, no kernel.
+
+busybox-cvs-udeb
+languagechooser
+nano-udeb
+bogl-bterm-udeb
+di-utils-terminfo
+kbd-chooser
+
+# floppy loading support
+load-floppy
+floppy-retriever
+cdebconf-newt-udeb
+rootskel-locale
+usb-discover
+
+# net installation support
+net-retriever
+download-installer
+netcfg-static
+netcfg-dhcp
+choose-mirror
+hw-detect
+discover-udeb
+discover-data-udeb
+ethdetect
