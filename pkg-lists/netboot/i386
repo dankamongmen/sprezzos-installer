@@ -1,0 +1,31 @@
+console-keymaps-at
+console-keymaps-usb
+
+discover-udeb
+discover-data-udeb
+usb-discover
+nic-shared-modules-${kernel:Version}
+socket-modules-${kernel:Version}
+isa-pnp-modules-${kernel:Version}
+nic-modules-${kernel:Version}
+nic-extra-modules-${kernel:Version}
+usb-modules-${kernel:Version}
+input-modules-${kernel:Version}
+dhcp-client-udeb
+
+# This is needed for proper display of utf-8.
+fb-modules-${kernel:Version}
+
+# XXX why the stuff to access disks? Isn't this netboot?
+ide-core-modules-${kernel:Version}
+ide-modules-${kernel:Version}
+
+# In case they need to load a driver floppy.
+floppy-retriever
+floppy-modules-${kernel:Version}
+fat-modules-${kernel:Version}
+
+# netboot pcmcia?
+#nic-pcmcia-modules-${kernel:Version}
+#pcmcia-modules-${kernel:Version}
+#pcmcia-cs-udeb

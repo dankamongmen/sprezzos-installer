@@ -1,0 +1,21 @@
+# 
+load-floppy
+floppy-retriever
+busybox-cvs-udeb
+cdebconf-text-udeb
+rootskel
+brltty-udeb
+#include "base"
+
+# net installation support
+net-retriever
+download-installer
+netcfg-static
+netcfg-dhcp
+choose-mirror
+kbd-chooser
+hw-detect
+languagechooser
+ethdetect
+
+

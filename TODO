@@ -1,0 +1,25 @@
+* Add disk labels to non-i386 floppys.
+* The busybox in the bootfloppy can be linked with uclibc and/or statically
+  to make it smaller. Only the linuxrc uses it, so it doesn't really
+  matter. This could save up to 200k on the boot floppy. But first someone
+  needs to add code to install uclibc or a uclibc udeb.
+* Find something to do with spare space on the bootfloppy; put udebs there
+  for extra drivers or something.
+* The apt download fails if the dpkg status file of the build system is
+  in an inconsistent state. It could be overridden to use another status
+  file, but that file would have to claim that all dependancies of the
+  udebs it's downloading were met. Hmm.
+* The debian/ directory is a bit of a mess because of the stillborn
+  autobuilder stuff that is not going to happen.
+* The extra driver disks stuff is currently hardcoded for one disk, and
+  should be generalised and generally cleaned up.
+* The size calcs in make stats for driver1 are not right, it can be full
+  and will show as having space free.
+* Change mklibs to not pull in libraries from the build system, and only
+  act on libraries in the tree; those libraries would then be provided by
+  udebs; this would be cleaner in several ways (and it's why eg anna
+  depends on libc-udeb already).
+* Switch alpha, powerpc, over to new "di" KERNEL_FLAVOUR.
+* Convert the driver floppies to use FAT filesystem, not ext2, on i386.
+  Makes it easier for third parties to throw additional udebs on.
+* Cache the upxed kernel, to avoid re-upxing it over and over.
