@@ -1,0 +1,24 @@
+efi-reader
+cdebconf-text-udeb
+console-keymaps-at
+console-keymaps-usb
+nic-modules-${kernel:Version}
+ide-core-modules-${kernel:Version}
+ide-modules-${kernel:Version}
+scsi-modules-${kernel:Version}
+usb-modules-${kernel:Version}
+usb-storage-modules-${kernel:Version}
+discover-udeb
+discover-data-udeb
+usb-discover
+dhcp-client-udeb
+input-modules-${kernel:Version}
+
+kbd-chooser
+bogl-bterm-udeb
+hw-detect
+ethdetect
+netcfg
+
+# used by netcfg
+libiw27-udeb
