@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+# Usage: bootscreen-subst "${MEDIA_TYPE}" "${DEBIAN_VERSION}" "${BUILD_DATE}"
+#                          < file > outfile
+my $type=shift;
+my $version=shift;
+my $date=shift;
+while (<>) {
+	s/\${MEDIA_TYPE}/$type/;
+	s/\${DEBIAN_VERSION}/$version/;
+	s/\${BUILD_DATE}/$date/;
+	s/\${BOOTPROMPT}\n?$//;
+	print;
+}

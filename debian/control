@@ -1,0 +1,18 @@
+Source: debian-installer
+Section: devel
+Priority: extra
+Build-Depends: apt, bc, slang1-utf8-pic, libnewt-pic, syslinux (>= 2.04-1) [i386], sysutils [i386], dosfstools [i386 ia64], libdiscover1-pic [!s390 !s390x !mips !mipsel], libdiscover1 [!s390 !s390x !mips !mipsel], ncurses-base, genext2fs, mklibs (>= 0.1.11), libdebconfclient0 (>= 0.47), libdebian-installer4, modutils, glibc-pic, mtools [i386 ia64] (>= 3.9.9-1), bf-utf-source, upx-ucl-beta [i386], libbogl-dev, libtextwrap1, debhelper, tip22 [mips], yaboot [powerpc], genromfs [sparc], mkisofs, elilo [ia64], fakeroot, aboot [alpha]
+Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Uploaders: Joey Hess <joeyh@debian.org>, Alastair McKinstry <mckinstry@computer.org>
+Standards-Version: 3.6.1.0
+
+Package: debian-installer-demo
+Recommends: ${kernel:Package}
+Architecture: i386 powerpc mips ia64
+Description: run a live demo of the Debian Installer, without rebooting
+ This package allows you to run a demonstration version of the Debian
+ installer in a chroot on a Debian system. While it might be possible to
+ use the demo system to actually install Debian to a spare partition, there
+ are better (and safer!) ways than using this Debian system, such as 
+ debootstrap. However, this package is useful if you'd like a look at the
+ Debian installer, or want to test or debug some aspect of it.

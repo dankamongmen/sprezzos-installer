@@ -1,0 +1,20 @@
+#include "base"
+#include "kernel"
+
+busybox-cvs-udeb
+rootskel-locale
+languagechooser
+hw-detect
+bogl-bterm-udeb
+di-utils-terminfo
+cdebconf-newt-udeb
+nano-udeb
+
+# include support for usb, including usb storage
+usb-discover
+
+# an iso from the hard drive is loop-mounted, and the cd retriever used
+# to load it
+iso-scan
+load-iso
+cdrom-retriever

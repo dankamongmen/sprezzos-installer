@@ -1,0 +1,46 @@
+#!/bin/sh -e
+
+# Set these in the environment to override.
+if [ -z "$HOST" ]; then
+	HOST=people.debian.org
+fi
+if [ -z "$BASEDIR" ]; then
+	BASEDIR=public_html/d-i/images
+fi
+if [ -z "$DIR" ]; then
+	DIR=`date +%Y-%m-%d`
+fi
+
+if [ ! -d pkg-lists ]; then
+    echo "You must run this from the build DIRectory"
+    exit 1
+fi
+
+unset LANG LC_ALL LANGUAGE
+cvs up || true
+
+make reallyclean
+mkdir dest
+for t in $(make all_list |grep '^build'); do
+    (
+    echo
+    echo BUILDING IMAGE FOR $t
+    echo
+    fakeroot make $t
+    ) 2>&1 | tee dest/$t.log # This is allowed to fail
+done
+fakeroot make all_stats | 2>&1 tee dest/stats.txt # This is allowed to fail
+
+echo
+echo UPLOADING FILES
+echo
+
+ssh $HOST mkdir -p $BASEDIR/daily $BASEDIR/$DIR/RSYNC_IN_PROGRESS
+ssh $HOST cp -a $BASEDIR/daily/. $BASEDIR/$DIR/RSYNC_IN_PROGRESS/ || true
+rsync --stats -rv dest/ $HOST:$BASEDIR/$DIR/RSYNC_IN_PROGRESS/
+ssh $HOST mv $BASEDIR/$DIR/RSYNC_IN_PROGRESS/\* $BASEDIR/$DIR/
+ssh $HOST rmdir $BASEDIR/$DIR/RSYNC_IN_PROGRESS
+ssh $HOST rm -f $BASEDIR/daily
+ssh $HOST ln -sf $DIR $BASEDIR/daily
+
+make reallyclean
