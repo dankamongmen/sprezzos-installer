@@ -1,0 +1,78 @@
+# All output files will go here.
+DEST=dest
+
+# Build tree location.
+TREE=$(TEMP)/tree
+
+# Scratch directory.
+BASE_TMP=./tmp/
+
+# Per-type scratch directory.
+TEMP=$(BASE_TMP)$(TYPE)
+
+# Directory apt uses for stuff.
+APTDIR=apt
+
+# Directory udebs are placed in.
+UDEBDIR=udebs
+
+# Extra udebs (for driver1, etc.) are placed here
+EXTRAUDEBDIR=extraudebs
+
+# Local directory that is searched for udebs, to avoid downloading.
+# (Or for udebs that are not yet available for download.)
+LOCALUDEBDIR=localudebs
+
+# Directory where debug versions of udebs will be built.
+DEBUGUDEBDIR=debugudebs
+
+# Directory where sources for all udebs may be kept
+SOURCEDIR=sourceudebs
+
+# Location of your "normal" sources.list. The sources.list for fetching
+# udebs will be derived from this file. Alternatively you can specify a mirror
+# in config/main or create your own sources.list.local
+SYSTEM_SOURCES_LIST=/etc/apt/sources.list
+
+# Figure out which sources.list to use. The .local one is preferred,
+# so you can set up a locally preferred one (and not accidentially cvs
+# commit it).
+ifeq ($(wildcard sources.list.local),sources.list.local)
+SOURCES_LIST=sources.list.local
+else
+SOURCES_LIST=sources.list
+endif
+
+# If there is a FLOPPY_SIZE for this TYPE, then set the filenames of the
+# initrd (in TEMP) and the final floppy image. Otherwise, the final result
+# is an initrd and a kernel.
+ifdef FLOPPY_SIZE
+# XXX This should be TEMP, but is DEST temporarily until we get our act
+# together.
+INITRD=$(DEST)/$(TYPE)-initrd.gz
+IMAGE=$(DEST)/$(TYPE)-image.img
+else
+INITRD=$(DEST)/$(TYPE)-initrd.gz
+ifeq ($(DEB_HOST_ARCH),mips)
+IMAGE=$(DEST)/$(TYPE)-image.img
+else
+ifeq ($(DEB_HOST_ARCH),mipsel)
+IMAGE=$(DEST)/$(TYPE)-image.img
+else
+IMAGE=$(INITRD)
+DEST_KERNEL=1
+endif
+endif
+endif
+
+# Used in the font reduction code.
+LOCALE_PATH=$(TREE)/usr/lib/locale
+
+# Used for building cd images, for eg, powerpc.
+CD_IMAGE_TREE=$(TEMP)/cd_image_tree
+
+DPKGDIR=$(TREE)/var/lib/dpkg
+DRIVEREXTRASDIR=$(TREE)/driver-tmp
+DRIVEREXTRASDPKGDIR=$(DRIVEREXTRASDIR)/var/lib/dpkg
+
+TMP_MNT:=$(shell pwd)/mnt

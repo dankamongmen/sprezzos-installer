@@ -1,0 +1,12 @@
+# Commented efi-reader because the one in the archive is still linked
+# against libdebian-installer3
+#efi-reader
+cdebconf-text-udeb
+console-keymaps-at
+console-keymaps-usb
+discover-data-udeb
+discover-udeb
+kbd-chooser
+nic-modules-${kernel:Version}
+ide-modules-${kernel:Version}
+scsi-modules-${kernel:Version}
