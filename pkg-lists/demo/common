@@ -1,0 +1,12 @@
+#include "base"
+# No kernel needed
+busybox-cvs-udeb
+rootskel-locale
+languagechooser
+hw-detect
+bogl-bterm-udeb
+di-utils-terminfo
+cdebconf-newt-udeb
+nano-udeb
+
+di-utils-exit-installer
