@@ -1,0 +1,92 @@
+#!/usr/bin/perl
+# Outputs a list of udebs to install. Pass it the type of image to build as
+# the first parameter, then the kernel flavour, then the sub architecture
+# (or an empty string if there are none) and then the kernel version(s)
+# as the rest of the parameters. Reads the lists in pkg-lists.
+
+use warnings;
+use strict;
+
+if (int(@ARGV) < 4) {
+	die "Usage: $0 type KERNEL_FLAVOUR SUB_ARCH KERNEL_VERSION [KERNEL_VERSION ...]\n";
+}
+my $type=shift;
+my $kernel_flavour=shift;
+my $sub_arch=shift;
+my @kernel_versions=@ARGV;
+
+my $deb_host_arch=`dpkg-architecture -qDEB_HOST_ARCH`;
+chomp $deb_host_arch;
+
+my @lists = ("pkg-lists/local");
+my $t="";
+foreach my $subtype (split "/", $type) {
+	if (! length $t) {
+		$t=$subtype;
+	}
+	else {
+		$t="$t/$subtype";
+	}
+	push @lists, ("pkg-lists/$t/local", "pkg-lists/$t/common",
+	              "pkg-lists/$t/$deb_host_arch");
+}
+
+while (@lists) {
+	my $list=pop @lists;
+	if (! -e $list) {
+		print STDERR "warning: missing list, $list, for type $type\n"
+			if $list !~ /local$/;
+	}
+	else {
+		open (LIST, $list) || die "open $list $!";
+		while (<LIST>) {
+			chomp;
+
+			# includes
+			if (/^#include \"(.*)\"/) {
+				push @lists, "pkg-lists/$1";
+			}
+			
+			# comments
+			s/^#.*//;
+			next unless length;
+			
+			# normal kernel version substitution
+			if (/\${kernel:Version}/) {
+				foreach my $v (@kernel_versions) {
+					my $l=$_;
+					$l=~s/\${kernel:Version}/$v-$kernel_flavour/g;
+					print "$l\n";
+				}
+				next; # move onto teh next line
+			}
+
+			# limited kernel version substitutions
+			if (/\$\{kernel:Version(?:=(.*?))?\}/)
+			{
+				if (! length $1 ) {
+					print STDERR "warning: empty kernel version substitution list\n";
+					next;
+				}
+				my $l = $_;
+				my @limits = split( /,/, $1 );
+
+				foreach my $v (@kernel_versions)
+				{
+					my $str = $l;
+					if( grep { $sub_arch eq $_ } @limits )
+					{
+						#kernel_version is in limit list
+						$str =~ s/\${kernel:Version=.*?}/$v-$kernel_flavour/g;
+						print "$str\n";
+					}
+				}
+				next; # move onto the next line
+			}
+
+			#if nothing else matches print the line untouched
+			print "$_\n";
+		    }
+		close LIST;
+	}
+}
