@@ -1,0 +1,7 @@
+s390-netdevice
+nic-modules-${kernel:Version}
+netcfg-static
+
+# used by netcfg
+libiw27-udeb
+

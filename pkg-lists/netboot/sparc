@@ -1,0 +1,14 @@
+console-keymaps-usb
+console-keymaps-sun
+dhcp-client-udeb
+discover-udeb
+discover-data-udeb
+
+kbd-chooser
+bogl-bterm-udeb
+hw-detect
+ethdetect
+netcfg
+
+# used by netcfg
+libiw27-udeb
