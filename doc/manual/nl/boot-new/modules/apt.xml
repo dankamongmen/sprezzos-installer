@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 11648 -->
+
+ <sect2 id="configure-apt">
+ <title>APT configureren</title>
+
+<para>
+
+Het belangrijkste middel dat mensen gebruiken om pakketten op hun systeem
+te installeren is een programma genaamd <command>apt-get</command>,
+uit het pakket <classname>apt</classname>.<footnote>
+<para>
+
+Merk op dat het programma dat de feitelijke installatie van pakketten
+uitvoert, <command>dpkg</command> is. Dit pakket is echter meer een
+soort specialistisch gereedschap en wordt waar nodig door
+<command>apt-get</command> aangeroepen. <command>dpkg</command> bevat echter
+ook hogere functionaliteit: het is in staat om andere pakketten te
+installeren die vereist zijn voor het pakket dat u probeert te installeren
+en ook om pakketten op te halen vanaf CD, het netwerk en andere bronnen.
+<!-- FJP: origineel loopt niet: volgens mij heb ik de juiste interpretatie //-->
+
+</para>
+</footnote>
+
+Wel moet APT worden geconfigureerd zodat het weet waar het pakketten
+vandaan kan halen. De toepassing die daarbij assisteert heet
+<command>apt-setup</command>.
+
+</para><para>
+
+De volgende stap in het configuratieproces is dat u APT moet vertellen
+waar andere Debian-pakketten gevonden kunnen worden. Merk op dat u op
+elk moment na de installatie de te gebruiken bronnen voor pakketten kunt
+wijzigen door <command>apt-setup</command> te starten of door handmatig
+het bestand <filename>/etc/apt/sources.list</filename> te wijzigen.
+<!-- FJP: origineel loopt niet 're-run this tool ... by manually editing //-->
+
+</para><para>
+
+Als u het installatiesysteem heeft opgestart vanaf een officiële Debian
+CD, dan behoort deze CD automatisch, zonder dat u daarom wordt gevraagd,
+te worden geconfigureerd als bron voor APT. U kunt dit nagaan doordat u
+zal merken dat de CD wordt gescand; daarna zal u worden gevraagd of u nog
+een CD wilt configureren. Als u beschikt over een set bestaande uit meerdere
+installatie-CD's &mdash; wat in veel gevallen zo zal zijn &mdash; dan dient
+u elke CD afzonderlijk te laten scannen.
+<!-- FJP: 'official _Debian_ CD'! //-->
+
+</para><para>
+
+Gebruikers zonder een officiële CD zal een reeks van mogelijkheden voor het
+ophalen van Debian pakketten worden geboden: FTP, HTTP, CD-ROM of vanaf een
+lokaal bestandssysteem. Gebruikers met een officiële CD kunnen ook van deze
+(aanvullende) bronnen gebruikmaken door aan te geven dat nog een extra bron
+moet worden toegevoegd.
+<!-- FJP: laatste zin zou beter in vorige paragraaf verwerkt kunnen worden //-->
+
+</para><para>
+
+U dient te weten dat het zeer wel mogelijk is om een aantal verschillende
+bronnen voor APT te hebben, zelfs voor hetzelfde Debian archief.
+<command>apt-get</command> zal automatisch het pakket met de hoogste versie
+selecteren vanuit de beschikbare versies. Een ander voorbeeld is dat
+<command>apt-get</command>, als u zowel een HTTP-bron als een CD-bron heeft
+gedefinieerd, automatisch de CD-bron zal kiezen en alleen zal terugvallen op
+de HTTP-bron als daar een nieuwere versie beschikbaar is. Het is echter geen
+goed idee om onnodig bronnen voor APT toe te voegen omdat dit het proces van
+controle op nieuwe versies in netwerkarchieven zal vertragen.
+
+</para>
+
+  <sect3 id="configure-apt-net">
+  <title>Netwerkbronnen voor pakketten configureren</title>
+
+<para>
+
+Als u van plan bent om de rest van uw systeem te installeren vanaf het
+netwerk, is de <userinput>http</userinput>-bron de meestgebruikte optie.
+De <userinput>ftp</userinput>-bron is ook een mogelijkheid, maar is over
+het algemeen iets trager bij het tot stand brengen van een verbinding.
+
+</para><para>
+
+De volgende stap bij de configuratie van netwerkbronnen voor pakketten is
+dat u <command>apt-setup</command> moet vertellen in welk land u woont.
+Hiermee wordt geconfigureerd welke van de officiële mirrors uit het Debian
+Internetnetwerk wordt gebruikt. Afhankelijk van het land waar u woont,
+wordt een lijst met mogelijke mirrors getoond. Over het algemeen is het
+prima om de bovenste van de lijst te kiezen, maar alle opties behoren te
+werken.
+
+</para><para>
+
+Als u een HTTP-bron heeft geselecteerd, zal u worden gevraagd of gebruik
+moet worden gemaakt van een proxy-server. Dit is soms vereist voor systemen
+die bijvoorbeel achter een firewall zitten of zijn aangesloten op een
+bedrijfsnetwerk.
+<!-- Vrij vertaald! Opmerking toevoegen dat dit leeg mag blijven? //-->
+
+</para><para>
+
+Tot slot zal uw nieuwe netwerkbron worden getest. Als alles goed gaat, zal
+u worden gevraagd of u eventueel nog een extra netwerkbron wil toevoegen.
+<!-- FJP: klopt dit met de feitelijke procedure //-->
+
+</para>
+  </sect3>
+ </sect2>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 12756 -->
+
+<chapter id="preparing">
+ <title>Avant d'installer &debian;</title>
+
+&install-overview.xml;
+&backup.xml;
+&needed-info.xml;
+&minimum-hardware-reqts.xml;
+&non-debian-partitioning.xml;
+&pre-install-bios-setup.xml;
+
+</chapter>

@@ -1,0 +1,64 @@
+#!/usr/bin/make -f
+
+ARCH=$(shell dpkg-architecture -qDEB_BUILD_ARCH)
+VERSION=$(shell LC_ALL=C dpkg-parsechangelog | grep ^Version: | cut -d ' ' -f 2)
+DATE=$(shell echo $(VERSION) | cut -d '.' -f 1)
+DISTRIBUTION=$(shell LC_ALL=C dpkg-parsechangelog | grep ^Distribution: | cut -d ' ' -f 2)
+ifeq (${DISTRIBUTION},UNRELEASED)
+DISTRIBUTION=unstable
+endif
+
+ARCHIVEDIR=installer-$(ARCH)
+DESTDIR=$(ARCHIVEDIR)/$(DATE)
+IMAGEDIR=$(DESTDIR)/images
+TARNAME=debian-installer-images_$(VERSION)_$(ARCH).tar.gz
+
+clean:
+	dh_testdir
+	dh_testroot
+	dh_clean build-stamp
+	$(MAKE) -C build reallyclean
+
+build: build-stamp
+build-stamp:
+	rm -f $@
+	fakeroot $(MAKE) -C build all_build stats SUITE=$(DISTRIBUTION)
+	touch $@
+	
+build-manual:
+	-rm -rf debian/tmp/$(DESTDIR)/doc/manual
+	cd doc/manual/build && \
+		destination=$(shell pwd)/debian/tmp/$(DESTDIR)/doc/manual \
+		architectures=$(ARCH) noarchdir=1 ./build.sh
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_install
+	install -d debian/tmp/$(DESTDIR)/doc
+	cp debian/*.html doc/INSTALLATION-HOWTO doc/INSTALLATION-HOWTO.?? \
+		debian/tmp/$(DESTDIR)/doc
+	debian/rules build-manual
+	install -d debian/tmp/$(IMAGEDIR)
+	cp -a build/dest/* debian/tmp/$(IMAGEDIR)
+	cd debian/tmp/$(IMAGEDIR) && md5sum `find . -type f` > MD5SUMS
+	ln -s $(DATE) debian/tmp/$(ARCHIVEDIR)/current
+
+binary-arch: install  
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs
+	dh_installdocs debian/tmp/$(DESTDIR)/doc/manual
+	dh_installdocs -X historic -X manual doc/*
+	dh_compress
+	dh_fixperms
+	dh_gencontrol -- -Vkernel:Package='$(KERNELPACKAGE)'
+	dh_builddeb
+	cd debian/tmp && tar czvf ../../../$(TARNAME) .
+	dpkg-distaddfile $(TARNAME) byhand -
+
+binary-indep:
+
+binary: binary-indep binary-arch 
+.PHONY: build clean binary-indep binary-arch binary install 
