@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 18767 -->
+
+
+ <sect2 id="install-packages">
+ <title>Installation des paquets</title>
+
+<para>
+
+Il vous sera ensuite proposé un certain nombre de configurations logicielles 
+préparées par Debian. Mais vous pourrez toujours choisir d'installer ce que 
+vous voulez installer sur votre nouvelle machine, paquet par paquet. 
+C'est la raison d'être du programme <command>aptitude</command> décrit plus 
+bas. Toutefois, avec près de &num-of-distrib-pkgs; paquets disponibles, 
+cela peut être long&nbsp;!
+</para>
+<para>
+Vous pouvez ainsi d'abord choisir des <emphasis>tâches</emphasis>, et ensuite 
+ajouter des paquets individuellement. Ces tâches représentent 
+approximativement les différents travaux qu'on peut faire avec son ordinateur,
+par exemple de la <quote>bureautique</quote>, du <quote>service web</quote> 
+ou encore du <quote>service d'impression</quote><footnote>
+<para>
+Il faut savoir que pour présenter cette liste, <command>base-config</command> 
+appelle simplement le programme	<command>tasksel</command>. Pour une 
+sélection manuelle des paquets, c'est <command>aptitude</command> qui est
+exécuté. Chacun de ces programmes peut être utilisé, à tout moment une fois 
+l'installation terminée, pour installer	d'autres paquets. Une fois que 
+l'installation est finie, si vous voulez un paquet particulier, exécutez 
+simplement 
+<userinput>apt-get install <replaceable>paquet</replaceable></userinput>, où
+<replaceable>paquet</replaceable> est le nom du paquet voulu.
+</para>
+</footnote>.
+</para>
+<para>
+Si vous choisissez d'installer des paquets sur une base individuelle,
+sélectionnez <quote>Sélection manuelle des paquets</quote> dans
+    <command>tasksel</command>.
+</para>
+<para>
+Une fois que vous avez sélectionné vos tâches, choisissez
+<guibutton>OK</guibutton>. À ce stade, <command>aptitude</command>
+installera tous les paquets que vous avez sélectionnés. Notez que même
+si vous n'avez pas choisi de tâche, tous les paquets de type standard, 
+important ou nécessaire, qui ne sont pas encore présents sur votre système 
+seront automatiquement installés. Cette fonctionnalité revient à exécuter 
+<userinput>tasksel -s</userinput> sur la ligne de commande et implique 
+actuellement le téléchargement d'environ 37&nbsp;Mo d'archive. Il vous sera 
+montré le nombre de paquets à installer et la quantité de données en 
+kilo-octets qu'il est nécessaire de télécharger.
+</para>
+<para>
+Sur les &num-of-distrib-pkgs; paquets disponibles dans les archives Debian, 
+seule une petite minorité est comprise dans les tâches offertes par
+l'installateur des tâches. Afin d'obtenir plus d'information sur les paquets, 
+utilisez soit 
+<userinput>apt-cache search <replaceable>chaîne de recherche</replaceable></userinput> pour une chaîne de caractères donnée (voir la page de manuel
+    <citerefentry><refentrytitle>apt-cache</refentrytitle>
+      <manvolnum>8</manvolnum></citerefentry>), soit exécutez
+    <command>aptitude</command> comme décrit plus bas.
+</para>
+
+  <sect3 id="aptitude">
+    <title>Sélection avancée de paquets avec
+      <command>aptitude</command></title>
+
+<para>
+
+<command>Aptitude</command> est un programme moderne de gestion de paquets. 
+Il permet de sélectionner des paquets individuels, des ensembles de paquets 
+suivant des critères donnés (pour utilisateurs avancés) ou encore des tâches
+entières.
+
+</para>
+<para>
+
+
+Les actions les plus basiques sont&nbsp;:
+
+<informaltable>
+<tgroup cols="2">
+<thead>
+<row>
+  <entry>Touche</entry><entry>Action</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry><keycap>Haut</keycap>, <keycap>Bas</keycap></entry>
+  <entry>Déplacer la sélection en haut ou en bas.</entry>
+</row><row>
+  <entry>&enterkey;</entry>
+  <entry>Ouvrir/fermer/activer un élément.</entry>
+</row><row>
+  <entry><keycap>+</keycap></entry>
+  <entry>Marquer le paquet pour l'installation.</entry>
+</row><row>
+  <entry><keycap>-</keycap></entry>
+  <entry>Marquer le paquet pour la suppression.</entry>
+</row><row>
+  <entry><keycap>d</keycap></entry>
+  <entry>Montrer les dépendances d'un paquet.</entry>
+</row><row>
+  <entry><keycap>g</keycap></entry>
+  <entry>Vraiment télécharger/installer/supprimer les paquets.</entry>
+</row><row>
+  <entry><keycap>q</keycap></entry>
+  <entry>Quitter la vue courante.</entry>
+</row><row>
+  <entry><keycap>F10</keycap></entry>
+  <entry>Activer le menu.</entry>
+</row>
+</tbody></tgroup></informaltable>
+
+Pour plus de commandes, veuillez vous référer à l'aide en ligne avec la
+touche <keycap>?</keycap>.
+
+</para>
+    </sect3>
+  </sect2>
+

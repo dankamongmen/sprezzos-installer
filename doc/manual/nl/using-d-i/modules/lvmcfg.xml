@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 22935 -->
+
+   <sect3 id="lvmcfg">
+   <title>Logisch volumebeheer (LVM) instellen</title>
+<para>
+
+Als u met computers werkt op het niveau van systeembeheerder of
+<quote>gevorderde</quote> gebruiker, heeft u vast de situatie meegemaakt
+waar op een partitie (meestal de meest belangrijke) onvoldoende ruimte
+beschikbaar was, terwijl een andere partitie grotendeels ongebruikt was.
+Als oplossing heeft u mogelijk bestanden moeten verplaatsen met symbolische
+verwijzingen vanaf de oude lokatie.
+
+</para><para>
+
+Om deze situatie te voorkomen, kunt u gebruik maken van Logisch volumebeheer
+(Logical Volume Management &mdash; LVM). Met LVM kunt u uw partities (in de
+terminologie van LVM <firstterm>fysieke volumes</firstterm>) combineren tot
+een virtuele harde schijf (ofwel <firstterm>volumegroep</firstterm>); deze
+kan op zijn beurt worden opgedeeld in virtuele partities (<firstterm>logische
+volumes</firstterm>). Het nut hiervan is dat logische volumes (en natuurlijk
+ook de onderliggende volumegroepen) verschillende fysieke harde schijven
+kunnen omvatten.
+
+</para><para>
+
+Als u bijvoorbeeld vervolgens ontdekt dat u meer ruimte nodig heeft op uw
+oude 160GB <filename>/home</filename> partitie, kunt u eenvoudig een extra
+300GB harde schijf in de computer plaatsen, deze toevoegen in uw bestaande
+volumegroep en vervolgens het logische volume vergroten waarop uw
+<filename>/home</filename> bestandssysteem zich bevindt. En klaar is Kees: uw
+gebruikers kunnen beschikken over de extra ruimte op een vernieuwde partitie
+van 460GB. Dit voorbeeld is uiteraard enigszins gesimplificeerd. Wij raden u
+aan om, voor zover u dat nog niet heeft gedaan, de
+<ulink url="&url-lvm-howto;">LVM HOWTO</ulink> te raadplegen.
+
+</para><para>
+
+Het instellen van LVM in &d-i; is relatief eenvoudig. Allereerst dient u de
+partities te markeren die u wilt gebruiken als fysieke volumes voor LVM.
+Hiervoor selecteert u in <command>partman</command> vanuit het menu
+<guimenu>Partitie-instellingen</guimenu> de optie <menuchoice>
+<guimenu>Gebruiken als:</guimenu> <guimenuitem>fysiek volume voor
+LVM</guimenuitem> </menuchoice>. Vervolgens start u de module
+<command>lvmcfg</command> (dit is mogelijk zowel direct vanuit
+<command>partman</command> als vanuit het hoofdmenu van &d-i;) en voegt u
+vanuit de menukeuze <guimenuitem>Volumegroepen (VG) aanpassen</guimenuitem>
+de fysieke volumes samen tot één of meerdere volumegroepen. Vervolgens
+dient u nog vanuit de menukeuze <guimenuitem>Logische volumes (LV)
+aanpassen</guimenuitem> de logische volumes te creëren bovenop de
+volumegroepen.
+
+</para><para>
+
+Nadat u vanuit <command>lvmcfg</command> terugkeert in
+<command>partman</command>, zult u de aangemaakte logische volumes als ware
+het gewone partities terugvinden in het menu (en u kunt ze verder ook als
+zodanig behandelen).
+
+</para>
+   </sect3>

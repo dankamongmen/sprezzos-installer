@@ -1,0 +1,336 @@
+<!-- original version: 18674 -->
+
+
+  <sect2 arch="i386" id="bios-setup"><title>Das BIOS-Setup-Menü aufrufen</title>
+
+<para>
+
+Das BIOS bietet Basisfunktionen, die benötigt werden, um den Rechner
+zu starten und dem Betriebssystem Zugriff auf die Hardware zu ermöglichen.
+Möglicherweise hat Ihr System ein BIOS-Setup-Menü, in dem das BIOS
+konfiguriert wird. Vor der Installation von Debian <emphasis>müssen</emphasis>
+Sie sicherstellen, dass Ihr BIOS korrekt eingestellt ist; ansonsten könnte das 
+zu sporadischen Ausfällen führen oder Sie können Debian möglicherweise nicht
+installieren.
+
+</para><para>
+
+Der Rest dieses Abschnitts ist bei <ulink url="&url-pc-hw-faq;"></ulink>
+entliehen und beantwortet die Frage "Wie gelange ich in das 
+CMOS-Konfigurationsmenü?" Wie Sie Ihr BIOS (oder "CMOS") erreichen, hängt
+davon ab, welche Firma Ihr BIOS erstellt hat:
+
+</para>
+
+<!-- From: burnesa@cat.com (Shaun Burnet) -->
+<variablelist>
+
+<varlistentry>
+ <term>AMI BIOS</term>
+ <listitem><para>
+
+<keycap>Entfernen</keycap>-Taste während des POST (Power on Self Test, Selbsttest
+nach dem Einschalten)
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+ <term>Award BIOS</term>
+ <listitem><para>
+
+<keycombo>
+  <keycap>Strg</keycap><keycap>Alt</keycap><keycap>Esc</keycap>
+</keycombo>, oder <keycap>Entfernen</keycap>-Taste während des POST
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry><term>DTK BIOS</term>
+ <listitem><para>
+
+<keycap>Esc</keycap>-Taste während des POST
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry><term>IBM PS/2 BIOS</term>
+ <listitem><para>
+
+<keycombo>
+  <keycap>Strg</keycap><keycap>Alt</keycap><keycap>Einfügen</keycap>
+</keycombo>
+nach
+<keycombo>
+  <keycap>Strg</keycap><keycap>Alt</keycap><keycap>Entfernen</keycap>
+</keycombo>
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+ <term>Phoenix BIOS</term>
+ <listitem><para>
+
+<keycombo>
+  <keycap>Strg</keycap><keycap>Alt</keycap><keycap>Esc</keycap>
+</keycombo>
+oder
+<keycombo>
+  <keycap>Strg</keycap><keycap>Alt</keycap><keycap>S</keycap>
+</keycombo>
+oder
+<keycap>F1</keycap>
+
+</para></listitem>
+</varlistentry>
+</variablelist>
+
+<para>
+
+Informationen, wie Sie andere BIOS-Funktionen aufrufen, finden Sie unter
+<ulink url="&url-invoking-bios-info;"></ulink>.
+
+</para><para>
+
+Einige &arch-title;-Rechner haben kein CMOS-Konfigurationsmenü im BIOS.
+Sie erfordern ein CMOS-Setup-Programm. Wenn Sie keine Installations- und/oder
+Diagnosedisketten für Ihren Rechner haben, können Sie versuchen, ein 
+Shareware/Freeware-Programm zu benutzen. Werfen Sie einen Blick auf
+<ulink url="&url-simtel;"></ulink>.
+
+</para>
+  </sect2>
+
+  <sect2 arch="i386" id="boot-dev-select"><title>Das Start-Laufwerk auswählen (Boot Device Selection)</title>
+
+<para>
+
+Viele BIOS-Setup-Menüs erlauben die Auswahl des Laufwerks, von dem
+das System gestartet wird. Stellen Sie dies so ein, dass wie folgt
+nach einem bootfähigen Betriebssystem gesucht wird: 
+zuerst <filename>A:</filename> (das erste Diskettenlaufwerk), dann optional
+das erste CD-ROM-Laufwerk (dies erscheint möglicherweise als <filename>D:</filename>
+oder <filename>E:</filename>), und dann <filename>C:</filename>, die
+erste Festplatte. Diese Einstellung erlaubt, entweder von eine Floppy-Disk
+oder einer CD-ROM zu booten; dies sind die beiden meist verwendeten
+Start-Laufwerke, um Debian zu installieren.
+
+</para><para>
+
+Wenn Sie einen neueren SCSI-Controller besitzen und ein CD-ROM-Gerät
+dort angeschlossen haben, können Sie normalerweise von diesem CD-ROM
+booten. Sie müssen dazu lediglich das Booten von CD-ROM im
+SCSI-BIOS des Controllers aktivieren.
+
+</para><para>
+
+Eine andere beliebte Option ist das Starten von einem USB-Speicher
+(manchmal auch USB-Memorystick oder USB-Key genannt). Einige BIOS
+können direkt von einem USB-Speicher booten, einige können dies jedoch 
+nicht. Möglicherweise müssen Sie im BIOS die Boot-Option
+<quote>Wechsel-Plattenlaufwerk (Removable drive)</quote> oder sogar
+<quote>USB-ZIP</quote> wählen, um zu erreichen, dass der Rechner
+vom USB-Speicher startet.
+
+</para><para>
+
+Hier einige Details über das Festlegen der Startreihenfolge.
+Denken Sie daran, die Einstellung wieder auf den ursprünglichen Wert 
+zurückzustellen, nachdem Linux installiert ist, sodass nach einem
+Neustart von der Festplatte gebootet wird.
+
+</para>
+
+   <sect3 id="ctbooi">
+   <title>Ändern der Startreihenfolge auf Rechnern mit IDE-Laufwerken</title>
+
+<orderedlist>
+<listitem><para>
+
+Sobald Ihr Computer staret, drücken Sie die nötigen Tasten, um in das BIOS-Menü
+zu gelangen. Oft ist dies die <keycap>Entfernen</keycap>-Taste, andernfalls
+konsultieren Sie Ihre Hardware-Dokumentation bezüglich der genauen 
+Tastenkombination.
+
+</para></listitem>
+<listitem><para>
+
+Suchen Sie nach der Einstellung für die Bootreihenfolge (boot sequence). Der
+genaue Ort hängt von Ihrem BIOS ab; suchen Sie nach einem Feld, in dem Laufwerke
+aufgelistet sind.
+
+</para><para>
+
+Gebräuchliche Einstellungen für Rechner mit IDE-Laufwerken sind "C, A, CDROM" oder
+"A, C, CDROM".   
+
+</para><para>
+   
+C ist die (erste) Festplatte, und A ist das Diskettenlaufwerk.
+
+</para></listitem>   
+<listitem><para>
+
+Ändern Sie die Bootreihenfolge, sodass das CD-ROM oder die Floppy-Disk als erstes
+steht. Oft können Sie mit <keycap>Page Up</keycap> oder <keycap>Page Down</keycap>
+die möglichen Einstellungen wechseln.
+
+</para></listitem>
+<listitem><para>
+
+Speichern Sie die Änderungen (Save Changes). Richten Sie sich dabei nach den Instruktionen
+auf dem Bildschirm.
+
+</para></listitem>
+</orderedlist>
+   </sect3>
+
+   <sect3 id="ctboos">
+   <title>Ändern der Startreihenfolge auf Rechnern mit SCSI-Laufwerken</title>
+<para>
+
+<orderedlist>
+<listitem><para>
+
+Während Ihr Rechner startet, drücken Sie die entsprechenden Tasten, um das SCSI-Setup-Programm
+zu starten:
+
+</para><para>
+
+Nachdem der Speichercheck und die Nachricht, wie Sie Ihr BIOS-Setup erreichen,
+angezeigt wurden, können Sie das SCSI-Setup-Programm starten.
+
+</para><para>
+
+Die Tastenkombination, die Sie drücken müssen, hängt von dem Setup-Programm ab.
+Oft ist es <keycombo><keycap>Strg</keycap><keycap>F2</keycap></keycombo>.
+Andernfalls konsultieren Sie Ihre Hardware-Dokumentation, um die richtige
+Tastenkombination zu erfahren.
+
+</para></listitem>
+<listitem><para>
+
+Suchen Sie nach der Einstellung für die Startreihenfolge (boot order).
+
+</para></listitem>
+<listitem><para>
+
+Stellen Sie diese so ein, dass die ID des SCSI-CDROM-Laufwerks als erstes
+auf der Liste steht.
+
+</para></listitem>
+<listitem><para>
+
+Sichern Sie die Änderungen (Save Changes). Richten Sie sich dabei nach den 
+Instruktionen auf dem Bildschirm. Oft müssen Sie dazu <keycap>F10</keycap>
+drücken.
+
+</para></listitem>
+</orderedlist>
+
+</para>
+   </sect3>
+  </sect2>
+
+  <sect2 arch="i386">
+  <title>Verschiedene BIOS-Einstellungen</title>
+
+   <sect3 id="cd-settings"><title>CD-ROM-Einstellungen</title>
+<para>
+
+Einige BIOS-Systeme (wie z.B. Award BIOS) erlauben es, die Geschwindigkeit
+des CD-ROM-Laufwerks automatisch wählen zu lassen. Sie sollten dies 
+vermeiden und stattdessen die langsamste Geschwindigkeit wählen.
+Wenn Sie <userinput>seek failed</userinput>-Fehlermeldungen erhalten,
+könnte dies das Problem sein.
+
+</para>
+   </sect3>
+
+   <sect3><title>Extended vs. Expanded Memory</title>
+<para>
+
+If your system provides both ex<emphasis>ten</emphasis>ded and
+ex<emphasis>pan</emphasis>ded memory, set it so that there is as much
+extended and as little expanded memory as possible. Linux requires
+extended memory and cannot use expanded memory.
+
+</para>
+   </sect3>
+
+   <sect3><title>Virus Protection</title>
+<para>
+
+Disable any virus-warning features your BIOS may provide. If you have
+a virus-protection board or other special hardware, make sure it is
+disabled or physically removed while running GNU/Linux. These aren't
+compatible with GNU/Linux; moreover, due to the file system
+permissions and protected memory of the Linux kernel, viruses are
+almost unheard of.
+
+<footnote>
+<para>
+
+After installation you can enable Boot Sector protection if you
+want. This offers no additional security in Linux but if you also run
+Windows it may prevent a catastrophe. There is no need to tamper with
+the Master Boot Record (MBR) after the boot manager has been set up.
+
+</para>
+</footnote>
+
+</para>
+   </sect3>
+
+   <sect3><title>Shadow RAM</title>
+<para>
+
+Your motherboard may provide <emphasis>shadow RAM</emphasis> or BIOS
+caching. You may see settings for ``Video BIOS Shadow'', ``C800-CBFF
+Shadow'', etc. <emphasis>Disable</emphasis> all shadow RAM.  Shadow
+RAM is used to accelerate access to the ROMs on your motherboard and
+on some of the controller cards. Linux does not use these ROMs once it
+has booted because it provides its own faster 32-bit software in place
+of the 16-bit programs in the ROMs. Disabling the shadow RAM may make
+some of it available for programs to use as normal memory.  Leaving
+the shadow RAM enabled may interfere with Linux access to hardware
+devices.
+
+</para>
+   </sect3>
+
+   <sect3><title>Memory Hole</title>
+<para>
+
+If your BIOS offers something like ``15-16 MB Memory Hole'', please
+disable that. Linux expects to find memory there if you have that much
+RAM.
+
+</para><para>
+
+We have a report of an Intel Endeavor motherboard on which there is an
+option called ``LFB'' or ``Linear Frame Buffer''. This had two
+settings: ``Disabled'' and ``1 Megabyte''. Set it to ``1 Megabyte''.
+When disabled, the installation floppy was not read correctly, and the
+system eventually crashed. At this writing we don't understand what's
+going on with this particular device &mdash; it just worked with that
+setting and not without it.
+
+</para>
+   </sect3>
+
+<!-- no other platforms other than x86 provide this sort of thing, AFAIK -->
+
+   <sect3><title>Advanced Power Management</title>
+<para>
+
+If your motherboard provides Advanced Power Management (APM),
+configure it so that power management is controlled by APM. Disable
+the doze, standby, suspend, nap, and sleep modes, and disable the hard
+disk's power-down timer.  Linux can take over control of these modes,
+and can do a better job of power-management than the BIOS.
+
+</para>
+   </sect3>
+  </sect2>

@@ -1,0 +1,174 @@
+Release testing checklist. Successful installs should be reported 
+for each of the following before release.
+
+For the next release we're testing the sarge CDs and the 20041027 build of
+d-i boot images (on the mirrors).
+
+					pass/fail (details)
+languages
+
+jfbterm: means that using jfbterm on the console is mandatory for 
+         avoiding Mojibake
+reboot : means that the display is correct only after rebooting the
+         installed system. This is because of reset to Latin-1
+	 at the end of base-config
+
+	Albanese			retry	base-config loop fixed
+	Arabic				pass	jfbterm
+	Basque				pass	 
+	Bosnian				pass	reboot
+	Bulgarian			pass	 
+	Catalan				pass
+	Chinese (Simplified)		pass	jfbterm
+	Chinese (Traditional)		pass	jfbterm
+	Croatian			pass	reboot
+	Czech				pass	reboot
+	Danish				pass
+	Dutch				pass
+	French				pass
+	Galician			pass
+	German				pass
+	Greek				pass
+	Hebrew				pass	fbterm
+	Hungarian			pass	reboot
+	Indonesian			pass
+	Italian				pass
+	Japanese			pass	jfbterm
+	Korean				pass 	jfbterm
+	Latvian				pass 	
+	Lithuanian			fail	lt keymap missing (#275087). 
+						Is OK with US keyboard
+	Northern Sami			pass	No borders around dialog in 2nd stage
+	Norwegian Bokmal		pass    Encoding problem in shadow 
+						(already reported)
+	Norwegian Nynorsk		pass    exim4 config screen broken, bug reported
+	Persian				fail	Missing characters
+						No 2nd stage translation
+						jfbterm (probably)
+	Polish				pass	reboot. exim4 broken (same as nn)
+	Portuguese of Brazil		pass
+	Portuguese			pass
+	Romanian			pass	reboot
+	Russian				pass	reboot
+	Serbian				fail    Uses Bosnian translation as fallback
+						Console-cyrillic properly installed though
+						Glitches in 2nd stage.
+	Slovakian			pass	reboot
+	Slovenian			pass	reboot
+	Spanish				pass
+	Swedish				pass
+	Turkish				pass	reboot
+	Ukrainian			pass	reboot
+	Welsh				pass	reboot
+						No lines around dialog boxes in 2nd stage
+
+i386
+	netinst cd install		pass
+	businesscard cd install		pass
+	usb keychain			pass
+	usb floppy install		pass
+	real floppy install		pass
+	floppy + cd install		pass
+	floppy + network install	pass
+	netboot install			pass
+	pcmcia network install 		pass
+          (any boot media)		
+	lvm install			
+	lvm root			
+	raid root			
+	raid 1 root and boot		
+          (lilo)			
+	lvm over raid					
+	32 mb ram install		pass
+	48 mb ram install		pass	
+	2.6 netinst install				
+	2.6 businesscard install			
+	2.6 netboot install				
+	2.6 pcmcia install		pass		
+	2.6 lvm install			
+	2.6 lvm root			
+	2.6 software raid install	
+	2.6 usb keychain		pass
+	2.6 lvm over raid		
+	windows detection		pass
+	other linux detection		
+	full CD desktop install		pass
+	
+powerpc	
+        basic netinst cd				
+        basic businesscard cd				
+        floppy + cd [not newworld]			
+        floppy + network [not newworld]			
+        netboot						
+        using pcmcia network card			
+        32 mb ram					
+        48 mb ram					
+
+sparc
+	sparc32 install from CD				
+	sparc64 install from CD				
+	sparc32 netboot					
+	sparc64 netboot
+
+ia64
+	netboot						
+	2.6 netboot					
+	cd install					
+	2.6 cd install					
+
+alpha
+	cd install					
+
+mips
+	SGI (r4k-ip22) netboot				
+	SGI (r4k-ip22) CD boot				
+	SGI (r4k-ip22) via serial			
+	SGI (r4k-ip22) via graphics			
+	SGI (r5k-ip22) netboot				
+	SGI (r5k-ip22) CD boot				
+	SGI (r5k-ip22) via serial			
+	SGI (r5k-ip22) via graphics			
+
+mipsel
+	DECstation (r3k-kn02) netboot			
+	DECstation (r3k-kn02) CD boot			
+	DECstation (r3k-kn02) via serial		
+	DECstation (r3k-kn02) via graphics		
+	DECstation (r4k-kn04) netboot			
+	DECstation (r4k-kn04) CD boot			
+	DECstation (r4k-kn04) via serial		
+	DECstation (r4k-kn04) via graphics		
+	Cobalt netboot via serial			
+	Cobalt (lowmem) netboot via serial		
+	Cobalt lvm install				
+	Cobalt software raid install			
+
+m68k
+	amiga cdrom
+	amiga nativehd
+	atari cdrom
+	atari floppy
+	atari nativehd
+	mac cdrom22					
+	mac hd-media					
+	mac nativehd					
+
+hppa
+	cdrom						
+	netboot						
+
+arm
+	Netwinder netboot via serial			
+	Netwinder netboot via graphics			
+
+s390
+	vm reader					
+	emulated tape
+	IUCV network					
+	CTC network					
+	qeth						
+
+amd64
+	cdrom						
+	USB						
+	netboot						

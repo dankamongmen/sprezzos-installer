@@ -1,0 +1,441 @@
+<!-- original version: 23061 -->
+
+  <sect2 arch="i386"><title>Von einer CD-ROM starten</title>
+
+&boot-installer-intro-cd.xml;
+
+<!-- We'll comment the following section until we know exact layout -->
+<!-- 		For the same reason I will leave the section untranslated -->
+<!-- 		in the german translation. Holger Wansing -->
+<!-- 
+CD #1 of official Debian CD-ROM sets for &arch-title; will present a
+<prompt>boot:</prompt> prompt on most hardware. Press
+<keycap>F3</keycap> to see the list of kernel options available
+from which to boot. Just type your chosen flavor name (idepci,
+vanilla, compact, bf24) at the <prompt>boot:</prompt> prompt
+followed by &enterkey;.
+
+</para><para>
+
+If your hardware doesn't support booting of multiple images, put one
+of the other CDs in the drive. It appears that most SCSI CD-ROM drives 
+do not support <command>isolinux</command> multiple image booting, so users
+with SCSI CD-ROMs should try either CD2 (vanilla) or CD3 (compact), 
+or CD5 (bf2.4). 
+
+</para><para>
+
+CD's 2 through 5 will each boot a 
+different ``flavor'' depending on which CD-ROM is
+inserted. See <xref linkend="kernel-choice"/> for a discussion of the
+different flavors.  Here's how the flavors are laid out on the
+different CD-ROMs:
+
+<variablelist>
+<varlistentry>
+<term>CD 1</term><listitem><para>
+
+Allows a selection of kernel images to boot from (the idepci flavor is
+the default if no selection is made). 
+
+</para></listitem></varlistentry>
+<varlistentry>
+<term>CD 2</term><listitem><para>
+
+Boots the `vanilla' flavor.
+
+</para></listitem></varlistentry>
+<varlistentry>
+<term>CD 3</term><listitem><para>
+
+Boots the `compact' flavor.
+
+</para></listitem></varlistentry>
+<varlistentry>
+<term>CD 4</term><listitem><para>
+
+Boots the `idepci' flavor.
+
+</para></listitem></varlistentry>
+<varlistentry>
+<term>CD 5</term><listitem><para>
+
+Boots the `bf2.4' flavor.
+
+</para></listitem></varlistentry>
+
+ </variablelist>
+
+</para><para>
+
+-->
+
+  </sect2>
+
+<!-- FIXME the documented procedure does not exactly work, commented out
+     until fixes -->
+<!-- 		For the same reason I will leave the section untranslated -->
+<!-- 		in the german translation. Holger Wansing -->
+<!-- 
+
+  <sect2 arch="i386" id="install-from-dos">
+  <title>Booting from a DOS partition</title>
+
+&boot-installer-intro-hd.xml;
+
+<para>
+
+Boot into DOS (not Windows) without any drivers being loaded.  To do
+this, you have to press <keycap>F8</keycap> at exactly the right
+moment (and optionally select the `safe mode command prompt only'
+option).  Enter the subdirectory for the flavor you chose, e.g.,
+
+<informalexample><screen>
+
+cd c:\install
+
+</screen></informalexample>.  
+
+Next, execute <command>install.bat</command>.
+The kernel will load and launch the installer system. 
+
+</para><para>
+
+Please note, there is currently a loadlin problem (#142421) which
+precludes <filename>install.bat</filename> from being used with the
+bf2.4 flavor. The symptom of the problem is an
+<computeroutput>invalid compressed format</computeroutput> error.
+
+</para>
+  </sect2>
+
+END FIXME -->
+
+  <sect2 arch="i386" id="boot-initrd">
+  <title>Von Linux aus booten mittels <command>LILO</command> oder
+  <command>GRUB</command></title>
+
+<para>
+Um den Installer von der Festplatte aus booten zu können, müssen Sie zunächst 
+die dafür benötigten Dateien herunterladen und speichern, wie unter 
+<xref linkend="boot-drive-files"/> beschrieben.
+</para>
+
+<para>
+Wenn Sie vorhaben, die Festplatte lediglich zum Booten zu benutzen und danach alles 
+per Netzwerk herunterzuladen, sollten Sie sich 
+<filename>netboot/debian-installer/i386/initrd.gz</filename> und den dazugehörigen 
+Kernel auf die Platte laden. Dies gibt Ihnen später die Möglichkeit, die Festplatte, 
+von der Sie den Installer gestartet haben, umzupartitionieren; trotzdem sollten 
+Sie dies mit Vorsicht genießen.
+</para>
+
+<para>
+Alternativ dazu können Sie <filename>hd-media/initrd.gz</filename> und 
+den dazugehörigen Kernel sowie ein CD-»iso«-Image herunterladen für den
+Fall, dass Sie eine existierende Partition auf der Festplatte 
+unverändert behalten wollen (stellen Sie sicher, dass der Name des CD-Images
+auf .iso endet). Der Installer kann dann von der Festplatte booten und 
+Debian von der CD installieren, ohne dabei eine Netzwerkverbindung zu benötigen.
+</para>
+
+<para>
+Um <command>LILO</command> zu benutzen, müssen Sie zwei wichtige Dinge 
+in <filename>/etc/lilo.conf</filename> konfigurieren: 
+<itemizedlist>
+<listitem><para>
+
+den <filename>initrd.gz</filename>-Installer beim Booten laden,
+
+</para></listitem>
+<listitem><para>
+
+der <filename>vmlinuz</filename>-Kernel muss eine RAM-Disk als 
+Root-Partition benutzen.
+
+</para></listitem>
+</itemizedlist>
+
+Hier ein Beispiel für <filename>/etc/lilo.conf</filename>:
+
+</para><para>
+
+<informalexample><screen>
+
+image=/boot/newinstall/vmlinuz
+       label=newinstall
+       initrd=/boot/newinstall/initrd.gz
+       root=/dev/ram0
+       append="devfs=mount,dall ramdisk_size=17000"
+
+</screen></informalexample>
+
+Mehr Details finden Sie in den Handbuchseiten von 
+<citerefentry><refentrytitle>initrd</refentrytitle>
+<manvolnum>4</manvolnum></citerefentry> und
+<citerefentry><refentrytitle>lilo.conf</refentrytitle>
+<manvolnum>5</manvolnum></citerefentry>. Führen Sie danach 
+<userinput>lilo</userinput> aus und starten Sie den Rechner neu.
+
+</para><para>
+
+Für <command>GRUB</command> ist die Vorgehensweise ähnlich. Suchen Sie
+die Datei <filename>menu.lst</filename> im Verzeichnis 
+<filename>/boot/grub/</filename> (manchmal auch in
+<filename>/boot/boot/grub/</filename>) und fügen Sie folgende Zeilen ein:
+
+<informalexample><screen>
+
+title  New Install
+kernel (hd0,0)/boot/newinstall/vmlinuz root=/dev/ram0 devfs=mount,dall ramdisk_size=17000
+initrd (hd0,0)/boot/newinstall/initrd.gz
+
+</screen></informalexample>
+
+Starten Sie danach den Rechner neu. 
+Beachten Sie, dass der Wert für <userinput>ramdisksize</userinput> 
+unter Umständen an die Größe des initrd-Image angepasst werden muss. 
+Ab hier sollte es keinen Unterschied geben zwischen <command>GRUB</command>
+und <command>LILO</command>.
+
+</para>
+  </sect2>
+
+  <sect2 arch="i386" id="usb-boot">
+  <title>Von einem USB-Memory-Stick booten</title>
+<para>
+Wir nehmen an, Sie haben alles wie unter 
+<xref linkend="boot-dev-select"/> und <xref linkend="boot-usb-files"/>
+beschrieben vorbereitet. Stecken Sie jetzt den USB-Stick in einen freien 
+Steckplatz und starten den Rechner neu. Das System sollte booten und den 
+<prompt>boot:</prompt>-Prompt anzeigen. Sie können hier zusätzliche 
+Boot-Parameter eintippen oder einfach &enterkey; drücken.
+
+</para><para>
+
+Für den Fall, dass Ihr Rechner das Booten von einem USB-Speicher nicht 
+unterstützt, können Sie eine einfache Floppy-Disk für den eigentlichen 
+Boot-Vorgang benutzen und dann auf USB umsteigen. Booten Sie dazu das 
+System wie unter <xref linkend="floppy-boot"/> beschrieben; der Kernel 
+von der Boot-Floppy sollte den USB-Stick automatisch erkennen. Wenn 
+er nach der Root-Floppy-Disk verlangt, drücken Sie einfach &enterkey;. 
+Sie sollten jetzt sehen, wie der &d-i; startet.
+
+</para>
+  </sect2>
+
+  <sect2 arch="i386" id="floppy-boot">
+  <title>Von Floppy-Disketten booten</title>
+<para>
+
+Sie sollten die Floppy-Images bereits heruntergeladen und 
+auf Disketten kopiert haben (siehe <xref linkend="create-floppy"/>).
+
+<!-- missing-doc FIXME If you need to, you can also modify the boot floppy; see 
+<xref linkend="rescue-replace-kernel"/>. -->
+
+</para><para>
+
+Um den Installer von Diskette zu starten, legen Sie die Disk in das 
+erste Floppy-Laufwerk ein, fahren das System normal herunter und 
+starten es dann neu. 
+
+</para><para>
+
+Um mit einem Satz Disketten von einem LS-120-Laufwerk (ATAPI-Version) 
+zu installieren, müssen Sie die virtuelle Position des Laufwerks angeben.
+Dies wird mit dem <emphasis>root=</emphasis>-Parameter gemacht, 
+indem man die Gerätebezeichnung angibt, die der ide-floppy-Treiber 
+dem Gerät zuweist. Ein Beispiel: wenn Ihr LS-120-Laufwerk als erstes 
+IDE-Gerät (Master) am zweiten IDE-Kabel angeschlossen ist, gibt man 
+<userinput>linux root=/dev/hdc</userinput> am Boot-Prompt ein.
+Installation von LS-120-Laufwerken wird nur von Kernel-Versionen 
+2.4 und später unterstützt.
+
+</para><para>
+
+Beachten Sie, dass manche Rechner durch 
+<keycombo><keycap>Strg</keycap>
+<keycap>Alt</keycap> <keycap>Entf</keycap></keycombo> nicht vernünftig 
+zurückgesetzt werden; deswegen wird ein ``harter'' Reboot empfohlen.
+Wenn Sie das Installationssystem von einem existierenden Betriebssystem 
+aus booten, haben Sie keine Wahl, aber ansonsten machen Sie bitte einen 
+Hardware-Neustart.
+
+</para><para>
+
+Es wird die Diskette gesucht und Sie sollten dann einen Bildschirm 
+sehen, dass die Boot-Diskette eingelesen wird; schließlich wird der 
+<prompt>boot:</prompt>-Prompt anzeigt.
+
+</para><para>
+
+Sobald Sie &enterkey; drücken, sollten Sie die Nachricht 
+<computeroutput>Loading...</computeroutput> sehen, gefolgt von 
+<computeroutput>Uncompressing Linux...</computeroutput>; dann 
+bekommen Sie einen ganzen Bildschirm voll mit Informationen über 
+die Hardware in Ihrem System. Mehr Informationen über diese 
+Phase des Bootprozesses finden Sie unter <xref linkend="kernel-msgs"/>.
+
+</para><para>
+
+Nach dem Starten von der Boot-Floppy wird die Root-Floppy benötigt.
+Legen Sie sie ein und drücken &enterkey;; der Inhalt der Disk wird 
+in den Speicher geladen. Der <command>debian-installer</command> 
+startet automatisch.
+
+</para>
+  </sect2>
+  
+  <sect2 arch="i386" id="boot-tftp"><title>Mit TFTP booten</title>
+ 
+&boot-installer-intro-net.xml;
+ 
+<para>
+
+Es gibt mehrere Wege, um ein i386-System per TFTP-Boot zu starten.
+
+</para>
+
+   <sect3><title>NIC oder Motherboard, das PXE unterstützt</title>
+<para>
+
+Es ist möglich, dass Ihre Netzwerkkarte oder Ihr Motherboard die 
+PXE-Boot-Funktion unterstützt. Dies ist eine 
+<trademark class="trade">Intel</trademark>-Implementation des TFTP-Boots.
+Wenn dies so ist, sind Sie möglicherweise in der Lage, Ihr BIOS so 
+zu konfigurieren, dass es per Netzwerk bootet.
+
+</para>
+   </sect3>
+   
+   <sect3><title>NIC mit Netzwerk-BootROM</title>
+<para>
+
+Es könnte sein, dass Ihre Netzwerkkarte die TFTP-Boot-Funktionalität 
+anbietet.
+
+</para><para condition="FIXME">
+
+Lassen Sie es uns bitte (<email>&email-debian-boot-list;</email>) wissen, 
+wie Sie es hinbekommen haben. 
+
+</para>
+   </sect3>
+
+   <sect3><title>Etherboot</title>
+<para>
+
+Das <ulink url="http://www.etherboot.org">Etherboot-Projekt</ulink>
+bietet Bootdisketten und sogar BootROMs an, die per TFTP-Boot starten.
+
+</para>
+   </sect3>
+  </sect2>
+
+  <sect2 arch="i386"><title>i386-Boot-Parameter</title>
+<para>
+
+Wenn der Installer bootet, wird Ihnen der Boot-Prompt angezeigt
+(<prompt>boot:</prompt>). Sie können dann zweierlei tun: drücken Sie
+die Funktionstasten <keycap>F1</keycap> bis <keycap>F10</keycap>, 
+um hilfreiche Informationen zu bekommen, oder drücken Sie 
+<keycap>Enter</keycap>, um das System zu starten.
+
+</para><para>
+
+Informationen über nützliche Boot-Parameter bekommen Sie mit
+den Tasten <keycap>F3</keycap> bis <keycap>F7</keycap>. 
+Wenn Sie irgendwelche Parameter zur Boot-Zeile hinzufügen, stellen Sie 
+sicher, dass Sie als erstes die Boot-Methode (Standard ist 
+<userinput>linux</userinput>) und ein Leerzeichen vor dem ersten 
+Parameter (z.B. <userinput>linux floppy=thinkpad</userinput>)
+eingeben. Wenn Sie einfach &enterkey; drücken, ist das das gleiche, 
+als wenn Sie nur <userinput>linux</userinput> ohne zusätzliche 
+Argumente eintippen.
+
+</para><para>
+
+Einige Systeme haben Floppy-Laufwerke mit ``invertierten DCLs''. 
+Wenn Sie Probleme haben, von der Floppy-Disk zu lesen, obwohl Sie wissen, 
+dass die Disk in Ordnung ist, versuchen Sie den Parameter
+<userinput>floppy=thinkpad</userinput>.
+
+</para><para>
+
+Auf einigen System, wie den IBM PS/1 oder ValuePoint (das ST-506-Laufwerkstreiber 
+hat), werden IDE-Laufwerke unter Umständen nicht korrekt erkannt. 
+Versuchen Sie es hier zunächst ohne Boot-Parameter und überprüfen Sie, 
+ob das IDE-Laufwerk richtig erkannt wird. Falls nicht, bestimmen Sie 
+die Geometrie-Parameter Ihrer Festplatte (Zylinder, Köpfe und Sektoren) 
+und nutzen Sie das Boot-Argument 
+<userinput>hd=<replaceable>cylinders</replaceable>,<replaceable>heads</replaceable>,<replaceable>sectors</replaceable></userinput>.
+
+</para><para>
+
+Wenn Sie eine sehr alte Maschine haben und der Kernel nach der Meldung
+<computeroutput>Checking 'hlt' instruction...</computeroutput> hängt, 
+versuchen Sie es mit dem Boot-Argument <userinput>no-hlt</userinput>, 
+das diesen Test deaktiviert.
+
+</para><para>
+
+Wenn Ihr Bildschirm ein eigenartiges Bild zeigt, während der Kernel bootet, 
+z.B. komplett weiß, komplett schwarz oder farbiger Pixelmüll, enthält 
+Ihr Rechner möglicherweise eine problematische Grafikkarte, die nicht 
+ordnungsgemäß in den Framebuffer-Modus schaltet. Sie können dann den 
+Boot-Parameter <userinput>debian-installer/framebuffer=false</userinput> 
+oder <userinput>video=vga16:off</userinput> benutzen, um den Framebuffer 
+auf der Konsole zu deaktivieren. In diesem Fall steht aufgrund von 
+eingeschränkter Konsolenfunktionalität nur die englische 
+Sprache zur Verfügung. <xref linkend="boot-parms"/> enthält Details zu
+diesem Thema.
+
+</para>
+  </sect2>
+
+
+  <sect2 arch="i386">
+  <title>Während der PCMCIA-Konfiguration friert das System ein</title>
+
+<para>
+
+Einige Laptop-Modelle von Dell sind bekannt dafür, dass Sie sich aufhängen, 
+wenn die PCMCIA-Geräteerkennung versucht, bestimmte Hardwareadressen 
+abzufragen. Andere Modelle können ähnliche Symptome zeigen. Wenn Ihnen solche 
+Probleme unterkommen und Sie kein PCMCIA-Gerät während der Installation 
+benötigen, können Sie PCMCIA komplett deaktivieren, indem Sie den 
+Boot-Parameter <userinput>hw-detect/start_pcmcia=false</userinput>
+benutzen. Nachdem die Installation abgeschlossen ist, können Sie PCMCIA so 
+konfigurieren, dass der problematische Adressbereich ausgeschlossen wird.
+
+</para><para>
+
+Alternativ können Sie den Installer im Experten-Modus booten. 
+Sie werden dann aufgefordert, die Ressourcenbereiche einzugeben, 
+die Ihre Hardware benötigt. Ein Beispiel: wenn Sie einen der oben 
+erwähnten Dell-Laptops besitzen, sollten Sie hier 
+<userinput>exclude port 0x800-0x8ff</userinput> eingeben. 
+Im <ulink url="http://pcmcia-cs.sourceforge.net/ftp/doc/PCMCIA-HOWTO-2.html#ss2.5">System
+resource settings section of the PCMCIA-HOWTO</ulink> gibt es eine 
+Liste mit einigen allgemeinen Angaben über Ressourcenbereiche.
+Beachten Sie, dass Sie alle Kommata weglassen müssen, wenn Sie 
+Angaben von dieser Quelle in den Installer eingeben.
+
+</para>
+  </sect2>
+
+  <sect2 arch="i386">
+  <title>Das System friert ein, während die USB-Module geladen werden</title>
+<para>
+
+Der Kernel versucht normalerweise, die USB-Module und die USB-Tastatur-Treiber 
+zu laden, um einige »non-standard«-USB-Tastaturen unterstützen zu können. 
+Allerdings gibt es einige kaputte USB-Systeme, bei denen sich der Treiber während 
+des Ladens aufhängt. Eine Möglichkeit, dies zu umgehen, ist, den USB-Controller 
+im BIOS des Mainboards zu deaktivieren. Ein anderer Weg wäre, 
+den Parameter <userinput>debian-installer/probe/usb=false</userinput> 
+am Boot-Prompt einzugeben; dies verhindert, dass die Module geladen werden.
+
+</para>
+  </sect2>

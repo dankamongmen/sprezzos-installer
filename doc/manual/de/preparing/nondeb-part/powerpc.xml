@@ -1,0 +1,47 @@
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 11648 -->
+
+
+  <sect2 arch="powerpc"><title>Partitionierung auf MacOS-/MacOSX-Systemen</title>
+
+<para>
+
+Das Programm <application>Apple Drive Setup</application> finden Sie im
+<filename>Utilities</filename>-Verzeichnis der MacOS-CD. Es kann keine
+vorhandenen Partitionen bearbeiten; es ist beschränkt darauf, die ganze
+Festplatte auf einmal zu partitionieren. Die Disk Driver Partitions
+(die kleinen Partitionen, die für Apple-Disk-Treiber reserviert sind) werden
+hier unter <application>Drive Setup</application> nicht angezeigt.
+
+</para><para>
+
+Denken Sie daran, eine Platzhalter-Partition für GNU/Linux zu erstellen,
+möglichst am Anfang der Platte. Es spielt keine Rolle, was für ein Typ
+diese Partition ist, sie wird eh vom &debian;-Installer gelöscht und ersetzt.
+
+</para><para>
+
+Wenn Sie vorhaben, sowohl MacOS 9 als auch OS X zu installieren, ist es das
+Beste, separate Partitionen für OS 9 und OS X zu erzeugen. Wenn Sie auf der
+gleichen Partition installiert sind, muss das Programm <application>Startup Disk</application>
+(und reboot) benutzt werden, um zwischen den beiden auszuwählen. Mit zwei
+separaten Partitionen werden verschiedene Wahlmöglichkeiten für OS 9 und OS X erscheinen,
+wenn Sie beim Booten die <keycap>Option</keycap>-Taste gedrückt halten;
+es können ebenfalls separate Booteinträge für das Bootmenü von
+<application>yaboot</application> konfiguriert werden. Außerdem wird
+Startup Disk alle anderen mountfähigen Partitionen verunreinigen, was
+sich auf den Bootvorgang von GNU/Linux auswirken kann. Sowohl auf die OS 9-
+wie auch auf die OS X-Partition kann von OS 9 und OS X zugegriffen werden.
+
+</para><para>
+
+GNU/Linux kann nicht auf 'HFS+'-Partitionen (aka MacOS Extended) oder auf
+UFS-Partitionen zugreifen. OS X erfordert eine der beiden Typen als seine
+Boot-Partition. MacOS 9 kann entweder auf HFS (aka MacOS Standard) oder
+HFS+ installiert werden. Um Daten unter MacOS und GNU/Linux gleichzeitig
+nutzen zu können, ist eine extra Austausch-Partition praktisch. HFS-
+und MS-DOS-FAT-Partitionen werden sowohl von MacOS wie auch von Linux
+unterstützt.
+
+</para>
+  </sect2>

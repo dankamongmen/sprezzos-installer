@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 23058 -->
+
+ <sect1 id="linuxdevices"><title>Périphériques Linux</title>
+<para>
+
+Sous Linux, vous disposez de fichiers spéciaux dans
+<filename>/dev</filename>. Ces fichiers sont appelés fichiers de 
+périphérique. Dans le monde Unix, l'accès au matériel se fait de façon
+particulière. En effet, vous utilisez un fichier qui commande un pilote, qui 
+à son tour accède au matériel. Le fichier de périphérique est une interface 
+au composant système. Les fichiers sous <filename>/dev</filename> se 
+comportent différemment des fichiers ordinaires. Ci-dessous sont repris les 
+fichiers de périphérique les plus importants.
+
+</para><para>
+
+<informaltable><tgroup cols="2"><tbody>
+<row>
+  <entry><filename>fd0</filename></entry>
+  <entry>1er lecteur de disquette</entry>
+</row><row>
+  <entry><filename>fd1</filename></entry>
+  <entry>2e lecteur de disquette</entry>
+</row>
+</tbody></tgroup></informaltable>
+
+<informaltable><tgroup cols="2"><tbody>
+<row>
+  <entry><filename>hda</filename></entry>
+  <entry>Disque dur IDE ou cédérom sur le premier port IDE (maître)</entry>
+</row><row>
+  <entry><filename>hdb</filename></entry>
+  <entry>Disque dur IDE ou cédérom sur le premier port IDE (esclave)</entry>
+</row><row>
+  <entry><filename>hdc</filename></entry>
+  <entry>Disque dur IDE ou cédérom sur le second port IDE (maître)</entry>
+</row><row>
+  <entry><filename>hdd</filename></entry>
+  <entry>Disque dur IDE ou cédérom sur le second port IDE (esclave)</entry>
+</row><row>
+  <entry><filename>hda1</filename></entry>
+  <entry>1re partition sur le premier disque dur IDE</entry>
+</row><row>
+  <entry><filename>hdd15</filename></entry>
+  <entry>15e partition sur le quatrième disque dur IDE</entry>
+</row>
+</tbody></tgroup></informaltable>
+
+<informaltable><tgroup cols="2"><tbody>
+<row>
+  <entry><filename>sda</filename></entry>
+  <entry>Disque SCSI avec l'identificateur SCSI le plus bas (p. ex. 0)</entry>
+</row><row>
+  <entry><filename>sdb</filename></entry>
+  <entry>Disque SCSI avec l'identificateur suivant (p. ex. 1)</entry>
+</row><row>
+  <entry><filename>sdc</filename></entry>
+  <entry>Disque SCSI avec l'identificateur suivant (p. ex. 2)</entry>
+</row><row>
+  <entry><filename>sda1</filename></entry>
+  <entry>1re partition du premier disque SCSI</entry>
+</row><row>
+  <entry><filename>sdd10</filename></entry>
+  <entry>10e partition du quatrième disque SCSI</entry>
+</row>
+</tbody></tgroup></informaltable>
+
+<informaltable><tgroup cols="2"><tbody>
+<row>
+  <entry><filename>sr0</filename></entry>
+  <entry>cédérom SCSI avec l'identificateur SCSI le plus bas</entry>
+</row><row>
+  <entry><filename>sr1</filename></entry>
+  <entry>cédérom SCSI avec l'identificateur SCSI suivant</entry>
+</row>
+</tbody></tgroup></informaltable>
+
+<informaltable><tgroup cols="2"><tbody>
+<row>
+  <entry><filename>ttyS0</filename></entry>
+  <entry>Port série 0 (COM1: sous DOS)</entry>
+</row><row>
+  <entry><filename>ttyS1</filename></entry>
+  <entry>Port série 1 (COM2: sous DOS)</entry>
+</row><row>
+  <entry><filename>psaux</filename></entry>
+  <entry>port souris PS/2</entry>
+</row><row>
+  <entry><filename>gpmdata</filename></entry>
+  <entry>pseudo périphérique, répétiteur du démon GPM de souris</entry>
+</row>
+</tbody></tgroup></informaltable>
+
+<informaltable><tgroup cols="2"><tbody>
+<row>
+  <entry><filename>cdrom</filename></entry>
+  <entry>Lien symbolique vers le lecteur de cédérom</entry>
+</row><row>
+  <entry><filename>mouse</filename></entry>
+  <entry>Lien symbolique vers le fichier de périphérique de la souris</entry>
+</row>
+</tbody></tgroup></informaltable>
+
+<informaltable><tgroup cols="2"><tbody>
+<row>
+  <entry><filename>null</filename></entry>
+  <entry>tout ce qui pointe vers ce fichier disparaît</entry>
+</row><row>
+  <entry><filename>zero</filename></entry>
+  <entry>fichier qui fabrique continuellement des zéros</entry>
+</row>
+</tbody></tgroup></informaltable>
+
+</para>
+
+  <sect2>
+<title>Régler la souris</title>
+
+<para>
+
+La souris peut être utilisée aussi bien dans une console Linux (avec gpm) 
+qu'en environnement X Window. Les deux modes sont compatibles entre eux si le 
+répétiteur gpm est utilisé afin de permettre au signal de suivre le parcours 
+suivant&nbsp;:
+
+<informalexample><screen>
+mouse =&#62; /dev/psaux  =&#62; gpm =&#62; /dev/gpmdata -&#62; /dev/mouse =&#62; X
+         /dev/ttyS0             (repeater)        (symlink)
+         /dev/ttyS1
+</screen></informalexample>
+
+</para><para>
+
+Ajustez le protocole de répétition sur «&nbsp;raw&nbsp;» (dans
+<filename>/etc/gpm.conf</filename>) tandis que vous réglerez X pour
+     utiliser le protocole original de la souris dans
+<filename>/etc/X11/XF86Config</filename> ou
+<filename>/etc/X11/XF86Config-4</filename>.
+
+</para><para>
+
+Cette approche qui préconise l'utilisation de gpm même sous X a des avantages,
+si par exemple vous déconnectez la souris par erreur. Il suffit de redémarrer 
+gpm par
+<informalexample><screen>
+user@debian:# /etc/init.d/gpm restart
+</screen></informalexample>
+et la souris recommencera à fonctionner sous X sans qu'il y ait besoin de 
+redémarrer le serveur.
+
+</para><para>
+
+Si gpm est désactivé ou n'est pas installé, assurez-vous que X est réglé de 
+façon à lire directement la souris à travers par exemple /dev/psaux. Pour 
+plus de détails, reportez-vous au mini-Howto 
+«&nbsp;Souris Série 3 Boutons&nbsp;» dans 
+<filename>/usr/share/doc/HOWTO/en-txt/mini/3-Button-Mouse.gz</filename>,
+<userinput>man gpm</userinput>, <filename>/usr/share/doc/gpm/FAQ.gz</filename>,
+et <ulink url="&url-xfree86;current/mouse.html">README.mouse</ulink>.
+
+</para><para arch="powerpc">
+
+Pour les PowerPC, dans <filename>/etc/X11/XF86Config</filename> ou
+<filename>/etc/X11/XF86Config-4</filename>, réglez le périphérique de
+      souris sur <userinput>"/dev/input/mice"</userinput>.
+
+</para><para arch="powerpc">
+
+Les noyaux modernes vous offrent la possibilité d'émuler une souris 3 boutons 
+quand votre souris n'en a qu'un. Ajoutez simplement les lignes suivantes au 
+fichier <filename>/etc/sysctl.conf</filename>&nbsp;:
+
+<informalexample><screen>
+
+# 3-button mouse emulation 
+# turn on emulation
+/dev/mac_hid/mouse_button_emulation = 1
+# Send middle mouse button signal with the F11 key
+/dev/mac_hid/mouse_button2_keycode = 87
+# Send right mouse button signal with the F12 key
+/dev/mac_hid/mouse_button3_keycode = 88
+# For different keys, use showkey to tell you what the code is.
+
+</screen></informalexample>  
+</para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="tasksel-size-list">
+ <title>Ressources d'espace disque pour les tâches</title>
+<para>
+
+Une installation de Sarge, avec tous les paquets standard, demande
+178&nbsp;Mo. 
+</para>
+<para>
+Le tableau suivant montre les tailles rapportées par aptitude pour les tâches 
+affichées dans tasksel. Remarquez que certaines tâches ont des éléments
+communs, et donc la taille totale pour ces deux tâches peut être moindre que 
+le total obtenu en additionnant les deux tailles.
+</para><para>
+
+<informalexample><screen>
+Tâches                           Installée    Chargée      Espace à 
+                                 Taille (Mo)  Taille (Mo)  prendre (Mo)
+
+Desktop                            1537        521        2058
+Serveur Web                          71         21          92
+Serveur d'impression                240         83         323
+Serveur de courrier                  41         12          53
+Serveur de fichiers                  85         34         119
+Base de données SQL                 108         33         141
+
+</screen></informalexample>
+</para>
+ </sect1>

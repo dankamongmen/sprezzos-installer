@@ -1,0 +1,31 @@
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 16556 -->
+
+
+ <sect1 id="unix-intro">
+ <title>Wenn Sie neu sind bei Unix</title>
+<para>
+
+Wenn Sie neu sind bei Unix, sollten Sie sich vielleicht ein
+paar Bücher kaufen und lesen. Die
+<ulink url="ftp://rtfm.mit.edu/pub/usenet/news.answers/unix-faq/faq/">
+Unix FAQ</ulink> enthält eine ganze Zahl an Empfehlungen für Bücher und
+Usenet-Newsgroups, die Ihnen helfen sollten. Sie können auch einen Blick
+auf die <ulink url="http://www.camelcity.com/~noel/usenet/cuuf-FAQ.htm">
+User-Friendly Unix FAQ</ulink> werfen.
+
+</para><para>
+
+Linux ist eine Implementation von Unix. Das
+<ulink url="http://www.tldp.org/">Linux Documentation Project (LDP)</ulink>
+vereint viele HOWTOs und Online-Bücher über Linux. Die meisten dieser Dokumente
+können lokal installiert werden; installieren Sie einfach das Paket
+<classname>doc-linux-html</classname> (Dokumentation als HTML-Version) oder
+<classname>doc-linux-text</classname> (als ASCII-Version) und schauen Sie dann
+unter <filename>/usr/share/doc/HOWTO</filename>.
+Internationale Versionen von den LDP-HOWTOs sind ebenso verfügbar wie von den
+Debian-Paketen.
+
+</para>
+
+ </sect1>

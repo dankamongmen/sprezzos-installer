@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 16554 -->
+
+ <sect1 id="further-reading"><title>Pour aller plus loin</title>
+<para>
+
+Si vous avez besoin d'informations à propos d'un programme particulier,
+vous devriez d'abord essayer 
+<userinput>man <replaceable>programme</replaceable></userinput>, ou 
+<userinput>info <replaceable>programme</replaceable></userinput>.
+
+</para><para>
+
+Vous pourrez également trouver beaucoup de documents utiles dans
+<filename>/usr/share/doc</filename>. En particulier, 
+<filename>/usr/share/doc/HOWTO</filename>
+et <filename>/usr/share/doc/FAQ</filename> contiennent beaucoup d'informations
+intéressantes. Pour signaler des bogues, regardez les fichiers
+<filename>/usr/share/doc/debian/bug*</filename>. Pour connaître des 
+informations spécifiques à Debian pour un programme particulier, lisez
+<filename>/usr/share/doc/(nom du paquet)/README.Debian</filename>.
+
+</para><para>
+
+Le <ulink url="http://www.debian.org/">site web Debian</ulink> 
+contient beaucoup de documentation sur Debian. Plus spécialement, consultez la
+<ulink url="http://www.debian.org/doc/FAQ/">FAQ Debian</ulink> et les
+<ulink url="http://lists.debian.org/">Archives des listes de diffusion</ulink>.
+Les membres de la communauté Debian s'entraident&nbsp;; pour vous abonner à 
+une ou plusieurs listes de diffusion Debian, voyez la page d'
+<ulink url="http://www.debian.org/MailingLists/subscribe">abonnement aux listes de diffusion</ulink>
+
+</para><para>
+
+Le 
+<ulink url="http://www.tldp.org/">Projet de documentation sur Linux</ulink>
+est une source d'informations générales  sur GNU/Linux. 
+Vous y trouverez des Guides et des liens vers d'autres informations sur le 
+système GNU/Linux.
+
+</para>
+
+ </sect1>

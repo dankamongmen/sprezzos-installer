@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 23061 -->
+
+  <sect2 arch="i386"><title>Amorcer depuis un cédérom</title>
+
+&boot-installer-intro-cd.xml;
+
+<!-- We'll comment the following section until we know exact layout -->
+<!-- 
+Le cédérom n°&nbsp;1 du jeu officiel de cédéroms pour
+      &arch-title; vous présentera une invite <prompt>boot:</prompt> sur la
+      plupart des matériels. Appuyez sur <keycap>F3</keycap> pour afficher la
+      liste des options du noyau disponibles à partir desquelles
+      amorcer. Tapez simplement le nom de la saveur (idepci, vanilla,
+      compact, bf24) après l'invite de <prompt>boot:</prompt> et validez par
+      &enterkey;.
+
+</para><para>
+
+Si votre matériel ne supporte pas l'amorçage d'images multiples,
+      insérez un des autres cédéroms dans le lecteur. Il semble que la
+      plupart des lecteurs de cédéroms SCSI soient incapables de gérer
+l'amorçage d'images multiples de <command>isolinux</command>, les
+      possesseurs de tels lecteurs de cédéroms devraient essayer le
+      cédérom 2 (vanilla), 3 (compact) ou 5 (bf2.4).
+
+</para><para>
+
+Les cédéroms numéro 2 à 5 amorceront chacun sur une saveur différente
+dépendant du cédérom inséré. cf.<xref linkend="kernel-choice"/>
+pour une discussion sur les différentes
+variantes. Voici comment sont disposées les variantes sur les
+      différents cédéroms&nbsp;:
+
+<variablelist>
+<varlistentry>
+<term>CD 1</term><listitem><para>
+
+           Sur les nouveaux matériels, il permet une sélection
+           d'images de noyau à amorcer. Sur les vieux matériels, il
+           amorcera le noyau en saveur «&nbsp;idepci&nbsp;»&nbsp;;
+
+</para></listitem></varlistentry>
+<varlistentry>
+<term>CD 2</term><listitem><para>
+
+Amorce la saveur «&nbsp;vanilla&nbsp;»&nbsp;;
+
+</para></listitem></varlistentry>
+<varlistentry>
+<term>CD 3</term><listitem><para>
+
+Amorce la saveur «&nbsp;compact&nbsp;»&nbsp;;
+
+</para></listitem></varlistentry>
+<varlistentry>
+<term>CD 4</term><listitem><para>
+
+Amorce la saveur «&nbsp;idepci&nbsp;»&nbsp;;
+
+</para></listitem></varlistentry>
+<varlistentry>
+<term>CD 5</term><listitem><para>
+
+Amorce la saveur «&nbsp;bf2.4&nbsp;».
+
+</para></listitem></varlistentry>
+
+ </variablelist>
+
+</para><para>
+
+-->
+
+</sect2>
+
+<!-- FIXME the documented procedure does not exactly work, commented out
+      until fixes
+
+  <sect2 arch="i386" id="install-from-dos">
+  <title>Amorcer depuis une partition DOS</title>
+
+&boot-installer-intro-hd.xml;
+
+<para>
+
+Démarrez en MS-DOS (pas en Windows) sans charger de pilotes. Pour faire cela, 
+il faut presser <keycap>F8</keycap> au bon moment (et éventuellement 
+sélectionner l'option «&nbsp;safe mode command prompt only&nbsp;»&nbsp;: 
+«&nbsp;mode DOS sans échec&nbsp;»). Puis allez dans le sous-répertoire qui
+contient la saveur que vous avez choisie, p. ex.
+
+<informalexample><screen>
+
+cd c:\current\compact
+
+</screen></informalexample>.  
+
+Ensuite exécutez <command>install.bat</command>. Le noyau se chargera et 
+lancera l'installateur.
+
+</para><para>
+
+Veuillez noter qu'il y a actuellement un problème avec loadlin 
+(bogue n°142421) qui empêche le fichier <filename>install.bat</filename> 
+d'être utilisé par la saveur bf2.4. Le symptôme de ce problème est le message 
+<computeroutput>invalid compressed format</computeroutput>.
+
+</para>
+  </sect2>
+
+END FIXME -->
+
+  <sect2 arch="i386" id="boot-initrd">
+  <title>Amorcer à partir de linux avec <command>LILO</command>
+  ou <command>GRUB</command></title>
+
+<para>
+Pour amorcer l'installateur sur un disque dur, vous devez d'abord télécharger
+les fichiers et les installer comme l'explique la section
+<xref linkend="boot-drive-files"/>.
+</para>
+
+<para>
+Si vous voulez utiliser le disque seulement pour l'amorçage et ensuite 
+utiliser le réseau pour télécharger tous les paquets, vous devez récupérer 
+le fichier <filename>netboot/debian-installer/i386/initrd.gz</filename> et le
+noyau qui lui correspond. Vous pourrez ainsi repartitionner le disque sur 
+lequel se trouve l'installateur. Toutefois cette opération demande un grand
+soin.
+</para>
+
+<para>
+Si vous voulez garder intacte une partition sur ce disque, vous pouvez
+télécharger le fichier <filename>hd-media/initrd.gz</filename> et le noyau
+correspondant&nbsp;; copiez aussi une image CD sur le disque (assurez-vous
+que le nom de cette image finit en <quote>.iso</quote>). L'installateur
+peut alors se lancer à partir du disque dur et s'installer à partir de cette
+image, sans avoir besoin du réseau.
+</para>
+
+<para>
+
+Pour <command>LILO</command>, vous devez configurer deux choses essentielles
+dans <filename>/etc/lilo.conf</filename>&nbsp;:
+<itemizedlist>
+<listitem><para>
+
+le chargement de <filename>initrd.gz</filename> au moment de l'amorçage&nbsp;;
+
+</para></listitem>
+<listitem><para>
+
+l'utilisation par le noyau <filename>vmlinuz</filename> d'un disque virtuel
+en mémoire comme sa partition racine.
+
+</para></listitem>
+</itemizedlist>
+
+
+Voici un exemple de fichier <filename>/etc/lilo.conf</filename>&nbsp;:
+
+
+</para><para>
+
+<informalexample><screen>
+
+image=/boot/newinstall/vmlinuz
+       label=newinstall
+       initrd=/boot/newinstall/initrd.gz
+       root=/dev/ram0
+       append="devfs=mount,dall ramdisk_size=17000"
+
+</screen></informalexample>
+
+Pour plus de précisions, référez-vous aux pages de manuel de
+<citerefentry><refentrytitle>initrd</refentrytitle>
+<manvolnum>4</manvolnum></citerefentry> et de 
+<citerefentry><refentrytitle>lilo.conf</refentrytitle>
+<manvolnum>5</manvolnum></citerefentry>. Exécutez maintenant
+<userinput>lilo</userinput> et relancez la machine.
+</para>
+
+<para>
+La procédure pour <command>GRUB</command> est relativement similaire.
+Cherchez le fichier <filename>menu.lst</filename> dans le répertoire
+<filename>/boot/grub/</filename> (parfois dans
+<filename>/boot/boot/grub/</filename>), ajoutez les lignes suivantes&nbsp;:
+
+<informalexample><screen>
+
+title  New Install
+kernel (hd0,0)/boot/newinstall/vmlinuz root=/dev/ram0 devfs=mount,dall ramdisk_size=17000
+initrd (hd0,0)/boot/newinstall/initrd.gz
+
+</screen></informalexample>
+
+et redémarrez. Veuillez noter qu'il sera peut-être nécessaire d'augmenter 
+le paramètre <userinput>ramdisk_size</userinput>, selon l'image que vous
+démarrez.
+À partir de maintenant, il ne devrait plus y avoir de différences
+entre <command>GRUB</command> et <command>LILO</command>.
+</para>
+</sect2>
+
+<sect2 arch="i386" id="usb-boot">
+<title>Amorcer sur une clé USB</title>
+
+<para>
+Supposons que tout a été préparé comme l'expliquent les sections
+<xref linkend="boot-dev-select"/> et <xref linkend="boot-usb-files"/>. 
+Branchez maintenant votre clé USB dans un port libre et relancez la machine.
+Le système devrait se lancer et une invite <prompt>boot:</prompt> apparaître.
+Maintenant, vous pouvez donner des paramètres optionnels ou simplement
+appuyer sur la touche &enterkey;.
+</para>
+
+<para>
+Si votre ordinateur ne permet pas l'amorçage par clé USB, vous pouvez
+toujours amorcer avec une disquette et passer ensuite sur la clé USB.
+Procédez selon la <xref linkend="floppy-boot"/>&nbsp;; le noyau sur la disquette
+détectera automatiquement la clé USB. Quand il demande la disquette root,
+appuyez simplement sur la touche &enterkey;. L'installateur devrait se lancer.
+</para>
+</sect2>
+
+  <sect2 arch="i386" id="floppy-boot">
+  <title>Amorcer depuis des disquettes</title>
+<para>
+
+Vous devez avoir déjà téléchargé les images de disquettes dont vous aurez
+besoin et créé les disquettes à partir de ces images, voyez la
+<xref linkend="create-floppy"/>. 
+<!-- missing-doc FIXME If you need to, you can also modify the boot floppy; see\
+<xref linkend="rescue-replace-kernel"/>. -->
+</para>
+<para>
+
+Pour amorcer depuis la disquette d'amorçage, placez-la dans le premier 
+lecteur de disquette, éteignez la machine comme 
+vous le faites habituellement puis rallumez-la.
+
+</para><para>
+
+Pour réaliser l'installation à partir d'un lecteur LS-120 (version ATAPI) 
+avec un jeu de disquettes, vous devrez préciser l'emplacement virtuel du 
+lecteur de disquette. On utilise le paramètre de démarrage 
+<emphasis>root=</emphasis> pour le faire, en indiquant le périphérique que le 
+pilote ide-floppy aura simulé. Par exemple si votre lecteur est connecté sur 
+la première interface IDE en seconde position sur le câble, entrez
+<userinput>linux root=/dev/hdc</userinput> lors de l'invite de démarrage.
+L'installation depuis un lecteur LS-120 n'est possible qu'à partir des noyaux 
+2.4.
+
+</para><para>
+
+Remarquez bien que sur certaines machines <keycombo><keycap>Control</keycap>
+<keycap>Alt</keycap> <keycap>Delete</keycap></keycombo> ne remet pas 
+proprement à zéro la machine. Éteindre la machine est alors recommandé. Si 
+vous installez depuis un système d'exploitation existant, (p. ex. à partir 
+d'une machine MS-DOS), vous n'aurez pas le choix. Sinon, veuillez éteindre la
+machine et rallumez-là.
+
+</para><para>
+
+La disquette sera lue et  vous devriez apercevoir un écran 
+présentant la disquette d'amorçage et l'invite <prompt>boot:</prompt> au bas de
+l'écran.
+</para>
+
+<para>
+
+Une fois que vous avez appuyé sur la touche &enterkey;, vous devez voir le 
+message
+<computeroutput>Loading...</computeroutput> suivi par
+<computeroutput>Uncompressing Linux...</computeroutput> et ensuite un écran
+rempli d'informations sur les éléments matériels de votre machine. Vous
+pouvez trouver un complément d'information sur cette phase dans la
+<xref linkend="kernel-msgs"/>.
+</para>
+
+<para>
+Après avoir démarré depuis la disquette d'amorçage, la disquette root est
+démandée. Insérez-la puis pressez la touche &enterkey; et le contenu est
+chargé en mémoire. L'<command>installateur Debian</command> est 
+automatiquement lancé.
+</para>
+</sect2>
+
+  <sect2 arch="i386" id="boot-tftp"><title>Amorçage avec TFTP</title>
+ 
+&boot-installer-intro-net.xml;
+ 
+<para>
+
+Il y a plusieurs façons d'amorcer avec TFTP sur une machine i386.
+
+</para>
+
+   <sect3><title>NIC ou carte mère avec PXE</title>
+<para>
+
+Il se pourrait que votre interface réseau ou votre carte mère permettent
+l'amorcage PXE. C'est une réimplémentation de l'amorçage TFTP par 
+<trademark class="trade">Intel</trademark>. Dans ce cas, vous pourrez 
+configurer votre bios pour qu'il s'amorce sur le réseau.
+
+</para>
+   </sect3>
+
+   <sect3><title>NIC avec ROM de démarrage réseau</title>
+<para>
+
+Une carte d'interface réseau peut offrir la possibilité de démarrer par TFTP.
+
+</para><para condition="FIXME">
+
+Dites-nous (<email>&email-debian-boot-list;</email>) comment vous 
+avez fait. Veuillez vous référer à ce document.
+
+</para>
+   </sect3>
+
+   <sect3><title>Etherboot</title>
+<para>
+Le <ulink url="http://www.etherboot.org">projet etherboot</ulink> offre des
+disquettes d'amorçage et même des ROMS qui permettent l'amorçage par TFTP.
+</para>
+</sect3>
+</sect2>
+
+  <sect2 arch="i386"><title>Paramètres d'amorçage pour i386</title>
+<para>
+Quand l'installateur démarre, une invite d'amorçage,<prompt>boot:</prompt>
+apparaît. Vous pouvez maintenant presser les touches de 
+fonctions de <keycap>F1</keycap> jusqu'à <keycap>F10</keycap> pour lire 
+d'autres informations ou vous pouvez appuyer 
+sur la touche <keycap>Enter</keycap> pour amorcer le système.
+</para>
+
+<para>
+Des informations utiles sur les paramètres d'amorçage peuvent être consultées
+en pressant les touches <keycap>F3</keycap> à <keycap>F7</keycap>.
+Si vous ajoutez des paramètres à la ligne de commande d'amorçage, assurez-vous
+d'indiquer la méthode d'amorçage (la valeur par défaut est
+<userinput>linux</userinput>) et un espace avant le premier paramètre
+(par exemple, <userinput>linux floppy=thinkpad</userinput>). Si vous pressez 
+simplement sur la touche &enterkey;, cela revient à saisir
+<userinput>linux</userinput> sans aucun paramètre.
+</para>
+
+<para>
+Certains systèmes ont un lecteur de disquettes avec 
+«&nbsp;DCL inversés&nbsp;». Si vous obtenez des erreurs lors de la lecture
+de disquettes, même lorsque vous savez que les disquettes sont 
+«&nbsp;bonnes&nbsp;», essayez le paramètre 
+<userinput>floppy=thinkpad</userinput>.
+
+</para><para>
+
+Sur certains systèmes, tels que les IBM PS/1 ou ValuePoint (qui ont des 
+pilotes de disques ST-506), le disque IDE peut ne pas être reconnu. Encore 
+une fois, essayez d'abord sans paramètre supplémentaire pour voir si votre 
+disque IDE est reconnu correctement. Si ce n'est pas le cas, déterminez la 
+géométrie du disque (cylindres, têtes et secteurs) et utilisez le paramètre
+<userinput>hd=<replaceable>cylindres</replaceable>,<replaceable>têtes</replaceable>,<replaceable>secteurs</replaceable></userinput>.
+
+</para><para>
+
+Si vous avez une très vieille machine et si le noyau gèle après avoir 
+affiché <computeroutput>Checking 'hlt' instruction...</computeroutput>,
+alors vous devez passer le paramètre d'amorçage <userinput>no-hlt</userinput>
+qui désactive ce test.
+
+</para><para>
+
+Si votre écran commence à afficher une image bizarre lors des démarrages du 
+noyau, par exemple, un écran entièrement blanc, noir ou un écran contenant un 
+mélange de couleurs, alors votre système a très certainement une carte video 
+problématique qui ne parvient pas à passer en mode 
+<emphasis>framebuffer</emphasis> correctement. Dans ce cas, essayez de passer 
+le paramètre de démarrage 
+<userinput>debian-installer/framebuffer=false</userinput> ou
+<userinput>video=vga16:off</userinput>, 
+pour désactiver la console <emphasis>framebuffer</emphasis>. Le menu de 
+sélection de la langue n'apparaîtra pas, et l'anglais sera la seule langue 
+utilisable pour l'installation&nbsp;; c'est dû aux caractéristiques limitées 
+de la console. Référez-vous à la <xref linkend="boot-parms"/> pour plus de 
+précisions.
+
+</para>
+  </sect2>
+
+
+  <sect2 arch="i386">
+  <title>Le système bloque lors de la configuration du PCMCIA</title>
+<para>
+Quelques ordinateurs portables fabriqués par Dell plantent fréquemment
+lorsque la détection des périphériques essaie d'accéder à certaines
+adresses matérielles. D'autres portables ont aussi des problèmes semblables.
+Si vous rencontrez un tel problème et si vous n'avez pas besoin de PCMCIA 
+pendant l'installation, vous pouvez désactiver cette option avec le paramètre 
+<userinput>hw-detect/start_pcmcia=false</userinput>. Vous pourrez configurer
+PCMCIA après l'installation et éviter le problème des adresses des ressources.
+  </para>
+<para>
+Vous pouvez aussi démarrer l'installateur en mode expert.
+On vous demandera d'indiquer les options pour les adresses des ressources de 
+votre matériel. Par exemple, si votre ordinateur est un des portables Dell
+mentionnés plus haut, vous pouvez indiquer 
+<userinput>exclude port 0x800-0x8ff</userinput>. Il existe une liste de ces
+options communes dans la section sur les ressources système du
+<ulink url="http://pcmcia-cs.sourceforge.net/ftp/doc/PCMCIA-HOWTO-2.html#ss2.5">HOWTO PCMCIA</ulink>. Notez qu'il faut supprimer les virgules quand vous
+passez ces valeurs à l'installateur.
+</para>
+</sect2>
+
+  <sect2 arch="i386">
+  <title>Le système se bloque lors du chargement des modules USB</title>
+<para>
+
+Le noyau essaye normalement d'installer les modules USB et les pilotes de 
+claviers USB afin de permettre l'installation de quelques claviers USB non 
+standard. Cependant, sur certains systèmes USB, le pilote provoque un blocage 
+lors du démarrage. 
+Il est possible d'éviter ces problèmes en désactivant le contrôleur USB dans 
+la configuration BIOS de votre carte mère. Il est également possible 
+d'utiliser le paramètre 
+<userinput>debian-installer/probe/usb=false</userinput> à l'invite de 
+démarrage, 
+ce qui empêchera le chargement de ces modules.
+
+</para>
+  </sect2>
