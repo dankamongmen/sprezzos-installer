@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 11648 -->
+
+ <sect2 id="install-packages">
+ <title>Installatie van pakketten: eenvoudig of geavanceerd</title>
+
+<!-- FJP: Ontbreekt hier niet een algemene inleiding met uitleg
+van prioriteit, secties van pakketten? //-->
+
+<para>
+
+Vervolgens zal een lijst worden gepresenteerd met programma's die u kunt
+gebruiken voor de keuze van te installeren pakketten. U kunt hierbij
+kiezen tussen een eenvoudige, maar zeer globale selectiemethode en een
+meer geavanceerde en fijnmazige methode. We adviseren u te starten met
+de eenvoudige methode, aangezien u later altijd nog de meer geavanceerde
+methode kunt uitvoeren.
+
+</para><para>
+
+U moet weten dat <command>base-config</command> voor een eenvoudige selectie
+slechts het programma <command>tasksel</command> aanroept. Voor de meer
+geavanceerde methode wordt ofwel <command>dselect</command> ofwel
+<command>aptitude</command> uitgevoerd. Elk van deze programma's kunt u na de
+installatie op elk gewenst moment zelf uitvoeren om extra pakketten te
+installeren (of te verwijderen). Als u, nadat de installatie voltooid is, op
+zoek bent naar een specifiek pakket, kunt u eenvoudig <userinput>apt-get install
+<replaceable>pakket</replaceable></userinput> uitvoeren, waarbij
+<replaceable>pakket</replaceable> de naam is van het pakket dat u zoekt.
+
+</para>
+
+  <sect3 id="tasksel">
+  <title>Eenvoudige pakketselectie &mdash; het Taak-installatieprogamma</title>
+
+<para>
+
+Als u heeft gekozen voor de <quote>eenvoudige</quote> installatie met
+behulp van <command>tasksel</command>, zult u vervolgens in het
+Taak-installatieprogamma terecht komen. Deze methode biedt u een aantal
+van de voorverpakte softwareconfiguraties die door Debian worden geboden.
+Het is natuurlijk mogelijk om pakket voor pakket te kiezen wat u op uw
+nieuwe systeem wilt installeren. Dit is de functie van het programma
+<command>dselect</command> dat hieronder wordt beschreven. Dit zou echter,
+met ongeveer &num-of-distrib-pkgs; pakketten beschikbaar in Debian, een
+langdurige bezigheid kunnen worden.
+
+</para><para>
+
+U heeft daarom de mogelijkheid om eerst <emphasis>taken</emphasis> te kiezen
+en daarna later individuele pakketten toe te voegen. Deze taken
+vertegenwoordigen vrij globaal een aantal functies of dingen die u met uw
+computer wilt doen, zoals een <quote>desktop-omgeving</quote>, een
+<quote>ontwikkelomgeving voor C</quote> of een <quote>bestandsserver</quote>.
+
+</para><para>
+
+U kunt, nadat u een taak heeft geselecteerd, met <guibutton>Taak
+Info</guibutton> aanvullende informatie over die taak bekijken. Dit toont
+u een meer uitgebreide omschrijving en een overzicht van de pakketten die
+voor die taak geïnstalleerd zullen worden. Voor planningsdoeleinden is in
+<xref linkend="tasksel-size-list"/> een tabel beschikbaar met de bij
+benadering voor de verschillende taken benodigde schijfruimte.
+
+</para><para>
+
+Selecteer <guibutton>Afsluiten</guibutton> als u klaar bent met de selectie van
+taken. Vervolgens zal de installatie van de door u geselecteerde pakketten
+plaatsvinden met behulp van <command>apt-get</command>. Let op: ook als u geen
+enkele taak heeft geselecteerd, kunnen toch pakketten met prioriteiten 'standaard',
+'belangrijk' of 'vereist' die nog niet op uw systeem aanwezig waren, geïnstalleerd
+worden. Deze functionaliteit is hetzelfde als wanneer u <command>tasksel -s</command>
+zou uitvoeren vanaf de opdrachtregel, en houdt op dit moment in dat ongeveer 37MB
+aan archieven zal worden gedownload. Het aantal te installeren pakketten zal worden
+getoond en, als er pakketten gedownload moeten worden, de omvang daarvan (in kB).
+<!-- FJP: Voorlaatste zin is overbodig gedetailleerd en verwarrend. //-->
+
+</para><para>
+
+Van de &num-of-distrib-pkgs; pakketten die beschikbaar zijn in Debian, wordt
+slechts een klein deel afgedekt door de taken uit het Taak-installatieprogamma.
+Om de informatie over de overige pakketten te bekijken, kunt u ofwel gebruik maken
+van <userinput>apt-cache search <replaceable>zoektekst</replaceable></userinput>
+(zie de man pagina voor <citerefentry><refentrytitle>apt-cache</refentrytitle>
+<manvolnum>8</manvolnum></citerefentry>), ofwel de hieronder beschreven programma's
+<command>dselect</command> of <command>aptitude</command> uitvoeren.
+
+</para>
+  </sect3>
+
+  <sect3 id="dselect">
+  <title>Geavanceerde pakketselectie met <command>dselect</command></title>
+
+<para>
+
+Als u een conservatief ingestelde gebruiker bent, zal u waarschijnlijk kiezen
+voor het programma <command>dselect</command>. De <ulink url="&url-dselect-beginner;">dselect
+Tutorial</ulink> is verplichte leesvoer voordat u <command>dselect</command>
+uitvoert. <command>dselect</command> stelt u in staat om individuele
+<emphasis>pakketten</emphasis> te selecteren voor installatie op uw systeem.
+(Om <command>dselect</command> te kunnen uitvoeren, moet u de rechten van de
+super-user (root) hebben.)
+<!-- FJP: tweede en derde zin zouden moeten worden omgewisseld //-->
+</para>
+ </sect3>
+
+ <sect3 id="aptitude">
+ <title>Geavanceerde pakketselectie met <command>aptitude</command></title>
+
+<para>
+
+<command>aptitude</command> is een modern programma voor het beheer van pakketten.
+De interface en opdrachttoetsen lijken enigszins op het beroemde
+<command>dselect</command>, maar het heeft een meer aangeklede functionaliteit
+waardoor het nieuwe gebruikers minder zal afschrikken. (Probeer vooral de
+geïntegreerde mijnenjager!) <command>aptitude</command> stelt u in staat om zowel
+individuele pakketten, een verzameling pakketten die aan bepaalde criteria voldoen
+(alleen voor gevorderde gebruikers) als complete taken te installeren.
+<!-- FJP: Als aptitude een <command> is, moet het zonder hoofdletter (net als dselect hiervoor) //-->
+
+</para><para>
+
+De belangrijkste opdrachttoetsen zijn:
+
+<informaltable>
+<tgroup cols="2">
+<thead>
+<row>
+  <entry>Toets</entry><entry>Actie</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry><keycap>Omhoog</keycap>, <keycap>Naar beneden</keycap></entry>
+  <entry>De selectie omhoog of naar beneden verplaatsen.</entry>
+</row><row>
+  <entry>&enterkey;</entry>
+  <entry>Het item uitklappen, inklappen of activeren.</entry>
+</row><row>
+  <entry><keycap>+</keycap></entry>
+  <entry>Het pakket markeren voor installatie.</entry>
+</row><row>
+  <entry><keycap>-</keycap></entry>
+  <entry>Het pakket markeren voor verwijdering.</entry>
+</row><row>
+  <entry><keycap>d</keycap></entry>
+  <entry>Afhankelijkheden (dependencies) met andere pakketten tonen.</entry>
+</row><row>
+  <entry><keycap>g</keycap></entry>
+  <entry>Het daadwerkelijk downloaden, installeren en/of verwijderen van pakketten.</entry>
+</row><row>
+  <entry><keycap>q</keycap></entry>
+  <entry>Het huidige venster sluiten.</entry>
+</row><row>
+  <entry><keycap>F10</keycap></entry>
+  <entry>Het menu activeren.</entry>
+</row>
+</tbody></tgroup></informaltable>
+
+Zie de online helpfunctie onder de <keycap>?</keycap> toets voor andere opdrachten.
+
+</para><para>
+
+Hoewel <command>aptitude</command> bekend zou moeten aanvoelen voor gebruikers
+van <command>dselect</command>, biedt het veel meer functionaliteit en kan
+in hoge mate gepersonaliseerd worden. (Zo kan u uw eigen opdrachttoetsen, kleuren
+en weergaven van pakketten definiëren). Na de installatie kunt u de mogelijkheden
+van <command>aptitude</command> ontdekken door
+<filename>/usr/share/doc/aptitude/README</filename> te lezen.
+
+</para>
+  </sect3>
+ </sect2>

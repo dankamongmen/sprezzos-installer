@@ -1,0 +1,35 @@
+<!-- original version: 11648 -->
+
+
+  <sect2 arch="mips"><title>CPU, Main Boards, and Video Unterstützung</title>
+<para>
+
+Komplette Informationen über unterstützte mips/mipsel Maschinen
+können im <ulink url="&url-mips-howto;">Linux MIPS HOWTO</ulink>
+gefunden werden. Der Zweck dieses Abschnitts ist, die Systeme zu behandeln,
+die von den Boot Disketten unterstützt werden.
+
+</para>         
+
+   <sect3><title>CPU</title>
+<para>
+
+Momentan werden der SGI Indy, Indigo 2 und Challenge S mit R4000, R4400 und
+R5000 Prozessoren vom Debian Installationssystem auf Big-Endian MIPS
+unterstützt. Wenn Sie Unterstütztung für andere Subarchitekturen benötigen,
+kontaktieren Sie die <ulink url="&url-list-subscribe;">
+debian-&architecture; Mailing-Liste</ulink>.
+
+</para><para>
+
+Anmerkung: überall, wo sich dieses Dokument auf die SGI Indy bezieht, sind
+damit auch die Indigo2 und die Challenge S gemeint.
+
+</para><para>
+
+Anmerkung: für Little-Endian MIPS siehe unter der mipsel Architektur.
+
+</para>
+   </sect3>
+  </sect2>
+
