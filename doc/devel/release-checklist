@@ -1,0 +1,192 @@
+Release testing checklist. Successful installs should be reported 
+for each of the following before release.
+
+For the next release we're testing the sarge CDs and the 20050305 build of
+d-i boot images (on the mirrors).
+
+					pass/fail (details)
+languages
+
+jfbterm: means that using jfbterm on the console is mandatory for 
+         avoiding Mojibake
+reboot : means that the display is correct only after rebooting the
+         installed system. This is because of reset to Latin-1
+	 at the end of base-config
+
+	Albanese			pass(2.4+2.6 base 2.4 desktop)
+	Arabic				pass(2.4+2.6 base 2.4+2.6 desktop)
+	Basque				pass(2.4+2.6 base)
+	Bosnian				pass(2.4+2.6 base 2.4 desktop)
+	Bulgarian			pass(2.4+2.6 base 2.4 desktop)
+	Catalan				pass(2.4+2.6 base 2.4 desktop)
+	Chinese (Simplified)		pass(2.4+2.6 base 2.4 desktop)
+	Chinese (Traditional)		pass(2.4+2.6 base 2.4 desktop)
+	Croatian			pass(2.4+2.6 base 2.4 desktop)
+	Czech				pass(2.4+2.6 base 2.4 desktop)
+	Danish				pass(2.4+2.6 base 2.4 desktop)
+	Dutch				pass(2.4+2.6 base 2.4 desktop) pass(fjp: 2.4 netinst; 2.6 netboot)
+	Finnish				pass(2.4+2.6 base 2.4 desktop)
+	French				pass(2.4+2.6 base 2.4 desktop)
+	Galician			pass(2.4+2.6 base 2.4 desktop)
+	German				pass(2.4+2.6 base 2.4 desktop)
+	Greek				pass(2.4+2.6 base 2.4 desktop)
+	Hebrew				pass(2.4+2.6 base 2.4 desktop)
+	Hungarian			pass(2.4+2.6 base 2.4 desktop)
+	Indonesian			pass(2.4+2.6 base 2.4 desktop)
+	Italian				pass(2.4+2.6 base 2.4 desktop)
+	Japanese			pass(2.4+2.6 base 2.4 desktop)
+	Korean				pass(2.4+2.6 base 2.4 desktop)
+	Latvian				pass(2.4+2.6 base 2.4 desktop)
+	Lithuanian			pass(2.4.2.6 base 2.4 desktop)
+	Northern Sami			pass(2.4+2.6 base 2.4 desktop)
+	Norwegian Bokmal		pass(2.4+2.6 base 2.4 desktop)
+	Norwegian Nynorsk		pass(2.4+2.6 base 2.4 desktop)
+	Persian				pass(2.4+2.6 base 2.4 desktop)
+	Polish				pass(2.4+2.6 base 2.4 desktop)
+	Portuguese of Brazil		pass(2.4+2.6 base 2.4 desktop)
+	Portuguese			pass(2.4+2.6 base 2.4 desktop)
+	Romanian			pass(2.4+2.6 base 2.4 desktop)
+	Russian				pass(2.4.2.6 base 2.4 desktop)
+	Slovakian			pass(2.4+2.6 base 2.4 desktop)
+	Slovenian			pass(2.4+2.6 base 2.4 desktop)
+	Spanish				pass(2.4+2.6 base 2.4 desktop)
+	Swedish				pass(2.4+2.6 base 2.4 desktop)
+	Turkish				pass(2.4+2.6 base 2.4 desktop)
+	Ukrainian			pass(2.4+2.6 base 2.4 desktop)
+	Welsh				pass(2.4+2.6 base 2.4 desktop)
+
+i386
+	netinst cd install		pass
+	businesscard cd install		pass
+	usb keychain			
+	usb floppy install		
+	real floppy install		
+	floppy + cd install		pass (qemu)
+	floppy + network install	pass (qemu)
+	netboot install			pass
+	pcmcia network install 		
+          (any boot media)		
+	lvm install			pass
+	lvm root			pass
+	lvm install from netinst CD	pass
+	raid root			
+	raid 1 root and boot		
+          (lilo)			
+	lvm over raid					
+	32 mb ram install		pass
+	48 mb ram install		pass
+	32 mb ram 2.6 install		fail (cycles while loading installer components because out of memory issues)
+	48 mb ram 2.6 install		pass (lowmem mode...normal mode with 52Mb memory)
+	2.6 netinst install		pass		
+	2.6 businesscard install			
+	2.6 netboot install		pass
+	2.6 pcmcia install		
+	2.6 lvm install			pass
+	2.6 lvm root			pass
+	2.6 software raid install	pass
+	2.6 usb keychain		
+	2.6 lvm over raid		pass (but needed to enter device for LILO manually, it does not want to install on default one [/dev/md0])	
+	windows detection		pass (fjp: win2k)
+	other linux detection		pass (fjp: debian)
+	full CD desktop install		pass
+	
+i386 access floppies
+	floppy + cd install		fails as no speakup udebs are included on CDs
+					(so either don't build cd-drivers floppy or include speakup udebs on CDs)
+	floppy + network install	pass (qemu)
+
+powerpc	
+        basic netinst cd				
+        basic businesscard cd			pass (on oldworld)	
+        floppy + cd [not newworld]		fails to boot
+        floppy + network [not newworld]		fails to boot
+        2.4-floppy + network [not newworld]	pass
+        netboot					pass (on pegasos)
+        using pcmcia network card			
+        32 mb ram				pass
+        48 mb ram					
+
+sparc
+	sparc32 netinst cd			pass
+	sparc32 businesscard cd			
+	sparc64 netinst cd			pass
+	sparc64 businesscard cd			pass
+	sparc32 netboot				pass
+	2.6 sparc32 netboot			fail (initrd error)
+	sparc64 netboot				pass
+
+ia64
+	2.4 netboot					
+	2.6 netboot				
+	2.4 cd install				pass
+	2.6 cd install				pass
+	netinst CD				pass
+	businesscard CD				pass
+	2.4 usb keyboard			pass
+	2.6 usb keyboard			pass
+	desktop task install			pass
+
+alpha
+	netinst cd install			pass
+	businesscard cd install			pass
+	netboot install				pass
+	desktop task install			pass
+
+mips
+	SGI (r4k-ip22) netboot			pass
+	SGI (r4k-ip22) CD boot			pass
+	SGI (r4k-ip22) via serial		pass
+	SGI (r4k-ip22) via graphics		pass
+	SGI (r5k-ip22) netboot			pass
+	SGI (r5k-ip22) CD boot				
+	SGI (r5k-ip22) via serial		pass
+	SGI (r5k-ip22) via graphics			
+	sb1-swarm-bn				pass (#299696)
+
+mipsel
+	DECstation (r3k-kn02) netboot			
+	DECstation (r3k-kn02) CD boot			
+	DECstation (r3k-kn02) via serial		
+	DECstation (r3k-kn02) via graphics		
+	DECstation (r4k-kn04) netboot		pass
+	DECstation (r4k-kn04) CD boot			
+	DECstation (r4k-kn04) via serial	pass
+	DECstation (r4k-kn04) via graphics		
+	Cobalt					pass
+	Cobalt (lowmem 1, 32 MB)		pass
+	Cobalt (lowmem 2, 24 MB)		pass
+	Cobalt lvm install			pass
+	Cobalt software raid install			
+	sb1-swarm-bn					
+
+m68k
+	amiga cdrom
+	amiga nativehd
+	atari cdrom
+	atari floppy
+	atari nativehd
+	mac cdrom22				pass
+	mac hd-media				pass	
+	mac nativehd				pass
+
+hppa
+	cdrom						
+	netboot					pass
+
+arm
+	Netwinder netboot via serial		pass (#299268)
+	Netwinder netboot via graphics		pass
+
+s390
+	IPL from dasd (generic)			pass (z/VM)
+	IPL from vm reader (generic)		pass (Hercules)
+	IPL from tape				pass (Hercules)
+	IUCV network				
+	CTC network				pass (Hercules)
+	QETH network, GuestLAN			pass (z/VM)
+	QETH network, OSA
+
+amd64
+	cdrom						
+	USB						
+	netboot						

@@ -1,0 +1,24 @@
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 16467 -->
+
+  <sect3 arch="sparc">
+  <title>Den <command>SILO</command>-Bootloader auf Festplatte installieren</title>
+<para>
+
+Der Standard-Bootloader für die &architecture;-Architektur heißt
+<quote>silo</quote>. Er ist in <filename>/usr/share/doc/silo/</filename>
+beschrieben. <command>SILO</command> ist in Konfiguration und Benutzung
+<command>LILO</command> ähnlich, mit einigen Ausnahmen. Zunächst mal kann
+<command>SILO</command> alle Kernel-Images booten, die auf der Platte liegen,
+sogar dann, wenn sie nicht in <filename>/etc/silo.conf</filename> eingetragen
+sind. Dies kommt daher, dass <command>SILO</command> Linux-Partitionen lesen
+kann. Außerdem wird die Datei <filename>/etc/silo.conf</filename> bei jedem
+Bootvorgang eingelesen; deswegen ist es nicht nötig, <command>silo</command>
+erneut auszuführen, wenn Sie einen neuen Kernel installiert haben (wie Sie es
+bei <command>LILO</command> müssen). <command>SILO</command> kann auch
+UFS-Partitionen lesen, was bedeutet, dass er auch von SunOS-/Solaris-Partitionen
+booten kann. Dies ist nützlich, wenn Sie GNU/Linux neben einem bestehenden
+SunOS-/Solaris-System installieren möchten.
+
+</para>
+  </sect3>

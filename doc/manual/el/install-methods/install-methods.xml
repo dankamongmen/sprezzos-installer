@@ -1,0 +1,15 @@
+<!-- retain these comments for translator revision tracking -->
+
+<chapter id="install-methods">
+ <title>Αποκτώντας τα Μέσα Εγκατάστασης του Συστήματος</title>
+
+&official-cdrom.xml;
+&downloading-files.xml;
+&ipl-tape.xml;
+&create-floppy.xml;
+&boot-usb-files.xml;
+&boot-drive-files.xml;
+&install-tftp.xml;
+&automatic-install.xml;
+
+</chapter>

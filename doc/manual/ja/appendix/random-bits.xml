@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="EUC-JP"?>
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 22661 -->
+
+<appendix id="appendix"><title>ランダムビット</title>
+
+&example-preseed.xml;
+&files.xml;
+&chroot-install.xml;
+
+</appendix>

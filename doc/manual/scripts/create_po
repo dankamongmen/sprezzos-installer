@@ -1,0 +1,130 @@
+#!/bin/sh
+
+# This script is used for translations using .po files.
+# It creates the initial .po files for a language where there
+# already is a translation.
+
+# This script is meant to be used only once for the transition
+# from translating the .xml files to using .po files.
+
+if [ "$1" = "--help" ] ; then
+    echo "Usage: $0 <language>"
+    exit 0
+fi
+
+language=${1:-pl}
+
+[ -d ./$language/ ] || exit 1
+
+SCRIPTDIR="./scripts"
+WORKDIR="./integrated"
+SOURCEDIR="$WORKDIR/$language"
+PODIR="./po"
+
+if [ -d "$PODIR" ] ; then
+    echo "Deleting old .po files for '$language'..."
+    for i in `find $PODIR/ -name "*.$language.po"` ; do
+        rm $i
+    done
+fi
+
+XMLLIST=$(find $SOURCEDIR -name "*.xml")
+
+echo "Creating .po files for language '$language'..."
+for SOURCEXML in $XMLLIST ; do
+    SUBDIR=$(dirname $SOURCEXML | sed "s:$SOURCEDIR::" | sed "s:^/::")
+    if [ ! -d $PODIR/$SUBDIR ] ; then
+        echo "Skipping $SUBDIR; directory does not exist under $PODIR"
+        continue
+    fi
+    XML=$(basename $SOURCEXML)
+    ORIGXML=$WORKDIR/en/$SUBDIR/$XML
+    PO=$PODIR/$SUBDIR/$(basename $SOURCEXML .xml).$language.po
+
+    echo "Converting translated $SUBDIR/$XML to .po file"
+    split2po $ORIGXML $SOURCEXML >$PO
+    if [ $? -ne 0 ] ; then
+        echo "** Error during conversion."
+        continue
+    fi
+
+    # Remove strange references created by split2po
+    # Note: this is a workaround for a bug in the tools:
+    #       http://bugs.kde.org/show_bug.cgi?id=90112
+    if grep -q "POXML_" $PO ; then
+        echo "   Converting "POXML_" references..."
+        cat $PO | \
+            sed "s/!POXML_AMP!/\&/g" | \
+            sed "s/        /\\\t/g" | \
+            sed "s/&POXML_SPACE;/ /g" | \
+            sed "s/&POXML_LINEFEED;/\\\n\"\n      \"/g" | \
+            sed "s/&POXML_LT;/</g" | \
+            sed "s/&POXML_GT;/>/g" \
+            >/tmp/tmp.po.$$
+        cp /tmp/tmp.po.$$ $PO
+    fi
+    # Check if there are any we don't yet know about
+    if grep "POXML_" $PO ; then
+        echo "** Error: file contains unknown "POXML_" references."
+    fi
+
+    # Remove spurious msgid's created by split2po (drop last 6 lines)
+    # Note: this is a workaround for a feature in the tools:
+    #       http://bugs.kde.org/show_bug.cgi?id=90112
+    if grep "ROLES_OF_TRANSLATORS" $PO >/dev/null; then
+        LINES=$(cat $PO | wc -l)
+        head -n $(($LINES - 6)) $PO >/tmp/tmp.po.$$
+        cp /tmp/tmp.po.$$ $PO
+    fi
+done
+
+# Check the results
+echo ""
+echo "Checking whether translation matches corresponding .pot file..."
+for PO in `find $PODIR -name "*.$language.po"` ; do
+    TDIR=$(dirname $PO); POT=$(basename $PO ".$language.po").pot
+    if [ -s $PO ] ; then
+        if [ -f $TDIR/$POT ] ; then
+            count_POT=$(egrep "^msgid " $TDIR/$POT | wc -l)
+            count_PO=$(egrep "^msgstr " $PO | wc -l)
+            if [ $count_PO != $count_POT ] ; then
+                echo "** Warning: translation for $PO has $count_PO strings, while original has $count_POT strings."
+            fi
+            count_missing_PO=$(egrep "^msgstr \"\"$" $PO | wc -l)
+            count_missing_PO=$(($count_missing_PO - 1))
+            if [ $count_missing_PO -ne 0 ] ; then
+                echo "** Warning: translation for $PO has $count_missing_PO missing strings."
+            fi
+        else
+            echo "** Error: corresponding .pot file not found for $PO."
+        fi
+    else
+        echo "** Error: $PO is empty (conversion error)."
+    fi
+done
+echo "Done."
+
+# Checking for untranslated strings
+echo ""
+echo "Checking for untranslated strings in the .po files..."
+for PO in `find po/ -name "*.$language.po"` ; do
+    echo "Checking $PO..."
+    awk -f $SCRIPTDIR/mark_untranslated.awk $PO
+done
+
+echo ""
+echo "The conversion has finished successfully."
+echo "The .po files for $language have been saved in '$PODIR'."
+echo ""
+echo "Please check all messages above very carefully."
+echo "If any translations are shown to have a different amount of strings than the original,"
+echo "you should probably correct the cause of this and run the conversion again."
+echo ""
+echo "Strings that are shown as 'looking untranslated', this could just be a string that"
+echo "does not need translation, but could also indicate parts of the original that really"
+echo "are untranslated but are not marked as such."
+echo "In that case, you can use the set_untranslated script to mark these strings as"
+echo "untranslated (enter 'set_untranslated --help' for usage)."
+
+rm /tmp/tmp.po.$$ /tmp/$$.xml &>/dev/null
+exit 0

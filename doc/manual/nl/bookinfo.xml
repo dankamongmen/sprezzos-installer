@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 24317 -->
+
+<bookinfo id="debian_installation_guide">
+<title>&debian; Installatiehandleiding</title>
+
+<abstract>
+<para>
+Dit document bevat instructies voor de installatie van het &debian;
+&release; systeem, voor het &arch-title; (<quote>&architecture;</quote>)
+platform. Verder bevat het verwijzingen naar aanvullende informatie en
+informatie over hoe u het meeste uit uw nieuwe Debian systeem kunt halen.
+</para>
+
+<para>
+<warning condition="not-checked"><para>
+<!--This installation guide is based on an earlier manual written for
+the old Debian installation system (the "boot-floppies"), and has
+been updated to document the new Debian installer. However, for
+&architecture;, the manual has not been fully updated and fact checked
+for the new installer. There may remain parts of the manual that are
+incomplete or outdated or that still document the boot-floppies
+installer. A newer version of this manual, possibly better documenting
+this architecture, may be found on the Internet at the
+<ulink url="&url-d-i;">&d-i; home page</ulink>. You may also be able
+to find additional translations there.-->
+Deze installatiehandleiding is gebaseerd op een eerdere handleiding die
+is geschreven voor het oude installatiesysteem van Debian (de
+"boot-floppies") en is bijgewerkt voor de nieuwe &d-i;. Voor &architecture;
+is de handleiding echter nog niet volledig bijgewerkt en gecontroleerd voor
+het nieuwe installatiesysteem. Het is mogelijk dat er nog delen zijnvan de
+handleiding die onvolledig of verouderd zijn, of die nog steeds de oude
+boot-floppies beschrijven. Nieuwere versies van deze handleiding, die mogelijk
+dit platform beter beschrijven, kunt u vinden op het Internet op de
+<ulink url="&url-d-i;">&d-i; website</ulink>. Mogelijk kunt u daar ook
+aanvullende vertalingen vinden.
+</para></warning>
+
+<note condition="checked"><para>
+<!--Although this installation guide for &architecture; is mostly up-to-date,
+we plan to make some changes and reorganize parts of the manual after the
+official release of &releasename;. A newer version of this manual may be
+found on the Internet at the <ulink url="&url-d-i;">&d-i; home page</ulink>.
+You may also be able to find additional translations there.-->
+Hoewel deze installatiehandleiding voor &architecture; grotendeels is bijgewerkt,
+zijn er plannen voor wijzigingen en een reorganisatie van delen van de handleiding
+na de officiële vrijgave van &releasename;. Nieuwere versies van deze handleiding
+kunt u vinden op het Internet op de <ulink url="&url-d-i;">&d-i; website</ulink>.
+Mogelijk kunt u daar ook aanvullende vertalingen vinden.
+</para></note>
+</para>
+
+<!--FJP Nieuwe paragraaf specifiek voor nl //-->
+<para>
+Deze handleiding is oorspronkelijk geschreven in het Engels en de
+vertaling naar het Nederlands is nog niet volledig. Voor de delen die nog
+niet zijn vertaald is de originele, Engelstalige tekst opgenomen.
+Voor informatie over de vertaling naar het Nederlands kunt u een e-mail
+sturen naar de <email>debian-l10n-dutch@lists.debian.org</email>
+mailinglijst. Zie ook <xref linkend="getting-newest-doc"/>.
+</para>
+</abstract>
+
+<copyright>
+ <year>2004
+ <trademark class="copyright">
+ </trademark>
+ </year>
+ <holder>het Debian Installatiesysteem team</holder>
+</copyright>
+
+<legalnotice>
+<para>
+
+Deze handleiding is vrije software; u mag deze verspreiden en/of wijzigen
+onder de bepalingen van de GNU Algemene Publieke Licentie. U wordt verzocht
+de licentie in <xref linkend="appendix-gpl"/> te raadplegen.
+
+</para>
+</legalnotice>
+</bookinfo>
