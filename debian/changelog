@@ -1,0 +1,81 @@
+debian-installer (20031113) unstable; urgency=low
+
+  * Joey Hess
+    - Add new loop-modules to bootfloppy, hd-media.
+    - Move input-modules from root floppy to bootfloppy, as the new
+      rootskel-bootfloppy prompts for the user to hit enter.
+    - Remove redundant usb-discover and usb-modules from root floppy;
+      the boot floppy takes care of that.
+    - Remove fat-modules and floppy-modules from the root floppy; they
+      boot floppy loads them.
+    - Create DEST before copying in DEST_KERNEL.
+    - ia64 build-depends on dosfstools. Closes: #219919
+    - sparc build-depends on genromfs. Closes: #220208
+    - remove brltty from everything except access. It is causing problems
+      (#219928) on sparc at least.
+    - add nic-extra-modules to netboot for i386, as it fits and netboot
+      should support as much as it can
+    - try to get full UTF-8 going on netboot
+    - add nano to netboot
+  * Richard Hirst
+    - Add mtools as a build-dep for ia64
+
+ -- Joey Hess <joeyh@debian.org>  Sun,  9 Nov 2003 19:59:13 -0500
+
+debian-installer (20031109) unstable; urgency=low
+
+  * Richard Hirst
+    - Remove efi-reader from ia64 cdrom pkglist for now; the one in the
+      archive is linked against libdebian-installer3 which is no longer
+      available.
+    - Stop including debootstrap-udeb in cdrom pkg-list for ia64.
+  * This should be the final build for the beta.
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 07 Nov 2003 22:31:07 +0000
+
+debian-installer (20031106.1) unstable; urgency=low
+
+  * Enable ia64 in control file. (Build report from Jeff Bailey)
+  * Idempotency fix in debian/rules install.
+  * Put in some stuff to allow for more than one release per day.
+
+ -- Joey Hess <joeyh@debian.org>  Thu,  6 Nov 2003 15:12:48 -0500
+
+debian-installer (20031106) unstable; urgency=low
+
+  * Improved the copyright file, decided not to try to list the copyright
+    of every component of the images.
+  * Uppercased the md5sums filename.
+  * New retriever menu setup:
+    - add load-floppy and download-installer to floppy
+    - add load-installer to cdrom, netboot
+    - add load-iso to hd-media
+    - add load-cdrom, hw-detect-full, ide-core-modules, and cdrom-detect
+      to cd_drivers, which is actually usable now
+  * Remove pcmcia-udeb from pkg-lists, hw-detect took over.
+  * Make d-i-demo catch SIGINT, clean up properly.
+  * Fix kernel module package names in udeb_include for driver floppies.
+  * Alastair McKinstry:
+    - Add additional shade characters to fix the scroll bar in the newt
+      frontend.
+    - The terminfo entries are now provided by di-utils-terminfo, not
+      the Makefile.
+  * Richard Hirst:
+    - Misc ia64 fixes - define KERNEL_FLAVOUR, clean up pkglists, etc
+  * Improved the description of debian-installer-demo. Closes: #219255
+  * Build includes new cdebconf, fixed partconf, fixed bogl-bterm redraw
+    problems, etc, etc. Many other fixes and improvements.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 30 Oct 2003 15:12:38 -0500
+
+debian-installer (20031029) unstable; urgency=low
+
+  * Initial release.
+  * This includes a deb that lets a demo of the installer be run
+    (and triggers autobuilders), but the main payload is the
+    debian-installer-images tarball, which is designed to be unpacked
+    by ftp-master into the ftp site.
+  * Set architecture to i386, powerpc for now. More will be added
+    once d-i works on them well enough to distribute images.
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 22 Oct 2003 16:16:21 -0400
