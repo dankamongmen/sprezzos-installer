@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="EUC-JP"?>
+<!-- retain these comments for translator revision tracking -->
+<!-- $Id$ -->
+<!-- original version: 12756 -->
+
+<chapter id="preparing">
+ <title>&debian; のインストール前に</title>
+
+&install-overview.xml;
+&backup.xml;
+&needed-info.xml;
+&minimum-hardware-reqts.xml;
+&non-debian-partitioning.xml;
+&pre-install-bios-setup.xml;
+
+</chapter>
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--  original version: 11648  -->
+
+<appendix id="appendix"><title>Éclats hasardeux</title>
+
+&files.xml;
+&chroot-install.xml;
+&gpl.xml;
+
+</appendix>

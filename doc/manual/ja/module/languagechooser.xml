@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="EUC-JP"?>
+<!-- retain these comments for translator revision tracking -->
+<!-- $Id$ -->
+<!-- original version: 11648 -->
+
+
+  <sect2 id="lang-chooser"><title>Language Chooser</title>
+<para>
+
+<!--
+As the first step of the installation, select the language in which
+you want the installation process to take place.  Some languages have
+variants available.  Pick whichever variant applies to your geographic
+region.
+-->
+インストールの最初のステップとして、
+インストールプロセスで使用したい言語を選択してください。
+いくつかの言語では変種が利用できます。
+あなたの住む地域に当てはまる変種を選択してください。
+
+</para><para>
+
+<!--
+The answers you provide will be used to pick the language which the
+installer will use, and to set a suitable keyboard layout.
+-->
+ここでの指定は、インストーラが使用する言語の抽出や、
+適切なキーボードレイアウトを設定するのに使用されるでしょう。
+
+</para>
+
+  </sect2>

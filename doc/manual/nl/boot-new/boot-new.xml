@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 14033 -->
+
+<chapter id="boot-new">
+ <title>De computer opstarten met uw nieuwe Debian systeem</title>
+
+ <sect1><title>Zorgen dat het systeem kan opstarten</title>
+<para>
+
+Het opstarten van meerdere besturingssystemen op één machine heeft nog
+altijd veel weg van zwarte magie. In dit document wordt niet eens een
+poging gedaan om de verschillende opstartladers te beschrijven omdat deze
+per platform en zelfs per subplatform verschillen.
+
+</para>
+
+&bootloader-i386.xml;
+&bootloader-m68k.xml;
+&bootloader-alpha.xml;
+&bootloader-sparc.xml;
+&bootloader-powerpc.xml;
+&bootloader-hppa.xml;
+&bootloader-s390.xml;
+&bootloader-arm.xml;
+&bootloader-mipsel.xml;
+
+  <sect2 condition="supports-nfsroot"><title>Werkstations zonder schijfeenheden</title>
+<para>
+
+Als u installeert op een werkstation zonder schijfeenheden dan is opstarten
+vanaf de lokale harde schijf uiteraard geen optie en zal deze stap worden
+overgeslagen. <phrase arch="sparc">Desgewenst kunt u OpenBoot instellen om
+standaard vanaf het netwerk op te starten; zie <xref
+linkend="boot-dev-select-sun"/>.</phrase>
+
+</para>
+
+  </sect2>
+</sect1>
+
+ <sect1 id="base-boot"><title>Het moment van de waarheid</title>
+<!-- FJP
+<para>
+
+Your system's first boot on its own power is what electrical engineers
+call the <quote>smoke test</quote>.//-->
+<!-- FJP: Is hier een aardig nl equivalent voor? Anders maar weglaten... //-->
+
+<!-- FJP
+</para>//--><para arch="s390">
+
+Selecteer de optie ``De installatie afronden'' uit het menu; deze zal
+het systeem stoppen omdat herstarten op &arch-title; in dit geval niet
+wordt ondersteund. U moet dan een IPL voor GNU/Linux uitvoeren vanuit de
+DASD die u tijdens de eerste stappen van de installatie heeft geselecteerd
+voor het root bestandssysteem.
+<!-- FJP: Vertaling Reboot the system in 1st stage menu nakijken 
+          Origineel moet zijn: 'Finish the installation' //-->
+
+</para><para>
+
+Als u direct opstart met uw nieuwe Debian systeem en het systeem niet goed
+opstart, probeer dan uw originele installatie opstartmedium (bijvoorbeeld de
+'rescue diskette') of gebruik de 'Debian opstartdiskette', als u deze heeft
+aangemaakt. Als u <emphasis>niet</emphasis> de 'Debian opstartdiskette'
+gebruikt, zal u waarschijnlijk enkele opstartargumenten moeten opgeven.
+Als u met de 'rescue diskette' of een vergelijkbare methode opstart, zal u
+<userinput>rescue root=<replaceable>root</replaceable></userinput> moeten
+opgeven, waarbij <replaceable>root</replaceable> staat voor uw root-partitie
+(bijvoorbeeld <filename>/dev/hda1</filename> of <filename>/dev/sda1</filename>).
+<!-- FJP: Is opstartargumenten consistent met andere plaatsen? //-->
+
+</para>
+
+  <sect2 arch="m68k"><title>Een VME6000 opstarten</title>
+<para>
+
+Als u zojuist een installatie zonder schijfeenheden heeft uitgevoerd
+op een BVM of Motorola VMEbus machine: geef dan, nadat het systeem het
+programma <command>tftplilo</command> vanaf de TFTP-server heeft geladen,
+één van de volgende commando's bij de <prompt>LILO Boot:</prompt> prompt:
+
+<itemizedlist>
+<listitem><para>
+
+<userinput>b6000</userinput> gevolgd door &enterkey;
+om een BVME4000/6000 op te starten
+
+</para></listitem><listitem><para>
+
+<userinput>b162</userinput> gevolgd door &enterkey;
+om een MVME162 op te starten
+
+</para></listitem><listitem><para>
+
+<userinput>b167</userinput> gevolgd door &enterkey;
+om een MVME166/167 op te starten
+
+</para></listitem>
+</itemizedlist>
+
+</para>
+
+  </sect2>
+
+  <sect2 arch="m68k"><title>Een Macintosh opstarten</title>
+
+<!-- FJP: Vooralsnog onvertaald; origineel is erg rommelig en ik heb
+          geen flauw idee wat hier precies gebeurt -->
+
+<para>
+
+Go to the directory containing the installation files and start up the
+<command>Penguin</command> booter, holding down the
+<keycap>command</keycap> key.  Go to the
+<userinput>Settings</userinput> dialogue (<keycombo>
+<keycap>command</keycap> <keycap>T</keycap> </keycombo>), and locate
+the kernel options line which should look like
+<userinput>root=/dev/ram video=font:VGA8x16</userinput> or similar.//-->
+
+</para><para>
+
+
+You need to change the entry to
+<userinput>root=/dev/<replaceable>yyyy</replaceable></userinput>.
+Replace the <replaceable>yyyy</replaceable> with the Linux name of the
+partition onto which you installed the system
+(e.g. <filename>/dev/sda1</filename>); you wrote this down earlier.
+The <userinput>video=font:VGA8x8</userinput> is recommended especially
+for users with tiny screens. The kernel would pick a prettier (6x11)
+font but the console driver for this font can hang the machine, so
+using 8x16 or 8x8 is safer at this stage.  You can change this at any
+time.
+
+</para><para>
+
+If you don't want to start GNU/Linux immediately each time you start,
+uncheck the <userinput>Auto Boot</userinput> option. Save your
+settings in the <filename>Prefs</filename> file using the
+<userinput>Save Settings As Default</userinput> option.
+
+</para><para>
+
+Now select <userinput>Boot Now</userinput> (<keycombo>
+<keycap>command</keycap> <keycap>B</keycap> </keycombo>) to start your
+freshly installed GNU/Linux instead of the RAMdisk installer system.
+
+</para><para>
+
+Debian should boot, and you should see the same messages as
+when you first booted the installation system, followed by some new
+messages.
+
+</para>
+
+  </sect2>
+ </sect1>
+
+ <sect1 id="base-config">
+ <title>Basisconfiguratie van Debian (na de herstart)</title>
+
+<para>
+
+Nadat het systeem opnieuw is gestart, zal u worden gevraagd de configuratie
+van uw basissysteem te voltooien en vervolgens om te selecteren welke
+aanvullende pakketten u wilt installeren. Het programma dat u door dit proces
+leidt is <classname>base-config</classname>. Het concept daarvan lijkt zeer
+sterk op de &d-i; uit de eerste fase van de installatie.
+<classname>base-config</classname> gebruikt hetzelfde navigatiesysteem en is
+opgebouwd uit een <quote>verborgen menu</quote> dat het installatieproces op
+de achtergrond stuurt en een aantal gespecialiceerde componenten die elk een
+bepaalde configuratietaak uitvoeren.
+<!-- FJP: Origineel kan worden verbeterd //-->
+
+</para><para>
+
+U kunt, nadat de installatie is voltooid, de basisconfiguratie desgewenst opnieuw
+uitvoeren door <userinput>base-config</userinput> te starten (als root).
+<!-- FJP: Ik betwijfel of dit erg veel zin heeft; veel vragen worden automatisch
+overgeslagen omdat ze gemarkeerd zijn als 'seen' //-->
+
+</para>
+
+&module-bc-timezone.xml;
+&module-bc-shadow.xml;
+&module-bc-ppp.xml;
+&module-bc-apt.xml;
+&module-bc-packages.xml;
+&module-bc-install.xml;
+&module-bc-mta.xml;
+
+ </sect1>
+
+ <sect1 id="login">
+ <title>Aanloggen</title>
+
+<para>
+
+Nadat u de pakketten heeft geïnstalleerd en het mailsysteem heeft
+geconfigureerd, zal, als alles goed is gegaan, een boodschap worden getoond
+dat de configuratie van het basissysteem voltooid is. Daarna wordt de
+aanlogprompt getoond. Log aan met uw persoonlijke gebruikersaccount door
+de gebruikersnaam en het wachtwoord die u eerder heeft geselecteerd in te
+geven. Uw systeem is nu klaar voor gebruik.
+<!-- FJP: origineel herzien! //-->
+
+</para><para>
+
+Als u een nieuwe gebruiker bent, adviseren wij om, terwijl u begint uw systeem
+te gebruiken, ook de documentatie te verkennen die al is geïnstalleerd tijdens
+het installatieproces.
+
+</para><para>
+
+De documentatie bij programma's die u heeft geïnstalleerd, kunt u vinden in
+submappen onder <filename>/usr/share/doc/</filename>; deze submappen hebben
+de naam van de geïnstalleerde pakketten. De APT User's Guide bijvoorbeeld voor
+het gebruik van <command>apt</command> om andere programma's op uw systeem te
+installeren, kunt u vinden in
+<filename>/usr/share/doc/apt/guide.html/index.html</filename>.
+<!-- FJP: Mappen hebben niet de naam van het programma, maar van het pakket! //-->
+<!-- FJP: Is dit wel zo'n geschikt voorbeeld? //-->
+
+</para><para>
+
+Daarnaast zijn er enkele bijzondere mappen onder
+<filename>/usr/share/doc/</filename>. Linux HOWTO handleidingen worden
+in <emphasis>.gz</emphasis>-formaat geïnstalleerd in
+<filename>/usr/share/doc/HOWTO/en-txt/</filename> en
+<filename>/usr/share/doc/HOWTO/en-txt/mini/</filename>. Het bestand
+<filename>/usr/share/doc/HTML/index.html</filename> bevat inhoudsopgaven
+die met een browser kunnen worden bekeken van documentatie die met
+<command>dhelp</command> zijn geïnstalleerd.
+<!-- FJP: Weet niet of dit helemaal klopt. Testen. //-->
+
+</para><para>
+
+Een eenvoudige manier om deze documenten te bekijken, is met
+<userinput>cd /usr/share/doc/</userinput>, gevolgd door
+<userinput>lynx .</userinput> (de punt staat voor de huidige map).
+<!-- FJP: wordt lynx nog steeds standaard geïnstalleerd? Nee! //-->
+
+</para><para>
+
+U kunt ook <userinput>info <replaceable>command</replaceable></userinput> of
+<userinput>man <replaceable>command</replaceable></userinput> gebruiken om
+documentatie te bekijken over de meeste opdrachten die vanaf de opdrachtregel
+gegeven kunnen worden. Ook als u een opdracht ingeeft gevolgd door
+<userinput>--help</userinput>, wordt over het algemeen een korte samenvatting
+gegeven over het gebruik van de betreffende opdracht. Als de uitvoer van een
+opdracht niet op één scherm past, probeer dan om <userinput> | more</userinput>
+achter de opdracht in te geven; hierdoor zal de uitvoer pauseren voordat deze
+voorbij de bovenkant van het scherm schuift. U kunt een overzicht krijgen van
+alle opdrachten die met (een) bepaalde letter(s) beginnen door direct achter de
+letter(s) tweemaal op <keycap>tab</keycap> te drukken.
+<!-- FJP: origineel: tab is <keycap> //-->
+
+</para><para>
+
+Voor een meer volledige introductie van Debian en GNU/Linux verwijzen wij naar
+<filename>/usr/share/doc/debian-guide/html/noframes/index.html</filename>.
+
+</para>
+
+ </sect1>
+</chapter>
