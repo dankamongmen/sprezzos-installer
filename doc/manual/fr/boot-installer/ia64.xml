@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 14350 -->
+
+  <sect2 arch="ia64"><title>Démarrer à partir d'un cédérom</title>
+
+&boot-installer-intro-cd.xml;
+
+  <emphasis condition="FIXME">Pas encore écrit.</emphasis>
+
+  </sect2>
+
+  <sect2 arch="ia64" id="boot-tftp"><title>Démarrer avec TFTP</title>
+
+&boot-installer-intro-net.xml;
+
+<para>
+
+
+Démarrer un système ia64 à partir du réseau demande deux actions spécifiquement
+liées à l'architecture. Sur le serveur de démarrage, DHCP et TFTP doivent être
+configurés pour lancer <command>elilo</command>. Sur le client, une option 
+doit être déclarée dans le gestionnaire de démarrage EFI pour permettre 
+l'utilisation du réseau.
+
+
+</para>
+  <sect3 arch="ia64" id="boot-tftp-server"><title>Configuration du serveur</title>
+<para>
+
+Une entrée TFTP pour démarrer par le réseau un système ia64 ressemble à 
+celle-ci&nbsp;:
+
+<informalexample><screen>
+
+host mcmuffin {
+        hardware ethernet 00:30:6e:1e:0e:83;
+        fixed-address 10.0.0.21;
+        filename "elilo.efi";
+}
+
+</screen></informalexample>
+
+Remarquez que le but est de faire marcher <command>elilo.efi</command> sur 
+le client.
+
+</para><para>
+
+Créez un sous-répertoire <filename>ia64/</filename> dans le répertoire
+tftpboot et remplissez-le avec les fichiers <filename>vmlinuz</filename> et
+<filename>initrd.gz</filename> qui sont sur le répertoire netboot de 
+l'installateur Debian.
+
+</para><para>
+
+Copiez <filename>elilo.efi</filename> dans le répertoire tftpboot et autorisez
+sa lecture à tout le monde. On peut trouver ce fichier dans le paquet
+elilo des distributions IA64, ou dans  <filename>/usr/lib/elilo</filename> ou 
+dans un sous-répertoire  de <filename>/boot/efi</filename>. Une copie valable
+se trouve dans le répertoire netboot de l'installateur Debian.
+
+</para><para>
+
+Créez un fichier <filename>elilo.conf</filename> dans le répertoire tftpboot.
+Il sera chargé par <command>elilo.efi</command> quand celui-ci s'exécute sur 
+le client. Ce fichier contrôle ce qui se passe ensuite, comme le choix du 
+noyau, l'image initrd, etc. Un exemple est donné dans le répertoire netboot 
+de l'installateur Debian. Vérifiez son contenu et modifiez-le selon vos 
+besoins.
+    </para>
+<para>
+
+Il est possible d'avoir plusieurs fichiers de configuration pour plusieurs
+clients. Nommez-les en utilisant l'adresse IP en notation hexadécimale du 
+client, et avec l'extension <filename>.conf</filename> au lieu de 
+<filename>elilo.conf</filename>.
+Voyez la documentation disponible dans le paquet <classname>elilo</classname>
+pour des précisions.
+    </para>
+
+  </sect3>
+
+  <sect3 arch="ia64" id="boot-tftp-client">
+<title>Configuration du client</title>
+<para>
+
+Pour un démarrage par TFTP, commencez par démarrez avec EFI et entrez dans
+le menu sur la <guimenu>maintenance des options de démarrage</guimenu>.
+
+<itemizedlist>
+<listitem><para>
+
+Ajoutez une option de démarrage.
+
+	  </para></listitem>
+
+<listitem><para>
+
+Choisissez la ligne <guimenuitem> Load File [Acpi()/.../Mac()]</guimenuitem>
+ou quelque chose d'approchant et appuyez sur la touche &enterkey;
+
+	  </para></listitem>
+
+<listitem><para>
+
+Choisissez <userinput>Netboot</userinput>, ou quelque chose d'approchant,
+sauvegardez et revenez au menu sur les options de démarrage.
+
+	  </para></listitem>
+      </itemizedlist>
+
+Vous devriez voir l'option que vous venez de créer. La sélectionner lancera
+une requête DHCP , ce qui chargera <filename>elilo.efi</filename> qui se 
+sur le serveur.
+
+</para>
+
+  </sect3>
+  </sect2>

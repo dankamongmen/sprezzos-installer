@@ -1,0 +1,183 @@
+<!-- original version: 11573 -->
+
+ <sect1 id="install-overview">
+ <title>Übersicht über den Installationsverlauf</title> 
+<para>
+
+Zuallererst ein kurzes Wort über Neuinstallationen. Mit Debian sind die
+Umstände, unter denen eine Neuinstallation notwendig sind, äußerst selten;
+wahrscheinlich ist ein mechanisches Versagen der Festplatte der häufigste
+Grund.
+
+</para><para>
+
+Viele gängige Betriebssysteme benötigen eine komplette Installation wenn
+kritische Fehler vorkommen oder für Upgrades auf neuere Versionen des
+Betriebssystems. Selbst wenn keine komplette Neuinstallation notwendig ist,
+müssen oftmals die verwendeten Programme neu installiert werden, um im neuen
+Betriebssystem korrekt zu funktionieren.
+
+</para><para>
+
+Unter &debian; ist es wahrscheinlicher, dass Sie Ihr Betriebssystem reparieren
+können als die Notwendigkeit, es neu zu installieren, wenn etwas schief
+läuft. Upgrades erfordern niemals eine komplette Installation; Sie können
+statt dessen immer upgraden. Die Programme sind fast immer mit den
+nachfolgenden Releases kompatibel. Benötigt die neue Version eines Programms
+neuere zu Grunde liegende Software, so stellt das Debian Paketsystem sicher,
+dass die benötigte Software automatisch identifiziert und installiert wird.
+Es wurde sehr viel Aufwand in das Eliminieren der Notwendigkeit
+von Neuinstallationen gesteckt, also sehen Sie es als allerletzte Möglichkeit
+an. Der Installer ist <emphasis>nicht</emphasis> auf die Neuinstallation
+bestehender Systeme ausgelegt.
+
+</para><para>
+
+Hier ist eine Übersicht der Schritte, die Sie während der Installation
+durchführen werden.
+
+</para>
+
+<orderedlist> 
+<listitem><para>
+
+Sammeln Sie Informationen über Ihren Computer und alle benötigten
+Dokumentationen, bevor Sie die Installation starten.
+
+</para></listitem>
+<listitem><para>
+
+Sichern von bestehenden Daten oder Dokumenten auf der Festplatte, auf die Sie
+installieren wollen.
+
+</para></listitem>
+<listitem><para>
+
+Partitionierbaren Platz für Debian auf Ihrer Festplatte erstellen.
+
+</para></listitem>
+<listitem><para>
+
+Die Installationssoftware und spezielle Treiberdateien für Ihr Gerät
+herunterladen (ausser Debian CD Benutzer)
+
+</para></listitem>
+<listitem><para>
+
+Boot-Bänder/Disketten/USB-Sticks erstellen, oder Bootdateien platzieren
+(die meisten Debian CD Benutzer können von einer der CDs hochstarten)
+
+</para></listitem>
+<listitem><para>
+
+Hochstarten des Installationssystems.
+
+</para></listitem>
+<listitem><para>
+
+Auswählen der Installationssprache.
+
+</para></listitem>
+<listitem arch="not-s390"><para>
+
+Aktivieren der Netzwerkverbindung, wenn verfügbar.
+
+</para></listitem>
+
+<listitem arch="s390"><para>
+
+Konfigurieren einer Netzwerkschnittstelle.
+
+</para></listitem>
+<listitem arch="s390"><para>
+
+Öffnen einer Telnet Verbindung zum neuen System.
+
+</para></listitem>
+<listitem arch="s390"><para>
+
+Anschließen eines oder mehrerer DASDs (Direct Access Storage Device).
+
+</para></listitem>
+
+<listitem><para>
+
+Erstellen und Mounten der Partitionen auf denen Debian installiert
+wird.
+
+</para></listitem>
+<listitem><para>
+
+Zuschauen beim automatischen Download/Installations/Setup-Vorgangs
+des <firstterm>Basis-Systems</firstterm>.
+
+</para></listitem>
+<listitem><para>
+
+Einen <firstterm>Boot Loader</firstterm> installieren, der &debian;
+und/oder Ihr existierendes System hochstarten kann.
+
+</para></listitem>
+<listitem><para>
+
+Das neu installierte System zum ersten Mal hochstarten, und einige
+anfängliche Systemeinstellungen vornehmen.
+
+</para></listitem>
+<listitem><para>
+
+Zusätzliche Software (<firstterm>Tasks</firstterm> und/oder
+<firstterm>Pakete</firstterm>) nach Belieben installieren.
+
+</para></listitem>
+</orderedlist>
+
+<para>
+
+Wenn Sie während der Installation haben, hilft es, wenn Sie wissen, welche
+Pakete in welchen Schritten beteiligt sind. Die wichtigsten Akteure in
+diesem Installations-Schauspiel:
+
+</para><para>
+
+Die Installer Software, <classname>debian-installer</classname> ist
+die wichtigste Angelegenheit dieses Handbuchs. Sie koordiniert das
+Architektur-spezifische Partitionierungsprogramm, installiert den
+Linux Kernel und überwacht danach <classname>modconf</classname> beim Laden
+der speziellen Hardwaretreiber, <classname>dhclient</classname> beim
+Konfigurieren der Netzwerkfunktion, <classname>debootstrap</classname> beim
+Installieren der Basis-Systempakete, und &boot-loader-installer;, den
+Installer des Boot Loaders. Einige andere Akteure spielen noch kleinere
+Rollen in diesem Prozess, aber der <classname>debian-installer</classname>
+hat seine Aufgabe erfüllt, wenn Sie das neue System zum ersten Mal starten.
+
+</para><para>
+
+Beim Laden des neuen Basis-Systems leitet <classname>base-config</classname>
+das Anlegen von neuen Benutzern, das Setzen der Zeitzone, und die Konfiguration
+des Paket-Installationssystems. Es bietet dann an,
+<classname>tasksel</classname> zu starten, das große Gruppen von miteinander
+verwandten Programmen installiert, und danach <classname>aptitude</classname>,
+das Ihnen die direkte Auswahl einzelner Softwarepakete ermöglicht.
+
+</para><para>
+
+Wenn der <classname>debian-installer</classname> fertig ist, vor dem
+ersten Systemstart, haben Sie ein sehr grundliegendes Text-basiertes
+System. Die graphische Oberfläche, die Fenster auf Ihrem Bildschirm
+anzeigt wird nicht installiert, außer Sie wählen es in den abschließenden
+Schritten entweder mit <classname>tasksel</classname> oder
+<classname>aptitude</classname> aus. Es ist optional, da viele
+&debian; Systeme Server sind, die keinen Bedarf für eine grafische
+Benutzeroberfläche haben, um ihre Arbeit zu erfüllen.
+
+</para><para>
+
+Seien Sie sich dessen bewusst, dass das X System vom
+<classname>debian-installer</classname> komplett getrennt ist, und
+in der Tat komplizierter ist. Die Installation und Problembeseitigung
+der X Window Installation wird von diesem Handbuch nicht abgedeckt.
+
+</para>
+ </sect1>
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 14602  -->
+
+
+  <sect2 id="lang-chooser"><title>Choix de la langue</title>
+<para>
+
+Le choix de la langue dans laquelle vous voulez faire l'installation est la
+première étape du processus d'installation. Certaines langues possèdent des 
+variantes. Choisissez celle qui concorde avec votre zone géographique.
+
+</para><para>
+
+Selon vos réponses, l'installation se fera dans la langue choisie et avec une 
+bonne carte clavier.
+
+</para>
+
+  </sect2>
