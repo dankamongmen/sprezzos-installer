@@ -1,0 +1,13 @@
+<!-- Start of file preface.xml -->
+
+<preface>
+ <title
+>在 &architecture; 上安装 &debian; &release;</title>
+<para
+>我们非常高兴地看到您决定试用 Debian，并确信您将发现 Debian 的 GNU/Linux 发行版是独一无二的。&debian; 将带给您来自世界各地的高质量的自由软件，并将它们整合成一个紧密的整体。您会发现整合后的结果一定会大于将各部分简单地相加。 </para
+><para
+>我们也知道大多数用户都希望能够不用阅读本手册而直接安装 Debian。Debian 安装程序的设计意图也就是尽力实现这个想法。如果您现在的确没有时间来阅读整个安装手册，我们推荐您看看安装指南一文。该文包含了基本安装过程的简要介绍，以及当处理运行错误或需要较专业内容时查询本手册的链接。您可以在 <xref linkend="installation-howto"/> 阅读此文。 </para
+><para
+>正如前面所提到的，我们还是希望您能抽出时间来阅读本手册的大部分内容。这通常都会使您的安装体验变得更详尽、更成功。 </para>
+</preface>
+<!--   End of file preface.xml -->

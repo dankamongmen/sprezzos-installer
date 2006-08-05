@@ -1,0 +1,87 @@
+#!/usr/bin/make -f
+
+ARCH=$(shell dpkg-architecture -qDEB_BUILD_ARCH)
+VERSION=$(shell LC_ALL=C dpkg-parsechangelog | grep ^Version: | cut -d ' ' -f 2)
+DATE=$(shell echo $(VERSION) | cut -d '.' -f 1)
+DISTRIBUTION=$(shell LC_ALL=C dpkg-parsechangelog | grep ^Distribution: | cut -d ' ' -f 2)
+ifeq (${DISTRIBUTION},stable)
+DISTRIBUTION=sarge
+endif
+ifeq (${DISTRIBUTION},unstable)
+DISTRIBUTION=sarge
+endif
+ifeq (${DISTRIBUTION},UNRELEASED)
+DISTRIBUTION=unstable
+endif
+
+ARCHIVEDIR=debian/tmp/installer-$(ARCH)
+DESTDIR=$(ARCHIVEDIR)/$(DATE)
+IMAGEDIR=$(DESTDIR)/images
+MANDIR=$(DESTDIR)/doc/manual
+MANTMP=$(shell pwd)/doc/manual/build/manual
+TARNAME=debian-installer-images_$(VERSION)_$(ARCH).tar.gz
+
+clean:
+	dh_testdir
+	dh_testroot
+	dh_clean build-stamp
+	rm -rf $(MANTMP)
+	$(MAKE) -C build reallyclean
+	$(MAKE) -C doc/devel/partman clean
+
+# Must run as root, so is not run as part of regular build.
+build-images:
+	$(MAKE) -C build all_build stats \
+		SUITE=$(DISTRIBUTION) BUILD_DATE=$(DATE)
+	
+build: build-stamp
+build-stamp:
+	rm -f $@
+	-rm -rf $(MANTMP)
+	set -e && cd doc/manual/build && \
+	        official_build=1 destination=$(MANTMP) \
+		architectures=$(ARCH) noarchdir=1 ./build.sh
+
+	$(MAKE) -C doc/devel/partman
+	
+	touch $@
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+	
+	install -d $(MANDIR)
+	cp -a $(MANTMP)/* $(MANDIR)
+	
+	# Inclusion of a sources.list.udeb.local is needed to build d-i for
+	# Sarge 3.1r3 including updated kernel udebs. This hack makes sure
+	# we also support AMD64 which uses a different mirror.
+	if [ $(ARCH) = amd64 ] && [ -f build/sources.list.udeb.local.amd64 ]; then \
+		cp build/sources.list.udeb.local.amd64 build/sources.list.udeb.local; \
+	fi
+	debian/rules build-images
+
+	install -d $(IMAGEDIR)
+	cp -a build/dest/* $(IMAGEDIR)
+	cd $(IMAGEDIR) && md5sum `find . -type f` > MD5SUMS
+	ln -s $(DATE) $(ARCHIVEDIR)/current
+
+binary-arch: install  
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs
+	dh_installdocs $(MANTMP)
+	dh_installdocs -X manual doc/* -X Makefile -X partman-doc.sgml
+	dh_compress
+	dh_fixperms
+	dh_gencontrol -- -Vkernel:Package='$(KERNELPACKAGE)'
+	dh_builddeb
+	cd debian/tmp && tar czvf ../../../$(TARNAME) .
+	dpkg-distaddfile $(TARNAME) byhand -
+
+binary-indep:
+
+binary: binary-indep binary-arch 
+.PHONY: build build-images clean binary-indep binary-arch binary install 

@@ -1,0 +1,2502 @@
+<!-- Start of file hardware/hardware.xml -->
+
+<chapter id="hardware-req">
+ <title
+>Requisitos do Sistema</title>
+
+<para
+>Esta secção contém informação acerca de que hardware é necessário para se iniciar com Debian. Irá também encontrar links para mais informações acerca do hardware suportado por GNU e Linux. </para>
+
+
+<!-- Start of file hardware/hardware-supported.xml -->
+
+ <sect1 id="hardware-supported">
+ <title
+>Hardware Suportado</title>
+
+<para
+>O Debian não impõe requisitos de hardware para além do que é requerido pelo kernel Linux e pelas ferramentas GNU. Por isso qualquer arquitectura ou plataforma para a qual tenha sido portado o kernel Linux, libc, <command
+>gcc</command
+>, etc. e para o qual exista um port de Debian, pode correr Debian. Para mais detalhes de sistema com a arquitectura &arch-title; que tenham sido testados com Debian por favor veja as páginas dos Ports em <ulink url="&url-ports;"
+></ulink
+>. </para
+><para
+>Em vez de tentar descrever todas a configurações de hardware que são suportadas por &arch-title;, esta secção contém informação geral e indicações de onde se pode encontrar informação adicional. </para>
+
+  <sect2
+><title
+>Arquitecturas Suportadas</title>
+
+<para
+>Debian &release; suporta onze arquitecturas de maior relevo e várias variações de cada arquitectura conhecidas por <quote
+>flavors</quote
+>. </para
+><para>
+
+<informaltable>
+<tgroup cols="4">
+<thead>
+<row>
+  <entry
+>Arquitectura</entry
+><entry
+>Designação Debian</entry>
+  <entry
+>Sub-arquitectura</entry
+><entry
+>Flavor</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry morerows="2"
+>Baseado em Intel x86</entry>
+  <entry morerows="2"
+>i386</entry>
+  <entry morerows="2"
+></entry>
+  <entry
+>vanilla</entry>
+</row
+><row>
+  <entry
+>speakup</entry>
+</row
+><row>
+  <entry
+>linux26</entry>
+</row>
+
+<row>
+  <entry morerows="5"
+>Motorola 680x0</entry>
+  <entry morerows="5"
+>m68k</entry>
+  <entry
+>Atari</entry>
+  <entry
+>atari</entry>
+</row
+><row>
+  <entry
+>Amiga</entry>
+  <entry
+>amiga</entry>
+</row
+><row>
+  <entry
+>68k Macintosh</entry>
+  <entry
+>mac</entry>
+</row
+><row>
+  <entry morerows="2"
+>VME</entry>
+  <entry
+>bvme6000</entry>
+</row
+><row>
+  <entry
+>mvme147</entry>
+</row
+><row>
+  <entry
+>mvme16x</entry>
+</row>
+
+<row>
+  <entry
+>DEC Alpha</entry>
+  <entry
+>alpha</entry>
+  <entry
+></entry>
+  <entry
+></entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>Sun SPARC</entry>
+  <entry morerows="1"
+>sparc</entry>
+  <entry morerows="1"
+></entry>
+  <entry
+>sun4cdm</entry>
+</row
+><row>
+  <entry
+>sun4u</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>ARM e StrongARM</entry>
+  <entry morerows="3"
+>arm</entry>
+  <entry morerows="3"
+></entry>
+  <entry
+>netwinder</entry>
+</row
+><row>
+  <entry
+>riscpc</entry>
+</row
+><row>
+  <entry
+>shark</entry>
+</row
+><row>
+  <entry
+>lart</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>IBM/Motorola PowerPC</entry>
+  <entry morerows="3"
+>powerpc</entry>
+  <entry
+>CHRP</entry>
+  <entry
+>chrp</entry>
+</row
+><row>
+  <entry
+>PowerMac</entry>
+  <entry
+>pmac</entry>
+</row
+><row>
+  <entry
+>PReP</entry>
+  <entry
+>prep</entry>
+</row
+><row>
+  <entry
+>APUS</entry>
+  <entry
+>apus</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>HP PA-RISC</entry>
+  <entry morerows="1"
+>hppa</entry>
+  <entry
+>PA-RISC 1.1</entry>
+  <entry
+>32</entry>
+</row
+><row>
+  <entry
+>PA-RISC 2.0</entry>
+  <entry
+>64</entry>
+</row>
+
+<row>
+  <entry
+>Baseado em Intel ia64</entry>
+  <entry
+>ia64</entry>
+  <entry
+></entry>
+  <entry
+></entry>
+</row>
+
+<row>
+  <entry morerows="2"
+>MIPS (big endian)</entry>
+  <entry morerows="2"
+>mips</entry>
+  <entry morerows="1"
+>SGI Indy/Indigo 2</entry>
+  <entry
+>r4k-ip22</entry>
+</row
+><row>
+  <entry
+>r5k-ip22</entry>
+</row
+><row>
+  <entry
+>Broadcom BCM91250A (SWARM)</entry>
+  <entry
+>sb1-swarm-bn</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>MIPS (little endian)</entry>
+  <entry morerows="3"
+>mipsel</entry>
+  <entry
+>Cobalt</entry>
+  <entry
+>cobalt</entry>
+</row
+><row>
+  <entry morerows="1"
+>DECstation</entry>
+  <entry
+>r4k-kn04</entry>
+</row
+><row>
+  <entry
+>r3k-kn02</entry>
+</row
+><row>
+  <entry
+>Broadcom BCM91250A (SWARM)</entry>
+  <entry
+>sb1-swarm-bn</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>IBM S/390</entry>
+  <entry morerows="1"
+>s390</entry>
+  <entry
+>IPL a partir de VM-reader e DASD</entry>
+  <entry
+>generic</entry>
+</row
+><row>
+  <entry
+>IPL a partir de tape</entry>
+  <entry
+>tape</entry>
+</row>
+
+</tbody
+></tgroup
+></informaltable>
+
+</para
+><para
+>Este documento aborda a instalação na arquitectura <emphasis
+>&arch-title;</emphasis
+>. Se está á procura de informação acerca de qualquer uma das outras arquitecturas suportadas por Debian veja a página das <ulink url="http://www.debian.org/ports/"
+>Conversões Debian</ulink
+>. </para
+><para condition="new-arch"
+>Esta é a primeira versão oficial de &debian; para a arquitectura &arch-title;. Nós pensamos que já se provou o suficiente para ser lançada. No entanto, devido a não ter a exposição (e consequentemente não ter sido testada por utilizadores) que outras arquitecturas tiveram, pode encontrar alguns bugs. Utilize o nosso <ulink url="&url-bts;"
+>Sistema de Seguimento de Bugs</ulink
+> para relatar algum problema que encontre; não se esqueça de mencionar que o bug está presente na arquitectura &arch-title;. Pode ser necessário usar também a <ulink url="&url-list-subscribe;"
+>mailing list debian-&architecture;</ulink
+> </para>
+
+  </sect2>
+
+<!-- supported cpu docs -->
+
+<!-- Start of file hardware/supported/alpha.xml -->
+
+
+  <sect2 arch="alpha" id="alpha-cpus"
+><title
+>Suporte de Processadores, Placas principais e de Vídeo</title>
+<para
+>Informação completa acerca de DEC Alphas suportados pode ser encontrada no <ulink url="&url-alpha-howto;"
+>Linux Alpha HOWTO</ulink
+>. O objectivo desta secção é descrever os sistemas suportados pelos discos de arranque. </para
+><para
+>As máquinas Alpha estão dividas em diferentes sistemas porque existe um grande número de diferentes gerações de motherboards e chipsets suportados. Sistemas diferentes (<quote
+>sub-arquitecturas</quote
+>) são muitas vezes radicalmente diferentes ao nível de engenharia e de capacidades. Neste caso, o processo de instalação e, mais precisamente, de arrancar, pode variar de sistema para sistema. </para
+><para
+>A seguinte tabela enumera os sistemas suportados por o sistema de instalação Debian. A tabela indica também o <emphasis
+>nome de código</emphasis
+> para esses sistemas. Vai precisar saber esse código quando começar o processo de instalação. </para>
+
+<informaltable>
+<tgroup cols="4">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<colspec colname="c3"/>
+<colspec colname="c4"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>Tipo de Hardware</entry>
+  <entry
+>Aliases</entry
+><entry
+>Imagem MILO</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry morerows="3"
+>ALCOR</entry>
+  <entry
+>AlphaStation 500 5/266.300</entry>
+  <entry
+>Maverick</entry>
+  <entry
+>alcor</entry>
+</row
+><row>
+  <entry
+>AlphaStation 500 5/333...500</entry>
+  <entry
+>Bret</entry>
+  <entry
+>alcor</entry>
+</row
+><row>
+  <entry
+>AlphaStation 600/266...300</entry>
+  <entry
+>Alcor</entry>
+  <entry
+>alcor</entry>
+</row
+><row>
+  <entry
+>AlphaStation 600/300...433</entry>
+  <entry
+>XLT</entry>
+  <entry
+>xlt</entry>
+</row>
+
+<row>
+  <entry
+>BOOK1</entry>
+  <entry
+>AlphaBook1 (laptop)</entry>
+  <entry
+>Alphabook1/Burns</entry>
+  <entry
+>Alphabook1/Burns</entry>
+</row>
+
+<row>
+  <entry morerows="7"
+>AVANTI</entry>
+  <entry
+>AlphaStation 200 4/100...166</entry>
+  <entry
+>Mustang</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 200 4/233</entry>
+  <entry
+>Mustang+</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 205 4/133...333</entry>
+  <entry
+>LX3</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 250 4/300</entry>
+  <entry
+>M3+</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 255 4/133...333</entry>
+  <entry
+>LX3+</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 300 4/266</entry>
+  <entry
+>Melmac</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 400 4/166</entry>
+  <entry
+>Chinet</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 400 4/233...300</entry>
+  <entry
+>Avanti</entry>
+  <entry
+>avanti</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>EB164</entry>
+  <entry
+>AlphaPC164</entry>
+  <entry
+>PC164</entry>
+  <entry
+>pc164</entry>
+</row
+><row>
+  <entry
+>AlphaPC164-LX</entry>
+  <entry
+>LX164</entry>
+  <entry
+>lx164</entry>
+</row
+><row>
+  <entry
+>AlphaPC164-SX</entry>
+  <entry
+>SX164</entry>
+  <entry
+>sx164</entry>
+</row
+><row>
+  <entry
+>EB164</entry>
+  <entry
+>EB164</entry>
+  <entry
+>eb164</entry>
+</row>
+
+<row>
+  <entry morerows="2"
+>EB64+</entry>
+  <entry
+>AlphaPC64</entry>
+  <entry
+>Cabriolet</entry>
+  <entry
+>Cabriolet</entry>
+</row
+><row>
+  <entry
+>AlphaPCI64</entry>
+  <entry
+>Cabriolet</entry>
+  <entry
+>Cabriolet</entry>
+</row
+><row>
+  <entry
+>EB64+</entry>
+  <entry
+>EB64+</entry>
+  <entry
+>eb64p</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>EB66</entry>
+  <entry
+>EB66</entry>
+  <entry
+>EB66</entry>
+  <entry
+>eb66</entry>
+</row
+><row>
+  <entry
+>EB66+</entry>
+  <entry
+>EB66+</entry>
+  <entry
+>eb66p</entry>
+</row>
+
+<row>
+  <entry morerows="2"
+>JENSEN</entry>
+  <entry
+>DEC 2000 Model 300(S)</entry>
+  <entry
+>Jensen</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>DEC 2000 Model 500</entry>
+  <entry
+>Culzen</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>DECpc 150</entry>
+  <entry
+>Jensen</entry>
+  <entry
+>N/D</entry>
+</row>
+
+<row>
+  <entry morerows="7"
+>MIATA</entry>
+  <entry
+>Personal WorkStation 433a</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 433au</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 466au</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 500a</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 500au</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 550au</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 600a</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 600au</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>MIKASA</entry>
+  <entry
+>AlphaServer 1000 4/200</entry>
+  <entry
+>Mikasa</entry>
+  <entry
+>mikasa</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000 4/233..266</entry>
+  <entry
+>Mikasa+</entry>
+  <entry
+>mikasa</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000 5/300</entry>
+  <entry
+>Mikasa-Pinnacle</entry>
+  <entry
+>mikasa</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000 5/300</entry>
+  <entry
+>Mikasa-Primo</entry>
+  <entry
+>mikasa</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>NAUTILUS</entry>
+  <entry
+>UP1000</entry>
+  <entry
+>Nautilus</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>UP1100</entry>
+  <entry
+>Galaxy-Train/Nautilus Jr.</entry>
+  <entry
+>N/D</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>NONAME</entry>
+  <entry
+>AXPpci33</entry>
+  <entry
+>Noname</entry>
+  <entry
+>noname</entry>
+</row
+><row>
+  <entry
+>UDB</entry>
+  <entry
+>Multia</entry>
+  <entry
+>noname</entry>
+</row>
+
+<row>
+  <entry morerows="6"
+>NORITAKE</entry>
+  <entry
+>AlphaServer 1000A 4/233...266</entry>
+  <entry
+>Noritake</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000A 5/300</entry>
+  <entry
+>Noritake-Pinnacle</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000A 5/333...500</entry>
+  <entry
+>Noritake-Primo</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaServer 800 5/333...500</entry>
+  <entry
+>Corelle</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaStation 600 A</entry>
+  <entry
+>Alcor-Primo</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>Digital Server 3300</entry>
+  <entry
+>Corelle</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>Digital Server 3300R</entry>
+  <entry
+>Corelle</entry>
+  <entry
+>N/D</entry>
+</row>
+
+<row>
+  <entry
+>PLATFORM 2000</entry>
+  <entry
+>P2K</entry>
+  <entry
+>P2K</entry>
+  <entry
+>p2k</entry>
+</row>
+
+<row>
+  <entry morerows="4"
+>RAWHIDE</entry>
+  <entry
+>AlphaServer 1200 5/xxx</entry>
+  <entry
+>Tincup/DaVinci</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaServer 4000 5/xxx</entry>
+  <entry
+>Wrangler/Durango</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaServer 4100 5/xxx</entry>
+  <entry
+>Dodge</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>Digital Server 5300</entry>
+  <entry
+>Tincup/DaVinci</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>Digital Server 7300</entry>
+  <entry
+>Dodge</entry>
+  <entry
+>N/D</entry>
+</row>
+
+<row>
+  <entry morerows="5"
+>RUFFIAN</entry>
+  <entry
+>DeskStation AlphaPC164-UX</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row
+><row>
+  <entry
+>DeskStation RPL164-2</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row
+><row>
+  <entry
+>DeskStation RPL164-4</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row
+><row>
+  <entry
+>DeskStation RPX164-2</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row
+><row>
+  <entry
+>DeskStation RPX164-4</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row
+><row>
+  <entry
+>Samsung AlphaPC164-BX</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>SABLE</entry>
+  <entry
+>AlphaServer 2000 4/xxx</entry>
+  <entry
+>Demi-Sable</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaServer 2000 5/xxx</entry>
+  <entry
+>Demi-Gamma-Sable</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaServer 2100 4/xxx</entry>
+  <entry
+>Sable</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaServer 2100 5/xxx</entry>
+  <entry
+>Gamma-Sable</entry>
+  <entry
+>N/D</entry>
+</row>
+
+<row>
+  <entry
+>TAKARA</entry>
+  <entry
+>21164 PICMG SBC</entry>
+  <entry
+>Takara</entry>
+  <entry
+>takara</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>TITAN</entry>
+  <entry
+>AlphaServer DS15</entry>
+  <entry
+>HyperBrick2</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS25</entry>
+  <entry
+>Granite</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaServer ES45</entry>
+  <entry
+>Privateer</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>DESCONHECIDO</entry>
+  <entry
+>Yukon</entry>
+  <entry
+>N/D</entry>
+</row>
+
+<row>
+  <entry morerows="12"
+>TSUNAMI</entry>
+  <entry
+>AlphaServer DS10</entry>
+  <entry
+>Webbrick</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS10L</entry>
+  <entry
+>Slate</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS20</entry>
+  <entry
+>Catamaran/Goldrush</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS20E</entry>
+  <entry
+>Goldrack</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS20L</entry>
+  <entry
+>Shark</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaServer ES40</entry>
+  <entry
+>Clipper</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>DP264</entry>
+  <entry
+>DP264</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>SMARTengine 21264 PCI/ISA SBC</entry>
+  <entry
+>Eiger</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>DESCONHECIDO</entry>
+  <entry
+>Warhol</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>DESCONHECIDO</entry>
+  <entry
+>Windjammer</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>UP2000</entry>
+  <entry
+>Swordfish</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>XP1000</entry>
+  <entry
+>Monet/Brisbane</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>XP900</entry>
+  <entry
+>Webbrick</entry>
+  <entry
+>N/D</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>WILDFIRE</entry>
+  <entry
+>AlphaServer GS160</entry>
+  <entry
+>Wildfire</entry>
+  <entry
+>N/D</entry>
+</row
+><row>
+  <entry
+>AlphaServer GS320</entry>
+  <entry
+>Wildfire</entry>
+  <entry
+>N/D</entry>
+</row>
+
+<row>
+  <entry
+>XL</entry>
+  <entry
+>XL-233...266</entry>
+  <entry
+>XL</entry>
+  <entry
+>xl</entry>
+</row>
+
+</tbody
+></tgroup
+></informaltable>
+
+<para
+>Acredita-se que Debian &releasename; suporta a instalação em todas as sub-arquitecturas alpha com a excepção das sub-arquitecturas ARC-only Ruffian e XL e a sub-arquitectura Titan, que requer uma alteração das opções de compilação do kernel. </para>
+  </sect2>
+<!--   End of file hardware/supported/alpha.xml -->
+
+<!-- Start of file hardware/supported/arm.xml -->
+
+
+  <sect2 arch="arm"
+><title
+>Suporte de Processadores, Placas principais e de Vídeo</title>
+
+<para
+>Cada arquitectura ARM distinta necessita do seu próprio kernel. Devido a isso a distribuição Debian standard apenas suporta a instalação num certo número de sistemas mais comuns. A userland do Debian pode ser utilizada por <emphasis
+>qualquer</emphasis
+> processador ARM incluído o xscale. </para>
+
+<para
+>A maioria dos processadores ARM podem correr em qualquer modo endian (big ou little)). No entanto quase todas as implementações de sistema actualmente usam o modo little-endian. O Debian actualmente apenas suporta sistemas ARM little-endian. </para>
+
+<para
+>Os sistemas comuns suportados são <variablelist>
+<varlistentry>
+<term
+>Netwinder</term>
+<listitem
+><para
+>Este é na verdade o nome de um grupo de máquinas baseadas no processador CPU StrongArm 110 e na Northbridge Intel 21285. Inclui máquinas como as: Netwinder (possivelmente um dos sistemas ARM mais comuns), CATS (também conhecido como o EB110ATX), EBSA 285 e o servidor pessoal Compaq (cps, também conhecido por skiff). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Bast</term>
+<listitem
+><para
+>Esta é uma moderna placa ARM 920 com um processador Samsung a 266MHZ. Tem integrado IDE, USB, portas Série e Paralela, áudio, vídeo, flash e duas portas ethernet. Este sistema tem um bom bootloader que também se encontra nos sistemas CATS e Riscstation.  </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>RiscPC</term>
+<listitem
+><para
+>Esta máquina é o mais antigo hardware suportado. Foi lançado em 1994. Tem o Risc OS na ROM, Linux pode ser iniciado a partir desse SO utilizando o linloader. O RiscPC tem uma placa de CPU modular que tipicamente inclui um processador 610 a 30MHz, 710 a 40MHz ou um StrongARM 110 a 233Mhz. A placa principal tem integrado IDE, Vídeo SVGA, porta paralela, uma única porta série, teclado PS/2 e uma porta proprietária para o rato. O módulo de expansão proprietário permite serem instaladas até 8 placas de expansão, dependendo da configuração, tendo vários desses módulos drivers em Linux. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Riscstation</term>
+<listitem
+><para
+>Esta é uma máquina de baixo custo baseada num 7500FE a 56MHz com vídeo integrado, IDE, teclado e rato PS/2 e duas portas série. A falta de poder de processamento é pelo seu baixo preço. Pode ser encontrada em duas configurações, uma com o RISC OS e outra com um bootloader básico.  </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>LART</term>
+<listitem
+><para
+>Esta é uma plataforma aberta de hardware modular concebida para ser construída por entusiastas. Para ser útil na instalação de Debian precisa da sua placa de expansão KSB. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+  </sect2>
+<!--   End of file hardware/supported/arm.xml -->
+
+<!-- Start of file hardware/supported/hppa.xml -->
+
+
+  <sect2 arch="hppa"
+><title
+>Suporte de Processadores, Placas principais e de Vídeo</title>
+<para
+>Existem dois flavors principais da arquitectura <emphasis
+>&architecture;</emphasis
+>: PA-RISC 1.1 e PA-RISC 2.0. A arquitectura PA-RISC 1.1 é orientada para processadores de 32 bits enquanto a arquitectura 2.0 é orientada para processadores de 64 bits. Alguns sistemas podem correr qualquer dos kernel, sendo, no entanto, a userland em 32 bits em ambos os casos. Existe a possibilidade de no futuro vir a existir uma userland a 64 bits. </para>
+  </sect2>
+
+<!--   End of file hardware/supported/hppa.xml -->
+
+<!-- Start of file hardware/supported/i386.xml -->
+
+
+  <sect2 arch="i386"
+><title
+>Suporte de Processadores, Placas principais e de Vídeo</title>
+<para
+>Informação completa acerca dos periféricos suportados pode ser encontrada no <ulink url="&url-hardware-howto;"
+>HOWTO de Compatibilidade de Hardware Com Linux</ulink
+>. Esta secção apenas enumera o básico. </para>
+
+   <sect3
+><title
+>CPU</title>
+<para
+>Quase todos os processadores baseados em x86 são suportados, incluindo os processadores AMD e VIA (antiga Cyrix). Também são suportados os processadores recentes como o Athlon XP e o Intel P4 Xeon. No entanto, Linux <emphasis
+>não</emphasis
+> corre em processadores 286 ou anteriores. </para>
+   </sect3>
+
+   <sect3 id="bus"
+><title
+>I/O Bus</title>
+<para
+>O bus de sistema é a parte da motherboard que permite que o processador comunique com os periféricos como dispositivos de armazenamento. O seu computador tem que utilizar ISA, EISA, PCI, a Microchannel Architecture (MCA, utilizada nos PS/2 da IBM), ou Vesa Local Bus (VLB, também conhecido por bus VL). </para>
+   </sect3>
+  </sect2>
+
+<!--   End of file hardware/supported/i386.xml -->
+
+<!-- Start of file hardware/supported/ia64.xml -->
+
+<!--   End of file hardware/supported/ia64.xml -->
+
+<!-- Start of file hardware/supported/m68k.xml -->
+
+  <sect2 arch="m68k"
+><title
+>Suporte de Processadores, Placas principais e de Vídeo</title>
+<para
+>Informação completa relativa aos sistemas (<emphasis
+>&architecture;</emphasis
+>) baseados em M68000 pode ser encontrada em <ulink url="&url-m68k-faq;"
+>Linux/m68k FAQ</ulink
+>. Esta secção apenas enumera o básico. </para
+><para
+>A port &architecture; de Linux corre em todos os 680x0 com uma PMMU (Paged Memory Management Unit) e com uma FPU (floating-point unit). Isto inclui o 68020 com uma 68851 PMMU externa, o 68030 e melhores, e exclui a linha <quote
+>EC</quote
+> de processadores 680x0. Para mais detalhes consulte a <ulink url="&url-m68k-faq;"
+>Linux/m68k FAQ</ulink
+>. </para
+><para
+>Existem quatro flavors principais dos flavors suportados de <emphasis
+>&architecture;</emphasis
+>: Amiga, Atari, Macintosh e sistemas VME. Amiga e Atari foram os os dois primeiros 2 sistemas a terem uma versão de Linux, e por conseguinte, são também os doiss ports melhor suportados de Debian. A linha Macintosh tem um suporte incompleto, tanto por Debian como pelo kernel Linux; em <ulink url="&url-m68k-mac;"
+>Linux m68k para Macintosh</ulink
+> encontrará mais informações sobre o estado do projecto e o hardware suportado. O BVM e os computadores Motorola de placa única VMEbus são os sistemas mais recentes na lista dos suportados por Debian. Ports para outras arquitecturas &architecture;, como a arquitectura Sun3 e a caixa negra NeXT, estão a ser trabalhadas não sendo ainda suportadas por Debian. </para>
+  </sect2>
+
+
+
+<!--   End of file hardware/supported/m68k.xml -->
+
+<!-- Start of file hardware/supported/mips.xml -->
+
+
+  <sect2 arch="mips"
+><title
+>Suporte de Processadores, Placas principais e de Vídeo</title>
+<para
+>Debian em &arch-title; actualmente suporta duas sub-arquitecturas: <itemizedlist
+> <listitem
+><para
+> SGI IP22: esta plataforma inclui as máquinas SGI Indy, Indigo 2 e Challange S. Dado que estas máquinas são muito parecidas, no entanto quando neste documento se refere a SGI Indy, também são considerados o Indigo 2 e o Challenge S. </para
+></listitem
+> <listitem
+><para
+> Broadcom BCM91250A (SWARM): esta é uma placa ATX form factor para avaliação da Broadcom baseada na sua família de Processadores SiByte. </para
+></listitem
+> </itemizedlist
+> Informação completa acerca das máquinas mips/mipsel suportadas pode ser encontrada na <ulink url="&url-linux-mips;"
+>Homepage do Linux-MIPS</ulink
+>. Em seguida, apenas os sistemas suportados pelo instalador Debian iram ser tratados.Se está a procura de suporte para outras sub-arquitecturas, contacte a <ulink url="&url-list-subscribe;"
+> mailing list de debian-&architecture;</ulink
+>. </para>
+
+   <sect3
+><title
+>CPU</title>
+<para
+>Nos SGI IP22, SGI Indy, Indigo 2 e Challenge S com processadores R4000, R4400, R4600 e R5000 existe suporte do sistema de instalação Debian em big endian MIPS. A placa de avaliação Broadcom BCM91250A inclui um chip SB1250 com dois núcleos SB-1 que são suportados em modo SMP por este instalador. </para
+><para
+>Algumas máquinas MIPS podem ser operadas tanto em modo big endian como em little endian. Em relação a little endian MIPS, leia a documentação da arquitectura mipsel. </para>
+   </sect3>
+  </sect2>
+
+<!--   End of file hardware/supported/mips.xml -->
+
+<!-- Start of file hardware/supported/mipsel.xml -->
+
+
+  <sect2 arch="mipsel"
+><title
+>Suporte de Processadores, Placas principais e de Vídeo</title>
+<para
+>Debian em &arch-title; actualmente suporta três sub-arquitecturas:<itemizedlist
+> <listitem
+><para
+> DECstation: vários modelos da DECstation são suportados. </para
+></listitem
+> <listitem
+><para
+> Cobalt Microserver: apenas as máquinas Cobalt baseadas em MIPS são aqui consideradas. Isto inclui o Cobalt Qube, RaQ, Qube2 e RaQ2, e o Gateway Microserver. </para
+></listitem
+> <listitem
+><para
+> Broadcom BCM91250A (SWARM): esta é uma placa ATX form factor para avaliação da Broadcom baseada na sua família de Processadores SiByte. </para
+></listitem
+> </itemizedlist
+> Informação completa acerca das maquinas mips/mipsel suportadas pode ser encontrada na <ulink url="&url-linux-mips;"
+>Homepage do Linux-MIPS</ulink
+>. Em seguida, apenas os sistemas suportados pelo instalador Debian iram ser tratados.Se está a procura de suporte para outras sub-arquitecturas, contacte a <ulink url="&url-list-subscribe;"
+>mailing list de debian-&architecture;</ulink
+> </para>
+
+   <sect3
+><title
+>Tipos de CPU/Máquinas</title>
+
+<para
+>Actualmente, apenas as DECstations com processadores R3000 e R4000/R4400 são suportados pelo sistema de instalação Debian em little endian MIPS. O sistema de instalação Debian funciona nas seguintes máquinas: </para
+><para>
+
+<informaltable>
+<tgroup cols="4">
+<thead>
+<row>
+  <entry
+>Tipo de sistema</entry
+><entry
+>CPU</entry
+><entry
+>Nome de Código</entry>
+  <entry
+>Sub-arquitectura Debian</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>DECstation 5000/1xx</entry>
+  <entry
+>R3000</entry>
+  <entry
+>3MIN</entry>
+  <entry
+>r3k-kn02</entry>
+</row
+><row>
+  <entry
+>DECstation 5000/150</entry>
+  <entry
+>R4000</entry>
+  <entry
+>3MIN</entry>
+  <entry
+>r4k-kn04</entry>
+</row
+><row>
+  <entry
+>DECstation 5000/200</entry>
+  <entry
+>R3000</entry>
+  <entry
+>3MAX</entry>
+  <entry
+>r3k-kn02</entry>
+</row
+><row>
+  <entry
+>DECstation 5000/240</entry>
+  <entry
+>R3000</entry>
+  <entry
+>3MAX+</entry>
+  <entry
+>r3k-kn02</entry>
+</row
+><row>
+  <entry
+>DECstation 5000/260</entry>
+  <entry
+>R4400</entry>
+  <entry
+>3MAX+</entry>
+  <entry
+>r4k-kn04</entry>
+</row
+><row>
+  <entry
+>Personal DECstation 5000/xx</entry>
+  <entry
+>R3000</entry>
+  <entry
+>Maxine</entry>
+  <entry
+>r3k-kn02</entry>
+</row
+><row>
+  <entry
+>Personal DECstation 5000/50</entry>
+  <entry
+>R4000</entry>
+  <entry
+>Maxine</entry>
+  <entry
+>r4k-kn04</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para
+><para
+>Todas as máquinas Cobalt que tem uma consola série (que é necessária para a instalação) são suportadas. </para
+><para
+>A placa de avaliação Broadcom BCM91250A inclui um chip SB1250 com dois núcleos SB-1 que são suportados em modo SMP por este instalador. </para>
+   </sect3>
+
+   <sect3
+><title
+>Opções de consola suportadas</title>
+<para
+>A consola série está disponível em todas DECstations suportadas (9600 bps, 8N1). Para utilizar a consola série, terá que arrancar a imagem do instalador com o parâmetro de kernel <literal
+>console=ttyS</literal
+><replaceable
+>x</replaceable
+> (com <replaceable
+>x</replaceable
+> sendo o número da porta série que você tem no seu terminal ligado a &mdash; normalmente <literal
+>2</literal
+>, mas <literal
+>0</literal
+> para as Personal DECstations). Em 3MIN e 3MAX+ (DECstation 5000/1xx, 5000/240 e 5000/260) a consola local está disponível com as opções gráficas PMAG-BA e PMAGB-B.  </para
+><para
+>Se tem um sistema Linux para utilizar como um terminal série, uma maneira fácil será correr <command
+>cu</command
+><footnote
+> <para
+> No Woody este comando era parte do pacote <classname
+>uucp</classname
+>, em versões mais recentes ficou disponível num pacote independente. </para
+> </footnote
+> nele. Exemplo: <informalexample
+><screen>
+$ cu -l /dev/ttyS1 -s 9600
+</screen
+></informalexample
+> Sendo a que a opção <literal
+>-l</literal
+> (linha) defina qual a porta a usar e <literal
+>-s</literal
+> (velocidade) define a velocidade para a ligação (9600 bits por segundo). </para
+><para
+>Ambas, Cobalt e Broadcom BCM91250A, usam 115200 bps. </para>
+   </sect3>
+  </sect2>
+<!--   End of file hardware/supported/mipsel.xml -->
+
+<!-- Start of file hardware/supported/powerpc.xml -->
+
+
+  <sect2 arch="powerpc"
+><title
+>Suporte de Processadores, Placas principais e de Vídeo</title>
+<para
+>Existem quatro principais sub-arquitecturas de <emphasis
+>&architecture;</emphasis
+>: PMac (Power-Macintosh), PReP, APUS (Amiga Power-UP System), e máquinas CHRP. Cada sub-arquitectura tem os seus próprios métodos de arranque. Para mais, existem 4 diferentes flavors de kernel suportando diferentes variantes dos processadores.  </para
+><para
+>Ports para outras arquitecturas <emphasis
+>&architecture;</emphasis
+>, como as arquitecturas Be-Box e MBX, estão a caminho mas, no entanto, não são suportadas por Debian. Existe a possibilidade de um port 64 bit de futuro. </para>
+
+   <sect3
+><title
+>Kernel Flavours</title>
+
+<para
+>Existem quatro flavours principais de kernel powerpc em Debian, baseado no tipo de processador:  <variablelist>
+<varlistentry>
+<term
+>powerpc</term>
+<listitem
+><para
+>A maioria dos sistemas usa este flavour de kernel, que suporta os processadores PowerPC 601, 603, 604, 740, 750, e 7400. Todos os sistemas Apple Power Macintosh até, e incluindo, ao G4 usam estes processadores. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>power3</term>
+<listitem
+><para
+>O processador POWER3 é utilizado em sistemas de servidores IBM 64-bit mais antigos: os modelos conhecidos incluem o IntelliStation POWER Model 265, o pSeries 610 e 640, e o RS/6000 7044-170, 7043-260, e 7044-270." </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>power4</term>
+<listitem
+><para
+>O processador POWER4 é utilizado nos recentes sistemas de servidor IBM 64 bit: nos modelos conhecidos incluem-se o pSeries 615, 630, 650, 655, 670, e 690." </para
+><para
+>O Apple G5 é também baseado na arquitectura POWER4, e usa esse kernel flavour. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>apus</term>
+<listitem
+><para
+>Este kernel suporta o Amiga Power-UP System.  </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+
+   </sect3>
+
+   <sect3
+><title
+>Sub-arquitectura Power Macintosh (pmac)</title>
+
+<para
+>A Apple (e brevemente outros fabricantes como, por exemplo, &mdash; Power Computing) produz uma série de computadores Macintosh baseados no processador PowerPC. Para propósitos de suporte da arquitectura, eles são categorizados com NuBus, OldWorld PCI, e NewWorld.  </para
+><para
+>Os computadores Macintosh que usam a série de processadores 680x0 não pertencem a família PowerPC, mas são sim máquinas m68k. Esses modelos começam com <quote
+>Mac II</quote
+> ou têm um número de modelo de 3-dígitos como, por exemplo, o Centris 650 ou o Quadra 950. Os PowerPC pré-iMac da Apple têm números de modelo com quatro dígitos. </para
+><para
+>Os sistemas NuBus não são actualmente suportados pelo debian/powerpc. O kernel monolítico Linux/PPC não tem actualmente suporte para estas máquinas; em vez disso tem que utilizar a microkernel Mach MkLinux, que Debian ainda não suporta. Incluídos estão: <itemizedlist
+> <listitem
+><para
+> Power Macintosh 6100, 7100, 8100 </para
+></listitem
+> <listitem
+><para
+> Performa 5200, 6200, 6300 </para
+></listitem
+> <listitem
+><para
+> Powerbook 1400, 2300, e 5300 </para
+></listitem
+> <listitem
+><para
+> Workgroup Server 6150, 8150, 9150 </para
+></listitem
+> </itemizedlist
+> Uma kernel linux para estas máquina e suporte limitado está disponível em <ulink url="http://nubus-pmac.sourceforge.net/"
+></ulink
+> </para
+><para
+>Os sistemas OldWorld são a maior parte dos Power Macintoshes com uma drive de disquetes e um bus PCI. A maior parte dos Power Machintoshes baseados nos 603, 603e, 604 e 604e são máquinas OldWorld. Os sistemas G3 beges também são OldWorld. </para
+><para
+>Os PowerMacs intitulados de NewWorld são todos os PowerMacs em caixas de plástico colorido translúcido. Isto inclui todos os iMacs, iBooks, sistemas G4, sistemas G3 de côr azul, e a maioria dos PowerBooks fabricados em e depois de 1999. Os PowerMacs NewWorld também são conhecidos por usarem os sistemas <quote
+>Rom in Ram</quote
+> para o MacOS, e foram produzidos a partir de meados de 1998 para a frente. </para
+><para
+>Especificações do hardware Apple estão disponíveis em <ulink url="http://www.info.apple.com/support/applespec.html"
+>AppleSpec</ulink
+>, e, para hardware mais antigo , <ulink url="http://www.info.apple.com/support/applespec.legacy/index.html"
+>AppleSpec Legacy</ulink
+>." </para
+><para>
+
+<informaltable>
+<tgroup cols="3">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<colspec colname="c3"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>Nome de Modelo/Número</entry>
+  <entry
+>Geração</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry morerows="22"
+>Apple</entry>
+  <entry
+>iMac·Bondi·Blue,·5·Sabores, Carregamento por Slot</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>iMac Verão 2000 Principio 2001</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>iMac G5</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>iBook, iBook SE, iBook Dual USB</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>iBook2</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>iBook G4</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh Azul e Branco (B&amp;W) G3</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Power·Macintosh·G4·PCI,·AGP,·Cubo</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh G4 Gigabit Ethernet</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh G4 Digital Audio, Quicksilver</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Power·Macintosh·G5</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook G3 FireWire Pismo (2000)</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook G3 Lombard (1999)</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook G4 Titanium</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook G4 Aluminum</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Xserve G5</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Performa 4400, 54xx, 5500</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Performa 6360, 6400, 6500</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh 4400, 5400</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh 7200, 7300, 7500, 7600</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh 8200, 8500, 8600</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh 9500, 9600</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh (Beige) G3 Minitower</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power·Macintosh·(Bege)·Desktop,·All-in-One</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook 2400, 3400, 3500</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook G3 Wallstreet (1998)</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Macintosh Vigésimo aniversário</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Workgroup Server 7250, 7350, 8550, 9650, G3</entry>
+  <entry
+>OldWorld</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>Power Computing</entry>
+  <entry
+>PowerBase, PowerTower / Pro, PowerWave</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>PowerCenter / Pro, PowerCurve</entry>
+  <entry
+>OldWorld</entry>
+</row>
+
+<row>
+  <entry
+>UMAX</entry>
+  <entry
+>C500, C600, J700, S900</entry>
+  <entry
+>OldWorld</entry>
+</row>
+
+<row>
+  <entry
+>APS</entry>
+  <entry
+>APS Tech M*Power 604e/2000</entry>
+  <entry
+>OldWorld</entry>
+</row>
+
+<row>
+  <entry
+>Motorola</entry>
+  <entry
+>Starmax 3000, 4000, 5000, 5500</entry>
+  <entry
+>OldWorld</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+
+   </sect3>
+
+   <sect3
+><title
+>Sub-arquitectura PReP</title>
+
+<para>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>Nome de Modelo/Número</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry morerows="4"
+>Motorola</entry>
+  <entry
+>Firepower, PowerStack Series E, PowerStack II</entry>
+</row
+><row>
+  <entry
+>MPC 7xx, 8xx</entry>
+</row
+><row>
+  <entry
+>MTX, MTX+</entry>
+</row
+><row>
+  <entry
+>MVME2300(SC)/24xx/26xx/27xx/36xx/46xx</entry>
+</row
+><row>
+  <entry
+>MCP(N)750</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>IBM RS/6000</entry>
+  <entry
+>40P, 43P</entry>
+</row
+><row>
+  <entry
+>Power 830/850/860 (6070, 6050)</entry>
+</row
+><row>
+  <entry
+>6030, 7025, 7043</entry>
+</row
+><row>
+  <entry
+>p640</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+
+   </sect3>
+
+   <sect3
+><title
+>Sub-arquitectura CHRP</title>
+
+<para>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>Nome de Modelo/Número</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>IBM RS/6000</entry>
+  <entry
+>B50, 43P-150, 44P</entry>
+</row>
+<row>
+  <entry
+>Genesi</entry>
+  <entry
+>Pegasos I, Pegasos II</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+
+   </sect3>
+
+   <sect3
+><title
+>Sub-arquitectura APUS</title>
+
+<para>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>Nome de Modelo/Número</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>Amiga Power-UP Systems (APUS)</entry>
+  <entry
+>A1200, A3000, A4000</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+   </sect3>
+  </sect2>
+<!--   End of file hardware/supported/powerpc.xml -->
+
+<!-- Start of file hardware/supported/s390.xml -->
+
+
+  <sect2 arch="s390"
+><title
+>Tipos de máquina S/390 e zSeries</title>
+<para
+>Informação completa acerca das máquinas S/390 e zSeries suportadas pode ser encontrada no Redbook da IBM <ulink url="http://www.redbooks.ibm.com/pubs/pdfs/redbooks/sg246264.pdf"
+> Linux no IBM eServer zSeries e S/390: Distribuições </ulink
+> no capitulo 2.1 ou na <ulink url="http://oss.software.ibm.com/developerworks/opensource/linux390/documentation-2.4.shtml"
+>Página de detalhes técnicos</ulink
+> em <ulink url="http://oss.software.ibm.com/developerworks/opensource/linux390/index.shtml"
+>developerWorks</ulink
+>. Resumindo, o G5 Multiprise 3000, G6 toda a zSeries é suportada; as máquinas Multiprise 2000, G3 e G4 são suportadas com emulação IEEE floating point e por isso terão uma performance diminuída. </para>
+  </sect2>
+
+<!--   End of file hardware/supported/s390.xml -->
+
+<!-- Start of file hardware/supported/sparc.xml -->
+
+
+  <sect2 arch="sparc" id="sparc-cpus"
+><title
+>Suporte de Processadores, Placas principais e de Vídeo</title>
+<para
+>Actualmente a port <emphasis
+>&architecture;</emphasis
+> suporta vários tipos de sistemas Sparc. Os mais comuns identificadores para sistemas Sparc são sun4, sun4c, sun4m, sun4d e sun4u. Actualmente não suportamos o hardware sun4 mais antigo. No entanto, outros sistemas são suportados.O Sun4d fui o menos testado desses, por isso pode esperar possíveis problemas de instabilidade em relação ao kernel. Os Sun4c e Sun4m, os mais comuns do hardware Sparc mais antigo, incluindo sistemas como a SparcStation 1, 1+, IPC, IPX e a SparcStation LX, 5, 10, e 20, respectivamente. Os sistemas da classe UltraSPARC incluem-se como parte da identificação sun4u, e são suportados utilizando o conjunto de imagens de instalação sun4u. Alguns sistemas que não se incluem nestas categorias são reconhecidamente não suportados. Sistemas que são reconhecidamente não suportados incluem o AP1000 multicomputer e o Tadpole Sparcbook 1. Veja a <ulink url="&url-sparc-linux-faq;"
+>FAQ Linux para processadores SPARC</ulink
+> para informação completa.  </para>
+
+   <sect3
+><title
+>Configuração de Memória</title>
+<para
+>Algumas antigas estações de trabalho Sun, particularmente a Sun IPX e a SUN IPC têm bancos de memória situados em localizações fixas na memória física. Se os bancos não estiverem cheios irão existir intervalos no espaço da memória física. A instalação de Linux necessita de um bloco de memória contíguo para o qual carregar o kernel e RAMdisk inicial. Se este não estiver disponível resultará daí um <quote
+>Data Access Exception</quote
+>. </para
+><para
+>Logo terá que configurar a memória de modo que o bloco de memória mais baixo seja pelo menos contíguo por 8MB. No IPX e IPC citados anteriormente os bancos de memória são delimitados em áreas de 16Mb. Na prática isto significa que terá que ter um SIMM no banco zero suficientemente grande para conter a kernel e o RAMdisk. Neste caso 4Mb <emphasis
+>não</emphasis
+> é suficiente. </para
+><para
+>Exemplo: Num Sun IPX tem um SIMM de 16Mb e um SIMM de 4Mb. Existem 4 bancos para SIMM (0,1,2,3). [O banco zero é o que está mais longe dos conectores SBUS]. Logo terá que instalar o SIMM de 16Mb no banco 0; é recomendado que instalar o SIMM de 4Mb no banco 2. </para>
+   </sect3>
+
+   <sect3
+><title
+>Configuração dos Componentes de Gráficos </title>
+<para
+>Especialmente no caso das estações de trabalho mais antigas da Sun, é normal que exista um framebuffer embutida na placa que tenha sido depreciado, (por exemplo o bwtwo no Sun IPC), e uma placa SBUS contendo um mais recente, provavelmente acelerado, buffer que é então ligado ao slot SBUS. Em Solaris/SunOS isto não causa problemas porque ambas as placas são iniciadas. </para
+><para
+>No entanto em Linux isto pode ser um problema, visto que o monitor da PROM de arranque pode direccionar a sua saída para a placa adicional; no entanto podendo ser as mensagens de kernel Linux direccionadas para o framebuffer embutido na placa, deixando <emphasis
+>nenhuma</emphasis
+> mensagem de erro no ecrã, e a máquina aparentemente encravada no carregamento do RAMdisk. </para
+><para
+>Para evitar este problema, deve conectar o monitor (se necessário) à placa de vídeo no slot SBUS mais com o número mais baixo (na motherboard a placa primeiro que os slots externos). Como alternativa pode usar uma consola série. </para>
+   </sect3>
+  </sect2>
+<!--   End of file hardware/supported/sparc.xml -->
+
+  <sect2 id="gfx" arch="not-s390"
+><title
+>Placa Gráfica</title>
+
+<para arch="i386"
+>Você deverá estar a utilizar uma placa gráfica compatível com VGA para a consola de terminal. Quase todas as placas gráficas modernas são compatíveis com VGA. Standarts antigos como o CGA, o MDA, ou o HGA também funcionam, desde que você não necessite suporte para X11. É de notar que o X11 não é utilizado durante o processo de instalação descrito neste documento.  </para
+><para
+>O suporte Debian para placas gráficas é determinado sob o suporte existente no sistema X11 da XFree86. A maioria das placas de vídeo AGP, PCI e PCIe trabalham com XFree86. Detalhes sobre barramentos gráficos, placas, monitores e dispositivos apontadores suportados podem ser encontrados em <ulink url="&url-xfree86;"
+></ulink
+>. Debian &release; vem com XFree86 versão &x11ver;. </para
+><para arch="mips"
+>O sistema de janelas XFree86 X11 é suportado no SGI Indy.A placa de avaliação Broadcom BCM91250A tem slots standard PCI 3.3v e suporta emulação de VGA ou Framebuffer de Linux num leque limitado de placas gráficas. Um <ulink url="&url-bcm91250a-hardware;"
+>lista de compatibilidade</ulink
+> para o BCM91250A está disponível.   </para
+><para arch="mipsel"
+>O sistema de janelas XFree86 X11 é suportado em algumas DECstation.A placa de avaliação Broadcom BCM91250A tem slots standard PCI 3.3v e suporta emulação de VGA ou Framebuffer de Linux num leque limitado de placas gráficas. Está disponível uma <ulink url="&url-bcm91250a-hardware;"
+>lista de compatibilidade</ulink
+> para o BCM91250A. </para>
+
+  </sect2>
+
+  <sect2 arch="i386" id="laptops"
+><title
+>Portáteis</title>
+<para
+>Os portáteis também são suportados. Os portáteis são muitas vezes hardware especializado ou contêm hardware proprietário. Para saber se o seu portátil funciona bem com GNU/Linux veja as <ulink url="&url-x86-laptop;"
+>páginas do Linux Laptop</ulink
+>.  </para>
+   </sect2>
+
+
+  <sect2 condition="defaults-smp">
+<title
+>Múltiplos Processadores</title>
+
+<para
+>Suporte para múltiplos processadores &mdash; também conhecido por <quote
+>symmetric multi-processing</quote
+> ou SMP &mdash; é suportado nesta arquitectura. A imagem de kernel standard da Debian &release; foi compilada com suporte SMP. Isto não deverá impedir a instalação visto que um kernel SMP deverá arrancar em sistemas não SMP; o kernel vai simplesmente utilizar mais alguns recursos. </para
+><para
+>De forma a optimizar o kernel para sistemas que só utilizem 1 CPU, terá que substituir o kernel Debian padrão. Pode encontrar uma discussão de como fazer isto em <xref linkend="kernel-baking"/>. Nesta altura (kernel versão &kernelversion;) a maneira de desactivar o SMP é não seleccionar <quote
+>&smp-config-option;</quote
+> na secção <quote
+>&smp-config-section;</quote
+> da configuração da kernel. </para>
+
+  </sect2>
+
+
+  <sect2 condition="supports-smp">
+ <title
+>Múltiplos Processadores</title>
+<para
+>Suporte para múltiplos processadores &mdash; também conhecido por <quote
+>symmetric multi-processing</quote
+> ou SMP &mdash; é suportado nesta arquitectura. No entanto a imagem padrão de kernel da Debian &release; não suporta SMP. Isto não deve impedir a instalação, visto que o kernel padrão, não SMP deve arrancar em sistemas SMP; o kernel vai simplesmente utilizar o primeiro CPU. </para
+><para
+>Para tirar proveito dos vários processadores, você terá de substituir o kernel Debian padrão. Pode encontrar uma discussão de como fazer isto em <xref linkend="kernel-baking"/>. Nesta altura (kernel versão &kernelversion;) a maneira de activar o SMP é seleccionar <quote
+>&smp-config-option;</quote
+> na secção <quote
+>&smp-config-section;</quote
+> da configuração da kernel.   </para>
+  </sect2>
+
+  <sect2 condition="supports-smp-sometimes">
+ <title
+>Múltiplos Processadores</title>
+<para
+>Suporte para múltiplos processadores &mdash; também conhecido por <quote
+>symetric multi-processing</quote
+> ou SMP &mdash; é suportado nesta arquitectura e é suportado por uma imagem de kernel pré-compilada. Dependendo do meio de instalação este kernel capaz de SMP pode ou não ser instalado por omissão. Isto não impede a instalação visto que o kernel, standard, não-SMP pode arrancar num sistema SMP; o kernel vai simplesmente usar o primeiro CPU. </para
+><para
+>Para tirar proveito dos vários processadores, você deve confirmar se um pacote de kernel que suporte SMP está instalado, e caso não esteja, escolher um pacote de kernel apropriado. Pode também pode construir o seu kernel personalizado com suporte para SMP. Pode encontrar uma discussão de como fazer isto na <xref linkend="kernel-baking"/>. Nesta altura (kernel versão &kernelversion;) a maneira de activar o SMP é seleccionar <quote
+>&smp-config-option;</quote
+> na secção <quote
+>&smp-config-section;</quote
+> da configuração do kernel. </para>
+  </sect2>
+ </sect1>
+<!--   End of file hardware/hardware-supported.xml -->
+
+<!-- Start of file hardware/installation-media.xml -->
+
+ <sect1 id="installation-media">
+ <title
+>Meios de Instalação</title>
+
+<para
+>Esta secção vai ajuda-lo a determinar qual dos meios disponíveis pode utilizar para instalar Debian. Por exemplo, se tem uma drive de disquetes pode a utilizar para instalar Debian. Existe todo um capítulo dedicado aos meios de instalação, <xref linkend="install-methods"/>, que lista as vantagens e desvantagem de cada meio. Pode querer mais tarde querer voltar a esta página quando chegar a essa secção.  </para>
+
+  <sect2 condition="supports-floppy-boot"
+><title
+>Disquetes</title>
+<para
+>Em alguns casos terá de fazer o primeiro arranque a partir de disquetes. Normalmente, tudo que precisa é uma drive de disquetes de 3.5 polegadas de alta densidade (1440 kilobytes). </para
+><para arch="powerpc"
+>Para CHRP, o suporte de disquete está actualmente quebrado. </para>
+  </sect2>
+
+  <sect2
+><title
+>CD-ROM/DVD-ROM</title>
+
+<note
+><para
+>Cada vez que vir <quote
+>CD-ROM</quote
+> neste manual, aplica-se tanto a CD-ROMs como a DVD-ROMs, porque ambas as tecnologias, do ponto de vista do sistema operativo, são o mesmo, excepto no caso de drives muito antigas e não standard que não são nem SCSI nem IDE/ATAPI. </para
+></note
+><para
+>A instalação baseada em CD-ROM é suportada em algumas arquitecturas. Em máquinas que suportem o arranque a partir de CD-ROMs, poderá fazer uma instalação completa <phrase arch="not-s390"
+>sem disquetes</phrase
+> <phrase arch="s390"
+>sem tapes</phrase
+>. Mesmo que o seu sistema não suporte o arranque a partir de CD-ROM, pode usar o CD-ROM em conjunção com as outras técnicas para instalar o seu sistema, assim que tiver arrancado por outros meios; veja o <xref linkend="boot-installer"/>. </para
+><para arch="i386"
+>Tanto são suportados CD-ROMs SCSI como IDE/ATAPI. Para mais, todos os interfaces de CD não standard são suportados por Linux através de disquetes de arranque (exemplos são as drives Mitsumi e Matsushida). No entanto, esses modelos podem necessitar de parâmetros de arranque especiais ou outros ´´improvisos´´ para conseguir que eles funcionem, e arrancar a partir desses dispositivos é improvável. O <ulink url="&url-cd-howto;"
+>Linux CD-ROM HOWTO</ulink
+> contém informação em detalhe acerca da utilização de CD-ROMs em Linux. </para
+><para arch="i386"
+>As drives de CD-ROM USB também são suportadas, assim comos os dispositivos FireWire que são suportados pelos drivers OHCI1394 e sbp2. </para
+><para arch="alpha"
+>Tanto são suportados CD-ROMs SCSI como IDE/ATAPI em &arch-title; desde que o controlador seja suportado pela consola SRM. Isto exclui muitas placas controladoras add-on, mas a maior parte dos chips IDE e SCSI integrados e placas controladoras disponibilizadas pelo fabricante em principio funcionarão. Para saber se o seu dispositivo é suportado pela consola SRM pode consultar o <ulink url="&url-srm-howto;"
+>SRM HOWTO</ulink
+>. </para
+><para arch="arm"
+>Os CD-ROMs IDE/ATAPI são suportados em todas as máquinas ARM. Nos RiscPCs os CD-ROMs SCSI também são suportados. </para
+><para arch="mips"
+>Em máquinas SGI, arrancar a partir de CD-ROM implica uma drive de CD-ROM SCSI capaz de trabalhar com blocos lógicos de 512 bytes. Muitas das drives de CD-ROM SCSI vendidas no mercado de PC não têm esta capacidade. Se a sua drive de CD-ROM tem um jumper intitulado <quote
+>Unix/PC</quote
+> ou <quote
+>512/2048</quote
+>, seleccione a posição <quote
+>Unix</quote
+> ou <quote
+>512</quote
+>. Para começar a instalação simplesmente escolha a entrada <quote
+>System installation</quote
+> no firmware. O Broadcom BCM91250A suporta dispositivos IDE standard, incluindo drives CD-ROM, mas não são disponibilizadas imagens de CD para esta plataforma porque o firmware não reconhece drives de CD.  </para
+><para arch="mipsel"
+>Nas DECstations, arrancar a partir de CD-ROM implica uma drive de CD-ROM SCSI capaz de trabalhar com blocos lógicos de 512 bytes. Muitas das drives de CD-ROM SCSI vendidas no mercado de PC não têm esta capacidade. Se a sua drive de CD-ROM tem um jumper intitulado <quote
+>Unix/PC</quote
+> ou <quote
+>512/2048</quote
+>, seleccione a posição <quote
+>Unix</quote
+> ou <quote
+>512</quote
+>. </para
+><para arch="mipsel"
+>O CD 1 inclui o instalador para as sub-arquitecturas r3k-kn02 (os modelos de DECstations 5000/1xx e 5000/240 baseadas em R3000 e também Personal DECstation baseados em R3000), o CD 2 inclui o instalador para a sub-arquitectura r4k-kn04 (as DECstations 5000/150 e 5000/260 baseadas em R4x00 e também as Personal DECstation 5000/50). </para
+><para arch="mipsel"
+>Para arrancar a partir de CD, lance o comando <userinput
+>boot <replaceable
+>#</replaceable
+>/rz<replaceable
+>id</replaceable
+></userinput
+> na prompt do firmware, onde <replaceable
+>#</replaceable
+> é o número do dispositivo TurboChannel de onde deverá arrancar (3 na maior parte das DECstations) e <replaceable
+>id</replaceable
+> é a SCSI ID da drive CD-ROM.Se precisar de adicionar parâmetros adicionais, pode acrescenta-los usando a seguinte sintaxe: </para
+><para arch="mipsel">
+
+<userinput
+>boot <replaceable
+>#</replaceable
+>/rz<replaceable
+>id</replaceable
+> param1=value1 param2=value2 ...</userinput>
+
+</para>
+  </sect2>
+
+  <sect2
+><title
+>Disco Rígido</title>
+
+<para
+>Arrancar o sistema de instalação directamente do disco rígido é outra hipótese em muitas arquitecturas. Isto irá requerer que outro sistema operativo carregue o instalador para o disco rígido. </para
+><para arch="m68k"
+>De facto instalar a partir de um disco rígido local é o método preferível de instalação para a maioria das máquinas &architecture;. </para
+><para arch="sparc"
+>Embora a &arch-title; não permite arrancar a partir de SunOS (Solaris), no entanto pode instalar a partir de uma partição SunOS (Slice UFS). </para>
+  </sect2>
+
+  <sect2 condition="bootable-usb"
+><title
+>USB Memory Stick</title>
+
+<para
+>A maior parte das máquinas Debian apenas precisam das drives de disquetes e/ou CD-ROM para instalar o sistema ou por motivos de recuperação. Se opera servidores, provavelmente já pensou em omitir essas drives e usar um memory stick USB para instalar e (quando necessário) recuperar o sistema. Também é útil nos sistemas que não têm espaço para drives desnecessárias. </para>
+  </sect2>
+
+  <sect2
+><title
+>Rede</title>
+
+<para condition="supports-tftp"
+>Pode também <emphasis
+>arrancar</emphasis
+> o seu sistema através de rede.<phrase arch="mips"
+>Este é o método de instalação preferível para os sistemas MIPS.</phrase
+> </para
+><para condition="supports-nfsroot"
+>A instalação sem recurso a disco, utilizando arranque de rede numa rede local e montando todos os sistemas de ficheiros locais em NFS é outra opção. </para
+><para
+>Depois do kernel do sistema operativo estar instalado, pode instalar o resto do sistema através de algum tipo de ligação de rede (incluído PPP depois da instalação do sistema base), via FTP ou HTTP. </para>
+  </sect2>
+
+  <sect2
+><title
+>Un*x ou sistema GNU</title>
+
+<para
+>Se estiver a correr outro sistema de tipo UNIX, você pode utiliza-lo para instalar &debian; sem precisar usar o &d-i; descrito no resto do manual. Este tipo de instalação pode ser útil para utilizadores com hardware que não é suportado de outra forma ou em sistemas que não se podem dar ao luxo de estarem em baixo. Se está interessado nesta técnica, veja a <xref linkend="linux-upgrade"/>. </para>
+  </sect2>
+
+  <sect2
+><title
+>Sistemas de Armazenamento Suportados</title>
+
+<para
+>Os discos de arranque Debian incluem um kernel que foi construído para maximizar o número de sistemas onde pode correr. Infelizmente isso resulta num kernel maior, que inclui muitos drivers que não serão utilizados na sua máquina (veja a <xref linkend="kernel-baking"/> para aprender a construir o seu próprio kernel). Suporte para o maior número possível de hardware é geralmente desejável, isto para que Debian possa ser instalado no leque mais variado possível de hardware.   </para
+><para arch="i386"
+>Geralmente, o sistema de instalação de Debian inclui suporte para disquetes, drives IDE, disquetes IDE, dispositivos IDE de porta paralela, controladores e drives SCSI, USB e Firewire. Os sistemas de ficheiros suportados incluem FAT, extensões Win-32 de FAT (VFAT), NTFS, entre outros. </para
+><para arch="i386"
+>são suportados os interfaces de disco que emulam a interface de disco rígido <quote
+>AT</quote
+> que são normalmente denominados de MFM, RLL, IDE, ou ATA. Controladores de disco 8 bit, muito antigos, usados nos computadores XT da IBM só são suportados através de um módulo. Existe suporte para controladores de disco SCSI de uma grande variedade de fabricantes. Veja o <ulink url="&url-hardware-howto;"
+>HOWTO de Compatibilidade de Hardware de Linux</ulink
+> para mais detalhes. </para
+><para arch="m68k"
+>Quase tudos os sistemas de armazenamento suportados pelo kernel Linux são suportados também pelo sistema de instalação Debian. É de notar que o kernel Linux actual não suporta disquetes em Macintosh, e que o sistema de instalação de Debian não suporta disquetes de Amigas. Também são suportados no Atari o sistema HFS do Macintosh, e o AFFS como um módulo. Os Macs suportam o sistema de ficheiros do Atari (FAT). Amigas suportam o sistema de ficheiros FAT, e o HFS como um módulo. </para
+><para arch="sparc"
+>Qualquer sistema de armazenamento suportado pelo kernel Linux é também suportado pelo sistema de arranque. Os seguintes drivers SCSI são suportados pelo kernel disponibilizado por omissão: <itemizedlist
+> <listitem
+><para
+> Sparc ESP </para
+></listitem
+> <listitem
+><para
+> PTI Qlogic,ISP </para
+></listitem
+> <listitem
+><para
+> Adaptec AIC7xxx </para
+></listitem
+> <listitem
+><para
+> NCR e Symbios 53C8XX </para
+></listitem
+> </itemizedlist
+>sistemas IDE (como o  UltraSPARC 5) são também suportados. Veja a <ulink url="&url-sparc-linux-faq;"
+>FAQ Processadores SPARC em Linux</ulink
+> </para
+><para arch="alpha"
+>Qualquer sistema de armazenamento suportado pelo kernel Linux é também suportado pelo sistema de arranque. Isto inclui tanto discos SCSI como IDE. Note, no entanto, que em muito sistemas a consola SRM não consegue arrancar de drives IDE, e que o Jensen é incapaz de arrancar de disquetes. Veja <ulink url="&url-jensen-howto;"
+></ulink
+> para mais informação de como arrancar no Jensen) </para
+><para arch="powerpc"
+>Qualquer sistema de armazenamento suportado pelo kernel Linux é também suportado pelo sistema de arranque. É de notar que o kernel Linux actual não suporta disquetes em sistemas CHRP. </para
+><para arch="hppa"
+>Qualquer sistema de armazenamento suportado pelo kernel Linux é também suportado pelo sistema de arranque. É de notar que o kernel Linux actual não suporta a drive de disquetes. </para
+><para arch="mips"
+>Qualquer sistema de armazenamento suportado pelo kernel Linux é também suportado pelo sistema de arranque. </para
+><para arch="s390"
+>Qualquer sistema de armazenamento suportado pelo kernel Linux é também suportado pelo sistema de arranque. Isto significa que o FBA e os ECKD DASD são suportados pela antiga organização de disco de Linux (ldl) e pela nova e mais comum organização de disco S/390 (cdl). </para>
+
+  </sect2>
+
+ </sect1>
+<!--   End of file hardware/installation-media.xml -->
+
+<!-- Start of file hardware/supported-peripherals.xml -->
+
+ <sect1 id="supported-peripherals">
+ <title
+>Periféricos e Outro Hardware</title>
+<para arch="not-s390"
+>Linux suporta uma grande variedade de dispositivos de hardware como ratos, impressoras, scanners, dispositivos PCMIA e USB. No entanto a maior parte destes dispositivos não são necessários durante a instalação do sistema. </para
+><para arch="i386"
+>O hardware USB geralmente funciona bem, apenas alguns teclados USB podem precisar de configuração adicional. (veja <xref linkend="usb-keyboard-config"/>). </para
+><para arch="i386"
+>Novamente, veja o <ulink url="&url-hardware-howto;"
+>HOWTO de Compatibilidade de Hardware em Linux</ulink
+> para determinar se o seu hardware é suportado por Linux. </para
+><para arch="s390"
+>A instalação de pacotes a partir de XPRAM e tape não são suportados neste sistema. Todos os pacotes que quererá instalar precisam de estar disponíveis num DASD ou através de rede utilizando NFS, HTTP ou FTP. </para
+><para arch="mips"
+>A placa de avaliação Broadcom BCM91250A disponibiliza slots PCI standard 3.3v de 32 bit e slots de 64 bit como também conectores USB. </para
+><para arch="mipsel"
+>A placa de avaliação Broadcom BCM91250A disponibiliza slots PCI standard 3.3v de 32 bit e slots de 64 bit como também conectores USB. O Cobalt RaQ não tem suporte para dispositivos adicionais, no entanto o Qube tem um slot PCI. </para>
+</sect1>
+
+ <sect1 arch="not-s390"
+><title
+>Comprar Hardware Especificamente para GNU/Linux </title>
+
+<para
+>Existem diversos fabricantes que lançam sistemas com Debian ou outras distribuições de GNU/Linux <ulink url="&url-pre-installed;"
+>pré-instalado</ulink
+>. Poderá ter que pagar mais pelo privilégio, mas, pelo menos compra alguma paz de espírito, dado que terá a certeza que o seu hardware é bem suportado por GNU/Linux. </para
+><para arch="m68k"
+>Infelizmente, é muito raro encontrar comerciantes a comercializar novas máquinas &arch-title; de qualquer forma. </para
+><para arch="i386"
+>Se você tiver de comprar uma máquina com Windows já instalado, leia cuidadosamente a licença de software que vem incluída com o Windows; você poderá ser capaz de rejeitar a licença e obter um desconto por parte do vendedor. Pode ser útil procurar na Internet por <quote
+>windows refund</quote
+> para obter informação que o possa ajudar. </para
+><para
+>Quer esteja a comprar um sistema com Linux já incluído, ou mesmo um sistema usado, é importante que verifique se o seu hardware é suportado pelo kernel Linux. Veja se o seu hardware esta listado na referência mencionada anteriormente. Não se esqueça de mencionar ao vendedor (se existir) que está a comprar uma máquina para utilizar com Linux. Suporte comerciantes de hardware amigáveis para com Linux. </para>
+
+  <sect2
+><title
+>Evitar Hardware Fechado ou Proprietário.</title>
+<para
+>Alguns fabricantes de hardware simplesmente não nos dizem como escrever drivers para o seu hardware. Outros não nos permitem aceder a documentação sem assinar um contracto de não divulgação que nos impediria de divulgar o código fonte de Linux. </para
+><para arch="m68k"
+>Outro exemplo de hardware proprietário é a antiga linha de Macintosh. De facto, nunca foram divulgadas nenhumas especificações ou documentação acerca de hardware Macintosh, mais notavelmente o controlador ADB (utilizado pelo teclado e rato), o controlador da disquetes, toda a aceleração e manipulação CLUT do hardware de vídeo (no entanto actualmente suportamos manipulação CLUT em quase tudos os chips de vídeo internos). Resumindo isto explica o porquê da port Macintosh estar atrasada em relação a outros ports de Linux. </para
+><para
+>Dado que não nos é dado acesso á documentação desses dispositivos, estes simplesmente não poderão trabalhar em Linux. Pode ajudar por pedindo aos fabricantes desse tipo de hardware para divulgar a documentação. Se pessoas suficientes pedirem eles acabarão por se aperceber que a comunidade de software livre é um mercado importante. </para>
+</sect2>
+
+
+  <sect2 arch="i386"
+><title
+>Hardware específico para Windows </title>
+<para
+>Uma tendência perturbante é a proliferação de modems e impressoras específicas para Windows. São em alguns casos especialmente desenhados para serem utilizados pelos sistemas operativo Microsoft Windows e incluem a legenda <quote
+>WinModem</quote
+> ou <quote
+>Feito especificamente para computadores com WIndows</quote
+>. Isto é geralmente feito através da remoção dos processadores embebidos do hardware e entregando o seu trabalho a um driver de Windows que é executado pelo CPU do seu computador. Esta estratégia permite que o hardware seja mais barato, mas o que é poupado normalmente <emphasis
+>não</emphasis
+> não é passado para o utilizador e este hardware pode mesmo ser tão ou mais caro dos que os dispositivos equivalentes que ainda incluem a inteligência embebida. </para
+><para
+>Deve evitar hardware específico de Windows por duas razões. A primeira porque os fabricantes raramente disponibilizam os recursos para que seja possível escrever um driver para Linux. Geralmente a interface de hardware e software é proprietário, e a documentação não está disponível sem a assinatura de um contracto de não divulgação, isto se estiver pelo menos disponível. Isso impede logo a sua utilização em software livre, dado que os programadores de software livre divulgam o código fonte dos seus programas. A segunda razão é que hardware como este que tiveram os seus processadores embebidos removidos, dependem do sistema operativo para fazer o seu trabalho, muitas vezes em prioridade de <emphasis
+>tempo real</emphasis
+>, logo ocupando o processador e não o disponibilizando para programas. Dado que o utilizador de Windows normalmente não corre tantos processos como um utilizador de Linux, os fabricantes esperam que o utilizador de Windows não note o fardo que este hardware é para o seu processador. No entanto qualquer sistema operativo de multi-processo sofre uma degradação de performance, mesmo o Windows 2000 ou XP, quando os fabricantes poupam no poder de processamento embebido do seu hardware.  </para
+><para
+>Pode ajudar neste problema encorajando os fabricantes a divulgar a documentação e outros recursos para que possamos programar para o seu hardware, mas a melhor estratégia é simplesmente evitar estes género de hardware até ser listados como funcional no <ulink url="&url-hardware-howto;"
+>HOWTO de Compatibilidade de Hardware em Linux</ulink
+>." </para>
+</sect2>
+
+
+  <sect2 id="Parity-RAM">
+  <title
+>RAM de Paridade Falsa ou <quote
+>Virtual</quote
+></title>
+<para
+>Se pedir RAM com paridade numa loja de informática, provavelmente vai obter memória de <emphasis
+>paridade virtual</emphasis
+>. SIMMs de paridade virtual podem ser (quase sempre) distinguidas por terem um chip a mais que os SIMMs que não tem Paridade, e que esse chip é mais pequeno que os demais. Os SIMMs de paridade virtual trabalham exactamente como os que não têm paridade. Eles não conseguem dizer quando existe um erro como os SIMMs de verdadeira paridade fazem numa motherboard que implemente paridade. Nunca pague mais por uma memória de paridade virtual do que uma não tenha paridade. Espere pagar por um SIMMs de verdadeira paridade, porque na verdade estará a comprar um bit de memória extra por cada 8 bits.  </para
+><para
+>Se quer informação completa nas questões de RAM em &arch-title;, e qual a melhor RAM a comprar, veja a <ulink url="&url-pc-hw-faq;"
+>FAQ de Hardware  de PC</ulink
+>." </para
+><para arch="alpha"
+>A maioria, se não todos sistemas Alpha necessitam de RAM de verdadeira paridade. </para>
+
+  </sect2>
+
+ </sect1>
+<!--   End of file hardware/supported-peripherals.xml -->
+
+<!-- Start of file hardware/memory-disk-requirements.xml -->
+
+ <sect1 id="memory-disk-requirements">
+ <title
+>Requisitos de Memória e de Espaço em Disco </title>
+
+<para
+>Tem de ter um mínimo de &minimum-memory; de memória e um mínimo de &minimum-fs-size; de espaço em disco rígido. Para uma instalação mínima baseada em consola (todos os pacotes standard) são necessários 250MB. Se quiser instalar uma razoável quantidade de software, incluindo o Sistema de Janelas X, e alguns programas de desenvolvimento e bibliotecas, precisará de, no mínimo, de 400MB. Para um sistema de desktop mais ou menos completo, necessitará de alguns gigabytes. </para
+><para arch="m68k"
+>Nos Amiga o tamanho de FastRAM conta para o total da memória requerida. Também não é suportado o uso de placas Zorro com RAM de 16-bit; precisará de RAM de 32-bit. O programa <command
+>amiboot</command
+> permite desactivar a RAM de 16-bit; veja a <ulink url="&url-m68k-faq;"
+>FAQ Linux/m68k</ulink
+>.   </para
+><para arch="m68k"
+>No Atari, ambos ST-RAM e Fast RAM (TT-RAM) são usados pelo Linux. Muitos utilizadores têm relatado problemas correndo o próprio kernel em Fast Ram, por isso a iniciação em Atari vai colocar o núcleo em ST-RAM. O mínimo requerido de ST-RAM é 2MB. Vai precisar inicialmente de 12 MB ou mais de TT-RAM. </para
+><para arch="m68k"
+>Em Macintosh, deverá ter-se cuidado em maquinas com vídeo baseado em RAM (RBV). O segmento de RAM no endereço físico 0 é usado como memória para ecran, indisponibilizando as posições por omissão para o kernel. O segmento de RAM alternativo usado para o kernel e disco inicial deverá ser de pelo menos 4MB. </para
+><para arch="m68k">
+
+<emphasis condition="FIXME"
+>FIXME: é isto ainda é verdade?</emphasis>
+
+</para>
+
+ </sect1>
+<!--   End of file hardware/memory-disk-requirements.xml -->
+
+<!-- Start of file hardware/network-cards.xml -->
+
+ <sect1 id="network-cards">
+ <title
+>Hardware Para Ligação em Rede</title>
+
+<para arch="i386"
+>A maioria das placas de rede PCI e muitas das antigas ISA são suportadas. Algumas placas de rede não são suportadas por muitos discos de instalação Debian, como placas e protocolos AX 25; placas NI16510 EtherBlaster; Schneider &amp; placas Koch G16; e a placa de rede interna Zenith Z-Note. Placas de rede Microchannel (MCA) não são suportadas pelo sistema de instalação standard mas veja o <ulink url="&url-linux-mca;"
+>Linux on MCA</ulink
+> para algumas (antigas) instruções. Redes FDDI também não são suportadas pelo disco de instalação, quer as placas quer os protocolos. </para
+><para arch="i386"
+>Como para o ISDN, o protocolo D-channel para o (velho) 1TR6 Alemão não é suportado; As placas Spellcaster BRI ISDN também não são suportadas pelo &d-i;. </para>
+
+<para arch="m68k"
+>Qualquer placa de rede (NIC) suportada pelo kernel Linux deve também ser suportada pelos discos de arranque. Poderá precisar de carregar o driver de rede como módulo. De novo, veja <ulink url="&url-m68k-faq;"
+></ulink
+> para detalhes completos. </para>
+
+<para arch="sparc"
+>As placas de rede (NICs) seguidamente mencionadas são suportadas directamente pelo kernel de arranque: <itemizedlist>
+ <listitem
+><para
+>Sun LANCE </para
+></listitem>
+ <listitem
+><para
+>Sun Happy Meal </para
+></listitem>
+</itemizedlist>
+
+</para
+><para arch="sparc"
+>As placas de rede mencionadas de seguida são suportadas como módulos. Podem ser utilizadas logo que os drivers forem instalados durante a instalação. Contudo, devido a magia da OpenPROM, poderá ainda arrancar a partir destes dispositivos: <itemizedlist>
+ <listitem
+><para
+>Sun BigMAC </para
+></listitem>
+ <listitem
+><para
+>Sun QuadEthernet </para
+></listitem>
+ <listitem
+><para
+>MyriCOM Gigabit Ethernet </para
+></listitem>
+</itemizedlist>
+
+</para
+><para arch="alpha"
+>Qualquer placa de rede (NIC) suportada pelo kernel Linux deve também ser suportada pelos discos de arranque. Poderá precisar de carregar o driver de rede como módulo. </para
+><para arch="powerpc"
+>Qualquer placa de rede (NIC) suportada pelo kernel Linux deve também ser suportada pelos discos de arranque. Poderá precisar de carregar o driver de rede como módulo. </para
+><para arch="hppa"
+>Qualquer placa de rede (NIC) suportada pelo kernel Linux deve também ser suportada pelos discos de arranque. Poderá precisar de carregar o driver de rede como módulo. </para
+><para arch="ia64"
+>Qualquer placa de rede (NIC) suportada pelo kernel Linux deve também ser suportada pelos discos de arranque. Poderá precisar de carregar o driver de rede como módulo. </para
+><para arch="mips"
+>Qualquer placa de rede (NIC) suportada pelo kernel Linux deve também ser suportada pelos discos de arranque. Poderá precisar de carregar o driver de rede como módulo. </para
+><para arch="mipsel"
+>Devido a limitações do kernel apenas são suportadas as placas de rede 'onboard' nas DECstations, as placas de rede com opção TurboChannel não são suportadas neste momento. </para
+><para arch="s390"
+>Qualquer placa de rede (NIC) suportada pelo kernel Linux deve também ser suportada pelos discos de arranque. Todos os drivers de rede estão compilados como módulos por isso terá primeiro de carregar um durante o início da instalação por rede. A lista de dispositivos de rede suportados é: <itemizedlist>
+ <listitem
+><para
+>Channel to Channel (CTC) e ligação ESCON (real ou emulada) </para
+></listitem>
+ <listitem
+><para
+>OSA-2 Token Ring/Ethernet e OSA-Express Fast Ethernet (non-QDIO) </para
+></listitem>
+<listitem
+><para
+>Inter-User Communication Vehicle (IUCV) &mdash; disponível apenas para VM guests </para
+></listitem>
+<listitem
+><para
+>OSA-Express no modo QDIO, HiperSockets e Guest-Lans </para
+></listitem>
+</itemizedlist>
+
+</para>
+
+<para arch="arm"
+>As placas de rede mencionadas de seguida são suportadas directamente pelo disco de arranque no NetWinder e maquinas CATS: <itemizedlist>
+ <listitem
+><para
+>PCI-based NE2000 </para
+></listitem>
+ <listitem
+><para
+>DECchip Tulip </para
+></listitem>
+</itemizedlist>
+
+</para
+><para arch="arm"
+>As placas de redes mencionadas de seguida são suportadas directamente pelo disco de arranque nos RiscPCs <itemizedlist>
+ <listitem
+><para
+>Ether1 </para
+></listitem>
+ <listitem
+><para
+>Ether3 </para
+></listitem>
+ <listitem
+><para
+>EtherH </para
+></listitem>
+</itemizedlist>
+
+</para
+><para arch="arm"
+>Se a sua placa é mencionada nas listas acima, a completa instalação podes ser levada a cabo pela rede sem necessidade de CD ROMs ou disquetes. </para
+><para arch="arm"
+>Qualquer outra placa de rede (NIC) suportada pelo kernel Linux deverá também ser suportada pelos discos de arranque. Poderá precisar de carregar o driver de rede como módulo. Isto significa que terá de instalar o kernel e módulos do sistema operativo usando algum outro meio. </para>
+
+ </sect1>
+<!--   End of file hardware/network-cards.xml -->
+
+</chapter>
+<!--   End of file hardware/hardware.xml -->

@@ -1,0 +1,2819 @@
+<!-- Start of file boot-installer/boot-installer.xml -->
+
+<chapter id="boot-installer"
+><title
+>啟動安裝系統</title>
+
+<!-- Include only archs that are documented to avoid build-errors -->
+<!-- The arch="..." condition can be deleted when al archs are present -->
+ <sect1 arch="alpha;arm;i386;ia64;m68k;mips;s390;powerpc;sparc">
+ <title
+>在 &arch-title; 上啟動安裝程式</title>
+
+<!-- This info is so architecture dependent, that I have turned the   -->
+<!-- structure inside out for this chapter. Each arch has a document. -->
+<!-- Note: archs hppa and mipsel are currently missing -->
+
+
+<!-- Start of file boot-installer/alpha.xml -->
+
+ <sect2 arch="alpha" id="alpha-firmware">
+ <title
+>Alpha 控制台韌體</title>
+<para
+>控制台韌體是儲存在一個快閃 ROM 中並且每次在 Alpha 系統開機或者重新啟動的時候啟動。在 Alpha 系統上有兩種規格的控制台，並且因此有兩類控制台韌體供使用。 </para>
+
+<itemizedlist>
+<listitem
+><para
+><emphasis
+>SRM console</emphasis
+> 基於 Alpha 控制台子系統。它為 OpenVMS， Tru64 Unix，以及 Linux 作業系統提供了一個操作環境。 </para
+></listitem>
+<listitem
+><para
+><emphasis
+>ARC, AlphaBIOS 或 ARCSBIOS console</emphasis
+> 以 Advanced RISC Computing (ARC) 為基礎，為 Windows NT 提供了一個操作環境。 </para
+></listitem>
+</itemizedlist>
+
+<para
+>從使用者的角度看，SRM 和 ARC 最重要的區別是控制台的選擇，可能會影響到您開機磁碟的分割方式。 </para
+><para
+>ARC 需要您在開機磁碟上建立一個 MS-DOS 分割表(用 <command
+>cfdisk</command
+> 建立)。因此 MS-DOS 分割表是從 ARC 開機的``原始''分割區格式。事實上，由於 AlphaBIOS 包含了一個磁碟分割工具，您也許可以在安裝 Linux 時透過韌體選單對磁碟進行分割區。 </para
+><para
+>保守地說，SRM 是<emphasis
+>不相容</emphasis
+> MS-DOS 分割區表。 <footnote
+><para
+> 具體來說，控制台子系統規範與需要的開機磁區格式和 DOS 分割區表相衝。</para
+></footnote
+>由於 Tru64 Unix 使用的是 BSD 磁碟標記格式，對於 SRM 安裝來說，這是一個``原始的''分割區格式。 </para
+><para
+>由於 GNU/Linux 是唯一能夠透過兩種控制台格式開機的系統，但是 &debian; $release只支援從以 SRM 為基礎的系統開機。如果您的 Alpha 沒有任何版本的 SRM，如果您希望和 Windows NT 做雙重開機，或是您個開機設備需要 ARC 控制台支援 BIOS 的初始化，您無法使用 &debian; &release; 安裝程式。所有其他的 Unix 型作業系統 (Tru64 Unix，FreeBSD，OpenBSD，以及 NetBSD) 和 OpenVMS 只能從 SRM 上面開機，而 Windows NT 只能從 ARC 上面開機。 </para
+><para
+>由於在目前生產的 Alpha 系統上並沒有實作 <command
+>MILO</command
+>(從 2000 年二月份開始)。而且購買一個 OpenVMS 和 Tru64 Unix 授權，來在老 Alpha 上裝上 SRM 韌體也是不必要的。我們建議在新的機器上使用 SRM。 </para
+><para
+>下面表格總括了可用以及支援的系統類型/控制台組合 (系統類型名稱參閱 <xref linkend="alpha-cpus"/> )。``ARC''一詞表示任何和 ARC 相容的控制台。 </para
+><para>
+
+<informaltable
+><tgroup cols="2">
+<thead>
+<row>
+  <entry
+>系統類型</entry>
+  <entry
+>支援的控制台類型</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>alcor</entry>
+  <entry
+>ARC or SRM</entry>
+</row
+><row>
+  <entry
+>avanti</entry>
+  <entry
+>ARC or SRM</entry>
+</row
+><row>
+  <entry
+>book1</entry>
+  <entry
+>SRM only</entry>
+</row
+><row>
+  <entry
+>cabriolet</entry>
+  <entry
+>ARC or SRM</entry>
+</row
+><row>
+  <entry
+>dp264</entry>
+  <entry
+>SRM only</entry>
+</row
+><row>
+  <entry
+>eb164</entry>
+  <entry
+>ARC or SRM</entry>
+</row
+><row>
+  <entry
+>eb64p</entry>
+  <entry
+>ARC or SRM</entry>
+</row
+><row>
+  <entry
+>eb66</entry>
+  <entry
+>ARC or SRM</entry>
+</row
+><row>
+  <entry
+>eb66p</entry>
+  <entry
+>ARC or SRM</entry>
+</row
+><row>
+  <entry
+>jensen</entry>
+  <entry
+>SRM only</entry>
+</row
+><row>
+  <entry
+>lx164</entry>
+  <entry
+>ARC or SRM</entry>
+</row
+><row>
+  <entry
+>miata</entry>
+  <entry
+>ARC or SRM</entry>
+</row
+><row>
+  <entry
+>mikasa</entry>
+  <entry
+>ARC or SRM</entry>
+</row
+><row>
+  <entry
+>mikasa-p</entry>
+  <entry
+>SRM only</entry>
+</row
+><row>
+  <entry
+>nautilus</entry>
+  <entry
+>ARC (see motherboard manual) or SRM</entry>
+</row
+><row>
+  <entry
+>noname</entry>
+  <entry
+>ARC or SRM</entry>
+</row
+><row>
+  <entry
+>noritake</entry>
+  <entry
+>SRM only</entry>
+</row
+><row>
+  <entry
+>noritake-p</entry>
+  <entry
+>SRM only</entry>
+</row
+><row>
+  <entry
+>pc164</entry>
+  <entry
+>ARC or SRM</entry>
+</row
+><row>
+  <entry
+>rawhide</entry>
+  <entry
+>SRM only</entry>
+</row
+><row>
+  <entry
+>ruffian</entry>
+  <entry
+>ARC only</entry>
+</row
+><row>
+  <entry
+>sable</entry>
+  <entry
+>SRM only</entry>
+</row
+><row>
+  <entry
+>sable-g</entry>
+  <entry
+>SRM only</entry>
+</row
+><row>
+  <entry
+>sx164</entry>
+  <entry
+>ARC or SRM</entry>
+</row
+><row>
+  <entry
+>takara</entry>
+  <entry
+>ARC or SRM</entry>
+</row
+><row>
+  <entry
+>xl</entry>
+  <entry
+>ARC only</entry>
+</row
+><row>
+  <entry
+>xlt</entry>
+  <entry
+>ARC only</entry>
+</row>
+
+</tbody>
+</tgroup>
+</informaltable>
+
+</para
+><para
+>一般來說，這些控制台都不能直接以 Linux 開機，因此需要一個中繼的 boot-loader。SRM 控制台使用一個小型的、平台獨立的 boot-loader，<command
+>aboot</command
+>。請參閱 (抱歉的是它也有點過時了) <ulink url="&url-srm-howto;"
+>SRM HOWTO</ulink
+>來獲得更多有關資訊 <command
+>aboot</command
+>。 </para
+><para condition="FIXME"
+>以下章節來自 woody 安裝手冊，放在這裡作為參考﹔如果以後 Debian 再支援基於 MILO 的安裝，它們或許對某些人有用。 </para
+><para condition="FIXME"
+>一般來說，這些控制台都不能直接以 Linux 開機，因此需要一個中繼的 boot-loader。這裡有兩個主要的 Linux loader：<command
+>MILO</command
+> 和 <command
+>aboot</command
+>。 </para
+><para condition="FIXME"
+><command
+>MILO</command
+> 自己本身就是一個控制台，可以替換載入記憶體中的 ARC 和 SRM。<command
+>MILO</command
+> 能夠同時從 ARC 和 SRM 開機並且是唯一一種從 ARC 控制台啟動 Linux 的方法。<command
+>MILO</command
+> 是與平台相依的 (對於每種不同的系統需要不同的 <command
+>MILO</command
+>) 並且只適合這些平台。請參閱 (很遺憾有點過時) <ulink url="&url-milo-howto;"
+>MILO HOWTO</ulink
+>。 </para
+><para condition="FIXME"
+><command
+>aboot</command
+> 是一個小型的，平台獨立的 boot-loader，不過只運作於 SRM 上。請參閱 (遺憾的是它也有點過時了 ) <ulink url="&url-srm-howto;"
+>SRM HOWTO</ulink
+>來取得更多有關資訊 <command
+>aboot</command
+>。 </para
+><para condition="FIXME"
+>因此，三種方案都是可行的，但取決與系統控制台韌體以及是否有可用的 <command
+>MILO</command
+>：<informalexample
+><screen>
+SRM -&gt; aboot
+SRM -&gt; MILO
+ARC -&gt; MILO
+</screen
+></informalexample
+> 由於 <command
+>MILO</command
+> 並沒有實作於目前生產的 Alpha 系統上(從 2000 年二月份開始)。而且也不需要購買 OpenVMS 和 Tru64 Unix 授權，來在老 Alpha 上裝上 SRM 韌體。除非您想採用 Windows NT 並且進行雙開機，我們建議在新的機器上使用 SRM 和 <command
+>aboot</command
+> 安裝 Linux。 </para
+><para
+>大部分 AlphaServers 以及目前所有的伺服器以及工作站產品韌體中都同時含有 SRM 和 AlphaBIOS 。對於具有不同試用主機板的 ``half-flash'' 機器來說。可以透過重寫韌體切換到另外一個版本。一旦 SRM 安裝完畢，從軟碟上運行 ARC/AlphaBIOS 也是可能的 (使用 <command
+>arc</command
+>)。基於上述理由，我們建議在安裝 &debian; 之前切換至 SRM。 </para
+><para
+>和其他的架構一樣，您也應該在安裝 &debian; 之前安裝最新的韌體版本。但 <footnote
+><para
+> 不包括 Jensen 1.7 以上的韌體版本，其不支援 Linux &mdash; 請參閱 <ulink url="&url-jensen-howto;"
+></ulink
+> 以取得更多的資訊</para
+></footnote
+>，對於 Alpha 來說，韌體升級可以從 <ulink url="&url-alpha-firmware;"
+>Alpha Firmware Updates</ulink
+> 取得。 </para>
+ </sect2>
+
+
+  <sect2 arch="alpha"
+><title
+>用 TFTP 開機</title>
+<para
+>在 SRM 上，以太網路介面名稱帶有 <userinput
+>ewa</userinput
+> 前綴，並可以用 <userinput
+>show dev</userinput
+> 命令列出，類似如下 (可能有一點不同)：<informalexample
+><screen>
+&gt;&gt;&gt; show dev
+ewa0.0.0.9.0               EWA0              08-00-2B-86-98-65
+ewb0.0.0.11.0              EWB0              08-00-2B-86-98-54
+ewc0.0.0.2002.0            EWC0              00-06-2B-01-32-B0
+</screen
+></informalexample
+> 您首先需要設定開機協定： <informalexample
+><screen>
+&gt;&gt;&gt; set ewa0_protocol bootp
+</screen
+></informalexample
+> 然後檢查媒介類型是否正確： <informalexample
+><screen>
+&gt;&gt;&gt; set ewa0_mode <replaceable
+>mode</replaceable>
+</screen
+></informalexample
+> 您檢閱有效模式的列表 <userinput
+>&gt;&gt;&gt;set ewa0_mode</userinput
+>。 </para
+><para
+>接下來，如果從第一個以太網路介面開機，您需要輸入：<informalexample
+><screen>
+&gt;&gt;&gt; boot ewa0 -flags ""
+</screen
+></informalexample
+> 這會把 netboot 映象啟動，並使用預設的核心參數。 </para
+><para
+>如果希望使用一個序列控制台，您<emphasis
+>必須</emphasis
+>傳遞 <userinput
+>console=</userinput
+> 參數給核心。這個工作可以使用SRM <userinput
+>boot</userinput
+> 指令加上 <userinput
+>-flags</userinput
+> 參數來完成。序列埠編號的命名和它們在目錄 <userinput
+>/dev</userinput
+> 中相同。另外，如有指定額外的核心參數，那麼連預設值也必須指定給 &d-i; 映象。例如，若需要從 <userinput
+>ewa0</userinput
+> 開機，並且在第一個序列埠使用控制台，您得輸入： <informalexample
+><screen
+>&gt;&gt;&gt; boot ewa0 -flags &quot;root=/dev/ram ramdisk_size=16384 console=ttyS0&quot;
+</screen
+></informalexample>
+
+</para>
+  </sect2>
+
+  <sect2 arch="alpha"
+><title
+>透過 SRM 控制台來從光碟開機</title>
+<para
+>輸入 <informalexample
+><screen>
+&gt;&gt;&gt; boot xxxx -flags 0
+</screen
+></informalexample
+> 上一行 <replaceable
+>xxxx</replaceable
+> 是光碟機在 SRM 裡的提示號。 </para>
+  </sect2>
+
+  <sect2 arch="alpha" condition="FIXME">
+  <title
+>透過 ARC 或者 AlphaBIOS 控制台來從光碟啟動</title>
+<para
+>為了透過 ARC 控制台以光碟開機，找出您的子架構結構代碼名稱 (請參閱 <xref linkend="alpha-cpus"/>)，然後輸入 <filename
+>\milo\linload.exe</filename
+> 作為 boot-loader 並且在 `OS Selection Setup' 選單下選擇 <filename
+>\milo\<replaceable
+>subarch</replaceable
+></filename
+> (<replaceable
+>subarch</replaceable
+> 是相應的子架構結構名稱) 作為作業系統路徑。Ruffians 則是一個例外：您需要使用 <filename
+>\milo\ldmilo.exe</filename
+> 作為 boot-loader 。 </para>
+  </sect2>
+
+
+  <sect2 arch="alpha" condition="supports-floppy-boot">
+  <title
+>透過 SRM 控制台從軟碟開機</title>
+<para
+>在 SRM 提示符號下 (<prompt
+>&gt;&gt;&gt;</prompt
+>)，使用如下指令：<informalexample
+><screen>
+&gt;&gt;&gt; boot dva0 -flags 0
+</screen
+></informalexample
+> 可能要以實際的設備名稱來替換 <filename
+>dva0</filename
+>。一般狀況下，<filename
+>dva0</filename
+> 是軟碟﹔輸入 <informalexample
+><screen>
+&gt;&gt;&gt; show dev
+</screen
+></informalexample
+> 來查看設備列表 (例如，如果您想從光碟開機)。注意如果您想透過 MILO 開機，<command
+>-flags</command
+> 參數將被忽略，因此您可以只輸入 <command
+>boot dva0</command
+>。如果上面步驟正常執行，您最終將看到 Linux 核心啟動。 </para
+><para
+>如果您想在透過 <command
+>aboot</command
+> 開機的時候指定特定的核心參數，請使用如下指令：<informalexample
+><screen>
+&gt;&gt;&gt; boot dva0 -file linux.bin.gz -flags "root=/dev/fd0 load_ramdisk=1 arguments"
+</screen
+></informalexample
+> (以一行輸入)，如果有需要，替換 <filename
+>dva0</filename
+> 的真實 SRM 開機設備名稱，<filename
+>fd0</filename
+> 是 Linux 的開機設備名稱，而 <filename
+>arguments</filename
+> 是需要指定的核心參數。 </para
+><para
+>如果您想在透過 <command
+>MILO</command
+> 開機時指定核心參數，您必須在進入 MILO 時中斷開機。請參閱 <xref linkend="booting-from-milo"/>。 </para>
+  </sect2>
+
+
+  <sect2 arch="alpha" condition="supports-floppy-boot">
+  <title
+>透過 ARC 或者 AlphaBISO 控制台從軟碟開機</title>
+
+<para
+>在作業系統選擇選單內，設定 <command
+>linload.exe</command
+> 作為 boot-loader，並且將 <command
+>milo</command
+> 作為作業系統參數。然後使用這個最近建立的選項啟動。 </para>
+  </sect2>
+
+ <sect2 arch="alpha" condition="FIXME" id="booting-from-milo"
+><title
+>採用 MILO 開機</title>
+<para
+>開機媒介上的 MILO 會自動進入 Linux 開機過程。如果您要對此有所控制，只需要在 MILO 倒計時時按下空格鍵。 </para
+><para
+>如果您確切想指定所有的位元 (例如，支援附加的參數)，您可以使用像下面的指令：<informalexample
+><screen>
+MILO
+> boot fd0:linux.bin.gz root=/dev/fd0 load_ramdisk=1 <!-- arguments -->
+</screen
+></informalexample
+> 如果透過軟碟之外的方法開機，在 Linux 提示號下把上面例子中的 <filename
+>fd0</filename
+> 替換成合適的設備名稱。<command
+>help</command
+> 指令將列出簡單的 MILO 指令參考。 </para>
+ </sect2>
+<!--   End of file boot-installer/alpha.xml -->
+
+<!-- Start of file boot-installer/arm.xml -->
+
+  <sect2 arch="arm" id="boot-tftp"
+><title
+>從 TFTP 開機</title>
+
+
+<!-- Start of file boot-installer/intro-net.xml -->
+
+<para
+>要從網路開機，您的機器必須連接上網路和一台 TFTP 網路開機伺服器 (DHCP, RARP 以及 BOOTP)。 </para
+><para arch="hppa"
+>較早的系統如 715 也許需要使用一台 RBOOT 伺服器來取代 BOOTP 伺服器。 </para
+><para
+>支援的網路開機安裝方法在 <xref linkend="install-tftp"/>。 </para>
+<!--   End of file boot-installer/intro-net.xml -->
+
+  <sect3 arch="arm"
+><title
+>從 NetWinder 上的 TFTP 開機</title>
+
+<para
+>NetWinders 具有兩個網路界面：10Mbps NE2000 相容的網卡作為 <filename
+>eth0</filename
+> 以及 100Mbps Tulip 網卡作為 <filename
+>eth1</filename
+>。 </para
+><note
+><para
+>您需要 NeTTrom 2.2.1 或者較高的版本來啟動安裝系統。建議使用 NeTTrom 2.3.3：請從下面網址取得 <ulink url="ftp://ftp.netwinder.org/pub/netwinder/firmware/"
+></ulink
+>: <itemizedlist>
+<listitem
+><para>
+
+<filename
+>nettrom-2.3-3.armv4l.rpm</filename>
+
+</para
+></listitem>
+<listitem
+><para>
+
+<filename
+>nettrom-2.3.3.bin</filename>
+
+</para
+></listitem>
+<listitem
+><para>
+
+<filename
+>nettrom-2.3.3.bin.md5sum</filename>
+
+</para
+></listitem>
+</itemizedlist>
+
+</para
+></note
+><para
+>在重新開機並在倒數計時的時候中斷開機後，您必須設定靜態網路: <informalexample
+><screen>
+    NeTTrom command-&gt; setenv eth0_ip 192.168.0.10/24
+</screen
+></informalexample
+> 這裡 24 是網路遮罩，您也可以設定一個動態位址： <informalexample
+><screen>
+    NeTTrom command-&gt; boot diskless
+</screen
+></informalexample
+> 如果 TFTP 伺服器並不在子網域內， 您也可能需要設定 <userinput
+>route1</userinput
+>。其他的設定方法是非常標準的 (save-all 這步是可選的)： <informalexample
+><screen>
+    NeTTrom command-&gt; setenv kerntftpserver 192.168.0.1
+    NeTTrom command-&gt; setenv kerntftpfile tftpboot.img
+    NeTTrom command-&gt; save-all
+    NeTTrom command-&gt; setenv netconfig_eth0 flash
+    NeTTrom command-&gt; setenv kernconfig tftp
+    NeTTrom command-&gt; setenv rootdev /dev/ram
+    NeTTrom command-&gt; setenv cmdappend root=/dev/ram
+</screen
+></informalexample
+> 只有最後四項會影響正常的磁碟開機，所以在此之前選擇 <command
+>save-all</command
+> 將儲存網路設定以免您需要再一次開機。如果您想用序列埠控制台安裝 netWinder，您需要如下設置:<informalexample
+><screen>
+    NeTTrom command-&gt; setenv cmdappend root=/dev/ram
+console=ttyS0,115200
+</screen
+></informalexample
+> 使用 <command
+>printenv</command
+> 可以檢查您的環境設定。最後，如果您的 <envar
+>cmdappend</envar
+> NeTTrom 參數具有 <option
+>noinitrd</option
+> 選項，您必須刪除它以確保下載的核心可以用其附帶的記憶體虛擬磁碟開機。 </para>
+  </sect3>
+
+  <sect3 arch="arm"
+><title
+>透過 CATS 上的 TFTP 開機</title>
+
+<para
+>在 CATS 機器上，可以使用指令 <command
+>boot de0:</command
+> 或者在 Cyclone 開機提示號輸入類似的指令。 </para>
+   </sect3>
+  </sect2>
+
+
+
+  <sect2 arch="arm"
+><title
+>從光碟開機</title>
+
+
+<!-- Start of file boot-installer/intro-cd.xml -->
+
+<para
+>對於大多數人來說，最快的途徑是使用一套 Debian CD 光碟套件。如果您有此套件，並且如果您的機器支援直接光碟開機，太棒了！只需要 <phrase arch="i386"
+> 設定您的系統以光碟開機，請參閱 <xref linkend="boot-dev-select"/>, </phrase
+> 插入您的光碟，重開機，然後繼續下一章。 </para
+><para
+>注意某些特定的光碟機需要一些特殊的驅動程式，因為他們可能在安裝的早期步驟中無法被存取。如果標準的光碟開機的方法不能用於您的硬體，閱讀本章中關於其他種類的核心以及安裝方法，它們有可能能解決問題。 </para
+><para
+>即便您不能從光碟開機，依然可以安裝光碟上面的 Debian 系統組件和所有軟體套件。只需要使用不同的媒介，例如軟碟來開機即可。當安裝作業系統、基礎系統和任意附加的軟體套件時只需指向安裝系統至光碟機即可。 </para
+><para
+>如果您遇到開機方面的問題，請參閱 <xref linkend="boot-troubleshooting"/>。 </para>
+<!--   End of file boot-installer/intro-cd.xml -->
+
+<para
+>如果需要在 Cyclone 控制台提示符號下從光碟下開機，請使用指令 <command
+>boot cd0:cats.bin</command
+> </para>
+  </sect2>
+<!--   End of file boot-installer/arm.xml -->
+<!-- &boot-installer-hppa.xml; -->
+
+<!-- Start of file boot-installer/i386.xml -->
+
+  <sect2 arch="i386"
+><title
+>從光碟開機</title>
+
+
+<!-- Start of file boot-installer/intro-cd.xml -->
+
+<para
+>對於大多數人來說，最快的途徑是使用一套 Debian CD 光碟套件。如果您有此套件，並且如果您的機器支援直接光碟開機，太棒了！只需要 <phrase arch="i386"
+> 設定您的系統以光碟開機，請參閱 <xref linkend="boot-dev-select"/>, </phrase
+> 插入您的光碟，重開機，然後繼續下一章。 </para
+><para
+>注意某些特定的光碟機需要一些特殊的驅動程式，因為他們可能在安裝的早期步驟中無法被存取。如果標準的光碟開機的方法不能用於您的硬體，閱讀本章中關於其他種類的核心以及安裝方法，它們有可能能解決問題。 </para
+><para
+>即便您不能從光碟開機，依然可以安裝光碟上面的 Debian 系統組件和所有軟體套件。只需要使用不同的媒介，例如軟碟來開機即可。當安裝作業系統、基礎系統和任意附加的軟體套件時只需指向安裝系統至光碟機即可。 </para
+><para
+>如果您遇到開機方面的問題，請參閱 <xref linkend="boot-troubleshooting"/>。 </para>
+<!--   End of file boot-installer/intro-cd.xml -->
+
+<!-- We'll comment the following section until we know exact layout -->
+<!-- 
+CD #1 of official Debian CD-ROM sets for &arch-title; will present a
+<prompt
+>boot:</prompt
+> prompt on most hardware. Press
+<keycap
+>F3</keycap
+> to see the list of kernel options available
+from which to boot. Just type your chosen flavor name (idepci,
+vanilla, compact, bf24) at the <prompt
+>boot:</prompt
+> prompt
+followed by &enterkey;.
+
+</para
+><para>
+
+If your hardware doesn't support booting of multiple images, put one
+of the other CDs in the drive. It appears that most SCSI CD-ROM drives 
+do not support <command
+>isolinux</command
+> multiple image booting, so users
+with SCSI CD-ROMs should try either CD2 (vanilla) or CD3 (compact), 
+or CD5 (bf2.4). 
+
+</para
+><para>
+
+CD's 2 through 5 will each boot a 
+different ``flavor'' depending on which CD-ROM is
+inserted. See <xref linkend="kernel-choice"/> for a discussion of the
+different flavors.  Here's how the flavors are laid out on the
+different CD-ROMs:
+
+<variablelist>
+<varlistentry>
+<term
+>CD 1</term
+><listitem
+><para>
+
+Allows a selection of kernel images to boot from (the idepci flavor is
+the default if no selection is made). 
+
+</para
+></listitem
+></varlistentry>
+<varlistentry>
+<term
+>CD 2</term
+><listitem
+><para>
+
+Boots the `vanilla' flavor.
+
+</para
+></listitem
+></varlistentry>
+<varlistentry>
+<term
+>CD 3</term
+><listitem
+><para>
+
+Boots the `compact' flavor.
+
+</para
+></listitem
+></varlistentry>
+<varlistentry>
+<term
+>CD 4</term
+><listitem
+><para>
+
+Boots the `idepci' flavor.
+
+</para
+></listitem
+></varlistentry>
+<varlistentry>
+<term
+>CD 5</term
+><listitem
+><para>
+
+Boots the `bf2.4' flavor.
+
+</para
+></listitem
+></varlistentry>
+
+ </variablelist>
+
+</para
+><para>
+
+-->
+
+  </sect2>
+
+<!-- FIXME the documented procedure does not exactly work, commented out
+     until fixes
+
+  <sect2 arch="i386" id="install-from-dos">
+  <title
+>Booting from a DOS partition</title>
+
+
+<para>
+
+Boot into DOS (not Windows) without any drivers being loaded.  To do
+this, you have to press <keycap
+>F8</keycap
+> at exactly the right
+moment (and optionally select the `safe mode command prompt only'
+option).  Enter the subdirectory for the flavor you chose, e.g.,
+
+<informalexample
+><screen
+>
+cd c:\install
+</screen
+></informalexample
+>.  
+
+Next, execute <command
+>install.bat</command
+>.
+The kernel will load and launch the installer system. 
+
+</para
+><para>
+
+Please note, there is currently a loadlin problem (#142421) which
+precludes <filename
+>install.bat</filename
+> from being used with the
+bf2.4 flavor. The symptom of the problem is an
+<computeroutput
+>invalid compressed format</computeroutput
+> error.
+
+</para>
+  </sect2>
+
+END FIXME -->
+
+  <sect2 arch="i386" id="boot-initrd">
+  <title
+>使用 <command
+>LILO</command
+> 或 <command
+>GRUB</command
+> 啟動 Linux</title>
+
+<para
+>為了從硬碟開機安裝程式，您首先必須按照要求下載並且放置所需的文件，請參閱 <xref linkend="boot-drive-files"/>。 </para>
+
+<para
+>如果您只想用硬碟開機，然後從網路下載其他檔案，您需要下載 <filename
+>netboot/debian-installer/i386/initrd.gz</filename
+> 及其對應的核心。這將允許您重新分割您用於開機的硬碟。這裡需要小心操作。 </para>
+
+<para
+>或者，如果您想要保持安裝硬碟原有分割區，可以下載 <filename
+>hd-media/initrd.gz</filename
+> 檔案及其核心，複製一個光碟 iso 檔到硬碟上 (確保文件名結尾是 ``.iso'')。安裝程式就可以不使用網路而從硬碟開機，並且從光碟映像檔上安裝。 </para>
+
+<para
+>如果採用 <command
+>LILO</command
+>，您需要在 <filename
+>/etc/lilo.conf</filename
+> 中設定兩件最基本的事情: <itemizedlist
+> <listitem
+><para
+> 在開機時載入 <filename
+>initrd.gz</filename
+> 安裝程式﹔</para
+></listitem
+> <listitem
+><para
+> 讓 <filename
+>vmlinuz</filename
+> 核心使用一個記憶體虛擬磁碟作為它的根分割區。</para
+></listitem
+> </itemizedlist
+> 這裡是一個 <filename
+>/etc/lilo.conf</filename
+> 的例子： </para
+><para>
+
+<informalexample
+><screen
+>image=/boot/newinstall/vmlinuz
+       label=newinstall
+       initrd=/boot/newinstall/initrd.gz
+       root=/dev/ram0
+       append="<phrase condition="sarge"
+>devfs=mount,dall </phrase
+>ramdisk_size=12000"
+</screen
+></informalexample
+> 欲獲知更多細節，請參閱 <citerefentry
+><refentrytitle
+>initrd</refentrytitle
+> <manvolnum
+>4</manvolnum
+></citerefentry
+> 和 <citerefentry
+><refentrytitle
+>lilo.conf</refentrytitle
+> <manvolnum
+>5</manvolnum
+></citerefentry
+> man 手冊。現在執行 <userinput
+>lilo</userinput
+> 並且重新啟動。 </para
+><para
+>採用 <command
+>GRUB</command
+> 的設定過程也很相似。在 <filename
+>/boot/grub/</filename
+> 目錄下 (有時會是 <filename
+>/boot/boot/grub/</filename
+>) 找出您的 <filename
+>menu.lst</filename
+>，加入幾行：<informalexample
+><screen>
+title  New Install
+kernel (hd0,0)/boot/newinstall/vmlinuz root=/dev/ram0 ramdisk_size=12000
+initrd (hd0,0)/boot/newinstall/initrd.gz
+</screen
+></informalexample
+> 並重開機。<phrase condition="sarge"
+>如果開機失敗，您可以嘗試在 <quote
+>kernel</quote
+> 行添加 <userinput
+>devfs=mount,dall</userinput
+>。</phrase
+> </para
+><para
+>注意 <userinput
+>ramdisk_size</userinput
+> 的值也許需要調整至 initrd 映像的大小。從此之後，採用 <command
+>GRUB</command
+> 或 <command
+>LILO</command
+> 都沒區別。 </para>
+  </sect2>
+
+  <sect2 arch="i386" id="usb-boot">
+  <title
+>從 USB 隨身碟開機</title>
+<para
+>假設您已經準備好了從 <xref linkend="boot-dev-select"/> 到 <xref linkend="boot-usb-files"/> 的所有步驟。現在只需要插入您的 USB 隨身碟到一個空的 USB 插槽並且重新啟動電腦。系統應該能夠開機，並且您會看到 <prompt
+>boot:</prompt
+> 提示符號。您可以輸入一些開機選項，或者只是按下 &enterkey;。 </para
+><para
+>如果您的電腦不支援從 USB 隨身碟設備開機，您也可以採用單張軟碟來開機並且切換至 USB。根據 <xref linkend="floppy-boot"/>，開機軟碟中的核心應該能夠自動偵測您的 USB 隨身碟。當它要求根軟碟的時候，只需簡單敲入 &enterkey;。您應該看到 &d-i; 開始執行。 </para>
+  </sect2>
+
+  <sect2 arch="i386" id="floppy-boot">
+  <title
+>從軟碟開機</title>
+<para
+>您可能已經下載了所需要得軟碟映像，並且根據這些映像建立了軟碟 <xref linkend="create-floppy"/>。 </para
+><para
+>從軟碟開機安裝程式需要放置軟碟至主軟碟機。按照您平時的習慣關閉系統，然後重新啟動。 </para
+><para
+>如果想在 LS-120 磁碟機 (ATAPI 版本) 使用這些軟碟，您需要指定這些軟碟設備的虛擬位址。這個可以透過 <emphasis
+>root=</emphasis
+> 開機參數來指定映射的 ide-floppy 磁碟機名稱來完成。例如，如果您的 LS-120 磁碟機連接到第二條排線上的第一個 IDE 設備 (master)，那麼在提示符號下輸入 <userinput
+>linux root=/dev/hdc</userinput
+>。從 LS-120 上安裝只為 2.4 及其以後版本的核心支援。 </para
+><para
+>注意有些機器使用，<keycombo
+><keycap
+>Control</keycap
+> <keycap
+>Alt</keycap
+> <keycap
+>Delete</keycap
+></keycombo
+> 不能重新啟動系統，所以建議使用``硬''重開機。如果您從一個既有的作業系統上安裝 (例如從 DOS 上) 您不需要這樣。否則，請用硬重開機的方法來開機。 </para
+><para
+>讀完軟碟後，您將看到螢幕上有一段有關開機軟碟的介紹，並且結尾是 <prompt
+>boot:</prompt
+> 提示符號。 </para
+><para
+>一旦您按下 &enterkey;，您應該能夠看到 <computeroutput
+>Loading...</computeroutput
+> 消息，並且接下來是 <computeroutput
+>Uncompressing Linux...</computeroutput
+>，然後是一些有關您系統的硬體資訊。想知道更多有關這段開機過程的資訊，請參考 <xref linkend="kernel-msgs"/>。 </para
+><para
+>軟碟開機後需要根軟碟。請插入根軟碟並且輸入 &enterkey;，然後其中的內容會被載入記憶體。安裝程式 <command
+>debian-installer</command
+> 會自動啟動。 </para>
+  </sect2>
+  
+  <sect2 arch="i386" id="boot-tftp"
+><title
+>用 TFTP 開機</title>
+ 
+
+<!-- Start of file boot-installer/intro-net.xml -->
+
+<para
+>要從網路開機，您的機器必須連接上網路和一台 TFTP 網路開機伺服器 (DHCP, RARP 以及 BOOTP)。 </para
+><para arch="hppa"
+>較早的系統如 715 也許需要使用一台 RBOOT 伺服器來取代 BOOTP 伺服器。 </para
+><para
+>支援的網路開機安裝方法在 <xref linkend="install-tftp"/>。 </para>
+<!--   End of file boot-installer/intro-net.xml -->
+ 
+<para
+>在 i386 架構上有很多方法用 TFTP 進行開機。 </para>
+
+   <sect3
+><title
+>支援 PXE 的網卡或者主機板</title>
+<para
+>您的網卡或者主機板可能已經提供了 PXE 開機功能。這 <trademark class="trade"
+>Intel</trademark
+> TFTP 開機的再實作。如果是這樣，也許可以能夠設定您的 BIOS 來用網路進行開機。 </para>
+   </sect3>
+   
+   <sect3
+><title
+>採用 Network BootROM 的網卡</title>
+<para
+>您的網卡很有可能提供了 TFTP 開機功能。 </para
+><para condition="FIXME"
+>請讓我們知道 (<email
+>&email-debian-boot-list;</email
+>) 您如何操作，並參考此文件。 </para>
+   </sect3>
+
+   <sect3
+><title
+>Etherboot</title>
+<para
+><ulink url="http://www.etherboot.org"
+>etherboot project</ulink
+> 提供了為 TFTP 開機所需要的開機軟碟甚至是開機 ROMS 。 </para>
+   </sect3>
+  </sect2>
+
+  <sect2 arch="i386"
+><title
+>開機提示</title>
+<para
+>安裝程式啟動後，您應該會看到一個友善的畫面，顯示著 Debian 的標誌，以及啟動提示：<informalexample
+><screen>
+Press F1 for help, or ENTER to boot:
+</screen
+></informalexample
+> 在提示號下您可以直接按下 &enterkey; 來使用預設選項啟動安裝程式，或者輸入參數以指定您要使用的啟動方式。 </para
+><para
+>有關開機參數的資訊可能會很有用。它可以透過 <keycap
+>F3</keycap
+> 到 <phrase condition="sarge"
+><keycap
+>F7</keycap
+></phrase
+><phrase condition="etch"
+><keycap
+>F8</keycap
+></phrase
+> 來得知。如果您加入任何參數至開機命令列，請確保在開機方法 (預設是 <userinput
+>linux</userinput
+>) 和第一個參數之間有一個空格 (例如 <userinput
+>linux floppy=thinkpad</userinput
+>)。如果您只鍵入 &enterkey;，這等同於輸入 <userinput
+>linux</userinput
+> 不附帶任何參數。 <note
+><para
+>如果您透過提供 VGA 文字介面的遠端遙控設備來安裝系統，您可能無法看到安裝程式一開始顯示的版權圖形；您甚至可能看不到啟動提示號。這些設備例如康柏的 <quote
+>integrated Lights Out</quote
+> (iLO) 和 <quote
+>Integrated Remote Assistant</quote
+> (IRA) 的文字控制台。您可以直接按下 F1<footnote
+> <para
+> 在某些狀況下，這些設備需要特殊的跳脫字串來啟用這個按鍵，例如 IRA 使用 <keycombo
+> <keycap
+>Ctrl</keycap
+> <keycap
+>F</keycap
+> </keycombo
+>,&nbsp;<keycap
+>1</keycap
+>. </para
+> </footnote
+> 來跳過這個畫面，並且顯示說明畫面。只要您離開了圖標畫面並進入了說明文字畫面，您的按下的按鍵就會顯示在螢幕上。為了防止安裝程式在之後的安裝步驟中使用 framebuffer，您可能會加入 <userinput
+>debian-installer/framebuffer=false</userinput
+> 到啟動參數中，如同說明文字中描述的。 </para
+></note>
+</para>
+
+  </sect2>
+<!--   End of file boot-installer/i386.xml -->
+
+<!-- Start of file boot-installer/ia64.xml -->
+
+  <sect2 arch="ia64"
+><title
+>從光碟開機</title>
+
+
+<!-- Start of file boot-installer/intro-cd.xml -->
+
+<para
+>對於大多數人來說，最快的途徑是使用一套 Debian CD 光碟套件。如果您有此套件，並且如果您的機器支援直接光碟開機，太棒了！只需要 <phrase arch="i386"
+> 設定您的系統以光碟開機，請參閱 <xref linkend="boot-dev-select"/>, </phrase
+> 插入您的光碟，重開機，然後繼續下一章。 </para
+><para
+>注意某些特定的光碟機需要一些特殊的驅動程式，因為他們可能在安裝的早期步驟中無法被存取。如果標準的光碟開機的方法不能用於您的硬體，閱讀本章中關於其他種類的核心以及安裝方法，它們有可能能解決問題。 </para
+><para
+>即便您不能從光碟開機，依然可以安裝光碟上面的 Debian 系統組件和所有軟體套件。只需要使用不同的媒介，例如軟碟來開機即可。當安裝作業系統、基礎系統和任意附加的軟體套件時只需指向安裝系統至光碟機即可。 </para
+><para
+>如果您遇到開機方面的問題，請參閱 <xref linkend="boot-troubleshooting"/>。 </para>
+<!--   End of file boot-installer/intro-cd.xml -->
+
+  <note>
+  <title
+>光碟的內容</title>
+
+<para
+>有三種基本的 Debian 安裝光碟衍生品：<emphasis
+>名片式</emphasis
+>光碟具有最少量的安裝程式並且可以裝在一小張光碟上。它的安裝需要網路連接來安裝其他部分的基本安裝程式以建立一個可用的系統。<emphasis
+>網路安裝</emphasis
+>光碟具有所有基礎安裝所需要的套件但是它還是需要一個能連接到 Debian 鏡像網站的網路連接來安裝其他的軟體套件來建立一個完全的系統。Debian 光碟套件則可以不透過網路就可以安裝一個具有各種範圍軟體套件的完全系統。 </para>
+  </note>
+
+<para
+>IA-64 使用 Intel 最新的可拓展韌體界面 (Extensible Firmware Interface, EFI)。與傳統的 x86 BIOS 只了解分割區表和主開機記錄 (MBR) 而不知道其他開機設備的特點不同，EFI 可以 對 FAT16 和 FAT32 格式的硬碟分割區進行讀寫操作。這個特點簡化了通常很難以理解的系統啟動過程。系統的 boot-loader 以及 EFI 韌體支援一個完全的檔案系統來保存啟動機器所需要的所有檔案。這意味著在一個 IA-64 系統上的系統磁碟具有一個附加的專門為 EFI 服務的磁碟分割區而不是像傳統系統上只是簡單的 MBR 或者開機塊記錄。 </para
+><para
+>Debian CD 包含了一個小型版本的 EFI 分割區來放置其設定檔<command
+>ELILO</command
+>、安裝程式核心以及初始的檔案系統 (initrd)。運行的系統同時也包含了一個 EFI 分割區用於放置開機系統所需要的必要檔案。這些檔案可以從 EFI Shell 讀出，描述如下。 </para
+><para
+>大部分有關 <command
+>ELILO</command
+> 如何實際裝入和啟動系統的細節對系統安裝程式是透明的。但是，安裝程式必須設置 EFI 分割區優先級來安裝基本系統。否則 <command
+>ELILO</command
+> 的安裝將會失敗並且導致系統不可開機。EFI 分割區是是在分割步驟中被分割出來且格式化的，之後安裝程式就會宰入系統磁碟的所有軟體套件。分割步驟也會在繼續安裝步驟前檢查 EFI 分割區是否合適。 </para
+><para
+>EFI Boot Manager 在韌體初始化的最後一步會被啟動。它顯示一個選單列表供使用者選擇。取決於系統的型號並且是否有其他的軟體已經被裝入系統，這個選單在不同系統上可能會不同。在每一個系統上，至少會有兩個選單項，<command
+>Boot Option Maintenance Menu</command
+> 與 <command
+>EFI Shell (Built-in)</command
+>。建議使用第一個，當然，若該選項不可用或者 CD 由於某種原因沒法啟動，使用第二個。 </para>
+
+  <warning>
+  <title
+>重要</title>
+<para
+>EFI Boot Manager 會在預設的幾秒鐘之後選擇預設的啟動方式，一般是第一選單項。在螢幕底部會有倒計時顯示。時間一到，系統按預設方式啟動，這樣您也許需要重新啟動才能繼續安裝。如果預設是 EFI Shell，您可在提示符號下執行 <command
+>exit</command
+> 以返回 Boot Manager。 </para>
+  </warning>
+
+  <sect3 arch="ia64" id="bootable-cd">
+  <title
+>選項 1: 從 Boot Option Maintenance Menu 啟動</title>
+ 
+
+<itemizedlist>
+
+<listitem
+><para
+>插入光碟到 DVD/CD 光碟機，然後重啟機器。韌體在完成系統初始化後會顯示 EFI Boot Manager 頁面和選單。 </para
+></listitem>
+
+<listitem
+><para
+>透過方向鍵選擇 <command
+>Boot Maintenance Menu</command
+> 然後按下 <command
+>ENTER</command
+>。會顯示一個新選單。 </para
+></listitem>
+
+<listitem
+><para
+>透過方向鍵選擇 <command
+>Boot From a File</command
+>，然後按下 <command
+>ENTER</command
+>。將顯示韌體檢測到的設備列表。您會看到兩個選單行，它們包括 <command
+>Debian Inst [Acpi ...</command
+> 或 <command
+>Removable Media Boot</command
+>標籤。如果您檢查選單行其他部分，會看到對應的設備和控制器資訊。 </para
+></listitem>
+
+<listitem
+><para
+>您可選擇指向 CD/DVD 光碟機的項目。透過方向鍵選擇並按下 <command
+>ENTER</command
+>。如果您選擇 <command
+>Removable Media Boot</command
+> 機器將進入啟動步驟。如果您選擇 <command
+>Debian Inst [Acpi ...</command
+>，它會顯示一個可啟動的光碟目錄列表，要求您進行 (額外的) 下一步。 </para
+></listitem>
+
+<listitem
+><para
+>您只在選擇 <command
+>Debian Inst [Acpi ...</command
+> 時需要這個。目錄列表還會顯示 <command
+>[Treat like Removable Media Boot]</command
+> 至最後一行。用方向鍵選擇，並按下 <command
+>ENTER</command
+>。這將進入啟動步驟。 </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>這些步驟啟動的 Debian boot-loader 會顯示一個選單頁以選擇啟動核心和選項。進入選擇啟動核心和選項。 </para>
+  </sect3>
+
+  <sect3 arch="ia64" id="boot-with-efi">
+  <title
+>選項 2: 從 EFI Shell 啟動</title>
+<para
+>某些情況下，選項 1 無法成功，重新啟動機器然後在 EFI Boot Manager 畫面出現的時候會有一個選項稱為 <command
+>EFI Shell [Built-in]</command
+>。 可以透過如下步驟來啟動 Debian 安裝程式： </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>把光碟放入光碟機並重新開機。系統初始化之後韌體將會顯示 EFI Boot Manager 的主頁和選單。 </para
+></listitem>
+
+<listitem
+><para
+>選擇 <command
+>EFI Shell</command
+> 然後按下 <command
+>ENTER</command
+>。EFI Shell 將掃描所有的可開機設備，並且在顯示其指令提示符號前在控制台列出它們。被辨認出去有可開機分割區的設備將以 <filename
+>fs<replaceable
+>n</replaceable
+>:</filename
+> 格式顯示。所有其他辨認出的分割區，將被命名為 <filename
+>blk<replaceable
+>n</replaceable
+>:</filename
+>。如果您在進入介殼之前就插入光碟，這將花費一些時間以初始化光碟機。 </para>
+</listitem>
+
+<listitem
+><para
+>在檢查光碟機期間請查看介殼的輸出顯示。一般來說是 <filename
+>fs0:</filename
+> 其他具有可開機分割區的設備上也會顯示成 <filename
+>fs<replaceable
+>n</replaceable
+></filename
+>。 </para
+></listitem>
+
+<listitem
+><para
+>進入 <command
+>fs<replaceable
+>n</replaceable
+>:</command
+> 然後按下 <command
+>ENTER</command
+> 來選擇設備。這裡 <replaceable
+>n</replaceable
+> 是光碟的分割區號。介殼將在提示符號下顯示分割區號。 </para
+></listitem>
+
+<listitem
+><para
+>進入 <command
+>elilo</command
+> 並按下 <command
+>ENTER</command
+>。這將進入啟動步驟。 </para
+></listitem>
+
+</itemizedlist>
+
+<para
+>與選項 1 相同，這些步驟也會啟動 Debian boot-loader，顯示一個選單頁供選擇啟動核心和參數。您可在介殼提示符號下輸入 <command
+>fs<replaceable
+>n</replaceable
+>:elilo</command
+>簡短指令。進入選擇啟動核心和選項。 </para>
+
+  </sect3>
+
+  <sect3 arch="ia64" id="serial-console">
+  <title
+>使用序列埠控制台安裝</title>
+
+<para
+>您可選擇使用顯示器與鍵盤或者序列埠連接來進行安裝。要使用顯示器/鍵盤配置，選擇包含 [VGA console] 的選項。要透過序列埠連接，選擇包含 [<replaceable
+>BAUD</replaceable
+> baud serial console] 的選項，其中 <replaceable
+>BAUD</replaceable
+> 是序列連接速度。選單項裡有大多數常見鮑率的 ttyS0 設備都有預設。 </para
+><para
+>大多時候，您會讓安裝程式使用與連接 EFI 控制台相同的鮑率。如果您不知如何設定，可以在 EFI shell 透過 <command
+>baud</command
+> 指令取得。 </para
+><para
+>如果沒有序列配置的選項或者您要使用的鮑率，可以覆蓋某個選單項裡面的既有鮑率。例如，使用 57600 鮑率覆蓋 ttyS1 設備，輸入 <command
+>console=ttyS1,57600n8</command
+> 到 <classname
+>Boot:</classname
+> 文字視窗。 </para>
+
+<note
+><para
+>大多數 IA-64 機器配備預設 9600 鮑率的控制台。這個速率太慢，普通安裝過程將花費明顯的時間來更新每個螢幕。您要麼透過提高鮑率以提升安裝效率，要麼使用文字模式安裝。參考 <classname
+>Params</classname
+> 說明選單，取得啟動文字模式安裝的指導。 </para
+></note>
+
+<warning
+><para
+>如果您選擇了錯誤的控制台類型，即便可以選擇核心和輸入參數，但顯示與輸入將在內核啟動後死掉，只有重新啟動才能開始安裝。 </para
+></warning>
+  </sect3>
+
+  <sect3 arch="ia64" id="kernel-option-menu">
+  <title
+>選擇啟動核心與選項</title>
+
+<para
+>開機程式會顯示一個表單，具有選單列與包含 <classname
+>Boot:</classname
+> 提示符號的文字視窗。用方向鍵選擇選單項並且鍵盤輸入的字元將顯示在鮑率視窗。輸入適當的功能鍵會顯示說明視窗。<classname
+>普通的</classname
+>說明視窗解釋選單選項，<classname
+>Params</classname
+>視窗解釋命令列參數。 </para
+><para
+>查詢 <classname
+>General</classname
+> 說明頁面，了解核心的說明和安裝對應的模式。您還應該查詢 <xref linkend="boot-parms"/>，了解在文字視窗中需要設置的額外參數 <classname
+>Boot:</classname
+>，您選擇的核心版本將會用在安裝過程和安裝好的系統中。如果安裝時碰到核心問題，在安裝好的系統中也會出現。以下兩步選擇和開始安裝： </para>
+
+<itemizedlist>
+
+<listitem
+><para
+>使用方向鍵選擇您需要的核心版本和適合的安裝模式。 </para
+></listitem>
+
+<listitem
+><para
+>在鍵盤上輸入任何啟動參數。這些文字將直接顯示在文字視窗。這是核心參數 (如同序列控制台) 指定的。 </para
+></listitem>
+
+<listitem
+><para
+>按下 <command
+>ENTER</command
+>。會載入並啟動核心。核心在 Debian 安裝程式的第一個螢幕顯示常規的初始化資訊。 </para
+></listitem
+> 
+
+</itemizedlist>
+
+<para
+>進入到下一章繼續安裝本地語言，網路和磁碟分割區。 </para>
+  </sect3>
+  </sect2>
+
+  <sect2 arch="ia64" id="boot-tftp"
+><title
+>用 TFTP 開機</title>
+
+<para
+>在 IA64 系統上面從網路開機很像從光碟上開機。唯一的區別是如何裝入核心。EFI Boot Manager 可以裝入並且從網路伺服器開始程式。一旦安裝核心被載入並且啟動，系統的安裝將和光碟安裝步驟相同，只是基本軟體套件將從網路裝入而不是光碟機。 </para>
+
+
+<!-- Start of file boot-installer/intro-net.xml -->
+
+<para
+>要從網路開機，您的機器必須連接上網路和一台 TFTP 網路開機伺服器 (DHCP, RARP 以及 BOOTP)。 </para
+><para arch="hppa"
+>較早的系統如 715 也許需要使用一台 RBOOT 伺服器來取代 BOOTP 伺服器。 </para
+><para
+>支援的網路開機安裝方法在 <xref linkend="install-tftp"/>。 </para>
+<!--   End of file boot-installer/intro-net.xml -->
+
+<para
+>用網路將一台 IA64 系統開機需要兩個架構相關的操作。在開機伺服器上，DHCP 和 TFTP 必須設定成可以傳送 <command
+>elilo</command
+>。在客戶端，必須在 EFI Boot Manager 定義新的開機選項來啟動網路網路以下載核心。 </para>
+
+  <sect3 arch="ia64" id="boot-tftp-server">
+  <title
+>配置網路伺服器</title>
+<para
+>一個用於 ia64 系統的合適呵網路開機 TFTP 選項應該看起來像這樣： <informalexample
+><screen>
+host mcmuffin {
+        hardware ethernet 00:30:6e:1e:0e:83;
+        fixed-address 10.0.0.21;
+        filename "debian-installer/ia64/elilo.efi";
+}
+</screen
+></informalexample
+> 注意到目標是讓 <command
+>elilo.efi</command
+> 在客戶端運行。 </para
+><para
+>使用 root 解壓縮 <filename
+>netboot.tar.gz</filename
+> 檔案到您的 tftp 伺服器。典型的 tftp 根目錄包括 <filename
+>/var/lib/tftp</filename
+> 和 <filename
+>/tftpboot</filename
+>。這將建立 <filename
+>debian-installer</filename
+> 目錄樹，它包括 IA-64 系統需要的開機檔案。 </para
+><para>
+
+<informalexample
+><screen
+># cd /var/lib/tftp
+# tar xvfz /home/user/netboot.tar.gz
+./
+./debian-installer/
+./debian-installer/ia64/
+[...]
+</screen
+></informalexample
+> <filename
+>netboot.tar.gz</filename
+> 包含 <filename
+>elilo.conf</filename
+> 可以在大多數的設定下工作。另外，要修改這個檔案，您可以在 <filename
+>debian-installer/ia64/</filename
+> 目錄中找到。這只需要按照客戶端 IP 位址的 16 進位命名這些檔案並且以 <filename
+>.conf</filename
+> 為副檔名取代 <filename
+>elilo.conf</filename
+>。請查看 <classname
+>elilo</classname
+> 軟體套件附帶的文件以取得細節。 </para>
+  </sect3>
+
+  <sect3 arch="ia64" id="boot-tftp-client">
+  <title
+>配置客戶端</title>
+<para
+>如果要設定支援 TFTP 開機的客戶端，只需要開機至 EFI，然後進入 <guimenu
+>Boot Option Maintenance Menu</guimenu
+>。<itemizedlist
+> <listitem
+><para
+> 加入一個開機選項。</para
+></listitem
+> <listitem
+><para
+> 您會看到一行或多行含有 <guimenuitem
+>Load File [Acpi()/.../Mac()]</guimenuitem
+> 的文字。如果存在一個以上的選項，選擇您需要您要啟動的機器的 MAC 位址的選項。使用方向鍵反白選擇，然後按 Enter。</para
+></listitem
+> <listitem
+><para
+> 為此選項命名，如 <userinput
+>Netboot</userinput
+> 或者相似的，儲存然後退回至開機選項選單。</para
+></listitem
+> </itemizedlist
+> 您現在應該能夠看到剛剛建立的新開機選項，選擇後應該會初始化一個 DHCP 查詢，然後會從伺服器載入 <filename
+>elilo.efi</filename
+>。 </para
+><para
+>在下載並且處理設定檔後，boot-loader 將顯示它的提示符號。從這裡開始，安裝過程將和光碟安裝是同樣的過程。完成從網路的自動安裝核心後，選擇一個如同前文提到的開機選項，它將開始 Debian 安裝程式。 </para
+><para
+>下一章將繼續安裝過程，在那裡您將設定語言區域，網路以及磁碟分割區。 </para>
+  </sect3>
+  </sect2>
+<!--   End of file boot-installer/ia64.xml -->
+
+<!-- Start of file boot-installer/m68k.xml -->
+
+  <sect2 arch="m68k"
+><title
+>選擇安裝方法</title>
+
+<para
+>一些 &arch-title; 子架構可以選擇使用從 2.4.x 或 2.2.x linux 核心啟動。如果以，請使用 2.4.x linux 核心。使用 2.4.x linux 核心的安裝程式要求較少的記憶體， 因為 2.2.x 支援需要固定大小的 ramdisk 而 2.4.x 使用 tmpfs。 </para
+><para
+>如果您使用 2.2.x linux 核心，那麼必須確保 ramdisk 滿足要求，請參閱 <ulink url="&disturl;/main/installer-&architecture;/current/images/MANIFEST"
+>MANIFEST</ulink
+>。您還需要使用 &ramdisksize; 核心參數。通常，這意味著您需要使用相同目錄下的 initrd22.gz ramdisk。 </para
+><para
+>確保 <userinput
+>root=/dev/ram</userinput
+> 使用您要用的核心。 </para
+><para
+>如果碰到麻煩，請參閱 <ulink url="&url-m68k-cts-faq;"
+>cts's &arch-title; debian-installer 常見問答集</ulink
+>。 </para>
+
+<itemizedlist>
+	<listitem
+><para
+><xref linkend="m68k-boot-amiga"/></para
+></listitem>
+	<listitem
+><para
+><xref linkend="m68k-boot-atari"/></para
+></listitem>
+	<listitem
+><para
+><xref linkend="m68k-boot-bvme6000"/></para
+></listitem>
+	<listitem
+><para
+><xref linkend="m68k-boot-mac"/></para
+></listitem>
+	<listitem
+><para
+><xref linkend="m68k-boot-mvme"/></para
+></listitem>
+	<listitem
+><para
+><xref linkend="m68k-boot-q40"/></para
+></listitem>
+</itemizedlist>
+
+
+    <sect3 arch="m68k" id="m68k-boot-amiga"
+><title
+>Amiga</title>
+<para
+>amiga 僅支援從硬碟安裝方式 (請參閱 <xref linkend="m68k-boot-hd"/>)。 <emphasis
+>也就是說光碟機無法開機</emphasis
+>。 </para
+><para
+>目前 Amiga 不能與 bogl 一起工作，如果您看到 bogl 錯誤，您需要使用將下面核心參數 <userinput
+>debian-installer/framebuffer=false</userinput
+>。 </para>
+    </sect3>
+
+    <sect3 arch="m68k" id="m68k-boot-atari"
+><title
+>Atari</title>
+<para
+>Atari 安裝程式可以從硬碟 (請參閱 <xref linkend="m68k-boot-hd"/>) 或軟碟 (請參閱 <xref linkend="boot-from-floppies"/>)。<emphasis
+>也就是說光碟機無法開機</emphasis
+>。 </para
+><para
+>目前 Atari 不能與 bogl 一起工作，如果您看到 bogl 錯誤，應該使用下面核心參數 <userinput
+>debian-installer/framebuffer=false</userinput
+>。 </para>
+    </sect3>
+
+    <sect3 arch="m68k" id="m68k-boot-bvme6000"
+><title
+>BVME6000</title>
+<para
+>BVME6000 上安裝程式可以從光碟 (請參閱 <xref linkend="m68k-boot-cdrom"/>)、軟碟 (請參閱 <xref linkend="boot-from-floppies"/>)，或網路 (請參閱 <xref linkend="boot-tftp"/>)。 </para>
+    </sect3>
+
+    <sect3 arch="m68k" id="m68k-boot-mac"
+><title
+>Macintosh</title>
+<para
+>Mac 上啟動安裝的唯一方法是硬碟 (請參閱 <xref linkend="m68k-boot-hd"/>)。 <emphasis
+>也就是說光碟無法開機</emphasis
+>。Macs 不能工作在 2.4 核心上。 </para
+><para
+>如果您的硬體中包括以 53c9x 為基礎的 scsi 排線，那麼您需要使用下面的核心參數 <userinput
+>mac53c9x=1</userinput
+>。裝有兩條這種 scsi 排線的硬體，如 Quadra 950，您需要使用 <userinput
+>mac53c9x=2</userinput
+> 參數。 </para>
+    </sect3>
+
+    <sect3 arch="m68k" id="m68k-boot-mvme"
+><title
+>MVME147 和 MVME16x</title>
+<para
+>MVEM147 和 MVEM16x 可以從軟碟 (請參閱 <xref linkend="boot-from-floppies"/>) 或網路 (請參閱 <xref linkend="boot-tftp"/>)。 <emphasis
+>也就是說光碟無法開機</emphasis
+>。 </para>
+    </sect3>
+
+    <sect3 arch="m68k" id="m68k-boot-q40"
+><title
+>Q40/Q60</title>
+<para
+>Q40/Q60 只支援從硬碟安裝 (請參閱 <xref linkend="m68k-boot-hd"/>)。<emphasis
+>也就是說光碟機無法啟動。</emphasis
+> </para>
+    </sect3>
+
+  </sect2>
+
+  <sect2 arch="m68k" id="m68k-boot-hd"
+><title
+>從硬碟開機</title>
+
+
+<!-- Start of file boot-installer/intro-hd.xml -->
+
+<para
+>從一個已存在的作業系統上開機通常是一個方便的選擇﹔對於一些系統來說，這則是唯一支援的安裝方法。 </para
+><para
+>如果要從硬碟上啟動安裝程式，您也許已經在 <xref linkend="boot-drive-files"/> 處下載並且在 <xref linkend="boot-drive-files"/> 安置了所需檔案。 </para>
+<!--   End of file boot-installer/intro-hd.xml -->
+
+<para
+>至少有六種不同的 ramdisk 可以從硬碟啟動，三個不同的類型分別用於支援或不支援 2.2.x linux 核心 (請參閱 <ulink url="&disturl;/main/installer-&architecture;/current/images/MANIFEST"
+>MANIFEST</ulink
+> 以了解更多細節)。 </para
+><para
+>這三種 ramdisk 類型為 <filename
+>cdrom</filename
+>、<filename
+>hd-media</filename
+> 和 <filename
+>nativehd</filename
+>。它們的區別僅在於安裝軟體套件的來源不同。<filename
+>cdrom</filename
+> ramdisk 使用光碟取得 debian-installer 軟體套件。<filename
+>hd-media</filename
+> ramdisk 使用硬碟上的 iso 映象檔。最後，<filename
+>nativehd</filename
+> ramdisk 使用網路安裝軟體套件。 </para>
+
+<itemizedlist>
+	<listitem
+><para
+><xref linkend="m68k-boothd-amiga"/></para
+></listitem>
+	<listitem
+><para
+><xref linkend="m68k-boothd-atari"/></para
+></listitem>
+	<listitem
+><para
+><xref linkend="m68k-boothd-mac"/></para
+></listitem>
+	<listitem
+><para
+><xref linkend="m68k-boothd-q40"/></para
+></listitem>
+</itemizedlist>
+
+
+    <sect3 arch="m68k" id="m68k-boothd-amiga"
+><title
+>從 AmigaOS 上開機</title>
+<para
+>在 <command
+>Workbench</command
+> 下，雙擊 <guiicon
+>StartInstall</guiicon
+> 圖示來啟動 Linux 安裝過程，它位於 <filename
+>debian</filename
+> 目錄中。 </para
+><para
+>Amiga 安裝程式會在一個視窗輸出一些除錯訊息，您可以按兩次 &enterkey; 。之後螢幕將變灰，這裡有一些很短的延遲。接下來，以黑底白字將顯示更多的除錯訊息。這些資訊可能捲動的非常快無法看到，但這沒有關係。在一些時間過後，安裝程式應該會自動安裝，因此您可以繼續參閱 <xref linkend="d-i-intro"/>。 </para>
+    </sect3>
+
+
+    <sect3 arch="m68k" id="m68k-boothd-atari"
+><title
+>從 Atari TOS 開機</title>
+<para
+>在 GEM 桌面上，可以透過雙擊 <guiicon
+>bootstra.prg</guiicon
+> 圖示，它位於 <filename
+>debian</filename
+> 目錄下，並且在程式選項對話框內點擊 <guibutton
+>Ok</guibutton
+> 來開始啟動安裝過程。 </para
+><para
+>當 Atari 安裝程式在視窗輸出一些除錯資訊以後，您可能要按下 &enterkey;。之後螢幕將變灰，這裡有一些很短的延遲。接下來，一個黑屏白字將顯示更多的除錯信息。這些資訊可能捲動的非常快沒法看，但這沒有問題。在一些時間過後，安裝程式應該自動安裝，因此您可以繼續參閱 <xref linkend="d-i-intro"/>。 </para>
+    </sect3>
+
+
+    <sect3 arch="m68k" id="m68k-boothd-mac"
+><title
+>從 MacOS 開機</title>
+<para
+>您必須有原來的 Mac 系統，並從它啟動。它是 <emphasis
+>必要的</emphasis
+>，當啟動 MacOS 準備啟動 Penguin linux loder 時，按住 <keycap
+>shift</keycap
+> 鍵阻止擴充套件繼續動作。如果您除了載入 linux 之外不使用 MacOS，您可以從 Mac 的系統目錄下清除所有的擴充套件和控制面板來達到同樣的目的。否則擴充套件會使 linux 核心參數隨機出錯。 </para
+><para
+>Mac 需要 <command
+>Penguin</command
+> 這個 boot-loader。如果您沒有這個工具處理 <command
+>Stuffit</command
+> 檔案，&penguin19.hfs; 是一個 hfs 磁碟映象，含有 <command
+>Penguin</command
+> 壓縮檔。<xref linkend="create-floppy"/> 說明如何將該映象複製到軟碟。 </para
+><para
+>在 MacOS 桌面，啟動 Linux 安裝進行需要雙擊 <guiicon
+>Penguin Prefs</guiicon
+> 圖示，它位於 <filename
+>Penguin</filename
+> 目錄。<command
+>Penguin</command
+> 啟動將開始。進入到 <guimenuitem
+>Settings</guimenuitem
+> 項，它位於 <guimenu
+>File</guimenu
+>選單，點擊 <guilabel
+>Kernel</guilabel
+> 選項。選擇核心 (<filename
+>vmlinuz</filename
+>) 和 ramdisk (<filename
+>initrd.gz</filename
+>) 映象，它位於 <filename
+>install</filename
+> 目錄，點擊右上角對應的按鈕，並在對話框中選擇檔案。 </para
+><para
+>要為 Penguin 設定啟動參數，請選擇 <guimenu
+>File</guimenu
+> -&gt; <guimenuitem
+>Settings...</guimenuitem
+>，然後切換到 <guilabel
+>Options</guilabel
+> 選項卡。啟動參數可以寫到文字區域。如果您要一直採用這些設置，選擇 <guimenu
+>File</guimenu
+> -&gt; <guimenuitem
+>儲存設定為預設</guimenuitem
+>。 </para
+><para
+>關閉 <guilabel
+>Settings</guilabel
+> 對話框，儲存設定然後用位於 <guimenu
+>File</guimenu
+> 選單的 <guimenuitem
+>Boot Now</guimenuitem
+> 選項開機。 </para
+><para
+><command
+>Penguin</command
+> 啟動將輸出一些除錯資訊到視窗。然後，螢幕變灰，會有數秒延遲。接著，帶有文字的黑底畫面出現，顯示各種核心除錯資訊。這些資訊可能捲動很快無法閱讀，這是正常的。再過一段時間，安裝程式就會自動執行，您可以按照下面步驟繼續 <xref linkend="d-i-intro"/>。 </para>
+
+    </sect3>
+
+    <sect3 arch="m68k" id="m68k-boothd-q40"
+><title
+>從 Q40/Q60 啟動</title>
+
+<para
+>FIXME </para
+><para
+>安裝程式就會自動執行，您可以按下面步驟繼續 <xref linkend="d-i-intro"/>。 </para>
+
+    </sect3>
+  </sect2>
+
+
+  <sect2 arch="m68k" id="m68k-boot-cdrom"
+><title
+>從光碟開機</title>
+<para
+>目前唯一 &arch-title; 子架構支援光碟開機的是 BVME6000。 </para>
+
+
+<!-- Start of file boot-installer/intro-cd.xml -->
+
+<para
+>對於大多數人來說，最快的途徑是使用一套 Debian CD 光碟套件。如果您有此套件，並且如果您的機器支援直接光碟開機，太棒了！只需要 <phrase arch="i386"
+> 設定您的系統以光碟開機，請參閱 <xref linkend="boot-dev-select"/>, </phrase
+> 插入您的光碟，重開機，然後繼續下一章。 </para
+><para
+>注意某些特定的光碟機需要一些特殊的驅動程式，因為他們可能在安裝的早期步驟中無法被存取。如果標準的光碟開機的方法不能用於您的硬體，閱讀本章中關於其他種類的核心以及安裝方法，它們有可能能解決問題。 </para
+><para
+>即便您不能從光碟開機，依然可以安裝光碟上面的 Debian 系統組件和所有軟體套件。只需要使用不同的媒介，例如軟碟來開機即可。當安裝作業系統、基礎系統和任意附加的軟體套件時只需指向安裝系統至光碟機即可。 </para
+><para
+>如果您遇到開機方面的問題，請參閱 <xref linkend="boot-troubleshooting"/>。 </para>
+<!--   End of file boot-installer/intro-cd.xml -->
+
+  </sect2>
+
+
+  <sect2 arch="m68k" id="boot-tftp"
+><title
+>用 TFTP 開機</title>
+
+
+<!-- Start of file boot-installer/intro-net.xml -->
+
+<para
+>要從網路開機，您的機器必須連接上網路和一台 TFTP 網路開機伺服器 (DHCP, RARP 以及 BOOTP)。 </para
+><para arch="hppa"
+>較早的系統如 715 也許需要使用一台 RBOOT 伺服器來取代 BOOTP 伺服器。 </para
+><para
+>支援的網路開機安裝方法在 <xref linkend="install-tftp"/>。 </para>
+<!--   End of file boot-installer/intro-net.xml -->
+
+<para
+>在起動 VMEbus 系統後您應該看到 LILO <prompt
+>Boot:</prompt
+> 提示符號。在提示符號下輸入以下一種方法來啟動 Linux，並開始在一個 vt102 模擬終端下面安裝普通的 Debian 軟體。 <itemizedlist>
+<listitem
+><para
+>輸入 <screen
+>i6000 &enterkey;</screen
+> 來安裝 BVME4000/6000 </para
+></listitem>
+<listitem
+><para
+>輸入 <screen
+>i162 &enterkey;</screen
+> 來安裝 MVME162 </para
+></listitem>
+<listitem
+><para
+>輸入 <screen
+>i167 &enterkey;</screen
+> 來安裝 MVME166/167 </para
+></listitem>
+    </itemizedlist>
+
+</para
+><para
+>您也可以附加一個字串 <screen
+>TERM=vt100</screen
+> 來使用 vt100 終端模擬。比如,<screen
+>i6000 TERM=vt100 &enterkey;</screen
+>。 </para>
+  </sect2>
+
+
+  <sect2 arch="m68k" id="boot-from-floppies">
+  <title
+>從軟碟開機</title>
+<para
+>對於大多數 m68k 架構來說，推薦方法是從一個本地檔案系統開機安裝程式。 </para
+><para
+>從軟碟開機的方法目前只支援 Atari 以及 VME (VME 有一個 SCSI 軟碟機)。 </para>
+ </sect2>
+
+<!--   End of file boot-installer/m68k.xml -->
+
+<!-- Start of file boot-installer/mips.xml -->
+
+
+  <sect2 arch="mips" id="boot-tftp"
+><title
+>用 TFTP 開機</title>
+
+   <sect3>
+   <title
+>SGI Indy 透過 TFTP 開機</title>
+<para
+>在進入指令監視器後使用 <informalexample
+><screen>
+bootp():
+</screen
+></informalexample
+> 在 SGI Indys 上啟動 Linux 及 Debian 軟體的安裝。為了正常執行，您可能必須取消設定 <envar
+>netaddr</envar
+> 環境變數。輸入 <informalexample
+><screen>
+unsetenv netaddr
+</screen
+></informalexample
+> 到指令監視器。 </para>
+  </sect3>
+
+   <sect3>
+   <title
+>Broadcom BCM91250A TFTP 的啟動</title>
+<para
+>在 Broadcom BCM91250A 試用主機板上，您不得不透過 TFTP 加載 SiByl 開機程式，它接著將載入和啟動 Debian 安裝程式。大多數情況下，您透過 DHCP 取得 IP 位址，當然也可以指定靜態位址。要使用 DHCP，您可以在下面 CFE 提示符號下輸入指令： <informalexample
+><screen>
+ifconfig eth0 -auto
+</screen
+></informalexample
+> 一旦得到 IP 位址，就可以使用下面指令載入 SiByl： <informalexample
+><screen>
+boot 192.168.1.1:/boot/sibyl
+</screen
+></informalexample
+> 您必須以網域名稱或從 TFTP 伺服器上取得的 IP 位址替換上例中的 IP 位址。完成之後，安裝程式就會自動載入。 </para>
+</sect3>
+  </sect2>
+
+  <sect2 arch="mips"
+><title
+>開機參數</title>
+
+   <sect3>
+   <title
+>SGI Indy 透過 TFTP 開機</title>
+<para
+>在 SGI Indys 上您可以在指令監視器下透過 <command
+>bootp():</command
+> 來附加開機參數。 </para
+><para
+>如果您沒有透過 bootp/dhcp 伺服器提供清楚的名字檔名，在 <command
+>bootp():</command
+> 指令之後您可以給提供徑和檔案名稱來開機。例如 <informalexample
+><screen>
+bootp():/boot/tftpboot.img
+</screen
+></informalexample
+> 還有更多的核心參數傳遞可以用 <command
+>append</command
+>: <informalexample
+><screen
+>bootp(): append="root=/dev/sda1"
+</screen
+></informalexample>
+
+</para>
+  </sect3>
+
+   <sect3>
+   <title
+>Broadcom BCM91250A TFTP 的啟動</title>
+<para
+>您不能從 CFE 提示符號直接傳遞啟動參數。而是編輯 TFTP 伺服器上的 <filename
+>/boot/sibyl.conf</filename
+> 文件並添加參數到 <replaceable
+>extra_args</replaceable
+> 變數。 </para>
+  </sect3>
+
+  </sect2>
+<!--   End of file boot-installer/mips.xml -->
+<!-- &boot-installer-mipsel.xml; -->
+
+<!-- Start of file boot-installer/s390.xml -->
+
+  <sect2 arch="s390"
+><title
+>s390 的限制</title>
+<para
+>為了在 S/390 上安裝系統，需要網路來和 ssh 連線。 </para
+><para
+>開機過程開始時候會要求一些參數來進行網路設定。如果設定成功，您將會透過ssh 連線登錄進入系統，並且開始標準系統安裝。 </para>
+  </sect2>
+
+
+  <sect2 arch="s390"
+><title
+>s390 開機參數</title>
+<para
+>在 S/390 上您可以在參數檔案下面附加一些開機參數。這個檔案可以是 ASCII 或者 EBCDIC 編碼。請閱讀 <ulink url="&url-s390-devices;"
+> 設備驅動程式以及安裝命令</ulink
+> 來取得更多有關 S/390 特定的開機參數。 </para>
+  </sect2>
+<!--   End of file boot-installer/s390.xml -->
+
+<!-- Start of file boot-installer/powerpc.xml -->
+
+  <sect2 arch="powerpc" id="boot-cd"
+><title
+>從光碟開機</title>
+
+
+<!-- Start of file boot-installer/intro-cd.xml -->
+
+<para
+>對於大多數人來說，最快的途徑是使用一套 Debian CD 光碟套件。如果您有此套件，並且如果您的機器支援直接光碟開機，太棒了！只需要 <phrase arch="i386"
+> 設定您的系統以光碟開機，請參閱 <xref linkend="boot-dev-select"/>, </phrase
+> 插入您的光碟，重開機，然後繼續下一章。 </para
+><para
+>注意某些特定的光碟機需要一些特殊的驅動程式，因為他們可能在安裝的早期步驟中無法被存取。如果標準的光碟開機的方法不能用於您的硬體，閱讀本章中關於其他種類的核心以及安裝方法，它們有可能能解決問題。 </para
+><para
+>即便您不能從光碟開機，依然可以安裝光碟上面的 Debian 系統組件和所有軟體套件。只需要使用不同的媒介，例如軟碟來開機即可。當安裝作業系統、基礎系統和任意附加的軟體套件時只需指向安裝系統至光碟機即可。 </para
+><para
+>如果您遇到開機方面的問題，請參閱 <xref linkend="boot-troubleshooting"/>。 </para>
+<!--   End of file boot-installer/intro-cd.xml -->
+
+<para
+>目前來說，&arch-title; 下的子架構只有 PReP 和 New World PowerMacs 支援光碟開機。在 PowerMacs 下從光碟上開機時，按住 <keycap
+>c</keycap
+> 鍵，或者組合鍵 <keycap
+>Command</keycap
+>, <keycap
+>Option</keycap
+>, <keycap
+>Shift</keycap
+>, 和 <keycap
+>Delete</keycap
+> 。 </para
+><para
+>OldWorld Powermacs 不能從 Debian 光碟開機，因為 OldWorld 電腦要求光碟片上存有 MacOSROM CD 開機驅動程式，但是目前還沒有自由的版本。所有的 OldWorld 系統具有軟碟驅動程式，因此可以使用軟碟驅動程式來啟動安裝程式，然後讓安裝程式從 CD 上選擇所需要的文件。 </para
+><para
+>如果您的系統不支援直接從光碟啟動，仍然可以採用光碟來安裝系統。在 NewWorlds 上面，可以使用一個 OpenFirmware 指令來手動光碟開機。除了在 OF 提示符號下使用光碟上的 <command
+>yaboot</command
+>，按照 <xref linkend="boot-newworld"/> 的方法從硬碟來進行開機，例如： <informalexample
+><screen
+>0 &gt; boot cd:,\install\yaboot
+</screen
+></informalexample>
+
+</para>
+  </sect2>
+
+  <sect2 arch="powerpc" id="install-drive">
+  <title
+>從硬碟開機</title>
+
+
+<!-- Start of file boot-installer/intro-hd.xml -->
+
+<para
+>從一個已存在的作業系統上開機通常是一個方便的選擇﹔對於一些系統來說，這則是唯一支援的安裝方法。 </para
+><para
+>如果要從硬碟上啟動安裝程式，您也許已經在 <xref linkend="boot-drive-files"/> 處下載並且在 <xref linkend="boot-drive-files"/> 安置了所需檔案。 </para>
+<!--   End of file boot-installer/intro-hd.xml -->
+
+  <sect3
+><title
+>從 OpenFirmware 開機 CHRP</title>
+
+<para>
+
+  <emphasis
+>還沒有完成</emphasis>
+
+</para>
+   </sect3>
+
+   <sect3
+><title
+>從 OldWorld PowerMacs 的 MacOS 上開機</title>
+<para
+>如果您在 <xref linkend="files-oldworld"/> 中設定好了 BootX，您可以使用它啟動並進入安裝系統。雙擊 <guiicon
+>BootX</guiicon
+> 應用程式圖示。點擊 <guibutton
+>Options</guibutton
+> 按鈕並且選擇 <guilabel
+>Use Specified RAM Disk</guilabel
+>。這將可以讓您選擇 <filename
+>ramdisk.image.gz</filename
+> 檔案。也許根據您的硬體情況需要選擇 <guilabel
+>No Video Driver</guilabel
+> 選擇框。然後點擊 <guibutton
+>Linux</guibutton
+> 按鈕，來關閉 MacOS 以及啟動安裝程序。 </para>
+   </sect3>
+
+
+  <sect3 id="boot-newworld">
+  <title
+>從 NewWorld Macs 的 OpenFirmware 開機</title>
+<para
+>您也許已經按照 <filename
+>vmlinux</filename
+>, <filename
+>initrd.gz</filename
+>, <filename
+>yaboot</filename
+> 和 <filename
+>yaboot.conf</filename
+> 在 HFS 分割區的根層次放置好了 <xref linkend="files-newworld"/> 檔案。請重新啟動電腦，並且立即 (在發聲時) 同時按住 <keycap
+>Option</keycap
+>, <keycap
+>Command (cloverleaf/Apple)</keycap
+>, <keycap
+>o</keycap
+>, 和 <keycap
+>f</keycap
+> 鍵。過幾秒鐘後，將進入 Open Firmware 提示符號。在提示符號下，輸入： <informalexample
+><screen>
+0 &gt; boot hd:<replaceable
+>x</replaceable
+>,yaboot
+</screen
+></informalexample
+> 以放置核心和 yaboot 檔案的 HFS 分割區號來代替 <replaceable
+>x</replaceable
+> 然後按下 &enterkey;。在某些機器上，您也許需要時用 <userinput
+>ide0:</userinput
+> 來代替 <userinput
+>hd:</userinput
+>，在接下來的幾秒鐘內，將會看到一個提示符號 <informalexample
+><screen>
+boot:
+</screen
+></informalexample
+> 在 yaboot 的 <prompt
+>boot:</prompt
+> 提示符號下，輸入 <userinput
+>install</userinput
+> 或者 <userinput
+>install video=ofonly</userinput
+> 然後點擊 &enterkey;。 <userinput
+>video=ofonly</userinput
+> 參數是用於最大可能的相容性﹔您可以在 <userinput
+>install</userinput
+> 無法運作的情況下嘗試使用它。Debian 安裝程式應該立刻啟動。 </para>
+   </sect3>
+  </sect2>
+
+  <sect2 arch="powerpc" id="usb-boot">
+  <title
+>從 USB 隨身碟開機</title>
+<para
+>目前，New World PowerMac 系統支援從 USB 開機。 </para>
+
+<para
+>確認您已經準備就緒 <xref linkend="boot-usb-files"/>。要從 USB 隨身碟開機 Macintosh 系統，即使 Open Firmware 預設不搜索 USB 隨身碟設備，您也需要使用 Open Firmware 提示符號。要得到提示符號，在啟動時按住 <keycombo
+><keycap
+>Command</keycap
+> <keycap
+>Option</keycap
+> <keycap
+>o</keycap
+> <keycap
+>f</keycap
+></keycombo
+> (請參閱 <xref linkend="invoking-openfirmware"/>)。 </para
+><para
+>您還需要算出 USB 隨身碟設備在設備樹上的位置，因為現在 <command
+>ofpath</command
+> 無法自動計算。鍵入 <userinput
+>dev / ls</userinput
+> 和 <userinput
+>devalias</userinput
+> 到 Open Firmware 提示符號下，得到所有的已知設備和設備別名。在筆者的系統上有各種 USB 隨身碟，路徑諸如 <filename
+>usb0/disk</filename
+>, <filename
+>usb0/hub/disk</filename
+>, <filename
+>/pci@f2000000/usb@1b,1/disk@1</filename
+>，和 <filename
+>/pci@f2000000/usb@1b,1/hub@1/disk@1</filename
+> 。 </para
+><para
+>得到設備路徑之後，用類似下面的指令啟動安裝程式： <informalexample
+><screen>
+boot <replaceable
+>usb0/disk</replaceable
+>:<replaceable
+>2</replaceable
+>,\\:tbxi
+</screen
+></informalexample
+> <replaceable
+>2</replaceable
+> 吻合 Apple_HFS 或 Apple_Bootstrap 分割區上，之前所複製啟動映象，<userinput
+>,\\:tbxi</userinput
+> 部分指示 Open Firmware 從具有 ``tbxi'' 類型的 HFS 檔案開機(如 <command
+>yaboot</command
+>) 位於前面使用 bless 目錄 <command
+>hattrib -b</command
+>。 </para
+><para
+>系統應該可以開機，然後您會看到 <prompt
+>boot:</prompt
+> 提示符號。這裡您可以輸入啟動參數，或者只按下 &enterkey;。 </para
+><warning
+><para
+>這個是新的啟動方法，可能無法在一些 NewWorld 系統上工作。如果您遇到問題，請寫下安裝報告，請參閱 <xref linkend="submit-bug"/>。 </para
+></warning>
+  </sect2>
+
+  <sect2 arch="powerpc" id="boot-tftp"
+><title
+>用 TFTP 開機</title>
+
+
+<!-- Start of file boot-installer/intro-net.xml -->
+
+<para
+>要從網路開機，您的機器必須連接上網路和一台 TFTP 網路開機伺服器 (DHCP, RARP 以及 BOOTP)。 </para
+><para arch="hppa"
+>較早的系統如 715 也許需要使用一台 RBOOT 伺服器來取代 BOOTP 伺服器。 </para
+><para
+>支援的網路開機安裝方法在 <xref linkend="install-tftp"/>。 </para>
+<!--   End of file boot-installer/intro-net.xml -->
+
+<para
+>目前來說，PReP 以及 New World PowerMac 系統支援網路開機。 </para
+><para
+>在 Open Firmware 機器上，例如 NewWorld Power Macs，進入開機監視器 (請參閱 <xref linkend="invoking-openfirmware"/>) 並且使用指令 <command
+>boot enet:0</command
+>。PReP 以及 CHRP 可能使用不同的途徑來確認網路。在一台 PReP 機器上，您應該嘗試 <userinput
+>boot <replaceable
+>server_ipaddr</replaceable
+>,<replaceable
+>file</replaceable
+>,<replaceable
+>client_ipaddr</replaceable
+></userinput
+>。 </para>
+  </sect2>
+
+
+  <sect2 arch="powerpc">
+  <title
+>從軟碟開機</title>
+<para
+>&arch-title; 支援從軟碟開機，盡管它本來只適合 OldWorld 系統。NewWorld 系統並沒有安裝軟碟機，而且加裝的 USB 軟碟並不支援開機。 </para
+><para
+>您可能已經下載了所需要得軟碟映像，並且根據這些映像建立了軟碟 <xref linkend="create-floppy"/>。 </para
+><para
+>若需要從 <filename
+>boot-floppy-hfs.img</filename
+> 軟碟開機，請在關閉系統後、按下電源開關前把它放到軟碟機內。 </para
+><note
+><para
+>對於不熟悉 Macintosh 軟碟操作的人來說：一個放在軟碟機的軟碟將取得第一優先開機順序。一個沒有有效開機系統的軟碟將會被退出，並且機器將檢查硬碟分割區。 </para
+></note
+><para
+>開機之後需要含有 <filename
+>root.bin</filename
+> 的軟碟。插入開機軟碟並且按下 &enterkey;。安裝程式將在根系統被裝入記憶體後自動啟動。 </para>
+  </sect2>
+
+
+  <sect2 arch="powerpc"
+><title
+>PowerPC 開機參數</title>
+<para
+>許多比較老的 Apple 顯示器使用 640x480 67Hz 模式。如果您的畫面在這些老 Apple 顯示器上是扭曲的，請嘗試加入開機參數 <userinput
+>video=atyfb:vmode:6</userinput
+> 。它將為大多數 Mach64 和 Rage 顯示設備選擇合適的模式。對於 Rage 128 來說，請改變其值為 <userinput
+>video=aty128fb:vmode:6</userinput
+> 。 </para>
+  </sect2>
+<!--   End of file boot-installer/powerpc.xml -->
+
+<!-- Start of file boot-installer/sparc.xml -->
+
+  <sect2 arch="sparc" id="boot-tftp"
+><title
+>用 TFTP 開機</title>
+
+
+<!-- Start of file boot-installer/intro-net.xml -->
+
+<para
+>要從網路開機，您的機器必須連接上網路和一台 TFTP 網路開機伺服器 (DHCP, RARP 以及 BOOTP)。 </para
+><para arch="hppa"
+>較早的系統如 715 也許需要使用一台 RBOOT 伺服器來取代 BOOTP 伺服器。 </para
+><para
+>支援的網路開機安裝方法在 <xref linkend="install-tftp"/>。 </para>
+<!--   End of file boot-installer/intro-net.xml -->
+
+<para
+>在有 OpenBoot 的機器上，簡單地進入安裝機器的開機監視器，(請參閱 <xref linkend="invoking-openboot"/>)。請使用指令 <userinput
+>boot net</userinput
+> 來從 TFTP 和 RARP 伺服器開機，或者也可以用 <userinput
+>boot net:bootp</userinput
+> 或 <userinput
+>boot net:dhcp</userinput
+> 來從 TFTP 和 DHCP 服務器開機。一些比較老的 OpenBoot 版本需要使用設備名稱， 例如 <userinput
+>boot le()</userinput
+>﹔這些可能不支援 DHCP。 </para>
+  </sect2>
+
+
+  <sect2 arch="sparc"
+><title
+>從光碟開機</title>
+
+
+<!-- Start of file boot-installer/intro-cd.xml -->
+
+<para
+>對於大多數人來說，最快的途徑是使用一套 Debian CD 光碟套件。如果您有此套件，並且如果您的機器支援直接光碟開機，太棒了！只需要 <phrase arch="i386"
+> 設定您的系統以光碟開機，請參閱 <xref linkend="boot-dev-select"/>, </phrase
+> 插入您的光碟，重開機，然後繼續下一章。 </para
+><para
+>注意某些特定的光碟機需要一些特殊的驅動程式，因為他們可能在安裝的早期步驟中無法被存取。如果標準的光碟開機的方法不能用於您的硬體，閱讀本章中關於其他種類的核心以及安裝方法，它們有可能能解決問題。 </para
+><para
+>即便您不能從光碟開機，依然可以安裝光碟上面的 Debian 系統組件和所有軟體套件。只需要使用不同的媒介，例如軟碟來開機即可。當安裝作業系統、基礎系統和任意附加的軟體套件時只需指向安裝系統至光碟機即可。 </para
+><para
+>如果您遇到開機方面的問題，請參閱 <xref linkend="boot-troubleshooting"/>。 </para>
+<!--   End of file boot-installer/intro-cd.xml -->
+
+<para
+>大多數 OpenBoot 版本支援 <userinput
+>boot cdrom</userinput
+> 指令。它其實是從 ID 為 6 的 SCSI 設備進行開機的一個別名。(對於 IDE 系統來說，它是第二個主硬碟)。在較早的 OpenBoot 版本上，您可能必須使用實際的設備名稱，因為它們不支援這個特殊的指令。注意據說在 Sun4m (例如 Sparc 10s 和 Sparc 20s) 系統上用光碟開機有些問題。 </para>
+  </sect2>
+
+
+  <sect2 arch="sparc" condition="supports-floppy-boot">
+  <title
+>從軟碟開機</title>
+<para
+>在 SPARC 機器上用軟碟機開機，請使用 <informalexample
+><screen>
+Stop-A -&gt; OpenBoot: "boot floppy"
+</screen
+></informalexample
+> 注意較新的 Sun4u (ultra) 結構不支援軟碟機開機，一個標準的錯誤資訊是 <computeroutput
+>Bad magic number in disk label - Can't open disk label package</computeroutput
+>。甚至，一些 Sun4c 型號 (例如 IPX) 不支援磁碟上找到的壓縮映像，所以這些都不被支援。 </para
+><para
+>不少 Sparcs (例如 Ultra 10) 有一個 OBP 缺陷。它阻止這些機器開機 (從而完全不支持開機)。合適的 OBP 更新可以從下面連接的 ID 106121 中取得，<ulink url="http://sunsolve.sun.com"
+></ulink
+>。 </para
+><para
+>如果您正在從軟碟開機，並且看到如下資訊 <informalexample
+><screen>
+Fatal error: Cannot read partition
+Illegal or malformed device name
+</screen
+></informalexample
+> 那麼您的機器很可能不支援軟碟開機。 </para>
+  </sect2>
+
+  <sect2 arch="sparc"
+><title
+>IDPROM 訊息</title>
+<para
+>如果您由於得到一個有關 ``IDPROM'' 問題的消息並且不能開機，這可能是 NVRAM 電池已經用光。通常它為韌體保持設定資訊。檢查 <ulink url="&url-sun-nvram-faq;"
+>Sun NVRAM 常見問答集</ulink
+> 以取得更多資訊。 </para>
+  </sect2>
+<!--   End of file boot-installer/sparc.xml -->
+
+ </sect1>
+
+
+<!-- Start of file boot-installer/parameters.xml -->
+
+ <sect1 id="boot-parms"
+><title
+>開機參數</title>
+<para
+>開機參數是 Linux 核心的參數。一般用於確保周邊設備能夠正確地運行。對於其中的大多數部分來說，核心可以自動檢查周邊設備的相關資訊。但是在某些情況下，您可能需要給核心一點小小的幫助。 </para
+><para
+>如果這是您第一次開機系統，嘗試預設的開機參數 (即：不要輸入任何參數) 並且檢查是否工作正確。大部分情況下應該如此，如果不是，可以重新啟動，並且檢查需要告訴系統什麼樣的特定參數。 </para
+><para
+>有關很多開機參數的資訊可以參閱 <ulink url="http://www.tldp.org/HOWTO/BootPrompt-HOWTO.html"
+> Linux BootPrompt HOWTO</ulink
+>，其中包括一些老舊硬體的解決方法。這一節只描述一些對最常用的基本參數。一些常見的問題描述見 <xref linkend="boot-troubleshooting"/>。 </para
+><para
+>當核心開機的時候，一條訊息 <informalexample
+><screen>
+Memory:<replaceable
+>avail</replaceable
+>k/<replaceable
+>total</replaceable
+>k available 
+</screen
+></informalexample
+> 應該會在開機過程的早期顯示。其中 <replaceable
+>total</replaceable
+> 應該符合您記憶體的總量，其中單位為多少 K。如果此參數不符合您安裝的記憶體總數，需要使用 <userinput
+>mem=<replaceable
+>ram</replaceable
+></userinput
+> 參數。 這裡 <replaceable
+>ram</replaceable
+> 被設成記憶體的數量。如是 ``K'' 則為千字節，``M'' 為兆字節。例如，<userinput
+>mem=65536k</userinput
+> 和 <userinput
+>mem=64m</userinput
+> 表示 64MB 記憶體。 </para
+><para condition="supports-serial-console"
+>如果您透過序列控制台開機，一般來說核心將自動檢測 <phrase arch="mipsel"
+> (盡管不是在一台 DECstations 上面)</phrase
+>。如果您有一塊顯示卡 (framebuffer) 和一塊鍵盤，透過序列埠附加於想開機的電腦上面，也許需要傳遞 <userinput
+>console=<replaceable
+>device</replaceable
+></userinput
+> 參數給核心， <replaceable
+>device</replaceable
+> 是序列埠設備。通常類似於 <filename
+>ttyS0</filename
+>。 </para
+><para arch="sparc"
+>對於 &arch-title; 序列埠設備名稱是 <filename
+>ttya</filename
+> 或 <filename
+>ttyb</filename
+> 。或者，透過設置 <envar
+>input-device</envar
+> 和 <envar
+>output-device</envar
+> OpenPROM 變數至 <filename
+>ttya</filename
+>。 </para>
+
+
+  <sect2 id="installer-args"
+><title
+>Debian 安裝程式的參數</title>
+<para
+>安裝系統確認一些附加的開機參數 <footnote
+> <para
+> 注意，核心最多可以接受 8 個命令列參數和 8 個環境變數選項 (包括安裝程式預設使用的選項)。 如果超出，2.4 內核會忽略過多的選項，2.6 核心則會當機。</para
+> </footnote
+>，也許比較有用。 </para>
+
+<variablelist>
+<varlistentry>
+<term
+>debconf/priority</term>
+<listitem
+><para
+>這些參數將顯示資訊設定為最低的級別。 </para
+><para
+>預設安裝使用 <userinput
+>debconf/priority=high</userinput
+>。這意味著高優先的和至關重要的資訊將被顯示，但是中級和低級資訊將被跳過。如果其間出現了問題，安裝程式將按照要求調整優先級別。 </para
+><para
+>如果您加入 <userinput
+>debconf/priority=medium</userinput
+> 作為開機參數，將看到安裝選單以及安裝過程中更多的控制選項。使用 <userinput
+>debconf/priority=low</userinput
+>，將顯示所有的訊息 (這相當於採用 <emphasis
+>專家級</emphasis
+> 開機方法)。透過 <userinput
+>debconf/priority=critical</userinput
+>，安裝系統只會顯示至關重要的資訊，並且嘗試正確無誤地執行各項事宜。 </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+>DEBIAN_FRONTEND</term>
+<listitem
+><para
+>這個開機參數控於安裝程式的使用者界面類型。目前可能參數設置可以是：<itemizedlist
+> <listitem
+> <para
+><userinput
+>DEBIAN_FRONTEND=noninteractive</userinput
+></para
+> </listitem
+><listitem
+> <para
+><userinput
+>DEBIAN_FRONTEND=text</userinput
+></para
+> </listitem
+><listitem
+> <para
+><userinput
+>DEBIAN_FRONTEND=newt</userinput
+></para
+> </listitem
+><listitem
+> <para
+><userinput
+>DEBIAN_FRONTEND=slang</userinput
+></para
+> </listitem
+><listitem
+> <para
+><userinput
+>DEBIAN_FRONTEND=ncurses</userinput
+></para
+> </listitem
+><listitem
+> <para
+><userinput
+>DEBIAN_FRONTEND=bogl</userinput
+></para
+> </listitem
+><listitem
+> <para
+><userinput
+>DEBIAN_FRONTEND=gtk</userinput
+></para
+> </listitem
+><listitem
+> <para
+><userinput
+>DEBIAN_FRONTEND=corba</userinput
+></para
+> </listitem
+> </itemizedlist
+> 預設的前端是 <userinput
+>DEBIAN_FRONTEND=newt</userinput
+>。 <userinput
+>DEBIAN_FRONTEND=text</userinput
+> 可以用於序列埠控制台安裝。一般來說在預設安裝媒介上只有 <userinput
+>newt</userinput
+> 前端，因此目前這個並非很有用。 </para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+>BOOT_DEBUG</term>
+<listitem
+><para
+>傳遞此參數將記錄最複雜的開機資訊。 <variablelist>
+<varlistentry>
+<term
+><userinput
+>BOOT_DEBUG=0</userinput
+></term>
+<listitem
+><para
+>此為預設。</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><userinput
+>BOOT_DEBUG=1</userinput
+></term>
+<listitem
+><para
+>更多的資訊。</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><userinput
+>BOOT_DEBUG=2</userinput
+></term>
+<listitem
+><para
+>大量的除錯資訊。</para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><userinput
+>BOOT_DEBUG=3</userinput
+></term>
+<listitem
+><para
+>介殼腳本將在開機期間執行於不同的地方以允許細節上的調整。退出介殼將繼續開機過程。 </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</para
+></listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term
+>INSTALL_MEDIA_DEV</term>
+<listitem
+><para
+>此參數值是載入 Debian 安裝程式設備的路徑，例如： <userinput
+>INSTALL_MEDIA_DEV=/dev/floppy/0</userinput
+> </para
+><para
+>開機映像通常會掃描所有的軟碟和 USB 隨身碟設備來找到根軟碟。它也可以透過此參數只查找一個設備。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>debian-installer/framebuffer</term>
+<listitem
+><para
+>一些架構使用核心 framebuffer 以提供不同的語言安裝。如果 framebuffer 在您的系統發生問題，您可以透過參數 <userinput
+>debian-installer/framebuffer=false</userinput
+> 關閉這個功能。這方面問題的徵兆是 bterm 或者 bogl 的錯誤資訊、一個空白的螢幕，或者在開始安裝的時候停止幾分鐘。 </para
+><para arch="i386"
+><userinput
+>video=vga16:off</userinput
+> 參數可以被用來停用 framebuffer。這類問題的報告原於使用 Mobile Radeon 卡的 Dell Inspiron 上。 </para
+><para arch="m68k"
+>在 Amiga 1200 and SE/30 上面也有報告指出這方面的問題。 </para
+><para arch="hppa"
+>在 hppa 上面報告過存在這些問題。 </para
+><note arch="sparc"
+><para
+>由於某些系統上顯示有問題，framebuffer 在 &arch-title; 上<emphasis
+>預設禁止使用</emphasis
+>。
+這將會使支援 framebuffer 良好的系統顯示很醜陋，例如採用 ATI 圖形卡的系統。
+如果您在安裝程式中遇到顯示問題，可以試著採用開機參數 <userinput
+>debian-installer/framebuffer=true</userinput
+>。 </para
+></note
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>debian-installer/probe/usb</term>
+<listitem
+><para
+>設定成 <userinput
+>false</userinput
+> 可以阻止在開機的時候禁止 USB 檢查來杜絕其所引起的問題。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>netcfg/disable_dhcp</term>
+<listitem
+><para
+>預設情況下，&d-i; 會透過 DHCP 來自動偵測網路。如果檢測成功，您將不需要審視並且改變其取得的設定。您可以在 DHCP 檢測失敗的情況下手動配置網路。 </para
+><para
+>如果您的網路上面具備一台 DHCP 伺服器，但是不想使用它，例如，因為它給出錯誤的答案。您可以使用參數 <userinput
+>netcfg/disable_dhcp=true</userinput
+> 來透過 DHCP 來設定網路並且手動輸入參數。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>hw-detect/start_pcmcia</term>
+<listitem
+><para
+>設定成 <userinput
+>false</userinput
+> 來阻止啟動 PCMCIA 服務，如果其引起各種問題。有些筆記型電腦對此會有錯誤的行為。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>preseed/url</term>
+<listitem
+><para
+>指定預設參數檔案的 URL，此檔案將在安裝中自動下載、掛載和使用。請參閱 <xref linkend="automatic-install"/>。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>preseed/file</term>
+<listitem
+><para
+>指定預設參數檔案的路徑，在安裝中自動掛載和使用。請參閱 <xref linkend="automatic-install"/>。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry condition="etch">
+<term
+>cdrom-detect/eject</term>
+<listitem
+><para
+>在重開機前，&d-i; 預設會自動退出安裝時的光學媒介。如果系統不是自動從光碟開機，這不是必要的動作。在某些情況下，這反而不便，例如，如果光碟機不能自動插入光碟片，使用者又不在旁邊操作。許多 slot loading, slim-line 和 caddy 類型的光碟機不能自動重新掛載媒介。 </para
+><para
+>設為 <userinput
+>false</userinput
+> 可以禁止自動退出，但要小心確保系統在安裝完後，不會自動從光碟開機。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>ramdisk_size</term>
+<listitem
+><para
+>如果您在使用 2.2.x 核心，也許需要設定 &ramdisksize;。 </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+  </sect2>
+ </sect1>
+
+<!--   End of file boot-installer/parameters.xml -->
+
+<!-- Start of file boot-installer/trouble.xml -->
+
+ <sect1 id="boot-troubleshooting">
+ <title
+>安裝過程中的障礙排除</title>
+ 
+
+  <sect2 condition="supports-floppy-boot" id="unreliable-floppies">
+  <title
+>軟碟的可靠性</title>
+
+<para
+>對於第一次安裝 Debian 的人來說，他們遇到的最大的問題很可能是軟碟的可靠性。 </para
+><para
+>問題出現最嚴重的是糟糕的開機軟碟，因為他們由硬體直接讀出，然後才進入 Linux 開機程序。很多情況下，硬體的讀取並不能像 Linux 軟碟驅動讀取那樣可靠，並且對於錯誤的資料，它們只是停止執行而且沒有錯誤訊息。軟碟機也可能發生錯誤並且印出很多有關的 I/O 錯誤。 </para
+><para
+>如果您在特定的軟碟上遇到麻煩，第一件要做的事情，是重新下載磁碟映像並且把它寫到<emphasis
+>另外</emphasis
+>一張軟碟上。僅僅只是格式化老的軟碟是不夠的，有可能的話甚至要在別的統上重寫這些軟碟。 </para
+><para
+>一個使用者曾報告他不得不把映像往軟碟寫了<emphasis
+>三</emphasis
+>次，直到第四次軟碟才算工作良好。 </para
+><para
+>其他一些使用者報告過用同樣的軟碟重新啟動若干次才能有一次成功的開機。這都是因為 硬體或者有缺陷的韌體軟碟驅動程式造成的。 </para>
+  </sect2>
+
+  <sect2
+><title
+>開機設定</title>
+
+<para
+>如果在開機過程中您遇到了問題或者核心當掉、無法辨識存在的周邊設備或者辨識錯誤，首先要做的事情是檢查開機參數，如同 <xref linkend="boot-parms"/> 之中的內容。 </para
+><para
+>如果開機時使用的是您自己的核心，而不是安裝程式提供的核心，請確定您的核心編有 <userinput
+>CONFIG_DEVFS</userinput
+> 參數。安裝程式需要 <userinput
+>CONFIG_DEVFS</userinput
+>。 </para
+><para
+>通稱，可以透過移除外掛硬體或者周邊設備來解決問題，然後再次重新開機。<phrase arch="i386"
+> 內建的調變解調器、音效卡以及隨插即用的設備通常很容易引起問題。</phrase
+> </para
+><para
+>如果您的機器上裝有多於 512M 的大容量的記憶體，並且安裝程式在啟動核心時當住，您可能需要加入一個開機參數，來限制核心能夠看到的記憶體數量，例如 <userinput
+>mem=512m</userinput
+>。 </para>
+  </sect2>
+
+  <sect2 arch="i386" id="i386-boot-problems">
+  <title
+>常見的 &arch-title; 安裝問題</title>
+<para
+>傳入某些啟動參數可以解決或避免一些常見的安裝問題。 </para
+><para
+>一些系統的軟碟會有 ``inverted DCLs''。如果您在讀軟碟時遇到錯誤資訊，並且您可以確定軟碟是好的，嘗試參數 <userinput
+>floppy=thinkpad</userinput
+>。 </para
+><para
+>在一些系統上，例如 IBM PS/1 或者 ValuePoint (具有 ST-506 設備)，IDE 設備可能無法辨識。請首先嘗試沒有參數的開機情況下是否能夠被識別。如果不行，請確定設備的幾何參數 (柱面，磁頭還有磁區)。然後使用參數 <userinput
+>hd=<replaceable
+>cylinders</replaceable
+>,<replaceable
+>heads</replaceable
+>,<replaceable
+>sectors</replaceable
+></userinput
+>。 </para
+><para
+>如果您有一台非常老的機器，並且核心在顯示 <computeroutput
+>Checking 'hlt' instruction...</computeroutput
+> 時中斷，需要嘗試 <userinput
+>no-hlt</userinput
+> 參數來取消這個測試。 </para
+><para
+>如果您的螢幕在核心開機的時候顯示一個奇怪的圖片 (例如，純白，純黑或者彩色的像素塊)，則顯示卡可能有問題。它不能切換至 framebuffer 模式。您可以使用開機參數 <userinput
+>debian-installer/framebuffer=false</userinput
+> 或 <userinput
+>video=vga16:off</userinput
+> 來取消 framebuffer 控制台。在這種情況下，由於控制台的限制，在安裝過程中只能用英語，請參閱 <xref linkend="boot-parms"/> 來取得細節資訊。 </para>
+  
+  <sect3>
+  <title
+>在 PCMCIA 段系統當機</title>
+<para
+>某些型號的 Dell 筆記型電腦會在 PCMCIA 設備檢測程式嘗試存取一些硬體位址的時候當機。其他筆記型電腦可能顯示類似的問題。如果您遇到那樣的問題，並且在安裝的時候不需要 PCMCIA 的支援，可以用 <userinput
+>hw-detect/start_pcmcia=false</userinput
+> 啟動參數來取消 PCMCIA 功能。您可以在安裝後，配定 PCMCIA 並且避開可能引起問題的資源範圍。 </para
+><para
+>或者，您可以在啟動安裝程式時進入專家模式。您需要按照要求輸入硬體資源範圍選項。例如，您如果有如上所說的 Dell 筆記型電腦問題，應該在這裡輸入 <userinput
+>exclude port 0x800-0x8ff</userinput
+>。在 <ulink url="http://pcmcia-cs.sourceforge.net/ftp/doc/PCMCIA-HOWTO-1.html#ss1.12"
+>System resource settings section of the PCMCIA HOWTO</ulink
+> 處有一個列表，整理出一些有問題的資源範圍選項。注意在安裝程式中，輸入這些值的時候必須忽略逗號。 </para>
+   </sect3>
+
+   <sect3>
+   <title
+>在裝入 USB 模組時系統當機</title>
+<para
+>核心在正常情況下會嘗試安裝 USB 模組以及 USB 鍵盤驅動程式來支援一些非標準的 USB 鍵盤。但是，有些不完整的 USB 系統會在驅動程式載入時當機。一個可能的解決方法是在 BIOS 設置內禁用您的 USB 控制器。或者在開機提示符號處傳遞 <userinput
+>debian-installer/probe/usb=false</userinput
+> 參數，這將阻止載入此模組。 </para>
+   </sect3>
+  </sect2>
+
+  <sect2 id="kernel-msgs">
+  <title
+>解讀核心起始資訊</title>
+
+<para
+>在開機期間，您可以看到很多資訊類似 <computeroutput
+>can't find <replaceable
+>something</replaceable
+> </computeroutput
+>，或者 <computeroutput
+> <replaceable
+>something</replaceable
+> not present</computeroutput
+>， <computeroutput
+>can't initialize <replaceable
+>something</replaceable
+> </computeroutput
+>，或者甚至 <computeroutput
+>this driver release depends on <replaceable
+>something</replaceable
+> </computeroutput
+>。大多數這些資訊都是無害的。您之所以看到它們，是因為安裝系統核心被設計成為可以在不同的電腦上執行，並且擁有不同的周邊設備。顯然地，沒有一個電腦可能擁有所有的周邊設備，因此作業系統可能在偵測一些您沒有的設備時送出一些警告。有時可以看到系統暫停了一段時間。這是由於它在等待一台設備的回應，但是這台設備並沒有安裝在您的系統上。如果您發現這段時間非常長，您可以之後重編自己的核心 (請參閱 <xref linkend="kernel-baking"/>)。 </para>
+  </sect2>
+
+
+  <sect2 id="problem-report">
+  <title
+>Bug Reporter</title>
+<para
+>如果您通過了初始化開機但是不能完成安裝，Bug Reporter 選單選項可能會很有用。它會複製系統的錯誤記錄和設定資訊至一個使用者提供的軟碟中。這個資訊可能提供了一些關於錯誤的原因和如何解決它的線索。如果您正在回報問題報告，您也許想附上這些資訊。 </para
+><para
+>其他相關安裝期間的安裝資訊可以在 <filename
+>/var/log/</filename
+> 找到，以及在電腦已經啟動至安裝後的系統的 <filename
+>/var/log/debian-installer/</filename
+> 中。 </para>
+  </sect2>
+
+  <sect2 id="submit-bug">
+  <title
+>回報安裝報告</title>
+<para
+>如果您還是有問題，請回報臭蟲報告。即使您安裝成功，我們還是希望您能發一份安裝報告，讓我們取得眾多硬體設定的更多資訊。請採用下列模板填寫安裝報告，並把這份報告以 "installation-reports" 虛擬軟體套件之臭蟲報告的名義，發送一封電子郵件至 <email
+>submit@bugs.debian.org</email
+>。 <informalexample
+><screen>
+Package: installation-reports
+
+Debian-installer-version: &lt;Fill in date and from where you got the image&gt;
+uname -a: &lt;The result of running uname -a on a shell prompt&gt;
+Date: &lt;Date and time of the install&gt;
+Method: &lt;How did you install?  What did you boot off?  If network
+      install, from where?  Proxied?&gt;
+
+Machine: &lt;Description of machine (eg, IBM Thinkpad R32)&gt;
+Processor:
+Memory:
+Root Device: &lt;IDE?  SCSI?  Name of device?&gt;
+Root Size/partition table: &lt;Feel free to paste the full partition
+      table, with notes on which partitions are mounted where.&gt;
+Output of lspci and lspci -n:
+
+Base System Installation Checklist:
+[O] = OK, [E] = Error (please elaborate below), [ ] = didn't try it
+
+Initial boot worked:    [ ]
+Configure network HW:   [ ]
+Config network:         [ ]
+Detect CD:              [ ]
+Load installer modules: [ ]
+Detect hard drives:     [ ]
+Partition hard drives:  [ ]
+Create file systems:    [ ]
+Mount partitions:       [ ]
+Install base system:    [ ]
+Install boot loader:    [ ]
+Reboot:                 [ ]
+
+Comments/Problems:
+
+&lt;Description of the install, in prose, and any thoughts, comments
+      and ideas you had during the initial install.&gt;
+</screen
+></informalexample
+> 在臭蟲報告內，請描述問題，包括核心當住後見到的核心訊息。請描述進入問題狀態前相關的步驟。 </para>
+  </sect2>
+ </sect1>
+<!--   End of file boot-installer/trouble.xml -->
+
+</chapter>
+<!--   End of file boot-installer/boot-installer.xml -->

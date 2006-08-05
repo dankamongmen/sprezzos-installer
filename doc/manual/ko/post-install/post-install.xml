@@ -1,0 +1,476 @@
+<!-- Start of file post-install/post-install.xml -->
+
+<chapter id="post-install">
+ <title
+>다음 단계 및 그 다음에 할 일</title>
+
+
+<!-- Start of file post-install/new-to-unix.xml -->
+
+
+ <sect1 id="unix-intro">
+ <title
+>유닉스를 처음 접한다면</title>
+<para
+>유닉스를 처음 접한다면, 아마 책을 몇권 사서 읽는 게 좋을 것입니다. 또 여러가지 좋은 정보들이 <ulink url="&url-debian-reference;"
+>Debian Reference</ulink
+>에 있습니다. <ulink url="&url-unix-faq;"
+>list of Unix FAQs</ulink
+>에는 역사적인 훌륭한 참고자료들이 들어 있는 여러가지 유즈넷 문서 목록이 들어 있습니다. </para
+><para
+>리눅스는 유닉스를 구현한 것입니다. <ulink url="&url-ldp;"
+>Linux Documentation Project (LDP)</ulink
+> 사이트에는 리눅스에 관한 여러가지 HOWTO와 온라인 서적이 있습니다. 이 문서 대부분은 컴퓨터에 직접 설치할 수도 있습니다. <classname
+>doc-linux-html</classname
+> 꾸러미 (HTML 버전) 아니면 <classname
+>doc-linux-text</classname
+> 꾸러미를 (ASCII 버전) 설치하시고, <filename
+>/usr/share/doc/HOWTO</filename
+> 안의 파일을 읽어보십시오. 여러가지 언어로 되어 있는 LDP HOWTO도 데비안 꾸러미가 있습니다. </para>
+
+ </sect1>
+<!--   End of file post-install/new-to-unix.xml -->
+
+<!-- Start of file post-install/orientation.xml -->
+
+
+ <sect1 id="debian-orientation"
+><title
+>데비안에 익숙해지기</title>
+<para
+>데비안은 다른 배포판들과 약간 다릅니다. 다른 배포판에 익숙해져 있다고 해도 몇 가지 알아둬야 시스템을 훌륭하고 깔끔한 상태로 유지합니다 이 장에서는 데비안에 익숙해지는 방법을 설명합니다. 데비안을 사용하는 방법을 하나하나 설명하지 않고, 성급한 분들을 위해 아주 약간의 시스템 개요만 설명합니다. </para>
+
+  <sect2
+><title
+>데비안 꾸러미 시스템</title>
+<para
+>알아야 할 가장 중요한 점은 데비안 꾸러미 시스템입니다. 원칙적으로 시스템의 대부분을 꾸러미 시스템이 제어하게 됩니다. 이 부분은: <itemizedlist
+> <listitem
+><para
+> <filename
+>/usr</filename
+> (<filename
+>/usr/local</filename
+> 제외) </para
+></listitem
+> <listitem
+><para
+> <filename
+>/var</filename
+> (<filename
+>/var/local</filename
+>을 만들면 그 안에서는 제어하지 않음) </para
+></listitem
+> <listitem
+><para
+> <filename
+>/bin</filename
+> </para
+></listitem
+> <listitem
+><para
+> <filename
+>/sbin</filename
+> </para
+></listitem
+> <listitem
+><para
+> <filename
+>/lib</filename
+> </para
+></listitem
+> </itemizedlist
+> 예를 들어, <filename
+>/usr/bin/perl</filename
+> 파일을 덮어 썼다고 하면 당장은 덮어 쓴 파일로 동작하긴 하지만, <classname
+>perl</classname
+> 꾸러미를 업그레이드하면 그 파일을 업그레이드하면서 다시 덮어 씁니다. 전문가들이라면 <command
+>aptitude</command
+>에서 해당 꾸러미를 <quote
+>고정</quote
+>상태로 놓아서 이 문제를 피해갑니다. </para
+><para
+>가장 훌륭한 꾸러미 설치 도구의 하나는 APT입니다. 명령행 방식의 <command
+>apt-get</command
+>을 사용할 수도 있고, 텍스트 전체화면 방식의 <application
+>aptitude</application
+>를 사용할 수도 있습니다. APT를 이용해 main, contrib, non-free 모두에서 설치할 수 있고, 그러면 표준 꾸러미 외에 특정 국가로 수출이 제한되어 있는 꾸러미까지도 설치할 수 있습니다. </para>
+  </sect2>
+
+  <sect2
+><title
+>프로그램 버전 관리</title>
+<para
+>같은 이름의 프로그램이 여러가지 버전이 있는 경우 update-alternatives에서 관리합니다. 여러 버전의 프로그램을 관리하고 있다면, update-alternative 맨페이지를 읽어 보십시오. </para>
+  </sect2>
+
+  <sect2
+><title
+>CRON 작업 관리</title>
+<para
+>시스템 관리자가 관리하는 작업들은 모두 <filename
+>/etc</filename
+> 안에 들어 있어야 합니다. 루트 CRON 작업으로 매일, 매주, 밤마다 실행해야 하는 게 있으면, 해당 작업을 <filename
+>/etc/cron.{daily,weekly,monthly}</filename
+> 아래에 넣어 두십시오. 이 디렉토리 아래의 파일들은 <filename
+>/etc/crontab</filename
+>에서 시작되어 알파벳 순서로 차례대로 실행하며 동기화 될 것입니다. </para
+><para
+>한편, (1) 특정 사용자로 실행해야 할 CRON 작업이 있거나, (2) 특정 시간이나 특정 주기로 실행해야 하는 작업이 있으면, <filename
+>/etc/crontab</filename
+>을 사용하거나, 아니면 더 좋은 방법으로 <filename
+>/etc/cron.d/아무개</filename
+>를 사용할 수 있습니다. 이 파일에는 CRON 작업을 실행할 사용자를 지정하는 필드가 있습니다. </para
+><para
+>둘 중에 어떤 경우이든 간에, 파일을 편집하기만 하면 CRON에서 자동으로 처리합니다. 따로 명령어를 실행할 필요가 없습니다. 더 자세한 정보는 cron(8), crontab(5), <filename
+>/usr/share/doc/cron/README.Debian</filename
+>을 참고하십시오. </para>
+  </sect2>
+ </sect1>
+<!--   End of file post-install/orientation.xml -->
+
+<!-- Start of file post-install/reactivating-win.xml -->
+
+
+ <sect1 arch="i386" id="reactivating-win">
+ <title
+>DOS 및 Windows 다시 살리기</title>
+<para
+>베이스 시스템을 설치하고 <emphasis
+>마스터 부트 레코드</emphasis
+>를 쓰면, 리눅스를 부팅할 수 있지만 그 외의 운영 체제는 부팅할 수 없는 경우가 있습니다. 설치할 때 어떻게 했느냐에 따라 달라집니다. 이 장에서는 어떻게 예전의 시스템을 살려서 DOS나 Windows로 다시 부팅할 수 있는지 다룹니다. </para
+><para
+>부팅 관리자 <command
+>LILO</command
+>는 리눅스 외의 다른 PC용 운영 체제도 부팅할 수 있습니다. <command
+>LILO</command
+>는 <filename
+>/etc/lilo.conf</filename
+> 파일을 편집해 설정합니다. 이 파일을 편집한 다음에 <command
+>lilo</command
+> 프로그램을 실행해야 합니다. 이렇게 해야 하는 이유는 프로그램을 실행해야만 바뀐 사항이 실제로 적용되기 때문입니다. </para
+><para
+><filename
+>lilo.conf</filename
+> 파일에서 중요한 부분은 <userinput
+>image</userinput
+>와 <userinput
+>other</userinput
+> 키워드가 들어 있는 줄과 그 뒤에 나오는 줄입니다. 각각은 <command
+>LILO</command
+>가 부팅하는 시스템 하나하나에 대해 쓰여 있습니다. 여기에는 커널 (<userinput
+>image</userinput
+>), 루트 파일시스템, 커널 파라미터가 들어 있고, 리눅스가 아닌 다른 (<userinput
+>other</userinput
+>) 운영 체제를 부팅하는 설정들도 들어 있습니다. 이 <userinput
+>image</userinput
+>와 <userinput
+>other</userinput
+> 키워드는 여러 번 사용할 수 있습니다. 설정 파일에서 시스템의 순서가 중요합니다. 이 순서에 따라 제한시간이 지났을 때 자동으로 부팅하는 시스템이 달라집니다. (제한시간동안 <keycap
+>shift</keycap
+> 키를 누르지 않아서 <command
+>LILO</command
+>가 멈추지 않았다고 가정합니다.) </para
+><para
+>데비안을 처음 설치한 후에, <command
+>LILO</command
+>를 이용해 시스템을 부팅하도록 설정했다고 가정합니다. 다른 리눅스 커널로 부팅하려면 <filename
+>/etc/lilo.conf</filename
+> 설정 파일을 편집해서 다음 줄을 추가해야 합니다: <informalexample
+><screen>
+&additional-lilo-image;
+</screen
+></informalexample
+> 기본적인 설정에서는 처음 두 줄만 필요합니다. 다른 두 옵션에 대해 알고 싶으시면 <command
+>LILO</command
+> 문서를 참고하십시오. 이 문서는 <filename
+>/usr/share/doc/lilo/</filename
+> 안에 있습니다. 읽어봐야 할 파일은 <filename
+>Manual.txt</filename
+>입니다. 부팅에 관해 빨리 알고 싶으시면 <command
+>LILO</command
+> 맨페이지를 볼 수 있습니다. 설정 파일의 키워드에 대해 살펴보시려면 <filename
+>lilo.conf</filename
+> 맨페이지를, 부트 섹터를 새로 설치하는 설명에 대해서는 <filename
+>lilo</filename
+> 맨페이지를 보십시오. </para
+><para
+>&debian;에는 GRUB (<classname
+>grub</classname
+> 꾸머리), CHOS (<classname
+>chos</classname
+> 꾸러미), Extended-IPL (<classname
+>extipl</classname
+> 꾸러미), loadlin (<classname
+>loadlin</classname
+> 꾸러미) 등과 같은 다른 부트로더도 있습니다. </para>
+ </sect1>
+<!--   End of file post-install/reactivating-win.xml -->
+
+<!-- Start of file post-install/further-reading.xml -->
+
+ <sect1 id="further-reading"
+><title
+>그 외에 읽을 것과 정보</title>
+<para
+>특정 프로그램에 대한 정보를 보려면, <userinput
+>man <replaceable
+>프로그램</replaceable
+></userinput
+> 명령을 실행해 보시고, 아니면 <userinput
+>info <replaceable
+>프로그램</replaceable
+></userinput
+> 명령을 실행해 보십시오. </para
+><para
+><filename
+>/usr/share/doc</filename
+> 안에도 유용한 문서가 많이 들어 있습니다. 특히 <filename
+>/usr/share/doc/HOWTO</filename
+> 및 <filename
+>/usr/share/doc/FAQ</filename
+>에 재미있는 정보가 많이 들어 있습니다. 버그를 제출하려면 <filename
+>/usr/share/doc/debian/bug*</filename
+> 파일들을 보십시오. 어떤 특정 프로그램의 데비안 관련 정보를 읽으려면 <filename
+>/usr/share/doc/(꾸러미이름)/README.Debian</filename
+> 파일을 보십시오. </para
+><para
+><ulink url="http://www.debian.org/"
+>데비안 웹사이트</ulink
+>에는 많은 양의 데비안 관련 문서가 있습니다. 특히, <ulink url="http://www.debian.org/doc/FAQ/"
+>Debian GNU/Linux FAQ</ulink
+> 와 <ulink url="http://www.debian.org/doc/user-manuals#quick-reference"
+>데비안 레퍼런스</ulink
+>를 보십시오.많은 데비안 문서들의 인덱스는 <ulink url="http://www.debian.org/doc/ddp"
+>데비안 문서 프로젝트</ulink
+>를 통해서 얻을 수 있습니다. 데비안 커뮤니티에 참여하면 커뮤니티 안에서 서로 도와줍니다. 데비안 메일링 리스트에 가입하려면 <ulink url="http://www.debian.org/MailingLists/subscribe"
+> 메일링 리스트 가입</ulink
+> 페이지를 보십시오.마지막으로 <ulink url="http://lists.debian.org/"
+>데비안 메일링 리스트 아카이브</ulink
+>에는 데비안에 관한 유용한 정보들이 들어 있습니다. </para
+><para
+>GNU/리눅스에 관한 정보는 보통 <ulink url="http://www.tldp.org/"
+>Linux Documentation Project</ulink
+>에 보면 있습니다. 여기에 GNU/리눅스 시스템에 관한 HOWTO 및 다른 훌륭한 정보가 들어 있는 링크가 있습니다. </para>
+
+ </sect1>
+<!--   End of file post-install/further-reading.xml -->
+
+<!-- Start of file post-install/kernel-baking.xml -->
+
+ <sect1 id="kernel-baking"
+><title
+>새 커널 컴파일하기</title>
+<para
+>왜 새 커널을 컴파일할까요? 데비안에 들어 있는 기본 커널에는 대부분의 경우에 동작하기 때문에 보통 다시 컴파일할 필요가 없습니다. 또, 데비안은 여러 가지 커널 꾸러미가 들어 있습니다. 그래서 하드웨어에 더 적합한 다른 커널 이미지 꾸러미가 있는 지 먼저 확인해 보는 게 좋습니다. 하지만 다음 이유때문에 커널을 컴파일하는 게 좋을 수도 있습니다: <itemizedlist>
+<listitem
+><para
+>특별한 하드웨어가 필요할 때, 혹은 기존 커널에서 하드웨어 충돌이 발생할 때 </para
+></listitem>
+<listitem
+><para
+>기본 커널에서 지원하지 않는 커널 옵션 사용 (예를 들어 큰 메모리 지원) </para
+></listitem>
+<listitem
+><para
+>필요없는 드라이버를 지워 커널을 최적화해 부팅 시간을 빠르게 하기 </para
+></listitem>
+<listitem
+><para
+>모듈 여러 개로 구성된 커널 대신에 이미지 하나로 된 커널 만들기 </para
+></listitem>
+<listitem
+><para
+>새로 업데이트된 커널이나 개발버전 커널 사용 </para
+></listitem>
+<listitem
+><para
+>리눅스 커널 공부하기 </para
+></listitem>
+</itemizedlist>
+
+</para>
+
+  <sect2
+><title
+>커널 이미지 관리</title>
+<para
+>커널 컴파일을 꺼려하지 마십시오. 재미있는 일이고 그만큼 좋은 점이 있습니다. </para
+><para
+>데비안 방식으로 커널을 컴파일하려면, 꾸러미가 몇개 필요합니다: <classname
+>fakeroot</classname
+>, <classname
+>kernel-package</classname
+>, <phrase condition="classic-kpkg"
+><classname
+>kernel-source-&kernelversion;</classname
+> (이 안내서를 쓰는 시점에서 가장 최근 버전)</phrase
+> <phrase condition="common-kpkg"
+><classname
+>linux-source-2.6</classname
+></phrase
+>  및 기타 이미 설치되어 있을 꾸러미들. (완전한 목록은 <filename
+>/usr/share/doc/kernel-package/README.gz</filename
+> 파일을 참고하십시오.) </para
+><para
+>이 방법을 이용해 커널 소스에서 .deb 꾸러미 파일을 만들고, 커널에 들어 있지 않은 모듈이 있으면 그 모듈의 .deb 파일도 커널에 맞춰서 만듭니다. 이 방법이 커널 이미지를 관리하는 더 좋은 방법입니다. <filename
+>/boot</filename
+> 안에 커널, System.map 및 빌드할 때 사용한 커널 설정 파일이 들어 있게 됩니다. </para
+><para
+><quote
+>데비안 방식</quote
+>으로 커널을 컴파일할 <emphasis
+>필요는</emphasis
+> 없습니다. 하지만 꾸러미 시스템을 통해 커널을 관리하는 게 더 안전하고 더 쉽습니다. 설령 <phrase condition="classic-kpkg"
+><classname
+>kernel-source-&kernelversion;</classname
+></phrase
+><phrase condition="common-kpkg"
+><classname
+>linux-source-2.6</classname
+></phrase
+> 꾸러미가 아니라 직접 리누스 토발즈가 배포하는 커널 소스를 이용한다고 해도 <classname
+>kernel-package</classname
+> 컴파일 방법을 계속 사용할 수 있습니다. </para
+><para
+><filename
+>/usr/share/doc/kernel-package</filename
+> 안에 <classname
+>kernel-package</classname
+>를 사용하는 방법에 대한 문서가 있습니다. 여기서는 간단히 어떤 단계를 거쳐야 하는지만 설명합니다. </para
+><para
+>여기서부터는, 하드웨어에 대한 권한 없이 자기 홈 디렉토리에 커널 소스를 풀었다고 가정합니다<footnote
+> <para
+> 다른 위치에 커널 소스를 풀고 빌드할 수도 있지만, 특정 권한이 없이도 할 수 있는 가장 쉬운 방법입니다. </para
+> </footnote
+>. 또 커널 버전이 &kernelversion; 버전이라고 가정합니다. 커널 소스를 풀려는 디렉토리에서, <phrase condition="classic-kpkg"
+><userinput
+>tar xjf /usr/src/kernel-source-&kernelversion;.tar.bz2</userinput
+></phrase
+><phrase condition="common-kpkg"
+><userinput
+>tar xjf /usr/src/linux-source-&kernelversion;.tar.bz2</userinput
+></phrase
+> 명령으로 커널 소스를 풀고, 새로 만들어진 <phrase condition="classic-kpkg"
+><filename
+>kernel-source-&kernelversion;</filename
+></phrase
+><phrase condition="common-kpkg"
+><filename
+>linux-source-&kernelversion;</filename
+></phrase
+> 디렉토리로 들어가십시오. </para
+><para
+>그리고 커널을 설정합니다. X11을 설치하고 실행중이라면 <userinput
+>make xconfig</userinput
+>를 실행합니다. 아니면 <userinput
+>make menuconfig</userinput
+>를 실행합니다. (<userinput
+>menuconfig</userinput
+>는 <classname
+>libncurses5-dev</classname
+> 꾸러미를 설치해야 합니다.) 온라인 도움말을 읽어 보시면서 주의를 기울여 선택하십시오. 뭔가 의심스러운 게 있으면, 잘 모르더라도 해당 장치 드라이버(이더넷 카드, SCSI 컨트롤러 등 하드웨어 주변장치를 관리하는 소프트웨어)를 포함하는 편이 더 좋습니다. 주의하십시오: 특정 하드웨어와는 관계없는 옵션이고 그 옵션이 뭔지 잘 모르겠다면 기본값 그대로 놔 두십시오. <quote
+>Loadable module support</quote
+>에 있는 <quote
+>Kernel module loader</quote
+> 옵션을 꼭 선택하십시오. (기본값으로 선택이 안 되어 있습니다.) 이 옵션이 없으면, 데비안 시스템에 문제가 발생합니다. </para
+><para
+>소스 트리에 필요없는 파일들을 지워서 <classname
+>kernel-package</classname
+> 파라미터를 초기화하십시오. <userinput
+>make-kpkg clean</userinput
+> 명령을 실행합니다. </para
+><para
+>이제 커널을 컴파일합니다: <userinput
+>fakeroot make-kpkg --revision=custom.1.0 kernel_image</userinput
+> 명령을 실행합니다. 버전 번호 <quote
+>1.0</quote
+>은 마음대로 바꿀 수 있습니다. 이 번호는 커널 빌드를 파악하려고 사용하는 버전 번호일 뿐입니다. 마찬가지로 <quote
+>custom</quote
+> 대신에 어떤 단어라도 (예를 들어 호스트이름) 넣을 수 있습니다. 커널 컴파일은 컴퓨터 속도에 따라 시간이 좀 오래 걸릴 수도 있습니다. </para
+><para condition="supports-pcmcia"
+>PCMCIA 기능이 필요하다면 <classname
+>pcmcia-source</classname
+> 꾸러미도 설치해야 합니다. tar.gz 파일을 루트 권한으로 <filename
+>/usr/src</filename
+> 디렉토리에서 푸십시오. (모듈이 <filename
+>/usr/src/modules</filename
+>에 들어 있는 게 중요합니다.) 그 다음에 루트로 <userinput
+>make-kpkg modules_image</userinput
+>를 실행하십시오. </para
+><para
+>컴파일이 끝나면 다른 꾸러미와 마찬가지로 직접 만든 커널을 설치합니다. 루트 권한으로 <userinput
+>dpkg -i ../kernel-image-&kernelversion;-<replaceable
+>서브아키텍처</replaceable
+>_custom.1.0_&architecture;.deb</userinput
+> 명령을 실행합니다. <replaceable
+>서브아키텍처</replaceable
+> 부분은 커널 옵션을 어떻게 따라 달라지는 <phrase arch="i386"
+><quote
+>i586같은</quote
+></phrase
+> 서브아키텍처 이름입니다. <userinput
+>dpkg -i kernel-image...</userinput
+> 명령은 커널 이미지를 설치하고, 다른 관련 파일 몇 개도 설치합니다. 예를 들어 <filename
+>System.map</filename
+> 파일을 설치하고 (커널 문제를 디버깅할 때 사용), <filename
+>/boot/config-&kernelversion;</filename
+> (커널 설정이 들어 있음) 파일도 설치합니다. <classname
+>kernel-image-&kernelversion;</classname
+> 꾸러미를 설치하면 알아서 해당 플랫폼의 부트로더를 사용해 부팅 설정을 업데이트합니다. 그래서 부트로더를 직접 신경 쓰지 않아도 부팅할 수 있게 됩니다. 모듈 꾸러미를 만들었다면 (예를 들어 PCMCIA가 있다면), 그 꾸러미도 설치해야 합니다. </para
+><para
+>이제 시스템을 다시 시작합니다. 위의 단계에서 발생한 메세지들을 잘 읽어보시고, <userinput
+>shutdown -r now</userinput
+> 명령을 실행하십시오. </para
+><para
+><phrase condition="etch"
+>데비안 커널과 커널 컴파일에 대한 더 많은 정보는 <ulink url="&url-kernel-handbook;"
+>데비안 리눅스 커널 핸드북</ulink
+>을 보십시오.</phrase
+> <classname
+>kernel-package</classname
+>에 대한 더 많은 정보는 <filename
+>/usr/share/doc/kernel-package</filename
+> 안의 문서를 읽어보십시오. </para>
+  </sect2>
+ </sect1>
+<!--   End of file post-install/kernel-baking.xml -->
+
+<!-- Start of file post-install/rescue.xml -->
+
+ <sect1 id="rescue" condition="etch">
+ <title
+>손상된 시스템 복구하기</title>
+<para
+>경우에 따라서는 문제가 발생해서 정성을 기울여 설치한 시스템이 부팅하지 않게 될 수 있습니다. 무언가 바꾸는 중에 부트로더 설정이 망가졌을 수도 있고, 새로 설치한 커널이 부팅하지 않을 수도 있고, 디스크가 방사선에 맞아서 <filename
+>/sbin/init</filename
+> 파일의 일부를 바꾸어 놨을 수도 있습니다. 어떤 원인이든지, 이 문제를 수정하려면 작업할 시스템이 하나 필요하고, 응급복구 모드를 이 경우에 사용하는 게 좋습니다. </para
+><para
+>응급복구 모드로 들어가려면, <prompt
+>boot:</prompt
+> 프롬프트에서 <userinput
+>rescue</userinput
+>라고 입력하거나 부팅 파라미터로 <userinput
+>rescue/enable=true</userinput
+> 부팅 파라미터로 부팅하십시오. 설치 프로그램의 맨 처음 화면이 나타나고, 지금 모드가 설치 모드가 아니라 응급복구 모드라는 사실을 알리는 말이 나타납니다. 너무 걱정하지 마십시오. 시스템을 엎어쓰지 않습니다! 응급복구 모드는 설치 프로그램에 들어 있는 하드웨어 검색 기능을 이용해 디스크, 네트워크 장치 등을 복구하는 동안 사용할 수 있도록 하는 것 뿐입니다. </para
+><para
+>파티션 도구 대신에, 시스템의 파티션 목록이 나타나고, 그 중에 하나를 선택합니다. 보통 복구를 하려는 루트 파일시스템이 들어 있는 파티션을 선택합니다. 디스크에 있는 파티션은 물론 RAID나 LVM장치에 있는 파티션을 선택할 수도 있습니다. </para
+><para
+>가능하다면, 설치 프로그램에서 선택한 파일 시스템 안에서 쉘 프롬프트를 표시할 것이고, 거기에서 필요한 복구 작업을 할 수 있습니다. <phrase arch="i386"
+> 예를 들어, GRUB 부트로더를 첫 번째 하드 디스크의 마스터부트레코드에 다시 설치하려면, <userinput
+>grub-install '(hd0)'</userinput
+> 명령을 실행하면 됩니다.</phrase
+> </para
+><para
+>선택한 루트 파일시스템에서 쉘을 실행할 수 없는 경우 (예를 들어 파일 시스템이 망가진 경우), 경고 메세지를 표시하고 설치 환경 안에서 쉘을 실행합니다. 이 환경에서는 그리 많은 프로그램을 쓸 수는 없지만, 시스템을 복구하는 용도로는 충분할 것입니다. 선택한 루트 파일시스템은 <filename
+>/target</filename
+> 디렉토리에 마운트되어 있습니다. </para
+><para
+>어떤 경우이든, 쉘을 빠져나간 다음에 시스템이 다시 시작합니다. </para
+><para
+>망가진 시스템을 복구하는 작업은 매우 어려울 수도 있습니다. 그리고 이 안내서는 무엇이 망가지고 그걸 어떻게 고치는 지에 대한 모든 사항을 언급하지 않습니다. 문제에 부딪힌 경우, 전문가에게 문의하십시오. </para>
+ </sect1>
+<!--   End of file post-install/rescue.xml -->
+
+</chapter>
+<!--   End of file post-install/post-install.xml -->

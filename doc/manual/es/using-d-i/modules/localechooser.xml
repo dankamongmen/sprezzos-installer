@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 28856  -->
+<!-- traducido por jfs, 30 dic. 2005 -->
+
+   <sect3 id="localechooser" condition="etch">
+   <title>Seleccionar las opciones de localización</title>
+
+<para>
+
+En la mayoría de los casos las primeras preguntas que se le harán estárán
+relacionadas con las opciones de localización que se van a utilizar tanto
+en la instalación como en el sistema instalado. Las opciones de localización
+consisten en el idioma, el país y la localización.
+
+</para><para>
+
+El idioma que escoja se utilizará durante el resto del proceso de instalación,
+siempre que exista una traducción para los distintos mensajes que se muestran
+en ésta. Si no hay una traducción disponible para el idioma seleccionado
+el instalador mostrará los mensajes en inglés.
+
+</para><para>
+
+El país seleccionado se utilizará más adelante en el proceso de instalación
+para seleccionar su zona horaria por omisión y la réplica de Debian más
+apropiada en función de us localización geográfica. El idioma y el país se
+utilizarán conjuntamente para definir la localización del sistema por omisión y
+para ayudarle a seleccionar su teclado.
+
+</para><para>
+
+Primero se le preguntará cuál es su idioma preferido. Los nombres de idioma
+se muestran tanto en inglés (lado izquierdo) como en el propio idioam (lado
+derecho). También se utiliza la tipografía apropiada para su idioma en el lado
+derecho. La lista está ordenada alfabéticamente por el nombre en inglés.
+El primer elemento de la lista es una opción adicional que le permite
+seleccionar la localización <quote>C</quote> en lugar de un idioma concreto. Si
+escoje la localización <quote>C</quote> la instalación procederá en inglés, y
+el sistema instalado no tendrá soporte de localización ya que no se instalará
+el paquete <classname>locales</classname>.
+
+</para><para>
+
+Se le pedirá que seleccione un país 
+si selecciona un idioma que es el idioma oficial para más de un país<footnote>
+
+<para>
+
+En términos técnicos esto significa que hay múltiples localizaciones para
+ese lenguaje con distintos códigos de país.
+
+</para>
+
+</footnote>
+Podrá obtener una lista de países, agrupados por continente, 
+si elije <guimenuitem>Otro</guimenuitem>, al final de la lista.
+Si el idioma elegido tiene sólo un país asociado a éste se seleccionará automáticamente.
+
+</para><para>
+
+Se seleccionará una localización por omisión basándose en su idioma y país
+seleccionado. Si está instalando en prioridad media o baja podrá seleccionar
+una localización distinta del valor por omisión y también podrá elegir las
+localizaciones adicionales que se generarán para el sistema instalado.
+
+</para>
+   </sect3>

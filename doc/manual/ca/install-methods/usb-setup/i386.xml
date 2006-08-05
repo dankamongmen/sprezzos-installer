@@ -1,0 +1,105 @@
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 32141 -->
+
+   <sect3 arch="i386">
+   <title>Particionar un llapis USB a &arch-title;</title>
+<para>
+
+Mostrarem com configurar un llapis de memòria per utilitzar la primera
+partició d'aquest, en comptes del dispositiu complet.
+
+</para><note><para>
+
+La major part dels llapis USB venen preconfigurats amb una única
+partició FAT16, així que en general no serà necessari reparticionar o
+reformatar-lo. Si heu de fer-ho, utilitzeu el <command>cfdisk</command>
+o qualsevol altra ferramenta per crear la partició FAT16, i aleshores
+creeu el sistema de fitxers fent:
+
+<informalexample><screen>
+# mkdosfs /dev/<replaceable>sda1</replaceable>
+</screen></informalexample>
+
+Aneu en compte d'utilitzar el nom del dispositiu correcte pel vostre
+llapis USB. L'ordre <command>mkdosfs</command> és al paquet Debian
+<classname>dosfstools</classname>.
+
+</para></note><para>
+
+Per arrencar el nucli després d'arrencar des del llapis USB, posarem un
+carregador d'arrencada al llapis. Malgrat que hauria de funcionar
+qualsevol carregador (p.ex. <command>LILO</command>), és convenient
+utilitzar <command>SYSLINUX</command>, ja que utilitza una partició FAT16
+i pot reconfigurar-se editant tan sols un fitxer de text. Qualsevol sistema
+operatiu que suporte el sistema de fitxers FAT pot utilitzar-se per canviar
+la configuració del carregador d'arrencada.
+
+</para><para>
+
+Per posar el <command>SYSLINUX</command> a la partició FAT16 del vostre
+llapis USB, instal·leu els paquets <classname>syslinux</classname> i
+<classname>mtools</classname> al vostre sistema i executeu:
+
+<informalexample><screen>
+# syslinux /dev/<replaceable>sda1</replaceable>
+</screen></informalexample>
+
+Altra vegada, aneu en compte i utilitzeu el nom correcte pel dispositiu.
+La partició no hauria d'estar muntada quan executeu l'ordre
+<command>SYSLINUX</command>.
+Aquest procediment escriu un sector d'arrencada a la partició i crea el fitxer
+<filename>ldlinux.sys</filename> que conté el codi del carregador d'arrencada.
+
+</para><para>
+
+Munteu la partició (<userinput>mount /dev/sda1 /mnt</userinput>) i copieu
+els fitxers següents al llapis:
+
+<itemizedlist>
+<listitem><para>
+
+<filename>vmlinuz</filename> (nucli binari)
+
+</para></listitem>
+<listitem><para>
+
+<filename>initrd.gz</filename> (imatge inicial del disc ram)
+
+</para></listitem>
+<listitem><para>
+
+<filename>syslinux.cfg</filename> (fitxer de configuració del SYSLINUX)
+
+</para></listitem>
+<listitem><para>
+
+Mòduls del nucli opcionals
+
+</para></listitem>
+</itemizedlist>
+
+Si voleu canviar el nom dels fitxers, aneu en compte de que el
+<command>SYSLINUX</command> tan sols pot utilitzar nom de fitxers tipus
+DOS (8.3).
+
+</para><para>
+
+
+El fitxer de configuració <filename>syslinux.cfg</filename> hauria de contenir
+les següents línies:
+
+<informalexample><screen>
+default vmlinuz
+append initrd=initrd.gz ramdisk_size=12000 root=/dev/ram rw
+</screen></informalexample>
+
+Fixeu-vos que el paràmetre <userinput>ramdisk_size</userinput> hauria de
+incrementar-se depenent de la imatge que esteu arrencant.
+<phrase condition="sarge">
+Si l'arrencada falla, podeu afegir <userinput>devfs=mount,dall</userinput>
+a la línia <quote>append</quote>.
+</phrase>
+
+</para>
+   </sect3>
+

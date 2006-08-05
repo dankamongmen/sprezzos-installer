@@ -1,0 +1,44 @@
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 28997 -->
+
+
+  <sect2 arch="sparc"><title>Particionament des de SunOS</title>
+
+<para>
+
+Es pot perfectament particionar des de SunOS, de fet, si voleu executar
+SunOS i Debian a la mateixa màquina, es recomana que particioneu utilitzant
+SunOS abans de instal·lar Debian. El nucli de Linux entén les etiquetes
+de Sun, així que no tindreu problemes. Tan sols assegureu-vos de deixar
+l'espai necessari per la partició arrel de Debian dins de l'àrea d'1 GiB
+del disc d'arrencada. Podeu també posar la imatge del nucli a una partició
+UFS si això és més fàcil que posar-ho a la partició arrel. SILO suporta
+arrencar Linux i SunOS des de particions EXT2 (Linux), UFS (SunOS),
+romfs i iso9660 (CDROM).
+
+</para>
+  </sect2>
+
+  <sect2 arch="sparc"><title>Particionament de Linux o altre SO</title>
+
+<para>
+
+Igual dóna el sistema que esteu particionant, assegureu-vos de crear una
+<quote>etiqueta de disc Sun</quote> al vostre disc d'arrencada. Aquest és
+l'únic tipus de esquema de particions que entén la PROM OpenBoot, així que
+és l'únic esquema des del qual podeu arrencar. Al <command>fdisk</command>,
+s'utilitza la tecla <keycap>s</keycap> per crear les etiquetes de disc de
+Sun. Tan sols necessiteu fer-ho a discs que no tenen encara la etiqueta de
+Sun. Si utilitzeu un disc que abans s'ha formatat utilitzant un PC (o
+qualsevol altra arquitectura) necessitareu crear una nova etiqueta de disc,
+o possiblement tindreu problemes amb la geometria del disc.
+
+</para><para>
+
+Possiblement utilitzareu <command>SILO</command> com a carregador (el
+programa xicotet que executa el nucli del sistema operatiu).
+<command>SILO</command> té alguns requeriments tan per la mida de les
+particions com per la seva posició; vegeu <xref linkend="partitioning"/>.
+
+</para>
+  </sect2>

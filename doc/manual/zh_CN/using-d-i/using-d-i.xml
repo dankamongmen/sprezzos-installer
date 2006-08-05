@@ -1,0 +1,1957 @@
+<!-- Start of file using-d-i/using-d-i.xml -->
+
+
+ <chapter id="d-i-intro"
+><title
+>使用 Debian 安装程序</title>
+
+ <sect1
+><title
+>安装程序如何工作</title>
+<para
+>Debian 安装程序由一些特定功能的组件组成，它们完成各自的安装任务。每一组件执行任务时，会询问一些任务相关的问题。每个任务又有各自的 优先级，可以在安装程序开始时设置优先级决定哪些问题会问到。 </para
+><para
+>执行默认安装时，只有必要的(高优先级)的问题会被问到。使得安装过程可以高度自动化，几乎不需用户干预。组件按次序字典执行；至于哪些组件会执行，这取决于您使用的安装方法，以及您的硬件。对于没有询问的问题，安装程序将采用默认值。 </para
+><para
+>如果遇到麻烦，用户会看到错误画面，并且显示安装菜单供选择其它替代操作。如果没有问题，用户将不会碰到安装菜单，只需依此回答每个组件的提问。严重错误提示的优先级为<quote
+>critical</quote
+>，因此用户总会注意到。 </para
+><para
+>如果在 &d-i; 开始的时候，给启动加上一些参数，它将会影响安装程序使用的默认值。例如，假设您希望指定静态网络连接配置(如果存在 DHCP，将会被采用)，您可以为启动参数加上 <userinput
+>netcfg/disable_dhcp=true</userinput
+>。参阅 <xref linkend="installer-args"/> 了解有效的选项。 </para
+><para
+>熟练的用户也许更习惯菜单驱动的交互方式，安装中的每一步都可以被用户控制，而不是让安装程序自动依此执行。要使用菜单驱动的手动安装方式，添加启动参数选项 <userinput
+>debconf/priority=medium</userinput
+>。 </para
+><para
+>如果您的硬件要求给出内核模块设置选项才能安装，您就需要使用 <quote
+>expert</quote
+> 模式启动安装程序。可以通过使用 <command
+>expert</command
+> 命令或者添加 <userinput
+>debconf/priority=low</userinput
+> 启动参数。专家模式赋予您对 &d-i; 完全的控制力。 </para
+><para
+>正常的安装程序是基于字符界面的(相对于常见的图形界面)。在此环境下，用户无法使用鼠标。以下是操作各种对话框所需要使用的按键。<keycap
+>Tab</keycap
+> 或 <keycap
+>右</keycap
+> 箭头键向<quote
+>前</quote
+>移动，<keycombo
+> <keycap
+>Shift</keycap
+> <keycap
+>Tab</keycap
+> </keycombo
+> 或 <keycap
+>左</keycap
+> 箭头键向<quote
+>后</quote
+>移动，它们用于按钮和选择之间。<keycap
+>上</keycap
+> 与 <keycap
+>下</keycap
+> 箭头键用于选择可以滚动的列表，也能滚动列表本身。另外，对于长的列表，您可以按下一个字母，让列表直接移动到该字母开头的列表项，使用 <keycap
+>Pg-Up</keycap
+> 和 <keycap
+>Pg-Down</keycap
+> 滚动列表的不同段。<keycap
+>空格键</keycap
+>选择复选框的选项。用 &enterkey; 激活选择。 </para
+><para arch="s390"
+>S/390 不支持虚拟控制台。您可以打开第二或第三个 ssh 会话查看上述的 log。 </para
+><para
+>错误信息被重定向到第三个控制台。您可以访问该控制台通过按下 <keycombo
+><keycap
+>左 Alt</keycap
+><keycap
+>F3</keycap
+></keycombo
+> (按住左 <keycap
+>Alt</keycap
+> 键同时按下 <keycap
+>F3</keycap
+> 功能键)；返回主安装进程使用 <keycombo
+><keycap
+>左 Alt</keycap
+><keycap
+>F1</keycap
+></keycombo
+>。 </para
+><para
+>这些信息还可以在 <filename
+>/var/log/messages</filename
+> 里找到。完成安装之后，该 log 会被复制到 <filename
+>/var/log/debian-installer/messages</filename
+> 您的新系统中。其它的安装信息安装时可以在 <filename
+>/var/log/</filename
+> 找到。在 <filename
+>/var/log/debian-installer/</filename
+> 是系统重新启动后的记录地方。 </para>
+ </sect1>
+
+
+  <sect1 id="modules-list"
+><title
+>组件介绍</title>
+<para
+>下面列出安装程序使用的组件，和各个组件目的的简要说明。如果您需要了解各组件详细的信息，见 <xref linkend="module-details"/>。 </para>
+
+<variablelist>
+<varlistentry>
+
+<term
+>main-menu</term
+><listitem
+><para
+>在安装进行中，显示组件列表，并执行选中的组件。主菜单的优先级设为中，如果您的优先级设为高或紧急(默认为高)，您不会看的菜单。另一方面，假如出现问题需要您干预，询问的优先级会临时调低，而让您解决该问题，菜单可能在这种情况下出现。 </para
+><para
+>您可以通过不断地按<quote
+>返回</quote
+>按钮，从当前运行的组件回到主菜单。 </para
+></listitem>
+</varlistentry>
+<varlistentry condition="sarge">
+
+<term
+>languagechooser</term
+><listitem
+><para
+>显示语言与方言的列表。除非选中的语言没有被翻译，安装程序将以您选择的语言显示信息。对于没有翻译的语言，将显示英文信息。 </para
+></listitem>
+</varlistentry>
+<varlistentry condition="sarge">
+
+<term
+>countrychooser</term
+><listitem
+><para
+>显示国家列表。用户可以选择自己生活的国家。 </para
+></listitem>
+</varlistentry>
+<varlistentry condition="etch">
+
+<term
+>localechooser</term
+><listitem
+><para
+>允许用户为安装程序和安装的系统选择地区选项: 语言，国家和位置。除非选中的语言没有被翻译，安装程序将以您选择的语言显示信息。对于没有翻译的语言，将显示英文信息。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>kbd-chooser</term
+><listitem
+><para
+>显示键盘列表，用户在其中选择与自己匹配的模式。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>hw-detect</term
+><listitem
+><para
+>自动识别绝大多数系统硬件，包括网卡、硬盘和 PCMCIA。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>cdrom-detect</term
+><listitem
+><para
+>寻找并挂载 Debian 安装 CD。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>netcfg</term
+><listitem
+><para
+>配置计算机网络连接，使它能连上互联网。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>iso-scan</term
+><listitem
+><para
+>寻找 ISO 文件系统，它可能存在于 CD-ROM 或者硬盘上。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>choose-mirror</term
+><listitem
+><para
+>列出 Debian 软件包镜像。用户可以选择从哪里安装软件包。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>cdrom-checker</term
+><listitem
+><para
+>检验 CD-ROM。这种方法确保用户使用的安装 CD-ROM 没有损坏。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>lowmem</term
+><listitem
+><para
+>它会检测小内存容量的系统，并采用一些技巧从内存中删除 &d-i; 不需要的部分 (代价是丧失一些特性)。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>anna</term
+><listitem
+><para
+>Anna's Not Nearly APT。安装软件包从选择的镜像或 CD 获取。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>partman</term
+><listitem
+><para
+>让用户为系统安排磁盘分区，创建文件系统，并分配挂载点。它包括一些有趣的特性，如自动模式或 LVM 支持。在 Debian 里这是推荐的分区工具。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>autopartkit</term
+><listitem
+><para
+>根据用户预设，自动为整个硬盘分区。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>partitioner</term
+><listitem
+><para
+>允许用户为系统安排磁盘分区。根据用户计算机的体系选择和善的分区工具。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>partconf</term
+><listitem
+><para
+>显示分区列表，按用户指令为选择的分区创建文件系统。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>lvmcfg</term
+><listitem
+><para
+>帮助用户配置 <firstterm
+>LVM</firstterm
+> (Logical Volume Manager)。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>mdcfg</term
+><listitem
+><para
+>让用户设置 Software <firstterm
+>RAID</firstterm
+> (Redundant Array of Inexpensive Disks)。Software RAID 是新主板提供的廉价 IDE (虚拟硬件) RAID 控制器的高级管理。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>base-installer</term
+><listitem
+><para
+>安装一些基本的包，让计算机重起后能在 Linux 下运行。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>os-prober</term
+><listitem
+><para
+>检测当前计算机上安装的操作系统，将信息传递给 bootloader-installer，使它能将检测到的操作系统添加到 bootloader 的启动菜单里面。方便用户选择启动哪个操作系统。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>bootloader-installer</term
+><listitem
+><para
+>在硬盘上安装启动引导程序，这是必须的一步，使得计算机不必依靠软盘和 CD-ROM 启动。许多引导程序都允许用户在启动的时候选择使用哪个操作系统。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>base-config</term
+><listitem
+><para
+>根据用户设置提供配置系统软件包的对话框。它通常在新 Debian 系统<quote
+>首次运行</quote
+>时工作。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>shell</term
+><listitem
+><para
+>让用户能从菜单或者第二控制台执行 shell。 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term condition="sarge"
+>bugreporter</term
+><term condition="etch"
+>save-logs</term
+><listitem
+><para
+>当用户遇到麻烦时，提供一种方式记录信息到软盘<phrase condition="etch"
+>，网络，硬盘或其他介质</phrase
+>，用于以后给 Debian 开发人员精确报告安装程序的问题。 </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+ </sect1>
+
+
+<!-- Start of file using-d-i/components.xml -->
+
+ <sect1 id="module-details">
+ <title
+>使用单独的组件</title>
+<para
+>本节将会描述各个安装组件的详细信息。各组件按用户可以识别的阶段分组。它们在安装过程中按次序显示出来。注意，每次安装并不会使用所有的模块； 至于使用哪些模块，取决于您的安装方法和您的硬件。 </para>
+
+  <sect2 id="di-setup">
+  <title
+>启动 Debian 安装程序与配置硬件</title>
+<para
+>假设 Debian 安装程序已经启动，然后您看到了初始画面。此时，&d-i; 的能力还很有限。它还不了解您的硬件，首选的语言，甚至不知道要执行什么任务。不用担心，因为 &d-i; 相当聪明，它能自动探测您的硬件，定位其余的组件，并更新自己以具备安装系统的能力。但您仍然要协助 &d-i;，提供给它不能自动决定的内容 (比如选择您首选的语言，键盘布局或网络镜像)。 </para
+><para
+>您会留意到 &d-i; 在本阶段执行 <firstterm
+>硬件侦测</firstterm
+> 多次。第一次目的是指定哪些硬件需要安装(比如，您的 CD-ROM 或者网卡)。在第一次运行的时候并不是所有的驱动程序都就绪，硬件侦测会在后续过程里面多次重复。 </para>
+
+
+<!-- Start of file using-d-i/modules/lowmem.xml -->
+
+  <sect3 id="lowmem">
+  <title
+>检测有效的内存</title>
+
+<para
+>&d-i; 首先要做的一件事是检测有效的内存。如果内存有限，该组件将修改后续的安装进程，使您可以将 &debian; 安装到您的系统上。 </para
+><para
+>在小内存的安装下，只有部分组件有效。其中的一个限制是您无法在安装过程中选择语言。 </para>
+   </sect3>
+<!--   End of file using-d-i/modules/lowmem.xml -->
+
+<!-- Start of file using-d-i/modules/languagechooser.xml -->
+
+
+   <sect3 id="lang-chooser" condition="sarge">
+   <title
+>选择语言</title>
+
+<para
+>安装的第一步，选择您希望安装过程使用的语言。语言名称列表使用英文(左侧)和该语言本身(右侧)显示； 右侧的语言可以用正确的形态表现出来。该列表以英文名称排序。 </para
+><para
+>您选择的语言将用于紧接着的安装过程，对话框已经有各种语言翻译的版本。如果选择的语言没有对应翻译的版本，安装将默认使用英文。选择的语言也将助于选择一个合适的键盘布局。 </para>
+   </sect3>
+<!--   End of file using-d-i/modules/languagechooser.xml -->
+
+<!-- Start of file using-d-i/modules/countrychooser.xml -->
+
+
+   <sect3 id="country-chooser" condition="sarge">
+   <title
+>选择国家</title>
+
+<para
+>如果您选择的语言 <xref linkend="lang-chooser"/>与多个国家关联(存在于中文，英文，法文，以及其它语言)，您可以在这里选择国家。如果您从列表的底部选择 <guimenuitem
+>其它</guimenuitem
+> ，您将看到按大洲分组的全部国家。 </para
+><para
+>在安装过程的后面，这个选择还会被用于设置默认的时区和您所处地理位置的 Debian 镜像。如果安装程序默认的建议不合适，您可以做其它选择。选择国家，还有选择语言，都会影响您新 Debian 系统的本地化设置。 </para>
+   </sect3>
+<!--   End of file using-d-i/modules/countrychooser.xml -->
+
+<!-- Start of file using-d-i/modules/localechooser.xml -->
+
+
+   <sect3 id="localechooser" condition="etch">
+   <title
+>选择地区选项</title>
+
+<para
+>大多时候，您遇到的第一个问题是关于地区的选项，它用于安装过程和安装后的系统。
+地区选项由语言，国家和地点组成。 </para
+><para
+>您选择的语言将用于紧接着的安装过程，对话框已经有各种语言翻译的版本。如果选择的语言没有对应翻译的版本，安装将默认使用英文。 </para
+><para
+>在安装过程的后面，选择的国家还会被用于设置默认的时区和您所处地理位置的 Debian 镜像。语言和国家可以一起用来设置您系统默认的 locale，并帮助您选择键盘。 </para
+><para
+>您将被首先问到倾向的语言。语言名称同时以英文(左侧)和该语言(右侧)列出; 右侧名称是使用该语言来书写。
+列表以英文名称排列。在列表的顶端是一个额外的选项，允许您使用 <quote
+>C</quote
+> locale 替代语言。
+选择 <quote
+>C</quote
+> locale 使得安装过程使用英文; 安装的系统不再有本地化支持，
+<classname
+>locales</classname
+> 软件包也不会安装。 </para
+><para
+>如果您选择的语言被多个国家作为官方语言<footnote
+> <para
+> 技术范畴: 一种语言针对不同国家代码的不同 locale。</para
+> </footnote
+>,
+您会被要求选择国家。如果您在列表底部选择 <guimenuitem
+>Other</guimenuitem
+>，您将看到按大洲分组的全部国家。
+如果该语言只关联到一个国家，国家将自动选择。 </para
+><para
+>默认 locale 的选择是基于您先前所选的语言和国家。如果您以 medium 或 low 优先级安装，您可以选择不同的默认 locale 以及为安装好的系统生成额外的 locale。 </para>
+   </sect3>
+<!--   End of file using-d-i/modules/localechooser.xml -->
+
+<!-- Start of file using-d-i/modules/kbd-chooser.xml -->
+
+   <sect3 id="kbd-chooser">
+   <title
+>选择键盘</title>
+
+<para
+>键盘经常按照不同语言使用的字符裁剪。选择一个您的键盘使用的合适布局，或者为没有的布局选择一个接近的。一旦系统安装完毕，您可以从更大范围内您选择键盘的布局 (在安装完之后用 root 执行 <command
+>kbdconfig</command
+>)。 </para
+><para
+>将高亮显示部分移到您选择的键盘，然后按下 &enterkey;。用箭头健移到高亮显示 &mdash; 它们位于所以国家键盘布局相同的地方，因此独立于键盘配置。'扩展的'键盘是有 <keycap
+>F1</keycap
+>到<keycap
+>F10</keycap
+> 健，沿着上箭头。 </para
+><para arch="mipsel"
+>当前 DEC 工作站上没有可以加载的 keymap，因此您不得不跳过键盘选项，保持默认的内核 keymap (LK201 US)。随着 Linux/MIPS 内核的开发，将来也许会改变。 </para
+><para arch="powerpc"
+>有两种 US 键盘布局；qwerty/mac-usb-us (Apple USB) 将 Alt 功能放在 <keycap
+>Command/Apple</keycap
+> 健 (处于键盘的 <keycap
+>空格</keycap
+> 健旁，类似于 PC 键盘的 <keycap
+>Alt</keycap
+> )，另外 qwerty/us (Standard) 布局将 Alt 功能放在 <keycap
+>Option</keycap
+> 健上(在大多数 Mac 键盘上标明 'alt')。其余地方这两种布局相似。 </para>
+
+<note arch="sparc"
+><para
+>如果您的系统上使用 Sun USB 键盘，并且使用默认的 2.4 内核启动，该键盘将无法被安装系统识别。
+安装程序会提供 Sun 类型的 keymap 列表供选择，但是选择了其中一个会导致键盘无法使用。
+如果您使用 2.6 内核安装，便不会有问题。 </para
+><para
+>为了让键盘可以工作，您应该给引导程序加上参数 <userinput
+>debconf/priority=medium</userinput
+>。
+当您看到键盘选择项<footnote
+> <para
+> 如果您使用默认的优先级安装，在显示 Sun 类型 keymap 之后，您应该使用 <userinput
+>Go Back</userinput
+> 按钮返回安装菜单。</para
+> </footnote
+>，如果您使用美式(US)键盘布局，请选 <quote
+>No keyboard to configure</quote
+> ，如果您使用本地化键盘布局，请选 <quote
+>USB keyboard</quote
+>。选择 <quote
+>No keyboard to configure</quote
+> 会使内核 keympa 放在合适的地方，这对美式键盘是正确的做法。 </para
+></note>
+   </sect3>
+<!--   End of file using-d-i/modules/kbd-chooser.xml -->
+
+<!-- Start of file using-d-i/modules/s390/netdevice.xml -->
+<!--   End of file using-d-i/modules/s390/netdevice.xml -->
+
+<!-- Start of file using-d-i/modules/ddetect.xml -->
+<!--   End of file using-d-i/modules/ddetect.xml -->
+
+<!-- Start of file using-d-i/modules/cdrom-detect.xml -->
+<!--   End of file using-d-i/modules/cdrom-detect.xml -->
+
+<!-- Start of file using-d-i/modules/iso-scan.xml -->
+
+   <sect3 id="iso-scan">
+   <title
+>寻找 Debian 安装程序 ISO 映像</title>
+<para
+>当安装是使用 <emphasis
+>hd-media</emphasis
+> 方式，将会有一个动作，是寻找和挂载 Debian 安装程序 iso 映像，用于获取其它的安装文件。组件 <command
+>iso-scan</command
+> 正是用来完成此任务。 </para
+><para
+>首先，<command
+>iso-scan</command
+> 自动挂载具有已知文件系统的块设备(比如，分区)，然后顺次搜索文件名结尾是 <filename
+>.iso</filename
+> (或 <filename
+>.ISO</filename
+> 之类)。注意，首次只扫描位于根目录的文件，和第一层子目录 (例如，它找到 <filename
+>/<replaceable
+>whatever</replaceable
+>.iso</filename
+>, <filename
+>/data/<replaceable
+>whatever</replaceable
+>.iso</filename
+>，而不是 <filename
+>/data/tmp/<replaceable
+>whatever</replaceable
+>.iso</filename
+>)。在 iso 映象文件找到后，<command
+>iso-scan</command
+>检查它包含的内容，确定该映象文件是不是有效的 Debian iso 映象。如为前者，任务结束；如果是后者，<command
+>iso-scan</command
+> 搜索其它的映象。 </para
+><para
+>万一前面尝试寻找 iso 映象失败，<command
+>iso-scan</command
+> 会询问您是否原意进行完整的搜索。这次不只查看最上级目录，而是真正地贯串整个文件系统。 </para
+><para
+>如果 <command
+>iso-scan</command
+> 找不到您的安装 iso 映象，请重新启动返回到您以前的操作系统，检查映象文件名是否正确(以 <filename
+>.iso</filename
+>结尾)，是否放在一个能被 &d-i; 识别的文件系统上，是否损坏(用 checksum 校验)。有经验的 Unix 用户可以在第二个控制台上完成这些动作，而毋须重新启动。 </para>
+   </sect3>
+<!--   End of file using-d-i/modules/iso-scan.xml -->
+
+<!-- Start of file using-d-i/modules/anna.xml -->
+<!--   End of file using-d-i/modules/anna.xml -->
+
+<!-- Start of file using-d-i/modules/netcfg.xml -->
+
+   <sect3 id="netcfg">
+   <title
+>配置网络</title>
+
+<para
+>进到这一步，如果系统检测到您有多于一个的网络接口，您将被要求选择哪个设备是您的 <emphasis
+>主</emphasis
+>网络接口，比如，您在安装中要用的那个。其他的网络接口这时不会配置。您可以在安装完毕之后去配置额外的接口；参考 <citerefentry
+> <refentrytitle
+>interfaces</refentrytitle
+> <manvolnum
+>5</manvolnum
+> </citerefentry
+> man 页。 </para
+><para
+>默认情况下，&d-i; 会自动尝试使用 DHCP 配置您的计算机网络。如果 DHCP 侦测成功，这一步就完成。如果失败，造成的原因会有多种因素，从没有接网线到错误设置的 DHCP。或者您的局域网里面根本就没有 DHCP 服务器。检查第三个控制台了解更多的解释。不管怎样，您将被要求选择再试还是手动配置。DHCP 服务器有时候响应很慢，因此，如果您确定都正常，再试一次。 </para
+><para
+>手动配置网络会依次询问一些您网络的问题，值得注意的是 <computeroutput
+>IP 地址</computeroutput
+>，<computeroutput
+>网络掩码</computeroutput
+>，<computeroutput
+>网关</computeroutput
+>，<computeroutput
+>域名服务器地址</computeroutput
+>，和 <computeroutput
+>主机名</computeroutput
+>。此外，如果您有无线网络接口，您会被要求提供您的 <computeroutput
+>Wireless ESSID</computeroutput
+> 和 一个 <computeroutput
+>WEP key</computeroutput
+>。填写答案 <xref linkend="needed-info"/>。 </para
+><note
+><para
+>一些技术细节您也许需要，或者不需要，放在手边： 程序假定网络 IP 地址是按位与您的系统 IP 地址和网络掩码。它还会猜测广播地址是按位或您的系统 IP 地址和按位反网络掩码。它也会猜测您的网关。如果您不能回答这些问题，让系统猜测 &mdash; 您可以在系统安装完毕之后来修改它们，如果需要，编辑 <filename
+>/etc/network/interfaces</filename
+>。另外一种选择，您可以安装 <classname
+>etherconf</classname
+>，它用来一步步进行网络配置。 </para
+></note>
+   </sect3>
+<!--   End of file using-d-i/modules/netcfg.xml -->
+
+<!-- Start of file using-d-i/modules/choose-mirror.xml -->
+
+<!--
+- Component is only selected and executed if the installer needs to load
+  installer components or the base system from the network
+  (either local or the internet).
+- This means you first have to configure a network interface.
+- A list of countries is displayed with the default based on the country you
+  selected earlier.
+- Note that not all mirrors are equal (see http://www.nl.debian.org/mirror/list)
+- Selection of a local mirror (at top of the list: manual selection).
+- After selecting a country, a list of mirrors in the country will be shown.
+
+- The selected mirror will be tested.
+- How to handle problems with mirrors.
+-->
+<!--   End of file using-d-i/modules/choose-mirror.xml -->
+
+  </sect2>
+
+  <sect2 id="di-partition">
+  <title
+>分区与选择挂载点</title>
+<para
+>现在，经过最后的硬件检测，&d-i; 已经充满活力，按照用户定制，准备就绪。正如本节标题指明，接下来组件的主要任务是为您的硬盘分区，创建文件系统，安排挂载点，并为近似选项进行配置，比如 LVM 或 RAID 设备。 </para>
+
+
+<!-- Start of file using-d-i/modules/s390/dasd.xml -->
+<!--   End of file using-d-i/modules/s390/dasd.xml -->
+
+<!-- Start of file using-d-i/modules/partman.xml -->
+
+   <sect3 id="partman">
+   <title
+>硬盘的分区</title>
+
+<para
+>现在是时候对您的硬盘进行分区了。要是您对分区还有心存疑虑，或者只是想了解 更多的细节，请参阅 <xref linkend="partitioning"/>。 </para
+><para
+>首先您可以选择对整块硬盘或是其上的空闲空间进行自动分区。这也被称为 <quote
+>向导式</quote
+> 分区。倘若您不愿自动分区，那么也可以选择菜单中的 <guimenuitem
+>手动编辑分区表</guimenuitem
+> 。 </para
+><para
+>倘若您选择了向导式分区，那么就要从下表所列的几个方式中选择其一。每个方式都 各有利弊。在 <xref linkend="partitioning"/>中对它们中的几个有些评价。如果您没有把握，请选择第一个选项吧。有一点要记住，就是使用向导式分区至少 需要一定大小的空闲空间才能正常运作。如果您没有给它 1GB 以上的空间(具体大小 示所选的方式而不同)，那么向导式分区将以失败告终。 </para>
+
+<informaltable>
+<tgroup cols="3">
+<thead>
+<row>
+  <entry
+>分区方式</entry>
+  <entry
+>所需最小空间</entry>
+  <entry
+>所新建的分区</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>所有文件在同一分区</entry>
+  <entry
+>600MB</entry>
+  <entry
+><filename
+>/</filename
+>, swap</entry>
+</row
+><row>
+  <entry
+>桌面用机</entry>
+  <entry
+>500MB</entry>
+  <entry
+><filename
+>/</filename
+>, <filename
+>/home</filename
+>, swap </entry>
+</row
+><row>
+  <entry
+>多用户工作站</entry>
+  <entry
+>1GB</entry>
+  <entry
+><filename
+>/</filename
+>, <filename
+>/home</filename
+>, <filename
+>/usr</filename
+>, <filename
+>/var</filename
+>, <filename
+>/tmp</filename
+>, swap </entry>
+</row>
+
+</tbody
+></tgroup
+></informaltable>
+
+<para arch="ia64"
+>倘若您为您的 IA64 系统选择了自动分区，那就会另外分出来一个分区。这个分区专门为 EFI bootloader 格式化成了 FAT16 的可引导文件系统。同时，菜单里也会有另外的一项，可以让您手动把某个分区作为 EFI 引导分区。 </para
+><para arch="alpha"
+>如果您为 Alpha 系统选择自动分区，额外的，未格式化的分区将分配在磁盘的开始处，作为 aboot boot loader 的保留空间。 </para
+><para
+>在选定了分区方式后的下一个界面，您会看到关于自己分区的一张表格，上面标明了 分区是否将被格式化，将以何种方式格式化，以及它们将被挂载到哪里的相关信息。 </para
+><para
+>分区表格的格式如下： <informalexample
+><screen>
+  IDE1 master (hda) - 6.4 GB WDC AC36400L
+        #1 primary   16.4 MB     ext2       /boot
+        #2 primary  551.0 MB     swap       swap
+        #3 primary    5.8 GB     ntfs
+           pri/log    8.2 MB     FREE SPACE
+
+  IDE1 slave (hdb) - 80.0 GB ST380021A
+        #1 primary   15.9 MB     ext3
+        #2 primary  996.0 MB     fat16
+        #3 primary    3.9 GB     xfs        /home
+        #5 logical    6.0 GB     ext3       /
+        #6 logical    1.0 GB     ext3       /var
+        #7 logical  498.8 GB     ext3
+        #8 logical  551.5 GB     swap       swap
+        #9 logical   65.8 GB     ext2
+</screen
+></informalexample
+> 本例中有两块硬盘，它们分别被分割成了几个分区。其中，第一块硬盘上还有些空闲空间。表中，每行列出了分区编号、其类型、分区大小、可选的标志、采用的文件系统，及其挂载点(如果有的话)。 </para
+><para
+>接下来，向导式分区就要完成了。如果您对上面生成的分区信息表感到满意，那么 请在菜单中选择 <guimenuitem
+>分区设定结束并将修改写入磁盘</guimenuitem
+> 一项，这样，新的分区表就创建了(本节节末将会对此进行解释)。如果您认为分区设置不 如愿，那么可以选择 <guimenuitem
+>撤销对分区设置的修改</guimenuitem
+>，之后就 可以再次进行向导式分区，或者按照下面将要介绍的手动分区的办法来完成自己所 设想的分区规划。 </para
+><para
+>如果您选择了手动分区的话，它的界面和上面介绍的向导式分区大体上相同。不同之处在于，界面上显示的是您当前的分区列表，而且其中并没有挂载点的信息。关于如何手动设置您的分区表，以及新安装的 Debian 系统将如何使用这些分区，这些内容将会在本节的后面谈到。 </para
+><para
+>倘若您选用的是一块全新的硬盘，它还没有被分过区，上面也没有空闲空间。那么 系统会要求您新建一个分区表(只有这样，您才能创建新的分区)。分区表建好之后，在被选中的磁盘条目下会出现一个新行，上面写着 <quote
+>空闲空间</quote
+>。 </para
+><para
+>如果您选中了某块空闲空间，那么就可以在上面新建分区了。接着需要回答一系列简短的问题，它们会就分区大小、类型(主分区还是逻辑分区)、以及分区的位置(在空闲空间的开始部分还是在结束部分)向您询问。回答完毕后，您会看到一个小结，它详尽地总结了这个新分区的各种参数和设置，包括挂载点、挂载选项、启动标志或者分区的用途。如果您不喜欢预设的缺省设置的话，尽可以按照自己的喜好更改它们。比如说，选中 <guimenuitem
+>Use as:</guimenuitem
+> 选项，然后您可以让这个分区改用其他的文件系统，比如把它用作交换分区、软 RAID、LVM，或者根本就放着不用。另外还有个不错的功能，就是可以把现有分区的数据拷贝到新分区上。一旦您对新分区的设置感到满意了，就可以选择 <guimenuitem
+>Done setting up the partition</guimenuitem
+>，然后会自动退回到 <command
+>partman</command
+> 的主界面。 </para
+><para
+>若是您希望修改分区的设置，只要选中该分区，分区的配置菜单就会出现在您的 面前。由于这个界面和新建分区时使用的界面是相同的，所以您可以像以前那样 修改那些设置项。有一件事，可能第一眼看不大出来，就是您还可以通过选中 显示分区大小的项目来调整分区的大小。已知适用的文件系统至少有 fat16、fat32、ext2、ext3 和 swap。在这个菜单中，您还可以删除分区。 </para
+><para
+>请确保至少分出两个分区：其中一个作为 <emphasis
+>root</emphasis
+> 文件系统(它必须挂载到 <filename
+>/</filename
+>)另一个用于 <emphasis
+>swap</emphasis
+>。若是您忘记了挂载根(root)文件系统的话，<command
+>partman</command
+> 会拒绝让您继续下面的步骤，直到您改正了这个错误。 </para
+><para arch="ia64"
+>如果您忘记选择和格式化一个 EFI 启动分区 <command
+>partman</command
+> 会察觉这一点，不让您继续操作，直到您划分出这样一个分区。 </para
+><para
+>由于 <command
+>partman</command
+> 的功能是通过安装本套件的各模块功能得以延伸和扩展的，但是具体又因您的系统的体系架构而有所区别。因此，如果您发现安装的实际情况与我们所言不符，缺少了某些功能特性，那么请检查一下，确保已加载了所有必须的模块(比如，<filename
+>partman-ext3</filename
+>, <filename
+>partman-xfs</filename
+> 或者 <filename
+>partman-lvm</filename
+>)。 </para
+><para
+>在您对分区设置感到满意后，就可以选择分区菜单中 的 <guimenuitem
+>分区设定结束并将修改写入磁盘</guimenuitem
+> 一项。在这之后，会出现一个清单，它列出了即将在硬盘上进行的所有操作。此时，安装程序会让您确认 是否就照此分区。 </para>
+   </sect3>
+<!--   End of file using-d-i/modules/partman.xml -->
+
+<!-- Start of file using-d-i/modules/autopartkit.xml -->
+<!--   End of file using-d-i/modules/autopartkit.xml -->
+
+<!-- Start of file using-d-i/modules/partitioner.xml -->
+
+<!--   End of file using-d-i/modules/partitioner.xml -->
+
+<!-- Start of file using-d-i/modules/partconf.xml -->
+<!--   End of file using-d-i/modules/partconf.xml -->
+
+<!-- Start of file using-d-i/modules/lvmcfg.xml -->
+
+   <sect3 id="lvmcfg">
+   <title
+>配置逻辑卷管理(LVM)</title>
+<para
+>如果您做计算机系统管理员工作或者 <quote
+>高级</quote
+> 用户，您一定遇到过磁盘分区(经常是最重要的那个)空间不足，同时其他的分区却不能平衡使用，然后您不得不靠移到或符号链接等方法来折腾。 </para
+><para
+>为了避免上面描述的情况，您可以采用逻辑卷管理(LVM)。简而言之，使用 LVM 您可以组合您的分区(<firstterm
+>物理卷</firstterm
+>，LVM 术语) 形成一个虚拟盘(称为 <firstterm
+>卷组</firstterm
+>)，它可以被分割成虚拟分区(<firstterm
+>逻辑卷</firstterm
+>)。逻辑卷(当然下面是卷组)的亮点在于它可以跨越多个物理磁盘。 </para
+><para
+>当您认识到需要给更多的空间给您已有的 160 GB <filename
+>/home</filename
+> 分区时，您只需加一个新的 300GB 磁盘到计算机，添加进您已经存在的卷组，然后为 <filename
+>/home</filename
+> 分区的逻辑卷重新设置尺寸，然后 voila &mdash; 您的用户在更新的 460GB 分区上又有了空间。这个例子当然过于简单。如果您还还没有读过，您应该查阅 <ulink url="&url-lvm-howto;"
+>LVM HOWTO</ulink
+>。 </para
+><para
+>在 &d-i; 里面设置 LVM 很简单。首先，您必须为 LVM 标记您的分区为物理卷。(这由 <command
+>partman</command
+> 在 <guimenu
+>分区设置</guimenu
+>菜单完成，那里您应该选择 <menuchoice
+> <guimenu
+>用做：</guimenu
+> <guimenuitem
+>LVM 物理卷</guimenuitem
+> </menuchoice
+>。)接着开始 <command
+>lvmcfg</command
+> 模块(可以直接从 <command
+>partman</command
+> 或从 &d-i; 的主菜单) 然后组合物理卷到卷组，它位于 <guimenuitem
+>修改卷组(VG)</guimenuitem
+>菜单。之后，您应该为卷组创建逻辑卷，这是从菜单 <guimenuitem
+>修改逻辑卷(LV)</guimenuitem
+>。 <note arch="powerpc" condition="sarge"
+><para
+>在 Apple Power Macintosh 硬件上，现在还没有一个广为接受的识别包含 LVM 数据分区的标准。在这种硬件上，以上创建物理卷和卷组的步骤将不能工作。假如您熟悉底层的 LVM 工具，有一种突破这种限制的方法。 </para
+><para
+>为了在 Power Macintosh 硬件上安装使用逻辑卷，您应该按通常方式创建所有的磁盘分区。在 <guimenu
+>Partition settings</guimenu
+>菜单里，您应该选择 <menuchoice
+><guimenu
+>用做：</guimenu
+> <guimenuitem
+>Do Not Use</guimenuitem
+></menuchoice
+>对那些分区(您将不会被要求使用这些分区作为物理卷)。当您创建完所有的分区，您可以正常启动逻辑卷管理器。然而，因为没有创建物理卷，您现在必须通过第二虚拟终端 打开命令 shell (参阅 <xref linkend="shell"/>) 并且手动创建它们。 </para
+><para
+>在命令行提示符下使用 <command
+>pvcreate</command
+> 命令为您选择的分区创建物理卷。然后使用 <command
+>vgcreate</command
+> 命令创建您需要的卷组。在此过程中，您可以安全地忽略有关 incorrect metadata area header checksums 和 fsync failures 这些错误信息。当您建立完所有的卷组，您可以返回到第一虚拟终端，然后直接跳到 <command
+>lvmcfg</command
+> 逻辑卷管理菜单项。您将看到卷组，并可以像通常那样创建逻辑卷。 </para
+></note>
+
+</para
+><para
+>从 <command
+>lvmcfg</command
+> 返回 <command
+>partman</command
+>之后，您可以看到新建的逻辑卷与其他普通的分区一样(您也应该这样对待它们)。 </para>
+   </sect3>
+<!--   End of file using-d-i/modules/lvmcfg.xml -->
+
+<!-- Start of file using-d-i/modules/mdcfg.xml -->
+
+   <sect3 id="mdcfg">
+   <title
+>配置多磁盘设备(Software RAID)</title>
+<para
+>如果您有多于一个的硬盘<footnote
+><para
+> 其实，您可以从单个物理硬盘上不同分区创建 MD 设备，但这样做不会给您带来任何用处。</para
+></footnote
+> 安装在您的计算机上，您可以用 <command
+>mdcfg</command
+> 配置硬盘以提升效能和/或更好的数据可靠性。这种结果称为 <firstterm
+>多磁盘设备 MD</firstterm
+>(或者更有名的 <firstterm
+>software RAID</firstterm
+>)。 </para
+><para
+>MD 本质上是一束位于部分磁盘上的分区，组合在一起形成一个 <emphasis
+>逻辑</emphasis
+>设备。该设备可以像正常的分区一样使用(比如可以用 <command
+>partman</command
+> 格式化，分配挂载点，等等)。 </para
+><para
+>您得到的好处取决于您创建的 MD 类型。当前支持： <variablelist
+> <varlistentry
+> <term
+>RAID0</term
+><listitem
+><para
+> 它的主要目标是效能。RAID0 将进来的数据分割成 <firstterm
+>stripes</firstterm
+> 然后平均分配到组里面的每个硬盘上。这样可以提升读/写操作速度，但是一旦其中的一个硬盘损坏，您将丢失 <emphasis
+>一切</emphasis
+> (部分信息在好盘上，其他的 <emphasis
+>曾经</emphasis
+> 在坏盘上)。</para
+><para
+> 典型的 RAID0 应用是视频编辑分区。</para
+></listitem
+> </varlistentry
+> <varlistentry
+> <term
+>RAID1</term
+><listitem
+><para
+> 适用于可靠性作为优先考虑的场合。它由多个(通常两个)相同尺寸的分区组成，每个分区容纳相同的数据。这意味着三件事。第一，如果其中的一个损坏，您仍然有数据镜像在其余的磁盘上。第二，您只能使用现有容量中的碎片 (更准确的说，它是 RAID 中尺寸最小的磁盘分区)。第三，文件读取在磁盘间 负载平衡，这可以提升服务器的性能，如文件服务器，它倾向于读的负载大于写。</para
+><para
+> 可选择的是，您可以用备用的磁盘放在组中，用于顶替事故中损坏的磁盘。</para
+></listitem
+> </varlistentry
+> <varlistentry
+> <term
+>RAID5</term
+><listitem
+><para
+> 这是一个速度、可靠性和数据冗余都不错的折衷方案。RAID5 将进来的数据分割成 strips (类似于RAID0)但只平均分配到一个磁盘上。与 RAID0 不同，RAID5 还会计算 <firstterm
+>奇偶校验</firstterm
+> 信息，这将会写入其他磁盘。奇偶检验磁盘不是静态的(那被称为 RAID4)，会周期性的修改，所以奇偶校验信息平均分配到所有磁盘。当其中的一个磁盘损坏，丢失信息的部分可以从其他数据以及奇偶校验计算出来。RAID5 最少需要三个活动的分区。作为选项，您可以用备用的磁盘放在组中，用于顶替事故中损坏的磁盘。</para
+><para
+> 如您所见，RAID5 近于 RAID1 的可靠性并具有较少冗余。另一方面，它只比 RAID0 在写入的时候慢，这是因为要计算校验信息。</para
+></listitem
+> </varlistentry
+> </variablelist
+> 总结： <informaltable
+> <tgroup cols="5">
+<thead>
+<row>
+  <entry
+>类型</entry>
+  <entry
+>最少设备</entry>
+  <entry
+>备用设备</entry>
+  <entry
+>幸免于磁盘损坏？</entry>
+  <entry
+>可用空间</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>RAID0</entry>
+  <entry
+>2</entry>
+  <entry
+>否</entry>
+  <entry
+>否</entry>
+  <entry
+>容量为最小分区乘以 RAID 设备数</entry>
+</row>
+
+<row>
+  <entry
+>RAID1</entry>
+  <entry
+>2</entry>
+  <entry
+>可选</entry>
+  <entry
+>是</entry>
+  <entry
+>容量为 RAID 最小分区</entry>
+</row>
+
+<row>
+  <entry
+>RAID5</entry>
+  <entry
+>3</entry>
+  <entry
+>可选</entry>
+  <entry
+>是</entry>
+  <entry
+>容量为最小分区乘以(RAID 设备数量减一) </entry>
+</row>
+
+</tbody
+></tgroup
+></informaltable>
+
+</para
+><para
+>如果您想真正全面了解 Software RAID，看一下 <ulink url="&url-software-raid-howto;"
+>Software RAID HOWTO</ulink
+>。 <note arch="powerpc" condition="sarge"
+><para
+>在 Apple Power Macintosh 硬件上，现在还没有一个广为接受的识别包含 RAID 数据分区的标准。这意味着当前 &d-i; 还不支持在此平台上建立 RAID。 </para
+></note>
+
+</para
+><para
+>为了创建 MD 设备，您需要将期望的分区标记为供 RAID 使用。(通过 <guimenu
+>Partition settings</guimenu
+> 菜单的 <command
+>partman</command
+> 完成，您应该选择 <menuchoice
+> <guimenu
+>Use as:</guimenu
+> <guimenuitem
+>physical volume for RAID</guimenuitem
+> </menuchoice
+>。) </para
+><warning
+><para
+>在安装程序中支持 MD 是相对新的功能。如果您尝试结合一些 RAID 类型与启动引导器并将 MD 用于根(<filename
+>/</filename
+>)文件系统，您也许会经历一些挫折。对有经验的用户，从 shell 手动地处理一些配置和安装步骤，也许会绕开这些问题 </para
+></warning
+><para
+>下一步，您应该从 <command
+>partman</command
+> 主菜单选择 <guimenuitem
+>Configure software RAID</guimenuitem
+>。在 <command
+>mdcfg</command
+> 第一个画面选择 <guimenuitem
+>Create MD device</guimenuitem
+>。您将看到被支持的 MD 设备列表，您应从其中选择一项(如 RAID1)。后续操作会根据您选择的 MD 类型而定。 </para>
+
+<itemizedlist>
+<listitem
+><para
+>RAID0 是简单的 &mdash; 您会看到可用的 RAID 分区，然后您的任务仅是选择那些想要组成 MD 的分区。 </para
+></listitem>
+<listitem
+><para
+>RAID1 需要一些技巧。首先，您将要求输入组成 MD 的活动设备和备用设备数量。其次，您需要从 RAID 可用分区列表中选择哪些是活动分区，哪些是备用的。选择的分区总数必须与之前提供的数目相同。不必担心，如果您出错选择了不同的分区数，&d-i; 将不会允许您继续下去，直到纠正错误。 </para
+></listitem>
+<listitem
+><para
+>RAID5 的配置过程类似于 RAID1，只是您至少需要<emphasis
+>三个</emphasis
+> 活动分区。 </para
+></listitem>
+</itemizedlist>
+
+<para
+>完美的解决方案或许是同时使用不同的 MD 类型。例如，您有三块 200 GB 的硬盘打算用于 MD，没块包含两个 100 GB 的分区，您可以将三块硬盘上的第一组分区组成 RAID0 (高速的视频编辑分区)，其余的三个分区(2 个活动 1 个备用) 用于 RAID1 (相当可靠的 100 GB 分区用于 <filename
+>/home</filename
+>)。 </para
+><para
+>按您需要配置 MD 设备之后，您可以 <guimenuitem
+>结束</guimenuitem
+> <command
+>mdcfg</command
+> 返回到 <command
+>partman</command
+> 去创建文件系统到您的新 MD 设备并分配挂载点这样的属性。 </para>
+   </sect3>
+<!--   End of file using-d-i/modules/mdcfg.xml -->
+  </sect2>
+
+  <sect2 id="di-install-base">
+  <title
+>安装基本系统</title>
+<para
+>尽管这一阶段少有问题，但却需要大量时间用于整个基本系统的下载、校验和解包。如果您用较慢的计算机或网络连接，这要花费好一会儿时间。 </para>
+
+
+<!-- Start of file using-d-i/modules/base-installer.xml -->
+
+   <sect3 id="base-installer">
+   <title
+>基本系统安装</title>
+
+<para
+>在基本系统安装期间，软件包解包和配置信息重定向到 <userinput
+>tty3</userinput
+>。您可以访问该终端通过按下 <keycombo
+><keycap
+>左 Alt</keycap
+><keycap
+>F3</keycap
+></keycombo
+>； 返回主安装进程使用 <keycombo
+><keycap
+>左 Alt</keycap
+><keycap
+>F1</keycap
+></keycombo
+>。 </para
+><para
+>基本系统安装时解包/配置信息保存在 <filename
+>/var/log/messages</filename
+> 这是在安装程序通过串口控制台执行的情况下。 </para
+><para
+>作为安装的一部分，Linux 内核也要安装。在默认的优先级下，安装程序会选择一个与您硬件最匹配的内核。在较低的优先级下，您可以从列表中选择一个有效的内核。 </para>
+   </sect3>
+<!--   End of file using-d-i/modules/base-installer.xml -->
+  </sect2>
+
+  <sect2 id="di-make-bootable">
+  <title
+>创建启动系统</title>
+
+<para condition="supports-nfsroot"
+>如果您是安装无盘工作站，显然，从本机启动是没有意义的选项，这一步可以跳过。<phrase arch="sparc"
+>您也许希望默认设置 OpenBoot 为网络启动；参阅 <xref linkend="boot-dev-select-sun"/>。</phrase
+> </para
+><para
+>注意，从单机上启动多个操作系统仍然是黑色艺术。本文档无意描写各种启动引导器，它们会依系统甚至是子系统而变化。您应该参考启动引导器的文档了解更多信息。 </para>
+
+
+<!-- Start of file using-d-i/modules/os-prober.xml -->
+
+   <sect3 id="os-prober">
+   <title
+>检测其他的操作系统</title>
+
+<para
+>在启动引导器安装之前，安装程序会试着侦测已经安装到计算机上的其他操作系统。如果它找到支持的操作系统，您将在启动引导器安装步骤里得到提示，与 Debian 一起，计算机也将配置为可以启动其他操作系统。 </para
+><para
+>注意，从单机上启动多个操作系统仍然是黑色艺术。自动支持检测和设置启动引导器启动其他操作系统，会依系统甚至是子系统而变化。如果它不能工作，您应该参考启动管理器的文档了解更多信息。 </para>
+
+<note condition="sarge"
+><para
+>当安装程序检测操作系统的时候，如果分区已经挂载，检测可能会失败。这可能是由于您使用 <command
+>partman</command
+> 选择的挂载点(如 /win)包含其他操作系统，或者通过控制台手动挂载一个分区。 </para
+></note>
+
+   </sect3>
+<!--   End of file using-d-i/modules/os-prober.xml -->
+
+<!-- Start of file using-d-i/modules/alpha/aboot-installer.xml -->
+
+  <sect3 arch="alpha">
+  <title
+>安装 <command
+>aboot</command
+> 到硬盘上</title>
+<para
+>如果您从 SRM 启动，如果您选取该项，安装程序将写入 <command
+>aboot</command
+> 到您安装 Debian 磁盘的第一个扇区。要 <emphasis
+>特别</emphasis
+>小心 &mdash; 它也许 <emphasis
+>不能</emphasis
+>从同一个磁盘上启动多个操作系统(如，GNU/Linux，Free/Open/NetBSD，OSF/1 又名 Digital Unix 又名 Tru64 Unix，或 OpenVMS)。如果您在安装 Debian 的磁盘上装有不同的操作系统，您将不得不从一个软盘启动 GNU/Linux。 </para>
+  </sect3>
+<!--   End of file using-d-i/modules/alpha/aboot-installer.xml -->
+
+<!-- Start of file using-d-i/modules/hppa/palo-installer.xml -->
+
+  <sect3 arch="hppa">
+  <title
+><command
+>palo</command
+>-installer</title>
+<para
+>PA-RISC 上的 bootloader 是 <quote
+>palo</quote
+>。<command
+>PALO</command
+> 的配置和用法类似于 <command
+>LILO</command
+>，只有个别地方不同。首先，<command
+>PALO</command
+> 允许您从引导分区启动任何内核映象。这是因为 <command
+>PALO</command
+> 能真正地读 Linux 分区。 </para
+><para condition="FIXME"
+>hppa FIXME ( need more info ) </para>
+  </sect3>
+<!--   End of file using-d-i/modules/hppa/palo-installer.xml -->
+
+<!-- Start of file using-d-i/modules/i386/grub-installer.xml -->
+
+  <sect3 arch="i386">
+  <title
+>硬盘上 <command
+>Grub</command
+> Boot Loader 的安装</title>
+<para
+>&architecture; 上主要的 boot loader 是 <quote
+>grub</quote
+>。Grub 是个灵活和稳定的 boot loader，它对新手来说是个不错的缺省选择。对老鸟来说，它也同样适合。 </para
+><para
+>缺省情况下，grub 会被装在主引导区(MBR)。如果装在那里的话，它将会完全主宰启动的整个过程。如果您喜欢的话，您可以把 grub 装在其他地方。若要全面和完整的信息，请参阅 grub 的手册。 </para
+><para
+>如果您并不想安装 grub，请使用返回按钮回到主菜单，并从中选择您想要使用的任何启动引导器。 </para>
+  </sect3>
+<!--   End of file using-d-i/modules/i386/grub-installer.xml -->
+
+<!-- Start of file using-d-i/modules/i386/lilo-installer.xml -->
+
+  <sect3 arch="i386">
+  <title
+>硬盘上 <command
+>LILO</command
+> Boot Loader 的安装</title>
+<para
+>第二个 &architecture; boot loader 名叫 <quote
+>LILO</quote
+>。它是个老派的强大程序，提供了很多功能，包括对 DOS、Windows 以及 OS/2 的引导 管理。如果有特别的要求的话，请您仔细阅读 目录 <filename
+>/usr/share/doc/lilo/</filename
+> 里的提示和教程，同时，您也可以参考一下 <ulink url="&url-lilo-howto;"
+>LILO mini-HOWTO</ulink
+>。 </para>
+<note
+><para
+>当前 LILO 安装时只能为那些可以 <firstterm
+>chainloaded</firstterm
+> 的操作系统创建菜单项。就是说您不得不在安装之后手动添加 GNU/Linux 和 GNU/Hurd 这类操作系统。 </para
+></note>
+<para
+>&d-i; 提供给您三种选择来安装 <command
+>LILO</command
+> 启动加载器： <variablelist>
+<varlistentry>
+<term
+>主引导区(MBR)</term
+><listitem
+><para
+>这种方式 <command
+>LILO</command
+> 将完全控制启动过程。 </para
+></listitem
+></varlistentry>
+<varlistentry>
+<term
+>新 Debian 分区</term
+><listitem
+><para
+>如果您想使用其它启动管理，选择此方式。<command
+>LILO</command
+> 将它自己安装到新 Debian 分区的起始位置，并能作为第二 boot loader。 </para
+></listitem
+></varlistentry>
+<varlistentry>
+<term
+>其它选择</term
+><listitem
+><para
+>对于高级用户，想把 <command
+>LILO</command
+> 安装到其它地方很有用。这种方式下，会询问您希望的位置。您可以采用 devfs 风格的名称，比如起始是 <filename
+>/dev/ide</filename
+>，<filename
+>/dev/scsi</filename
+>，和 <filename
+>/dev/discs</filename
+>，还可以用传统的名称，如 <filename
+>/dev/hda</filename
+> 或 <filename
+>/dev/sda</filename
+>。 </para
+></listitem
+></varlistentry>
+</variablelist>
+
+</para
+><para
+>如果您在此步之后无法启动 Windows 9x (或 DOS)，您需要使用一个 Windows 9x (MS-DOS) 启动盘，并用 <userinput
+>fdisk /mbr</userinput
+> 命令重新安装 MS-DOS 主引导记录 &mdash; 但这也意味着您要使用其他方式才能启动 Debian！ 关于此的更多信息，请参阅 <xref linkend="reactivating-win"/>。 </para>
+  </sect3>
+<!--   End of file using-d-i/modules/i386/lilo-installer.xml -->
+
+<!-- Start of file using-d-i/modules/ia64/elilo-installer.xml -->
+
+  <sect3 arch="ia64">
+  <title
+>安装 <command
+>ELILO</command
+> Boot Loader 到硬盘</title>
+<para
+>&architecture; boot loader 称为 <quote
+>elilo</quote
+>。它模仿 x86 体系上的 <quote
+>lilo</quote
+> boot loader 并使用类似的配置文件。然而，与写入 MBR 或分区引导记录到磁盘不同，它将必要的文件复制到单独的 FAT 格式化过的磁盘分区，并修改 <guimenuitem
+>EFI Boot Manager</guimenuitem
+> 固件里的菜单指向 EFI 分区的文件。<command
+>elilo</command
+> boot loader 实际上是两部分。<filename
+>/usr/sbin/elilo</filename
+> 命令管理分区和复制文件。<filename
+>elilo.efi</filename
+> 程序被复制到 EFI 分区，然后被 <quote
+>EFI Boot Manager</quote
+> 调用执行真正地加载和启动 Linux 内核的工作。 </para
+><para
+><quote
+>elilo</quote
+> 配置与安装在基本系统安装软件包的最后一步完成。&d-i; 会给您列出适合 EFI 分区的磁盘分区列表。选择您安装前期配置的分区，典型的分区是与 <emphasis
+>root</emphasis
+> 文件系统相同的磁盘。 </para>
+
+  <warning
+><title
+>选择正确的分区！</title>
+
+<para
+>选择分区的准则是格式化为 FAT 的文件系统并有 <emphasis
+>boot</emphasis
+> 标志。&d-i; 可能会显示多个选择，这取决于被扫描的包含 EFI 分区的磁盘和 EFI 诊断分区。切记，<command
+>elilo</command
+> 可能会在安装时格式化分区，这将清除以前的所有内容！ </para
+></warning>
+
+  </sect3>
+
+  <sect3 arch="ia64">
+  <title
+>EFI 分区内容</title>
+
+<para
+>EFI 分区是存在于系统中的一个硬盘上，它是 FAT 文件系统格式的分区，通常也是包含 <emphasis
+>root</emphasis
+> 文件系统的同一磁盘。它通常不会挂载在一个运行的系统上，而只被 <quote
+>EFI Boot Manager</quote
+> 用于加载系统和安装部分的 <command
+>elilo</command
+> 去直接写入文件系统。<command
+>/usr/sbin/elilo</command
+> 工具在安装时将下列文件写入 EFI 分区的 <filename
+>efi/debian</filename
+> 目录。注意 <quote
+>EFI Boot Manager</quote
+> 会找到这些文件，路径是 <filename
+>fs<replaceable
+>n</replaceable
+>:\efi\debian</filename
+>。经过一段时间，系统更新或重新配置，文件系统中也许会有其他文件。 </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><filename
+>elilo.conf</filename
+></term>
+<listitem
+><para
+>这是启动时 boot loader 读取的配置文件。它是 <filename
+>/etc/elilo.conf</filename
+> 的复制，其文件名重写成 EFI 分区上的文件。 </para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><filename
+>elilo.efi</filename
+></term>
+<listitem
+><para
+>这是用于启动系统的 <quote
+>EFI Boot Manager</quote
+> boot loader 程序。也是 <guimenuitem
+>Debian GNU/Linux</guimenuitem
+> 菜单项背后的程序，位于 <quote
+>EFI Boot Manager</quote
+> 命令菜单。 </para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><filename
+>initrd.img</filename
+></term>
+<listitem
+><para
+>这是用于启动内核最初的文件系统。它是引用 <filename
+>/etc/elilo.conf</filename
+> 的复制文件。在标准的 Debian 安装程序程序中他是 <filename
+>/boot</filename
+> 符号链接 <filename
+>/initrd.img</filename
+> 指向的文件。 </para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><filename
+>readme.txt</filename
+></term>
+<listitem
+><para
+>这个小文本文件用于警告您那些被 <command
+>elilo</command
+> 管理的目录中的内容，任何本地修改在下次 <filename
+>/usr/sbin/elilo</filename
+> 运行时将丢失。 </para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><filename
+>vmlinuz</filename
+></term>
+<listitem
+><para
+>此为压缩内核本身。它是引用 <filename
+>/etc/elilo.conf</filename
+> 的复制文件。在标准的 Debian 安装程序程序中他是 <filename
+>/boot</filename
+> 符号链接 <filename
+>/vmlinuz</filename
+> 指向的文件。 </para
+></listitem
+></varlistentry>
+
+</variablelist>
+
+  </sect3>
+<!--   End of file using-d-i/modules/ia64/elilo-installer.xml -->
+
+<!-- Start of file using-d-i/modules/mips/arcboot-installer.xml -->
+
+  <sect3 arch="mips">
+  <title
+><command
+>arcboot</command
+>-installer</title>
+<para
+>SGI Indys 上的 boot loader 是 <command
+>arcboot</command
+>。它必须被安装到与内核相同的磁盘上(安装程序自动完成)。Arcboot 可以支持不同的设置，它们的配置在 <filename
+>/etc/arcboot.conf</filename
+>。每个设置有单独的文件，安装程序创建的默认设置为 <quote
+>linux</quote
+>。acrboot 安装之后，系统可以从硬盘启动，这需要固件提示时设置一些固件环境变量 <informalexample
+><screen>
+<userinput
+> setenv SystemPartition scsi(<replaceable
+>scsi</replaceable
+>)disk(<replaceable
+>disk</replaceable
+>)rdisk(0)partition(0)</userinput>
+<userinput
+> setenv OSLoadPartition scsi(<replaceable
+>scsi</replaceable
+>)disk(<replaceable
+>disk</replaceable
+>)rdisk(0)partition(<replaceable
+>partnr</replaceable
+>)</userinput>
+<userinput
+> setenv OSLoader arcboot</userinput>
+<userinput
+> setenv OSLoadFilename <replaceable
+>config</replaceable
+></userinput>
+<userinput
+> setenv AutoLoad yes</userinput>
+</screen
+></informalexample
+> ，然后键入 <command
+>boot</command
+>。 </para>
+
+<variablelist>
+<varlistentry>
+<term
+> <replaceable
+>scsi</replaceable
+> </term>
+<listitem
+><para
+>是启动的 SCSI 总线，<userinput
+>0</userinput
+> 为板载控制器 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+> <replaceable
+>disk</replaceable
+> </term>
+<listitem
+><para
+>硬盘的 SCSI ID，<command
+>arcboot</command
+> 安装在其上 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+> <replaceable
+>partnr</replaceable
+> </term>
+<listitem
+><para
+>分区号，<filename
+>/etc/arcboot.conf</filename
+> 处于该分区 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+> <replaceable
+>config</replaceable
+> </term>
+<listitem
+><para
+><filename
+>/etc/arcboot.conf</filename
+> 上设置的入口名，默认为 <quote
+>linux</quote
+> 。 </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+  </sect3>
+<!--   End of file using-d-i/modules/mips/arcboot-installer.xml -->
+
+<!-- Start of file using-d-i/modules/mipsel/colo-installer.xml -->
+<!--   End of file using-d-i/modules/mipsel/colo-installer.xml -->
+
+<!-- Start of file using-d-i/modules/mipsel/delo-installer.xml -->
+
+  <sect3 arch="mipsel">
+  <title
+><command
+>delo</command
+>-installer</title>
+<para
+>DECstations 上的 boot loader 是 <command
+>DELO</command
+>。它必须被安装到与内核相同的磁盘上(安装程序自动完成)。DELO 可以支持不同的设置，它们的配置在<filename
+>/etc/delo.conf</filename
+>。每个设置有单独的文件，安装程序创建的默认设置为 <quote
+>linux</quote
+>。DELO 安装之后，系统可以从硬盘启动，这需要固件提示时设置一些固件环境变量 <informalexample
+><screen>
+<userinput
+>boot <replaceable
+>#</replaceable
+>/rz<replaceable
+>id</replaceable
+> <replaceable
+>partnr</replaceable
+>/<replaceable
+>name</replaceable
+></userinput>
+</screen
+></informalexample
+> 。 </para>
+
+<variablelist>
+<varlistentry>
+<term
+> <replaceable
+>#</replaceable
+> </term>
+<listitem
+><para
+>是启动的 TurboChannel 设备，在 DEC 工作站上板载控制器是 <userinput
+>3</userinput
+> </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+> <replaceable
+>id</replaceable
+> </term>
+<listitem
+><para
+>硬盘上的 SCSI ID，<command
+>DELO</command
+> 安装在其上 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+> <replaceable
+>partnr</replaceable
+> </term>
+<listitem
+><para
+>分区号，<filename
+>/etc/delo.conf</filename
+> 处于此分区 </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+> <replaceable
+>name</replaceable
+> </term>
+<listitem
+><para
+><filename
+>/etc/delo.conf</filename
+>上设置的入口名，默认为 <quote
+>linux</quote
+> </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>尽管 <filename
+>/etc/delo.conf</filename
+> 位于硬盘的第一个分区，并且应该引导默认的设置，但也可以用 <informalexample
+><screen
+><userinput
+>boot #/rz<replaceable
+>id</replaceable
+></userinput
+>
+</screen
+></informalexample>
+
+</para>
+  </sect3>
+<!--   End of file using-d-i/modules/mipsel/delo-installer.xml -->
+
+<!-- Start of file using-d-i/modules/powerpc/yaboot-installer.xml -->
+
+  <sect3 arch="powerpc">
+  <title
+>安装 <command
+>Yaboot</command
+> 至硬盘</title>
+<para
+>新的(1998 年以后)的 PowerMacs 使用 <command
+>yaboot</command
+> 作为它们的 boot loader。安装程序自动配置 <command
+>yaboot</command
+>，您只需一个 820k 的小分区，命名为 <quote
+>bootstrap</quote
+>，类型为 <emphasis
+>Apple_Bootstrap</emphasis
+> 这由分区组件创建。如果这步完全成功，硬盘就可以启动，OpenFireware 将设为启动 &debian;。 </para>
+  </sect3>
+<!--   End of file using-d-i/modules/powerpc/yaboot-installer.xml -->
+
+<!-- Start of file using-d-i/modules/powerpc/quik-installer.xml -->
+
+  <sect3 arch="powerpc">
+  <title
+>安装 <command
+>Quik</command
+> 至硬盘</title>
+<para
+>用于 OldWorld Power Macintosh 机器的 boot loader 是 <command
+>quik</command
+>。您可以将它用于 CHRP。安装程序会自动配置 <command
+>quik</command
+>。该配置已知可以工作在 7200，7300 和 7600 Powermacs，以及一些 Power Computing 克隆。 </para>
+  </sect3>
+<!--   End of file using-d-i/modules/powerpc/quik-installer.xml -->
+
+<!-- Start of file using-d-i/modules/s390/zipl-installer.xml -->
+
+  <sect3 arch="s390">
+  <title
+><command
+>zipl</command
+>-installer</title>
+<para
+>&arch-title; 上的 boot loader 是 <quote
+>zipl</quote
+>。<command
+>ZIPL</command
+> 的配置和用法类似于 <command
+>LILO</command
+>，只有少许不同。如果您想了解更多，请参考 <quote
+>LINUX for &arch-title; Device Drivers and Installation Commands</quote
+>，它位于 IBM 的 developerWorks 网站<command
+>ZIPL</command
+>。 </para>
+  </sect3>
+<!--   End of file using-d-i/modules/s390/zipl-installer.xml -->
+
+<!-- Start of file using-d-i/modules/sparc/silo-installer.xml -->
+
+  <sect3 arch="sparc">
+  <title
+>安装 <command
+>SILO</command
+> Boot Loader 到硬盘</title>
+<para
+>&architecture; 上标准的 boot loader 称为 <quote
+>silo</quote
+>。它的文档位于 <filename
+>/usr/share/doc/silo/</filename
+>。<command
+>SILO</command
+> 的配置和用法类似于 <command
+>LILO</command
+>，只有少许不同。首先，<command
+>SILO</command
+> 允许您从磁盘上引导内核映象，即使它没有列入 <filename
+>/etc/silo.conf</filename
+>。这是因为 <command
+>SILO</command
+> 可以真正地读取 Linux 分区。当然，<filename
+>/etc/silo.conf</filename
+> 是在启动时读取，也就不需要在安装新内核之后再执行 <command
+>silo</command
+>，就像您用 <command
+>LILO</command
+>。<command
+>SILO</command
+> 也可以读取 UFS 分区，就是说它可以从 SunOS/Solaris 分区启动。这对于安装 GNU/Linux 到一个已经存在 SunOS/Solaris 的系统很有用。 </para>
+  </sect3>
+<!--   End of file using-d-i/modules/sparc/silo-installer.xml -->
+
+<!-- Start of file using-d-i/modules/nobootloader.xml -->
+
+   <sect3 id="nobootloader">
+   <title
+>不使用启动引导器继续进行</title>
+
+<para
+>该选项用于完成安装而不安装引导器，这种情况要么是体系/子体系不支持，要么是因为不想要(比如，您想使用已经存在的引导器)<phrase arch="m68k"
+>这个选项对 Macintosh，Atari 和 Amiga 系统特别有用，因为它们本来的操作系统必须在机器上维护，以用于启动 GNU/Linux。</phrase
+> </para
+><para
+>如果您打算手动设置 bootloader，需要检测安装的内核，它位于 <filename
+>/target/boot</filename
+>。您还需要检测 <firstterm
+>initrd</firstterm
+> 存在的目录；如果有，也许需要指导 bootloader 使用它。其他需要的信息，包括您为 <filename
+>/</filename
+> 文件系统选择的磁盘和分区，并且，如果您打算安装 <filename
+>/boot</filename
+> 到一个独立的分区，还需要 <filename
+>/boot</filename
+> 文件系统。 </para>
+   </sect3>
+<!--   End of file using-d-i/modules/nobootloader.xml -->
+  </sect2>
+
+  <sect2 id="di-finish">
+  <title
+>完成第一阶段</title>
+<para
+>这是在您启动新 Debian 之前的最后一些工作。主要进行一些 &d-i; 之后的清理。 </para>
+
+
+<!-- Start of file using-d-i/modules/prebaseconfig.xml -->
+
+   <sect3 id="prebaseconfig">
+   <title
+>完成安装并重启</title>
+
+<para
+>这是安装 Debian 进程的最后一步。您会被提醒拿出用于安装启动的媒介(CD，软盘等)。安装程序将做最后几分钟的任务，然后启动到您的新 Debian 系统。 </para
+><para arch="s390"
+>选择 <guimenuitem
+>完成安装</guimenuitem
+> 菜单项，它用来关闭系统。因为在这种情况下，重启不被 &arch-title; 支持。您需要使用来自 DASD 的 IPL GNU/Linux，它在安装步骤第一步里选做根文件系统。 </para>
+   </sect3>
+<!--   End of file using-d-i/modules/prebaseconfig.xml -->
+  </sect2>
+
+  <sect2 id="di-miscellaneous">
+  <title
+>杂项</title>
+<para
+>这里的组件通常不在安装进程之内，但会在后台待命，以帮助用户遇到麻烦时处理问题。 </para>
+
+
+<!-- Start of file using-d-i/modules/save-logs.xml -->
+
+   <sect3 id="save-logs">
+   <title
+>保存安装记录</title>
+
+<para
+>如果安装成功，安装过程中创建的记录文件会被自动保存到 <filename
+>/var/log/debian-installer/</filename
+> 在您的新 Debian 系统上。 </para
+><para
+>从主菜单上选择 <guimenuitem
+>保存调试记录</guimenuitem
+> 允许您将记录文件保存到软盘上<phrase condition="etch"
+>，网络，硬盘或其他介质</phrase
+>。这是用于安装过程中遭遇严重错误的时，您想在其它系统上研究记录，或者用于报告的附件。 </para>
+   </sect3>
+<!--   End of file using-d-i/modules/save-logs.xml -->
+
+<!-- Start of file using-d-i/modules/cdrom-checker.xml -->
+<!--   End of file using-d-i/modules/cdrom-checker.xml -->
+
+<!-- Start of file using-d-i/modules/shell.xml -->
+
+   <sect3 id="shell">
+   <title
+>使用 Shell 查看记录</title>
+   <!-- TODO: There is nothing about logs in this section! -->
+
+<para
+>有一个 <guimenuitem
+>Execute a Shell</guimenuitem
+> 菜单项。如果没有菜单，想使用 shell 要按 <keycombo
+><keycap
+>左 Alt</keycap
+> <keycap
+>F2</keycap
+></keycombo
+> (在 Mac 键盘上，<keycombo
+><keycap
+>Option</keycap
+> <keycap
+>F2</keycap
+> </keycombo
+>) 切换到第二个 <emphasis
+>虚拟控制台</emphasis
+>。就是同时按下 <keycap
+>Alt</keycap
+> 健，它位于<keycap
+>空格健</keycap
+>的左手边，和 <keycap
+>F2</keycap
+> 功能键。另外一个单独的窗口运行着 Bourne shell 的克隆 <command
+>ash</command
+>。 </para
+><para
+>因为这时您是从 RAM 盘启动，只有有限的 Unix 工具可以使用。您可以通过命令 <command
+>ls /bin /sbin /usr/bin /usr/sbin</command
+> 和键入 <command
+>help</command
+> 查看哪些程序可以使用。文本编辑器是 <command
+>nano</command
+>。该 shell 有一些好用的特性，如自动完成与历史纪录。 </para
+><para
+>使用菜单完成它们能完成的工作 &mdash; shell 和命令只在出错的时候使用。尤其要使用菜单，而不是 shell 去激活您的交换分区，因为菜单软件无法检测到您在 shell 做的工作。如果您用菜单打开的 shell，按下<keycombo
+><keycap
+>左 Alt</keycap
+> <keycap
+>F1</keycap
+></keycombo
+>，或者键入 <command
+>exit</command
+> 返回菜单。 </para>
+   </sect3>
+<!--   End of file using-d-i/modules/shell.xml -->
+
+<!-- Start of file using-d-i/modules/network-console.xml -->
+
+   <sect3 id="network-console">
+   <title
+>通过网络安装</title>
+
+<para arch="not-s390"
+>更好玩的一个组件是<firstterm
+>network-console</firstterm
+>。它可以让您使用 SSH 通过网络完成大部分安装工作。使用网络也就是您要用控制台完成第一阶段，或者至少先建立网络。(您可以使用 <xref linkend="automatic-install"/> 做这部分工作。) </para
+><para arch="not-s390"
+>该组件默认不会加载到安装主菜单，因此必须单独指定。如果使用 CD，您需要使用 medium 优先级或者打开安装主菜单并选择 <guimenuitem
+>Load installer components from CD</guimenuitem
+>，在额外的组件列表里面选择 <guimenuitem
+>network-console: Continue installation remotely using SSH</guimenuitem
+>。加载成功后会出现一个新的菜单项，名为 <guimenuitem
+>Continue installation remotely using SSH</guimenuitem
+>。 </para
+><para arch="s390"
+>在 &arch-title; 上安装，建立网络之后这是默认的方法。 </para
+><para
+><phrase arch="not-s390"
+>选择新菜单项之后，您</phrase
+> <phrase arch="s390"
+>您</phrase
+> 会被问到新密码用于连接到安装系统，以及确认。就这些。现在您应该看到一个画面，提示您使用 <emphasis
+>installer</emphasis
+> 用户远程登录，密码就是刚才您提供的。另外一个需要留意的重要细节，是屏幕上显示的该系统的 fingerprint。您需要安全地传输该 fingerprint 给<quote
+>那些要继续远程安装的人</quote
+>。 </para
+><para
+>当您决定继续本地安装时，不断地按 &enterkey;，就可以返回主菜单，之后可以选择其他的组件。 </para
+><para
+>现在转到网线的另一端。有一个先决条件，您需要配置您的终端使用 UTF-8 编码，因为安装系统使用这种编码。如果您不这样做，远程安装也可以进行，但是您可能看到奇怪的显示，比如破碎的对话框边界，或者不可读的非 ASCII 字符。与安装系统建立连接只需键入: <informalexample
+><screen>
+<prompt
+>$</prompt
+> <userinput
+>ssh -l installer <replaceable
+>install_host</replaceable
+></userinput>
+</screen
+></informalexample
+> 其中 <replaceable
+>install_host</replaceable
+> 是安装计算机的名字或 IP 地址。正式登录之前，会显示远程系统的 fingerprint，您需要确认是否正确。 </para
+><note
+><para
+>如果您依次安装多台电脑，他们碰巧使用相同的 IP 地址或主机名，那么 ssh 将拒绝连接。造成的原因是它具有不同的 fingerprint，这通常是欺骗攻击的标志。如果您确信不是那种情况，需要删除 <filename
+>~/.ssh/known_hosts</filename
+> 里面相关的行，再重新来过。 </para
+></note
+><para
+>登录之后您将看到一个初始画面，显示有两个可能，<guimenuitem
+>Start menu</guimenuitem
+> 和 <guimenuitem
+>Start shell</guimenuitem
+>。前一个将带您到安装主菜单，那么您可以像普通方式一样安装。后一个打开一个 shell，您可以检查修复远程的系统。在安装菜单只能打开一个 SSH 会话，但 shell 可以打开多个。 </para
+><warning
+><para
+>使用 SSH 开始远程安装之后，您不该返回本地控制台运行的安装会话。这将破坏新系统配置的数据库。结果可能导致安装失败或者安装完成的系统出现问题。 </para
+><para
+>另外，如果您在 X 终端下运行 ssh 会话，也不要改变窗口大小，它可能会造成连接中止。 </para
+></warning>
+
+   </sect3>
+<!--   End of file using-d-i/modules/network-console.xml -->
+
+<!-- Start of file using-d-i/modules/baseconfig.xml -->
+
+   <sect3 id="baseconfig">
+   <title
+>在 &d-i; 之内运行 <command
+>base-config</command
+></title>
+
+<para
+>在安装程序的第一阶段(从硬盘启动之前)，<firstterm
+>chroot</firstterm
+> 环境下执行 <command
+>base-config</command
+>，也可以配置基本系统。但这主要是用来测试安装程序，通常应该避免使用。 </para>
+   </sect3>
+<!--   End of file using-d-i/modules/baseconfig.xml -->
+  </sect2>
+ </sect1>
+<!--   End of file using-d-i/components.xml -->
+
+</chapter>
+
+<!--   End of file using-d-i/using-d-i.xml -->

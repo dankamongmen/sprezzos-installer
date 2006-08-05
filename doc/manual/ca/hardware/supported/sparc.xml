@@ -1,0 +1,82 @@
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 28997 -->
+
+
+  <sect2 arch="sparc" id="sparc-cpus"><title>Suport de CPU, plaques base i
+    vídeo</title>
+<para>
+
+Els ports de <emphasis>&architecture;</emphasis> suporten diferents
+tipus de sistemes Sparc. Els identificadors més comuns pels sistemes
+Sparc són sun4c, sun4m, sun4d i sun4u. En aquest moment no es suporta bé
+el maquinari antic sun4. Però els altres sí que es suporten. El sun4d és
+el que menys s'ha provat d'aquests, així que espereu problemes respecte a
+l'estabilitat del nucli. Els sun4c i sun4m, els més comuns del maquinaris
+vells de Sparc, inclouen sistemes com SparcStation 1, 1+, IPC, IPX i el
+SparcStation LX, 5, 10 i 20 respectivament. Els sistemes de tipus
+UltraSPARC tenen l'identificador sun4u, i es suporten utilitzant el
+conjunt d'imatges sun4u. Alguns que tenen aquest identificador, es sabut
+que no estan suportats. Es sap que no estan suportats els multi-computadors
+AP1000 i el Tadpole Sparcbook 1. Vegeu
+<ulink url="&url-sparc-linux-faq;">Linux for SPARCProcessors FAQ</ulink>
+per una informació completa.
+
+</para>
+
+   <sect3><title>Configuració de la memòria</title>
+<para>
+
+Algunes estacions de treball antigues de Sun, especialment les Sun IPX i
+Sun IPC tenen uns bancs de memòria a direccions fixes a la memòria física.
+Així si els bancs no s'han omplit, hi haurà forats a l'espai de memòria
+física. La instal·lació de Linux necessita un bloc de memòria contigu on
+carregar el nucli i el disc RAM inicial. Si no està disponible s'obtindrà
+un <quote>Data Access Exception</quote>.
+
+</para><para>
+Així que heu de configurar la memòria de manera que el bloc de memòria
+més baix sigui continu i de al menys 8 MiB. Als abans esmentats IPX i IPC,
+els bancs de memòria esta mapada a blocs de 16 MiB. Açò significa en la
+pràctica que es disposa d'un SIMM al banc zero suficientment gran per
+contenir el nucli i el RAMdisk. En aquest cas 4 MiB <emphasis>no</emphasis>
+són suficients.
+
+</para><para>
+
+Exemple:
+A un Sun IPX disposeu de un SIMM de 16 MiB i un de 4 MiB. Hi ha
+quatre bancs SIMM (0,1,2,3). [El banc zero és més enllà dels connectors
+SBUS]. Per tant hauríeu d'instal·lar el SIMM de 16 MiB al bank 0; i
+aleshores es recomana que instal·leu el SIMM de 4 MiB al banc 2.
+
+</para>
+   </sect3>
+
+   <sect3><title>Configuració dels gràfics</title>
+<para>
+
+Sobretot en el cas de les estacions de treball velles de Sun, és molt
+normal que tingueu una framebuffer en placa que s'ha reemplaçat (per
+exemple per la bwtwo al Sun IPC), i que tingueu una targeta SBUS
+d'acceleració del buffer a una ranura SBUS. A Solaris/SunOS no suposa
+cap problema ja que s'inicialitzen les dos targetes.
+
+</para><para>
+
+Però a Linux açò pot portar problemes, pot passar que el monitor PROM
+d'arrencada pot mostrar la seva sortida a aquesta targeta addicional; i
+per altra banda els missatges d'arrencada del nucli de Linux dirigir-se
+a la targeta original a la placa, <emphasis>no</emphasis> deixant els
+missatges d'error a la pantalla, amb la màquina aparentment encallada
+carregant el RAMdisk.
+
+</para><para>
+
+Per evitar aquest problema, connecteu el monitor (si fa falta) a la
+targeta de vídeo amb la ranura amb nombre SBUS més baix (la targeta a
+la placa base conta com la ranura externa més baixa). També podeu
+alternativament utilitzar una consola serie.
+
+</para>
+   </sect3>
+  </sect2>

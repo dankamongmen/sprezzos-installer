@@ -1,0 +1,67 @@
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 28856 -->
+
+
+   <sect3 id="localechooser" condition="etch">
+   <title>Selecionando Opções de Localização</title>
+
+<para>
+
+Na maioria dos casos a primeira pergunta que é feita à você tem a ver com
+as opções de localização à serem usadas tanto para a instalação quanto para
+o sistema instalado. As opções de localização consistem em idioma, país e 
+<quote>locales</quote>.
+
+</para><para>
+
+O idioma que você escolhe será usado para o resto do processo de instalação, 
+provendo a tradução dos diferentes diálogos disponíveis. Se não houver
+tradução válida disponível para o idioma selecionado, o instalador utilizará
+o padrão em Inglês.
+
+</para><para>
+
+O país selecionado será utilizado mais tarde no processo de instalação para
+pegar fuso horário e o espelho Debian apropriado para a sua localização
+geográfica. Idioma e país juntos serão usados para definir a <quote>locale
+</quote> padrão para o seu sistema e ajudar a selecionar seu teclado.
+
+</para><para>
+
+Você primeiramente será perguntado pelo seu idioma preferido. Os nomes de 
+idioma são listados tanto em Inglês (lado esquerdo) como no próprio idioma
+(lado direito); os nomes no lado direito são também mostrados no desenho
+próprio do idioma. A lista é ordenada pelo nome em Inglês. No topo da lista
+tem uma opção extra que permite você selecionar a <quote>locale</quote> <quote>C
+</quote> ao invés de um idioma. Selecionando a <quote>locale</quote> <quote>C
+</quote> resultará no procedimento de instalação em Inglês; o sistema instalado 
+não terá suporte à localização pois o pacote <classname>locales</classname>
+não será instalado.
+
+</para><para>
+
+Se você escolher um idioma que é reconhecido como idioma oficial para mais
+de um país<footnote>
+
+<para>
+
+Em termos técnicos: quando existem múltiplas localizações para um idioma
+com diferentes códigos de país.
+
+</para>
+
+</footnote>, será solicitado que você selecione um país.
+Se você selecionar <guimenuitem>Outro</guimenuitem> ao final da lista,
+você será apresentado à uma lista de todos os países, agrupados por continente
+Se um idioma tem apenas um país associado a ele, este país será selecionado
+automaticamente.
+
+</para><para>
+
+A <quote>locale</quote> padrão será selecionada baseada no idioma selecionado 
+e no país. Se você estiver instalando em prioridade média ou baixa, você tem a
+opção de selecionar uma <quote>locale</quote> padrão diferente e selecionar 
+<quote>locales</quote> diferentes para serem geradas para o sistema instalado.
+
+</para>
+   </sect3>

@@ -1,0 +1,8 @@
+#:CoLo:#
+#
+# load debian-installer via NFS
+#
+-serial on
+lcd 'Loading' 'debian-installer'
+nfs {dhcp-next-server} {dhcp-root-path} vmlinux-2.4.27-r5k-cobalt initrd.gz
+execute rd_start=0x{initrd-start} rd_size=0x{initrd-size} console=ttyS0,{console-speed}

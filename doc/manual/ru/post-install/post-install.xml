@@ -1,0 +1,470 @@
+<!-- Start of file post-install/post-install.xml -->
+
+<chapter id="post-install">
+ <title
+>Следующие шаги и что делать дальше</title>
+
+
+<!-- Start of file post-install/new-to-unix.xml -->
+
+
+ <sect1 id="unix-intro">
+ <title
+>Если вы новичок в Unix</title>
+<para
+>Если вы новичок в Unix, то, вероятно, вам стоит купить несколько книг и что-нибудь почитать. Много полезной информации можно найти в <ulink url="&url-debian-reference;"
+>справочнике по Debian</ulink
+>. В <ulink url="&url-unix-faq;"
+>списке Unix FAQs</ulink
+> содержатся ссылки на некоторые интересные документы UseNet. </para
+><para
+>Linux &mdash; это одна из реализаций Unix. <ulink url="&url-ldp;"
+>Linux Documentation Project (LDP)</ulink
+> собирает различные HOWTO и электронные книги, посвящённые Linux. Большинство из этих документов можно получить просто установив пакет <classname
+>doc-linux-html</classname
+> (HTML версия) или пакет <classname
+>doc-linux-text</classname
+> (ASCII версия), а затем перейти в каталог <filename
+>/usr/share/doc/HOWTO</filename
+>. Переводы LDP HOWTO также доступны в виде пакетов Debian. </para>
+
+ </sect1>
+<!--   End of file post-install/new-to-unix.xml -->
+
+<!-- Start of file post-install/orientation.xml -->
+
+
+ <sect1 id="debian-orientation"
+><title
+>Самостоятельное ориентирование в Debian</title>
+<para
+>Debian слегка отличается от других дистрибутивов. Даже если вы знакомы с другими дистрибутивами Linux, есть вещи, которые вы должны знать о Debian, чтобы поддерживать систему в рабочем состоянии. Эта глава содержит материалы, которые помогут вам ориентироваться; она не является руководством по использованию Debian, она всего лишь кратко описывает систему для занятых людей. </para>
+
+  <sect2
+><title
+>Система управления пакетами Debian</title>
+<para
+>Наиболее важно разобраться в системе управления пакетами Debian. В сущности, большая часть системы находится под контролем системы управления пакетами. Сюда входят: <itemizedlist
+> <listitem
+><para
+> <filename
+>/usr</filename
+> (кроме <filename
+>/usr/local</filename
+>) </para
+></listitem
+> <listitem
+><para
+> <filename
+>/var</filename
+> (вы можете спокойно сделать <filename
+>/var/local</filename
+>) </para
+></listitem
+> <listitem
+><para
+> <filename
+>/bin</filename
+> </para
+></listitem
+> <listitem
+><para
+> <filename
+>/sbin</filename
+> </para
+></listitem
+> <listitem
+><para
+> <filename
+>/lib</filename
+> </para
+></listitem
+> </itemizedlist
+> Например, если вы заместите <filename
+>/usr/bin/perl</filename
+>, он будет работать, но позже, если вы обновите пакет <classname
+>perl</classname
+>, файл, который вы положили будет заменён. Эксперты могут обойти это установив на пакеты флаг <quote
+>hold</quote
+> в <command
+>aptitude</command
+>. </para
+><para
+>Один из лучших методов установки пакетов &mdash; apt. Вы можете использовать версию для командной строки <command
+>apt-get</command
+> или полноэкранную текстовую версию <application
+>aptitude</application
+>. Заметим, что apt также позволяет объединить main, contrib и non-free, так что вы можете устанавливать имеющие экспортные ограничения пакеты вместе с обычными. </para>
+  </sect2>
+
+  <sect2
+><title
+>Управление версиями приложений</title>
+<para
+>Альтернативность версий приложений управляется с помощью программы update-alternatives. Если вы работаете с несколькими версиями одного приложения, прочитайте страницу руководства к update-alternatives. </para>
+  </sect2>
+
+  <sect2
+><title
+>Управление заданиями cron</title>
+<para
+>Любые работы относящиеся к администрированию системы должны проводится в каталоге <filename
+>/etc</filename
+>, так как там расположены конфигурационные файлы. Если у вас есть ежедневные, еженедельные или ночные задания cron для суперпользователя, поместите их в каталог <filename
+>/etc/cron.{daily,weekly,monthly}</filename
+>. Они вызываются из <filename
+>/etc/crontab</filename
+> и запускаются в алфавитном порядке. </para
+><para
+>С другой стороны, если задания: (а) нужно запускать от определённого пользователя или (b) нужно запустить в определённое время или с определённой частотой, вы можете использовать или <filename
+>/etc/crontab</filename
+>, или, что лучше, <filename
+>/etc/cron.d/имя_задания</filename
+>. Это особые файлы, они содержат дополнительное поле, позволящее вам указать пользователя от которого будет выполняться задание cron. </para
+><para
+>В любом случае, просто отредактируйте файлы, и cron обнаружит эти изменения автоматически. Не нужно запускать специальную команду. Подробная информация доступна в cron(8), crontab(5) и <filename
+>/usr/share/doc/cron/README.Debian</filename
+>. </para>
+  </sect2>
+ </sect1>
+<!--   End of file post-install/orientation.xml -->
+
+<!-- Start of file post-install/reactivating-win.xml -->
+
+
+ <sect1 arch="i386" id="reactivating-win">
+ <title
+>Реактивация DOS и Windows</title>
+<para
+>После установки базовой системы и изменения <emphasis
+>главной загрузочной записи (MBR)</emphasis
+>, вы сможете загружать Linux, но вероятно ничего более. Это зависит от вашего выбора во время установки. Эта глава опишет, как вы можете реактивировать вашу старую систему, например, чтобы снова стала возможной загрузка DOS или Windows. </para
+><para
+><command
+>LILO</command
+> &mdash; это менеджер загрузки, с помощью которого вы можете также загружать другие операционные системы кроме Linux, которые подчиняются PC соглашениям. Менеджер загрузки настраивается через файл <filename
+>/etc/lilo.conf</filename
+>. После редактирования этого файла, вы должны выполнить программу <command
+>lilo</command
+>. Это нужно для того, чтобы ваши изменения вступили в силу. </para
+><para
+>Важными частями файла <filename
+>lilo.conf</filename
+> являются строки, содержащие ключевые слова <userinput
+>image</userinput
+> и <userinput
+>other</userinput
+>, а также строки, стоящие после них. Они используются для описания системы, которая может быть загружена с помощью <command
+>LILO</command
+>. Такая система может иметь ядро (<userinput
+>image</userinput
+>), корневой раздел, дополнительные параметры ядра и так далее, а также конфигурацию для загрузки другой, не Linux, (<userinput
+>other</userinput
+>) операционной системы. Эти ключевые слова могут быть использованы несколько раз. Порядок этих систем в файле конфигурации важен, так как им определяется, какая система будет грузиться автоматически после, например, таймаута (<userinput
+>delay</userinput
+>), если <command
+>LILO</command
+> не остановлен нажатием клавиши <keycap
+>shift</keycap
+>. </para
+><para
+>После установки Debian, только текущая система прописана в загрузку с помощью <command
+>LILO</command
+>. Если нужно загрузить другое ядро Linux, вы можете отредактировать файл конфигурации <filename
+>/etc/lilo.conf</filename
+>, добавив следующие строки: <informalexample
+><screen>
+&additional-lilo-image;
+</screen
+></informalexample
+> Для простой настройки достаточно только две первые строки. Если вы хотите больше узнать об этих двух параметрах, обратитесь к документации на <command
+>LILO</command
+>. Её можно найти в каталоге <filename
+>/usr/share/doc/lilo/</filename
+>. Файл называется <filename
+>Manual.txt</filename
+>. Чтобы быстро войти в мир загрузки системы также посмотрите страницы руководства по <command
+>LILO</command
+> <filename
+>lilo.conf</filename
+>, где описаны ключевые слова файла конфигурации, а на странице <filename
+>lilo</filename
+> описана установка новой конфигурации в загрузочный сектор. </para
+><para
+>Обратите внимание, что в &debian; есть и другие системные загрузчики, такие как GRUB (в пакете <classname
+>grub</classname
+>), CHOS (в пакете <classname
+>chos</classname
+>), Extended-IPL (в пакете <classname
+>extipl</classname
+>), loadlin (в пакете <classname
+>loadlin</classname
+>) и другие. </para>
+ </sect1>
+<!--   End of file post-install/reactivating-win.xml -->
+
+<!-- Start of file post-install/further-reading.xml -->
+
+ <sect1 id="further-reading"
+><title
+>Что почитать</title>
+<para
+>Если вам требуется информация по определённой программе, сначала, попробуйте выполнить <userinput
+>man <replaceable
+>название программы</replaceable
+></userinput
+> или <userinput
+>info <replaceable
+>название программы</replaceable
+></userinput
+>. </para
+><para
+>Также, есть много полезной документации в каталоге <filename
+>/usr/share/doc</filename
+>. В частности, в каталогах <filename
+>/usr/share/doc/HOWTO</filename
+> и <filename
+>/usr/share/doc/FAQ</filename
+> содержится море интересной документации. Информацию об ошибках смотрите в <filename
+>/usr/share/doc/debian/bug*</filename
+>. Информацию по работе определённой программы в Debian смотрите в файле <filename
+>/usr/share/doc/(имя пакета )/README.Debian</filename
+>. </para
+><para
+><ulink url="http://www.debian.org/"
+>Веб сайт Debian</ulink
+> содержит огромное количество документации по Debian. В частности, посмотрите <ulink url="http://www.debian.org/doc/FAQ/"
+>Debian GNU/Linux FAQ</ulink
+> и <ulink url="http://www.debian.org/doc/user-manuals#quick-reference"
+>Справочник по Debian</ulink
+>. Каталог документации Debian находится по адресу<ulink url="http://www.debian.org/doc/ddp"
+>Проект Документации Debian</ulink
+>. Можно обратиться с вопросом к сообществу Debian подписавшись на один или более списков рассылки Debian <ulink url="http://www.debian.org/MailingLists/subscribe"
+>Подписка на списки рассылки</ulink
+>. Также, не последнее место занимают <ulink url="http://lists.debian.org/"
+>Архивы списков рассылки Debian</ulink
+>, содержащие ценную информацию о Debian. </para
+><para
+>Общая информация о GNU/Linux есть в <ulink url="http://www.tldp.org/"
+>проекте документации Linux</ulink
+>. Здесь вы найдёте разные HOWTO и ссылки на другие превосходные источники информации на компоненты системы GNU/Linux. </para>
+
+ </sect1>
+<!--   End of file post-install/further-reading.xml -->
+
+<!-- Start of file post-install/kernel-baking.xml -->
+
+ <sect1 id="kernel-baking"
+><title
+>Сборка нового ядра</title>
+<para
+>Зачем пересобирать ядро? Обычно этого делать не нужно, так как ядро, устанавливаемое по умолчанию в Debian, подходит для многих конфигураций. Кроме этого, в дистрибутиве Debian есть ещё несколько сборок ядра. Поэтому, сначала проверьте, может другой пакет с ядром лучше подходит для вашего компьютера. Однако, полезно пересобрать ядро в следующих случаях: <itemizedlist>
+<listitem
+><para
+>если установлено специфичное оборудование или возникает конфликт аппаратного обеспечения со стандартным ядром </para
+></listitem>
+<listitem
+><para
+>чтобы задействовать свойства, которых нет в поставляемых сборках ядра (например, поддержка high memory) </para
+></listitem>
+<listitem
+><para
+>для оптимизации ядра, удаляя ненужные драйверы для уменьшения времени загрузки </para
+></listitem>
+<listitem
+><para
+>создания монолитного ядра, без модулей </para
+></listitem>
+<listitem
+><para
+>для установки обновлённого или разрабатываемого ядра </para
+></listitem>
+<listitem
+><para
+>чтобы больше узнать о ядрах linux </para
+></listitem>
+</itemizedlist>
+
+</para>
+
+  <sect2
+><title
+>Управление образами ядра</title>
+<para
+>Не бойтесь пересобирать ядро. Это забавно и полезно. </para
+><para
+>Чтобы собрать ядро по технологии Debian, вам потребуются некоторые пакеты: <classname
+>fakeroot</classname
+>, <classname
+>kernel-package</classname
+>, <phrase condition="classic-kpkg"
+><classname
+>kernel-source-&kernelversion;</classname
+> (последняя версия на время написания)</phrase
+> <phrase condition="common-kpkg"
+><classname
+>linux-source-2.6</classname
+></phrase
+> и некоторые другие, которые, вероятно, уже установлены (в <filename
+>/usr/share/doc/kernel-package/README.gz</filename
+> есть полный список). </para
+><para
+>С помощью этого метода создаётся .deb файл из исходных текстов ядра, а также, если у вас имеются нестандартные модули, делается .deb файл с синхронизированными зависимостями. Это наилучший способ управления образами ядра; в <filename
+>/boot</filename
+> лежит ядро, System.map и журнальный конфигурационный файл от сборки. </para
+><para
+>Заметим, что вам <emphasis
+>не обязательно</emphasis
+> собирать ядро <quote
+>по технологии Debian</quote
+>; но мы пришли к выводу, что управлять ядрами с помощью системы управления пакетами на самом деле безопаснее и легче. Фактически, вы можете получить исходные тексты ядра прямо у Линуса, а не в виде <phrase condition="classic-kpkg"
+><classname
+>kernel-source-&kernelversion;</classname
+>,</phrase
+> <phrase condition="common-kpkg"
+><classname
+>linux-source-2.6</classname
+>,</phrase
+>, а после собрать ядро с помощью <classname
+>kernel-package</classname
+>. </para
+><para
+>Заметим, что полную документацию по использованию <classname
+>kernel-package</classname
+> можно найти в <filename
+>/usr/share/doc/kernel-package</filename
+>. Этот раздел содержит лишь краткое руководство. </para
+><para
+>Далее мы предполагаем, что вы можете делать на своей машине что угодно и хотите распаковать исходные тексты ядра в домашний каталог<footnote
+> <para
+> Есть несколько мест куда можно распаковывать исходные тексты и собрать своё ядро, но это самый лёгкий способ, без необходимости раздачи специальных прав.</para
+> </footnote
+>. Также мы предполагаем, что у вас ядро версии &kernelversion;. Проверьте, что вы находитесь в каталоге куда хотите распаковать исходные тексты ядра, распакуйте их с помощью команды <phrase condition="classic-kpkg"
+><userinput
+>tar xjf /usr/src/kernel-source-&kernelversion;.tar.bz2</userinput
+></phrase
+> <phrase condition="common-kpkg"
+><userinput
+>tar xjf /usr/src/linux-source-&kernelversion;.tar.bz2</userinput
+></phrase
+> и перейдите в только что появившийся каталог <phrase condition="classic-kpkg"
+><filename
+>kernel-source-&kernelversion;</filename
+></phrase
+> <phrase condition="common-kpkg"
+><filename
+>linux-source-&kernelversion;</filename
+></phrase
+>. </para
+><para
+>Теперь вы можете выполнить конфигурацию ядра. Если установлены, настроены и запущены X11, то запустите <userinput
+>make xconfig</userinput
+>, иначе <userinput
+>make menuconfig</userinput
+> (вам потребуется установить пакет <classname
+>libncurses5-dev</classname
+>). Внимательно прочитайте интерактивную документацию и внимательно выберите нужные параметры. Если что-то вам непонятно, обычно лучше включить драйвер устройства (программное обеспечение, которое управляет установленным оборудованием, например картами Ethernet, SCSI контроллерами и так далее). Будьте осторожны: для других параметров, не относящихся к определённому аппаратному обеспечению, нужно оставить значения по умолчанию, если вы не понимаете, что они делают. Не забудьте выбрать <quote
+>Kernel module loader</quote
+> в <quote
+>Loadable module support</quote
+> (не включён по умолчанию). Если его не включить, возникнут проблемы с установкой Debian. </para
+><para
+>Очистите дерево исходных текстов и сбросьте параметры <classname
+>kernel-package</classname
+>. Для этого выполните <userinput
+>make-kpkg clean</userinput
+>. </para
+><para
+>Теперь соберите ядро: <userinput
+>fakeroot make-kpkg --revision=custom.1.0 kernel_image</userinput
+>. Номер версии <quote
+>1.0</quote
+> можно изменить; этот номер версии нужен только для отслеживания ваших сборок. Более того, вы можете добавить любое слово вместо <quote
+>custom</quote
+> (например имя машины). Сборка ядра может занять некоторое время в зависимости от мощности машины. </para
+><para condition="supports-pcmcia"
+>Если требуется поддержка PCMCIA, вам нужно установить пакет <classname
+>pcmcia-source</classname
+>. Распакуйте сжатый tar файл с правами суперпользователя в каталог <filename
+>/usr/src</filename
+> (это важно, так как модули должны находиться там где их будут искать, то есть в <filename
+>/usr/src/modules</filename
+>). Затем, с правами суперпользователя, выполните <userinput
+>make-kpkg modules_image</userinput
+>. </para
+><para
+>После завершения сборки вы можете установить собранное ядро как обычный пакет. От суперпользователя выполните <userinput
+>dpkg -i ../kernel-image-&kernelversion;-<replaceable
+>subarchitecture</replaceable
+>_custom.1.0_&architecture;.deb</userinput
+>. Часть <replaceable
+>subarchitecture</replaceable
+> &mdash; это необязательная субархитектура, <phrase arch="i386"
+> например <quote
+>i586</quote
+>, </phrase
+> зависящая от установленных параметров ядра. <userinput
+>dpkg -i kernel-image...</userinput
+> установит ядро вместе с некоторыми полезными файлами поддержки. Например, будет правильно установлен <filename
+>System.map</filename
+> (полезен при отладке проблем с ядром), а также <filename
+>/boot/config-&kernelversion;</filename
+>, содержащий параметры сборки ядра. Ваш новый пакет <classname
+>kernel-image-&kernelversion;</classname
+> достаточно умён, чтобы автоматически использовать системный загрузчик платформы для обновления загрузки, что позволяет не делать перезапуск обновления системного загрузчика вручную. Если вы создали пакет с модулями, например, если у вас есть PCMCIA, то вам нужно установить и этот пакет. </para
+><para
+>Настало время перезагрузить систему: внимательно прочитайте все предупреждения, которые могут появиться, затем наберите <userinput
+>shutdown -r now</userinput
+>. </para
+><para
+><phrase condition="etch"
+>Подробней о ядрах Debian и сборке ядра смотрите в <ulink url="&url-kernel-handbook;"
+>Debian Linux Kernel Handbook</ulink
+>.</phrase
+>Полная информация о <classname
+>kernel-package</classname
+> лежит в каталоге <filename
+>/usr/share/doc/kernel-package</filename
+>. </para>
+  </sect2>
+ </sect1>
+<!--   End of file post-install/kernel-baking.xml -->
+
+<!-- Start of file post-install/rescue.xml -->
+
+ <sect1 id="rescue" condition="etch">
+ <title
+>Восстановление неработающей системы</title>
+<para
+>Иногда что-то идёт неправильно, и система, которую вы аккуратно установили больше не загружается. Возможно, испортились настройки системного загрузчика во время изменения, или не хочет загружаться новое ядро, или космические лучи попали в жёсткий диск и исправили единичку на нолик в файле <filename
+>/sbin/init</filename
+>. В любом случае, вам нужна система с которой можно всё исправить, и режим восстановления может помочь в этом. </para
+><para
+>Чтобы войтив режим восстановления, введите <userinput
+>rescue</userinput
+> после приглашения <prompt
+>boot:</prompt
+>, или загрузитесь с параметром загрузки <userinput
+>rescue/enable=true</userinput
+> . В начале вы пройдёте по нескольким диалогам программы установки, на которых есть пометка в углу экрана, что это режим восстановления, а не полная установка. Не волнуйтесь, ваши данные не исчезнут! Режим восстановления использует программу установки только для определения имеющихся устройств, таких как диски и сетевые устройства, и они будут доступны во время восстановления системы. </para
+><para
+>Вместо программы разметки, вам покажут список разделов, имеющихся в системе, попросят выбрать один из них. Обычно, нужно выбрать раздел, содержащий корневую систему, которую нужно восстановить. Кроме созданных непосредственно на дисках, вы можете выбирать разделы на устройствах RAID и LVM. </para
+><para
+>Если возможно, программа установки запустит оболочку командной строки в выбранной файловой системе, где вы сможете сделать любые дополнительныепроцедуры восстановления. <phrase arch="i386"
+> Например, для переустановки системного загрузчика GRUB в главную загрузочную запись первого жёсткого диска, введите команду <userinput
+>grub-install '(hd0)'</userinput
+> . </phrase
+> </para
+><para
+>Иногда программе установки не удаётся запустить оболочку командной строки в выбранной корневой файловой системе. Возможной причиной может быть повреждение файловой системы, и в этом случае выдаётся предупреждение и предлагается запустить оболочку командной строки в среде программы установки. Здесь не так много полезных программ, но и их часто достаточно для восстановления системы. Выбранная корневая файловая система будет смонтирована в каталог <filename
+>/target</filename
+>. </para
+><para
+>В обоих случаях, после выхода из оболочки командной строки система будет перезагружена. </para
+><para
+>И напоследок заметим, что восстановление нерабочей системы может оказаться очень трудным делом, и это руководство не пытается описать все возможные случаи, которые могут произойти и способы их решения. Если у вас есть проблемы &mdash; обратитесь к профессионалам. </para>
+ </sect1>
+<!--   End of file post-install/rescue.xml -->
+
+</chapter>
+<!--   End of file post-install/post-install.xml -->

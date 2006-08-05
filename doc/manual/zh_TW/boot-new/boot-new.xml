@@ -1,0 +1,882 @@
+<!-- Start of file boot-new/boot-new.xml -->
+
+<chapter id="boot-new">
+ <title
+>啟動新 Debian 系統</title>
+
+ <sect1 id="base-boot"
+><title
+>關鍵時刻</title>
+<para
+>當您的系統首次自行啟動，這在電子工程師圈子裡面稱為 <quote
+>冒煙測試</quote
+>。 </para
+><para
+>如果您直接從 Debian 啟動，但系統沒有起來，那麼請使用原來的安裝媒介，或是使用您自製的開機磁片，然後重新啟動系統。這種情況下，您也許需要添加一些啟動參數，像 <userinput
+>root=<replaceable
+>root</replaceable
+></userinput
+>，其中 <replaceable
+>root</replaceable
+> 是您的根分割區，例如 <filename
+>/dev/sda1</filename
+>。<phrase condition="etch"
+> 或者，請參閱 <xref linkend="rescue"/>以得知安裝程式內建的救援模式中的指令。</phrase
+> </para>
+
+  <sect2 arch="m68k"
+><title
+>啟動 BVME 6000</title>
+<para
+>如果您採用無硬碟方式安裝到 BVM 或 Motorola VMEbus 機器，一旦系統從 TFTP 伺服器載入 <command
+>tftplilo</command
+> 程式，在 <prompt
+>LILO Boot:</prompt
+> 提示符下輸入： <itemizedlist>
+<listitem
+><para
+><userinput
+>b6000</userinput
+> 然後按 &enterkey; 啟動 BVME 4000/6000 </para
+></listitem
+><listitem
+><para
+><userinput
+>b162</userinput
+> 然後按 &enterkey; 啟動 MVME162 </para
+></listitem
+><listitem
+><para
+><userinput
+>b167</userinput
+> 然後按 &enterkey; 啟動 MVME166/167 </para
+></listitem>
+</itemizedlist>
+
+</para>
+
+   </sect2>
+
+  <sect2 arch="m68k"
+><title
+>啟動 Macintosh</title>
+
+<para
+>進入包含安裝檔案的目錄，然後啟動 <command
+>Penguin</command
+> boot-loader，按住 <keycap
+>command</keycap
+> 鍵。進入<userinput
+>設定</userinput
+>對話框 (<keycombo
+> <keycap
+>command</keycap
+> <keycap
+>T</keycap
+> </keycombo
+>)，然後找到核心選項那行，如 <userinput
+>root=/dev/ram video=font:VGA8x16</userinput
+> 或類似提示。 </para
+><para
+>您需要修改該項目為 <userinput
+>root=/dev/<replaceable
+>yyyy</replaceable
+></userinput
+>。替換 <replaceable
+>yyyy</replaceable
+> 為您安裝分割區的 Linux 名稱 (例如，<filename
+>/dev/sda1</filename
+>);也就是之前記下的內容。<userinput
+>video=font:VGA8x8</userinput
+> 特別建議小螢幕的使用者使用。核心會選擇較美觀的 (6x11) 字體，但該字體可能會造成控制台驅動程式當機，因此使用 8x16 或 8x8 對於該階段較安全。您可以隨時修改它。 </para
+><para
+>如果您不想每次開機時立即啟動 GNU/Linux，移除 <userinput
+>Auto Boot</userinput
+> 選項。儲存設定到 <filename
+>Prefs</filename
+> 檔案，使用 <userinput
+>Save Settings As Default</userinput
+> 選項。 </para
+><para
+>現在選擇 <userinput
+>Boot Now</userinput
+> (<keycombo
+> <keycap
+>command</keycap
+> <keycap
+>B</keycap
+> </keycombo
+>) 以啟動新安裝的 GNU/Linux，而不是 RAMdisk 安裝系統。 </para
+><para
+>Debian 應該啟動，然後您將看到與安裝系統同樣的訊息，跟著是一些新訊息。 </para>
+   </sect2>
+
+
+  <sect2 arch="powerpc"
+><title
+>OldWorld PowerMacs</title>
+<para
+>如果機器在完成安裝後啟動失敗，並停在 <prompt
+>boot:</prompt
+> 提示符號，試著鍵入 <userinput
+>Linux</userinput
+> 然後按 &enterkey;。(<filename
+>quik.conf</filename
+> 中預設的啟動設定標籤是 Linux)。如果您在 <prompt
+>boot:</prompt
+> 提示符號下按 <keycap
+>Tab</keycap
+> 鍵，定義在 <filename
+>quik.conf</filename
+> 中的標籤將會被顯示出來。您也可以重新啟動安裝程式，並編輯 <filename
+>/target/etc/quik.conf</filename
+> 然後回到 <guimenuitem
+>安裝 Quik 到硬碟</guimenuitem
+> 步驟。處理 <command
+>quik</command
+> 的細節位於 <ulink url="&url-powerpc-quik-faq;"
+></ulink
+>。 </para
+><para
+>想要啟動回 MacOS 而不重設 nvram，請在 OpenFirmware 提示符號下鍵入 <userinput
+>bye</userinput
+> (假設 MacOS 沒有從機器裡面刪除)。要顯示 OpenFirmware 提示符號，按住 <keycombo
+> <keycap
+>command</keycap
+> <keycap
+>option</keycap
+> <keycap
+>o</keycap
+> <keycap
+>f</keycap
+> </keycombo
+> 鍵，在啟動機器的時候。如果您需要重新設定 OpenFirmware nvram 預設以 MacOS 啟動回到 MacOS，在開機的時候按下 <keycombo
+> <keycap
+>command</keycap
+> <keycap
+>option</keycap
+> <keycap
+>p</keycap
+> <keycap
+>r</keycap
+> </keycombo
+> 鍵。 </para
+><para
+>假如您使用 <command
+>BootX</command
+> 啟動安裝好的系統，只需選擇位於 <filename
+>Linux Kernels</filename
+> 目錄中需要的核心，去掉 ramdisk 選項，並加上與您的系統相對應的根設備﹔如 <userinput
+>/dev/hda8</userinput
+>。 </para>
+   </sect2>
+
+
+  <sect2 arch="powerpc"
+><title
+>NewWorld PowerMacs</title>
+<para
+>在 G4 機器和 iBooks 上，您可以按住 <keycap
+>option</keycap
+> 鍵，進入一個圖形介面，每個可以啟動的系統會對應到一個圖示，&debian; 將是一個企鵝的圖示。 </para
+><para
+>如果您保留 MacOS，有時候它會修改 OpenFirmware <envar
+>boot-device</envar
+> 變數，您應該重設 OpenFirmware 到它的預設設定。請在啟動機器的時候按住 <keycombo
+> <keycap
+>command</keycap
+> <keycap
+>option</keycap
+> <keycap
+>p</keycap
+> <keycap
+>r</keycap
+> </keycombo
+> 鍵。 </para
+><para
+>當您在 <prompt
+>boot:</prompt
+> 提示符號下按下 <keycap
+>Tab</keycap
+> 鍵時，定義在 <filename
+>yaboot.conf</filename
+> 裡的標籤會顯示出來。 </para
+><para
+>重設 G3 或 G4 硬體上的 OpenFirmware 將導致預設啟動 &debian; (假設您正確分割區， 並將 Apple_Bootstrap 分割區放在首位)。如果您將 &debian; 放在 SCSI 磁碟，而 MacOS 位於 IDE 磁碟，這也許不會運作，而您不得不進入 OpenFirmware 並設定 <envar
+>boot-device</envar
+> 變數，<command
+>ybin</command
+> 通常會自動完成這個動作。 </para
+><para
+>在首次啟動 &debian; 之後，您可以添加額外選項 (如雙啟動選項) 到 <filename
+>/etc/yaboot.conf</filename
+> 並執行 <command
+>ybin</command
+> 以更新修改過的設定。請參閱 <ulink url="&url-powerpc-yaboot-faq;"
+>yaboot HOWTO</ulink
+> 以了解更多資訊。 </para>
+   </sect2>
+ </sect1>
+
+ <sect1 id="base-config">
+ <title
+>Debian 啟動後之 (基本) 設置</title>
+
+<para
+>啟動之後，您將被提示去完成基本系統的設定，然後選擇您希望安裝的額外軟體套件。指引您完成此過程的應用程式稱為 <classname
+>base-config</classname
+>。它的概念類似 &d-i; 的第一階段。事實上，<classname
+>base-config</classname
+> 由一些特殊的元件組成，每個元件完成一項設定任務，包括<quote
+>在後台隱藏選單</quote
+>並使用同樣的瀏覽系統。 </para
+><para
+>如果您希望在完成安裝之後重新執行 <classname
+>base-config</classname
+>，請以 root 身份執行 <userinput
+>base-config</userinput
+>。 </para>
+
+
+<!-- Start of file boot-new/modules/timezone.xml -->
+
+ <sect2 id="base-config-tz">
+ <title
+>設定您的時區</title>
+
+<para
+>歡迎畫面之後，您將看到要求設定時區的提示。首先決定系統硬體時鐘為本地還是格林威治時間 (GMT或UTC)。對話框裡面顯示的時間可以幫您做出正確的選擇。 <phrase arch="m68k;powerpc"
+>Macintosh 硬體時鐘通常設為本地時間。如果您想多重開機，請選擇本地時間而非 GMT。</phrase
+> <phrase arch="i386"
+> 仍然) 運行 Dos 或 Windows 的系統通常設為本地時間。如果您想多重開機，選擇本地時間而非 GMT。</phrase
+> </para
+><para
+>基於安裝開始時選擇的地理位置，您將看到系統只列出與該位置相關的單一或者有限的時區列表。如果只列出一個時區，選擇<guibutton
+>是</guibutton
+>確認或者選擇<guibutton
+>否</guibutton
+> 從完整列表中去選擇。當列表顯示出來，從中選擇您的時區，或者選擇其他以列出完整列表。 </para>
+ </sect2>
+<!--   End of file boot-new/modules/timezone.xml -->
+
+<!-- Start of file boot-new/modules/shadow.xml -->
+
+ <sect2 id="base-config-users">
+ <title
+>設定使用者和密碼</title>
+
+  <sect3 id="base-config-root">
+  <title
+>設定 root 密碼</title>
+
+<para
+><emphasis
+>root</emphasis
+> 帳戶也被稱為<emphasis
+>超級使用者</emphasis
+>。系統中的所有安全防護措施對以超級使用者身份登陸者都是無效的。root 帳戶應該僅用來進行系統管理，而且使用時間應該盡可能短。 </para
+><para
+>您所建立的任何密碼都應該包含至少 6 個字元，同時包含大小寫字母，並且最好帶有標點符號等特殊字元。因為超級使用者具有最高權限，因此在您設定 root 密碼時尤其要小心。請避免採用能夠在字典中查到的單詞或者很容易猜測的個人資訊。 </para
+><para
+>如果他人向您索取您的 root 密碼，您也需要特別謹慎。除非您所管理的系統有多位管理員，否則您通常不應該將超級使用者密碼交給別人。 </para>
+  </sect3>
+
+  <sect3 id="make-normal-user">
+  <title
+>建立一個普通使用者</title>
+
+<para
+>系統會詢問您現在是否希望建立一個普通帳戶。您將使用該帳戶進行日常登陸操作。切記，平時<emphasis
+>不要</emphasis
+>使用 root 帳戶登陸或者將其作為個人帳號使用。 </para
+><para
+>為什麼呢？避免使用 root 特權帳戶的一個原因是，它很容易對系統造成無法挽回的破壞。另一個原因是，您有可能被惡意誘使執行<emphasis
+>特洛伊木馬</emphasis
+>程式 &mdash; 這是一種在您未知的情況下利用超級使用者權限損害系統安全的程式。任何合格的 Unix 系統管理書籍中都會涉及到這一主題 &mdash; 如果您不是很瞭解這方面的內容，建議您找一本書進行學習。 </para
+><para
+>您首先會被要求輸入使用者的全名。然後要求輸入使用者帳號名﹔通常為姓之類的即可，並且會成為預設值。最後，您將要求輸入該帳號的密碼。 </para
+><para
+>如果在安裝完畢後您還希望建立其它新帳戶，請使用 <command
+>adduser</command
+> 命令。 </para>
+  </sect3>
+ </sect2>
+<!--   End of file boot-new/modules/shadow.xml -->
+
+<!-- Start of file boot-new/modules/ppp.xml -->
+
+ <sect2 arch="not-s390" id="PPP">
+ <title
+>設定 PPP</title>
+
+<para
+>如果您的電腦沒有連上網路，接下來您將會被問到是否希望使用 PPP 安裝其餘的系統。PPP 是透過調變解調器建立撥號連接的通訊協定。如果您現在需要設定調變解調器，安裝系統將下載一些額外的軟體套件，或者在安裝的下一階段從網際網路安全更新。如果您的電腦沒有調變解調器，或者希望安裝完之後再設定調變解調器，您可以跳過這一節。 </para
+><para
+>為了設定 PPP 連線，您需要從網際網路伺服器供應商 (ISP) 那裡瞭解一些資訊，包括電話號碼，使用者名稱，密碼和 DNS 伺服器 (非必要)。一些 ISP 為 Linux 發行版提供安裝指引。即使他們並不是針對 Debian，您也可以使用這些資訊，這是因為在 Linux 發行版之間，大多數的設定參數 (和軟體) 都類似。 </para
+><para
+>如果您選擇在現在設定PPP，應用程式 <command
+>pppconfig</command
+> 將幫助您完成後續工作。<emphasis
+>記住，當程式提示您輸入撥號連接名稱時，您應該輸入 <userinput
+>供應商名稱</userinput
+>。</emphasis
+> </para
+><para
+>如果順利，<command
+>pppconfig</command
+> 能夠帶領您快速完成設定。否則，您需要繼續查看下面的具體指令介紹。 </para
+><para
+>在開始之前，您需要瞭解在 GNU/Linux 中閱覽和編輯檔案的基礎知識。要閱覽一個檔案，您可以使用 <command
+>more</command
+>，和 <command
+>zmore</command
+> 閱覽副檔名為 <userinput
+>.gz</userinput
+> 的壓縮檔。例如：要閱覽 <filename
+>README.debian.gz</filename
+>，您可以鍵入指令 <userinput
+>zmore README.debian.gz</userinput
+>。最小安裝的系統中帶有一個使用簡單但功能略少的編輯器，叫 <command
+>nano</command
+>。您也可以後續安裝其它功能強大的編輯器如 <command
+>jed</command
+>, <command
+>nvi</command
+>, <command
+>less</command
+>，和 <command
+>emacs</command
+>。 </para
+><para
+>編輯 <filename
+>/etc/ppp/peers/provider</filename
+> 並替換 <userinput
+>/dev/modem</userinput
+> 為 <userinput
+>/dev/ttyS<replaceable
+>&num;</replaceable
+></userinput
+> 其中 <replaceable
+>&num;</replaceable
+> 取決於您的數據機序列埠編號。在 Linux 下，序列埠是從0開始，您的第一個序列埠 <phrase arch="i386"
+>(如 <userinput
+>COM1</userinput
+>)</phrase
+> 就叫 <filename
+>/dev/ttyS0</filename
+>。<phrase arch="powerpc;m68k"
+>如果您在 Macintoshes 上，那麼數據機序列埠是 <filename
+>/dev/ttyS0</filename
+> 印表機的連接埠是 <filename
+>/dev/ttyS1</filename
+>。</phrase
+>下一步是編輯 <filename
+>/etc/chatscripts/provider</filename
+> 然後輸入供應商的電話號碼，您的使用者名稱與密碼。請勿刪除出現在密碼之前的 <quote
+>\q</quote
+>。這是用來隱藏您的密碼，而不出現在紀錄檔案裡面。 </para
+><para
+>許多供應商現在使用 PAP 或 CHAP 作為認證方式來取代最初的文字模式認證。部份ISP兩者都採用，如果您的ISP需要 PAP 或 CHAP，您需要按如下步驟進行設定：將檔案中撥號字串之後的所有內容加上註解符號 (即從 <quote
+>ATDT</quote
+>)，在 <filename
+>/etc/chatscripts/provider</filename
+> 裡同樣也把 <filename
+>/etc/ppp/peers/provider</filename
+> 檔案中撥號字串之後的內容加上註解，並添加 <userinput
+>user <replaceable
+>name</replaceable
+></userinput
+>，其中 <replaceable
+>name</replaceable
+> 指的是您在ISP的撥號使用者名稱。然後編輯 <filename
+>/etc/ppp/pap-secrets</filename
+> 或 <filename
+>/etc/ppp/chap-secrets</filename
+> 並在其中填入您的密碼。 </para
+><para
+>您還需要編輯 <filename
+>/etc/resolv.conf</filename
+>，將您的 ISP 網域名稱伺服器 (DNS) 的 IP 位址填寫進去。<filename
+>/etc/resolv.conf</filename
+> 裡面內容的填寫格式應該是：<userinput
+>nameserver <replaceable
+>xxx.xxx.xxx.xxx</replaceable
+></userinput
+> 這裡的 <replaceable
+>x</replaceable
+> 是 DNS 的 IP 位址。作為選項，您也可以在 <userinput
+>usepeerdns</userinput
+> 中添加 <filename
+>/etc/ppp/peers/provider</filename
+>，這樣系統能夠在必要的時候選擇適當的 DNS 伺服器。 </para
+><para
+>除非您的 ISP 的登陸方式與其它主要 ISP 有極大的差異，否則這樣就設定完成了。以root的身份輸入 <command
+>pon</command
+> 就能啟用 PPP 連線，<command
+>plog</command
+> 能夠監控目前連接，要中斷連線，則同樣是以root身份執行 <command
+>poff</command
+>。 </para
+><para
+>閱讀 <filename
+>/usr/share/doc/ppp/README.Debian.gz</filename
+> 可以獲得更多 Debian 上的 PPP 設定資訊。 </para
+><para
+>對於靜態 SLIP 連接來說，您需要加上 <userinput
+>slattach</userinput
+> 指令 (位於 <classname
+>net-tools</classname
+> 軟體套件中) 到 <filename
+>/etc/init.d/network</filename
+>。動態 SLIP 需要 <classname
+>gnudip</classname
+> 軟體套件。 </para>
+
+  <sect3 id="PPPOE">
+  <title
+>設定 PPP over Ethernet (PPPOE)</title>
+
+<para
+>PPPOE 是與 PPP 相關的協定，用於寬頻連線。目前基本系統裡面不會幫您建立設定。然而，相應的軟體套件已經安裝，也就意味著您可以在本階段手動設定 PPPOE，只需切換到 VT2，然後執行 <command
+>pppoeconf</command
+>。 </para>
+
+  </sect3>
+ </sect2>
+<!--   End of file boot-new/modules/ppp.xml -->
+
+<!-- Start of file boot-new/modules/apt.xml -->
+
+ <sect2 id="configure-apt">
+ <title
+>設定 APT</title>
+
+<para
+>本節的重點是 <command
+>apt-get</command
+>，這是一個用來安裝各種軟體的程式，它被包含在 <classname
+>apt</classname
+> 軟體套件中。<footnote
+> <para
+> 事實上，真正用來安裝軟體套件的程式是 <command
+>dpkg</command
+>。但這是一個比較低階的工具。<command
+>apt-get</command
+> 是一個高階工具，它可以在適當的時候執行 <command
+>dpkg</command
+>，並在安裝某個軟體套件時自動安裝所需的其它軟體套件， 並且能夠從您的光碟、網路或其它地方下載這些套件。</para
+> </footnote
+> 其他的套件管理前端程式，像 <command
+>aptitude</command
+>，<command
+>synaptic</command
+> 和較早的 <command
+>dselect</command
+> 也是使用並依賴 <command
+>apt-get</command
+>。在此推薦這些前端軟體給新使用者使用，因為它們在良好的使用者介面下整合了一些其他功能 (搜索套件與狀態檢驗)。 </para
+><para
+>您必須設定 APT，使它明白該從哪裡取得軟體套件。有一個幫助您完成這工作的程式叫 <command
+>apt-setup</command
+>。 </para
+><para
+>然後該告訴 APT 其它軟體套件可以在什麼地方取得軟體套件。您可以在安裝完畢後的任何時候重新執行 <command
+>apt-setup</command
+> 以進行設定，或者手動編輯 <filename
+>/etc/apt/sources.list</filename
+>。 </para
+><para
+>如果此時光碟機內放有官方發佈的光碟，那麼光碟機將會被自動設定為 apt 來源，而不會有提示。您會發現系統掃瞄您的光碟。 </para
+><para
+>對於那些沒有官方發佈光碟的使用者，有一列選項會讓您選擇如何取得軟體套件：FTP、HTTP、CD-ROM 或者本地檔案系統。 </para
+><para
+>您完全可以添加多個不同的 APT 來源 (甚至是同一 Debian 檔案庫也可以)。<command
+>apt-get</command
+> 會自動挑選出軟體套件中的最新版本。例如，如果您同時使用 HTTP 和 CD-ROM 作為 APT 來源，<command
+>apt-get</command
+> 會在有新版本的時候採用 HTTP 來源，沒有新版本時自動採用 CD-ROM 來源。儘管如此，仍然不建議您增加不必要的 APT 來源，因為這會大降低檢查網路檔案庫中新版本軟體的速度。 </para>
+
+  <sect3 id="configure-apt-net">
+  <title
+>設定網路軟體套件來源</title>
+
+<para
+>如果您計劃透過網路安裝系統的其它部分，常見的作法是選擇 <userinput
+>http</userinput
+> 來源。當然，<userinput
+>ftp</userinput
+> 來源也是可以的，只是在連接時會略慢一些。 </para
+><para
+>接下來您需要告訴 <command
+>apt-setup</command
+> 您生活在哪個國家。Debian會為您選擇最近的官方 Debian 網路鏡像站。根據您選擇的國家，程式會列出一些可能的伺服器列表。通常選擇最上面的一個，但所有伺服器應該都是正常可用的。之後，進行測試，如果您發現任何問題，您應該選擇另外一個。請注意，伺服器列表是在發行 Debian 時生成的，在發行之後到您安裝的這段時間內，一些鏡像網站也許無法存取。 </para
+><para
+>選擇鏡像站之後，您將會被詢問是否需要使用代理伺服器。代理伺服器是用來轉送您以 HTTP 和/或 FTP 要求存取網際網路的伺服器，通常在公司網路裡用來調節和最佳化網際網路的使用效率。在某些網路中只能透過代理伺服器存取網際網路，因此您不得不輸入代理伺服器名稱。您可能還要輸入使用者名稱和密碼。大多數的家庭使用者不需設定代理伺服器，這是因為一些 ISP 會提供。 </para
+><para
+>選擇鏡像之後，系統會測試您的網路軟體套件來源。一切正常的話，程式會提示您是否想要設定其它的網路來源。如果您的軟體套件源有問題，可以嘗試不同的鏡像網站 (從您的國家列表中或者全體列表) 或者使用不同的網路軟體套件來源。 </para>
+  </sect3>
+ </sect2>
+<!--   End of file boot-new/modules/apt.xml -->
+
+<!-- Start of file boot-new/modules/packages.xml -->
+
+ <sect2 id="install-packages">
+ <title
+>安裝軟體套件</title>
+
+<para
+>接下來，您將看到 Debain 事先選擇好的一些軟體套件。您可以逐個選擇哪些需要安裝到您的新系統上。這是 <command
+>aptitude</command
+> 程式的目的，後面會說明。但這可能是一項困難的任務，因為 Debian 有 &num-of-distrib-pkgs; 個軟體套件。 </para
+><para
+>所以，您可以先選擇 <emphasis
+>tasks</emphasis
+>，然後再單獨添加軟體套件。軟體集約略表示您要在電腦上從事的各類工作，例如 <quote
+>desktop environment</quote
+>、<quote
+>web server</quote
+> 或者 <quote
+>print server</quote
+><footnote
+> <para
+> 您應該知道顯示這個列表，<command
+>base-config</command
+> 僅是執行 <command
+>tasksel</command
+> 程式。手動選擇安裝軟體套件時，<command
+>aptitude</command
+> 程式則被呼叫。安裝程序之後的任何時候，一旦需要安裝 (或者刪除) 更多的軟體套件，它都被使用。如果您在尋找特定的軟體套件，當安裝完成後，只需執行 <userinput
+>aptitude install <replaceable
+>package</replaceable
+></userinput
+>, 其中 <replaceable
+>package</replaceable
+> 是您需要的軟體套件名稱。</para
+> </footnote
+>。<xref linkend="tasksel-size-list"/> 列出各 task 所需的空間。 </para
+><para
+>當您選擇了軟體集之後，選擇 <guibutton
+>確定</guibutton
+>。此時，<command
+>aptitude</command
+> 將安裝您選中的軟體套件。 <note
+><para
+>注意，即使您沒有選擇任何軟體集，但標準的、重要的，或者系統優先要求的軟體套件將被安裝。該功能相當於在命令列下執行 <userinput
+>tasksel -ris</userinput
+>，目前包括下載一個大約 37M 的套件。您會看到將要安裝的軟體套件，若套件需要被下載，您也會看見軟體套件的檔案大小。 </para
+></note>
+
+</para
+><para
+>如果您想基於軟體套件安裝軟體，選擇位於 <command
+>tasksel</command
+> 的 <quote
+>手動選取套件</quote
+> 選項。如果您選擇該選項旁的一個或多項軟體集，aptitude 將以 <command
+>--visual-preview</command
+> 選項執行。這表示您可以檢查<footnote
+> <para
+> 您可以修改這項預設選擇。如果您希望選擇額外的軟體套件，使用 <menuchoice
+> <guimenu
+>瀏覽</guimenu
+> <guimenuitem
+>瀏覽新套件</guimenuitem
+> </menuchoice
+>。</para
+> </footnote
+> 那些將要安裝的軟體套件。如果您不選擇任何軟體集，則一般的 <command
+>aptitude</command
+> 畫面被顯示。選擇完畢，請按下 <quote
+><userinput
+>g</userinput
+></quote
+> 開始下載和安裝軟體套件。 <note
+><para
+>如果您選擇<quote
+>手動選取套件</quote
+><emphasis
+>而不</emphasis
+>選擇軟體集，預設不會安裝任何軟體套件。這就是說，如果您希望安裝一個最小系統，並且您的系統 (啟動之前) 不需要安裝任何軟體套件，可用使用該選項。 </para
+></note>
+
+</para
+><para
+>在 &num-of-distrib-pkgs; 的 Debian 軟體套件中，只有少數被軟體集安裝程式涵蓋。為了瞭解更多軟體套件的資訊，請使用 <userinput
+>apt-cache search <replaceable
+>search-string</replaceable
+></userinput
+> 搜索字串 (請參閱 <citerefentry
+> <refentrytitle
+>apt-cache</refentrytitle
+> <manvolnum
+>8</manvolnum
+> </citerefentry
+> man 頁), 或者執行 <command
+>aptitude</command
+> 以觀看畫面下面的說明。 </para>
+
+ <sect3 id="aptitude">
+ <title
+><command
+>aptitude</command
+> 軟體套件進階選擇</title>
+
+<para
+><command
+>Aptitude</command
+> 是管理軟體套件的流行軟體。<command
+>aptitude</command
+> 允許您選擇單獨的軟體套件，符合指定要求的軟體套件群組 (針對進階使用者)，或者整個軟體集。 </para
+><para
+>最基本的按鍵組合是： <informaltable
+> <tgroup cols="2"
+> <thead
+> <row
+> <entry
+>按鍵</entry
+><entry
+>動作</entry
+> </row
+> </thead
+> <tbody
+> <row
+> <entry
+><keycap
+>Up</keycap
+>, <keycap
+>Down</keycap
+></entry
+> <entry
+>上下移到選項。</entry
+> </row
+><row
+> <entry
+>&enterkey;</entry
+> <entry
+>展開/關閉/啟用 項目。</entry
+> </row
+><row
+> <entry
+><keycap
+>+</keycap
+></entry
+> <entry
+>標註要安裝的軟體套件。</entry
+> </row
+><row
+> <entry
+><keycap
+>-</keycap
+></entry
+> <entry
+>標註要刪除的軟體套件。</entry
+> </row
+><row
+> <entry
+><keycap
+>d</keycap
+></entry
+> <entry
+>顯示軟體套件依賴關係。</entry
+> </row
+><row
+> <entry
+><keycap
+>g</keycap
+></entry
+> <entry
+>實際 下載/安裝/刪除 軟體套件。</entry
+> </row
+><row
+> <entry
+><keycap
+>q</keycap
+></entry
+> <entry
+>離開目前畫面。</entry
+> </row
+><row
+> <entry
+><keycap
+>F10</keycap
+></entry
+> <entry
+>啟用選單</entry
+> </row
+> </tbody
+></tgroup
+></informaltable
+> 查看更多的幫助請按 <keycap
+>?</keycap
+> 鍵。 </para>
+  </sect3>
+ </sect2>
+<!--   End of file boot-new/modules/packages.xml -->
+
+<!-- Start of file boot-new/modules/install.xml -->
+
+ <sect2 id="debconf">
+ <title
+>軟體安裝過程中的指令</title>
+
+<para
+>您透過 <command
+>tasksel</command
+> 或 <command
+>aptitude</command
+> 選擇的每個軟體套件包，都是由 <command
+>apt-get</command
+> 和 <command
+>dpkg</command
+> 程式下載、解開並安裝的。部份特殊的軟體在安裝過程中需要使用者提供更多的資訊，在這一過程中會有相關提示。您需要留意該過程的螢幕輸出，以判斷安裝中是發生錯誤 (儘管一般情況下如果一個軟體套件無法安裝，您會收到一個明確的錯誤訊息)。 </para>
+
+  <sect3 arch="powerpc" id="xserver">
+  <title
+>設定 X 伺服器</title>
+
+<para
+>在 iMacs 或者一些古老的 Macintoshes 機器上，X 伺服器軟體無法自動計算出適當的顯示卡設定。您需要在設定顯示卡時選擇<guimenuitem
+>進階</guimenuitem
+>選項，在螢幕的水平同步範圍中，填入 59&ndash;63。對垂直更新範圍，可以選擇預設值。 </para
+><para
+>滑鼠設備可以設定為 <userinput
+>/dev/input/mice</userinput
+>。 </para>
+  </sect3>
+ </sect2>
+<!--   End of file boot-new/modules/install.xml -->
+
+<!-- Start of file boot-new/modules/mta.xml -->
+
+ <sect2 id="base-config-mta">
+ <title
+>設定您的郵件傳輸代理 (MTA)</title>
+
+<para
+>今天，電子郵件已經成為很多人生活中不可或缺的部份，所以，Debian 讓您在安裝過程中設定郵件傳輸代理，並不是件奇怪的事。Debian 中的標準郵件傳輸代理是 <command
+>exim4</command
+>。這是一個非常小巧、靈活並且容易理解的工具。 </para
+><para
+>您可能會問，我的電腦並沒有連接到網路上，是否也需要這一步呢？答案是：是的。稍長一點的解釋是：部份系統工具 (例如 <command
+>cron</command
+>, <command
+>quota</command
+>, <command
+>aide</command
+> 等) 的重要通知都是透過郵件發送的。 </para
+><para
+>所以，在第一個螢幕上您可以看到幾個常見的郵件設定方案。請選擇一個最適合您需求的。 </para>
+
+<variablelist>
+<varlistentry>
+<term
+>網際網路站</term>
+<listitem
+><para
+>您的系統連接到網路上，並且您透過 SMTP 直接收發郵件。在接下來的幾頁中，程式會詢問您一些基本問題，如：您的機器的郵件名稱、您接受或轉發郵件的網域名稱等等。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>用 smarthost 發信</term>
+<listitem
+><para
+>在這個方案中，您的外送郵件將被另一台我們稱之為 <quote
+>smarthost</quote
+> 的主機轉發，由它來完成實際的郵件發送工作。Smarthost 通常也能存放將要投遞到您的電腦上的郵件，因此您並不需要永遠連線。也就是說，您必須透過諸如 fetchmail 之類的程式將郵件從 smarthost 下載回來。這一選項通常適合撥號使用者。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>僅在本地發送</term>
+<listitem
+><para
+>您的系統並未連接網路，則郵件僅僅在本地使用者間傳遞。即使您不打算發送任何郵件，我們也建議您選擇此選項，因為部份系統工具可能隨時會發送一些警告資訊 (例如：可愛的 <quote
+>Disk quota exceeded</quote
+>)。由於選擇此項後不需要回答任何問題，因此這一選項也非常適合新手。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>現在不進行設定</term>
+<listitem
+><para
+>除非您真的知道您在做什麼，否則請不要選擇這一選項。這會留下一個未設定的郵件系統 &mdash; 在您再次設定它之前，您都無法收發任何郵件，並且可能會錯過一些系統工具發出的重要資訊。 </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>如果以上的方案都不適合您的需求，或者您需要一個更好的設定，在安裝完畢後，您可以編輯 <filename
+>/etc/exim4</filename
+> 目錄下的設定檔。您還可以在 <filename
+>/usr/share/doc/exim4</filename
+> 下找到更多關於 <command
+>exim4</command
+> 的資料。 </para>
+ </sect2>
+<!--   End of file boot-new/modules/mta.xml -->
+
+ </sect1>
+
+ <sect1 id="login">
+ <title
+>登入</title>
+
+<para
+>安裝完軟體套件以後，您會看到登入提示符號。使用您選擇的登入使用者名稱和密碼。您的系統就能使用了。 </para
+><para
+>如果您是新使用者，您也許希望瀏覽已經安裝到系統上的文件。目前有多個文件系統，由不同類型的文件組成。接下來將做簡略介紹。 </para
+><para
+>伴隨程式的文件安裝在 <filename
+>/usr/share/doc/</filename
+> 之下，並存在於以程式名稱命名的子目錄下。例如，APT 使用者指南是關於使用 <command
+>apt</command
+> 安裝其他程式的說明，位於 <filename
+>/usr/share/doc/apt/guide.html/index.html</filename
+>。 </para
+><para
+>另外，還有一些特殊的目錄位於 <filename
+>/usr/share/doc/</filename
+> 目錄結構裡。Linux HOWTOs 以 <emphasis
+>.gz</emphasis
+> 格式安裝，放在 <filename
+>/usr/share/doc/HOWTO/en-txt/</filename
+>。安裝 <command
+>dhelp</command
+>之後，可以瀏覽 <filename
+>/usr/share/doc/HTML/index.html</filename
+> 文件索引。 </para
+><para
+>一種查看文件的簡易方法是 <userinput
+>cd /usr/share/doc/</userinput
+>，然後鍵入 <userinput
+>lynx</userinput
+> 後面加上空格和一個點 (點是指目前目錄)。 </para
+><para
+>您也可以鍵入 <userinput
+>info <replaceable
+>command</replaceable
+></userinput
+> 或 <userinput
+>man <replaceable
+>command</replaceable
+></userinput
+> 在去查看大多數命令列下的指令。鍵入 <userinput
+>help</userinput
+> 將顯示介殼指令的說明。鍵入指令後加上 <userinput
+>--help</userinput
+> 通常會顯示指令用法的簡短摘要。如果指令的結果捲動超出螢幕頂端，鍵入 <userinput
+>| more</userinput
+> 於指令之後，可以讓輸出暫停在頂端螢幕。查看某字母開始的所有可用指令，鍵入該字母，再按兩次 tab 鍵。 </para
+><para
+>想要多瞭解 Debian 和 GNU/Linux，請參閱 <filename
+>/usr/share/doc/debian-guide/html/noframes/index.html</filename
+>。 </para>
+
+ </sect1>
+</chapter>
+<!--   End of file boot-new/boot-new.xml -->

@@ -1,0 +1,91 @@
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 28997 -->
+
+  <sect2 arch="sparc" id="boot-tftp"><title>Arrencada amb el TFTP</title>
+
+&boot-installer-intro-net.xml;
+
+<para>
+
+A màquines amb OpenBoot, simplement entreu al monitor d'arrencada a la
+màquina que s'està instal·lant (vegeu <xref linkend="invoking-openboot"/>).
+Utilitzeu l'ordre <userinput>boot net</userinput> per arrencar des d'un
+servidor TFTP i RARP, o proveu <userinput>boot net:bootp</userinput> o
+<userinput>boot net:dhcp</userinput> per arrencar des d'un servidor TFTP i
+BOOTP o DHCP. Algunes revisions antigues d'OpenBoot necessiten utilitzar
+el nom del dispositiu, com <userinput>boot le()</userinput>; aquests
+probablement no suporten BOOTP ni DHCP.
+
+</para>
+  </sect2>
+
+
+  <sect2 arch="sparc"><title>Arrencada des d'un CD-ROM</title>
+
+&boot-installer-intro-cd.xml;
+
+<para>
+
+La major part de les versions d'OpenBoot suporten l'ordre
+<userinput>boot cdrom</userinput> que és un àlies per arrencar des del
+dispositiu SCSI amb ID 6 (o el màster del secundari a sistemes basats en
+IDE). Pot ser haureu d'utilitzar el nom del dispositiu actual per les
+versions d'OpenBoot velles què no suporten aquesta ordre especial.
+Adoneu-vos que els mateixos problemes s'han informat que els tenen els
+sistemes sun4m (ex. Sparc 10s i Sparc 20s) arrencant des de CD-ROM.
+
+</para>
+  </sect2>
+
+
+  <sect2 arch="sparc" condition="supports-floppy-boot">
+  <title>Arrencada des de disquets</title>
+<para>
+
+Per arrencar des de disquet a un Sparc, utilitzeu
+
+<informalexample><screen>
+Stop-A -&gt; OpenBoot: "boot floppy"
+</screen></informalexample>
+
+Aneu en compte que la nova arquitectura Sun4u (ultra) no suporta
+l'arrencada des de disquet. Un missatge d'error típic és
+<computeroutput>Bad magic number in disk label - Can't open disk label
+package</computeroutput>.
+A més, uns quants dels models de Sun4c (com els IPX) no suporten
+les imatges comprimides que es troben als discs, així que tampoc
+estan suportats.
+
+</para><para>
+
+Alguns Sparc (ex. Ultra 10) tenen un error OBP que els impedeix arrencar
+(en comptes de no suportar arrencar completament). La actualització OBP
+es pot descarregar des de <ulink url="http://sunsolve.sun.com"></ulink>
+com a producte amb ID 106121.
+
+</para><para>
+
+Si esteu arrencant des de disquet, i veieu missatges com aquest
+
+<informalexample><screen>
+Fatal error: Cannot read partition
+Illegal or malformed device name
+</screen></informalexample>
+
+aleshores és possible que que l'arrencada des de disquet simplement no
+està suportada a la vostra màquina.
+
+</para>
+  </sect2>
+
+  <sect2 arch="sparc"><title>Missatges del IDPROM</title>
+<para>
+
+Si no podeu arrencar perquè teniu missatges que informen d'un problema amb
+el <quote>IDPROM</quote>, aleshores és possible que la vostra pila de la
+NVRAM, que conté la informació de la configuració del vostre firmware,
+s'haja esgotat. Vegeu <ulink url="&url-sun-nvram-faq;">Sun NVRAM FAQ</ulink>
+per obtenir més informació.
+
+</para>
+  </sect2>

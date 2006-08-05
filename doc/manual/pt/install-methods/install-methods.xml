@@ -1,0 +1,1706 @@
+<!-- Start of file install-methods/install-methods.xml -->
+
+<chapter id="install-methods">
+ <title
+>Obter o Meio de Instalação do Sistema</title>
+
+
+<!-- Start of file install-methods/official-cdrom.xml -->
+
+ <sect1 id="official-cdrom">
+ <title
+>Conjuntos Oficiais de CD-ROM's &debian;</title>
+<para
+>A forma mais simples para se instalar o &debian; é de longe a partir de um conjunto de CD-ROM oficiais. Pode também comprar um conjunto de CDs a um vendedor (visite a <ulink url="&url-debian-cd-vendors;"
+>página de vendedores de CDs</ulink
+>). Também pode fazer o download das imagens a partir do mirror da Debian e fazer o seu próprio conjunto, se tiver uma ligação rápida à Internet e um gravador de CDs (para informações detalhadas visite a <ulink url="&url-debian-cd;"
+>página de CDs Debian</ulink
+>). Se tem um conjunto de CDs Debian e estes iniciam na sua máquina, pode saltar directamente para o <xref linkend="boot-installer"/>; muito esforço tem sido dispendido para garantir que os ficheiros que a maioria das pessoas precisam estão presentes no CD. Embora o conjunto completo dos pacotes binários necessite de vários CDs, é pouco provável que você irá precisar dos pacotes que estão presentes no terceiro CD e seguintes. Deve também considerar em usar a versão em DVD, que poupa bastante espaço na sua prateleira e evita a maratona de de CDs misturados. </para
+><para
+>Se a sua máquina não suporta arranque a partir de CD, mas no entanto tem um conjunto de CDs, você pode utilizar uma estratégia alternativa tal como <phrase condition="supports-floppy-boot"
+>disquete,</phrase
+> <phrase arch="s390"
+>tape, tape emulada, </phrase
+> <phrase condition="bootable-disk"
+>disco rígido,</phrase
+> <phrase condition="bootable-usb"
+>stick usb,</phrase
+> <phrase condition="supports-tftp"
+>net boot,</phrase
+> ou carregar manualmente o kernel a partir do CD para iniciar o instalador de sistema. Os ficheiros que precisa para inicializar através de outros métodos também estão no CD; A organização dos ficheiros do arquivo Debian na Internet é idêntica à organização de ficheiros do CD. Portanto quando abaixo forem dadas localizações para ficheiros específicos necessários para o arranque, procure por esses ficheiros nas mesmas directorias e subdirectorias do seu CD. </para
+><para
+>Uma vez o instalador iniciado, a partir do CD você poderá obter todos os outros ficheiros que precisa. </para
+><para
+>Se você não tem um conjunto de CDs, necessitará então de fazer o download dos ficheiros de instalação do sistema e coloca-los na <phrase arch="s390"
+>tape de instalação ou na </phrase
+> <phrase condition="supports-floppy-boot"
+>disquete ou</phrase
+> <phrase condition="bootable-disk"
+> no disco rígido ou </phrase
+> <phrase condition="bootable-usb"
+>num usb stick ou</phrase
+> <phrase condition="supports-tftp"
+>num computador que esteja ligado à rede</phrase
+> para que possam ser utilizados para arrancar com o instalador. </para>
+
+ </sect1>
+<!--   End of file install-methods/official-cdrom.xml -->
+
+<!-- Start of file install-methods/downloading-files.xml -->
+
+ <sect1 id="downloading-files">
+ <title
+>Download dos Ficheiros a partir dos Mirrors Debian</title>
+
+<para
+>Para encontrar o mirror mais próximo (e provavelmente o mais rápido), visite a <ulink url="&url-debian-mirrors;"
+>lista de mirrors Debian</ulink
+>. </para
+><para
+>Quando fizer download de ficheiros do mirror Debian, certifique-se que faz download dos ficheiros no modo <emphasis
+>binário</emphasis
+>, e não em texto nem no modo automático. </para>
+
+  <sect2 id="where-files">
+  <title
+>Onde Encontrar Imagens de Instalação</title>
+
+<para
+>As imagens de instalação estão localizadas em cada mirror Debian na directório <ulink url="&url-debian-installer;/images"
+>debian/dists/&releasename;/main/installer-&architecture;/current/images/</ulink
+> &mdash; o <ulink url="&url-debian-installer;/images/MANIFEST"
+>MANIFEST</ulink
+> lista cada imagem e o seu propósito. </para>
+
+
+<!-- Start of file install-methods/download/alpha.xml -->
+
+
+   <sect3 arch="alpha"
+><title
+>Ficheiros de Instalação de Alpha</title>
+<para
+>Se você escolheu arrancar a partir de uma consola de firmware ARC utilizando o <command
+>MILO</command
+>, necessitará também de preparar um disco contendo o <command
+>MILO</command
+> e <command
+>LINLOAD.EXE</command
+> a partir das imagens de disco fornecidas. Visite <xref linkend="alpha-firmware"/> para mais informações sobre firmware Alpha e gestores de arranque. As imagens de disquete podem ser encontradas na directoria <filename
+>MILO</filename
+> como <filename
+>milo_<replaceable
+>sub-arquitectura</replaceable
+>.bin</filename
+>. </para
+><para
+>Infelizmente, estas imagens <command
+>MILO</command
+> podem não ter sido testadas e podem não funcionar em todas as sub-arquitecturas. Se descobrir que não funcionam para si, tente copiar o binário apropriado do <command
+>MILO</command
+> para a disquete (<ulink url="&disturlftp;main/disks-alpha/current/MILO/"
+></ulink
+>). Note que os <command
+>MILO</command
+>s não suportam ext2 <quote
+>sparse superblocks</quote
+>, não os poderá utilizar para carregar o Kernel a partir de um sistema de ficheiros ext2 recentemente gerado. Como alternativa, pode colocar o Kernel numa partição FAT ao lado do <command
+>MILO</command
+>. </para
+><para
+>Os binários <command
+>MILO</command
+> são específicos da plataforma. Visite <xref linkend="alpha-cpus"/> para determinar a imagem apropriada para a sua plataforma Alpha. </para>
+   </sect3>
+<!--   End of file install-methods/download/alpha.xml -->
+
+<!-- Start of file install-methods/download/arm.xml -->
+
+
+   <sect3 arch="arm" id="riscpc-install-files">
+   <title
+>Ficheiros de Instalação RiscPC</title>
+<para
+>O instalador de RiscPC é arranca inicialmente a partir de RISC OS. Todos os ficheiros necessários são fornecidos num ficheiro Zip, &rpc-install-kit;. Faça download deste ficheiro para a máquina que tem o RISC OS, copie os componentes <filename
+>linloader.!Boot</filename
+> para o sítio, e execute <filename
+>!dInstall</filename
+>. </para>
+   </sect3>
+
+   <sect3 arch="arm" id="netwinder-install-files">
+   <title
+>Ficheiros de Instalação NetWinder</title>
+<para
+>A maneira mais simples de iniciar um NetWinder é através da rede, utilizando a imagem TFTP fornecida &netwinder-boot-img;. </para>
+   </sect3>
+
+   <sect3 arch="arm" id="cats-install-files">
+   <title
+>Ficheiros de Instalação CATS</title>
+<para
+>O único método de arranque suportado em CATS é utilizando a imagem combinada &cats-boot-img;. Isto pode carregado a partir de qualquer dispositivo acessível ao gestor de arranque Cyclone. </para>
+   </sect3>
+<!--   End of file install-methods/download/arm.xml -->
+
+<!-- Start of file install-methods/download/powerpc.xml -->
+
+<!-- commented out as it seems out of date and the links are broken
+
+   <sect3 arch="powerpc" id="newworld-install-files">
+   <title
+>NewWorld MacOS Installation Files </title>
+<para>
+
+For floppy-less installation on NewWorld Macs, it may be most
+convenient to obtain all the necessary files packaged into one Stuffit
+archive from
+<ulink url="&url-powerpc-of;"
+></ulink
+> (separate instructions are
+included in the archive). Otherwise, obtain the normal installation
+files listed above. Retrieve the files to an HFS (not HFS+) partition
+on your system.  You will also need the <filename
+>yaboot</filename
+> and
+<filename
+>yaboot.conf</filename
+> files from the
+<ulink url="&downloadable-file;new-powermac/"
+>new-powermac</ulink
+> or
+<ulink url="&downloadable-file;powermac/"
+>powermac</ulink
+> archive folder.
+However, the newest G4 PowerMacs, and those that work without MacOS 9,
+need the newest version of <command
+>yaboot</command
+>; the one in the
+archive will not work. Obtain the newest version from
+<ulink url="http://penguinppc.org/projects/yaboot/"
+></ulink
+>.
+
+</para>
+   </sect3>
+
+-->
+<!--   End of file install-methods/download/powerpc.xml -->
+
+<!-- Start of file install-methods/download/m68k.xml -->
+
+
+   <sect3 arch="m68k" id="kernel-22">
+   <title
+>Escolher um Kernel</title>
+
+<para
+>Algumas sub-arquitecturas m68k têm kernels à escolha para instalar. Na generalidade nós recomendamos experimentar primeiro a versão mais recente. Se a sua sub-arquitectura ou máquina precisa utilizar um kernel 2.2.x, certifique-se de que escolhe uma das imagens que suportam kernels 2.2.x (visite <ulink url="&disturl;/main/installer-&architecture;/current/images/MANIFEST"
+>MANIFEST</ulink
+>). </para>
+<para
+>Todas as imagens m68k para utilizar com kernels 2.2.x, requerem o parâmetro de kernel &ramdisksize;. </para>
+   </sect3>
+<!--   End of file install-methods/download/m68k.xml -->
+
+  </sect2>
+
+ </sect1>
+<!--   End of file install-methods/downloading-files.xml -->
+
+<!-- Start of file install-methods/ipl-tape.xml -->
+
+ <sect1 arch="s390" id="ipl-tape">
+ <title
+>Criar uma tape IPL</title>
+
+<para
+>Se não pode iniciar (IPL) a partir de CD_ROM e não está a utilizar VM primeiro irá precisar de criar uma tape IPL. Isto é descrito na secção 3.4.3 no <ulink url="http://www.redbooks.ibm.com/pubs/pdfs/redbooks/sg246264.pdf"
+> Linux for IBM eServer zSeries and S/390: Distributions</ulink
+> Redbook. Os ficheiros que precisa de gravar para a tape são (por esta ordem): <filename
+>kernel.debian</filename
+>, <filename
+>parmfile.debian</filename
+> e <filename
+>initrd.debian</filename
+>. O download destes ficheiros pode ser feito a partir da sub-directoria <filename
+>tape</filename
+>, visite <xref linkend="where-files"/>, </para>
+ </sect1>
+
+<!--   End of file install-methods/ipl-tape.xml -->
+
+<!-- Start of file install-methods/create-floppy.xml -->
+
+ <sect1 condition="supports-floppy-boot" id="create-floppy">
+ <title
+>Criar Disquetes a partir de Imagens de Disco</title>
+<para
+>Disquetes de arranque são geralmente utilizadas como último recurso para iniciar o instalador em hardware que não arranca de CD ou por outros meios. </para
+><para arch="powerpc"
+>É reportado que as disquetes de arranque falham nas drives de disquetes Mac ligadas por USB. </para
+><para arch="m68k"
+>Em Amigas ou Macs 68k o arranque a partir de disquetes não é suportado. </para
+><para
+>Imagens de disco são ficheiros que contêm o conteúdo completo das disquetes de arranque em formato <emphasis
+>raw</emphasis
+>. Imagens de disco, tais como <filename
+>boot.img</filename
+>, não podem simplesmente ser copiadas para disquetes. É utilizado um programa especial para escrever os ficheiros da imagem para disquetes em modo <emphasis
+>raw</emphasis
+>. Isto é necessário porque estas imagens são representações raw do disco; é necessário que seja feita uma <emphasis
+>cópia do sector</emphasis
+> dos dados deste ficheiro para a disquete. </para
+><para
+>Existem diferentes técnicas para criar disquetes a partir das imagens de disco, que dependem da sua plataforma. Esta secção descreve como criar disquetes a partir das imagens de disco em diferentes plataformas. </para
+><para
+>Não importa que método estiver a utilizar para criar as suas disquetes, assim que tiver escrito nelas deve lembrar-se de carregar na patilha de protecção contra escrita, para se assegurar que não serão involuntariamente danificadas. </para>
+
+  <sect2
+><title
+>Escrever Imagens de Disco a partir de um Sistema Linux ou Unix</title>
+<para
+>Para escrever os ficheiros de imagem de disquete para as disquetes, você provavelmente necessitará de aceder ao sistema como root. Coloque uma disquete vazia em boas condições na drive de disquetes. Em seguida utilize o comando <informalexample
+><screen>
+$ dd if=<replaceable
+>ficheiro</replaceable
+> of=/dev/fd0 bs=1024 conv=sync ; sync
+</screen
+></informalexample
+> onde <replaceable
+>ficheiro</replaceable
+> é um dos ficheiros da imagem de disco (veja <xref linkend="downloading-files"/> para saber onde deve estar o <replaceable
+>ficheiro</replaceable
+>). <filename
+>/dev/fd0</filename
+> é o nome normalmente utilizado para o dispositivo de disquetes, pode ser diferente na sua máquina <phrase arch="sparc"
+>(no Solaris, é <filename
+>/dev/fd/0</filename
+>)</phrase
+>. O comando pode libertar a linha de comandos antes do Unix ter terminado de escrever na disquete, verifique se a luz de utilização na drive de disquetes está apagada e se o disco parou antes de remover a disquete da drive. Em alguns sistemas, terá de executar um comando para ejectar a disquete <phrase arch="sparc"
+>(no Solaris, execute <command
+>eject</command
+>, visite a página do manual)</phrase
+>. </para
+><para
+>Alguns sistemas tentam automaticamente montar a disquete quando esta é colocada na drive. Você poderá ter de desactivar esta característica antes da máquina permitir efectuar a gravação da disquete em <emphasis
+>modo raw</emphasis
+>. Infelizmente, isto poderá variar consoante o sistema operativo. <phrase arch="sparc"
+>No Solaris, você poderá encontrar uma maneira  de conseguir acesso raw à disquete na gestão de volumes. Primeiro, certifique-se que a disquete é automaticamente montada (utilizando <command
+>volcheck</command
+> ou um comando equivalente no gestor de ficheiros). Execute então o comando <command
+>dd</command
+> da forma dada acima, substitua somente <filename
+>/dev/fd0</filename
+> por <filename
+>/vol/rdsk/<replaceable
+>nome da disquete</replaceable
+></filename
+>, onde <replaceable
+>nome da disquete</replaceable
+> é o nome dado à disquete na altura da sua formatação (o nome por omissão das disquetes é <filename
+>unnamed_floppy</filename
+>). Noutros sistemas, pergunte ao seu administrador de sistema. </phrase
+> </para
+><para arch="powerpc"
+>Se está a escrever nas disquetes num Linux em powerpc, necessitará de as ejectar. O programa <command
+>eject</command
+> é o apropriado; você pode ter de o instalar. </para>
+
+  </sect2>
+
+
+<!-- Start of file install-methods/floppy/i386.xml -->
+
+
+<!--  This is not set off for i386 only, because many people will have -->
+<!--  access to a PC in order to make a floppy for other arches. -->
+
+  <sect2
+><title
+>Gravar Imagens de Disco a partir de DOS, Windows, ou OS/2</title>
+
+<para
+>Se você tem acesso a uma máquina i386, pode utilizar um dos seguintes programas para copiar imagens para disquetes. </para
+><para
+>Os programas <command
+>rawrite1</command
+> e <command
+>rawrite2</command
+> podem ser utilizados em MS-DOS. <emphasis
+>Não</emphasis
+> é esperado que funcionem se tentar utilizar estes programas numa consola DOS no Windows ou fazendo duplo-click a partir do Explorador do Windows. </para
+><para
+>O programa <command
+>rwwrtwin</command
+> corre em Windows 95, NT, 98, 2000, ME, XP e provavelmente em versões posteriores. Para o utilizar terá de descompactar diskio.dll no mesmo directório. </para
+><para
+>Estes utilitários podem ser encontrados nos CD-ROMs Oficiais de Debian na directoria <filename
+>/tools</filename
+>. </para>
+  </sect2>
+<!--   End of file install-methods/floppy/i386.xml -->
+
+<!-- Start of file install-methods/floppy/m68k.xml -->
+
+
+  <sect2 arch="m68k"
+><title
+>Gravar Imagens de Disco em Sistemas Atari</title>
+<para
+>Irá encontrar o programa &rawwrite.ttp; na mesma directoria que as imagens de disquetes. Inicie o programa fazendo duplo click no ícone do programa, e na caixa de diálogo da linha de comando escreva o nome do ficheiro da imagem de disquete que quer escrever para a disquete. </para>
+
+  </sect2>
+
+  <sect2 arch="m68k"
+><title
+>Gravar Imagens de Disco em Sistemas Macintosh</title>
+<para
+>Não existe nenhuma aplicação MacOS para gravar imagens para disquetes (e não haverá motivo em fazer isto dado que não pode utilizar estas disquetes para iniciar a instalação do sistema ou instalar o kernel e módulos num Macintosh). Contudo, estes ficheiros serão mais tarde necessários para instalar o sistema operativo e módulos. </para>
+
+  </sect2>
+<!--   End of file install-methods/floppy/m68k.xml -->
+
+<!-- Start of file install-methods/floppy/powerpc.xml -->
+
+
+  <sect2 arch="powerpc"
+><title
+>Gravar Imagens de Disco a partir de MacOS</title>
+<para
+>Está disponível um AppleScript, <application
+>Make Debian Floppy</application
+>, para gravar disquetes a partir dos ficheiros de imagens de disco fornecidos. Poderá ser efectuado o download a partir <ulink url="ftp://ftp2.sourceforge.net/pub/sourceforge/d/de/debian-imac/MakeDebianFloppy.sit"
+></ulink
+>. Para utilizar, basta descompactar para o ambiente de trabalho, e então arrastar para cima qualquer ficheiro de imagem de disquete. Tem de ter o Applescript instalado e disponibilizado no gestor de extensões. Disk Copy irá solicitar confirmação para apagar a disquete e continuar com a gravação da imagem para lá. </para
+><para
+>Você pode também utilizar directamente o utilitário <command
+>Disk Copy</command
+> do MacOS, ou o <command
+>suntar</command
+> que é um utilitário livre. O ficheiro <filename
+>root.bin</filename
+> é um exemplo de uma imagem de disquete. Utilize um dos seguintes métodos para criar uma disquete a partir da imagem de disquetes com estes utilitários. </para>
+
+   <sect3>
+   <title
+>Gravar Imagens de Disco com <command
+>Disk Copy</command
+></title>
+<para
+>Se está a criar as imagens de disquetes a partir de ficheiros que estavam originalmente no CD oficial &debian;, então o Type e Creator já estão definidos correctamente. Os seguintes passos, <command
+>Creator-Changer</command
+> apenas são necessários se fez o download da imagem a partir de um mirror Debian. </para>
+<orderedlist>
+<listitem
+><para
+>Obtenha <ulink url="&url-powerpc-creator-changer;"
+>Creator-Changer</ulink
+> e utilize-o para abrir o ficheiro <filename
+>root.bin</filename
+>. </para
+></listitem>
+<listitem
+><para
+>Alterar o Creator para <userinput
+>ddsk</userinput
+> (Disk Copy), e o Type para <userinput
+>DDim</userinput
+> (imagem binária de disquete). Estes campos são sensíveis à capitalização. </para
+></listitem>
+<listitem
+><para
+><emphasis
+>Importante:</emphasis
+> No Finder, use <userinput
+>Get Info</userinput
+> para expôr a informação sobre a imagem de disquete encontrada pelo Finder, e marque com <quote
+>X</quote
+> a check box <userinput
+>File Locked</userinput
+> para que o MacOS fique impossibilitado de remover os blocos de arranque se a imagem for acidentalmente montada. </para
+></listitem>
+    <listitem
+><para
+>Obtenha <command
+>Disk Copy</command
+>; se tem um sistema MacOS ou CD é muito provável que já lá esteja, caso contrário tente em <ulink url="&url-powerpc-diskcopy;"
+></ulink
+>. </para
+></listitem>
+<listitem
+><para
+>Execute <command
+>Disk Copy</command
+>, e seleccione <menuchoice
+> <guimenu
+>Utilitiess</guimenu
+> <guimenuitem
+>Make a Floppy</guimenuitem
+> </menuchoice
+>, e depois seleccione o ficheiro da imagem <emphasis
+>locked</emphasis
+>. Ser-lhe-á pedido que insira uma disquete, em seguida ser-lhe-à perguntado se quer mesmo apagá-la. Quando terminado a disquete deverá ser ejectada. </para
+></listitem>
+</orderedlist>
+
+   </sect3>
+
+   <sect3>
+   <title
+>Gravar Imagens de Disco com <command
+>suntar</command
+></title>
+<para>
+
+<orderedlist>
+<listitem
+><para
+>Obtenha <command
+>suntar</command
+> em <ulink url="&url-powerpc-suntar;"
+> </ulink
+>. Inicie o programa <command
+>suntar</command
+> e seleccione <quote
+>Overwrite Sectors...</quote
+> do menu <userinput
+>Special</userinput
+>. </para
+></listitem>
+<listitem
+><para
+>Insira a disquete conforme pedido, pressione a tecla &enterkey; (Começar no sector 0). </para
+></listitem>
+<listitem
+><para
+>Seleccione o ficheiro <filename
+>root.bin</filename
+> na caixa de diálogo de abertura de ficheiro. </para
+></listitem>
+<listitem
+><para
+>Depois da disquete ser criada com sucesso, seleccione <menuchoice
+> <guimenu
+>File</guimenu
+> <guimenuitem
+>Eject</guimenuitem
+> </menuchoice
+>. Se existirem quaisquer erros durante a escrita na disquete, simplesmente deite-a fora e tente com outra. </para
+></listitem>
+</orderedlist>
+Antes de utilizar a disquete que criou, <emphasis
+>ajuste a patilha de protecção contra escrita</emphasis
+>! Caso contrário se você acidentalmente montá-la em MacOS, MacOS irá arruiná-la. </para>
+   </sect3>
+  </sect2>
+<!--   End of file install-methods/floppy/powerpc.xml -->
+
+ </sect1>
+
+<!--   End of file install-methods/create-floppy.xml -->
+
+<!-- Start of file install-methods/boot-usb-files.xml -->
+
+ <sect1 condition="bootable-usb" id="boot-usb-files">
+ <title
+>Preparar Ficheiros para iniciar a partir de USB Memory Stick</title>
+
+<para
+>Para preparar o stick USB você precisará de um sistema GNU/Linux que já esteja em funcionamento e onde seja suportado USB. Você deve assegurar-se que o módulo do kernel usb-storage é carregado (<userinput
+>modprobe usb-storage</userinput
+>) e tente descobrir para qual dispositivo SCSI foi mapeado o stick USB (neste exemplo é utilizado o <filename
+>/dev/sda</filename
+>). Para gravar para o seu stick, provavelmente terá de desligar a protecção de escrita. </para
+><para
+>Nota, o stick USB deverá ter no mínimo capacidade para 128 MB (são possíveis configurações menores se seguir a <xref linkend="usb-copy-flexible"/>). </para>
+
+  <sect2 id="usb-copy-easy">
+  <title
+>Copiar ficheiros &mdash; a maneira simples</title>
+<para arch="i386"
+>Existe um ficheiro tudo-em-um <filename
+>hd-media/boot.img.gz</filename
+> que contém todos os ficheiros do instalador (incluindo o kernel) assim como o <command
+>SYSLINUX</command
+> e o seu ficheiro de configuração. Você apenas terá de o descompactar directamente para o seu stick USB:  <informalexample
+><screen
+># zcat boot.img.gz &gt; /dev/<replaceable
+>sda</replaceable
+>
+</screen
+></informalexample>
+
+</para
+><para arch="powerpc"
+>Existe um ficheiro todos em um <filename
+>hd-media/boot.img.gz</filename
+> que contém todos os ficheiros da instalador (incluindo o kernel) tal como o <command
+>yaboot</command
+> e o seu ficheiro de configuração. Crie uma partição do tipo "Apple_Bootstrap" no seu stick USB utilizando o comando  <userinput
+>C</userinput
+> do <command
+>mac-fdisk</command
+> e descompacte a imagem directamente para lá: <informalexample
+><screen
+># zcat boot.img.gz &gt; /dev/<replaceable
+>sda2</replaceable
+>
+</screen
+></informalexample>
+
+</para>
+<warning
+><para
+>Utilizar este método irá destruir tudo o que já esteja no dispositivo. Assegure-se que utiliza o nome de dispositivo correcto do seu stick USB. </para
+></warning>
+<para
+>Em seguida, monte o stick de memória USB (<userinput
+>mount <replaceable arch="i386"
+>/dev/sda</replaceable
+> <replaceable arch="powerpc"
+>/dev/sda2</replaceable
+> /mnt</userinput
+>), que terá a partir de agora <phrase arch="i386"
+>um sistema de ficheiros FAT</phrase
+> <phrase arch="powerpc"
+>ou um sistema de ficheiros HFS</phrase
+>, e copie para lá uma imagem ISO Debian netinst ou uma businesscard. O nome do ficheiro tem de terminar em <filename
+>.iso</filename
+>. Desmonte o stick (<userinput
+>umount /mnt</userinput
+>) e pronto está feito. </para>
+  </sect2>
+
+  <sect2 id="usb-copy-flexible">
+  <title
+>Copiar os ficheiro &mdash; a maneira flexível</title>
+<para
+>Se você aprecia maior flexibilidade ou apenas quer saber o que se está a passar, deve utilizar o seguinte método para colocar os ficheiros no stick. </para>
+
+
+<!-- Start of file install-methods/usb-setup/i386.xml -->
+
+   <sect3 arch="i386">
+   <title
+>Particionamento do stick USB em &arch-title;</title>
+<para
+>Iremos demonstrar como preparar o memory stick para utilizar a primeira partição, em vez de todo o dispositivo. </para
+><note
+><para
+>Dado que a maioria dos sticks USB vêm pré-configurados com uma única partição FAT16, provavelmente não terá de reparticionar ou reformatar o stick. Se o tiver de fazer de qualquer maneira, utilize <command
+>cfdisk</command
+> ou qualquer outra ferramenta de particionamento para criar uma partição FAT16 e então criar o sistema de ficheiros utilizando: <informalexample
+><screen>
+# mkdosfs /dev/<replaceable
+>sda1</replaceable>
+</screen
+></informalexample
+> Certifique-se de que utiliza o nome correcto do seu dispositivo USB. O comando <command
+>mkdosfs</command
+> está contido no pacote Debian <classname
+>dosfstools</classname
+>. </para
+></note
+><para
+>Com o intuito de iniciar o kernel após arrancar a partir do stick USB, nós iremos colocar o gestor de arranque no stick. Apesar de qualquer gestor de arranque servir (por exemplo o <command
+>LILO</command
+>), é conveniente utilizar o <command
+>SYSLINUX</command
+>, dado que utiliza uma partição FAT16 e pode ser simplesmente reconfigurada editanto um ficheiro de texto. Qualquer sistema operativo que suporte um sistema de ficheiros FAT pode ser utilizado para fazer alterações à configuração do gestor de arranque. </para
+><para
+>Para colocar <command
+>SYSLINUX</command
+> na partição FAT16 do seu stick USB, instale os pacotes <classname
+>syslinux</classname
+> e <classname
+>mtools</classname
+> no seu sistema, e faça: <informalexample
+><screen>
+# syslinux /dev/<replaceable
+>sda1</replaceable>
+</screen
+></informalexample
+> Mais uma vez certifique-se de que utiliza o nome correcto do dispositivo. A partição não deve ser montada quando <command
+>SYSLINUX</command
+> iniciar. Este procedimento escreve um sector de arranque para a partição e cria o ficheiro <filename
+>ldlinux.sys</filename
+> que contém o código do gestor de arranque. </para
+><para
+>Monte a partição (<userinput
+>mount /dev/sda1 /mnt</userinput
+>) e copie os seguintes ficheiros dos arquivos Debian para o stick: <itemizedlist
+> <listitem
+><para
+> <filename
+>vmlinuz</filename
+> (binário kernel) </para
+></listitem
+> <listitem
+><para
+> <filename
+>initrd.gz</filename
+> (imagem ramdisk inicial) </para
+></listitem
+> <listitem
+><para
+> <filename
+>syslinux.cfg</filename
+> (ficheiro de configuração SYSLINUX) </para
+></listitem
+> <listitem
+><para
+> Módulos de kernel opcionais </para
+></listitem
+> </itemizedlist
+> Se quiser renomear os ficheiros, tenha atenção que <command
+>SYSLINUX</command
+> apenas pode processar nomes de ficheiros DOS (8.3). </para
+><para
+>O ficheiro de configuração <filename
+>syslinux.cfg</filename
+> deve conter as duas linhas seguintes: <informalexample
+><screen>
+default vmlinuz
+append initrd=initrd.gz ramdisk_size=12000 root=/dev/ram rw
+</screen
+></informalexample
+> Note, por favor, que o parâmetro <userinput
+>ramdisk_size</userinput
+> poderá necessitar ser aumentado, dependendo da imagem de que está a arrancar. <phrase condition="sarge"
+> Se o arranque falhar, poderá tentar adicionar <userinput
+>devfs=mount,dall</userinput
+> à linha <quote
+>adicionada</quote
+>. </phrase
+> </para>
+   </sect3>
+<!--   End of file install-methods/usb-setup/i386.xml -->
+
+<!-- Start of file install-methods/usb-setup/powerpc.xml -->
+
+   <sect3 arch="powerpc">
+   <title
+>Particionamento do stick USB em &arch-title;</title>
+<para
+>A maioria dos sticks USB não vêm configurados de forma a que o Open Firmware possa iniciar a partir deles, então vai necessitar de reparticionar o stick. Em sistemas Mac, execute <userinput
+>mac-fdisk /dev/sda</userinput
+>, inicialize um novo mapa de partição utilizando o comando <userinput
+>i</userinput
+>, e crie uma nova partição do tipo Apple_Bootstrap utilizando o comando <userinput
+>C</userinput
+>. (Note que a primeira "partition" irá sempre ser o próprio mapa de partições.) Depois digite <informalexample
+><screen>
+$ hformat /dev/<replaceable
+>sda2</replaceable>
+</screen
+></informalexample
+> Certifique-se de que está a utilizar o nome do correcto do seu stick USB. O comando <command
+>hformat</command
+> está contido no pacote Debian <classname
+>hfsutils</classname
+>. </para
+><para
+>Com o intuito de iniciar o kernel após arrancar de stick USB, nós iremos colocar um gestor de arranque no stick. O gestor de arranque <command
+>yaboot</command
+> pode ser instalado no sistema de ficheiros HFS e pode ser reconfigurado apenas editando um ficheiro de texto. Qualquer sistema operativo que suporte um sistema de ficheiros HFS pode ser utilizado para fazer alterações à configuração do gestor de arranque. </para
+><para
+>A ferramenta <command
+>ybin</command
+> que por norma vem com o <command
+>yaboot</command
+> ainda não reconhece dispositivos de armazenamento USB, terá então de instalar, manualmente, <command
+>yaboot</command
+> utilizando as ferramentas <classname
+>hfsutils</classname
+>. Escreva <informalexample
+><screen>
+$ hmount /dev/sda2
+$ hcopy -r /usr/lib/yaboot/yaboot :
+$ hattrib -c UNIX -t tbxi :yaboot
+$ hattrib -b :
+$ humount
+</screen
+></informalexample
+> Mais uma vez, certifique-se de que está a utilizar o nome correcto do dispositivo. A partição não deve ser montada de outra maneira durante este procedimento. Este procedimento escreve o gestor de arranque para a partição, e usa o utilitário HFS para marcá-lo de maneira a que Open Firmware inicie a partir dele. Tendo isto feito, O resto do stick USB pode ser preparado utilizando os utilitários Unix comuns. </para
+><para
+>Monte a partição (<userinput
+>mount /dev/sda2 /mnt</userinput
+>) e copie para o stick os seguintes ficheiros dos arquivos Debian: <itemizedlist>
+<listitem
+><para
+><filename
+>vmlinux</filename
+> (binário do kernel) </para
+></listitem>
+<listitem
+><para
+><filename
+>initrd.gz</filename
+> (imagem ramdisk inicial) </para
+></listitem>
+<listitem
+><para
+><filename
+>yaboot.conf</filename
+> (ficheiro de configuração yaboot) </para
+></listitem>
+<listitem
+><para
+><filename
+>boot.msg</filename
+> (mensagem opcional de arranque) </para
+></listitem>
+<listitem
+><para
+>Módulos opcionais do kernel </para
+></listitem>
+</itemizedlist>
+
+</para
+><para
+>O ficheiro de configuração <filename
+>yaboot.conf</filename
+> deve conter as seguintes linhas:<informalexample
+><screen>
+default=install
+root=/dev/ram
+
+message=/boot.msg
+
+image=/vmlinux
+        label=install
+        initrd=/initrd.gz
+        initrd-size=10000<phrase condition="sarge">
+        append="devfs=mount,dall --"</phrase>
+        read-only
+</screen
+></informalexample
+> Por favor note que o parâmetro <userinput
+>initrd-size</userinput
+> pode necessitar ser aumentado, dependendo da imagem de que está a iniciar. </para>
+   </sect3>
+<!--   End of file install-methods/usb-setup/powerpc.xml -->
+
+   <sect3>
+   <title
+>Adicionar uma imagem ISO</title>
+<para
+>Agora você deve colocar uma imagem Debian ISO (businesscard, netinst ou até uma completa) no seu stick (se couber). O nome do ficheiro de tal imagem deve terminar em <filename
+>.iso</filename
+>. </para
+><para
+>Se quiser instalar através da rede, sem utilizar uma imagem ISO, saltará naturalmente o passo anterior. Além disso você terá de usar a ramdisk inicial da directoria <filename
+>netboot</filename
+> em vez daquela do <filename
+>hd-media</filename
+>, porque <filename
+>hd-media/initrd.gz</filename
+> não tem suporte para rede. </para
+><para
+>Quando terminar, desmonte o stick de memória USB (<userinput
+>umount /mnt</userinput
+>) e active a sua protecção de escrita. </para>
+   </sect3>
+
+   <!-- TODO: doesn't this section belong later? -->
+   <sect3 arch="i386">
+   <title
+>Arrancar do stick USB</title>
+<warning
+><para
+>Se o seu sistema se recusa a arrancar a partir do stick de memória, este stick pode conter um master boot record (MBR) inválido. Para solucionar isto, utilize o comando <command
+>install-mbr</command
+> do pacote <classname
+>mbr</classname
+>: <informalexample
+><screen
+># install-mbr /dev/<replaceable
+>sda</replaceable
+>
+</screen
+></informalexample>
+
+</para
+></warning>
+   </sect3>
+  </sect2>
+ </sect1>
+<!--   End of file install-methods/boot-usb-files.xml -->
+
+<!-- Start of file install-methods/boot-drive-files.xml -->
+
+ <sect1 condition="bootable-disk" id="boot-drive-files">
+ <title
+>Preparar Ficheiros para Arrancar a Partir de Disco Rígido.</title>
+<para
+>O instalador pode ser iniciado utilizando os ficheiros de arranque colocados numa partição do disco rígido, quer seja lançado a partir de outro sistema operativo ou invocando directamente o gestor de arranque da BIOS. </para
+><para
+>Uma instalação completa <quote
+>pure network</quote
+> pode ser conseguida utilizando esta técnica. Isto evita todo o aborrecimento do media amovível, tal como encontrar e gravar imagens de CD ou lutar com demasiadas e não fiáveis imagens de disquetes. </para
+><para arch="i386"
+>O instalador não pode arrancar a partir dos ficheiros num sistema de ficheiros NTFS. </para
+><para arch="powerpc"
+>O instalador não pode iniciar dos ficheiros num sistema de ficheiros HFS+. O sistema MacOS 8.1 e abaixo pode utilizar o sistema de ficheiros HFS+; NewWorld PowerMacs utilizam todos HFS+. Para determinar se os seu sistema de ficheiros é HFS+, seleccione <userinput
+>Get Info</userinput
+> para o volume em questão. O sistema de ficheiros HFS aparecem como <userinput
+>Mac OS Standard</userinput
+>, enquanto sistemas de ficheiros HFS+ são conhecidos como <userinput
+>Mac OS Extended</userinput
+>. Você deve ter uma partição HFS com o intuito de trocar ficheiros entre MacOS e Linux, em particular os ficheiros de instalação dos quais fez download. </para
+><para arch="powerpc"
+>Diferentes programas são utilizados para iniciar uma instalação de um disco rígido, dependendo se o sistema é do modelo <quote
+>NewWorld</quote
+> ou um <quote
+>OldWorld</quote
+>. </para>
+
+  <sect2 arch="i386" id="files-lilo">
+  <title
+>Arrancar o Instalador de disco rígido com o <command
+>LILO</command
+> ou <command
+>GRUB</command
+></title>
+<para
+>Esta secção explica como adicionar ou substituir uma instalação de Linux existente utilizando tanto o <command
+>LILO</command
+> como o <command
+>GRUB</command
+>. </para
+><para
+>Na altura do arranque, ambos os gestores de arranque suportam carregar para a memória, não apenas o kernel, mas também a imagem de disco. Este disco RAM pode ser utilizado pelo kernel como sistema de ficheiros root. </para
+><para
+>Copie os seguintes ficheiros dos arquivos Debian para uma localização conveniente no seu disco, por exemplo para a <filename
+>/boot/newinstall/</filename
+>. <itemizedlist>
+<listitem
+><para
+><filename
+>vmlinuz</filename
+> (binário kernel) </para
+></listitem>
+<listitem
+><para
+><filename
+>initrd.gz</filename
+> (imagem ramdisk) </para
+></listitem>
+</itemizedlist>
+
+</para
+><para
+>Finalmente, para configurar o gestor de arranque prossiga para a <xref linkend="boot-initrd"/>. </para>
+  </sect2>
+
+
+  <sect2 arch="powerpc" id="files-oldworld">
+  <title
+>Instalador para Disco Rígido para Macs OldWorld</title>
+<para
+>A disquete <filename
+>boot-floppy-hfs</filename
+> utiliza <application
+>miBoot</application
+> para iniciar a instalação de linux, mas <application
+>miBoot</application
+> não pode facilmente ser utilizado para iniciar a partir de um disco rígido. <application
+>BootX</application
+> pode também ser usado para MacOS dual-boot e linux após a sua instalação Debian estar completa. Para Performa 6360, parece que <command
+>quik</command
+> não pode iniciar a partir do disco rígido. Portanto <application
+>BootX</application
+> é requerido nesse modelo. </para
+><para
+>Faça o download e descomprima a distribuição <application
+>BootX</application
+>, disponível a partir de <ulink url="&url-powerpc-bootx;"
+></ulink
+>, ou na directoria <filename
+>dists/woody/main/disks-powerpc/current/powermac</filename
+> nos mirrors http/ftp Debian e nos CD's oficiais de Debian. Utilize <application
+>Stuffit Expander</application
+> para extraí-lo do seu arquivo. Dentro do pacote está um directório vazio com o nome de <filename
+>Linux Kernels</filename
+>. Faça download do <filename
+>linux.bin</filename
+> e <filename
+>ramdisk.image.gz</filename
+> a partir do directório <filename
+>disks-powerpc/current/powermac</filename
+>, e coloque-os no directório <filename
+>Linux Kernels</filename
+>. Coloque então o directório <filename
+>Linux Kernels</filename
+> no directório activo System Folder. </para>
+  </sect2>
+
+  <sect2 arch="powerpc" id="files-newworld">
+  <title
+>Arrancar o Instalador a partir do Disco Rígido em Macs NewWorld</title>
+<para
+>PowerMacs NewWorld suportam iniciar a partir da rede ou de um CD-ROM ISO9660, assim como carregar binários ELF directamente do disco rígido. Estas máquinas irão arrancar de Linux directamente através de <command
+>yaboot</command
+>, que suporta carregar um kernel e RAMdisk directamente de uma partição ext2, tal como o dual-booting com MacOS. Iniciar o instalador a partir do disco rígido é particularmente apropriado para máquinas recentes sem drive de disquetes. <command
+>BootX</command
+> não é suportado e não deve ser utilizado em PowerMacs NewWorld. </para
+><para
+><emphasis
+>Copie</emphasis
+> (não mova) os seguintes quatro ficheiros que fez download anteriormente dos arquivos Debian, para o nível de root do seu disco rígido (isto pode ser feito com <keycap
+>option</keycap
+>-arrastando cada ficheiro para o ícone	do disco rígido). <itemizedlist>
+<listitem
+><para>
+
+<filename
+>vmlinux</filename>
+
+</para
+></listitem>
+<listitem
+><para>
+
+<filename
+>initrd.gz</filename>
+
+</para
+></listitem>
+<listitem
+><para>
+
+<filename
+>yaboot</filename>
+
+</para
+></listitem>
+<listitem
+><para>
+
+<filename
+>yaboot.conf</filename>
+
+</para
+></listitem>
+</itemizedlist>
+
+</para
+><para
+>Tome nota do número da partição do MacOS onde colocou estes ficheiros. Se tem o programa <command
+>pdisk</command
+> de MacOS, pode utilizar o comando L para verificar o número da partição. Vai necessitar desse número para o comando que vai escrever na prompt do Open Firmware quando iniciar o instalador. </para
+><para
+>Para iniciar o instalador, prossiga para a <xref linkend="boot-newworld"/>. </para>
+  </sect2>
+ </sect1>
+<!--   End of file install-methods/boot-drive-files.xml -->
+
+<!-- Start of file install-methods/install-tftp.xml -->
+
+ <sect1 condition="supports-tftp" id="install-tftp">
+ <title
+>Preparar Ficheiros para arranque pela Rede via TFTP</title>
+<para
+>Se a sua máquina está ligada a uma rede local, pode ser capaz de a arrancar através da rede a partir de outra máquina, utilizando TFTP. Se tenciona iniciar a instalação do sistema a partir de outra máquina, será necessário colocar os ficheiros de arranque numa localização específica dessa máquina, e a máquina configurada para suportar o arranque da sua máquina especifica. </para
+><para
+>Precisa configurar o servidor TFTP, e para muitas máquinas, um servidor BOOTP <phrase condition="supports-rarp"
+>, ou servidor RARP</phrase
+> <phrase condition="supports-dhcp"
+>, ou um servidor DHCP</phrase
+>. </para
+><para
+><phrase condition="supports-rarp"
+> O Reverse Address Resolution Protocol (RARP) é uma maneira de informar o cliente qual o IP deve usar. Outra maneira é utilizar o protocolo BOOTP. </phrase
+> <phrase condition="supports-bootp"
+>BOOTP é um protocolo IP que informa o computador do seu endereço IP e em que local da rede pode obter uma imagem de arranque.</phrase
+> <phrase arch="m68k"
+> Ainda assim existe outra alternativa  no sistema VMEbus: o endereço IP pode ser manualmente configurado na ROM de arranque. </phrase
+> <phrase condition="supports-dhcp"
+> O DHCP (Dynamic Host Configuration Protocol) é mais flexível, compatível com extensões anteriores do BOOTP. Alguns sistemas apenas podem ser configurados via DHCP. </phrase
+> </para
+><para arch="powerpc"
+>Para PowerPC, se tem uma máquina Macintosh Power NewWorld, é uma boa ideia usar DHCP em vez de BOOTP. Algumas das máquinas mais recentes não conseguem utilizar BOOTP. </para
+><para arch="alpha"
+>Ao contrário do Open Firmware encontrado nas máquinas Sparc PowerPC, a consola SRM <emphasis
+>não</emphasis
+> irá utilizar RARP para obter o seu endereço IP, e portanto você deve usar BOOTP para arrancar o seu Alpha através da rede<footnote
+> <para
+> Os sistemas Alpha também podem arrancar através da rede utilizando o DECNet MOP (Maintenance Operations Protocol), mas este assunto não é coberto aqui. Presumivelmente, o seu operador local de OpenVMS ficará contente por o ajudar se você estiver a arder por utilizar MOP para arrancar Linux no seu Alpha. </para
+> </footnote
+>. Você pode também inserir a configuração IP para as interfaces de rede directamente na consola SRM. </para
+><para arch="hppa"
+>Algumas máquinas mais antigas HPPA (ex.: 715/75) usam RBOOTD em vez de BOOTP. Está disponível um pacote <classname
+>rbootd</classname
+> em Debian. </para
+><para
+>O Trivial File Transfer Protocol (TFTP) é utilizado para servir a imagem de arranque para o cliente. Teoricamente, qualquer servidor, em qualquer plataforma, que implemente estes protocolos, pode ser utilizado. Nos exemplos desta sessão, iremos disponibilizar comandos para for SunOS 4.x, SunOS 5.x (a.k.a. Solaris), e GNU/Linux. <note arch="i386"
+><para
+>Para utilizar o método Pre-boot Execution Environment (PXE), vai necessitar de um servidor TFTP com suporte <userinput
+>tsize</userinput
+>. Num servidor &debian;, os pacotes <classname
+>atftpd</classname
+> e <classname
+>tftpd-hpa</classname
+> permitem-no; nós recomendamos <classname
+>tftpd-hpa</classname
+>. </para
+></note>
+
+</para>
+
+
+<!-- Start of file install-methods/tftp/rarp.xml -->
+
+
+  <sect2 condition="supports-rarp" id="tftp-rarp">
+   <title
+>Configurar o servidor RARP</title>
+<para
+>Para configurar RARP, necessita saber o endereço de Ethernet (a.k.a. o endereço MAC) do computador cliente a ser instalado. Se não sabe esta informação, pode encontra-la <phrase arch="sparc"
+> nas mensagens de arranque do OpenPROM inicial, use o comando OpenBoot <userinput
+>.enet-addr</userinput
+>, ou </phrase
+> arranque no modo <quote
+>Rescue</quote
+> (ex.:, a partir da disquete de recuperação) e utilize o comando <userinput
+>/sbin/ifconfig eth0</userinput
+>. </para
+><para
+>Num sistema servidor RARP com um kernel Linux 2.2.x, você necessita de povoar a tabela RARP do kernel. Para fazer isto, execute os seguintes comandos: <informalexample
+><screen>
+# <userinput
+>/sbin/rarp -s 
+<replaceable
+>client-hostname</replaceable>
+<replaceable
+>client-enet-addr</replaceable
+></userinput>
+
+# <userinput
+>/usr/sbin/arp -s 
+<replaceable
+>client-ip</replaceable>
+<replaceable
+>client-enet-addr</replaceable
+></userinput>
+</screen
+></informalexample
+> Se obtiver <informalexample
+><screen>
+SIOCSRARP: Invalid argument
+</screen
+></informalexample
+> você provavelmente necessita de carregar o módulo RARP do kernel ou então recompilar o kernel para suportar RARP. Tente <userinput
+>modprobe rarp</userinput
+> e em seguida tente novamente o comando <command
+>rarp</command
+>. </para
+><para
+>Num sistema servidor RARP usando um kernel Linux 2.4.x, não existe nenhum módulo RARP, e você deve usar o programa <command
+>rarpd</command
+>. O procedimento é similar ao que é utilizado em SunOS no próximo parágrafo. </para
+><para
+>Em SunOS, necessita de assegurar que o endereço do hardware de Ethernet para o cliente é listado na base de dados <quote
+>ethers</quote
+> (seja no ficheiro <filename
+>/etc/ethers</filename
+>, ou via NIS/NIS+) e na base de dados <quote
+>hosts</quote
+>. Em seguida precisa de iniciar o daemon RARP. Em SunOS 4, execute o comando (como root): <userinput
+>/usr/etc/rarpd -a</userinput
+>; em SunOS 5, use <userinput
+>/usr/sbin/rarpd -a</userinput
+>. </para>
+  </sect2>
+<!--   End of file install-methods/tftp/rarp.xml -->
+
+<!-- Start of file install-methods/tftp/bootp.xml -->
+
+
+  <sect2 condition="supports-bootp" id="tftp-bootp">
+  <title
+>Configurar o servidor BOOTP</title>
+<para
+>Existem disponíveis dois servidores BOOTP para GNU/Linux, o CMU <command
+>bootpd</command
+> e o outro é um servidor DHCP, o ISC <command
+>dhcpd</command
+>, que estão nos pacotes <classname
+>bootp</classname
+> e <classname
+>dhcp</classname
+> em &debian;. </para
+><para
+>Para utilizar o CMU <command
+>bootpd</command
+>, primeiro você tem de retirar o comentário (ou adicionar) da linha relevante em <filename
+>/etc/inetd.conf</filename
+>. Em &debian;, você pode executar <userinput
+>update-inetd --enable bootps</userinput
+>, para o fazer. Caso contrário, a linha em questão deve parecer-se com: <informalexample
+><screen>
+bootps  dgram  udp  wait  root  /usr/sbin/bootpd  bootpd -i -t 120
+</screen
+></informalexample
+>Agora, você tem de criar um ficheiro <filename
+>/etc/bootptab</filename
+>. Este tem de ser do mesmo tipo do familiar e críptico formato dos bons velhos ficheiros de BSD <filename
+>printcap</filename
+>, <filename
+>termcap</filename
+>, e <filename
+>disktab</filename
+>. Para mais informações veja a página do manual de <filename
+>bootptab</filename
+>. Para o CMU <command
+>bootpd</command
+>, você vai necessitar saber o endereço (MAC) de hardware do cliente. Aqui está um <filename
+>/etc/bootptab</filename
+> de exemplo: <informalexample
+><screen>
+client:\
+  hd=/tftpboot:\
+  bf=tftpboot.img:\
+  ip=192.168.1.90:\
+  sm=255.255.255.0:\
+  sa=192.168.1.1:\
+  ha=0123456789AB:
+</screen
+></informalexample
+>Você tem de alterar pelo menos a opção <quote
+>ha</quote
+>, que especifica o endereço de hardware do cliente. A opção <quote
+>bf</quote
+> especifica o ficheiro que o cliente deve obter via TFTP; para mais detalhes veja a <xref linkend="tftp-images"/>. <phrase arch="mips"
+>Em Indys da SGI você pode apenas entrar no monitor de comandos e escrever <userinput
+>printenv</userinput
+>. O valor da variável <userinput
+>eaddr</userinput
+> é o endereço MAC da máquina. </phrase
+> </para
+><para
+>Por contraste, configurar BOOTP com ISC <command
+>dhcpd</command
+> é realmente fácil, porque trata os clientes BOOTP como casos moderadamente especiais de clientes DHCP. Algumas arquitecturas requerem uma configuração complexa para iniciarem clientes via BOOTP. Se o seu caso é um desses, leia a secção <xref linkend="dhcpd"/>. Caso contrário, irá provavelmente ser capaz de conseguir com um simples adicionar de directiva <userinput
+>allow bootp</userinput
+> para o bloco de configuração para a subnet que contém o cliente, e reiniciar <command
+>dhcpd</command
+> com <userinput
+>/etc/init.d/dhcpd restart</userinput
+>. </para>
+  </sect2>
+<!--   End of file install-methods/tftp/bootp.xml -->
+
+<!-- Start of file install-methods//tftp/dhcp.xml -->
+
+  <sect2 condition="supports-dhcp" id="dhcpd">
+   <title
+>Configurar um servidor DHCP</title>
+<para
+>Um software livre de servidor DHCP é o <command
+>dhcpd</command
+> do ISC. Em &debian;, isto está disponível no pacote <classname
+>dhcp</classname
+>. Aqui está um exemplo de um ficheiro de configuração para ele (normalmente <filename
+>/etc/dhcpd.conf</filename
+>): <informalexample
+><screen>
+option domain-name "example.com";
+option domain-name-servers ns1.example.com;
+option subnet-mask 255.255.255.0;
+default-lease-time 600;
+max-lease-time 7200;
+server-name "servername";
+
+subnet 192.168.1.0 netmask 255.255.255.0 {
+  range 192.168.1.200 192.168.1.253;
+  option routers 192.168.1.1;
+}
+
+host clientname {
+  filename "/tftpboot/tftpboot.img";
+  server-name "servername";
+  next-server servername;
+  hardware ethernet 01:23:45:67:89:AB;
+  fixed-address 192.168.1.90;
+}
+</screen
+></informalexample
+> Nota: O novo (e preferêncial) pacote <classname
+>dhcp3</classname
+> utiliza <filename
+>/etc/dhcp3/dhcpd.conf</filename
+>. </para
+><para
+>Neste exemplo, existe um servidor <replaceable
+>servername</replaceable
+> que executa todo o trabalho de servidor DHCP, de servidor TFTP e gateway de rede. Vai precisar quase de certeza de alterar as opções de domain-name, tal como o nome do servidor e o endereço de hardware do cliente. A opção <replaceable
+>filename</replaceable
+> deve ser o nome do ficheiro obtido via TFTP. </para
+><para
+>Após ter editado o ficheiro de configuração <command
+>dhcpd</command
+>, reinicie-o com <userinput
+>/etc/init.d/dhcpd restart</userinput
+>. </para>
+
+   <sect3 arch="i386">
+   <title
+>Possibilitar o Arranque PXE na configuração DHCP</title>
+<para
+>Aqui está outro exemplo para um <filename
+>dhcp.conf</filename
+> utilizando o método Pre-boot Execution Environment (PXE) de TFTP. <informalexample
+><screen>
+option domain-name "example.com";
+
+default-lease-time 600;
+max-lease-time 7200;
+
+allow booting;
+allow bootp;
+
+# O próximo parágrafo necessita ser alterado para se adequar com o seu caso
+subnet 192.168.1.0 netmask 255.255.255.0 {
+  range 192.168.1.200 192.168.1.253;
+  option broadcast-address 192.168.1.255;
+# O endereço de gateway que pode ser diferente
+# (acesso à internet por exemplo)
+  option routers 192.168.1.1;
+# indica o dns que quer utilizar
+  option domain-name-servers 192.168.1.3;
+}
+
+group {
+ next-server 192.168.1.3;
+ host tftpclient {
+# endereço de harware do cliente tftp
+  hardware ethernet  00:10:DC:27:6C:15;
+  filename "/tftpboot/pxelinux.0";
+ }
+}
+</screen
+></informalexample
+> Note que para um arranque PXE, o ficheiro cliente com o nome de <filename
+>pxelinux.0</filename
+>, é o gestor de arranque, não uma imagem de kernel (veja a <xref linkend="tftp-images"/> abaixo). </para>
+   </sect3>
+  </sect2>
+<!--   End of file install-methods//tftp/dhcp.xml -->
+
+  <sect2 id="tftpd">
+  <title
+>Disponibilizar o Servidor TFTP</title>
+<para
+>Para ter o servidor TFTP pronto a funcionar, deve primeiro certificar-se que é permitido executar <command
+>tftpd</command
+>. Isto é usualmente permitido tendo algo como a seguinte linha em <filename
+>/etc/inetd.conf</filename
+>: <informalexample
+><screen>
+tftp dgram udp wait nobody /usr/sbin/tcpd in.tftpd /tftpboot
+</screen
+></informalexample
+> Os pacotes Debian em geral irão configura-lo correctamente, por omissão, quando são instalados. </para
+><para
+>Procure nesse ficheiro e lembre-se da directoria que é utilizada como argumento do <command
+>in.tftpd</command
+>; que irá necessitar abaixo. O argumento <userinput
+>-l</userinput
+> permite que algumas versões registem todos os pedidos aos logs de sistema; isto é útil para diagnosticar erros de arranque. Se tiver de alterar o <filename
+>/etc/inetd.conf</filename
+>, terá de notificar o processo <command
+>inetd</command
+> que o ficheiro foi alterado. Numa máquina Debian, execute <userinput
+>/etc/init.d/inetd reload</userinput
+>; noutras máquinas, procure o ID do processo de <command
+>inetd</command
+>, e execute <userinput
+>kill -HUP <replaceable
+>inetd-pid</replaceable
+></userinput
+>. </para
+><para arch="mips"
+>Se tenciona instalar Debian numa máquina SGI e o seu servidor é uma máquina GNU/Linux utilizando um Linux 2.4, necessitará de configurar o seguinte no servidor <informalexample
+><screen>
+# echo 1 &gt; /proc/sys/net/ipv4/ip_no_pmtu_disc
+</screen
+></informalexample
+> para desligar o Path MTU discovery, caso contrário o Indy's PROM não consegue fazer o download do kernel. Além disso, assegure-se que os pacotes TFTP são enviados a partir de um source port não maior que 32767, ou o download irá ficar bloqueado após o primeiro pacote. Mais uma vez, o Linux 2.4.X despoleta este bug na PROM, pode evitá-lo configurando <informalexample
+><screen>
+# echo "2048 32767" &gt; /proc/sys/net/ipv4/ip_local_port_range
+</screen
+></informalexample
+> para ajustar a gama de source ports que o servidor TFTP de Linux utiliza. </para>
+  </sect2>
+
+  <sect2 id="tftp-images">
+  <title
+>Mover Imagens TFTP Para o Lugar</title>
+<para
+>Em seguida, coloque a imagem de arranque do TFTP, conforme encontrada na <xref linkend="where-files"/>, no directório de imagem de arranque <command
+>tftpd</command
+>. Por norma este directório será <filename
+>/tftpboot</filename
+>. Terá de fazer um link a partir desse ficheiro para o ficheiro que o <command
+>tftpd</command
+> irá utilizar para iniciar um cliente em particular. Infelizmente, o nome do ficheiro é determinado pelo cliente TFTP, e não existem standards sólidos. </para
+><para arch="powerpc"
+>Em máquinas Macintosh Power NewWorld, necessitará de configurar o gestor de arranque <command
+>yaboot</command
+> como a imagem de arranque TFTP. <command
+>Yaboot</command
+> irá então buscar a imagem do kernel e RAMdisk através do próprio TFTP. Para um arranque a partir da rede, utilize <filename
+>yaboot-netboot.conf</filename
+>. Renomeie-o apenas para <filename
+>yaboot.conf</filename
+> dentro da directoria TFTP. </para
+><para arch="i386"
+>Para um arranque PXE, tudo o que deve precisar configurar está no tarball <filename
+>netboot/netboot.tar.gz</filename
+>. Apenas extraia este tarball para o directório da imagem de arranque <command
+>tftpd</command
+>. Certifique-se que o servidor dhcp está configurado para passar <filename
+>/pxelinux.0</filename
+> ao <command
+>tftpd</command
+> como o nome do ficheiro para arrancar. </para
+><para arch="ia64"
+>Para um arranque PXE, tudo o que deve precisar configurar está no tarball <filename
+>netboot/netboot.tar.gz</filename
+>. Apenas extraia este tarball para o directório da imagem de arranque <command
+>tftpd</command
+>. Certifique-se que o servidor dhcp está configurado para passar <filename
+>/debian-installer/ia64/elilo.efi</filename
+> ao <command
+>tftpd</command
+> como o nome do ficheiro para arrancar. </para>
+
+   <sect3 arch="mipsel">
+   <title
+>Imagens TFTP DECstation</title>
+<para
+>Para DECstations, existem ficheiros tftpimage para cada sub-arquitectura, que contém ambos o kernel e o instalador num só ficheiro. A convenção do nome é <replaceable
+>subarchitecture</replaceable
+>/netboot-boot.img. Copie o ficheiro tftpimage que quer utilizar para <userinput
+>/tftpboot/tftpboot.img</userinput
+>, se trabalhar com o exemplo de configurações BOOTP/DHCP descritas acima. </para
+><para
+>O firmware DECstation arranca por TFTP com o comando <userinput
+>boot <replaceable
+>#</replaceable
+>/tftp</userinput
+>, onde <replaceable
+>#</replaceable
+> é o número do dispositivo TurboChannel do qual vai iniciar. Na maioria das DECstation é <quote
+>3</quote
+>. Se servidor BOOTP/DHCP não fornecer o nome do ficheiro ou necessitar de passar parâmetros adicionais, podem ser adicionados com a seguinte sintaxe: </para
+><para>
+
+<userinput
+>boot #/tftp/filename param1=value1 param2=value2 ...</userinput>
+
+</para
+><para
+>Algumas revisões de firmware DECstation mostram um problema relacionado com o arranque a partir da rede: a transferência começa, mas após algum tempo ela pára com um <computeroutput
+>a.out err</computeroutput
+>. Isto pode derivar de várias razões:  <orderedlist
+> <listitem
+><para
+> O firmware não responde a pedidos ARP durante a transferência TFTP. Isto leva a um timeout e a transferência pára. A solução é adicionar o MAC address da placa de Ethernet na DECstation estaticamente para a tabela ARP do servidor TFTP. Isto é feito executando <userinput
+>arp -s <replaceable
+>IP-address</replaceable
+> <replaceable
+>MAC-address</replaceable
+></userinput
+> como root na máquina que actua como servidor TFTP. O MAC-address da DECstation pode ser visto executando <command
+>cnfg</command
+> no prompt de DECstation firmware. </para
+></listitem
+> <listitem
+><para
+> O firmware tem um tamanho limite nos ficheiros que podem iniciar por TFTP. </para
+></listitem
+> </orderedlist
+> Existem também revisões de firmware que não podem ser iniciadas via TFPT. Uma visão geral sobre as diferentes revisões podem ser encontradas nas páginas web NetBSD: <ulink url="http://www.netbsd.org/Ports/pmax/board-list.html#proms"
+></ulink
+>. </para>
+   </sect3>
+
+   <sect3 arch="alpha">
+   <title
+>Iniciar TFTP Alpha</title>
+<para
+>Em Alpha, deve especificar o nome do ficheiro (como caminho relativo à directoria de imagem de arranque) utilizando o argumento<userinput
+>-file</userinput
+> para o comando SRM  <userinput
+>boot</userinput
+>, ou ajustando a variável de ambiente <userinput
+>BOOT_FILE</userinput
+>. Alternativamente, o nome do ficheiro pode ser dado via BOOTP (em ISC <command
+>dhcpd</command
+>, utilize a directiva <userinput
+>filename</userinput
+>).  Ao contrário de Open Firmware, <emphasis
+>não há nome de ficheiro por omissão</emphasis
+> em SRM, <emphasis
+>tem de </emphasis
+> especificar o nome do ficheiro por um destes métodos. </para>
+   </sect3>
+
+   <sect3 arch="sparc">
+   <title
+>Iniciar SPARC TFTP</title>
+<para
+>As Arquitecturas SPARC por exemplo utilizam os nome de sub-arquitecturas, tais como <quote
+>SUN4M</quote
+> ou <quote
+>SUN4C</quote
+>; Em alguns casos, a sub-arquitectura é deixada em branco, para que o ficheiro que o cliente procura é apenas <filename
+>client-ip-in-hex</filename
+>. Assim, se a sub-arquitectura do seu sistema for SUN4C, e o seu IP é 192.168.1.3, o nome do ficheiros será <filename
+>C0A80103.SUN4C</filename
+>. Uma maneira simples de determinar isto é executando o seguinte comando na consola (assumindo que o IP pretendido para a máquina é 10.0.0.4). <informalexample
+><screen>
+$ printf '%.2x%.2x%.2x%.2x\n' 10 0 0 4
+</screen
+></informalexample
+> Isto irá mandar o IP em hexadecimal; para obter o nome do ficheiro correcto, necessitará de alterar todas as letras para maiúsculas e se necessário adicionar o nome da sub-arquitectura. </para
+><para
+>Pode também forçar alguns sistemas sparc a procurar por um nome de ficheiro especifico adicionando-o no final do comando de arranque OpenPROM, tal como <userinput
+>boot net my-sparc.image</userinput
+>. Isto tem de residir na directoria onde o servidor TFTP procura. </para>
+   </sect3>
+
+   <sect3 arch="m68k">
+   <title
+>Iniciar TFTP em BVM/Motorola</title>
+<para
+>Para sistemas BVM e Motorola VMEbus copie os ficheiros &bvme6000-tftp-files; para <filename
+>/tftpboot/</filename
+>. </para
+><para
+>Em seguida, configure as suas ROMs de arranque ou servidor BOOTP para inicialmente carregar os ficheiros <filename
+>tftplilo.bvme</filename
+> ou <filename
+>tftplilo.mvme</filename
+> para a sua sub-arquitectura para informação adicional da configuração do sistema. </para>
+   </sect3>
+
+   <sect3 arch="mips">
+   <title
+>Iniciar TFTP em SGI Indys</title>
+<para
+>Em Indys da SGI pode confiar em <command
+>bootpd</command
+> para fornecer o nome do ficheiro TFTP. É dado seja em <userinput
+>bf=</userinput
+> <filename
+>/etc/bootptab</filename
+> ou como opção <userinput
+>filename=</userinput
+> em <filename
+>/etc/dhcpd.conf</filename
+>. </para>
+   </sect3>
+
+   <sect3 arch="mips">
+   <title
+>Iniciar TFTP em Broadcom BCM91250A</title>
+<para
+>Não tem de configurar o DHCP de uma maneira especial porque irá passar o caminho absoluto do ficheiro para o CFE. </para>
+   </sect3>
+
+  </sect2>
+
+<!-- FIXME: commented out since it seems too old to be usable and a current
+            way is not known
+
+  <sect2 id="tftp-low-memory">
+  <title
+>TFTP Installation for Low-Memory Systems</title>
+<para>
+
+On some systems, the standard installation RAMdisk, combined with the
+memory requirements of the TFTP boot image, cannot fit in memory.  In
+this case, you can still install using TFTP, you'll just have to go
+through the additional step of NFS mounting your root directory over
+the network as well.  This type of setup is also appropriate for
+diskless or dataless clients.
+
+</para
+><para>
+
+First, follow all the steps above in <xref linkend="install-tftp"/>.
+
+<orderedlist>
+<listitem
+><para>
+
+Copy the Linux kernel image on your TFTP server using the
+<userinput
+>a.out</userinput
+> image for the architecture you are
+booting.
+
+</para
+></listitem>
+<listitem
+><para>
+
+Untar the root archive on your NFS server (can be the same system as
+your TFTP server):
+
+<informalexample
+><screen
+>
+# cd /tftpboot
+# tar xvzf root.tar.gz
+</screen
+></informalexample>
+
+Be sure to use the GNU <command
+>tar</command
+> (other tar programs, like the
+SunOS one, badly handle devices as plain files).
+
+</para
+></listitem>
+<listitem
+><para>
+
+Export your <filename
+>/tftpboot/debian-sparc-root</filename
+> directory
+with root access to your client.  E.g., add the following line to
+<filename
+>/etc/exports</filename
+> (GNU/Linux syntax, should be similar
+for SunOS):
+
+<informalexample
+><screen
+>
+/tftpboot/debian-sparc-root <replaceable>client</replaceable>(rw,no_root_squash)
+</screen
+></informalexample>
+
+NOTE: <replaceable
+>client</replaceable
+> is the host name or IP address recognized
+by the server for the system you are booting.
+
+</para
+></listitem>
+<listitem
+><para>
+
+Create a symbolic link from your client IP address in dotted notation
+to <filename
+>debian-sparc-root</filename
+> in the
+<filename
+>/tftpboot</filename
+> directory.  For example, if the client
+IP address is 192.168.1.3, do
+
+<informalexample
+><screen
+>
+# ln -s debian-sparc-root 192.168.1.3
+</screen
+></informalexample>
+
+</para
+></listitem>
+</orderedlist>
+
+</para>
+
+  </sect2>
+
+  <sect2 condition="supports-nfsroot">
+  <title
+>Installing with TFTP and NFS Root</title>
+<para>
+
+Installing with TFTP and NFS Root is similar to
+<xref linkend="tftp-low-memory"/> because you don't want to
+load the RAMdisk anymore but boot from the newly created NFS-root file
+system.  You then need to replace the symlink to the tftpboot image by
+a symlink to the kernel image (for example,
+<filename
+>linux-a.out</filename
+>).
+
+</para
+><para>
+
+RARP/TFTP requires all daemons to be running on the same server (the
+workstation is sending a TFTP request back to the server that replied
+to its previous RARP request).
+
+</para>
+
+
+  </sect2>
+END FIXME -->
+ </sect1>
+<!--   End of file install-methods/install-tftp.xml -->
+
+<!-- Start of file install-methods/automatic-install.xml -->
+
+ <sect1 id="automatic-install">
+ <title
+>Instalação Automática</title>
+<para
+>Para instalar em vários computadores é possível fazer uma instalação completamente automática. Os pacotes Debian destinados a isto incluem <classname
+>fai</classname
+> (que utiliza um servidor de instalação), <classname
+>replicator</classname
+>, <classname
+>systemimager</classname
+>, <classname
+>autoinstall</classname
+>, e o próprio instalador Debian. </para>
+
+  <sect2 id="preseed">
+  <title
+>Instalação Automática Utilizando o Instalador Debian</title>
+<para
+>O Instalador Debian suporta instalações automáticas via ficheiros de pré-configuração. Um ficheiro de pré-configuração pode ser carregado a partir da rede ou a partir de um meio amovível, e utilizado para preencher as respostas às perguntas feitas durante o processo de instalação. </para
+><para condition="etch"
+>Toda a documentação sobre a pré-configuração e um exemplo funcional que pode editar encontra-se na <xref linkend="appendix-preseed"/>. </para
+><para condition="sarge"
+>Embora na maioria das caixas de diálogo utilizadas pelo &d-i; possa ser feita a pré-configuração utilizando este método, existem algumas notáveis excepções. Você pode (re)particionar um disco rígido completo ou utilizar o espaço livre num disco; não é possível utilizar as partições existentes. Actualmente você não pode utilizar a pré-configuração para configurar LVM e RAID. Além disso, com a excepção dos módulos de driver de rede, não é possível pré-configurar parâmetros de módulos do kernel. </para
+><para condition="sarge"
+>O ficheiro da pré-configuração está num formato utilizado pelo comando debconf-set-selections. Um exemplo bem documentado e funcional que pode editar encontra-se na <xref linkend="example-preseed"/>. </para
+><para condition="sarge"
+>Alternativamente, uma maneira de conseguir uma lista completa de todos os valores que podem ser pré-carregados é fazer uma instalação manual, e depois utilizar <filename
+>debconf-get-selections</filename
+>, a partir do pacote  <classname
+>debconf-utils</classname
+>, para enviar as bases de dados de debconf e cdebconf em /var/log/debian-installer/cdebconf para um único ficheiro: <informalexample
+><screen>
+$ debconf-get-selections --installer &gt; <replaceable
+>file</replaceable>
+$ debconf-get-selections &gt;&gt; <replaceable
+>file</replaceable>
+</screen
+></informalexample
+> Contudo, um ficheiro gerado desta maneira terá alguns itens que não devem ser pré-carregados, e o ficheiro na <xref linkend="example-preseed"/> é o melhor local de começo para a maioria dos utilizadores. </para
+><para condition="sarge"
+>Uma vez que tenha um ficheiro pré-configurado, você pode edita-lo se necessário, e colocá-lo num servidor web, ou copiá-lo para um instalador num meio de arranque. Seja lá onde colocar o ficheiro, necessita de passar o parâmetro para o instalador na altura do arranque para utilizar o ficheiro. </para
+><para condition="sarge"
+>Para fazer o instalador utilizar o ficheiro pré-configurado, conseguido através de download da rede, adicione preseed/url=http://url/to/preseed.cfg aos parâmetros de arranque do kernel. Claro que a pré-configuração não terá efeito até o instalador conseguir configurar a rede para fazer download do ficheiro, isto é portanto muito útil se o instalador conseguir configurar a rede via DHCP sem fazer nenhuma pergunta. Pode querer configurar a prioridade de instalação para evitar qualquer questão enquanto a rede está a ser configurada. Veja na <xref linkend="installer-args"/>. </para
+><para condition="sarge"
+>Para colocar um ficheiro de pré-configuração num CD, necessita de recriar a imagem ISO para incluir o seu ficheiro pré-configurado. Veja a página do manual de mkisofs para mais detalhes. Alternativamente, coloque o ficheiro preseed numa disquete, e utilize preseed/file=/floppy/preseed.cfg </para
+><para arch="i386" condition="sarge"
+>Se vai arrancar a partir de um USB memory stick, então pode simplesmente copiar o ficheiro de pré-configuração para o sistema de ficheiros do memory stick, e editar o ficheiro syslinux.cfg para adicionar preseed/file=/hd-media/preseed.cfg aos parâmetros de arranque do kernel. </para>
+  </sect2>
+ </sect1>
+<!--   End of file install-methods/automatic-install.xml -->
+
+</chapter>
+<!--   End of file install-methods/install-methods.xml -->

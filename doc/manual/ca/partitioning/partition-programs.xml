@@ -1,0 +1,169 @@
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 31619 -->
+
+ <sect1 id="partition-programs">
+ <title>Programes de Debian per particionar</title>
+<para>
+
+Els desenvolupadors de Debian han adaptat nombroses varietats de programes
+de particionament a fi que funcionen en diversos tipus de discs durs i
+arquitectures d'ordinador. Tot seguit hi ha una llista dels programes adients
+per a la vostra arquitectura.
+
+</para>
+
+<variablelist>
+
+<varlistentry>
+<term><command>partman</command></term>
+<listitem><para>
+
+És l'eina de Debian recomanada per particionar. Aquesta navalla suïssa també
+pot redimensionar particions, crear sistemes de fitxers
+<phrase arch="i386"> (<quote>formatar</quote> en terminologia de Windows)</phrase>
+i associar-los a punts de muntatge.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry condition="fdisk.txt">
+<term><command>fdisk</command></term>
+<listitem><para>
+
+És el particionador de discs original del Linux, adequat per als experts.
+
+</para><para>
+
+Aneu amb compte si teniu particions de FreeBSD. Els nuclis d'instal·lació
+permeten l'ús d'aquestes particions, però la manera com
+l'<command>fdisk</command> els representa (o no) pot fer que els noms de
+dispositiu diferisquen. Vegeu el
+<ulink url="&url-linux-freebsd;">COM ES FA Linux+FreeBSD</ulink>
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry condition="cfdisk.txt">
+<term><command>cfdisk</command></term>
+<listitem><para>
+
+És un particionador de discs d'ús senzill, apte per a tothom.
+
+</para><para>
+
+Tingueu en compte que el <command>cfdisk</command> no reconeix particions
+FreeBSD en absolut i que, novament, els noms de dispositiu poden diferir.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry condition="atari-fdisk.txt">
+<term><command>atari-fdisk</command></term>
+<listitem><para>
+
+És la versió de l'<command>fdisk</command> per a l'Atari.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry condition="amiga-fdisk.txt">
+<term><command>amiga-fdisk</command></term>
+<listitem><para>
+
+És la versió de l'<command>fdisk</command> per a l'Amiga.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry condition="mac-fdisk.txt">
+<term><command>mac-fdisk</command></term>
+<listitem><para>
+
+És la versió de l'<command>fdisk</command> per al Mac.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry condition="pmac-fdisk.txt">
+<term><command>pmac-fdisk</command></term>
+<listitem><para>
+
+És la versió de l'<command>fdisk</command> per al PowerMac, emprada també
+pels sistemes BVM i Motorola VMEbus.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry condition="fdasd.txt">
+<term><command>fdasd</command></term>
+<listitem><para>
+
+És la versió de l'<command>fdisk</command> per a &arch-title;; Llegiu el manual
+de l'fdasd o bé el capítol 13è de
+<ulink url="http://oss.software.ibm.com/developerworks/opensource/linux390/docu/l390dd08.pdf">
+Device Drivers and Installation Commands</ulink> per a més detalls.
+
+</para></listitem>
+</varlistentry>
+</variablelist>
+
+<para>
+
+Un d'aquests programes s'executarà de manera predeterminada quan seleccioneu
+<guimenuitem>Particiona un disc dur</guimenuitem>. Si el que s'executa
+de manera predeterminada no és el que voleu, sortiu del particionador, aneu a l'intèrpret
+d'ordres (<userinput>tty2</userinput>) prement les tecles <keycap>Alt</keycap>
+i <keycap>F2</keycap> a l'hora, i introduïu el nom del programa que voleu fer
+servir (amb els arguments necessaris, si cal).  Després ometeu el pas
+<guimenuitem>Particiona un disc dur</guimenuitem> del
+<command>debian-installer</command> i continueu en el següent pas.
+
+</para><para>
+
+Si voleu treballar amb més de 20 particions en un disc ide,
+heu de crear dispositius per a les particions de la 21a en endavant.
+El següent pas de la inicialització de la partició fallarà si no hi ha
+cap dispositiu adequat. Com a exemple, aquí teniu unes ordres que podeu
+emprar a <userinput>tty2</userinput> o sota Executa un intèrpret d'ordres
+per afegir un dispositiu de manera que la 21a partició es puga inicialitzar:
+
+<informalexample><screen>
+# cd /dev
+# mknod hda21 b 3 21
+# chgrp disk hda21
+# chmod 660 hda21
+</screen></informalexample>
+
+L'arrencada del nou sistema fallarà si no hi ha els dispositius adequats al
+sistema de destí. Després d'instal·lar el nucli i els mòduls, executeu:
+
+<informalexample><screen>
+# cd /target/dev
+# mknod hda21 b 3 21
+# chgrp disk hda21
+# chmod 660 hda21
+</screen></informalexample>
+
+<phrase arch="i386">Recordeu que heu de marcar la partició d'arrencada com a
+<quote>Arrencable</quote>.</phrase>
+
+</para><para condition="mac-fdisk.txt">
+
+Un aspecte important quan particioneu discs de tipus Mac és que la partició
+d'intercanvi s'identifica pel nom; s'ha d'anomenar <quote>swap</quote>.
+Totes les particions linux del Mac són del mateix tipus, Apple_UNIX_SRV2.
+Llegiu el manual. També podeu llegir el
+<ulink url="&url-mac-fdisk-tutorial;">Tutorial de mac-fdisk</ulink>, el qual
+inclou els passos que heu de fer si voleu compartir el disc amb un MacOS.
+
+</para>
+
+&partition-alpha.xml;
+&partition-hppa.xml;
+&partition-i386.xml;
+&partition-ia64.xml;
+&partition-mips.xml;
+&partition-powerpc.xml;
+&partition-sparc.xml;
+
+ </sect1>

@@ -1,0 +1,97 @@
+<!-- Start of file administrivia/administrivia.xml -->
+
+<appendix id="administrivia">
+ <title
+>Administrivia</title>
+
+
+ <sect1 id="about">
+ <title
+>Σχετικά με αυτό το κείμενο</title>
+
+<para
+>Αυτό το εγχειρίδιο δημιουργήθηκε για τον εγκαταστάτη του Debian Sarge, και είναι βασισμένο στο εγχειρίδιο εγκατάστασης του Woody με δισκέτες εκκίνησης, και στο εγχειρίδιο της διανομής Progeny το οποίο κυκλοφόρησε το 2003 υπό τους ορούς της GPL. </para
+><para
+>Το κείμενο αυτό είναι γραμμένο σε DocBook XML. Οι διάφοροι τύποι προϊόντων δημιουργούνται με προγράμματα από τα πακέτα<classname
+>docbook-xml</classname
+> και <classname
+>docbook-xsl</classname
+>. </para
+><para
+>Για να βελτιωθεί η συντηρησιμότητα του κειμένου αυτού, χρησιμοποιούμε έναν αριθμό γνωρισμάτων της SGML, όπως οι οντότητες και οι σημειωμένες ενότητες. Αυτά τα στοιχεία παίζουν έναν ρόλο ανάλογο των μεταβλητών και των συνθηκών στις γλώσσες προγραμματισμού. Ο πηγαίος κώδικας XML του κειμένου αυτού περιέχει πληροφορίες για κάθε διαφορετική αρχιτεκτονική &mdash; οι σημειωμένες ενότητες χρησιμοποιούνται για την απομόνωση συγκεκριμένων κομματιών κειμένου που χαρακτηρίζουν την κάθε αρχιτεκτονική. </para>
+ </sect1>
+
+ <sect1 id="contributing">
+ <title
+>Συνεισφορά στο Κείμενο</title>
+
+<para
+>Αν έχετε προβλήματα ή υποδείξεις σχετικά με το κείμενο αυτό, μπορείτε να τις υποβάλετε με τη μορφή αναφοράς σφαλμάτων για το πακέτο <classname
+>debian-installer-manual</classname
+>. Δείτε το πακέτο <classname
+>reportbug</classname
+> ή διαβάστε την τεκμηρίωση του <ulink url="&url-bts;"
+>Debian Bug Tracking System</ulink
+>. Θα ήταν καλό αν μπορούσατε να ελέγξετε τα <ulink url="&url-bts;debian-installer-manual"
+>ανοιχτά σφάλματα για το πακέτο install-doc</ulink
+> για να δείτε αν το πρόβλημά σας έχει ήδη αναφερθεί. Στην περίπτωση αυτή, μπορείτε να δώσετε επιπρόσθετη επιβεβαίωση ή πολύτιμη πληροφορία στο <email
+><replaceable
+>XXXX</replaceable
+>@bugs.debian.org</email
+>, όπου<replaceable
+>XXXX</replaceable
+> είναι ο αριθμός του ήδη αναφερθέντος σφάλματος. </para
+><para
+>Ακόμα καλύτερα, πάρτε μια κόπια του DocBook κώδικα για το κείμενο αυτό, και φτιάξτε κάποιες διορθώσεις για τον κώδικα. Ο DocBook κώδικας μπορεί να βρεθεί στο <ulink url="&url-d-i-websvn;"
+>debian-installer WebSVN</ulink
+>. Αν δεν είσαστε αρκετά εξοικειωμένοι με το DocBook, μην ανησυχείτε: υπάρχει ένα απλό cheatsheet αρχείο στους καταλόγους των  manuals με το οποίο μπορείτε να ξεκινήσετε. Είναι όπως το  html, αλλά προσανατολισμένο στο νόημα του κειμένου παρά στην παρουσίαση. Διορθώσεις που υποβάλλονται στη λίστα debian-boot είναι ευπρόσδεκτα. Για οδηγίες σχετικά με το πώς να ελέγξετε τον κώδικα μέσω του SVN, κοιτάξτε το αρχείο <ulink url="&url-d-i-readme;"
+>README</ulink
+> από το κύριο κατάλογο του κώδικα. </para
+><para
+>Παρακαλούμε να  <emphasis
+>μην</emphasis
+> έρθετε σε επαφή με τους συγγραφείς του κειμένου άμεσα. Υπάρχει επίσης μια λίστα αλληλογραφίας για τον &d-i;, που περιλαμβάνει συζητήσεις και για το εγχειρίδιο. Η λίστα είναι η <email
+>debian-boot@lists.debian.org</email
+>. Οδηγίες εγγραφής στη λίστα μπορούν να βρεθούν στη σελίδα <ulink url="&url-debian-lists-subscribe;"
+>Συνδρομής Λιστών ταχυδρομείου του Debian</ulink
+>, ή μπορείτε να διατρέξετε τα <ulink url="&url-debian-list-archives;"
+>Αρχεία των Λιστών Ταχυδρομείου του Debian</ulink
+> στο δίκτυο. </para>
+
+ </sect1>
+
+ <sect1 id="contributors">
+ <title
+>Κυριότερες Συνεισφορές</title>
+
+<para
+>Αυτό το κείμενο γράφτηκε αρχικά από τους  Bruce Perens, Sven Rudolph, Igor Grobman, James Treacy, και Adam Di Carlo. Ο Sebastian Ley έγραψε το Howto τής Εγκατάστασης, και πολλοί χρήστες και προγραμματιστές του Debian έχουν συνεισφέρει σε αυτό το κείμενο. Ιδιαίτερη αναφορά πρέπει να γίνει για τον Michael Schmitz (υποστήριξη για m68k), τον  Frank Neumann (αρχικό συγγραφέα του <ulink url="&url-m68k-old-amiga-install;"
+>εγχειρίδιο εγκατάστασης για Amiga</ulink
+>), τους Arto Astala, Eric Delaunay/Ben Collins (πληροφορίες για SPARC), για τους Tapio Lehtonen, και Stéphane Bortzmeyer για τις πολυάριθμες επεξεργασίες και κείμενα. Πρέπει να ευχαριστήσουμε τον Pascal Le Bail για τις χρήσιμες πληροφορίες του σχετικά με την εκκίνηση από συσκευές μνήμης USB sticks. O  Miroslav Kuře έχει τεκμηριώσει μεγάλο μέρος της νέας λειτουργείας του debian εγκαταστάτη της Sarge.  </para
+><para
+>Εξαιρετικά χρήσιμα κείμενα και πληροφορίες έχουν βρεθεί στο HOW-TO για εκκίνηση από δίκτυο του Jim Mintha ( δεν υπάρχει διαθέσιμο URL), και ανάμεσα στα αλλά στο <ulink url="&url-debian-faq;"
+>Debian FAQ</ulink
+>, στο <ulink url="&url-m68k-faq;"
+>Linux/m68k FAQ</ulink
+>, στο <ulink url="&url-sparc-linux-faq;"
+>Linux for SPARC Processors FAQ</ulink
+>, στο<ulink url="&url-alpha-faq;"
+>Linux/Alpha FAQ</ulink
+>. Πρέπει να αναγνωριστούν οι συντηρητές αυτών των ελευθέρα διαθέσιμων και πλούσιων πηγών πληροφοριών. </para
+><para
+>Η ενότητα για εγκαταστάσεις σε περιβάλλον chroot στο κείμενο αυτό (<xref linkend="linux-upgrade"/>) βασίστηκε εν μέρει σε κείμενα του Karsten M. Self. </para
+><para arch="i386"
+>Η ενότητα για εγκαταστάσεις μέσω plip στο κείμενο αυτό (<xref linkend="plip"/>) βασιστήκανε στο <ulink url="&url-plip-install-howto;"
+>PLIP-Install-HOWTO</ulink
+> από τον Gilles Lamiral. </para>
+ </sect1>
+
+ <sect1 id="trademarks">
+ <title
+>Μνεία Εμπορικών Σημάτων</title>
+<para
+>Όλα τα εμπορικά σήματα είναι ιδιοκτησία των αντίστοιχων κατόχων τους </para>
+ </sect1>
+</appendix>
+
+<!--   End of file administrivia/administrivia.xml -->

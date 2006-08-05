@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-2"?>
+<!-- original version: 29687 -->
+
+<appendix id="appendix"><title>Co se jinam nevešlo</title>
+
+&example-preseed.xml;
+&files.xml;
+&chroot-install.xml;
+&plip.xml;
+
+</appendix>

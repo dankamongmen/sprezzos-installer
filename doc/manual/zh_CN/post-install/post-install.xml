@@ -1,0 +1,481 @@
+<!-- Start of file post-install/post-install.xml -->
+
+<chapter id="post-install">
+ <title
+>下一步该干什么</title>
+
+
+<!-- Start of file post-install/new-to-unix.xml -->
+
+
+ <sect1 id="unix-intro">
+ <title
+>如果您不熟悉 Unix</title>
+<para
+>如果您不熟悉 Unix，您也许应该出去买些书来读。还可以从 <ulink url="&url-debian-reference;"
+>Debian Reference</ulink
+> 找到到大量有用的信息。<ulink url="&url-unix-faq;"
+>Unix 常见问题解答</ulink
+> 中包含了大量的 Usenet 文档，它提供过去很有用的参考。 </para
+><para
+>Linux 是 Unix 的一种实现。<ulink url="&url-ldp;"
+>Linux 文档计划 (LDP)</ulink
+> 收集了大量的 HOWTO 和 Linux 的在线书籍。这些文档绝大部分可以在本地安装；只要安装 <classname
+>doc-linux-html</classname
+> 包(HTML 版本)或者 <classname
+>doc-linux-text</classname
+>包(ASCII 版本)，然后在 <filename
+>/usr/share/doc/HOWTO</filename
+> 里面就能找到。在 Debian 软件包里面也提供 LDP HOWTO 的国际化版本。 </para>
+
+ </sect1>
+<!--   End of file post-install/new-to-unix.xml -->
+
+<!-- Start of file post-install/orientation.xml -->
+
+
+ <sect1 id="debian-orientation"
+><title
+>让您自己转向 Debian</title>
+<para
+>Debian 和其它的发行版有些不同。即使您熟悉其它发行版的 Linux，您也应该了解 Debian 的一些东西，以便保持您的系统处在整洁良好的状态。本章包的材料可以帮助您转向；但这并不是一个如何使用 Debian 的入门指南，而仅仅是对整个系统的一个粗略的介绍。 </para>
+
+  <sect2
+><title
+>Debian 软件包系统</title>
+<para
+>要掌握的最重要概念是 Debian 的软件包系统。事实上，您系统的绝大部分都应该由软件包系统来控制。包括：<itemizedlist
+> <listitem
+><para
+> <filename
+>/usr</filename
+> (除了 <filename
+>/usr/local</filename
+>) </para
+></listitem
+> <listitem
+><para
+> <filename
+>/var</filename
+> (您可以创建 <filename
+>/var/local</filename
+>，在那里面进行安全的操作) </para
+></listitem
+> <listitem
+><para
+> <filename
+>/bin</filename
+> </para
+></listitem
+> <listitem
+><para
+> <filename
+>/sbin</filename
+> </para
+></listitem
+> <listitem
+><para
+> <filename
+>/lib</filename
+> </para
+></listitem
+> </itemizedlist
+> 例如，如果您替换了 <filename
+>/usr/bin/perl</filename
+>，它可以正常工作，但以后升级了您的 <classname
+>perl</classname
+> 软件包，那个文件仍将被替换回来。有经验的用户可以将软件包设置为 <quote
+>hold</quote
+>状态，以避免这种情况，这需要使用 <command
+>aptitude</command
+>。 </para
+><para
+>apt 是最好的安装方法之一。您可以使用命令行模式的 <command
+>apt-get</command
+> 或者全屏幕文本模式的 <application
+>aptitude</application
+>。注意 apt 也可以让您合并 main，contrib 以及 non-free 版本的软件包，从而使您可以在使用标准版本的同时使用限制出口的软件包。 </para>
+  </sect2>
+
+  <sect2
+><title
+>应用程序版本管理</title>
+<para
+>可选版本的应用程序可以通过 update-alternatives 来管理。如果您维护着多个版本的应用程序，请参阅 update-alternatives 的 man 手册。 </para>
+  </sect2>
+
+  <sect2
+><title
+>定时任务管理</title>
+<para
+>任何系统管理员权限内的任务都必须位于 <filename
+>/etc</filename
+> 内，这是因为它们都是配置文件。如果您有一些需要以管理员身份每天(daily)，每周(weekly)或每月(monthly)运行的定时任务，请将它们放置在 <filename
+>/etc/cron.{daily,weekly,monthly}</filename
+> 中。它们将在 <filename
+>/etc/crontab</filename
+> 中被激活，然后按照文件名的字典顺序依次运行。 </para
+><para
+>另一方面，如果您有某个定时任务需要以某个特定的用户身份运行，或者需要在某个特定时刻或以特定周期运行，您或者可以使用 <filename
+>/etc/crontab</filename
+> 或 <filename
+>/etc/cron.d/whatever</filename
+>，而后者会更好一些。这些特殊的文件可以包含一个额外的域，允许您指定运行该定时任务的用户帐户。 </para
+><para
+>在任何情况下，您只需编辑这些文件，cron 将会自动处理它们。没有必要再运行某个特殊的命令。欲了解更多的信息，请参阅 cron(8)，crontab(5)，以及 <filename
+>/usr/share/doc/cron/README.Debian</filename
+>。 </para>
+  </sect2>
+ </sect1>
+<!--   End of file post-install/orientation.xml -->
+
+<!-- Start of file post-install/reactivating-win.xml -->
+
+
+ <sect1 arch="i386" id="reactivating-win">
+ <title
+>重新激活 DOS 和 Windows</title>
+<para
+>安装好基本系统并写入 <emphasis
+>主引导记录</emphasis
+> 后，您就可以启动 Linux，但也可能什么都没有。这将由您在安装中所作的选择决定。本章告诉您，如何重新激活旧系统，以便可以再次启动 DOS 或 Windows。 </para
+><para
+><command
+>LILO</command
+> 是一个启动引导器，通过它您可以启动 Linux 之外的其他操作系统，它遵循 PC 的习惯。该启动引导器通过 <filename
+>/etc/lilo.conf</filename
+> 文件进行配置。当您编辑过该文件之后，您必须运行 <command
+>lilo</command
+>程序。这是因为只有您运行过该程序后，所做的更改才能生效。 </para
+><para
+>在 <filename
+>lilo.conf</filename
+> 文件中的关键部分是包含关键字 <userinput
+>image</userinput
+> 和 <userinput
+>other</userinput
+> 的行，以及在其之后的行。它们用来描述可被 <command
+>LILO</command
+>引导的系统。这样的系统可以包含一个内核 (<userinput
+>image</userinput
+>)，一个根分区，额外的内核参数等，以及可引导另一个非 Linux 操作系统 (<userinput
+>other</userinput
+>)的配置。这些关键字可使用多次。这些系统在配置文件中的顺序很重要，因为它将决定哪个操作系统会自动引导，比如，在超时(<userinput
+>delay</userinput
+>) 而且 <command
+>LILO</command
+> 没有被按下 <keycap
+>shift</keycap
+> 键中止的情况下。 </para
+><para
+>刚刚安装好一个全新的 Debian 后，只有当前系统被配置好用 <command
+>LILO</command
+>引导。如果您想引导另一个 Linux 内核，您必须编辑 <filename
+>/etc/lilo.conf</filename
+> 配置文件，在其中加入如下行： <informalexample
+><screen>
+&additional-lilo-image;
+</screen
+></informalexample
+> 对一个基本安装而言，只有第一行是必需的。如果您想了解关于其它两个选项的更多信息，请查阅 <command
+>LILO</command
+> 的文档。该文档位于 <filename
+>/usr/share/doc/lilo/</filename
+>目录中，您所需阅读的文件是 <filename
+>Manual.txt</filename
+>。如果您想快速了解如何引导系统，您也可以查阅 <command
+>LILO</command
+> 的 man 手册，<filename
+>lilo.conf</filename
+>可得到关于配置文件的关键字的说明，<filename
+>lilo</filename
+> 可得到将一个新配置安装到引导扇区的说明。 </para
+><para
+>注意，在 &debian; 中还有其它可用的启动引导器，例如 GRUB (在 <classname
+>grub</classname
+> 包中)，CHOS (在 <classname
+>chos</classname
+> 包中)，Extended-IPL (在 <classname
+>extipl</classname
+> 包中)，loadlin (在 <classname
+>loadlin</classname
+> 包中) 等。 </para>
+ </sect1>
+<!--   End of file post-install/reactivating-win.xml -->
+
+<!-- Start of file post-install/further-reading.xml -->
+
+ <sect1 id="further-reading"
+><title
+>更多信息</title>
+<para
+>如果您想查阅某个程序的更详细资料，应该先试试 <userinput
+>man <replaceable
+>程序名称</replaceable
+></userinput
+>，或者 <userinput
+>info <replaceable
+>程序名称</replaceable
+></userinput
+>。 </para
+><para
+>在 <filename
+>/usr/share/doc</filename
+> 目录里有很多有用的文档，特别是 <filename
+>/usr/share/doc/HOWTO</filename
+>和 <filename
+>/usr/share/doc/FAQ</filename
+> 里有很多值得一读的文章。如果您想提交错误报告，请先查阅这些文件： <filename
+>/usr/share/doc/debian/bug*</filename
+>。针对某个程序，其有关于 Debian 的内容可以查阅文件： <filename
+>/usr/share/doc/(package name)/README.Debian</filename
+>。 </para
+><para
+>在 <ulink url="http://www.debian.org/"
+>Debian 网站</ulink
+> 上有大量的 Debian 相关文档。尤其要看看 <ulink url="http://www.debian.org/doc/FAQ/"
+>Debian GNU/Linux FAQ</ulink
+> 和 <ulink url="http://www.debian.org/doc/user-manuals#quick-reference"
+>Debian Reference</ulink
+>。更多的 Debian 文档位于 <ulink url="http://www.debian.org/doc/ddp"
+>Debian Documentation Project</ulink
+>。Debian 社区是靠用户们自己的力量支撑起来的; 如果您想要订阅 Debian 的邮件列表，请访问 <ulink url="http://www.debian.org/MailingLists/subscribe"
+> Mail List Subscription</ulink
+> 页面。最后，相当重要的，<ulink url="http://lists.debian.org/"
+>Debian Mailing List Archives</ulink
+> 包含了 Debian 丰富的信息。 </para
+><para
+>在 GNU/Linux 世界里，最常用的文档资料来源是： <ulink url="http://www.tldp.org/"
+>Linux 文档计划项目</ulink
+>。在这里您可以找到有关于 GNU/Linux 系统各个部分的 非常有价值的 HOWTO 文档以及其他指导。 </para>
+
+ </sect1>
+<!--   End of file post-install/further-reading.xml -->
+
+<!-- Start of file post-install/kernel-baking.xml -->
+
+ <sect1 id="kernel-baking"
+><title
+>编译新内核</title>
+<para
+>为什么有些人想要编译新内核? Debian 自带的默认内核已经包含了绝大部分配置，所以编译新内核并不是必需的。并且，Debian 提供了多个内核供选择。所以您应该先确认一下，有没有适合您硬件的内核映像软件包存在。然而，基于下列理由，编译新内核还是很有用的： <itemizedlist>
+<listitem
+><para
+>支持某些特殊的硬件，或者默认的内核配置和某些硬件冲突 </para
+></listitem>
+<listitem
+><para
+>使用某些不为所提供的内核支持的选项 (例如，支持 high memory) </para
+></listitem>
+<listitem
+><para
+>通过删除无用的驱动程序来优化内核，以减少启动时间 </para
+></listitem>
+<listitem
+><para
+>创建整体的而不是模块化的内核 </para
+></listitem>
+<listitem
+><para
+>运行最新的内核或开发中的内核 </para
+></listitem>
+<listitem
+><para
+>深入了解 linux 内核 </para
+></listitem>
+</itemizedlist>
+
+</para>
+
+  <sect2
+><title
+>内核映象管理</title>
+<para
+>不要害怕尝试编译内核。它很有趣而且很合算。 </para
+><para
+>为了以 Debian 的方式编译内核，您需要一些软件包： <classname
+>fakeroot</classname
+>，<classname
+>kernel-package</classname
+>，<phrase condition="classic-kpkg"
+><classname
+>kernel-source-&kernelversion;</classname
+>(此文档写作时最新的版本)</phrase
+> <phrase condition="common-kpkg"
+><classname
+>linux-source-2.6</classname
+></phrase
+> 以及其它一些您可能已经安装过的软件包(完整的列表请参阅 <filename
+>/usr/share/doc/kernel-package/README.gz</filename
+>)。 </para
+><para
+>此方法将从您的内核源码创建一个 .deb 文件，并且，如果您有非标准模块，将同时创建它们的同步依赖 .deb 文件。这是一个管理内核的较好的方法； <filename
+>/boot</filename
+> 目录将保存内核，System.map，以及当前编译的活动配置文件的日志。 </para
+><para
+>注意您不一定<emphasis
+>要</emphasis
+>以 <quote
+>Debian 方式</quote
+>编译内核；但我们发现使用软件包系统来管理您的内核，确实可以更加安全和易用。事实上，您可以直接从 Linus 那里而非 <phrase condition="classic-kpkg"
+><classname
+>kernel-source-&kernelversion;</classname
+>，</phrase
+> <phrase condition="common-kpkg"
+><classname
+>linux-source-2.6</classname
+>,</phrase
+> 得到内核源码，并仍使用 <classname
+>kernel-package</classname
+> 的编译方法。 </para
+><para
+>注意您可以找到完整的文档，通过使用 <classname
+>kernel-package</classname
+> 它在 <filename
+>/usr/share/doc/kernel-package</filename
+>里。本节只包含一个简单的入门指南。 </para
+><para
+>此后，我们假设您具有操作您机器的权力，可以将内核源码解压到您的 home 目录<footnote
+> <para
+> 可以在其他目录解开内核源码并编译自定义内核，但是不需要额外的权限是最简单的方式。</para
+> </footnote
+>。我们还假设您的内核版本是 "&kernelversion;。确定您处于打算解开内核源码的目录，然后使用 <phrase condition="classic-kpkg"
+><userinput
+>tar xjf /usr/src/kernel-source-&kernelversion;.tar.bz2</userinput
+></phrase
+> <phrase condition="common-kpkg"
+><userinput
+>tar xjf /usr/src/linux-source-&kernelversion;.tar.bz2</userinput
+></phrase
+> 解压，并进入 <phrase condition="classic-kpkg"
+><filename
+>kernel-source-&kernelversion;</filename
+></phrase
+> <phrase condition="common-kpkg"
+><filename
+>linux-source-&kernelversion;</filename
+></phrase
+> 刚才创建的目录。 </para
+><para
+>现在，您可以开始配置您的内核了。如果您已经安装配置好，并正在运行 X11，请执行 <userinput
+>make xconfig</userinput
+>；否则请执行 <userinput
+>make menuconfig</userinput
+>(必须已经安装好 <classname
+>libncurses5-dev</classname
+>)。请花点时间阅读在线帮助并仔细地作选择。如果有疑问，通常来说包含您所不确定的 设备驱动程序 (用来管理硬件外设的软件，例如以太网卡，SCSI 控制器等) 会比较好一点。注意：对于与特殊硬件无关的其它选项，如果您不了解它们，最好保持默认值。不要忘记选择 <quote
+>Kernel module loader</quote
+> 中的 <quote
+>Loadable module support</quote
+> (它们默认并没有被选择)。否则，您的 Debian 安装将会遇到问题。 </para
+><para
+>清除源码树并复原 <classname
+>kernel-package</classname
+> 参数。也就是使用 <userinput
+>make-kpkg clean</userinput
+>。 </para
+><para
+>现在，开始编译内核： <userinput
+>fakeroot make-kpkg --revision=custom.1.0 kernel_image</userinput
+>。其中版本号 <quote
+>1.0</quote
+> 可以随便您修改；它仅是一个用来跟踪您的内核编译的版本号。同样地，您也可以用任何您喜欢的单词替换 <quote
+>custom</quote
+> (例如，您的主机名称)。编译内核可能要花费较长的时间，这取决于您的机器的性能。 </para
+><para condition="supports-pcmcia"
+>如果您需要支持 PCMCIA，您必须安装 <classname
+>pcmcia-source</classname
+> 软件包。以 root 身份将用 gzip 压缩的 tar 文件解压到 <filename
+>/usr/src</filename
+> 目录内(注意模块必须位于它们所应处的位置，即 <filename
+>/usr/src/modules</filename
+>)。然后，以 root 身份执行 <userinput
+>make-kpkg modules_image</userinput
+>。 </para
+><para
+>一旦编译完成，您就可以像安装其它软件包一样安装您的内核。以 root 身份，执行 <userinput
+>dpkg -i ../kernel-image-&kernelversion;-<replaceable
+>subarchitecture</replaceable
+>_custom.1.0_&architecture;.deb</userinput
+>。其中 <replaceable
+>subarchitecture</replaceable
+> 部分是一个可选的子结构，<phrase arch="i386"
+> 例如 <quote
+>i586</quote
+>, </phrase
+> 这取决于您所设置的内核选项。<userinput
+>dpkg -i kernel-image...</userinput
+> 将安装内核以及其它的一些支持文件。例如 <filename
+>System.map</filename
+> 可能会被安装 (用来辅助调试内核问题)，<filename
+>/boot/config-&kernelversion;</filename
+> 也将被安装，它包含了您当前的配置。新的 <classname
+>kernel-image-&kernelversion;</classname
+> 软件包将会自动地使用您的系统上的启动引导器来更新引导区，因此您不必重新运行启动引导器即可引导系统。如果您创建了一个模块软件包，例如 PCMCIA，您也必须同时安装该软件包。 </para
+><para
+>下面到了重启系统的时刻了；请仔细阅读前述步骤所产生的所有警告信息，然后执行 <userinput
+>shutdown -r now</userinput
+>。 </para
+><para
+><phrase condition="etch"
+>要了解 Debian 内核与编译内核的更多信息，清参阅 <ulink url="&url-kernel-handbook;"
+>Debian Linux Kernel Handbook</ulink
+>。</phrase
+> 欲获得关于 <classname
+>kernel-package</classname
+> 的更多信息，请参阅 <filename
+>/usr/share/doc/kernel-package</filename
+>。 </para>
+  </sect2>
+ </sect1>
+<!--   End of file post-install/kernel-baking.xml -->
+
+<!-- Start of file post-install/rescue.xml -->
+
+ <sect1 id="rescue" condition="etch">
+ <title
+>修复损坏的系统</title>
+<para
+>有时候，会遇到一些麻烦，您小心翼翼安装的系统无法启动。可能是由于调整启动加载程序时损坏了配置文件，
+或者新准备的内核无法启动，或者宇宙射线撞击了您的硬盘造成 <filename
+>/sbin/init</filename>
+中的一位反转。无论什么原因，修复时您都需要一个可以工作的系统，rescue 模式正好用于此目的。 </para
+><para
+>要进入 rescue 模式，请再 <prompt
+>boot:</prompt
+> 提示符后键入 <userinput
+>rescue</userinput
+>，
+或者启动时给给引导参数加上 <userinput
+>rescue/enable=true</userinput
+>。
+您会看到安装程序的前几个画面，并再显示器的角落里面提示处于 rescue 模式，而不是完整安装。
+别担心，您的系统不会被覆盖! rescue 模式只是借助安装程序强大的硬件探测能力，确保修复系统的时候
+硬盘，网络设备等等可以使用。 </para
+><para
+>取代分区工具的，是显示您系统上的分区列表，并请您选择。通常，您应该选择修复包含 root 文件系统的分区。
+您也可以选择 RAID 和 LVM 设备上的分区，与直接在磁盘上创建一样。 </para
+><para
+>如可能，安装程序将在您选择的文件系统上给您一个 shell 提示符，通过它可以执行一些必要的修复操作。
+<phrase arch="i386"
+>例如，如果您需要在第一个硬盘的主引导区重装 GRUB 引导程序，
+您可以通过输入这个命令 <userinput
+>grub-install '(hd0)'</userinput
+>。</phrase
+> </para
+><para
+>假如安装程序在您选择的 root 文件系统上不能运行一个可用的 shell，这可能是因为文件系统已经损坏，
+那么将发出警告，并通过安装程序的环境提供一个 shell。您在这个环境下可能没有丰富的工具可用，
+但足以应付系统修复工作。您选择的 root 文件系统将挂载到 <filename
+>/target</filename
+> 目录。 </para
+><para
+>无论哪种情况，退出 shell 之后，系统将重启。 </para
+><para
+>最后，要注意修复一个损坏的系统可能非常困难，在这份手册里面不会列举所有的情况和修复方法。
+如果您遇到困难，请咨询专家。 </para>
+ </sect1>
+<!--   End of file post-install/rescue.xml -->
+
+</chapter>
+<!--   End of file post-install/post-install.xml -->

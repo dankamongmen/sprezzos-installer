@@ -1,0 +1,1722 @@
+<!-- Start of file install-methods/install-methods.xml -->
+
+<chapter id="install-methods">
+ <title
+>取得系統安裝媒介</title>
+
+
+<!-- Start of file install-methods/official-cdrom.xml -->
+
+ <sect1 id="official-cdrom">
+ <title
+>&debian; 官方光碟套件</title>
+<para
+>目前安裝 &debian; 最容易的方法是使用一個官方的 Debian光碟套件。您可以向零售商購買 (參閱 <ulink url="&url-debian-cd-vendors;"
+>光碟零售商</ulink
+>)。如果您有快速的網路連接和光碟燒錄機的話，也可以從 Debian 鏡像站下載光碟映像檔然後自行燒錄光碟 (具體參閱 <ulink url="&url-debian-cd;"
+>Debian 光碟網頁</ulink
+>)。如果您有一套 Debian 的光碟套件並且能在您的機器上開機這些光碟，您可以直接跳至 <xref linkend="boot-installer"/>。我們已經做了很多努力來確保光碟中已經包含了大多數人所需要的文件。儘管一整套預先編譯的二進位軟體套件需要好幾張光碟，但是您可能不會用到第三張光碟以後的內容。您也可以可以考慮使用 DVD 版本，這將為您的書架節省很多光碟存放空間，並且您可以避免馬拉松式的光碟換片動作。 </para
+><para
+>如果您的機器不支援光碟開機，但是您有一套光碟套件，您可以使用其他的方法例如： <phrase condition="supports-floppy-boot"
+>軟碟、</phrase
+> <phrase arch="s390"
+>磁帶、磁帶仿真、</phrase
+> <phrase condition="bootable-disk"
+>硬碟、</phrase
+> <phrase condition="bootable-usb"
+>USB 隨身碟、</phrase
+> <phrase condition="supports-tftp"
+>網路開機，</phrase
+> 或者從光碟中手動載入核心來初始系統安裝程式。透過其他方法開機所需要的文件都包含在光碟之中；Debain 的網路存檔和光碟的目錄組織方式是一致的。因此如果後文中有出現用於開機的特定檔案路徑時，請在光碟中同樣的目錄和子目錄下查找它們。 </para
+><para
+>安裝程式啟動一旦啟動，它將能夠取得光碟中其他所有必需的檔案。 </para
+><para
+>如果您沒有光碟套件，則需下載安裝系統檔案並且把他們放到：<phrase arch="s390"
+>安裝磁帶</phrase
+> <phrase condition="supports-floppy-boot"
+>軟碟、</phrase
+> <phrase condition="bootable-disk"
+>硬碟、</phrase
+> <phrase condition="bootable-usb"
+>USB 隨身碟或</phrase
+> <phrase condition="supports-tftp"
+>一台有連接網路的電腦上</phrase
+>，他們可以用來啟動安裝程式。 </para>
+
+ </sect1>
+<!--   End of file install-methods/official-cdrom.xml -->
+
+<!-- Start of file install-methods/downloading-files.xml -->
+
+ <sect1 id="downloading-files">
+ <title
+>從 Debian 鏡像伺服器下載檔案</title>
+
+<para
+>選擇離您較近的 (因此很可能也是最快的) 鏡像伺服器，請參閱 <ulink url="&url-debian-mirrors;"
+>Debian 鏡像列表</ulink
+>。 </para
+><para
+>當從 Debian 鏡像伺服器下載檔案的時候，請確認以<emphasis
+>二進位</emphasis
+>模式下載，而不是文字或者自動模式。 </para>
+
+  <sect2 id="where-files">
+  <title
+>哪裡能找到安裝映像檔</title>
+
+<para
+>安裝映像檔位於每一個 Debian 鏡像站的 <ulink url="&url-debian-installer;/images"
+>debian/dists/&releasename;/main/installer-&architecture;/current/images/</ulink
+> &mdash; <ulink url="&url-debian-installer;/images/MANIFEST"
+>MANIFEST</ulink
+> 文件列出每個映像檔及其用途。 </para>
+
+
+<!-- Start of file install-methods/download/alpha.xml -->
+
+
+   <sect3 arch="alpha"
+><title
+>Alpha 的安裝檔案</title>
+<para
+>如果您選擇透過 <command
+>MILO</command
+> 來從 ARC 控制台韌體開機，就需要從所提供的磁碟映像中準備一張載有 <command
+>MILO</command
+> 和 <command
+>LINLOAD.EXE</command
+> 的磁碟。有關 Alpha 韌體和 boot-loader 的更多資訊請參閱 <xref linkend="alpha-firmware"/> 。軟碟映像檔可以在 <filename
+>MILO</filename
+> 目錄下找到。其形式為：<filename
+>milo_<replaceable
+>子架構</replaceable
+>.bin</filename
+>。 </para
+><para
+>抱歉的是，這些 <command
+>MILO</command
+> 映像文件未經過足夠的測試，也許並不是在所有的子架構下都能正常運行。 如果您發現它不能運行，請嘗試將合適的 <command
+>MILO</command
+> 二進位檔案拷貝到軟碟中(<ulink url="&disturlftp;main/disks-alpha/current/MILO/"
+></ulink
+>)。注意，這些 <command
+>MILO</command
+> 不支援 ext2 的 <quote
+>sparse superblocks</quote
+>，因此您不能從新生成的 ext2 檔案系統中裝載核心。作為一個變通方法，您可以把核心放到 FAT 分割區中，緊跟著 <command
+>MILO</command
+>。 </para
+><para
+><command
+>MILO</command
+> 的二進位檔案是依賴於具體平台的，請參閱 <xref linkend="alpha-cpus"/> 來確認哪一個 <command
+>MILO</command
+> 映像檔適用於您的 Alpha 平台。 </para>
+   </sect3>
+<!--   End of file install-methods/download/alpha.xml -->
+
+<!-- Start of file install-methods/download/arm.xml -->
+
+
+   <sect3 arch="arm" id="riscpc-install-files">
+   <title
+>RiscPC 的安裝檔案</title>
+<para
+>RiscPC 安裝程式最初是從 RiSC OS 開機的。所有必需的文件都由一個名為 &rpc-install-kit; 的檔案所提供，請將此檔案下載到 RISC OS 機器中，將 <filename
+>linloader.!Boot</filename
+> 拷貝到合適的位置，然後執行 <filename
+>!dInstall</filename
+>。 </para>
+   </sect3>
+
+   <sect3 arch="arm" id="netwinder-install-files">
+   <title
+>NetWinder 的安裝檔案</title>
+<para
+>啟動一台 NetWinder 最輕鬆的途徑是使用其提供的 TFTP 映像檔 &netwinder-boot-img; 進行網路開機。 </para>
+   </sect3>
+
+   <sect3 arch="arm" id="cats-install-files">
+   <title
+>CATS 的安裝檔案</title>
+<para
+>在 CATS 上唯一被支援的開機方法是使用組合映像 &cats-boot-img;。它能從任何 Cyclone boot-loader 可以存取的設備上被掛載。 </para>
+   </sect3>
+<!--   End of file install-methods/download/arm.xml -->
+
+<!-- Start of file install-methods/download/powerpc.xml -->
+
+<!-- commented out as it seems out of date and the links are broken
+
+   <sect3 arch="powerpc" id="newworld-install-files">
+   <title
+>NewWorld MacOS Installation Files </title>
+<para>
+
+For floppy-less installation on NewWorld Macs, it may be most
+convenient to obtain all the necessary files packaged into one Stuffit
+archive from
+<ulink url="&url-powerpc-of;"
+></ulink
+> (separate instructions are
+included in the archive). Otherwise, obtain the normal installation
+files listed above. Retrieve the files to an HFS (not HFS+) partition
+on your system.  You will also need the <filename
+>yaboot</filename
+> and
+<filename
+>yaboot.conf</filename
+> files from the
+<ulink url="&downloadable-file;new-powermac/"
+>new-powermac</ulink
+> or
+<ulink url="&downloadable-file;powermac/"
+>powermac</ulink
+> archive folder.
+However, the newest G4 PowerMacs, and those that work without MacOS 9,
+need the newest version of <command
+>yaboot</command
+>; the one in the
+archive will not work. Obtain the newest version from
+<ulink url="http://penguinppc.org/projects/yaboot/"
+></ulink
+>.
+
+</para>
+   </sect3>
+
+-->
+<!--   End of file install-methods/download/powerpc.xml -->
+
+<!-- Start of file install-methods/download/m68k.xml -->
+
+
+   <sect3 arch="m68k" id="kernel-22">
+   <title
+>選擇一個核心</title>
+
+<para
+>一些 m68k 子架構可以選擇要安裝的核心。一般來說我們建議您首先嘗試最新的版本。 如果您的子架構系統或機器需要使用 2.2.x 版的核心，請確認您選擇的是一個支援對應核心的映像檔。(請參閱 <ulink url="&disturl;/main/installer-&architecture;/current/images/MANIFEST"
+>MANIFEST</ulink
+>)。 </para>
+<para
+>所有使用 2.2.x 核心的 m68k 的映像檔都要求使用 &ramdisksize; 核心參數。 </para>
+   </sect3>
+<!--   End of file install-methods/download/m68k.xml -->
+
+  </sect2>
+
+ </sect1>
+<!--   End of file install-methods/downloading-files.xml -->
+
+<!-- Start of file install-methods/ipl-tape.xml -->
+
+ <sect1 arch="s390" id="ipl-tape">
+ <title
+>建立 IPL 磁帶</title>
+
+<para
+>如果您不能從光碟開機 (IPL) 並且沒有使用 VM，您首先就需要建立一個 IPL 磁帶。這在 <ulink url="http://www.redbooks.ibm.com/pubs/pdfs/redbooks/sg246264.pdf"
+> Linux for IBM eServer zSeries and S/390: Distributions</ulink
+> Redbook 的第 3.4.3 節中有描述。您需要寫到磁帶上的檔案有 (按以下順序):<filename
+>kernel.debian</filename
+>、<filename
+>parmfile.debian</filename
+> 和 <filename
+>initrd.debian</filename
+>。這些檔案可以從 <filename
+>tape</filename
+> 子目錄下載，請參閱 <xref linkend="where-files"/>, </para>
+ </sect1>
+
+<!--   End of file install-methods/ipl-tape.xml -->
+
+<!-- Start of file install-methods/create-floppy.xml -->
+
+ <sect1 condition="supports-floppy-boot" id="create-floppy">
+ <title
+>利用軟碟映像檔建立開機磁片</title>
+<para
+>可開機的磁片一般被視為是在那些不能從光碟或其它方式啟動的硬體上開機安裝程式的最後一種方法。 </para
+><para arch="powerpc"
+>有報告說 Mac USB 軟碟機不支援開機磁片。 </para
+><para arch="m68k"
+>Amigas 或者 68k Macs 的軟碟開機也不被支援。 </para
+><para
+>軟碟映像檔是一些包含完整的<emphasis
+>原始</emphasis
+>磁片內容與格式的檔案。類似 <filename
+>boot.img</filename
+> 這樣的軟碟映像檔不能直接拷貝到軟碟中。必須使用特殊的程式將它們按<emphasis
+>原始</emphasis
+>模式寫入磁片。這是一個必要的步驟，因為這些映像 文件是一些原始的磁碟保存方式。所以需要把文件的數據 <emphasis
+>按磁區拷貝</emphasis
+>到軟碟中。 </para
+><para
+>根據平台的不同，有各種不同的方法來從軟碟映像檔建立開機磁片。這一節將描述如何在不同平台上從從軟碟映像檔建立開機磁片。 </para
+><para
+>無論您使用何種方法來建立開機磁片，您應該在建立以後記住打開防寫的開關，以確保內容不會在無意間被清除。 </para>
+
+  <sect2
+><title
+>從 Linux 或者 Unix 系統寫入軟碟映像檔</title>
+<para
+>為了把軟碟映像檔寫入軟碟，您可能需要系統的 root 存取權限。在軟碟機中放入一張優質的空白軟碟，然後使用指令 <informalexample
+><screen>
+$ dd if=<replaceable
+>filename</replaceable
+> of=/dev/fd0 bs=1024 conv=sync ; sync
+</screen
+></informalexample
+> 其中 <replaceable
+>filename</replaceable
+> 是一個軟碟映像檔案(請參閱 <xref linkend="downloading-files"/> 來獲知應該使用哪個 <replaceable
+>filename</replaceable
+>)。<filename
+>/dev/fd0</filename
+> 是一個常見的軟碟機設備名。可能在您的工作站上面有所不同 <phrase arch="sparc"
+>(在 Solaris 系統上是 <filename
+>/dev/fd/0</filename
+>)</phrase
+>。這個指令也許在寫入軟碟任務結束之前就會返回到指令提示號下。請觀察軟碟機上面的使用燈，並且確保在您拔出軟碟的時候燈已熄滅。在某些系統上，您可能需要下指令來退出磁片 <phrase arch="sparc"
+>(在 Solaris 系統中使用 <command
+>eject</command
+> 命令，請參閱其手冊)</phrase
+>。 </para
+><para
+>有些系統會在您放入軟碟時自動嘗試對其進行掛載。若要讓工作站允許您對軟碟進行 <emphasis
+>原始模式</emphasis
+>寫入操作，您可能要關閉此功能。不幸的是，如何關閉此功能的方法完全取決於作業系統。<phrase arch="sparc"
+> 在 Solaris 上，您可以利用磁碟設備管理程式來取得對軟碟機的原始存取權。首先，確信軟碟已經被自動掛載 (使用 <command
+>volcheck</command
+> 或者檔案管理中的類似指令)。然後安照上面給出的形式使用 <command
+>dd</command
+> 指令，只是把 <filename
+>/dev/fd0</filename
+> 替換成 <filename
+>/vol/rdsk/<replaceable
+>floppy_name</replaceable
+></filename
+>，這裡 <replaceable
+>floppy_name</replaceable
+> 是軟碟在格式化時所定的名字。(未命名的軟碟預設使用 <filename
+>unnamed_floppy</filename
+>)。至於其他系統，請咨詢您的系統管理員)。</phrase
+> </para
+><para arch="powerpc"
+>如果想在 powerpc Linux 上寫入軟碟，您將必須將之退出。<command
+>eject</command
+> 指令能夠對此進行控制，當然您可能需要先安裝它。 </para>
+
+  </sect2>
+
+
+<!-- Start of file install-methods/floppy/i386.xml -->
+
+
+<!--  This is not set off for i386 only, because many people will have -->
+<!--  access to a PC in order to make a floppy for other arches. -->
+
+  <sect2
+><title
+>在 DOS、Windows、或者 OS/2 下寫入磁碟映像檔</title>
+
+<para
+>如果您能操作一台 i386 機器，您可以使用如下方法之一把映像檔拷貝到軟碟上。 </para
+><para
+><command
+>rawrite1</command
+> 和 <command
+>rawrite2</command
+> 程式可在 MS-DOS 下使用。如果想使用這些程式，首先要確定您是從 DOS 啟動。在 Windows 的 DOS 視窗或者在檔案瀏覽器中雙擊使用這些程式是<emphasis
+>不能</emphasis
+>執行的。 </para
+><para
+><command
+>rwwrtwin</command
+> 程式可以在 Windows 95、NT、98、2000、ME、XP 甚至最新的版本上運行。要使用它您需要解壓 diskio.dll 至相同目錄下。 </para
+><para
+>這些工具可以在官方 Debian光碟中找到。他們位於 <filename
+>/tools</filename
+> 目錄下。 </para>
+  </sect2>
+<!--   End of file install-methods/floppy/i386.xml -->
+
+<!-- Start of file install-methods/floppy/m68k.xml -->
+
+
+  <sect2 arch="m68k"
+><title
+>在 Atari 系統上寫入磁碟映像檔</title>
+<para
+>您可以在與軟碟映像檔相同的目錄下找到 &rawwrite.ttp;。雙擊程式圖示，在 TOS 程式 指令列輸入框內鍵入您想寫入軟碟的軟碟映像檔名。 </para>
+
+  </sect2>
+
+  <sect2 arch="m68k"
+><title
+>在 Macintosh 系統上寫入磁碟映像檔</title>
+<para
+>沒有一個 MacOS 應用程式可以將映像檔寫到軟碟 (而且這也沒有什麼意義，因為您也不能在 Macintosh 系統上用軟碟啟動安裝系統來安裝核心以及模組)。但是，後續在安裝作業系統和模組時需要這些檔案。 </para>
+
+  </sect2>
+<!--   End of file install-methods/floppy/m68k.xml -->
+
+<!-- Start of file install-methods/floppy/powerpc.xml -->
+
+
+  <sect2 arch="powerpc"
+><title
+>在 MacOS 上寫入磁碟映像檔</title>
+<para
+>這裡有一個名為 <application
+>Make Debian Floppy</application
+> 的 AppleSrcipt 可以由磁碟映像檔製作磁片。您可從 <ulink url="ftp://ftp2.sourceforge.net/pub/sourceforge/d/de/debian-imac/MakeDebianFloppy.sit"
+></ulink
+> 處下載之。使用時只需要解壓縮檔案至桌面然後將您想燒錄的映像檔拖拉到該程式。您必須安裝 Applescript 並在您的擴充套件管理員中開啟它。Disk Copy 會要求您確認清空磁碟並寫入磁碟映像檔。 </para
+><para
+>您也可以直接使用 MacOS 工具 <command
+>Disk Copy</command
+> ，或者免費軟體工具 <command
+>suntar</command
+>。<filename
+>root.bin</filename
+> 是一個軟碟映像檔範例。您可以使用這些工具和以下方法將磁碟映像寫入軟碟。 </para>
+
+   <sect3>
+   <title
+>寫入磁碟映像檔：使用<command
+>Disk Copy</command
+></title>
+<para
+>假如您是使用官方 &debian;光碟上的軟碟映像檔文件，那麼 Type 和 Creator 已經設置正確。 以下 <command
+>Creator-Changer</command
+> 步驟只針對從 Debian 鏡像站下載映像檔的情況。 </para>
+<orderedlist>
+<listitem
+><para
+>取得 <ulink url="&url-powerpc-creator-changer;"
+>Creator-Changer</ulink
+> 並且用它打開 <filename
+>root.bin</filename
+> 檔案。 </para
+></listitem>
+<listitem
+><para
+>將 Creator 改為 <userinput
+>ddsk</userinput
+> (Disk Copy)，並將 Type 改為 <userinput
+>DDim</userinput
+> (binary floppy image)。注意此處有大小寫區分。 </para
+></listitem>
+<listitem
+><para
+><emphasis
+>注意：</emphasis
+> 在 Finder 中，使用 <userinput
+>Get Info</userinput
+> 來顯示軟碟映像檔的 Finder 資訊，並在 <userinput
+>File Locked</userinput
+> 複選欄中畫上 <quote
+>X</quote
+>。如此一來當映像檔被意外的掛載時 MacOS 才不會刪除開機區。 </para
+></listitem>
+    <listitem
+><para
+>取得 <command
+>Disk Copy</command
+>。如果您已經擁有了 MacOS 系統或光碟，它多半就已經被包含在其中，否則可以試試 <ulink url="&url-powerpc-diskcopy;"
+></ulink
+>。 </para
+></listitem>
+<listitem
+><para
+>執行 <command
+>Disk Copy</command
+>，並且選擇 <menuchoice
+><guimenu
+>Utilities</guimenu
+> <guimenuitem
+>Make a Floppy</guimenuitem
+> </menuchoice
+>，然後從對話框中選擇 <emphasis
+>locked</emphasis
+> 的映像檔。它會要求您插入一張磁片，然後詢問是否刪除它。完成後它應該會退出磁片。 </para
+></listitem>
+</orderedlist>
+
+   </sect3>
+
+   <sect3>
+   <title
+>寫入磁碟映像檔：使用<command
+>suntar</command
+></title>
+<para>
+
+<orderedlist>
+<listitem
+><para
+>取得 <command
+>suntar</command
+>，它在 <ulink url="&url-powerpc-suntar;"
+> </ulink
+> 中。執行 <command
+>suntar</command
+> 程式並且從 <userinput
+>Special</userinput
+> 選單中選擇 <quote
+>Overwrite Sectors...</quote
+>。 </para
+></listitem>
+<listitem
+><para
+>按照要求插入軟碟，然後按下 &enterkey; (從0磁區開始)。 </para
+></listitem>
+<listitem
+><para
+>在開啟檔案對話框中選擇 <filename
+>root.bin</filename
+> 檔案。 </para
+></listitem>
+<listitem
+><para
+>當軟碟被成功寫入之後，選擇 <menuchoice
+> <guimenu
+>File</guimenu
+> <guimenuitem
+>Eject</guimenuitem
+> </menuchoice
+>。如果期間發生任何錯誤，請換別的軟碟試試。 </para
+></listitem>
+</orderedlist>
+在使用您建立的軟碟之前，<emphasis
+>請設定防寫保護標籤</emphasis
+>！否則，如果您偶然在 MacOS 中掛載了它，MacOS 將會將其毀壞。 </para>
+   </sect3>
+  </sect2>
+<!--   End of file install-methods/floppy/powerpc.xml -->
+
+ </sect1>
+
+<!--   End of file install-methods/create-floppy.xml -->
+
+<!-- Start of file install-methods/boot-usb-files.xml -->
+
+ <sect1 condition="bootable-usb" id="boot-usb-files">
+ <title
+>準備從 USB 隨身碟開機的檔案</title>
+
+<para
+>您需要一台運行支援 USB 的 GNU/Linux 系統來為 USB 隨身碟準備開機檔案。 您應該確定 usb-storage 核心模組已經被載入 (<userinput
+>modprobe usb-storage</userinput
+>) 然後嘗試找出 USB 隨身碟被映射到的哪個 SCSI 設備 (在此以 <filename
+>/dev/sda</filename
+> 為例)。為了寫入您的儲存，您可能需要關閉它的防寫保護開關。 </para
+><para
+>注意，USB 隨身碟應該至少有 128MB 的容量 (在更小的大小安裝也是可能的，請參閱 <xref linkend="usb-copy-flexible"/>)。 </para>
+
+  <sect2 id="usb-copy-easy">
+  <title
+>複製檔案 &mdash; 簡單的方法</title>
+<para arch="i386"
+>這裡有一個單一檔案 <filename
+>hd-media/boot.img.gz</filename
+>，其中包含了所有的安裝程式文件 (包括核心)，以及 <command
+>SYSLINUX</command
+> 和它的設定檔案。您只需要把它直接解壓縮到您的 USB 隨身碟內即可：<informalexample
+><screen>
+# zcat boot.img.gz &gt; /dev/<replaceable
+>sda</replaceable>
+</screen
+></informalexample
+> 當然，這會刪除設備上現存的所有內容，因此請仔細檢查您使用的是正確的 USB 隨身碟設備名稱。 </para
+><para arch="powerpc"
+>這裡有一個單一文件 <filename
+>hd-media/boot.img.gz</filename
+> ，其中包含了所有的安裝程式文件(包括核心)，以及 <command
+>yaboot</command
+> 和它的設定檔。您可以使用 <command
+>mac-fdisk</command
+> 的 <userinput
+>C</userinput
+> 指令在您的 USB 隨身碟上建立一個類型為 ``Apple_Bootstrap'' 的分割區，然後直接解開映像文件到： <informalexample
+><screen>
+# zcat boot.img.gz &gt; /dev/<replaceable
+>sda2</replaceable>
+</screen
+></informalexample
+> 當然，這會刪除設備上現存的所有內容，因此請仔細檢查您使用的是正確的 USB 隨身碟設備名稱。 </para
+><para
+>然後，掛載 USB 隨身碟 (<userinput
+>mount <replaceable arch="i386"
+>/dev/sda</replaceable
+> <replaceable arch="powerpc"
+>/dev/sda2</replaceable
+> /mnt</userinput
+>)，它上面應該已經具有<phrase arch="i386"
+>一個 FAT 檔案系統</phrase
+> <phrase arch="powerpc"
+>一個 HFS 檔案系統</phrase
+>，您再將一個 Debian netinst (網路安裝) 或 businesscard (名片型安裝) ISO 映像檔拷貝到隨身碟上。請注意檔案名稱必須以 <filename
+>.iso</filename
+> 結尾。卸載隨身碟 (<userinput
+>umount /mnt</userinput
+>) 後結束。 </para>
+  </sect2>
+
+  <sect2 id="usb-copy-flexible">
+  <title
+>複製檔案 &mdash; 靈活的方法</title>
+<para
+>如果您需要更多的靈活性或者只是想瞭解其間發生了什麼，您應該使用下面的方法來把檔案放到您的隨身碟上。 </para>
+
+
+<!-- Start of file install-methods/usb-setup/i386.xml -->
+
+   <sect3 arch="i386">
+   <title
+>&arch-title; 上的 USB 隨身碟分割區</title>
+<para
+>我們將展示如何使用隨身碟的第一個分割區，而不是整個設備。 </para
+><note
+><para
+>由於大多數 USB 隨身碟預先設置了一個單獨的 FAT16 分割區， 您可能不需要重新分割或者格式化 USB 隨身碟。如果您必須這麼做，請使用 <command
+>cfdisk</command
+> 或者其他的分割工具來建立一個 FAT16 分割區並且輸入:<informalexample
+><screen>
+# mkdosfs /dev/<replaceable
+>sda1</replaceable>
+</screen
+></informalexample
+> 注意使用正確的 USB 隨身碟設備名稱。 <command
+>mkdosfs</command
+> 指令包含在 <classname
+>dosfstools</classname
+> Debian 套件中。 </para
+></note
+><para
+>為了能在 USB 隨身碟開機後啟動核心，我們要在 USB 隨身碟上放入一個 boot-loader。儘管任何 boot-loader (例如 <command
+>LILO</command
+>) 都應該可以勝任這個工作，不過還是使用 <command
+>SYSLINUX</command
+> 更方便。主要原因是是它可以使用 FAT16 分割區，而且只需要編輯一個文字檔案就能對其進行設定。任何支援 FAT 檔案系統的操作系統可以用來改變 boot-loader 的設定檔案。 </para
+><para
+>為了把 <command
+>SYSLINUX</command
+> 放到您的 USB 隨身碟的 FAT16 分割區上，請在您的系統中安裝 <classname
+>syslinux</classname
+> 和 <classname
+>mtools</classname
+> 套件，然後執行：<informalexample
+><screen>
+# syslinux /dev/<replaceable
+>sda1</replaceable>
+</screen
+></informalexample
+> 再提醒一次，請確認您使用的是正確的設備名稱。還有，一定不能在啟動 <command
+>SYSLINUX</command
+> 的時候掛載該分割區，因為在操作過程中會向分割區的開機磁區寫入資料並且建立包含 boot-loader 代碼的 <filename
+>ldlinux.sys</filename
+> 檔案。 </para
+><para
+>接下來就是掛載分割區 (<userinput
+>mount /dev/sda1 /mnt</userinput
+>) 以及將下列檔案從 Debain 檔案庫拷貝到儲存上：<itemizedlist
+> <listitem
+><para
+> <filename
+>vmlinuz</filename
+> (核心二進位檔案) </para
+></listitem
+> <listitem
+><para
+> <filename
+>initrd.gz</filename
+> (初始化記憶體映像檔) </para
+></listitem
+> <listitem
+><para
+> <filename
+>syslinux.cfg</filename
+> (SYSLINUX 設定檔案) </para
+></listitem
+> <listitem
+><para
+> 可選的核心模組 </para
+></listitem
+> </itemizedlist
+> 如果您想為這些檔名更名，請注意 <command
+>SYSLINUX</command
+> 只能處理 DOS (8.3) 格式的檔案名稱。 </para
+><para
+><filename
+>syslinux.cfg</filename
+> 設定檔案應該含有下列兩行： <informalexample
+><screen>
+default vmlinuz
+append initrd=initrd.gz ramdisk_size=12000 root=/dev/rd/0 init=/linuxrc rw
+</screen
+></informalexample
+> 請注意，根據開機的映像大小，在必要的時候，您可能需要增大 <userinput
+>ramdisk_size</userinput
+> 參數的數值。<phrase condition="sarge"
+>如果開機失敗，您可以嘗試添加 <userinput
+>devfs=mount,dall</userinput
+> 到 <quote
+>append</quote
+> 那一行。</phrase
+> </para>
+   </sect3>
+<!--   End of file install-methods/usb-setup/i386.xml -->
+
+<!-- Start of file install-methods/usb-setup/powerpc.xml -->
+
+   <sect3 arch="powerpc">
+   <title
+>&arch-title; 上的 USB 隨身碟分割區</title>
+<para
+>絕大多數 USB 隨身碟的預設設定都不能讓 Open Firmware 從該儲存進行開機，因此您需要將儲存重新分割。在 Mac 系統上，執行 <userinput
+>mac-fdisk /dev/sda</userinput
+>，用 <userinput
+>i</userinput
+> 指令初始化新的分割映射，然後使用 <userinput
+>C</userinput
+> 指令建立一個類型為 Apple_Bootstrap 的新分割區。(要注意的是第一個分割區總是分割映射本身。) 然後鍵入 <informalexample
+><screen>
+$ hformat /dev/<replaceable
+>sda2</replaceable>
+</screen
+></informalexample
+> 注意請使用正確的 USB 隨身碟設備名稱。 <command
+>hformat</command
+> 指令包含在 <classname
+>hfsutils</classname
+> Debian 套件中。 </para
+><para
+>為了能在 USB 隨身碟開機後啟動核心，我們要在 USB 隨身碟上放入一個 boot-loader。<command
+>yaboot</command
+> boot-loader 可以被安裝到 HFS 檔案系統上，而且只需要編輯一個純文字檔就能更改設定。任何支援 HFS 檔案系統的作業系統可以用來改變 boot-loader 的設定檔。 </para
+><para
+>包含於 <command
+>yaboot</command
+> 之中的常用工具 <command
+>ybin</command
+> 並不能識別 USB 隨身碟設備，因此您不得不手動安裝 <command
+>yaboot</command
+>，這可以透過 <classname
+>hfsutils</classname
+> 工具來完成。用法如下： <informalexample
+><screen>
+$ hmount /dev/sda2
+$ hcopy -r /usr/lib/yaboot/yaboot :
+$ hattrib -c UNIX -t tbxi :yaboot
+$ hattrib -b :
+$ humount
+</screen
+></informalexample
+> 再提醒一次，請確認您使用的是正確的設備名稱。操作過程中一定不能掛載此分割區。程式會把 boot-loader 寫入分割區，並使用 HFS 工具對其添加標記，使得 Open Fireware 可以以之開機。完成以上操作之後，USB 隨身碟的其他部分就可以用普通的 Unix 工具來處理了。 </para
+><para
+>接下來就是掛載分割區 (<userinput
+>mount /dev/sda2 /mnt</userinput
+>) 以及將下列檔案從 Debain 檔案庫拷貝到儲存上： <itemizedlist>
+<listitem
+><para
+><filename
+>vmlinux</filename
+> (核心二進位文件) </para
+></listitem>
+<listitem
+><para
+><filename
+>initrd.gz</filename
+> (初始化記憶體映像檔) </para
+></listitem>
+<listitem
+><para
+><filename
+>yaboot.conf</filename
+> (yaboot 設定檔案) </para
+></listitem>
+<listitem
+><para
+><filename
+>boot.msg</filename
+> (可選的啟動資訊) </para
+></listitem>
+<listitem
+><para
+>可選的核心模組 </para
+></listitem>
+</itemizedlist>
+
+</para
+><para
+><filename
+>yaboot.conf</filename
+> 設定檔應該含有以下幾行：<informalexample
+><screen>
+default=install
+root=/dev/ram
+
+message=/boot.msg
+
+image=/vmlinux
+        label=install
+        initrd=/initrd.gz
+        initrd-size=10000<phrase condition="sarge">
+        append="devfs=mount,dall --"</phrase>
+        read-only
+</screen
+></informalexample
+> 請注意，在必要的時候，您可能需要增大<userinput
+>initrd-size</userinput
+> 參數的數值，這完全取決於您所使用的記憶體映像的大小。 </para>
+   </sect3>
+<!--   End of file install-methods/usb-setup/powerpc.xml -->
+
+   <sect3>
+   <title
+>添加 ISO 映像</title>
+<para
+>現在您需要把任意一個 Debian ISO 映像 (businesscard、netinst 或者甚至是完全版) 放入您的 USB 隨身碟內 (如果它裝得下的話)。這樣的一個映像檔的副檔名必須是 <filename
+>.iso</filename
+>。 </para
+><para
+>如果您想直接透過網路安裝而不使用 ISO 映像，當然就可以跳過上述步驟。並且您必須要使用 <filename
+>netboot</filename
+> 目錄中的初始化記憶體映像來取代來自 <filename
+>hd-media</filename
+> 的相同檔案。這是因為 <filename
+>hd-media/initrd.gz</filename
+> 並不包含網路支援。 </para
+><para
+>當您完成後，卸載 USB 隨身碟 (<userinput
+>umount /mnt</userinput
+>) 並打開防寫保護。 </para>
+   </sect3>
+
+   <!-- TODO: doesn't this section belong later? -->
+   <sect3 arch="i386">
+   <title
+>以 USB 隨身碟開機</title>
+<warning
+><para
+>如果您的系統拒絕從 USB 隨身碟開機，那麼可能是因為它含有無效的主開機磁區記錄 (MBR)。您可以使用 <command
+>install-mbr</command
+> 指令來修復這個問題，該指令來自 <classname
+>mbr</classname
+> 軟體套件： <informalexample
+><screen
+># install-mbr /dev/<replaceable
+>sda</replaceable
+>
+</screen
+></informalexample>
+
+</para
+></warning>
+   </sect3>
+  </sect2>
+ </sect1>
+<!--   End of file install-methods/boot-usb-files.xml -->
+
+<!-- Start of file install-methods/boot-drive-files.xml -->
+
+ <sect1 condition="bootable-disk" id="boot-drive-files">
+ <title
+>準備從硬碟開機的檔案</title>
+<para
+>安裝程式可以從硬碟分割區上面用開機文件開機。它們可以在其它作業系統下面啟動，或者直接使用 BIOS 提供的 boot-loader 直接啟動。 </para
+><para
+>採用這個技術可以實現完全的<quote
+>純網路</quote
+>的安裝方式。這樣可以避免一些使用可移動媒介帶來的的缺點，例如尋找和燒錄光碟映像或是與大量且不可靠的軟碟糾纏不清。 </para
+><para arch="i386"
+>安裝程式無法在 NTFS 檔案系統上開機。 </para
+><para arch="powerpc"
+>安裝程式無法從 HFS+ 檔案系統進行開機。MacOS System 8.1 及之後的系統可能使 用 HFS+ 檔案系統，NewWorld PowerMacs 則全部使用 HFS+。要確認您的系統是否是 HFS+，請選擇 <userinput
+>Get Info</userinput
+> 來查看相關資訊。HFS 檔案系統會顯示為 <userinput
+>Mac OS Standard</userinput
+>，而 HFS+ 檔案系統將顯示為 <userinput
+>Mac OS Extended</userinput
+>。您必須使用一個 HFS 分割區來在 MacOS 和 Linux 之間交換檔案，特別是那些您下載的安裝檔案。 </para
+><para arch="powerpc"
+>根據您的系統是 <quote
+>NewWorld</quote
+> 或 <quote
+>OldWorld</quote
+> 型號，硬碟安裝程式開機時將使用不同的安裝檔案。 </para>
+
+  <sect2 arch="i386" id="files-lilo">
+  <title
+>使用 <command
+>LILO</command
+> 或 <command
+>GRUB</command
+>啟動硬碟安裝程式</title>
+<para
+>這一節將解釋如何透過 <command
+>LILO</command
+> 或 <command
+>GRUB</command
+> 增加或者甚至替換現有的 linux 安裝。 </para
+><para
+>在開機時，兩種 boot-loader 都支援將核心和磁碟映像掛載到記憶體中。這個記憶體虛擬磁碟可以被用做核心的根檔案系統。 </para
+><para
+>將以下檔案從 Debian 檔案庫中拷貝到硬碟中比較方便的地方，例如 <filename
+>/boot/newinstall/</filename
+>。 <itemizedlist>
+<listitem
+><para
+><filename
+>vmlinuz</filename
+>(核心二進位文件) </para
+></listitem>
+<listitem
+><para
+><filename
+>initrd.gz</filename
+> (記憶體虛擬磁碟映像) </para
+></listitem>
+</itemizedlist>
+
+</para
+><para
+>最後，要設定 boot-loader，請進入 <xref linkend="boot-initrd"/>。 </para>
+  </sect2>
+
+
+  <sect2 arch="powerpc" id="files-oldworld">
+  <title
+>OldWorld Macs 上的硬碟開機安裝程式</title>
+<para
+><filename
+>boot-floppy-hfs</filename
+> 軟碟使用 <application
+>miBoot</application
+> 來啟動 Linux 安裝，但是 <application
+>miBoot</application
+> 不易用於從硬碟開機。運作於 MacOS 的 <application
+>BootX</application
+> 支援從硬碟上的檔案進行開機。<application
+>BootX</application
+> 也能在安裝完 Debian 後用於 MacOS 和 Linux 的雙重開機。對於 Performa 6360 來說，<command
+>quik</command
+> 看上去不能讓硬碟可開機。因此 <application
+>BootX</application
+> 對於該型號來說是必須的。 </para
+><para
+>請下載並且解壓 <application
+>BootX</application
+> 發佈套件。它可以從 <ulink url="&url-powerpc-bootx;"
+></ulink
+>，或者 Debian http/ftp 鏡像以及官方 Debian光碟的 <filename
+>dists/woody/main/disks-powerpc/current/powermac</filename
+> 目錄下得到。可以用 <application
+>Stuffit Expander</application
+> 來把它從打包檔案中解開。在這個包中，有一個名為 <filename
+>Linux Kernels</filename
+> 的空目錄。請下載 <filename
+>linux.bin</filename
+> 和 <filename
+>ramdisk.image.gz</filename
+> (位於 <filename
+>disks-powerpc/current/powermac</filename
+> 目錄)，然後把他們放到 <filename
+>Linux Kernels</filename
+> 目錄中，然後把 <filename
+>Linux Kernels</filename
+> 目錄放到活動的系統目錄中。 </para>
+  </sect2>
+
+  <sect2 arch="powerpc" id="files-newworld">
+  <title
+>NewWorld Macs 下啟動硬碟安裝程式</title>
+<para
+>NewWorld PowerMacs 支援從網路或者 ISO9660 格式光碟進行開機，或者直接從硬碟上載入 ELF 二進位文件。這類機器可以直接使用 <command
+>yaboot</command
+> 開機。它既支援直接從 ext2 分割區中裝入核心和記憶體虛擬磁碟，也支援和 MacOS 的雙重開機。硬碟開機特別適合最新的沒有軟碟機的機器。<command
+>BootX</command
+> 則不被支援，也一定不能用在 NewWorld PowerMacs 上。 </para
+><para
+><emphasis
+>拷貝</emphasis
+> (而非移動) 您早先從 Debian 檔案庫下載的下列四個檔案到您硬碟的根目錄上 (這個可以用按住 <keycap
+>option</keycap
+> 鍵然後拖曳每個檔案到硬碟圖示的方法來完成)。 <itemizedlist>
+<listitem
+><para>
+
+<filename
+>vmlinux</filename>
+
+</para
+></listitem>
+<listitem
+><para>
+
+<filename
+>initrd.gz</filename>
+
+</para
+></listitem>
+<listitem
+><para>
+
+<filename
+>yaboot</filename>
+
+</para
+></listitem>
+<listitem
+><para>
+
+<filename
+>yaboot.conf</filename>
+
+</para
+></listitem>
+</itemizedlist>
+
+</para
+><para
+>記下您存放這些文件的 MacOS 分割區號。如果您有 MacOS 的 <command
+>pdisk</command
+> 程式，您可以使用 L 指令檢查分割區號。當開機安裝程式的時候，您需要這個分割區號碼用於在 Open Firmware 提示符號下面輸入指令。 </para
+><para
+>要啟動安裝程式，請進入 <xref linkend="boot-newworld"/>。 </para>
+  </sect2>
+ </sect1>
+<!--   End of file install-methods/boot-drive-files.xml -->
+
+<!-- Start of file install-methods/install-tftp.xml -->
+
+ <sect1 condition="supports-tftp" id="install-tftp">
+ <title
+>準備以 TFTP 網路開機用的檔案</title>
+<para
+>如果您的機器連接到了一個區域網路，您可以從網路上的另外一台機器上面透過 TFTP 來開機。如果您傾向從另外一台機器上面啟動安裝系統，則開機檔案需要放在那台機器上面的某個特殊地方，並且設定您的機器從該機器進行開機。 </para
+><para
+>您需要設置一台 TFTP 伺服器，對於很多機器來說，還需要一台 BOOTP 伺服器 <phrase condition="supports-rarp"
+>，或 RARP 伺服器</phrase
+> <phrase condition="supports-dhcp"
+>，又或 DHCP 伺服器</phrase
+>。 </para
+><para
+><phrase condition="supports-rarp"
+>反向位址解析協議 (The Reverse Address Resolution Protocol, RARP) 是一種告訴您的客戶它自己 IP 位址的方法。另外一種方法是 BOOTP 通訊協定。</phrase
+> <phrase condition="supports-bootp"
+>BOOTP 是一種 IP 通訊協定，用來告訴電腦它自己的 IP 位址以及從網路何處取得啟動映像。</phrase
+> <phrase arch="m68k"
+>在 VMEbus 系統上面的另外一種選擇是：IP 位址可以在開機 ROM 中手動設定。</phrase
+> <phrase condition="supports-dhcp"
+>DHCP (動態主機設定協定 Dynamic Host Configuration Protocol) 是一個更靈活，向後相容的 BOOTP 延伸。有一些系統只能透過 DHCP 來配置。</phrase
+> </para
+><para arch="powerpc"
+>對於 PowerPC 來說，如果您有一台 NewWorld Power Macintosh 機器，使用 DHCP 來代替 BOOTP 比較好。有些最新的機器不能從 BOOTP 開機。 </para
+><para arch="alpha"
+>不像 Sparc 和 PowerPC 機器上的 Open Firmware , SRM 控制台將<emphasis
+>不</emphasis
+>使用 RARP 來取得它的 IP 位址。因此您必須使用 BOOTP 來從網路啟動您的 <footnote
+> <para
+>Alpha 機器。Alpha 系統也能使用 DECNet MOP (Maintenance Operations Protocol) 來進行網路開機，但是這裡不使用此技術。相信您的本地 OpenVMS 操作員樂於協助您燒錄，以便在您的 Alpha 機器上用 MOP 來開機 Linux。 </para
+> </footnote
+>。您也可以直接在 SRM 控制台中直接輸入網路介面的 IP 設定。 </para
+><para arch="hppa"
+>一些較早的 HPPA 機器 (例如 715/75) 使用 RBOOTD 而不是 BOOTP。在 parisc-linux 網站上能夠找到 RBOOTD 軟體套件。 </para
+><para
+>普通檔案傳輸協定 (Trivial File Transfer Protocol, TFTP) 能為客戶端提供開機映像。理論上，任何伺服器，在任何平台上只要實做這些協定就都能夠被應用。在這一節的一些例子裡面，我們將提供在 SunOS 4.x、SunOS 5.x (即 Solaris) 和 GNU/Linux 上面的一些操作例子。 <note arch="i386"
+><para
+>如果想用 TFTP 的 Pre-boot Execution Environment (PXE) 方式啟動，您將需要一台支援 <userinput
+>tsize</userinput
+> 的 TFTP 伺服器。在 &debian; 伺服器上，<classname
+>atftpd</classname
+> 和 <classname
+>tftpd-hpa</classname
+>套件符合此要求，我們建議使用 <classname
+>tftpd-hpa</classname
+>。 </para
+></note>
+
+</para>
+
+
+<!-- Start of file install-methods/tftp/rarp.xml -->
+
+
+  <sect2 condition="supports-rarp" id="tftp-rarp">
+   <title
+>設置 RARP 伺服器</title>
+<para
+>為了設置 RARP ,您需要知道欲安裝系統的客戶端的以太網卡位址 (網卡 MAC 位址)。 如果您還不知道這個資訊，可以<phrase arch="sparc"
+>從 OpenPROM 的初始化開機資訊中取得，請使用 OpenBoot <userinput
+>.enet-addr</userinput
+> 指令，或者</phrase
+>開機進入 <quote
+>Rescue</quote
+> 模式 (例如使用回復軟碟) 並且使用 <userinput
+>/sbin/ifconfig eth0</userinput
+> 指令。 </para
+><para
+>在使用 Linux 2.2.x 核心的 RARP 伺服器系統上，您需要以下的指令來載入核心 RARP 表： <informalexample
+><screen>
+# <userinput
+>/sbin/rarp -s 
+<replaceable
+>client-hostname</replaceable>
+<replaceable
+>client-enet-addr</replaceable
+></userinput>
+
+# <userinput
+>/usr/sbin/arp -s 
+<replaceable
+>client-ip</replaceable>
+<replaceable
+>client-enet-addr</replaceable
+></userinput>
+</screen
+></informalexample
+> 如果您得到如下資訊 <informalexample
+><screen>
+SIOCSRARP: Invalid argument
+</screen
+></informalexample
+> 您可能需要掛載 RARP 核心模組或重新編譯核心並使之支援 RARP。試試在執行 <userinput
+>modprobe rarp</userinput
+> 指令後再嘗試一遍 <command
+>rarp</command
+> 指令。 </para
+><para
+>使用 Linux 2.4.x 核心的 RARP 伺服器系統上並沒有 RARP 模組，您應該使用 <command
+>rarpd</command
+> 程式替代。操作過程很類似下面將提到的在 SunOS 上的用法。 </para
+><para
+>在 SunOS 裡, 您需要確定客戶端的以太網硬體位址已經列在 <quote
+>ethers</quote
+> 資料庫(在 <filename
+>/etc/ethers</filename
+> 檔案中或者透過 NIS/NIS+)和 ``hosts'' 資料庫中，然後您需要啟動 RARP 伺服程式，在 SunOS 4 裡，使用(以 root 身份)： <userinput
+>/usr/etc/rarpd -a</userinput
+> 指令﹔在 SunOS 5 裡，則使用 <userinput
+>/usr/sbin/rarpd -a</userinput
+> 指令。 </para>
+  </sect2>
+<!--   End of file install-methods/tftp/rarp.xml -->
+
+<!-- Start of file install-methods/tftp/bootp.xml -->
+
+
+  <sect2 condition="supports-bootp" id="tftp-bootp">
+  <title
+>設置 BOOTP 伺服器</title>
+<para
+>在 GNU/Linux 下面有兩種 BOOTP 伺服器。他們是 CMU <command
+>bootpd</command
+> 和另外一種實際上是 DHCP 伺服器的程式 ISC <command
+>dhcpd</command
+>，他們被包含在 &debian; 的 <classname
+>bootp</classname
+> 和 <classname
+>dhcp</classname
+> 軟體套件中。 </para
+><para
+>要使用 CMU <command
+>bootpd</command
+>，您必須先將 <filename
+>/etc/inetd.conf</filename
+> 中相關的註釋標記去掉 (或者加入一些新行)。在 &debian; 裡，您可以執行 <userinput
+>update-inetd --enable bootps</userinput
+>，然後執行 <userinput
+>/etc/init.d/inetd reload</userinput
+> 來完成此工作。在其它系統中，這行設定應該看起來像這樣：<informalexample
+><screen>
+bootps  dgram  udp  wait  root  /usr/sbin/bootpd  bootpd -i -t 120
+</screen
+></informalexample
+> 現在，您必須建立一個 <filename
+>/etc/bootptab</filename
+> 檔案。它具有和一些老 BSD 檔案相似並使用相同的加密格式。這些檔案包括 <filename
+>printcap</filename
+>、<filename
+>termcap</filename
+>，和 <filename
+>disktab</filename
+>。請參閱 <filename
+>bootptab</filename
+> 的手冊以獲得更多的資訊。對於 CMU <command
+>bootpd</command
+>，您將需要知道客戶端硬的體 (MAC) 位址。這裡有一個範例 <filename
+>/etc/bootptab</filename
+>： <informalexample
+><screen>
+client:\\
+  hd=/tftpboot:\\
+  bf=tftpboot.img:\\
+  ip=192.168.1.90:\\
+  sm=255.255.255.0:\\
+  sa=192.168.1.1:\\
+  ha=0123456789AB:
+</screen
+></informalexample
+> 您至少需要修改 <quote
+>ha</quote
+> 選項，它指定了客戶端的硬體地址。<quote
+>bf</quote
+> 選項則指定了一個客戶端應該透過 TFTP 取得的檔案名稱。請從 <xref linkend="tftp-images"/> 處取得更多的資訊。 <phrase arch="mips"
+> 在 SGI Indys 上，您可以僅僅只是進入指令監視器然後輸入 <userinput
+>printenv</userinput
+>。 <userinput
+>eaddr</userinput
+> 的值就是機器的 MAC 位址。 </phrase
+> </para
+><para
+>透過 ISC <command
+>dhcpd</command
+> 設定 BOOTP 反而非常容易。因為它把 BOOTP 客戶端程式看成一個特殊的 DHCP 客戶端。部分架構結構需要經過複雜的設定才能從 BOOTP 啟動客戶端。如果您的機器屬於這種情況，請閱讀 <xref linkend="dhcpd"/>。否則，您大概只需要將 <userinput
+>allow bootp</userinput
+> 指令添加到包含客戶機的子網域的配定部分，並重新啟動 <command
+>dhcpd</command
+> 就可以了，重啟的指令是：<userinput
+>/etc/init.d/dhcpd restart</userinput
+>。 </para>
+  </sect2>
+<!--   End of file install-methods/tftp/bootp.xml -->
+
+<!-- Start of file install-methods//tftp/dhcp.xml -->
+
+  <sect2 condition="supports-dhcp" id="dhcpd">
+   <title
+>設置 DHCP 伺服器</title>
+<para
+>ISC <command
+>dhcpd</command
+> 是一種自由軟體 DHCP 伺服器。在 &debian; 裡，它被包含在 <classname
+>dhcp</classname
+> 軟體套件中。這裡有它的一個設定檔的範例(通常是 <filename
+>/etc/dhcpd.conf</filename
+>)：<informalexample
+><screen>
+option domain-name "example.com";
+option domain-name-servers ns1.example.com;
+option subnet-mask 255.255.255.0;
+default-lease-time 600;
+max-lease-time 7200;
+server-name "servername";
+
+subnet 192.168.1.0 netmask 255.255.255.0 {
+  range 192.168.1.200 192.168.1.253;
+  option routers 192.168.1.1;
+}
+
+host clientname {
+  filename "/tftpboot/tftpboot.img";
+  server-name "servername";
+  next-server servername;
+  hardware ethernet 01:23:45:67:89:AB; 
+  fixed-address 192.168.1.90;
+}
+</screen
+></informalexample
+> 註：新的(並且是建議的) <classname
+>dhcp3</classname
+> 軟體套件使用 <filename
+>/etc/dhcp3/dhcpd.conf</filename
+>作為其設定檔。 </para
+><para
+>在這個例子中，一台伺服器 <replaceable
+>servername</replaceable
+> 負責執行包括 DHCP 伺服器、TFTP 伺服器和閘道器在內的所有工作。您需要修改網域名稱選項，以及伺服器名稱和客戶端硬體位址。<replaceable
+>filename</replaceable
+> 選項應是要從 TFTP 取得的檔案名稱。 </para
+><para
+>在編輯了 <command
+>dhcpd</command
+> 設定檔後，您需要使用下面的指令重新啟動它：<userinput
+>/etc/init.d/dhcpd restart</userinput
+>。 </para>
+
+   <sect3 arch="i386">
+   <title
+>在 DHCP 設定中打開 PXE 開機功能</title>
+<para
+>這是另外一個採用 TFTP Pre-boot Execution Environment (PXE) 方法的 <filename
+>dhcp.conf</filename
+> 配置範例。
+<informalexample
+><screen>
+option domain-name "example.com";
+
+default-lease-time 600;
+max-lease-time 7200;
+
+allow booting;
+allow bootp;
+
+# 接下來的片段需要您自己修改成你所需要的
+subnet 192.168.1.0 netmask 255.255.255.0 {
+  range 192.168.1.200 192.168.1.253;
+  option subnet-mask 255.255.255.0;
+  option broadcast-address 192.168.1.255;
+# 閘道的位址可以不一樣
+# (例如連到網際網路)
+  option routers 192.168.1.1;
+# 設定您要使用的DNS
+  option domain-name-servers 192.168.1.3;
+}
+
+group {
+ next-server 192.168.1.3;
+ host tftpclient {
+# tftp 客戶端的硬體位址
+  hardware ethernet  00:10:DC:27:6C:15;
+  filename "/tftpboot/pxelinux.0";
+ }
+}
+</screen
+></informalexample
+> 注意對於 PXE 開機來說，客戶端檔案名 <filename
+>pxelinux.0</filename
+> 是一個 boot-loader，而非一個核心映像 (參閱下面的<xref linkend="tftp-images"/> )。 </para>
+   </sect3>
+  </sect2>
+<!--   End of file install-methods//tftp/dhcp.xml -->
+
+  <sect2 id="tftpd">
+  <title
+>啟用 TFTP 伺服器</title>
+<para
+>要準備好 TFTP 伺服器，您首先需要確定 <command
+>tftpd</command
+> 已經啟動。這通常可以在 <filename
+>/etc/inetd.conf</filename
+> 加入下列設定來完成： <informalexample
+><screen>
+tftp dgram udp wait nobody /usr/sbin/tcpd in.tftpd /tftpboot
+</screen
+></informalexample
+> Debian 套件通常在安裝後會自動把這條設定好。 </para
+><para
+>檢查那個檔案並且記住被用作 <command
+>in.tftpd</command
+> 參數的目錄，您接下來將會需要它。<userinput
+>-l</userinput
+> 參數能夠讓某些版本的 <command
+>in.tftpd</command
+> 將所有請求記錄到系統日誌中。這在檢查錯誤的時候會很有用。如果您必須修改 <filename
+>/etc/inetd.conf</filename
+>，您將必須提醒正在運作的 <command
+>inetd</command
+> 程序該檔案已經被改變。在 Debian 系統中，您應該執行 <userinput
+>/etc/init.d/inetd reload</userinput
+>﹔而在其它系統中，找到 <command
+>inetd</command
+> 所對應的程序 ID，並且執行 <userinput
+>kill -HUP <replaceable
+>inetd-pid</replaceable
+></userinput
+>。 </para
+><para arch="mips"
+>如果您想要在一台 SGI 上安裝 Debian 並且您的 TFTP 伺服器是在 Linux 2.4 的 GNU/Linux 上運作，您需要對伺服器進行如下設定：<informalexample
+><screen>
+# echo 1 &gt; /proc/sys/net/ipv4/ip_no_pmtu_disc
+</screen
+></informalexample
+> 來關閉 Path MTU 查詢，否則 Indy 的 PROM 不能下載核心。而且，您還要確保 TFTP 封包是從一個小於 32767 的連接埠送出，否則在第一個封包之後，下載將停止。重申一下，這是由於 Linux 2.4.X 觸發了 PROM 裡的一個 臭蟲。您可以透過如下設定：<informalexample
+><screen>
+# echo "2048 32767" &gt; /proc/sys/net/ipv4/ip_local_port_range
+</screen
+></informalexample
+> 調整 Linux TFTP 伺服器使用的來源連接埠範圍以避開這個錯誤。 </para>
+  </sect2>
+
+  <sect2 id="tftp-images">
+  <title
+>將 TFTP 映像放到適當的位置</title>
+<para
+>接下來，將在 <xref linkend="where-files"/> 中找到的 TFTP 開機映像放到<command
+>tftpd</command
+> 開機映像目錄中。一般來說，這個目錄將是 <filename
+>/tftpboot</filename
+>。您必須將該檔案鏈結到 <command
+>tftpd</command
+> 用來啟動客戶端的檔案名稱。不幸的是，這個檔案名稱完全決定於 TFTP 客戶端程式，並且沒有一個強制的標準。 </para
+><para arch="powerpc"
+>在 NewWorld Power Macintosh 上，您需要設定 <command
+>yaboot</command
+> boot-loader作為 TFTP 開機映像。接著，<command
+>Yaboot</command
+> 將透過 TFTP 來取得核心和記憶體虛擬磁碟映像。對於網路開機，請使用 <filename
+>yaboot-netboot.conf</filename
+>。只需要將其更名為 <filename
+>yaboot.conf</filename
+> 並且放入 TFTP 目錄。 </para
+><para arch="i386"
+>對於用 PXE 開機來說，您所需的只是設定 <filename
+>netboot/netboot.tar.gz</filename
+> 壓縮檔案。簡單地將此包解壓縮到 <command
+>tftpd</command
+> 開機映像目錄下。並確保您的 DHCP 伺服器的設定會把 <filename
+>/pxelinux.0</filename
+> 以開機所需的檔案名傳遞至 <command
+>tftpd</command
+>。 </para
+><para arch="ia64"
+>對於用 PXE 開機來說，您所需的只是設定 <filename
+>netboot/netboot.tar.gz</filename
+> 壓縮檔案。簡單地將此包解壓縮到 <command
+>tftpd</command
+> 開機映像目錄下。 並確保您的 DHCP 伺服器設定會把 <filename
+>/debian-installer/ia64/elilo.efi</filename
+> 以開機所需的檔案名傳遞至<command
+>tftpd</command
+>。 </para>
+
+   <sect3 arch="mipsel">
+   <title
+>DECstation TFTP 映像檔</title>
+<para
+>對於 DECstation 來說，對於每個子架構都有相應的 tftpimage 映像檔。這些單一檔案包含了核心和安裝程式。命名規則是 <replaceable
+>subarchitecture</replaceable
+>/netboot-boot.img。如果您是按照上述 BOOTP/DHCP 設定範例進行操作，請將想要使用的 tftpimage 檔案拷貝至 <userinput
+>/tftpboot/tftpboot.img</userinput
+>。 </para
+><para
+>DECstation 透過 <userinput
+>boot <replaceable
+>#</replaceable
+>/tftp</userinput
+> 指令來使用 TFTP 進行韌體開機。這裡 <replaceable
+>#</replaceable
+> 是用於開機的 TurboChannel 設備編號。在大多數 DECstations 上，這個數字是 <quote
+>3</quote
+>。 如果 BOOTP/DHCP 伺服器不提供檔案名或者您需要傳遞附加的參數，他們可以按照下列語法加入： </para
+><para>
+
+<userinput
+>boot #/tftp/filename param1=value1 param2=value2 ...</userinput>
+
+</para
+><para
+>一些 DECstation 韌體版本在網路開機中有一個問題：傳輸可以開始，但是過一段時間它就會停止並且產生一個 <computeroutput
+>a.out err</computeroutput
+>。這可能是由以下幾個原因所造成的：<orderedlist
+> <listitem
+><para
+> 韌體在一個 TFTP 傳輸中沒有回應 ARP 請求，這導致一個 ARP 超時並且停止傳輸。解決方案是將以太網卡的 MAC 位址靜態加入到 TFTP 伺服器的 ARP 列表中。想要作到這點可以在 TFTP 伺服器上用 root 身份執行 <userinput
+>arp -s <replaceable
+>IP-address</replaceable
+> <replaceable
+>MAC-address</replaceable
+></userinput
+>。DECstation 的 MAC 位址能夠透過在 DECstation 韌體提示符號下輸入 <command
+>cnfg</command
+> 來取得。</para
+></listitem
+> <listitem
+><para
+> 韌體對於這些能透過 TFTP 開機的檔案有一個大小限制。</para
+></listitem
+> </orderedlist
+> 有些韌體版本根本不能透過 TFTP 開機。您可以在 NetBSD 網頁上找到關於不同韌體版本的概述：<ulink url="http://www.netbsd.org/Ports/pmax/board-list.html#proms"
+></ulink
+>。 </para>
+   </sect3>
+
+   <sect3 arch="alpha">
+   <title
+>Alpha TFTP 開機</title>
+<para
+>在 Alpha 上，您必須透過 <userinput
+>-file</userinput
+> 參數將檔案名 (與開機映像目錄的相對路徑) 指定給 SRM 的 <userinput
+>boot</userinput
+> 指令，或者設定 <userinput
+>BOOT_FILE</userinput
+> 環境變數。或者，也可以透過 BOOTP 提供檔案名稱 (在 ISC 的 <command
+>dhcpd</command
+> 中，使用 <userinput
+>filename</userinput
+> 指令)。與 Open Firmware 不同的是，這裡的 SRM <emphasis
+>沒有預設檔案名稱</emphasis
+>，因此您<emphasis
+>必須</emphasis
+>透過以上方法之一來指定一個檔案名稱。 </para>
+   </sect3>
+
+   <sect3 arch="sparc">
+   <title
+>SPARC TFTP 開機</title>
+<para
+>SPARC 架構通常使用子架構名稱，例如 <quote
+>SUN4M</quote
+> 或者 <quote
+>SUN4C</quote
+>。在某些情況下，架構名字被留為空白，這時客戶端所需要的檔案僅僅是<filename
+>十六進位的客戶端 IP</filename
+>。因此，如果您的系統子架構是 SUN4C，其 IP 是 192.168.1.3，則檔案名為 <filename
+>C0A80103.SUN4C</filename
+>。一個簡易的確認方法是在 shell 中輸入下列指令 (假設機器的 IP 為 10.0.0.4)。 <informalexample
+><screen>
+$ printf '%.2x%.2x%.2x%.2x\n' 10 0 0 4
+</screen
+></informalexample
+> 它將 IP 寫成十六進制。要得到正確的檔案名稱，您應該將所有的字母改成大寫並在必要時加上子架構名。 </para
+><para
+>您也可以透過把一個特定的檔案名稱附加到 OpenPROM boot 指令的結尾來強制某些 SPARC 系統使用它。例如 <userinput
+>boot net my-sparc.image</userinput
+>。不過它仍然必須被放置在 TFTP 伺服器要查找的目錄中。 </para>
+   </sect3>
+
+   <sect3 arch="m68k">
+   <title
+>BVM/Motorola TFTP 開機</title>
+<para
+>對於 BVM 以及 Motorola VMEbus 系統來說，請先將 &bvme6000-tftp-files; 檔案拷貝到 <filename
+>/tftpboot/</filename
+>。 </para
+><para
+>接下來，設定您的開機 ROM 或 BOOTP 伺服器，使其從 TFTP 伺服器載入 <filename
+>tftplilo.bvme</filename
+> 或者 <filename
+>tftplilo.mvme</filename
+> 檔案。請閱讀 <filename
+>tftplilo.txt</filename
+> 文字檔來取得更多的關於您所使用的子架構的系統特殊配置資訊。 </para>
+   </sect3>
+
+   <sect3 arch="mips">
+   <title
+>SGI Indys TFTP 開機</title>
+<para
+>在 SGI Indys 上您可以採用 <command
+>bootpd</command
+> 來提供檔案名稱給 TFTP。它既可以是在 <filename
+>/etc/bootptab</filename
+> 檔案中設定 <userinput
+>bf=</userinput
+>，也可以是 <filename
+>/etc/dhcpd.conf</filename
+> 中的 <userinput
+>filename=</userinput
+>選項。 </para>
+   </sect3>
+
+   <sect3 arch="mips">
+   <title
+>Broadcom BCM91250A TFTP 開機</title>
+<para
+>您不需要透過特殊方法設定 DHCP，因為您要把要載入到 CFE 的檔案完全路徑傳送出去。 </para>
+   </sect3>
+
+  </sect2>
+
+<!-- FIXME: commented out since it seems too old to be usable and a current
+            way is not known
+
+  <sect2 id="tftp-low-memory">
+  <title
+>TFTP Installation for Low-Memory Systems</title>
+<para>
+
+On some systems, the standard installation RAMdisk, combined with the
+memory requirements of the TFTP boot image, cannot fit in memory.  In
+this case, you can still install using TFTP, you'll just have to go
+through the additional step of NFS mounting your root directory over
+the network as well.  This type of setup is also appropriate for
+diskless or dataless clients.
+
+</para
+><para>
+
+First, follow all the steps above in <xref linkend="install-tftp"/>.
+
+<orderedlist>
+<listitem
+><para>
+
+Copy the Linux kernel image on your TFTP server using the
+<userinput
+>a.out</userinput
+> image for the architecture you are
+booting.
+
+</para
+></listitem>
+<listitem
+><para>
+
+Untar the root archive on your NFS server (can be the same system as
+your TFTP server):
+
+<informalexample
+><screen
+>
+# cd /tftpboot
+# tar xvzf root.tar.gz
+</screen
+></informalexample>
+
+Be sure to use the GNU <command
+>tar</command
+> (other tar programs, like the
+SunOS one, badly handle devices as plain files).
+
+</para
+></listitem>
+<listitem
+><para>
+
+Export your <filename
+>/tftpboot/debian-sparc-root</filename
+> directory
+with root access to your client.  E.g., add the following line to
+<filename
+>/etc/exports</filename
+> (GNU/Linux syntax, should be similar
+for SunOS):
+
+<informalexample
+><screen
+>
+/tftpboot/debian-sparc-root <replaceable>client</replaceable>(rw,no_root_squash)
+</screen
+></informalexample>
+
+NOTE: <replaceable
+>client</replaceable
+> is the host name or IP address recognized
+by the server for the system you are booting.
+
+</para
+></listitem>
+<listitem
+><para>
+
+Create a symbolic link from your client IP address in dotted notation
+to <filename
+>debian-sparc-root</filename
+> in the
+<filename
+>/tftpboot</filename
+> directory.  For example, if the client
+IP address is 192.168.1.3, do
+
+<informalexample
+><screen
+>
+# ln -s debian-sparc-root 192.168.1.3
+</screen
+></informalexample>
+
+</para
+></listitem>
+</orderedlist>
+
+</para>
+
+  </sect2>
+
+  <sect2 condition="supports-nfsroot">
+  <title
+>Installing with TFTP and NFS Root</title>
+<para>
+
+Installing with TFTP and NFS Root is similar to
+<xref linkend="tftp-low-memory"/> because you don't want to
+load the RAMdisk anymore but boot from the newly created NFS-root file
+system.  You then need to replace the symlink to the tftpboot image by
+a symlink to the kernel image (for example,
+<filename
+>linux-a.out</filename
+>).
+
+</para
+><para>
+
+RARP/TFTP requires all daemons to be running on the same server (the
+workstation is sending a TFTP request back to the server that replied
+to its previous RARP request).
+
+</para>
+
+
+  </sect2>
+END FIXME -->
+ </sect1>
+<!--   End of file install-methods/install-tftp.xml -->
+
+<!-- Start of file install-methods/automatic-install.xml -->
+
+ <sect1 id="automatic-install">
+ <title
+>自動化安裝</title>
+<para
+>對於有多台電腦需要安裝的情況，可以採用全自動安裝的方式。用於此項工作的 Debian 軟體套件有 <classname
+>fai</classname
+> (需要使用一台安裝伺服器)， <classname
+>replicator</classname
+>、 <classname
+>systemimager</classname
+>、 <classname
+>autoinstall</classname
+>，以及 Debian 安裝程式本身。 </para>
+
+  <sect2 id="preseed">
+  <title
+>使用 Debian 安裝程式進行自動安裝</title>
+<para
+>Debian 安裝程式支援透過預先設定檔進行自動安裝。一個預先設定檔可以從網路上或者可從移動媒介上載入，並且被用來在安裝過程中自動回答問題。 </para
+><para
+>雖然大多 &d-i; 使用的對話框可以用這種方法預設，但還是有明顯的例外。目前還無法預設 RAID 和 LVM。另外還有，網路驅動模組，也無法預先設置核心模組參數。 </para
+><para
+>預先設定檔是按照 debconf-set-selections 指令的格式寫成的。這裡有一個具有詳盡註解並能正常工作的預先設定檔例子：<xref linkend="example-preseed"/>。 </para
+><para
+>除此之外，要得到一個包含所有可被預設項目的完整文件，您可以進行手動安裝，然後使用 <filename
+>debconf-get-selections</filename
+> 指令 (它來自 <classname
+>debconf-utils</classname
+>軟體套件) 將 debconf 資料庫和位於 /var/log/debian-installer/cdebconf 的資料庫的內容導出至一個單一的檔案：<informalexample
+><screen>
+$ debconf-get-selections --installer &gt; <replaceable
+>檔案名稱</replaceable>
+$ debconf-get-selections &gt;&gt; <replaceable
+>檔案名稱</replaceable>
+</screen
+></informalexample
+> 但是，按照些方法生成的檔案將會包含一些不應該被預先設定的項目，因此 <xref linkend="example-preseed"/> 中的檔案對於大多數使用者來說是一個更好的起點。 </para
+><para
+>一旦您有了一個預先設定檔，可以在需要時編輯它，並且上傳至網頁伺服器，或者拷貝至安裝程式的開機媒介。無論您將此檔案放在哪裡，都需要傳遞一個參數給安裝程式來使其使用個檔案。 </para
+><para
+>要讓安裝程式使用一個從網路下載的預先設定檔，請將 preseed/url=http://url/to/config 加入核心啟動參數。當然這個預先設定檔，只有安裝程式能夠管理網路並下載檔案後才能起作用，因此如果安裝程式能夠透過 DHCP 設置網路而不需要詢問任何問題的話，此方法會更有用。如果您已經設置好了網路，可能還會想將安裝優先順序調至關鍵級來避免任何問題。請參閱 <xref linkend="installer-args"/>。 </para
+><para
+>要將預先設定檔放在光碟中，您將需要重新製作 ISO 映像把您的預先設定檔納入。請閱讀 mkisofs 的手冊來取得細節資訊。另外，您也可以將預先設定檔放在一張軟碟中，然後使用 preseed/file=/floppy/preseed.cfg 參數。 </para
+><para arch="i386"
+>如果您要從 USB 隨身碟上開機，那您可以簡單拷貝您的預先設定檔至儲存的檔案系統中，並編輯 syslinux.cfg 檔案，加入 preseed/file=/hd-media/preseed.cfg 至核心啟動參數。 </para>
+
+   <sect3 condition="etch">
+   <title
+>使用預先設定來改變預設值</title>
+<para
+>您也能使用預先設定來回答預設的對話框，對話框仍會秀出。想要使用此功能必須在預先設定樣板之後把<firstterm
+>seen</firstterm
+> 設為 <quote
+>false</quote
+> <informalexample
+><screen
+>d-i foo/bar string value
+d-i foo/bar seen false
+</screen
+></informalexample>
+
+</para>
+   </sect3>
+  </sect2>
+ </sect1>
+<!--   End of file install-methods/automatic-install.xml -->
+
+</chapter>
+<!--   End of file install-methods/install-methods.xml -->

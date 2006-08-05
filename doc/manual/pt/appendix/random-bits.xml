@@ -1,0 +1,1542 @@
+<!-- Start of file appendix/random-bits.xml -->
+
+<appendix id="random-bits"
+><title
+>Miscelânea</title>
+
+
+<!-- Start of file appendix/example-preseed.xml -->
+
+<sect1 id="example-preseed" condition="sarge">
+<title
+>Exemplo de Ficheiro de Pré-configuração</title>
+
+<para
+>Este é um exemplo completo e funcional de um ficheiro de pré-configuração para uma instalação automatizada. A sua utilização é explicada em <xref linkend="automatic-install"/>. Você poderá querer descomentar algumas das linhas antes de utilizar o ficheiro. </para>
+
+<note
+><para
+>De modo a ser possível apresentar correctamente este exemplo no manual, tivemos de dividir algumas linhas. Isto é indicado pela utilização do carácter de continuação de linha <quote
+>\</quote
+> e identação extra na linha seguinte. Num ficheiro de pré-configuração verdadeiro, estas linhas separadas têm de ser unidas <emphasis
+>numa única linha</emphasis
+>. Se não o fizer, a pré-configuração irá falhar com resultados imprevisíveis. </para
+><para
+>Um ficheiro de exemplo <quote
+>limpo</quote
+> está disponível a partir de &urlset-example-preseed;. </para
+></note>
+
+<para>
+
+
+<!-- Start of file appendix/example-preseed-sarge.xml -->
+
+<informalexample condition="sarge"
+><screen
+>#### Arranque.
+
+# Para iniciar um ficheiro preseed, primeiro precisa de arrancar com o
+# instalador , e dizer-lhe qual ficheiro de preseed a utilizar. Isto é
+# feito passando um paramêtro de arranque ao kernel quer manualmente
+# durante o arranque ou editando o ficheiro syslinux.cfg (ou similar) e 
+# acrescentando o paramêtro no fim das linhas de append do kernel.
+.#
+# Se está a utilizar o netbooting, utilize isto:
+#   preseed/url=http://host/path/to/preseed
+# Se está a criar um CD, você pode utilizar isto:
+#   preseed/file=/cdrom/preseed
+# Se está a instalar a partir de media USB, utilize isto, e coloque o
+# ficheiro de preseed no directório raiz do stick USB.
+#  preseed/file=/hd-media/preseed
+#
+# Se se sentir confortável a alterar a imagem initrd do instalador, pode
+# também colocar um ficheiro de preseed no directório raiz do sistema de
+# ficheiros do initrd, chamado "preseed.cfg" -- se estiver presente o
+# instalador irá sempre utilizar este ficheiro (nota: não suportado pela
+# versão Sarge do instalador). Caso contrário assegure-se que copia o
+# ficheiro para o local que especificou.
+#
+# Para se assegurar que o instalador obtém o ficheiro de preseed correcto,
+# pode especificar um checksum para o ficheiro. Actualmente isto tem
+# de ser um md5sum, e se especificado tem de coincidir com o ficheiro ou o
+# instalador vai-se recusar a utilizar o ficheiro.
+# preseed/url/checksum=5da499872becccfeda2c4872f9171c3d
+# preseed/file/checksum=5da499872becccfeda2c4872f9171c3d
+#
+# Algumas partes do processo de instalação não podem ser automatizadas
+# utilizando algumas formas de preseeding, porque as questões são
+# colocadas antes do ficheiro de preseed ser carregado. Se o ficheiro
+# de preseed for obtido a partir da rede, primeiro tem de ser configurada
+# a rede. Uma das razões para utilizar preseed com initrd é que permite
+# fazer preseed mesmo nos passos iniciais do processo de instalação.
+#
+# Enquanto o está a fazer, você pode querer mandar para lá um
+# debconf/priority=critical para evitar a maioria das questões mesmo que
+# o preseeding abaixo falhe algumas. E você pode definir o timeout para 1
+# em syslinux.cfg para evitar ter de carregar em
+# enter para iniciar o instalador.
+#
+# Note que o kernel aceita um máximo de 8 opções de linha de comandos e
+# 8 opções de ambiente (incluindo quaisquer opções adicionadas por omissão
+# para o instalador). Se esses números forem excedidos, os kernels 2.4
+# irão largar as opções em excesso e nos kernels 2.6 ocorrerá um panic.
+# Com o kernel 2.6.9 ou mais recentes pode utilizar 32 opções de linha
+# de comandos e 32 opções de ambiente
+#
+# Algumas das opções por omissão, como 'vga=normal' podem ser removidas 
+# sem problemas na maioria das instalações, que lhe pode permitiri
+# adicionar mais opções para preseeding.
+
+# Para escolher o seu idioma e país, utilize esta configuração, mas
+# lembre-se que isto só vai funcionar para preseed baseado no initrd,
+# para outras formas de preseed deve converte-la para opções do kernel
+# tais como debian-installer/locale=pt_PT
+d-i debian-installer/locale string pt_PT
+
+# Para escolher um teclado utilize esta configuração. Novamente terá de a
+# passar como paramêtros ao kernel na maioria das configurações de preseed.
+d-i console-keymaps-at/keymap select pt
+
+#### Configuração de rede.
+
+# Claro que, isto não vai funcionar se você está a carregar o ficheiro de preseed a partir da
+# rede! Mas é óptimo se está a arrancar a partir de CD ou de um stick USB. Você pode
+# passar parâmetros de configuração de rede nos parâmetros do kernel se você está
+# a carregar os ficheiros de preseed a partir da rede.
+
+# Se possível o netcfg irá escolher um interface que tenha uma ligação. Isto faz com que
+# não mostre uma lista se existir mais de um interface.
+d-i  netcfg/choose_interface select auto
+
+# Se tiver um servidor dhcp lento e o instalador esgota o tempo à espera, 
+# isto pode ser útil.
+#d-i netcfg/dhcp_timeout string 60
+
+# Se você preferir configurar a rede manualmente, aqui está como o fazer:
+#d-i netcfg/disable_dhcp                boolean true
+#d-i netcfg/get_nameservers             string 192.168.1.1
+#d-i netcfg/get_ipaddress               string 192.168.1.42
+#d-i netcfg/get_netmask                 string 255.255.255.0
+#d-i netcfg/get_gateway                 string 192.168.1.1
+#d-i netcfg/confirm_static              boolean true
+
+# Note que qualquer hostname e nome de domínio adquiridos por dhcp tomam
+# precedência sobre os valores definidos aqui. No entanto, definir os valores
+# previne que as questões sejam mostradas mesmo que os valores venham por dhcp.
+d-i  netcfg/get_hostname                string unassigned-hostname
+d-i  netcfg/get_domain                  string unassigned-domain
+
+# Desligar a irritante janela de diálogo da chave WEP.
+d-i  netcfg/wireless_wep                string
+# O hostname que alguns ISPs utilizam como password.
+#d-i netcfg/dhcp_hostname               string radish
+
+#### Configurações do mirror.
+
+d-i  mirror/country                     string enter information manually
+d-i  mirror/http/hostname               string http.us.debian.org
+d-i  mirror/http/directory              string /debian
+d-i  mirror/http/proxy                  string 
+
+ Qual o conjunto de Debian a instalar.
+#d-i mirror/suite string testing
+# Qual o conjunto de Debian a instalar para carregar os componentes do
+# instalador. (Por omissão será utilizado o mesmo de mirror/suite.)
+#d-i mirror/udeb/suite string testing
+
+#### Particionamento.
+
+# Se o sistema tiver espaço livre suficiente você pode escolher particionar apenas esse espaço.
+#d-i partman-auto/init_automatically_partition \
+#    select Utilizar o maior espaço contíguo
+
+# Alternativamente, você pode especificar um disco a particionar. O nome do dispositivo pode
+# ser dado quer por devfs ou pelo formato tradicional não-devfs.
+# Por exemplo, para utilizar o primeiro disco que devfs conhece:
+d-i  partman-auto/disk                  string /dev/discs/disc0/disc
+
+# você pode escolher a partir de qualquer umas das receitas de particionamento pré-definidas:
+d-i  partman-auto/choose_recipe         select \
+     Todos os ficheiros numa partição (recomendado para novos utilizadores)
+#d-i partman-auto/choose_recipe         select Desktop machine
+#d-i partman-auto/choose_recipe         select Multi-user workstation
+
+# Ou disponibilize você uma receita sua...
+# O formato de receita está documentado no ficheiro devel/partman-auto-recipe.txt.
+# Se tiver como colocar um ficheiro de receita no ambiente do d-i, você pode
+# apenas apontar para lá.
+#d-i partman-auto/expert_recipe_file    string /hd-media/recipe
+
+# Caso contrário, você pode colocar toda a receita numa linha. Este exemplo cria
+# uma pequena partição /boot, adequada para swap, e utiliza o resto do espaço
+# para a partição raiz:
+#d-i partman-auto/expert_recipe         string boot-root :: \
+#    20 50 100 ext3 $primary{ } $bootable{ } method{ format } format{ } \
+#    use_filesystem{ } filesystem{ ext3 } mountpoint{ /boot } . \
+#    500 10000 1000000000 ext3 method{ format } format{ } \
+#    use_filesystem{ } filesystem{ ext3 } mountpoint{ / } . \
+#    64 512 300% linux-swap method{ swap } format{ } . 
+# Para referência, aqui está a mesma receita de uma forma mais legível:
+#    boot-root ::
+#       40 50 100 ext3
+#          $primary{ } $bootable{ }
+#          method{ format } format{ }
+#          use_filesystem{ } filesystem{ ext3 }
+#          mountpoint{ /boot }
+#       .
+#       500 10000 1000000000 ext3
+#          method{ format } format{ }
+#          use_filesystem{ } filesystem{ ext3 }
+#          mountpoint{ / }
+#       .
+#       64 512 300% linux-swap
+#          method{ swap } format{ }
+#       .
+
+# Isto faz o partman particionar automaticamente sem confirmação.
+d-i partman/confirm_write_new_label boolean true
+d-i partman/choose_partition \
+# select Terminar particionamento e escrever alteraçãoes no disco
+d-i partman/confirm boolean true
+
+#### Instalação do Gestor de Arranque.
+
+# Grub é o gestor de arranque por omissão (para x86). Se você quer o lilo instalado
+# em vez disso, tire o comentário desta linha:
+#d-i grub-installer/skip                boolean true
+
+# Fazer isto é normalmente seguro, se nenhum outro sistema operativo foi detectado
+#faz com o grub se instale automaticamente na MBR
+d-i  grub-installer/only_debian         boolean true
+
+# Este faz com que o grub-installer se instale na MBR se também encontrar algum
+# outro SO, que é menos seguro porque não ser possível iniciar o outro SO.
+d-i  grub-installer/with_other_os       boolean true
+
+# Em alternativa, se você quer instalar noutro local que não a MBR,
+# tire o comentário e edite estas linhas:
+#d-i grub-installer/bootdev             string (hd0,0)
+#d-i grub-installer/only_debian         boolean false
+#d-i grub-installer/with_other_os       boolean false
+
+#### Terminar a instalação da primeira etapa.
+
+# Evitar aquela última mensagem acerca da instalação estar completa.
+d-i  prebaseconfig/reboot_in_progress   note 
+
+#### Comandos da shell.
+
+# O preseed do d-i é inerentemente não seguro. Nada no instalador
+# verifica tentativas de buffer overflows ou outros exploits nos valores
+# de um ficheiro de preseed como este. Utilize apenas ficheiros preseed
+# de uma fonte de confiança! Para conseguir isso, e porque normalmente é
+# útil, aqui está uma forma de correr automaticamente qualquer comando da
+# shell dentro do instalador.
+
+# O primeiro comando é executado tão cedo quanto possível, logo após
+# ter sido lido o preseed.
+#d-i preseed/early_command string anna-install some-udeb
+
+# Este comando é executado imaediatamente antes da instalação terminar,
+# mas quando ainda existe um directório /target que possa ser utilizado.
+#d-i preseed/late_command string echo foo 
+> /target/etc/bar
+
+# Este comando é executado quando o base-config estiver a iniciar.
+#base-config base-config/early_command string echo hi mom
+
+# Este comando é executado após o base-config ter terminado e
+# imediatamente antes da prompt login:. Esta é uma boa forma de instalar
+# um conjunto de pacotes que queira, ou alterar a cnfiguração do sistema.
+#base-config base-config/late_command string \
+#    apt-get install zsh; chsh -s /bin/zsh
+
+# Preseed para a 2ª etapa da instalação.
+
+# Evitar a mensagem introdutória.
+base-config  base-config/intro          note
+
+# Evitar a mensagem final.
+base-config  base-config/login          note
+
+# Se você instalou um gestor de display, mas não quer inicia-lo imediatamente
+# após o base-config terminar.
+#base-config base-config/start-display-manager boolean false
+
+# Algumas versões do instalador podem relatar de volta o que você instalou.
+# O padrão é não relatar de volta, mas enviar relatórios ajuda o projecto
+# a determinar qual o software mais popular e inclui-lo nos CDs.
+#popularity-contest popularity-contest/participate boolean false
+
+#### Configuração do Relógio e do Fuso Horário.
+
+# Controla se o relógio de hardware está ou não definido para UTC.
+d-i clock-setup/utc boolean true
+
+# Você pode definir isto para qualquer configuração válida de $TZ;
+para as opções veja o conteúdo de /usr/share/zoneinfo/ .
+d-i time/zone string US/Eastern
+
+# Este preseeding costumava ser mais complexo; o método antigo está
+# aqui documentado para estar completo. Se está a utilizar o Sarge, vai
+necessitar deste método.
+
+# Controla de o relógio do hardware está definido para UTC.
+#base-config tzconfig/gmt boolean true
+# Se você disse ao instalador que está nos Estados Unidos, então você
+# pode definir o fuso horário utilizando esta variável.
+# (As escolhas são: Eastern, Central, Mountain, Pacific, Alaska, Hawaii,
+# Aleutian, Arizona East-Indiana, Indiana-Starke, Michigan, Samoa, outros)
+base-config  tzconfig/choose_country_zone/US          select Eastern
+# Se disse que está no Canadá.
+# (As escolhas são: Newfoundland, Atlantic, Eastern, Central,
+# East-Saskatchewan, Saskatchewan, Mountain, Pacific, Yukon, outros)
+base-config  tzconfig/choose_country_zone/CA          select Eastern
+# Se disse que está no Brazil. (As escolhas são: East, West, Acre,
+# DeNoronha, outros)
+base-config  tzconfig/choose_country_zone/BR          select East
+# Muito países têm apenas um fuso horário. Se disse ao instalador que está
+# num desses países, você pode escolher o fuso horário standard através desta
+# questão.
+base-config  tzconfig/choose_country_zone_single      boolean true
+# Esta pergunta é feita como recurso para outros países que não os
+# listados acima, que têm mais de um fuso horário. você pode fazer o preseed de um dos
+# fusos horários, ou "outros".
+#base-config tzconfig/choose_country_zone_multiple    select 
+
+#### Preparação de Contas.
+
+# Para fazer o preseed à password de root, você tem de pô-la a descoberto neste
+# ficheiro. Isso não é uma ideia muito boa, use com cautela!
+#passwd passwd/root-password            password r00tme
+#passwd passwd/root-password-again      password r00tme
+
+# Se quer saltar a criação de uma conta de utilizador normal.
+#passwd passwd/make-user                boolean false
+
+# Em alternativa, pode fazer o preseed ao nome e password do utilizador.
+#passwd passwd/user-fullname            string Debian User
+#passwd passwd/username                 string debian
+# As passwords deles, mas utilize com cautela!
+#passwd passwd/user-password            password insecure
+#passwd passwd/user-password-again      password insecure
+
+#### Preparação do Apt.
+
+# Esta questão controla qual a fonte que a instalação da segunda etapa vai utilizar
+# para os pacotes. As escolhas são cdrom, http, ftp, filesystem, editar lista de fontes
+# à mão
+base-config  apt-setup/uri_type         select http
+
+# Se você escolher http ou ftp, ser-lhe-á perguntado o país e o mirror.
+base-config  apt-setup/country          select enter information manually
+base-config  apt-setup/hostname         string http.us.debian.org
+base-config  apt-setup/directory        string /debian
+# Parar após escolher um mirror.
+base-config  apt-setup/another          boolean false
+
+# Você pode escolher instalar software contrib e non-free.
+#base-config apt-setup/non-free         boolean true
+#base-config apt-setup/contrib          boolean true
+
+# Para permitir actualizações de segurança.
+base-config  apt-setup/security-updates boolean true
+
+#### Selecção de pacotes.
+
+# Você pode escolher instalar qualquer combinação de tarefas que estejam
+ # disponíveis. As tarefas disponíveis até à escrita deste documento 
+# incluem: Ambiente Desktop, Servidor Web, Servidor de Impressão, Servidor
+# de DNS, Servidor de Ficheiros, Servidor de Mail, Base de Dados SQL,
+# Portátil, Sistema Padrão, selecção manual de pacotes. A última irá
+# correr o aptitude. Você pode também escolher não instalar tarefas, e
+# forçar a instalação de um conjunto de pacotes de alguma outra forma.
+tasksel tasksel/first multiselect Desktop environment, Standard system
+#tasksel tasksel/first multiselect Web server, Standard system
+
+#### Configuração do Servidor de Mail.
+
+# Durante uma instalação normal, o exim faz apenas algumas perguntas.
+# Aqui está como evitar até essas. É possível um preseeding mais complicado.
+exim4-config exim4/dc_eximconfig_configtype \
+ escolher não configurar desta vez
+exim4-config exim4/no
+>config boolean true
+
+# É boa ideia definir isto para qualquer que seja a conta que você escolha criar.
+# Deixar o valor em branco resulta em o mail do postmaster ir para
+# /var/mail/mail.
+exim4-config exim4/dc_postmaster        string 
+
+#### Configuração do X.
+
+# Fazer o preseed a configuração do X do Debian é possível, mas provavelmente você tem de saber
+# alguns detalhes sobre o hardware de vídeo da máquina, já que o configurador do
+# X em Debian não faz a configuração automática de tudo.
+
+# O X pode detectar o driver certo para algumas placas, mas se está a fazer preseed,
+#você contorna o que foi detectado. Ainda assim, VESA vai funcionar na maioria dos casos.
+#xserver-xfree86 xserver-xfree86/config/device/driver select vesa
+
+# Um aviso acerca da auto-detecção do rato é que se falhar, o X vai tentar
+# fazê-la sem parar. Se vai ser feito o preseed, existe a possibilidade de
+# um ciclo infinito se o rato não for auto-detectado.
+#xserver-xfree86 xserver-xfree86/autodetect_mouse     boolean true
+
+# É recomendada a auto-detecção do monitor.
+xserver-xfree86 xserver-xfree86/autodetect_monitor    boolean true
+# Retire o comentário se tiver um ecrã LCD.
+#xserver-xfree86 xserver-xfree86/config/monitor/lcd   boolean true
+# O X tem três caminhos na configuração para o monitor. Aqui está como fazer o preseed:
+# o caminho "medium", que está sempre disponível. O caminho "simple" pode não estar
+# disponível, e o caminho "advanced" faz demasiadas questões.
+xserver-xfree86  xserver-xfree86/config/monitor/selection-method \
+    select medium
+xserver-xfree86  xserver-xfree86/config/monitor/mode-list \
+    select 1024x768 @ 60 Hz
+
+#### Tudo o resto.
+
+# Dependendo do software que você escolher instalar, ou se as coisas correrem mal
+# durante o processo de instalação, é possível que outras questões possam ser
+# colocadas. Você pode fazer o preseed também a essas, claro. Para obter uma lista de todas
+# as possíveis questões que possam ser colocadas durante uma instalação, faça uma
+# instalação, e depois corra estes comandos:
+#   debconf-get-selections --installer 
+> file
+#   debconf-get-selections 
+>
+> file
+
+# Se você quiser, pode incluir outros ficheiros de preseed neste.
+# Quaisquer definições nesses ficheiros vão-se sobrepor às anteriores deste ficheiro.
+# Pode ser listado mais do que um ficheiro, separado por espaços; todos serão
+# carregados. Os ficheiros incluídos também podem ter directivas preseed/incluídas neles
+# próprios. Note que se os ficheiros forem relativos, eles são tirados da
+# mesma directoria que o ficheiros de preseed que os inclui.
+#d-i preseed/include string x.cfg
+
+# O instalador pode opcionalmente verificar checksums de ficheiros preseed
+# antes de os utilizar. Actualmente apenas são suportados md5sums, liste os
+# md5sums na mesma ordem da lista de ficheiros a incluir.
+# (Checksums não são suportados no instalador sarge.)
+#d-i pressed/include/checksum string 5da499872becccfeda2c4872f9171c3d
+
+# Mais flexibilidade, isto corre um comando da shell e mostra os nomes dos
+# ficheiros de preseed, inclui esses ficheiros. Por exemplo, para trocar configurações
+# baseadas num particular dispositivo de armazenamento usb (neste caso, um
+# leitor de cartões embebido):
+#d-i preseed/include_command            string \
+#    if $(grep -q "GUID: 0aec3050aec305000001a003" /proc/scsi/usb-storage-*/*); \
+#    then echo kraken.cfg; else echo otherusb.cfg; fi
+</screen
+></informalexample>
+<!--   End of file appendix/example-preseed-sarge.xml -->
+
+</para>
+</sect1>
+<!--   End of file appendix/example-preseed.xml -->
+
+<!-- Start of file appendix/files.xml -->
+
+
+ <sect1 id="linuxdevices"
+><title
+>Dispositivos em Linux</title>
+<para
+>Em Linux você tem vários ficheiros especiais em <filename
+>/dev</filename
+>. Este ficheiros são chamados ficheiros de dispositivos. No mundo Unix aceder a hardware é diferente. Lá você tem um ficheiro especial que na realidade corre um controlador que por sua vez acede ao hardware. O ficheiro de dispositivo é um interface para o verdadeiro componente do sistema. Os ficheiros sob <filename
+>/dev</filename
+> também se comportam de forma diferente dos ficheiros vulgares. Abaixo estão listados os ficheiros de dispositivos mais importantes. </para
+><para>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>fd0</filename
+></entry>
+  <entry
+>Primeira Drive de Disquete</entry>
+</row
+><row>
+  <entry
+><filename
+>fd1</filename
+></entry>
+  <entry
+>segunda Drive de Disquete</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>hda</filename
+></entry>
+  <entry
+>Disco Rígido IDE / CD-ROM no primeiro canal IDE (Master)</entry>
+</row
+><row>
+  <entry
+><filename
+>hdb</filename
+></entry>
+  <entry
+>Disco Rígido IDE / CD-ROM no primeiro canal IDE (Slave)</entry>
+</row
+><row>
+  <entry
+><filename
+>hdc</filename
+></entry>
+  <entry
+>Disco Rígido IDE / CD-ROM no segundo canal IDE (Master)</entry>
+</row
+><row>
+  <entry
+><filename
+>hdd</filename
+></entry>
+  <entry
+>Disco Rígido IDE /CD-ROM no segundo canal IDE (Slave)</entry>
+</row
+><row>
+  <entry
+><filename
+>hda1</filename
+></entry>
+  <entry
+>Primeira partição do primeiro disco rígido IDE</entry>
+</row
+><row>
+  <entry
+><filename
+>hdd15</filename
+></entry>
+  <entry
+>Décima-quinta partição do quarto disco rígido IDE</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>sda</filename
+></entry>
+  <entry
+>Disco Rígido SCSI com o SCSI ID mais baixo (e.g. 0)</entry>
+</row
+><row>
+  <entry
+><filename
+>sdb</filename
+></entry>
+  <entry
+>Disco Rígido SCSI com o próximo SCSI ID mais alto (e.g. 1)</entry>
+</row
+><row>
+  <entry
+><filename
+>sdc</filename
+></entry>
+  <entry
+>Disco Rígido SCSI com o próximo SCSI ID mais alto (e.g. 2)</entry>
+</row
+><row>
+  <entry
+><filename
+>sda1</filename
+></entry>
+  <entry
+>Primeira partição do primeiro disco rígido SCSI</entry>
+</row
+><row>
+  <entry
+><filename
+>sdd10</filename
+></entry>
+  <entry
+>Décima partição do quarto disco rígido SCSI</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>sr0</filename
+></entry>
+  <entry
+>CD-ROM SCSI com o SCSI ID mais baixo</entry>
+</row
+><row>
+  <entry
+><filename
+>sr1</filename
+></entry>
+  <entry
+>CD-ROM SCSI com o próximo SCSI ID mais alto</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>ttyS0</filename
+></entry>
+  <entry
+>Porto Série 0, COM1 em MS-DOS</entry>
+</row
+><row>
+  <entry
+><filename
+>ttyS1</filename
+></entry>
+  <entry
+>Porta série 2, COM2 em MS-DOS</entry>
+</row
+><row>
+  <entry
+><filename
+>psaux</filename
+></entry>
+  <entry
+>Dispositivo de rato PS/2</entry>
+</row
+><row>
+  <entry
+><filename
+>gpmdata</filename
+></entry>
+  <entry
+>Pseudo dispositivo, daemon repetidor de informação do GPM (rato)</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>cdrom</filename
+></entry>
+  <entry
+>Link simbólico para a drive de CD-ROM</entry>
+</row
+><row>
+  <entry
+><filename
+>mouse</filename
+></entry>
+  <entry
+>Link simbólico para o ficheiros de dispositivo mouse</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>null</filename
+></entry>
+  <entry
+>Tudo o que for enviado para este dispositivo irá desaparecer</entry>
+</row
+><row>
+  <entry
+><filename
+>zero</filename
+></entry>
+  <entry
+>É possível ler infinitamente zeros a partir deste dispositivo</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+
+  <sect2>
+<title
+>Preparando o Seu Rato</title>
+
+<para
+>O rato pode ser utilizado quer na consola Linux (com gpm) quer no ambiente de janelas do X. Os dois usos podem ser compatíveis se o repetidor gpm for utilizado para permitir ao sinal fluir para o servidor X como é mostrado: <informalexample
+><screen>
+mouse =&gt; /dev/psaux  =&gt; gpm =&gt; /dev/gpmdata -&gt; /dev/mouse =&gt; X
+         /dev/ttyS0             (repeater)        (symlink)
+         /dev/ttyS1
+</screen
+></informalexample
+> Defina o protocolo de repetição para ser raw (em <filename
+>/etc/gpm.conf</filename
+> enquanto que no X defina o protocolo original mouse em <filename
+>/etc/X11/XF86Config</filename
+> ou <filename
+>/etc/X11/XF86Config-4</filename
+>. </para
+><para
+>Esta aproximação para utilizar o gpm também no X tem vantagens quando o rato é inadvertidamente desligado. Simplesmente re-iniciar o gpm com <informalexample
+><screen>
+# /etc/init.d/gpm restart
+</screen
+></informalexample
+> irá re-ligar o rato ao software sem re-iniciar o X. </para
+><para
+>Se o gpm estiver desligado ou não instalado por alguma razão, assegure-se de colocar o X a ler directamente a partir do dispositivo de rato como o /dev/psaux. Para detalhes, veja o mini-Howto Rato de 3-Botões em <filename
+>/usr/share/doc/HOWTO/en-txt/3-Button-Mouse.gz</filename
+>, <userinput
+>man gpm</userinput
+>. <filename
+>/usr/share/doc/gpm/FAQ.gz</filename
+>, e <ulink url="&url-xfree86;current/mouse.html"
+>README.mouse</ulink
+>. </para
+><para arch="powerpc"
+>Para PowerPC, em <filename
+>/etc/X11/XF86Config</filename
+> ou <filename
+>/etc/X11/XF86Config-4</filename
+>, defina o dispositivo de rato para <userinput
+>"/dev/input/mice"</userinput
+>. </para
+><para arch="powerpc"
+>Os kernel modernos dão-lhe a capacidade de emular um rato de três botões mesmo que o seu rato tenha apenas um botão. Apenas junte as seguintes linhas ao ficheiro <filename
+>/etc/sysctl.conf</filename
+>. <informalexample
+><screen
+># emulação de rato de 3-botões
+# ligar a emulação
+/dev/mac_hid/mouse_button_emulation = 1
+# Enviar o sinal de botão do meio com a tecla F11
+/dev/mac_hid/mouse_button2_keycode = 87
+# Enviar o sinal do botão direito do rato com a tecla F12
+/dev/mac_hid/mouse_button3_keycode = 88
+# Para teclas diferentes, utilize showkey para lhe dizer qual é o código.
+</screen
+></informalexample>
+
+</para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="tasksel-size-list">
+ <title
+>Espaço em Disco Necessário para Tarefas</title>
+
+<!-- Note for d-i and manual maintainers
+ Sizes of tasks should be determined by running "tasksel new" on a system
+ that been fully installed without selecting any tasks. By selecting a
+ task together with the "manual selection" option, aptitude will be started
+ and show the sizes for the task. After deselecting the packages to be
+ installed, quit aptitude and repeat for other tasks.
+ Space requirements need to be determined from tasksel as tasksel will not
+ install recommended packages while selecting a task from aptitude will.
+-->
+
+<para
+>A instalação base do sarge para i386, utilizando o kernel 2.4 por omissão, incluindo todos os pacotes standard, necessita de 573MB de espaço em disco. </para
+><para
+>A tabela seguinte lista os tamanhos reportados pelo aptitude para as tarefas listadas com o tasksel. Note que algumas tarefas têm constituintes que se sobrepõem, por isso o total do tamanho instalado de duas tarefas pode ser menor que o total obtido somando os números. </para
+><para
+>Note que você vai necessitar de somar os tamanhos listados na tabela ao tamanho da instalação base do sarge quando determinar o tamanho das partições. A maioria dos tamanhos listados como <quote
+>Tamanho Instalado</quote
+> irá acabar em <filename
+>/usr</filename
+>; o tamanho listado como <quote
+>Tamanho do download</quote
+> é necessário (temporariamente) em <filename
+>/var</filename
+>. </para
+><para>
+
+<informaltable
+><tgroup cols="4">
+<thead>
+<row>
+  <entry
+>Tarefa</entry>
+  <entry
+>Espaço instalado (MB)</entry>
+  <entry
+>Tamanho do download (MB)</entry>
+  <entry
+>Espaço necessário para instalar (MB)</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>Desktop</entry>
+  <entry
+>1392</entry>
+  <entry
+>460</entry>
+  <entry
+>1852</entry>
+</row>
+
+<row>
+  <entry
+>Servidor Web</entry>
+  <entry
+>36</entry>
+  <entry
+>12</entry>
+  <entry
+>48</entry>
+</row>
+
+<row>
+  <entry
+>Servidor de Impressão</entry>
+  <entry
+>168</entry>
+  <entry
+>58</entry>
+  <entry
+>226</entry>
+</row>
+
+<row>
+  <entry
+>Servidor de DNS</entry>
+  <entry
+>2</entry>
+  <entry
+>1</entry>
+  <entry
+>3</entry>
+</row>
+
+<row>
+  <entry
+>Servidor de Ficheiros</entry>
+  <entry
+>47</entry>
+  <entry
+>24</entry>
+  <entry
+>71</entry>
+</row>
+
+<row>
+  <entry
+>Servidor de Mail</entry>
+  <entry
+>10</entry>
+  <entry
+>3</entry>
+  <entry
+>13</entry>
+</row>
+
+<row>
+  <entry
+>Base de Dados SQL</entry>
+  <entry
+>66</entry>
+  <entry
+>21</entry>
+  <entry
+>87</entry>
+</row>
+
+</tbody>
+</tgroup
+></informaltable>
+
+<note
+><para
+>A tarefa <emphasis
+>Desktop</emphasis
+> irá instalar ambos os ambientes de desktop GNOME e KDE. </para
+></note>
+
+</para
+><para
+>Se vai instalar noutro idioma que não o Inglês, o <command
+>tasksel</command
+> pode instalar automaticamente uma <firstterm
+>tarefa de localização</firstterm
+>, se estiver alguma disponível para o seu idioma. As necessidades de espaço diferem por idioma; você deve permitir até um total de 200MB para download e instalação. </para>
+ </sect1>
+<!--   End of file appendix/files.xml -->
+
+<!-- Start of file appendix/chroot-install.xml -->
+
+ <sect1 id="linux-upgrade">
+ <title
+>Instalar &debian; a partir de um sistema Unix/Linux</title>
+
+<para
+>Esta secção explica como instalar &debian; a partir de um sistema Unix ou Linux existente, sem utilizar o instalador guiado pelo menu como é explicado no resto do manual. Este <quote
+>cross-install</quote
+> HOWTO foi pedido por utilizadores que mudam para &debian; a partir de Red Hat, Mandrake e SUSE. Nesta secção é assumida alguma familiaridade em introduzir comandos *nix e navegar através do sistema de ficheiros. Nesta secção, <prompt
+>$</prompt
+> simboliza um comando a ser escrito pelo utilizador do sistema actual, e <prompt
+>#</prompt
+> refere-se a comandos introduzidos no chroot Debian. </para
+><para
+>Assim que tiver o novo sistema Debian configurado de acordo com as suas preferências, você pode migrar os dados existentes dos utilizadores (se os tiver) para lá, e continuar a rolar. Isto é portanto uma instalação &debian; com <quote
+>zero paragens</quote
+>. É também uma maneira inteligente de lidar com hardware que de outro modo não se dá bem com os vários media ou tipos de arranque. </para>
+
+  <sect2>
+  <title
+>Começar</title>
+<para
+>Com os seus actuais utilitários de particionamento *nix, reparticione o disco rígido conforme necessário, criando pelo menos um sistema de ficheiros e swap. Você necessita pelo menos de 150 MB de espaço disponível para instalação de apenas consola, ou pelo menos 300MB se planeia instalar o X. </para
+><para
+>Para criar os sistemas de ficheiros nas suas partições. Por exemplo, para criar um sistema de ficheiros ext3 na partição <filename
+>/dev/hda6</filename
+> (é a nossa partição raiz no nosso exemplo): <informalexample
+><screen>
+# mke2fs -j /dev/hda6
+</screen
+></informalexample
+> Em vez disso para criar um sistema de ficheiros ext2, omita <userinput
+>-j</userinput
+>. </para
+><para
+>Inicializar e activar a partição swap (substitua o número da partição pelo que deseja na sua partição swap Debian): <informalexample
+><screen>
+# mkswap /dev/hda5
+# sync; sync; sync
+# swapon /dev/hda5
+</screen
+></informalexample
+> Monte uma partição como <filename
+>/mnt/debinst</filename
+> (o ponto de instalação, para ser o sistema de ficheiros raiz (<filename
+>/</filename
+>) no seu novo sistema). O nome do ponto de montagem é completamente arbitrário, é referenciado depois mais abaixo. <informalexample
+><screen
+># mkdir /mnt/debinst
+# mount /dev/hda6 /mnt/debinst
+</screen
+></informalexample>
+
+</para>
+<note
+><para
+>Se deseja ter partes do sistema de ficheiros (e.g. /usr) montados em partições separadas, você tem de criar e montar manualmente esses directórios antes de proceser para a próxima etapa. </para
+></note>
+  </sect2>
+
+  <sect2>
+  <title
+>Instalar <command
+>debootstrap</command
+></title>
+<para
+>O utilitário que o instalador Debian utiliza, que é reconhecido como a forma oficial de instalar um sistema base Debian, é o <command
+>debootstrap</command
+>. Este utiliza o <command
+>wget</command
+> e <command
+>ar</command
+>, mas de outra forma depende apenas de <classname
+>/bin/sh</classname
+>. Instale os <command
+>wget</command
+> e <command
+>ar</command
+> se não estão já no seu sistema actual, depois faça o download e instale o <command
+>debootstrap</command
+>. </para
+><para
+>Se você tem um sistema baseado em rpm, você pode utilizar o alien para converter o .deb em .rpm, ou fazer o download de uma versão rpm em <ulink url="http://people.debian.org/~blade/install/debootstrap"
+></ulink
+> </para
+><para
+>Ou, pode utilizar o seguinte procedimento para instala-lo manualmente. Crie um directório de trabalho para extrair lá o .deb: <informalexample
+><screen>
+# mkdir work
+# cd work
+</screen
+></informalexample
+> O binário <command
+>debootstrap</command
+> esta localizado no arquivo Debian (assegure-se que escolhe o ficheiro adequado para a sua arquitectura). Faça o download do .deb <command
+>debootstrap</command
+> a partir do <ulink url="http://ftp.debian.org/debian/pool/main/d/debootstrap/"
+> pool</ulink
+>, copie o pacote para o directório de trabalho, e extraia dele os ficheiros binários. Você vai necessitar de privilégios de root para instalar os binários. <informalexample
+><screen
+># tar -x debootstrap_0.X.X_arch.deb
+# cd /
+# zcat /full-path-to-work/work/data.tar.gz | tar xv
+</screen
+></informalexample>
+
+</para
+><para
+>Note que correr <command
+>debootstrap</command
+> pode necessitar que tenha instalada uma versão minimalista da <classname
+>glibc</classname
+> (actualmente GLIBC_2.3). O próprio <command
+>debootstrap</command
+> é um script da shell, mas chama vários utilitários que necessitam da <classname
+>glibc</classname
+>. </para>
+  </sect2>
+
+  <sect2>
+  <title
+>Corra <command
+>debootstrap</command
+></title>
+<para
+>O <command
+>debootstrap</command
+> pode fazer o download dos ficheiros necessários directamente do arquivo quando o executar. Você pode substituir qualquer mirror de arquivo por <userinput
+>http.us.debian.org/debian</userinput
+> no exemplo do comando abaixo, de preferência um mirror perto da sua rede. Os mirrors estão listados em <ulink url="http://www.debian.org/misc/README.mirrors"
+></ulink
+>. </para
+><para
+>Se você tem o CD &debian; &releasename; montado em <filename
+>/cdrom</filename
+>, você pode substituir um URL de ficheiro em vez do URL http: <userinput
+>file:/cdrom/debian/</userinput
+> </para
+><para
+>Substitua um dos seguintes por <replaceable
+>ARCH</replaceable
+> em <command
+>debootstrap</command
+> command: <userinput
+>alpha</userinput
+>, <userinput
+>arm</userinput
+>, <userinput
+>hppa</userinput
+>, <userinput
+>i386</userinput
+>, <userinput
+>ia64</userinput
+>, <userinput
+>m68k</userinput
+>, <userinput
+>mips</userinput
+>, <userinput
+>mipsel</userinput
+>, <userinput
+>powerpc</userinput
+>, <userinput
+>s390</userinput
+>, ou <userinput
+>sparc</userinput
+>. <informalexample
+><screen
+># /usr/sbin/debootstrap --arch ARCH &releasename; \
+     /mnt/debinst http://http.us.debian.org/debian
+</screen
+></informalexample>
+
+</para>
+  </sect2>
+
+  <sect2>
+  <title
+>Configurar o Sistema Base</title>
+<para
+>Agora que você tem um verdadeiro sistema Debian, embora pouco limpo, no disco. Faça nele o <command
+>Chroot</command
+>: <informalexample
+><screen
+># LANG= chroot /mnt/debinst /bin/bash
+</screen
+></informalexample>
+
+</para>
+
+   <sect3>
+   <title
+>Partições a Montar</title>
+<para
+>Você tem de criar <filename
+>/etc/fstab</filename
+>. <informalexample
+><screen>
+# editor /etc/fstab
+</screen
+></informalexample
+> Isto é um exemplo que você pode modificar à sua medida: <informalexample
+><screen>
+# /etc/fstab: informação estáctica do sistema de ficheiros
+#
+# file system    mount point   type    options                  dump pass
+/dev/XXX         /             ext3    defaults                 0    0
+/dev/XXX         /boot         ext3    ro,nosuid,nodev          0    2
+
+/dev/XXX         none          swap    sw                       0    0
+proc             /proc         proc    defaults                 0    0
+
+/dev/fd0         /mnt/floppy   auto    noauto,rw,sync,user,exec 0    0
+/dev/cdrom       /mnt/cdrom    iso9660 noauto,ro,user,exec      0    0
+
+/dev/XXX         /tmp          ext3    rw,nosuid,nodev          0    2
+/dev/XXX         /var          ext3    rw,nosuid,nodev          0    2
+/dev/XXX         /usr          ext3    rw,nodev                 0    2
+/dev/XXX         /home         ext3    rw,nosuid,nodev          0    2
+</screen
+></informalexample
+> Para montar todos os sistemas de ficheiros que tem especificado em <filename
+>/etc/fstab</filename
+> utilize <userinput
+>mount -a</userinput
+>, ou para montar os sistemas de ficheiros individualmente utilize: <informalexample
+><screen>
+# mount /path   # e.g.: mount /usr
+</screen
+></informalexample
+> Você pode montar o sistema de ficheiros proc várias vezes e em locais arbitrários, embora o /proc seja alterável. Se você não utilizou <userinput
+>mount -a</userinput
+> certifique-se que monta o proc antes de continuar. <informalexample
+><screen
+># mount -t proc proc /proc
+</screen
+></informalexample>
+
+</para
+><para
+>O comando <userinput
+>ls /proc</userinput
+> deve agora mostrar um directório não-vazio. Se isto falhar, você pode montar o proc fora da chroot: <informalexample
+><screen
+># mount -t proc proc /mnt/debinst/proc
+</screen
+></informalexample>
+
+</para>
+   </sect3>
+
+   <sect3>
+   <title
+>Configurar o Teclado</title>
+<para
+>Para configurar o seu teclado: <informalexample
+><screen
+># dpkg-reconfigure console-data
+</screen
+></informalexample>
+
+</para
+><para
+>Note que o teclado não pode ser definido enquanto está no chroot, mas será configurado após o próximo reboot. </para>
+   </sect3>
+
+   <sect3>
+   <title
+>Configurar a Rede</title>
+<para
+>Para configurar a rede, edite <filename
+>/etc/network/interfaces</filename
+>, <filename
+>/etc/resolv.conf</filename
+>, e <filename
+>/etc/hostname</filename
+>. <informalexample
+><screen>
+# editor /etc/network/interfaces 
+</screen
+></informalexample
+> Aqui estão alguns exemplos simples de <filename
+>/usr/share/doc/ifupdown/examples</filename
+>: <informalexample
+><screen>
+######################################################################
+# /etc/network/interfaces -- ficheiro de configuração para ifup(8), ifdown(8)
+# Veja a manpage interfaces(5) manpage para informação acerca de quais
+# opções estão disponíveis.
+######################################################################
+
+# Nós queremos sempre o interface loopback.
+#
+auto lo
+iface lo inet loopback
+
+# Para utilizar dhcp:
+#
+# auto eth0
+# iface eth0 inet dhcp
+
+# Exemplo de uma configuração com IP estático: (broadcast e gateway são opcionais)
+#
+# auto eth0
+# iface eth0 inet static
+#     address 192.168.0.42
+#     network 192.168.0.0
+#     netmask 255.255.255.0
+#     broadcast 192.168.0.255
+#     gateway 192.168.0.1
+</screen
+></informalexample
+> Introduza o(s) servidor(es) de nomes e directivas de procura em <filename
+>/etc/resolv.conf</filename
+>: <informalexample
+><screen>
+# editor /etc/resolv.conf
+</screen
+></informalexample
+> Um simples <filename
+>/etc/resolv.conf</filename
+>: <informalexample
+><screen>
+search hqdom.local\000
+nameserver 10.1.1.36
+nameserver 192.168.9.100
+</screen
+></informalexample
+> Escreva o hostname do seu sistema (2 a 63 caracteres): <informalexample
+><screen>
+# echo DebianHostName &gt; /etc/hostname
+</screen
+></informalexample
+> Se você tem várias placas de rede, você deve ordenar os nomes dos drivers dos módulos no ficheiro <filename
+>/etc/modules</filename
+> com a ordem desejada. Depois, durante o arranque cada placa será associada com um nome de interface (eth0, eth1, etc.) que você espera. </para>
+   </sect3>
+
+   <sect3>
+   <title
+>Configurar Fuso Horário, Utilizadores, e APT</title>
+<para
+>Defina o seu fuso horário, crie um utilizador normal, e escolha as as suas fontes para o <command
+>apt</command
+> executando <informalexample
+><screen
+># /usr/sbin/base-config new
+</screen
+></informalexample>
+
+</para>
+   </sect3>
+
+   <sect3>
+   <title
+>Configurar Locales</title>
+<para
+>Para configurar as suas definições de locale para utilizar outro idioma que não o Inglês, instale o pacote de suporte de locale e configure-o: <informalexample
+><screen>
+# apt-get install locales
+# dpkg-reconfigure locales
+</screen
+></informalexample
+> NOTA: O apt tem de ser configurado antes, ie. durante a fase do base-config. Antes de utilizar locales com conjuntos de caracteres que não sejam ASCII ou latin1, por favor consulte o HOWTO de localização apropriado. </para>
+   </sect3>
+  </sect2>
+
+  <sect2>
+  <title
+>Instalar um Kernel</title>
+<para
+>Se você pretende iniciar este sistema, você provavelmente quer um kernel Linux e um gestor de arranque. Identifique os kernels pré-empacotados disponíveis com <informalexample
+><screen>
+# apt-cache search kernel-image
+</screen
+></informalexample
+> E depois instale a sua escolhe utilizando o nome do pacote. <informalexample
+><screen
+># apt-get install kernel-image-<replaceable
+>2.X.X-arch-etc</replaceable
+>
+</screen
+></informalexample>
+
+</para>
+  </sect2>
+
+  <sect2>
+<title
+>Configurar o Boot Loader</title>
+<para
+>Para tornar o seu sistema &debian; iniciável, prepare o gestor de arranque para carregar o kernel com a sua nova partição raiz. Note que o debootstrap não instala um gestor de arranque, embora possa utilizar a apt-get dentro do seu chroot Debian para o fazer. </para
+><para arch="i386"
+>Veja <userinput
+>info grub</userinput
+> ou <userinput
+>man lilo.conf</userinput
+> para instruções acerca de como configurar o gestor de arranque. Se está a manter o sistema que utilizou para instalar Debian, apenas adicione uma entrada para a instalação Debian ao seu grub existente <filename
+>lilo.conf</filename
+> ou <filename
+>lilo.conf</filename
+>, pode também copia-lo para o novo sistema e edita-lo lá. Após acabar de editar, chame o lilo (lembre-se que vai utilizar <filename
+>lilo.conf</filename
+> relativo ao sistema de onde o chama). </para
+><para arch="i386"
+>Aqui está um <filename
+>/etc/lilo.conf</filename
+> simples como exemplo: <informalexample
+><screen
+>boot=/dev/hda6
+root=/dev/hda6
+install=menu
+delay=20
+lba32
+image=/vmlinuz
+label=Debian
+</screen
+></informalexample>
+
+</para
+><para arch="powerpc"
+>Veja <userinput
+>man yaboot.conf</userinput
+> para instruções acerca de como preparar o bootloader. Se está a manter o sistema que utilizou para instalar, adicione apenas uma entrada para a instalação Debian ao seu <filename
+>yaboot.conf</filename
+>. Você pode também copia-lo para o seu novo sistema e edita-lo lá. Quando acabar de o editar, chame ybin (lembre-se que vai utilizar <filename
+>yaboot.conf</filename
+> relativo ao sistema de onde você o chamar). </para
+><para arch="powerpc"
+>Aqui está um exemplo básico de <filename
+>/etc/yaboot.conf</filename
+>: <informalexample
+><screen>
+boot=/dev/hda2
+device=hd:
+partition=6
+root=/dev/hda6
+magicboot=/usr/lib/yaboot/ofboot
+timeout=50
+image=/vmlinux
+label=Debian
+</screen
+></informalexample
+> Em algumas máquinas, pode precisar de utilizar <userinput
+>ide0:</userinput
+> em vez de <userinput
+>hd:</userinput
+>. </para>
+  </sect2>
+ </sect1>
+<!--   End of file appendix/chroot-install.xml -->
+
+<!-- Start of file appendix/plip.xml -->
+
+ <sect1 id="plip" arch="i386">
+ <title
+>Instalar &debian; a partir de uma linha IP Paralela (PLIP)</title>
+
+<para
+>Esta secção explica como instalar &debian; num computador sem placa Ethernet, mas sim com apenas uma gateway remota ligada através de um cabo Null-modem (também chamado cabo Null-printer). O computador gateway deve estar ligado a uma rede que tenha um mirror Debian (p.e. à Internet). </para
+><para
+>No exemplo deste apêndice vamos configurar uma ligação PLIP utilizando uma gateway ligada à Internet através de uma ligação dial-up (ppp0). Nós iremos utilizar os endereços IP 192.168.0.1 e 192.168.0.2 para os interfaces PLIP respectivamente nos sistemas alvo e fonte (estes endereços devem estar livres dentro do seu espaço de endereçamento de rede). </para
+><para
+>A configuração da ligação PLIP durante a instalação também estará disponível após reiniciar para o sistema instalado (veja <xref linkend="boot-new"/>). </para
+><para
+>Antes de começar, você precisa verificar a configuração da BIOS (endereço base IO e IRQ) para as portas paralelas de ambos os sistemas fonte e alvo. Os valores mais comuns são <literal
+>io=0x378</literal
+>, <literal
+>irq=7</literal
+>. </para>
+
+  <sect2>
+  <title
+>Requisitos</title>
+
+<itemizedlist>
+<listitem
+><para
+>Um computador alvo, chamado <emphasis
+>target</emphasis
+>, onde será instalado Debian. </para
+></listitem>
+<listitem
+><para
+>Media de instalação do sistema; veja <xref linkend="installation-media"/>. </para
+></listitem>
+<listitem
+><para
+>Outro computador ligado à Internet, chamado <emphasis
+>source</emphasis
+>, que irá funcionar como gateway. </para
+></listitem>
+<listitem
+><para
+>Um cabo Null-Modem DB-25. Para mais informações acerca deste cabo e instruções  de como fazer o seu veja o <ulink url="&url-plip-install-howto;"
+>PLIP-Install-HOWTO</ulink
+>. </para
+></listitem>
+</itemizedlist>
+
+  </sect2>
+
+  <sect2>
+  <title
+>Configurando a fonte</title>
+<para
+>A seguinte shell script é um simples exemplo de como configurar o computador fonte como uma gateway para a Internet utilizando ppp0. <informalexample
+><screen
+>#!/bin/sh
+
+# Nós removemos do kernel módulos em execução para evitar conflitos e
+# para os reconfigurar manualmente.
+modprobe -r lp parport_pc
+modprobe parport_pc io=<replaceable
+>0x378</replaceable
+> irq=<replaceable
+>7</replaceable>
+modprobe plip
+
+# Configurar o interface plip (plip0 para mim, veja dmesg | grep plip)
+ifconfig <replaceable
+>plip0 192.168.0.2</replaceable
+> pointopoint <replaceable
+>192.168.0.1</replaceable
+> netmask 255.255.255.255 up
+
+#Configurar a gateway
+modprobe iptable_nat
+iptables -t nat -A POSTROUTING -o <replaceable
+>ppp0</replaceable
+> -j MASQUERADE
+echo 1 
+> /proc/sys/net/ipv4/ip_forward
+</screen
+></informalexample>
+
+</para>
+  </sect2>
+
+  <sect2>
+  <title
+>Instalar o alvo</title>
+<para
+>Inicie a partir da media de instalação. A instalação tem de ser corrida em modo avançado; introduza <userinput
+>expert</userinput
+> na prompt de aranque. Abaixo estão as respostas que devem ser dadas durante as várias etapas da instalação. </para>
+
+<orderedlist>
+<listitem
+><para>
+
+<guimenuitem
+>Carregar componentes do instalador</guimenuitem>
+
+</para
+><para
+>Escolha a opção <userinput
+>plip-modules</userinput
+> na lista; isto irá disponibilizar os drivers PLIP para o sistema de instalação. </para
+></listitem>
+<listitem
+><para>
+
+<guimenuitem
+>Detectar hardware de rede</guimenuitem>
+
+</para>
+
+ <itemizedlist>
+ <listitem
+><para
+>Se o alvo <emphasis
+>tiver</emphasis
+> uma placa de rede, será mostrada uma lista de módulos das placas detectadas. Se quizer forçar o &d-i; a utilizar em vez disso plip, tem de retirar a seleccão de todos os drivers de módulos listados. Obviamente, se o alvo não tiver placa de rede, o instalador não irá mostrar esta lista. </para
+></listitem>
+ <listitem
+><para
+>Pergunta para os parâmetros de módulos: Sim </para
+></listitem>
+ <listitem
+><para
+>Como não foi detectada/seleccionada nenhuma placa de rede anteriormente, o instalador irá pedir-lhe para seleccionar um módulo de driver de rede a partir de uma lista. Escolha o módulo <userinput
+>plip</userinput
+>. </para
+></listitem>
+ <listitem
+><para
+>Parâmetros adicionais para o módulo parport_pc: <userinput
+><replaceable
+>io=0x378 irq=7</replaceable
+></userinput
+> </para
+></listitem>
+ <listitem
+><para
+>Parâmetros adicionais para o módulo plip: deixe vazio </para
+></listitem>
+ </itemizedlist>
+
+</listitem>
+<listitem
+><para>
+
+<guimenuitem
+>Configurar a rede</guimenuitem>
+ 
+ <itemizedlist>
+ <listitem
+><para
+>Auto-configurar a rede com DHCP: Não </para
+></listitem>
+ <listitem
+><para
+>Endereço IP: <userinput
+><replaceable
+>192.168.0.1</replaceable
+></userinput
+> </para
+></listitem>
+ <listitem
+><para
+>Endereço ponto-a-ponto: <userinput
+><replaceable
+>192.168.0.2</replaceable
+></userinput
+> </para
+></listitem>
+ <listitem
+><para
+>Endereços de servidor de nomes: você pode introduzir os mesmos endereços utilizados na fonte (veja <filename
+>/etc/resolv.conf</filename
+>) </para
+></listitem>
+ </itemizedlist>
+
+</para
+></listitem>
+</orderedlist>
+
+  </sect2>
+ </sect1>
+<!--   End of file appendix/plip.xml -->
+
+</appendix>
+<!--   End of file appendix/random-bits.xml -->

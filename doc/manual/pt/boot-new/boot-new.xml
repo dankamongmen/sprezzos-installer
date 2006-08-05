@@ -1,0 +1,882 @@
+<!-- Start of file boot-new/boot-new.xml -->
+
+<chapter id="boot-new">
+ <title
+>A Iniciar O Seu Novo Sistema Debian</title>
+
+ <sect1 id="base-boot"
+><title
+>O Momento da Verdade</title>
+<para
+>A primeira inicialização do seu sistema no seu todo é o que os engenheiros eléctricos chamam de <quote
+>teste de fumo</quote
+> </para
+><para
+>Se está a iniciar directamente para o Debian, e o sistema não inicia, utilize o seu sistema de instalação original ou, se tiver, insira uma disquete de arranque e reinicie o sistema. Desta forma, irá provavelmente necessitar de adicionar alguns argumentos de inicialização tais como <userinput
+>root=<replaceable
+>root</replaceable
+></userinput
+>, onde <replaceable
+>root</replaceable
+> é a sua partição de raiz, como por exemplo <filename
+>/dev/sda1</filename
+>. <phrase condition="etch"
+> Alternativamente, leia o <xref linkend="rescue"/> para instruções em como usar o modo de recuperação do instalador. </phrase
+> </para>
+
+  <sect2 arch="m68k"
+><title
+>A iniciar BVME 6000</title>
+<para
+>Se apenas efectuou uma instalação sem disco em um BVM ou uma máquina Motorola VMDbus: assim que o sistema tiver lido o programa  <command
+>tftplilo</command
+> do servidor de TFTP, do <prompt
+>LILO Boot:</prompt
+> introduza um dos seguintes: <itemizedlist>
+<listitem
+><para
+><userinput
+>b6000</userinput
+> seguido de &enterkey; para iniciar o BVME 4000/6000 </para
+></listitem
+><listitem
+><para
+><userinput
+>b162</userinput
+> seguido de &enterkey; para iniciar o MVME162 </para
+></listitem
+><listitem
+><para
+><userinput
+>b167</userinput
+> seguido de &enterkey; para iniciar o MVME166/167 </para
+></listitem>
+</itemizedlist>
+
+</para>
+
+   </sect2>
+
+  <sect2 arch="m68k"
+><title
+>A iniciar Macintosh</title>
+
+<para
+>Vá para a directoria que contém os ficheiros de instalação e inicie o <command
+>Penguin</command
+>, pressionando a tecla <keycap
+>command</keycap
+>. Vá para <userinput
+>Settings</userinput
+> (<keycombo
+> <keycap
+>command</keycap
+> <keycap
+>T</keycap
+> </keycombo
+>), e localize a linha de opções do kernel que deverá ser parecido com <userinput
+>root=/dev/ram video=font:VGA8x16</userinput
+> ou similar. </para
+><para
+>Necessita mudar a entrada para <userinput
+>root=/dev/<replaceable
+>yyyy</replaceable
+></userinput
+>. Altere o <replaceable
+>yyyy</replaceable
+> com o nome Linux da partição na qual instalou o sistema (p.e. <filename
+>/dev/sda1</filename
+>); que apontou anteriormente. O <userinput
+>video=font:VGA8x8</userinput
+> é recomendado especialmente para utilizadores com ecrãs pequenos. O kernel escolherá uma fonte mais bonita (6x11) mas o driver da consola para esta fonte pode bloquear a máquina, por isso utilizar 8x16 ou 8x8 é mais seguro nesta fase. Isto pode ser alterado a qualquer altura. </para
+><para
+>Se não pretender iniciar o GNU/Linux imediatamente de cada vez que iniciar, desseleccione a opção <userinput
+>Auto Boot</userinput
+>. Guarde as definições no ficheiro <filename
+>Prefs</filename
+> usando a opção <userinput
+>Save Settings As Default</userinput
+>. </para
+><para
+>Agora seleccione <userinput
+>Boot Now</userinput
+> (<keycombo
+> <keycap
+>command</keycap
+> <keycap
+>B</keycap
+> </keycombo
+>) para iniciar o seu GNU/Linuxrecentemente instalado em vez do sistema de instalação RAMdisk. </para
+><para
+>O Debian deverá iniciar, e deverá ver as mesmas mensagens como viu na primeira vez que iniciou o sistema de instalação, seguido de algumas mensagens novas. </para>
+   </sect2>
+
+
+  <sect2 arch="powerpc"
+><title
+>OldWorld PowerMacs</title>
+<para
+>Se a máquina falhar ao iniciar após a instalação estar completa, e parar com o prompt <prompt
+>boot:</prompt
+>, tente escrever <userinput
+>Linux</userinput
+> seguido de &enterkey;. (A configuração de inicialização padrão no <filename
+>quik.conf</filename
+> está definido como Linux). As definições no <filename
+>quik.conf</filename
+> serão apresentadas se pressionar a tecla <keycap
+>Tab</keycap
+> quando aparecer <prompt
+>boot:</prompt
+>. Pode tentar iniciar de novo para o instalador, e editar o <filename
+>/target/etc/quik.conf</filename
+> colocado pelo item <guimenuitem
+>Install Quik on a Hard Disk</guimenuitem
+>. Mais documentação sobre o <command
+>quik</command
+> encontra-se disponível em <ulink url="&url-powerpc-quik-faq;"
+></ulink
+>. </para
+><para
+>Para iniciar o MacOS sem reinicializar a nvram, escreva <userinput
+>bye</userinput
+> no OpenFirmware (assume-se que o MacOS não foi retirado da máquina). Para obter o OpenFirmware, pressione as teclas <keycombo
+> <keycap
+>command</keycap
+> <keycap
+>option</keycap
+> <keycap
+>o</keycap
+> <keycap
+>f</keycap
+> </keycombo
+> enquanto reinicia a máquina. Se precisar de reinicializar a nvram do OpenFirmware para o MacOS por omissão para que possa iniciar directamente em MacOS, pressione as teclas <keycombo
+> <keycap
+>command</keycap
+> <keycap
+>option</keycap
+> <keycap
+>p</keycap
+> <keycap
+>r</keycap
+> </keycombo
+> enquanto reinicia a máquina. </para
+><para
+>Se utiliza o <command
+>BootX</command
+> para iniciar para o sistema instalado, seleccione apenas o kernel pretendido na directoria <filename
+>Linux Kernels</filename
+>, desseleccionando a opção ramdisk, e adicionando o dispositivo de raiz correspondente à sua instalação; p.e. <userinput
+>/dev/hda8</userinput
+>. </para>
+   </sect2>
+
+
+  <sect2 arch="powerpc"
+><title
+>NewWorld PowerMacs</title>
+<para
+>Nas máquinas G4 e iBooks, pode pressionar a tecla <keycap
+>option</keycap
+> e obter um ecrã gráfico com um botão para cada um dos SO que podem arrancar, o &debian; será um botão com um icon contendo um pequeno pinguim. </para
+><para
+>Se ficou com o MacOS e este alterou a variável do OpenFirmware <envar
+>boot-device</envar
+> deverá reinicializar o OpenFirmware para a sua configuração padrão. Para fazer esta operação pressione as teclas <keycombo
+> <keycap
+>command</keycap
+> <keycap
+>option</keycap
+> <keycap
+>p</keycap
+> <keycap
+>r</keycap
+> </keycombo
+> enquanto reinicia a máquina. </para
+><para
+>As definições no <filename
+>yaboot.conf</filename
+> serão apresentadas se pressionar a tecla <keycap
+>Tab</keycap
+> no prompt <prompt
+>boot:</prompt
+>. </para
+><para
+>Reinicializar o OpenFirmware no hardware G3 ou G4 irá fazer com que o &debian; inicie por defeito (caso tenha particionado correctamente e colocado a partição Apple_Bootstrap em primeiro lugar). Se tiver o &debian; num disco SCSI e o MacOS num disco IDE esta operação pode não funcionar e terá que entrar no OpenFirmware e definir a variável <envar
+>boot-device</envar
+>, normalmente o <command
+>ybin</command
+> efectua esta operação automaticamente. </para
+><para
+>Após iniciar o &debian; pela primeira vez poderá adicionar qualquer opção adicional que desejar (tal como opções de duplo arranque) ao <filename
+>/etc/yaboot.conf</filename
+> e correr o <command
+>ybin</command
+> para actualizar a partição de arranque com a configuração modificada. Para mais informação por favor leia o <ulink url="&url-powerpc-yaboot-faq;"
+>yaboot HOWTO</ulink
+>. </para>
+   </sect2>
+ </sect1>
+
+ <sect1 id="base-config">
+ <title
+>Configuração para depois da inicialização (Base) do Debian</title>
+
+<para
+>Depois do arranque, ser-lhe-á pedido para completar a configuração do seu sistema básico, e depois para seleccionar pacotes adicionais que deseja instalar. A aplicação que irá guiá-lo neste processo chama-se <classname
+>base-config</classname
+>. O seu conceito é muito semelhante ao do &d-i; da primeira fase. Na realidade, o <classname
+>base-config</classname
+> consiste num conjunto de componentes especializados, onde cada componente trata de uma tarefa de configuração, contém <quote
+>menus escondidos não visíveis</quote
+> e também usa o mesmo sistema de navegação. </para
+><para
+>Se pretender voltar a correr o <classname
+>base-config</classname
+> em qualquer altura depois da instalação estar completa, como root escreva <userinput
+>base-config</userinput
+>. </para>
+
+
+<!-- Start of file boot-new/modules/timezone.xml -->
+
+ <sect2 id="base-config-tz">
+ <title
+>Configurar O Seu Fuso Horário</title>
+
+<para
+>Depois do ecrã de boas vindas, ser-lhe-á pedido para configurar o seu fuso horário. Seleccione primeiramente se o relógio de hardware do seu sistema está acertado para a hora local ou para o Horário do Meridiano de Greenwhich (GMT ou UTC). O horário apresentado pode ajudar a decidir a opção correcta. <phrase arch="m68k;powerpc"
+>Os relógios de hardware do Macintosh estão normalmente acertados pela hora local. Se pretender utilizar o duplo arranque, seleccione hora local em vez de GMT.</phrase
+> <phrase arch="i386"
+>Sistemas que (também) correm Dos ou Windows estão normalmente acertados pela hora local. Se pretender utilizar o duplo arranque, seleccione hora local em vez de GMT.</phrase
+> </para
+><para
+>Dependendo da localização seleccionada no inicio do processo de instalação, ser-lhe-á apresentado de seguida apenas um fuso horário ou uma lista de fusos horários relevantes para essa localização. Se apenas for mostrado um fuso horário, escolha <guibutton
+>Yes</guibutton
+> para confirmar ou escolha <guibutton
+>No</guibutton
+> para escolher um fuso horário da lista completa de fusos horários. Se for mostrada uma lista, seleccione o seu fuso horário dessa lista, ou Outro para a lista completa. </para>
+ </sect2>
+<!--   End of file boot-new/modules/timezone.xml -->
+
+<!-- Start of file boot-new/modules/shadow.xml -->
+
+ <sect2 id="base-config-users">
+ <title
+>Definir Utilizadores E Palavras Passe</title>
+
+  <sect3 id="base-config-root">
+  <title
+>Definir a Palavra Pass de Root</title>
+
+<para
+>A conta de root é também chamada de <emphasis
+>super-user</emphasis
+>; é um acesso ao sistema que ultrapassa qualquer protecção de segurança no seu sistema. A conta de root deve apenas ser utilizada para efectuar administração do sistema, e apenas por um período que deve ser o mais curto possível. </para
+><para
+>Qualquer password que criar deve conter pelo menos 6 caracteres, e deve conter tanto caracteres maíusculos como minúsculos, bem como caracteres de pontuação. Tenha especial atenção quando definir a sua password de root, uma vez que é uma conta com muitos poderes. Evite o uso de palavras que constem em dicionários ou que contenham alguma informação pessoal que facilmente possa ser adivinhada. </para
+><para
+>Se alguma vez alguém lhe disser que precisa da sua password de root, esteja atento. Normalmente não deve dar a sua password de root, a não ser que esteja a administrar uma máquina com mais do que um administrador de sistemas. </para>
+  </sect3>
+
+  <sect3 id="make-normal-user">
+  <title
+>Criar um Utilizador Normal</title>
+
+<para
+>Nesta fase o sistema perguntar-lhe-á se pretende criar uma conta para um utilizador normal. Esta conta deverá ser a sua conta principal de acesso. <emphasis
+>Não</emphasis
+> Deve usar a conta de root para o uso diário ou para seu o acesso pessoal. </para
+><para
+>Porque não? Bem, uma das razões para evitar usar os privilégios de root é porque é muito fácil fazer estragos irreparáveis como root. Outra razão é porque poderá ser levado a correr um programa <emphasis
+>Cavalo de Tróia</emphasis
+> &mdash; que é um programa que tira vantagens de poderes de um super-utilizador para comprometer a segurança do seu sistema sem dar por isso. Qualquer bom livro de administração de sistemas Unix cobrirá este tópico com mais detalhe &mdash; considere a leitura de um se este assunto for novo para si. </para
+><para
+>Ser-lhe-á perguntado inicialmente o nome completo do utilizador. Seguidamente ser-lhe-á perguntado por um nome para a conta de utilizador; geralmente o seu primeiro nome ou algo similar será suficiente e será esse o valor por defeito. Finalmente, ser-lhe-á perguntado a password para esta conta. </para
+><para
+>Se em qualquer ponto depois da instalação pretender criar outra conta, utilize o comando <command
+>adduser</command
+>. </para>
+  </sect3>
+ </sect2>
+<!--   End of file boot-new/modules/shadow.xml -->
+
+<!-- Start of file boot-new/modules/ppp.xml -->
+
+ <sect2 arch="not-s390" id="PPP">
+ <title
+>A Configurar o PPP</title>
+
+<para
+>Se nenhuma rede tiver sido configurada durante a primeira fase da instalação, ser-lhe-á perguntado de seguida se pretende instalar o resto do sistema usando o PPP. O PPP é um protocolo utilizado para estabelecer ligações por telefone entre modems. Se configurar o modem agora, a instalação do sistema será capaz de fazer download dos pacotes adicionais ou actualizações de segurança da Internet nos próximos passos da instalação. Se não tiver um modem no seu computador ou se preferir configurar o seu modem depois da instalação, pode saltar este passo. </para
+><para
+>Para configurar a sua ligação PPP, irá precisar de alguma informação do seu fornecedor de Internet (ISP), incluindo o número de telefone, nome de utilizador, password e servidores de DNS (opcional). Alguns ISPs fornecem guias de instalação para distribuições Linux. Pode usar essa informação mesmo que não seja específica para Debian uma vez que a maior parte dos parâmetros de configuração (e software) é semelhante em todas as distribuições de Linux. </para
+><para
+>Se pretender configurar o PPP agora, um programa chamado <command
+>pppconfig</command
+> será executado. Este programa ajuda-o a configurar a sua ligação PPP. <emphasis
+>Certifique-se que, quando perguntar pelo nome da sua ligação telefónica, que lhe chama <userinput
+>provider</userinput
+>.</emphasis
+> </para
+><para
+>Se tudo correr bem, o programa <command
+>pppconfig</command
+> irá guiá-lo a uma configuração da ligação PPP sem problemas. No entanto, se não funcionar, veja abaixo instruções detalhadas. </para
+><para
+>Para poder configurar o PPP, irá necessitar de conhecer os princípios básicos da edição e visualização de ficheiros em GNU/Linux. Para visualizar ficheiros, deverá usar o <command
+>more</command
+>, e o <command
+>zmore</command
+> para ficheiros comprimidos com a extensão <userinput
+>.gz</userinput
+>. Por exemplo, para ver o <filename
+>README.debian.gz</filename
+>, escreva <userinput
+>zmore README.debian.gz</userinput
+>. O sistema base vem com um editor chamado <command
+>nano</command
+>, que é muito simples de utilizar, mas não inclui muitas funcionalidades. Irá provavelmente querer instalar editores com mais funcionalidades e mais poderosos mais tarde, tais como o <command
+>jed</command
+>, o <command
+>nvi</command
+>, o <command
+>less</command
+>, e o <command
+>emacs</command
+>. </para
+><para
+>Edite o <filename
+>/etc/ppp/peers/provider</filename
+> e substitua o <userinput
+>/dev/modem</userinput
+> por <userinput
+>/dev/ttyS<replaceable
+>&num;</replaceable
+></userinput
+> onde <replaceable
+>&num;</replaceable
+> significa o número da sua porta de série. Em Linux, a numeração das portas de série começa em 0; a primeira porta de série <phrase arch="i386"
+>(i.e., <userinput
+>COM1</userinput
+>)</phrase
+> é <filename
+>/dev/ttyS0</filename
+> em Linux. <phrase arch="powerpc;m68k"
+>Em Macintoshes com portas de série, a porta do modem é <filename
+>/dev/ttyS0</filename
+> e a porta da impressora é <filename
+>/dev/ttyS1</filename
+>.</phrase
+> O próximo passo é editar o <filename
+>/etc/chatscripts/provider</filename
+> e inserir o número de telefone do seu fornecedor, o seu nome de utilizador e password. Por favor não apague o <quote
+>\q</quote
+> que antecede a password. Isto faz com que a sua password não apareça nos ficheiros de registo. </para
+><para
+>Muitos fornecedores usam o PAP ou o CHAP para a sequência de autenticação em vez de utilizarem a autenticação em modo de texto. Outros usam ambos. Se o seu fornecedor requer o uso de PAP ou CHAP, irá necessitar de seguir um procedimento diferente. Comente tudo abaixo da sequência de marcação (a que começa com <quote
+>ATDT</quote
+>) no <filename
+>/etc/chatscripts/provider</filename
+>, modifique o <filename
+>/etc/ppp/peers/provider</filename
+>, tal como foi descrito em cima, e adicione <userinput
+>user <replaceable
+>name</replaceable
+></userinput
+> onde <replaceable
+>name</replaceable
+> significa o seu nome de utilizador para o fornecedor que pretende efectuar a ligação. Seguidamente, edite o <filename
+>/etc/ppp/pap-secrets</filename
+> ou o <filename
+>/etc/ppp/chap-secrets</filename
+> e introduza lá a sua password. </para
+><para
+>Irá também necessitar de editar o <filename
+>/etc/resolv.conf</filename
+> e adicionar o endereço IP do servidor de nomes (DNS) do seu fornecedor. As linhas no <filename
+>/etc/resolv.conf</filename
+> tem o seguinte formato: <userinput
+>nameserver <replaceable
+>xxx.xxx.xxx.xxx</replaceable
+></userinput
+> onde os <replaceable
+>x</replaceable
+> são os números do endereço IP. Opcionalmente pode adicionar a opção <userinput
+>usepeerdns</userinput
+> ao ficheiro <filename
+>/etc/ppp/peers/provider</filename
+>, o que irá activar a escolha automática dos servidores DNS, utilizando as definições que a máquina remota normalmente fornece. </para
+><para
+>A não ser que o seu fornecedor possua uma sequência de login diferente da maioria dos ISPs, este passo está concluído! Inicie a ligação PPP escrevendo <command
+>pon</command
+> como root, e verifique o processo utilizando o comando <command
+>plog</command
+>. Para desligar, utilize <command
+>poff</command
+>, de novo, como root. </para
+><para
+>Ler o ficheiro <filename
+>/usr/share/doc/ppp/README.Debian.gz</filename
+> para mais informações de como usar o PPP em Debian. </para
+><para
+>Para ligações SLIP estáticas, necessitará de adicionar o comando <userinput
+>slattach</userinput
+> (do pacote <classname
+>net-tools</classname
+>) no <filename
+>/etc/init.d/network</filename
+>. O SLIP dinâmico necessita do pacote <classname
+>gnudip</classname
+>. </para>
+
+  <sect3 id="PPPOE">
+  <title
+>Configurar o PPP através de Ethernet (PPPOE)</title>
+
+<para
+>O PPPOE é um protocolo relacionado com o PPP utilizado por algumas ligações de banda larga. Neste momento não existe suporte na configuração base para ajuda-lo a definir este tipo de ligações. No entanto, o software necessário já se encontra instalado, o que significa que pode configurar o PPPOE manualmente nesta fase da instalação indo para para VT2 e executando o <command
+>pppoeconf</command
+>. </para>
+
+  </sect3>
+ </sect2>
+<!--   End of file boot-new/modules/ppp.xml -->
+
+<!-- Start of file boot-new/modules/apt.xml -->
+
+ <sect2 id="configure-apt">
+ <title
+>A Configurar o APT</title>
+
+<para
+>O meio principal que os utilizadores utilizam para instalar pacotes nos seus sistemas é através de um programa chamado <command
+>apt-get</command
+>, do pacote <classname
+>apt</classname
+>. <footnote
+> <para
+> Note que o programa actual que instala os pacotes é o <command
+>dpkg</command
+>. No entanto, este pacote é uma ferramenta de mais baixo nível. O <command
+>apt-get</command
+> é uma ferramenta de um nível mais alto uma vez que invoca o <command
+>dpkg</command
+> quando necessário e também porque é capaz de instalar outros pacotes que são necessários para o pacote que está a tentar instalar, bem como ir buscar o pacote do CD, da rede, ou de outro lado. </para
+> </footnote
+> Outras ferramentas para a gestão de pacotes, como o <command
+>aptitude</command
+>, o <command
+>synaptic</command
+> e o antigo <command
+>dselect</command
+> também usam e dependem do <command
+>apt-get</command
+>. Estas ferramentas são recomendadas para novos utilizadores, uma vez que integram algumas funcionalidades adicionais (procura de pacotes e verificação de estado) num agradável ambiente gráfico. </para
+><para
+>O APT tem que ser configurado de modo a que saiba onde ir buscar os pacotes. A aplicação que ajuda nesta tarefa é a <command
+>apt-setup</command
+>. </para
+><para
+>O próximo passo no seu processo de configuração é dizer ao APT onde outros pacotes Debian podem ser encontrados. Note que pode correr este utilitário de novo a qualquer altura depois da instalação executando o <command
+>apt-setup</command
+>, ou editando manualmente o <filename
+>/etc/apt/sources.list</filename
+>. </para
+><para
+>Se um CD-ROM oficial estiver na drive neste momento, então esse CD-ROM deve ser configurado automaticamente como uma fonte do apt sem lhe ser perguntado. Irá notar esta situação porque irá observar o CD-ROM a ser pesquisado. </para
+><para
+>Para utilizadores sem um CD-ROM oficial, ser-lhe-á oferecido um conjunto de escolhas da forma como os pacotes Debian são acedidos: FTP, HTTP, CD-ROM, ou um sistema de ficheiros local. </para
+><para
+>Deverá saber que é perfeitamente aceitável ter uma quantidade de fontes APT diferentes, mesmo que seja para o mesmo repositório Debian. O <command
+>apt-get</command
+> irá escolher automaticamente o pacote com o número de versão mais alto dadas todas as versões disponíveis. Ou, por exemplo, se tive tanto uma fonte APT HTTP e um CD-ROM, o <command
+>apt-get</command
+> deverá usar automaticamente o CD-ROM local quando possível, e apenas recorrer ao HTTP se uma versão mais recente estiver disponível. No entanto, não é uma boa ideia adicionar fontes APT desnecessárias, uma vez que irá atrasar o processo de verificação de novas versões nos repositórios de rede. </para>
+
+  <sect3 id="configure-apt-net">
+  <title
+>Configurar As Fontes de Pacotes de Rede</title>
+
+<para
+>Se pretender instalar o resto do seu sistema via rede, a opção mais comum é seleccionar a fonte <userinput
+>http</userinput
+>. Uma fonte <userinput
+>ftp</userinput
+> é também aceitável, mas tende a ser algo mais lento ao efectuar as ligações. </para
+><para
+>O próximo passo durante a configuração das fontes de pacotes por rede é informar o <command
+>apt-setup</command
+> em que país vive. Isto configura qual dos repositórios oficiais do Debian na Internet irá ligar-se. Dependendo do país que escolher, ser-lhe-á apresentada uma lista de possíveis servidores. Poderá escolher logo o primeiro da lista, no entanto qualquer outro deverá funcionar. De notar contudo que a lista de repositórios fornecida pela instalação foi gerada quando uma versão do Debian foi lançada e que alguns desses repositórios podem já não estar disponíveis. </para
+><para
+>Depois de ter escolhido o repositório, ser-lhe-á perguntado se um servidor de proxy deve ser usado. Um servidor de proxy é um servidor que encaminha todos os seus pedidos de HTTP e/ou FTP para a Internet e é maioritariamente utilizado para regular e optimizar o acesso à Internet em redes empresariais. Em alguma redes apenas o servidor de proxy está autorizado a aceder à Internet, em qualquer dos casos terá que introduzir o nome do servidor de proxy. Poderá também ter de incluir o nome de um utilizador e uma password. A maioria dos utilizadores domésticos não necessitará de especificar um servidor de proxy, no entanto alguns ISPs podem fornecer servidores de proxy para os seus utilizadores. </para
+><para
+>Depois de escolher o repositório, a sua nova fonte de pacotes de rede irá ser testada. Se tudo correr bem, ser-lhe-á perguntado se pretende adicionar outra fonte de pacotes. Se tiver algum problema na utilização da fonte de pacotes que escolheu, tente utilizar um repositório diferente (seja da lista do seu país ou da lista global), ou tente utilizar uma fonte de pacotes de rede diferente. </para>
+  </sect3>
+ </sect2>
+<!--   End of file boot-new/modules/apt.xml -->
+
+<!-- Start of file boot-new/modules/packages.xml -->
+
+ <sect2 id="install-packages">
+ <title
+>Instalação de Pacotes</title>
+
+<para
+>De seguida ser-lhe-á oferecido um conjunto de configurações de software pré-definidas oferecidas pelo Debian. Poderá sempre escolher, pacote a pacote, o que pretender instalar na sua nova máquina. Esta é a função do programa <command
+>aptitude</command
+>, descrito abaixo. Mas este pode ser uma tarefa longa com cerca de &num-of-distrib-pkgs; pacotes disponíveis no Debian! </para
+><para
+>Assim, tem a capacidade de primeiramente escolher as <emphasis
+>tasks</emphasis
+>, e mais tarde adicionar  pacotes individuais. Estas tarefas representam um conjunto de diferentes trabalhos ou coisas que pretende fazer com o seu computador, tais como <quote
+>computador de trabalho</quote
+>, <quote
+>servidor de web</quote
+>, ou <quote
+>servidor de impressão</quote
+><footnote
+> <para
+> Deverá saber que para apresentar esta lista, o <command
+>base-config</command
+> está meramente a invocar o programa <command
+>tasksel</command
+>. Para uma selecção de pacotes manual, o programa <command
+>aptitude</command
+> está a ser executado. Qualquer um destes pode ser executado a qualquer altura depois da instalação para instalar (ou remover) mais pacotes. Se está à procura de um pacote específico, depois da instalação estar concluída, simplesmente execute <userinput
+>aptitude install <replaceable
+>package</replaceable
+></userinput
+>, onde <replaceable
+>package</replaceable
+> é o nome do pacote que procura. </para
+> </footnote
+>. <xref linkend="tasksel-size-list"/> lista o espaço necessário para as tarefas disponíveis. </para
+><para
+>Assim que tiver seleccionado as suas tarefas, seleccione <guibutton
+>Ok</guibutton
+>. Neste ponto, o <command
+>aptitude</command
+> irá instalar os pacotes que seleccionou. <note
+><para
+>Mesmo que não escolha qualquer tarefa, qualquer pacote normal, importante ou prioritariamente necessário que ainda não esteja presente no seu sistema irá ser instalado. Esta funcionalidade é a mesma que executar <userinput
+>tasksel -ris</userinput
+> na linha de comandos, e actualmente transfere cerca de 37M de ficheiros. Ser-lhe-á mostrado o número de pacotes para serem instalados, e quantos kilobytes de pacotes, se existirem, necessitam de ser transferidos. </para
+></note>
+
+</para
+><para
+>Se pretender escolher o que instalar numa base de pacote a pacote, seleccione a opção <quote
+>selecção manual de pacotes</quote
+> no <command
+>tasksel</command
+>. Se seleccionar uma ou mais tarefas além desta opção, o <command
+>aptitude</command
+> irá ser chamado com a opção <command
+>--visual-preview</command
+>. Isto significa que poderá rever<footnote
+> <para
+> Pode sempre modificar as selecções padrão. Se pretender seleccionar qualquer pacote adicional, use <menuchoice
+> <guimenu
+>Ver</guimenu
+> <guimenuitem
+>Nova Vista de Pacotes</guimenuitem
+> </menuchoice
+>. </para
+> </footnote
+> os pacotes que estão para ser instalados. Se não seleccionar qualquer tarefa, o ecrã normal do <command
+>aptitude</command
+> será apresentado. Depois de fazer as suas selecções deverá carregar em <quote
+><userinput
+>g</userinput
+></quote
+> para iniciar a transferência e a instalação dos pacotes. <note
+><para
+>Se escolher a <quote
+>selecção manual de pacotes</quote
+> <emphasis
+>sem</emphasis
+> escolher qualquer tarefa, nenhum pacote irá ser instalado por omissão. Isto significa que pode usar esta opção se pretender instalar um sistema mínimo, mas também que a responsabilidade para seleccionar qualquer pacote não instalado como parte do sistema base (antes do reboot) que pode ser necessária para o seu sistema. </para
+></note>
+
+</para
+><para
+>Dos &num-of-distrib-pkgs; pacotes disponíveis no Debian, apenas uma pequena minoria está coberta pelas tarefas oferecidas no Instalador de Tarefas. Para ver informação sobre mais pacotes, pode usar o <userinput
+>apt-cache search <replaceable
+>search-string</replaceable
+></userinput
+> para uma data string de pesquisa (ver a página do manual <citerefentry
+> <refentrytitle
+>apt-cache</refentrytitle
+> <manvolnum
+>8</manvolnum
+> </citerefentry
+>),  ou execute o <command
+>aptitude</command
+> como descrito abaixo. </para>
+
+ <sect3 id="aptitude">
+ <title
+>Selecção de Pacotes Avançada com o <command
+>aptitude</command
+></title>
+
+<para
+>O <command
+>aptitude</command
+> é um programa moderno para gerir pacotes. O <command
+>aptitude</command
+> permite-lhe seleccionar pacotes individuais, conjuntos de pacotes por um dado critério (para utilizadores avançados), ou tarefas inteiras. </para
+><para
+>As combinações de teclas mais utilizadas são: <informaltable
+> <tgroup cols="2"
+> <thead
+> <row
+> <entry
+>Tecla</entry
+><entry
+>Action</entry
+> </row
+> </thead
+> <tbody
+> <row
+> <entry
+><keycap
+>Cima</keycap
+>, <keycap
+>Baixo</keycap
+></entry
+> <entry
+>Move a selecção para cima e para baixo.</entry
+> </row
+><row
+> <entry
+>&enterkey;</entry
+> <entry
+>Abrir/expandir/activar um item.</entry
+> </row
+><row
+> <entry
+><keycap
+>+</keycap
+></entry
+> <entry
+>Marcar o pacote para ser instalado.</entry
+> </row
+><row
+> <entry
+><keycap
+>-</keycap
+></entry
+> <entry
+>Marcar o pacote para ser desinstalado.</entry
+> </row
+><row
+> <entry
+><keycap
+>d</keycap
+></entry
+> <entry
+>Mostra as dependências do pacote.</entry
+> </row
+><row
+> <entry
+><keycap
+>g</keycap
+></entry
+> <entry
+>Faz a transferência/instalação/desinstalação dos pacotes.</entry
+> </row
+><row
+> <entry
+><keycap
+>q</keycap
+></entry
+> <entry
+>Sair da vista actual.</entry
+> </row
+><row
+> <entry
+><keycap
+>F10</keycap
+></entry
+> <entry
+>Activa o menu.</entry
+> </row
+> </tbody
+></tgroup
+></informaltable
+> Para mais comandos veja a ajuda utilizando a tecla <keycap
+>?</keycap
+>. </para>
+  </sect3>
+ </sect2>
+<!--   End of file boot-new/modules/packages.xml -->
+
+<!-- Start of file boot-new/modules/install.xml -->
+
+ <sect2 id="debconf">
+ <title
+>Perguntas Durante a Instalação do Software</title>
+
+<para
+>Cada pacote que seleccionar com o <command
+>tasksel</command
+> ou o <command
+>aptitude</command
+> é transferido, desempacotado e depois instalado na sua vez pelos programas <command
+>apt-get</command
+> e <command
+>dpkg</command
+>. Se um programa particular necessita de mais informação do utilizador, ser-lhe-á perguntado durante esse processo. Poderá também ter em atenção ao ecrã durante o processo, para ver qualquer erro de instalação (apesar de que ser-lhe-á perguntado para confirmar os erros que previnem a instalação dos pacotes). </para>
+
+  <sect3 arch="powerpc" id="xserver">
+  <title
+>A Configurar o Servidor X</title>
+
+<para
+>Nos iMacs, e também em alguns Machitoshes antigos, o software Servidor X não calcula as definições de vídeo apropriadas. Necessitará de escolher a opção <guimenuitem
+>Avançadas</guimenuitem
+> durante a configuração das definições de vídeo. Para a gama de sincronização horizontal do monitor, introduza 59&ndash;63. Pode deixar o valor por defeito para a gama de refrescamento vertical. </para
+><para
+>O rato deve ser definido para <userinput
+>/dev/input/mice</userinput
+>. </para>
+  </sect3>
+ </sect2>
+<!--   End of file boot-new/modules/install.xml -->
+
+<!-- Start of file boot-new/modules/mta.xml -->
+
+ <sect2 id="base-config-mta">
+ <title
+>Configurar o Mail Transport Agent</title>
+
+<para
+>Hoje em dia, o email é uma parte muito importante da vida de muitas pessoas, por isso não é nenhuma surpresa que o Debian o deixe configurar o seu sistema de correio de forma correcta como parte do processo de instalação. O agente de transporte de mail por omissão no Debian é o <command
+>exim4</command
+>, que é relativamente pequeno, flexível, e fácil de aprender. </para
+><para
+>Poderá perguntar se isto é necessário mesmo que o seu computador não esteja ligado a nenhuma rede. A resposta mais rápida é: Sim. A explicação mais longa: Algumas ferramentas do sistema (tal como o <command
+>cron</command
+>, o <command
+>quota</command
+>, o <command
+>aide</command
+>, &hellip;) podem enviar-lhe avisos importantes por email. </para
+><para
+>Assim no primeiro ecrã ser-lhe-á apresentado um conjunto de cenários comuns de mail. Escolha o que mais se adequa às suas necessidades: </para>
+
+<variablelist>
+<varlistentry>
+<term
+>site de internet</term>
+<listitem
+><para
+>O seu sistema está ligado a uma rede e o seu correio é enviado e recebido directamente usando o SMTP. Nos ecrãs seguinte ser-lhe-á perguntado algumas questões básicas, como o nome para o correio da sua máquina, ou uma lista de domínios para os quais deseja aceitar e encaminhar o correio. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>correio enviado por smarthost</term>
+<listitem
+><para
+>Neste cenário o seu mail de saída é encaminhado para outra máquina, chamada de <quote
+>smarthost</quote
+>, que irá fazer o trabalho por si. O smarthost normalmente também guarda correio direccionado para o seu computador, assim não é preciso que esteja permanentemente online. O que também significa que tem que transferir o seu correio do smarthost através de programas tal como o fetchmail. Esta opção é aconselhável para utilizadores de acesso telefónico. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>distribuição local apenas</term>
+<listitem
+><para
+>O seu sistema não está numa rede e o correio apenas é enviado ou recebido entre utilizadores locais. Mesmo que não tenha a intenção de enviar quaisquer mensagens, esta opção é altamente recomendável, porque algumas ferramentas do sistema podem enviar-lhe vários alertas de tempos a tempos (p.e. o adorado <quote
+>Disk quota exceeded</quote
+>). Esta opção é também conveniente para novos utilizadores, porque não irá fazer mais nenhuma pergunta. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>sem configuração neste momento</term>
+<listitem
+><para
+>Escolha esta opção se está absolutamente convencido de que sabe o que está a fazer. Esta opção irá deixar-lhe com o sistema de correio desconfigurado &mdash; até que o configure, não será capaz de enviar ou receber qualquer mail e pode perder algumas mensagens importantes dos utilitários do seu sistema. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>Se nenhum destes cenários serve as suas necessidades, ou se necessita de uma configuração mais detalhada. irá necessitar de editar os ficheiros de configuração na directoria <filename
+>/etc/exim4</filename
+> depois da instalação estar completa. Poderá encontrar mais informação sobre o <command
+>exim4</command
+> em <filename
+>/usr/share/doc/exim4</filename
+>. </para>
+ </sect2>
+<!--   End of file boot-new/modules/mta.xml -->
+
+ </sect1>
+
+ <sect1 id="login">
+ <title
+>Log In</title>
+
+<para
+>Depois de ter instalado os pacotes, ser-lhe-á apresentado o comando de login. Entre no sistema utilizando o seu nome de utilizador pessoal e a password que escolheu. O seu sistema está pronto a ser utilizado. </para
+><para
+>Se é um novo utilizador, poderá querer explorar a documentação que já se encontra instalada no seu sistema à medida que começa a utiliza-lo. Existem presentemente diversos sistemas de documentação, estão sendo feitos esforços no sentido de integrar os diferentes tipo de documentação. Aqui estão alguns pontos de partida. </para
+><para
+>A documentação que acompanha os programas que instalou estão em <filename
+>/usr/share/doc/</filename
+>, dentro de uma subdirectoria com o mesmo nome do programa. Por exemplo, o Guia dos Utilizadores do APT utilize o <command
+>apt</command
+> para instalar outros programas no seu sistema, que está localizado em <filename
+>/usr/share/doc/apt/guide.html/index.html</filename
+>. </para
+><para
+>Adicionalmente, existem algumas directorias especiais dentro da hierarquia <filename
+>/usr/share/doc/</filename
+>. Os Linux HOWTOs estão instalados no formato <emphasis
+>.gz</emphasis
+>,em <filename
+>/usr/share/doc/HOWTO/en-txt/</filename
+>. O <filename
+>/usr/share/doc/HTML/index.html</filename
+> contém índices navegáveis da documentação instalada pelo <command
+>dhelp</command
+>. </para
+><para
+>Uma maneira fácil de ver estes documentos é fazer <userinput
+>cd /usr/share/doc/</userinput
+> e escrever <userinput
+>lynx</userinput
+> seguido de um espaço e um ponto (o ponto significa a directoria actual). </para
+><para
+>Poderá também escrever <userinput
+>info <replaceable
+>command</replaceable
+></userinput
+> ou <userinput
+>man <replaceable
+>command</replaceable
+></userinput
+> para ver a documentação na maioria dos comandos disponíveis na linha de comandos. Escrever <userinput
+>help</userinput
+> irá apresentar uma ajuda nos comandos de shell. E escrever um comando seguido de <userinput
+>--help</userinput
+> irá normalmente apresentar um resumo da forma de utilização desse comando. Se o resultado de um comando passar o topo do ecrã, escreva <userinput
+>| more</userinput
+> depois do comando para fazer com que os resultados parem depois de passar o topo do ecrã. Para ver uma lista de todos os comandos necessários que começam com uma determinada letra, escreva a letra seguido de dois tabs. </para
+><para
+>Para uma introdução mais completa ao Debian e ao GNU/Linux, consulte <filename
+>/usr/share/doc/debian-guide/html/noframes/index.html</filename
+>. </para>
+
+ </sect1>
+</chapter>
+<!--   End of file boot-new/boot-new.xml -->

@@ -1,0 +1,352 @@
+<!-- Start of file welcome/welcome.xml -->
+
+<chapter id="welcome"
+><title
+>歡迎使用 Debian</title>
+<para
+>本章將簡要介紹 Debian 計畫和 &debian;。如果您已經對 Debian 計畫的歷史和 &debian; 發行套件有一定的瞭解，您可略過本章。 </para>
+
+
+<!-- Start of file welcome/what-is-debian.xml -->
+
+ <sect1 id="what-is-debian">
+ <title
+>什麼是 Debian？</title>
+<para
+>Debian 是一個由自願者組成，致力於自由軟體開發並宣揚自由軟體基金會理念的組織。 Debian 計畫建立於 1993 年。當時，Ian Murdock 發出一份公開信邀請軟體開發者們為這個以當時較新的 Linux 核心、完整而緊密的軟體發行套件貢獻心力。經過多年的成長，起初由 <ulink url="&url-fsf-intro;"
+>自由軟體基金會 (Free Software Foundation)</ulink
+> 資助並受到 <ulink url="&url-gnu-intro;"
+>GNU</ulink
+> 哲理影響的一小群愛好者已經演變為一個擁有大約 &num-of-debian-developers; 位 <firstterm
+>Debian 開發人員的組織</firstterm
+>。 </para
+><para
+>Debian 開發人員所做的工作包括有：<ulink url="&url-debian-home;"
+>網站</ulink
+>和 <ulink url="&url-debian-ftp;"
+>FTP</ulink
+> 站台管理、圖形設計、軟體許可證的法律分析、編寫文件、當然，還有維護軟體套件。 </para
+><para
+>為了傳遞我們的理念並吸引那些與 Debian 有著相同信仰的開發人員，Debian 計劃發表了許多文件來闡明我們的價值觀和成為 Debian 開發人員的意義。 <itemizedlist>
+<listitem
+><para
+><ulink url="&url-social-contract;"
+>Debian 社群契約</ulink
+>是一份 Debian 對自由軟體社群的承諾聲明。任何同意遵守此社群契約的人都可以成為<ulink url="&url-new-maintainer;"
+>維護人員</ulink
+>。任何維護人員都能將新軟體引入 Debian &mdash;條件是此軟體必須滿足我們對「自由」的衡量尺度，並且必須符合我們的品質標準。 </para
+></listitem>
+<listitem
+><para
+><ulink url="&url-dfsg;"
+>Debian 自由軟體準則(Debian Free Software Guidelines)</ulink
+>是 Debian 對於自由軟體標準的聲明，該聲明清晰而簡潔。在自由軟體運動中，DFSG 是一份非常有影響力的文件，<ulink url="&url-osd;"
+>開放源代碼定義(The Open Source Definition)</ulink
+>便是以DFSG為基礎所衍生而出。 </para
+></listitem>
+<listitem
+><para
+><ulink url="&url-debian-policy;"
+>Debian 政策文件(Debian Policy Manual)</ulink
+>是一份有關 Debian 計畫中品質標準的規格說明書。 </para
+></listitem>
+</itemizedlist>
+</para
+><para
+>Debian 開發人員還參與了其他許多計畫。有些是針對 Debian 的，另外則是關於 Linux 社群的。例如： <itemizedlist>
+<listitem
+><para
+><ulink url="&url-lsb-org;"
+>Linux 標準基礎 (Linux Standard Base, LSB)</ulink
+> 是一個針對基本 GNU/Linux 系統標準化的計畫，它將使第三方軟體和硬體開發者能更容易的為「通用 Linux」設計應用程式和驅動程式，而不僅僅是為某個特定的 GNU/Linux 發行套件進行開發。 </para
+></listitem>
+<listitem
+><para
+><ulink url="&url-fhs-home;"
+>檔案系統架構標準 (Filesystem Hierarchy Standard, FHS)</ulink
+> 則是朝 Linux 檔案系統架構標準化的方向努力。FHS 將使軟體開發者能集中精力於程式設計，而不需要擔心軟體套件在不同的 GNU/Linux 發行套件下要如何安裝。 </para
+></listitem>
+<listitem
+><para
+><ulink url="&url-debian-jr;"
+>Debian Jr.</ulink
+> 是一個內部計畫，目標是確保Debian  能向年幼的使用者提供一些有用的東西。 </para
+></listitem>
+</itemizedlist>
+
+</para
+><para
+>關於 Debian 的更多資訊，請參考 <ulink url="&url-debian-faq;"
+>Debian 常見問答集</ulink
+>。 </para>
+
+ </sect1>
+
+<!--   End of file welcome/what-is-debian.xml -->
+
+<!-- Start of file welcome/what-is-linux.xml -->
+
+ <sect1 id="what-is-linux">
+ <title
+>什麼是 GNU/Linux？</title>
+<para
+>Linux 是一種作業系統：一系列能讓您與電腦互動並且執行其他程式的程式 </para
+><para
+>作業系統由許多基礎程式組成，它們是讓電腦接受使用者指令並與之溝通的必要程式；讀取資料或將其寫入硬碟、磁帶或印表機；控制記憶體的使用；以及執行其它軟體。作業系統最重要的部分是核心。在 GNU/Linux 系統中，就是以 Linux 為核心。而系統的其他部分則是由其他程式組成，這些程式主要由 GNU 計畫所提供，或者是針對 GNU 計畫所編寫的。因為單獨的 Linux 核心不能成為一個可以正常工作的作業系統，所以我們更傾向使用 <quote
+>GNU/Linux</quote
+> 一詞來表達人們常用的 <quote
+>Linux</quote
+>。 </para
+><para
+>Linux 是以 Unix 作業系統為原型。從一開始，它就被設計為一個多工、多使用者的系統。這些特點使 Linux 不同於其它著名的作業系統。事實上，Linux 比您所能想像的更加不同。相對於其他作業系統，沒人真正擁有 Linux，大部分的開發工作都是由無酬償的志願者完成。 </para
+><para
+>GNU/Linux 濫觴於 1984 年。當時，<ulink url="http://www.gnu.org/"
+>自由軟體基金會(Free Software Foundation)</ulink
+> 開始發展一套類 Unix 的自由軟體作業系統，被稱為 GNU。 </para
+><para
+>GNU 計畫開發了被大量用於 Unix&trade; 的自由軟體工具和類 Unix 作業系統，例如Linux。這些工具使使用者能執行從簡單常用 (例如在系統中複製和刪除文件) 到進階複雜 (例如撰寫和編譯程式或對多種文件格式進行編輯) 的各類工作。 </para
+><para
+>雖然有許多組織和個人都為 Linux 的發展做出貢獻，但是自由軟體基金會依然是最大的貢獻者。他不僅僅創造了絕大部分在 Linux 中使用的工具，還為 Linux 的存在提供了理論和社會基礎。 </para
+><para
+><ulink url="&url-kernel-org;"
+>Linux 核心 (kernel)</ulink
+> 的首次面世是在 1991 年。當時，名為 Linus Torvalds 的芬蘭資訊科學系學生在 Usenet 新聞群組 <userinput
+>comp.os.minix</userinput
+> 上發佈了一種替代 Minix 核心的早期版本。請參考 Linux International 的 <ulink url="&url-linux-history;"
+>Linux 歷史</ulink
+>。 </para
+><para
+>在幾個可信賴的副手幫助下，Linus Torvalds 一直協調著數百位開發人員的工作。有關 <userinput
+>linux-kernel</userinput
+> 通信論壇上討論內容的每週精采概要在可參閱 <ulink url="&url-kernel-traffic;"
+>Kernel Traffic</ulink
+>。更多關於 <userinput
+>linux-kernel</userinput
+> 通訊論壇的資訊請參考 <ulink url="&url-linux-kernel-list-faq;"
+>linux-kernel 通訊論壇常見問題集</ulink
+>。 </para
+><para
+>Linux 使用者在挑選軟體方面有著極大的自由。例如，Linux 使用者可以選擇幾十種不同的命令列介殼(shell)和多種圖形桌面。 這通常讓其它作業系統的使用者手足無措，他們可能從來沒想過命令列和桌面其實是可以更換的。 </para
+><para
+>Linux 很少會當機、適合在同一時間執行多個程式，而且比大多數作業系統更為安全。有了這些優勢，Linux 在伺服器市場成為成長最快的作業系統。近來，它還開始在家庭和商業使用者之間變得越來越流行。 </para>
+
+ </sect1>
+
+<!--   End of file welcome/what-is-linux.xml -->
+
+<!-- Start of file welcome/what-is-debian-linux.xml -->
+
+ <sect1 id="what-is-debian-linux">
+ <title
+>什麼是 &debian;?</title>
+<para
+>&debian; 是將 Debian 哲學與方法論、GNU 工具集、Linux 核心，以及其他重要的自由軟體結合在一起所構成的獨特的軟體發行套件。該發行套件由大量的軟體<emphasis
+>套件</emphasis
+>組成。發行套件中的每個軟體套件都包含了執行檔、腳本、文件和設定資訊，並且擁有一位<emphasis
+>維護者</emphasis
+>，其主要職責是保持軟體套件更新、追蹤臭蟲報告，並與軟體原作者保持聯絡。我們龐大的使用者群與臭蟲追蹤系統的結合可以確保問題被及時發現和修復。 </para
+><para
+>Debian 對細節的注重使我們可以生產出高品質、穩定和靈活的發行套件。經過簡單的設定後，可以安裝並應用到各種場合，從精簡的防火牆到 桌面科學工作站，甚至高級網路伺服器。 </para
+><para
+>Debian 在進階使用者中非常流行的原因在於它具有優秀的技術， 而且它對 Linux 的深入貢獻滿足了社群的需求與期望。 現今，Debian 為 Linux 引入的許多特色已經成為非常通用的標準。 </para
+><para
+>例如，Debian 是第一個使用套件管理系統的 Linux 發行套件，它讓安裝和刪除軟體變得容易。而且它還是第一個可以不用重新安裝就能升級的 Linux 發行套件。 </para
+><para
+>Debian 一直是 Linux 開發的領導者。它的開發過程是開放原始碼開開發模式的範例 &mdash; 即使是用於建立和維護一個完整作業系統這樣複雜的任務。 </para
+><para
+>Debian 與其他 Linux 發行套件最大的不同之處在於套件管理系統的特性。這些工具讓 Debian 系統管理員能夠完全控制安裝到系統上的軟體套件，包括安裝單一軟體套件和自動升級整個作業系統；個別軟體套件也可以被保護而不被升級。您甚至可以告訴套件管理系統哪些軟體是您自己編譯的以及它們對其他軟體套件的依賴關係。 </para
+><para
+>為了提防<quote
+>特洛伊木馬</quote
+>和其他惡意軟體以保護您的系統，Debian 伺服器會驗證由在 Debian 註冊的維護人員所上傳的軟體套件。 Debian 的套件打包人員也會特別注意以安全的方式配置軟體套件。當發佈出去的軟體套件有安全問題時，通常會很快被修復。透過 Debian 的簡易更新選項，可以從網際網路自動下載和安裝各項安全更新。 </para
+><para
+>為您的 &debian; 系統尋求技術支援和聯絡 Debian 開發人員，最主要、也是最好的方法是透過 Debian 計畫的通信論壇 (撰寫本文時已有&num-of-debian-maillists;個通信論壇) 進行溝通。訂閱這些論壇的最簡單方法是透過 <ulink url="&url-debian-lists-subscribe;"
+> Debian 通訊論壇訂閱網頁</ulink
+>並填寫相關表單。 </para>
+
+ </sect1>
+<!--   End of file welcome/what-is-debian-linux.xml -->
+
+<!-- Start of file welcome/what-is-debian-hurd.xml -->
+
+<!-- conditionalised because the hurd port is not yet an official debian
+release -->
+ <sect1 id="what-is-debian-hurd" condition="unofficial-build">
+ <title
+>什麼是 Debian GNU/Hurd?</title>
+
+<para
+>Debian GNU/Hurd 是將 Debian GNU 系統中 Linux 單核心替換為 GNU Hurd &mdash; 運行在 GNU Mach 微核心上的一組伺服器程式。Hurd 還沒有完成，不適合日常應用，但仍在開發當中。Hurd 目前僅為 i386 架構開發，不過當系統穩定之後也會移植到其他的硬體架構下。 </para
+><para
+>請參閱 <ulink url="http://www.debian.org/ports/hurd/"
+>Debian GNU/Hurd 移植網頁</ulink
+>以及 <email
+>debian-hurd@lists.debian.org</email
+> 通信論壇來取得更多資訊。 </para>
+
+ </sect1>
+<!--   End of file welcome/what-is-debian-hurd.xml -->
+
+<!-- Start of file welcome/getting-newest-inst.xml -->
+
+ <sect1 id="getting-newest-inst">
+ <title
+>取得 Debian</title>
+
+<para
+>關於如何從網際網路上下載 &debian; 或者從何購買官方 Debian光碟的資訊，請參閱 <ulink url="&url-debian-distrib;"
+>發行網頁</ulink
+>。<ulink url="&url-debian-mirrors;"
+>Debian 鏡像列表</ulink
+>包含完整的 Debian 官方鏡像站，您可以很容易找到最近的一個。 </para
+><para
+>Debian 在安裝之後可以很容易的升級。如果有需要，安裝步驟將幫助您建立系統，使您可以在安裝之後立即進行升級。 </para>
+
+ </sect1>
+<!--   End of file welcome/getting-newest-inst.xml -->
+
+<!-- Start of file welcome/getting-newest-doc.xml -->
+
+ <sect1 id="getting-newest-doc">
+ <title
+>取得本文件最新版本</title>
+
+<para
+>本文件會不斷地修訂。請查閱 <ulink url="&url-release-area;"
+>Debian &release; 網頁</ulink
+> 以瞭解最新的 &release; 版 &debian; 系統相關資訊。更新的安裝手冊也可以從<ulink url="&url-install-manual;"
+>官方安裝手冊網頁</ulink
+>取得。 </para>
+
+ </sect1>
+<!--   End of file welcome/getting-newest-doc.xml -->
+
+<!-- Start of file welcome/doc-organization.xml -->
+
+ <sect1 id="doc-organization">
+ <title
+>本文架構</title>
+
+<para
+>本文件意在成為 Deiban 新手的使用手冊。儘管它已經盡量對您的的專業知識水平做最少的假設，但我們還是假設您對電腦硬體的工作方式有基本的瞭解。 </para
+><para
+>專業使用者也可以在本手冊中找到一些有趣的參考資訊，包括最小安裝所需的空間，Debian 安裝程式支援的硬體細節等等。我們鼓勵專業使用者選擇性的瀏覽本文件。 </para
+><para
+>基本上，本手冊內容以線性鋪陳，從開始安裝帶領您到安裝結束。以下是安裝 &debian; 的步驟，以及每步驟相關的章節： <orderedlist>
+<listitem
+><para
+>確定您的硬體是否滿足安裝系統的要求，請參考 <xref linkend="hardware-req"/>。 </para
+></listitem>
+<listitem
+><para
+>備份您的系統，並且在安裝 Debian 之前進行必要的規劃和硬體配置，請參考 <xref linkend="preparing"/>。如果您需要多重開機於不同的作業系統，您可能需要為 Debian 建立硬碟分割區。 </para
+></listitem>
+<listitem
+><para
+>您所選擇的安裝方式所需要的安裝文件 <xref linkend="install-methods"/> 取得。 </para
+></listitem>
+<listitem
+><para
+><xref linkend="boot-installer"/> 描述如何啟動安裝系統。本章還將討論安裝過程中遇到問題時的解決步驟。 </para
+></listitem>
+<listitem
+><para
+>請根據 <xref linkend="d-i-intro"/>來進行真正的安裝動作。這其中涉及選擇語言、設定周邊設備的驅動模組、設定網路連接以從 Debian 伺服器上取得後續安裝檔案(如果您不是採用光碟安裝)、分割硬碟和安裝最小工作系統。(有關如何為 Debian 系統建立分割區的背景知識位請參考 <xref linkend="partitioning"/>) </para
+></listitem>
+<listitem
+><para
+>啟動您新安裝的基本系統，然後執行一些額外的設置工作，請參考 <xref linkend="boot-new"/>。 </para
+></listitem>
+<listitem
+><para
+>安裝額外的軟體，請參考 <xref linkend="install-packages"/>。 </para
+></listitem>
+</orderedlist>
+
+</para
+><para
+>當系統安裝完成，您可以閱讀 <xref linkend="post-install"/>。該章節將解釋在哪裡尋找更多有關 Unix 和 Debian 的資訊，以及如何更換您的核心。 </para
+><para
+>最後，是關於本文件的資訊以及您可以如何對此做出貢獻，請參考 <xref linkend="administrivia"/>。 </para>
+
+ </sect1>
+
+ <sect1 condition="FIXME">
+ <title
+>歡迎為此文件提供幫助</title>
+
+<para
+>對於任何幫助、建議，特別是補丁，我們都非常感謝。本文件的開發中版本位於 <ulink url="&url-d-i-alioth-manual;"
+></ulink
+>。在那裡，您可以看到所有本文件對不同語言以及硬體架構的版本列表。 </para
+><para
+>本文件的原始檔也是公開的。請參考 <xref linkend="administrivia"/> 以瞭解如何貢獻您的心力。我們歡迎建議，批評，補丁和錯誤報告 (請以對 &d-i-manual; 軟體套件為名提出臭蟲報告，但是請先檢查該問題是否已經被提出)。 </para>
+ </sect1>
+<!--   End of file welcome/doc-organization.xml -->
+
+<!-- Start of file welcome/about-copyright.xml -->
+
+ <sect1>
+<title
+>關於版權與軟體協議 </title>
+
+<para
+>我們相信您曾經閱讀過一些商業軟體的授權 &mdash; 它們通常要求您只能在一台電腦上使用一份軟體拷貝。本系統所使用的授權與它們完全不同。我們鼓勵您在學校或商業機構的每台電腦上安裝本系統。將安裝媒介借給朋友，並幫助他們安裝到電腦上！您甚至可以製造上千份的拷貝，然後將之<emphasis
+>出售</emphasis
+> &mdash; 儘管這會有一些限制。您安裝和使用系統的自由權利是因為 Debian 乃基於<emphasis
+>自由軟體</emphasis
+>的緣故。 </para
+><para
+>稱軟體為<emphasis
+>自由</emphasis
+>並不意味著該軟體沒有版權，也不是指包含該軟體的光碟必須免費分送。自由軟體，某種程度上意味著您不須為發送和使用這些程式的權利付費。自由軟體也表示任何人可以擴展、改寫、修改該軟體，但是他們工作的成果也必須以該形式發佈。 <note
+><para
+>Debian 計畫考慮到對使用者的實用性，也有不符合我們自由規範的軟體套件存在。這些軟體套件不屬於官方發行套件，只存在於 <userinput
+>contrib</userinput
+> 或 <userinput
+>non-free</userinput
+> Debian 鏡像區域或者第三方的光碟中，請參閱 <ulink url="&url-debian-faq;"
+>Debian 常見問答集</ulink
+>的 <quote
+>The Debian FTP archives</quote
+> 章節以瞭解更多關於檔案庫佈局和內容的資訊。 </para
+></note>
+
+</para
+><para
+>系統中很多軟體所使用的許可證是 <emphasis
+>GNU</emphasis
+> <emphasis
+>General Public License(通用公共許可證)</emphasis
+>，通常簡稱為 <quote
+>GPL</quote
+>。GPL 要求您將程式的 <emphasis
+>原始碼</emphasis
+> 隨著二進位拷貝一起發佈﹔許可證的這項規定確保任何使用者都可以修改軟體。正是由於此規定，所有這類程式的原始碼<footnote
+> <para
+> 關於如何從 Debian 原始碼套件中尋找、解開以及建立二進位檔的資訊，請參閱 <quote
+>Debian 軟體套件管理系統入門</quote
+> 中的<ulink url="&url-debian-faq;"
+>Debian FAQ</ulink
+>。</para
+> </footnote
+> 都可以在 Debian 系統中取得。 </para
+><para
+>Debian 中的程式還使用許多其他形式的版權聲明和軟體許可證。您可以在您的系統中找到每個軟體套件相關的版權和許可證，它們位於 <filename
+>/usr/share/doc/<replaceable
+>軟體套件名</replaceable
+>/copyright</filename
+> ，這些文件在您將軟體套件安裝到系統後就存在了。 </para
+><para
+>Debian 如何判斷軟體是否足夠自由到可以包括在主發行套件中的資訊，請參考 <ulink url="&url-dfsg;"
+>Debian 自由軟軟體準則</ulink
+>。 </para
+><para
+>在此，最重要的法律聲明是此軟體 <emphasis
+>無擔保</emphasis
+>。程式設計創造此軟體為的是使社群受益，而不能保證軟體適用於任何特定用途。但是，因為軟體是自由的，您可以修改此軟體以使其能適用於您的需要 &mdash; 並享用其他人透過這種途徑擴充修改後的成果。 </para>
+ </sect1>
+<!--   End of file welcome/about-copyright.xml -->
+
+</chapter>
+<!--   End of file welcome/welcome.xml -->

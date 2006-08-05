@@ -1,0 +1,231 @@
+<!-- Start of file howto/installation-howto.xml -->
+
+<appendix id="installation-howto">
+<title
+>安装指南</title>
+
+<para
+>本文介绍了如何在 &arch-title; (<quote
+>&architecture;</quote
+>) 架构的计算机上，使用新版的 &d-i; 安装 &debian; &releasename;。这是一次对安装过程的走马观花式的简介，但是它应该囊括了大多数情况下您进行安装所必须的信息。当有必要获得更多信息时，我们会有相应的较详尽的说明文档 <link linkend="debian_installation_guide"
+>&debian;安装指南</link
+>。 </para>
+
+ <sect1 id="howto-preliminaries">
+ <title
+>前言</title>
+<para
+><phrase condition="unofficial-build"
+> debian-installer 仍然处于 beta 测试阶段。</phrase
+> 如果您在安装时碰到程序出错，请参考 <xref linkend="submit-bug"/> 回报错误。倘若本文档不能够回答您所有的疑问，那么请带着这些问题去 debian-boot 的邮件列表(&email-debian-boot-list;)问问看，或者您也可以在 irc (即 freenode 站点的 #debian-boot 频道)上直接提问。 </para>
+ </sect1>
+
+ <sect1 id="howto-getting-images">
+ <title
+>安装套件的引导</title>
+<para
+><phrase condition="unofficial-build"
+> 要想找到几个便捷的 CD 映像文件的链接，请看 <ulink url="&url-d-i;"
+> &d-i; 的主页</ulink
+>。</phrase
+> Debian-cd 小组在 <ulink url="&url-debian-cd;"
+>Debian CD 页</ulink
+>上提供了使用 &d-i; CD 映像的已编译版本。如果您需要了解有关如何得到这些 CD 的更多信息，请看 <xref linkend="official-cdrom"/>。 </para
+><para
+>有些安装方法需要其它种类的映像而非 CD 的映像。<phrase condition="unofficial-build"
+> <ulink url="&url-d-i;"
+>&d-i; 的主页</ulink
+> 上有到其它种类的映像的链接。</phrase
+> <xref linkend="where-files"/> 会告诉您如何在 Debian 的映像站点找到那些映像文件。 </para
+><para
+>下面小节会就每种可能的安装方法，具体讲授如何获得所需的映像文件。 </para>
+
+  <sect2 id="howto-getting-images-cdrom">
+  <title
+>CDROM</title>
+
+<para
+>现在有两种不同的 netinst CD 映像可以用来通过 &d-i; 安装 &releasename;。这些映像文件是被用来刻成光盘的。然后让电脑从光盘启动，再由安装程序从网络上下载安装其它的软件包。“netinst”的名字由此得来。两种映像的区别在于，在完整版的 netinst 映像上包含了基本的软件包，而使用名片版的映像安装则需要从网络上下载它们。如果喜欢的话，您可以下载一个标准大小的 CD 映像文件，用它的话就可以不借助网络安装了。这只需要一套光盘中的第一张就行了。 </para
+><para
+>您想用哪种办法装，就下载相应的映像文件，再把它刻成光盘。<phrase arch="i386"
+>若要从光盘启动，您可能需要根据 <xref linkend="bios-setup"/> 的提示，修改 BIOS 设置。</phrase
+> <phrase arch="powerpc"
+> 若要从光盘启动您的 PowerMac，可以在它启动时摁着 <keycap
+>c</keycap
+> 键不放。参阅 <xref linkend="boot-cd"/> 可以获知其它从 CD 启动的方法。</phrase
+> </para>
+  </sect2>
+
+  <sect2 condition="supports-floppy-boot" id="howto-getting-images-floppy">
+  <title
+>软盘</title>
+<para
+>如果您无法从 CD 启动，不妨下载一些软盘的映像文件，用它们来安装 Debian。这时，您需要 <filename
+>floppy/boot.img</filename
+> 和 <filename
+>floppy/root.img</filename
+>，也许还要那些驱动盘中的某一张。 </para
+><para
+>启动软盘就是其上存有 <filename
+>boot.img</filename
+> 的一张软盘。当使用这张盘启动时，它会提示您插入第二张软盘 &mdash;，这时请使用里面存有 <filename
+>root.img</filename
+> 的那张盘。 </para
+><para
+>倘若您计划从网络安装，一般来说，您就要准备好 <filename
+>floppy/net-drivers.img</filename
+>，这里面包含了许多种以太网卡的驱动程序，同时它还加入了对 PCMCIA 的支持。 </para
+><para
+>假如您有光驱，但是不能从它启动，那么您可以从软驱启动，再用存在驱动盘里的 <filename
+>floppy/cd-drivers.img</filename
+> 来接着完成基于光盘的安装。 </para
+><para
+>软盘是最不可靠的存储介质之一，因此您最好有碰到许多坏盘的准备(请参看 <xref linkend="unreliable-floppies"/>)。您所下载的每个 <filename
+>.img</filename
+> 文件其实就是一张软盘。您可以用 dd 命令把它写到 /dev/fd0，也可以用其他方法来做这件事(具体细节请参看 <xref linkend="create-floppy"/> )。既然您将会弄出好几张软盘，不妨给它们做上标签吧。 </para>
+  </sect2>
+
+  <sect2 condition="bootable-usb" id="howto-getting-images-usb">
+  <title
+>U 盘</title>
+<para
+>我们也可以从移动 USB 存储设备来安装系统。比如说您带着一个 USB 的钥匙链走遍天涯海角的同时，它还可以成为方便称手的 Debian 安装介质。 </para
+><para
+>要把您的 U 盘做成安装盘，最简单的办法就是下载 <filename
+>hd-media/boot.img.gz</filename
+>，然后用 gunzip 把这个文件解压，生成 128 MB 的映像文件。再把生成的映像文件直接写到 U盘。对了，这个 U 盘的容量至少要有 128 mb。当然了，上面所说的操作会把 U 盘里的原有数据全部毁掉。以后再挂载这个 U 盘的话，它上面就不再是 FAT 文件系统了。写完 U 盘后，接着要下载一个 Debian netinst CD 映像文件，再把这个映像拷贝到 U 盘里。哪个映像文件都可以用，只要它的文件名是 <literal
+>.iso</literal
+> 结尾的就行。 </para
+><para
+>除此之外，还有其它更为灵活的办法可以做出能启动 debian-installer 的 U 盘，同时也是有办法适用于较小容量的 U 盘的。欲知详情，请看 <xref linkend="boot-usb-files"/>。 </para
+><para arch="i386"
+>有些 BIOS 支持直接从 USB 的存储设备启动，但也有的 BIOS 不支持这种特性。您或许需要设置一下 BIOS 让您的机器从 <quote
+>removable drive</quote
+> 或是 <quote
+>USB-ZIP</quote
+> 启动，以使电脑能从 USB 设备启动。如果这样不奏效，您可以借助一张软盘启动，然后再用 U 盘完成后面的安装。您还可以发现一些有用的提示和具体的细节说明，参阅 <xref linkend="usb-boot"/>。 </para
+><para arch="powerpc"
+>从 Macintosh 系统上使用 USB 存储设备与使用 Open Fireware 相关。相关指导见 <xref linkend="usb-boot"/>。 </para>
+  </sect2>
+
+  <sect2 id="howto-getting-images-netboot">
+  <title
+>从网络启动</title>
+<para
+>要完全从网络上启动(即 netboot) &d-i; 也是可行的。而具体采取哪种方法来从网络启动，这取决于您的硬件架构和网络启动的相关设置。在 <filename
+>netboot/</filename
+> 目录里的文件是用来从网络启动 &d-i; 的。 </para
+><para arch="i386"
+>最简单的建立方式是使用 PXE 的网络启动。解开 <filename
+>netboot/pxeboot.tar.gz</filename
+> 文件，把它放到 <filename
+>/var/lib/tftpboot</filename
+>，或者放到您的 tftp 服务器所使用的目录。然后再建立 DHCP 服务器，传送 <filename
+>/pxelinux.0</filename
+> 这个文件名给客户端。老天保佑的话，就能顺利安装了。若要知道详细的操作步骤，请参阅 <xref linkend="install-tftp"/>。 </para>
+  </sect2>
+
+  <sect2 id="howto-getting-images-hard-disk">
+  <title
+>从硬盘启动</title>
+<para
+>除了从移动介质启动安装套件，其实从手中现有的安装了其它操作系統的硬盘启动也是可行的。把 <filename
+>hd-media/initrd.gz</filename
+>、<filename
+>hd-media/vmlinuz</filename
+> 和一个 Debian CD 映像文件下载到硬盘最底层的目录里。请确保这个 CD 映像文件的文件名是以 <literal
+>.iso</literal
+> 结尾的。接下来的问题就是用 initrd 启动 linux 了。<phrase arch="i386"
+> <xref linkend="boot-initrd"/> 说明了如何做这件事。</phrase
+> </para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="howto-installation">
+<title
+>安装</title>
+<para
+>一旦安装套件开始运行后，会有一个初始画面迎接您。要启动的话，请按 &enterkey;；也可以先看一下其它的启动方式以及各种参数(参阅 <xref linkend="boot-parms"/>)。<phrase arch="i386"
+> <phrase condition="sarge"
+>如果您希望用 2.6 的内核，在 <prompt
+>boot:</prompt
+> 提示符之后键入 <userinput
+>linux26</userinput
+>。</phrase
+> <phrase condition="etch"
+> 如果您希望使用 2.4 的内核，在 <prompt
+>boot:</prompt
+> 提示符之后键入 <userinput
+>linux24</userinput
+>。</phrase
+> <footnote
+><para
+> <phrase condition="sarge"
+>除了软盘，2.6 内核可以在大多数启动方式中使用。</phrase
+> <phrase condition="etch"
+> 在多数启动方式下，默认使用 2.6 内核，但软盘启动时 2.6 内核不可用。</phrase
+> </para
+></footnote
+> </phrase
+> </para
+><para
+>再过一会儿，您就会可以选择您所使用的语言了。用上下箭头键来选择一门语言，然后摁 &enterkey; 继续下面的步骤。接下来，您要选择您的国家，选项里包括了那些使用您所选语言的国家。如果在那个稍短的列表里找不到您要找的国家，还有一个含有世界上所有国家的列表以备选择。 </para
+><para
+>您还可能被要求确认一下您的键盘布局(keyboard layout)。请选择缺省的那个，除非您清楚更合适的布局。 </para
+><para
+>现在可以坐下来，松口气，休息一下了。这时 debian-installer 会侦测您的一部分硬件，并从 CD、软驱、USB 或其它设备里把它的其余部分加载进系统。 </para
+><para
+>接下来，安装程序会想办法侦测您和网络相关的硬件，再用 DHCP 完成网络的设置。如果您没有连接网络，或是没有用 DHCP，那么您也可以手动配置网络。 </para
+><para
+>好，现在该对您的硬盘分区了。首先，您可以选择对整个驱动器或是驱动器上的空闲空间进行自动分区。我们推荐新手或者手头有急事的朋友使用自动分区。不过要是您不想用自动分区的话，请在菜单中选择手动分区。 </para
+><para arch="i386"
+>如果您有一个 DOS 或 Windows 分区并想保留它，要小心使用自动分区。如果您选择手动分区，可以使用安装程序重新设置 FAT 或 NTFS 分区的大小，分给 Debian 更多的安装空间：只需选择该分区，并指定它的新尺寸。 </para
+><para
+>在接下来的界面里，您可以看到自己有关分区的一张表，上面标出了各分区将以何种方式格式化，以及它们将来的挂载点在何处。要修改分区的设置或是删除分区，可以先选中它，再进行操作。如果您先前选择的是自动分区，那么您现在只要选<guimenuitem
+>分区结束</guimenuitem
+>, 使用自动分区的设置即可。有一点，请不要忘记至少要分配一个分区作为交换空间，还有必须把一个分区挂载到 <filename
+>/</filename
+>上。<xref linkend="partitioning"/> 有更多关于分区方面的信息。 </para
+><para
+>现在 &d-i; 会把您的分区格式化，然后安装基系统。这两步会花些时间。接着，它会安装内核。 </para
+><para
+>最后一步就是安装 boot loader 了。如果安装程序发现您的计算机还安装有其它的操作系统，它会把它们加入启动菜单，并通知您。<phrase arch="i386"
+>缺省情况下会把 GRUB 安装到第一块硬盘的引导记录上。一般来说，这样做没什么问题。您也可以不让它这样做，而是把 GRUB 装在其它什么地方。</phrase
+> </para
+><para
+>&d-i; 现在会告诉您安装已经完成了。把光盘从光驱里取出或者取下其它启动介质，然后敲一下 &enterkey; 就可以重新启动您的机器了。重启后，它会进入安装过程的下一个阶段，在 <xref linkend="boot-new"/> 有对它的详尽说明。 </para
+><para
+>如果您想要更多的安装过程相关信息，请看 <xref linkend="d-i-intro"/>。 </para>
+ </sect1>
+
+ <sect1 id="howto-installation-report">
+ <title
+>请给我们发一份安装报告</title>
+<para
+>如果您用 &d-i; 安装成功，请抽空给我们写一份报告。<phrase condition="sarge"
+>在新装好的系统里，<filename
+>/root</filename
+> 目录下有一个名为 <filename
+>install-report.template</filename
+> 的模板文件。请填写内容，并把它作为 <classname
+>installation-reports</classname
+> 软件包的 bug 报告发送回来，具体操作，见 <xref linkend="submit-bug"/>。</phrase
+> <phrase condition="etch"
+>有一个最简单的方法，即安装 report bug 软件包(<command
+>apt-get install reportbug</command
+>)，然后执行 <command
+>reportbug installation-report</command
+>。</phrase
+> </para
+><para
+>如果您到不了 base-config 这一步，或者碰到了其它的麻烦，那么您也许发现了一个 debian-installler 的错误。要改进安装程序，就很有必要让我们知道这些异状，因此，请抽空把这些错误报告给我们。您也可以使用 installation report 来回报错误。如果安装彻底失败了，请参看 <xref linkend="problem-report"/>。 </para>
+ </sect1>
+
+ <sect1 id="howto-installation-finally">
+ <title
+>末了……</title>
+<para
+>我们祝愿您的 Debian 安装顺利愉快，并希望您能发现 Debian 在您这里的用武之地。还有您也许可以读一下 <xref linkend="post-install"/>。 </para>
+ </sect1>
+</appendix>
+<!--   End of file howto/installation-howto.xml -->

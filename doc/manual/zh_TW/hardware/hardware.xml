@@ -1,0 +1,2502 @@
+<!-- Start of file hardware/hardware.xml -->
+
+<chapter id="hardware-req">
+ <title
+>系統需求</title>
+
+<para
+>本章包括運作 Debian 所需硬體的資訊。您還能找到更多有關 GNU 和 Linux 所支援硬體的超鏈結資訊。 </para>
+
+
+<!-- Start of file hardware/hardware-supported.xml -->
+
+ <sect1 id="hardware-supported">
+ <title
+>支援的硬體</title>
+
+<para
+>Debian 不會超出 Linux 核心與 GNU 工具集所支援的硬體範圍之外。因此，任何移植了 Linux 核心、libc、<command
+>gcc</command
+>，以及針對 Debian 移植的硬體架構或平台都可以運行 Debian。請參考移植網頁 <ulink url="&url-ports;"
+></ulink
+> 以瞭解更多已被 Debian 測試過的 &arch-title; 架構。 </para
+><para
+>本章僅包含一些通用的資訊以及在何處可以取得更多資訊的指引，而不試圖列出所有支援 &arch-title; 的硬體配置。 </para>
+
+  <sect2
+><title
+>支援的硬體架構</title>
+
+<para
+>Debian &release; 支援十一種主要的硬體架構和一些稱為<quote
+>風味 (flavors)</quote
+>的變種。 </para
+><para>
+
+<informaltable>
+<tgroup cols="4">
+<thead>
+<row>
+  <entry
+>架構</entry
+><entry
+>Debian 命名</entry>
+  <entry
+>子架構</entry
+><entry
+>風味</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry morerows="2"
+>Intel x86-based</entry>
+  <entry morerows="2"
+>i386</entry>
+  <entry morerows="2"
+></entry>
+  <entry
+>vanilla</entry>
+</row
+><row>
+  <entry
+>speakup</entry>
+</row
+><row>
+  <entry
+>linux26</entry>
+</row>
+
+<row>
+  <entry morerows="5"
+>Motorola 680x0</entry>
+  <entry morerows="5"
+>m68k</entry>
+  <entry
+>Atari</entry>
+  <entry
+>atari</entry>
+</row
+><row>
+  <entry
+>Amiga</entry>
+  <entry
+>amiga</entry>
+</row
+><row>
+  <entry
+>68k Macintosh</entry>
+  <entry
+>mac</entry>
+</row
+><row>
+  <entry morerows="2"
+>VME</entry>
+  <entry
+>bvme6000</entry>
+</row
+><row>
+  <entry
+>mvme147</entry>
+</row
+><row>
+  <entry
+>mvme16x</entry>
+</row>
+
+<row>
+  <entry
+>DEC Alpha</entry>
+  <entry
+>alpha</entry>
+  <entry
+></entry>
+  <entry
+></entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>Sun SPARC</entry>
+  <entry morerows="1"
+>sparc</entry>
+  <entry morerows="1"
+></entry>
+  <entry
+>sun4cdm</entry>
+</row
+><row>
+  <entry
+>sun4u</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>ARM and StrongARM</entry>
+  <entry morerows="3"
+>arm</entry>
+  <entry morerows="3"
+></entry>
+  <entry
+>netwinder</entry>
+</row
+><row>
+  <entry
+>riscpc</entry>
+</row
+><row>
+  <entry
+>shark</entry>
+</row
+><row>
+  <entry
+>lart</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>IBM/Motorola PowerPC</entry>
+  <entry morerows="3"
+>powerpc</entry>
+  <entry
+>CHRP</entry>
+  <entry
+>chrp</entry>
+</row
+><row>
+  <entry
+>PowerMac</entry>
+  <entry
+>pmac</entry>
+</row
+><row>
+  <entry
+>PReP</entry>
+  <entry
+>prep</entry>
+</row
+><row>
+  <entry
+>APUS</entry>
+  <entry
+>apus</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>HP PA-RISC</entry>
+  <entry morerows="1"
+>hppa</entry>
+  <entry
+>PA-RISC 1.1</entry>
+  <entry
+>32</entry>
+</row
+><row>
+  <entry
+>PA-RISC 2.0</entry>
+  <entry
+>64</entry>
+</row>
+
+<row>
+  <entry
+>Intel ia64-based</entry>
+  <entry
+>ia64</entry>
+  <entry
+></entry>
+  <entry
+></entry>
+</row>
+
+<row>
+  <entry morerows="2"
+>MIPS (big endian)</entry>
+  <entry morerows="2"
+>mips</entry>
+  <entry morerows="1"
+>SGI Indy/Indigo 2</entry>
+  <entry
+>r4k-ip22</entry>
+</row
+><row>
+  <entry
+>r5k-ip22</entry>
+</row
+><row>
+  <entry
+>Broadcom BCM91250A (SQARM)</entry>
+  <entry
+>sb1-swarm-bn</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>MIPS (little endian)</entry>
+  <entry morerows="3"
+>mipsel</entry>
+  <entry
+>Cobalt</entry>
+  <entry
+>cobalt</entry>
+</row
+><row>
+  <entry morerows="1"
+>DECstation</entry>
+  <entry
+>r4k-kn04</entry>
+</row
+><row>
+  <entry
+>r3k-kn02</entry>
+</row
+><row>
+  <entry
+>Broadcom BCM91250A (SQARM)</entry>
+  <entry
+>sb1-swarm-bn</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>IBM S/390</entry>
+  <entry morerows="1"
+>s390</entry>
+  <entry
+>IPL from VM-reader and DASD</entry>
+  <entry
+>generic</entry>
+</row
+><row>
+  <entry
+>IPL from tape</entry>
+  <entry
+>type</entry>
+</row>
+
+</tbody
+></tgroup
+></informaltable>
+
+</para
+><para
+>本文件涵蓋了 <emphasis
+>&arch-title;</emphasis
+> 架構下的安裝資訊。如果您在尋找其他 Debian 所支援的硬體架構相關資訊，請瀏覽 <ulink url="http://www.debian.org/ports/"
+>Debian 移植</ulink
+>網頁。 </para
+><para condition="new-arch"
+>此為第一個 &arch-title; 架構的 &debian; 官方發佈版。我們認為它已經到達可發佈的品質要求。但是，由於它沒有像其他架構那樣得到足夠的曝光(經過使用者測試)，您可能會遇到一些臭蟲。請使用我們的 <ulink url="&url-bts;"
+>臭蟲追蹤系統</ulink
+>來報告問題，並註明該臭蟲是在 &arch-title; 平台上產生的。您也可以透過 <ulink url="&url-list-subscribe;"
+>debian-&architecture; 通信論壇</ulink
+>來進行討論。 </para>
+
+  </sect2>
+
+<!-- supported cpu docs -->
+
+<!-- Start of file hardware/supported/alpha.xml -->
+
+
+  <sect2 arch="alpha" id="alpha-cpus"
+><title
+>中央處理器，主機板和顯示的支援</title>
+<para
+>完整的 DEC Alphas 支援資訊可以在 <ulink url="&url-alpha-howto;"
+>Linux Alpha HOWTO</ulink
+> 中找到，本節是描述有啟動磁區支援的系統。 </para
+><para
+>由於有很多世代的主機板和支援晶片，Alpha 機器可以細分成不同的系統。各個系統 (<quote
+>子架構，sub-architectures</quote
+>) 通常具有完全不同的工程與性能。因此，安裝過程，或更準確的說：開機過程，會因系統不同而不同。 </para
+><para
+>以下表格中列出 Debian 安裝系統所支援的系統類型。表格中還指出這些系統類型的<emphasis
+>代號(code name)</emphasis
+>。當開始安裝時，您需要知道這些代號。 </para>
+
+<informaltable>
+<tgroup cols="4">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<colspec colname="c3"/>
+<colspec colname="c4"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>硬體類型</entry>
+  <entry
+>別名</entry
+><entry
+>MILO image</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry morerows="3"
+>ALCOR</entry>
+  <entry
+>AlphaStation 500 5/266.300</entry>
+  <entry
+>Maverick</entry>
+  <entry
+>alcor</entry>
+</row
+><row>
+  <entry
+>AlphaStation 500 5/333...500</entry>
+  <entry
+>Bret</entry>
+  <entry
+>alcor</entry>
+</row
+><row>
+  <entry
+>AlphaStation 600/266...300</entry>
+  <entry
+>Alcor</entry>
+  <entry
+>alcor</entry>
+</row
+><row>
+  <entry
+>AlphaStation 600/300...433</entry>
+  <entry
+>XLT</entry>
+  <entry
+>xlt</entry>
+</row>
+
+<row>
+  <entry
+>BOOK1</entry>
+  <entry
+>AlphaBook1 (laptop)</entry>
+  <entry
+>Alphabook1/Burns</entry>
+  <entry
+>book1</entry>
+</row>
+
+<row>
+  <entry morerows="7"
+>AVANTI</entry>
+  <entry
+>AlphaStation 200 4/100...166</entry>
+  <entry
+>Mustang</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 200 4/233</entry>
+  <entry
+>Mustang+</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 205 4/133...333</entry>
+  <entry
+>LX3</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 250 4/300</entry>
+  <entry
+>M3+</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 255 4/133...333</entry>
+  <entry
+>LX3+</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 300 4/266</entry>
+  <entry
+>Melmac</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 400 4/166</entry>
+  <entry
+>Chinet</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 400 4/233...300</entry>
+  <entry
+>Avanti</entry>
+  <entry
+>avanti</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>EB164</entry>
+  <entry
+>AlphaPC164</entry>
+  <entry
+>PC164</entry>
+  <entry
+>pc164</entry>
+</row
+><row>
+  <entry
+>AlphaPC164-LX</entry>
+  <entry
+>LX164</entry>
+  <entry
+>lx164</entry>
+</row
+><row>
+  <entry
+>AlphaPC164-SX</entry>
+  <entry
+>SX164</entry>
+  <entry
+>sx164</entry>
+</row
+><row>
+  <entry
+>EB164</entry>
+  <entry
+>EB164</entry>
+  <entry
+>eb164</entry>
+</row>
+
+<row>
+  <entry morerows="2"
+>EB64+</entry>
+  <entry
+>AlphaPC64</entry>
+  <entry
+>Cabriolet</entry>
+  <entry
+>cabriolet</entry>
+</row
+><row>
+  <entry
+>AlphaPCI64</entry>
+  <entry
+>Cabriolet</entry>
+  <entry
+>cabriolet</entry>
+</row
+><row>
+  <entry
+>EB64+</entry>
+  <entry
+>EB64+</entry>
+  <entry
+>eb64p</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>EB66</entry>
+  <entry
+>EB66</entry>
+  <entry
+>EB66</entry>
+  <entry
+>eb66</entry>
+</row
+><row>
+  <entry
+>EB66+</entry>
+  <entry
+>EB66+</entry>
+  <entry
+>eb66p</entry>
+</row>
+
+<row>
+  <entry morerows="2"
+>JENSEN</entry>
+  <entry
+>DEC 2000 Model 300(S)</entry>
+  <entry
+>Jensen</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>DEC 2000 Model 500</entry>
+  <entry
+>Culzen</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>DECpc 150</entry>
+  <entry
+>Jensen</entry>
+  <entry
+>N/A</entry>
+</row>
+
+<row>
+  <entry morerows="7"
+>MIATA</entry>
+  <entry
+>Personal WorkStation 433a</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 433au</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 466au</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 500a</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 500au</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 550au</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 600a</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 600au</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>MIKASA</entry>
+  <entry
+>AlphaServer 1000 4/200</entry>
+  <entry
+>Mikasa</entry>
+  <entry
+>mikasa</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000 4/233..266</entry>
+  <entry
+>Mikasa+</entry>
+  <entry
+>mikasa</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000 5/300</entry>
+  <entry
+>Mikasa-Pinnacle</entry>
+  <entry
+>mikasa</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000 5/300</entry>
+  <entry
+>Mikasa-Primo</entry>
+  <entry
+>mikasa</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>NAUTILUS</entry>
+  <entry
+>UP1000</entry>
+  <entry
+>Nautilus</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>UP1100</entry>
+  <entry
+>Galaxy-Train/Nautilus Jr.</entry>
+  <entry
+>N/A</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>NONAME</entry>
+  <entry
+>AXPpci33</entry>
+  <entry
+>Noname</entry>
+  <entry
+>noname</entry>
+</row
+><row>
+  <entry
+>UDB</entry>
+  <entry
+>Multia</entry>
+  <entry
+>noname</entry>
+</row>
+
+<row>
+  <entry morerows="6"
+>NORITAKE</entry>
+  <entry
+>AlphaServer 1000A 4/233...266</entry>
+  <entry
+>Noritake</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000A 5/300</entry>
+  <entry
+>Noritake-Pinnacle</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000A 5/333...500</entry>
+  <entry
+>Noritake-Primo</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer 800 5/333...500</entry>
+  <entry
+>Corelle</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaStation 600 A</entry>
+  <entry
+>Alcor-Primo</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>Digital Server 3300</entry>
+  <entry
+>Corelle</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>Digital Server 3300R</entry>
+  <entry
+>Corelle</entry>
+  <entry
+>N/A</entry>
+</row>
+
+<row>
+  <entry
+>PLATFORM 2000</entry>
+  <entry
+>P2K</entry>
+  <entry
+>P2K</entry>
+  <entry
+>p2k</entry>
+</row>
+
+<row>
+  <entry morerows="4"
+>RAWHIDE</entry>
+  <entry
+>AlphaServer 1200 5/xxx</entry>
+  <entry
+>Tincup/DaVinci</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer 4000 5/xxx</entry>
+  <entry
+>Wrangler/Durango</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer 4100 5/xxx</entry>
+  <entry
+>Dodge</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>Digital Server 5300</entry>
+  <entry
+>Tincup/DaVinci</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>Digital Server 7300</entry>
+  <entry
+>Dodge</entry>
+  <entry
+>N/A</entry>
+</row>
+
+<row>
+  <entry morerows="5"
+>RUFFIAN</entry>
+  <entry
+>DeskStation AlphaPC164-UX</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row
+><row>
+  <entry
+>DeskStation RPL164-2</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row
+><row>
+  <entry
+>DeskStation RPL164-4</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row
+><row>
+  <entry
+>DeskStation RPX164-2</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row
+><row>
+  <entry
+>DeskStation RPX164-4</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row
+><row>
+  <entry
+>Samsung AlphaPC164-BX</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>SABLE</entry>
+  <entry
+>AlphaServer 2000 4/xxx</entry>
+  <entry
+>Demi-Sable</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer 2000 5/xxx</entry>
+  <entry
+>Demi-Gamma-Sable</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer 2100 4/xxx</entry>
+  <entry
+>Sable</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer 2100 5/xxx</entry>
+  <entry
+>Gamma-Sable</entry>
+  <entry
+>N/A</entry>
+</row>
+
+<row>
+  <entry
+>TAKARA</entry>
+  <entry
+>21164 PICMG SBC</entry>
+  <entry
+>Takara</entry>
+  <entry
+>takara</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>TITAN</entry>
+  <entry
+>AlphaServer DS15</entry>
+  <entry
+>HyperBrick2</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS25</entry>
+  <entry
+>Granite</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer ES45</entry>
+  <entry
+>Privateer</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>UNKNOWN</entry>
+  <entry
+>Yukon</entry>
+  <entry
+>N/A</entry>
+</row>
+
+<row>
+  <entry morerows="12"
+>TSUNAMI</entry>
+  <entry
+>AlphaServer DS10</entry>
+  <entry
+>Webbrick</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS10L</entry>
+  <entry
+>Slate</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS20</entry>
+  <entry
+>Catamaran/Goldrush</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS20E</entry>
+  <entry
+>Goldrack</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS20L</entry>
+  <entry
+>Shark</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer ES40</entry>
+  <entry
+>Clipper</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>DP264</entry>
+  <entry
+>DP264</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>SMARTengine 21264 PCI/ISA SBC</entry>
+  <entry
+>Eiger</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>UNKNOWN</entry>
+  <entry
+>Warhol</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>UNKNOWN</entry>
+  <entry
+>Windjammer</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>UP2000</entry>
+  <entry
+>Swordfish</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>XP1000</entry>
+  <entry
+>Monet/Brisbane</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>XP900</entry>
+  <entry
+>Webbrick</entry>
+  <entry
+>N/A</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>WILDFIRE</entry>
+  <entry
+>AlphaServer GS160</entry>
+  <entry
+>Wildfire</entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer GS320</entry>
+  <entry
+>Wildfire</entry>
+  <entry
+>N/A</entry>
+</row>
+
+<row>
+  <entry
+>XL</entry>
+  <entry
+>XL-233...266</entry>
+  <entry
+>XL</entry>
+  <entry
+>xl</entry>
+</row>
+
+</tbody
+></tgroup
+></informaltable>
+
+<para
+>除了 ARC-only Ruffian、XL sub-architectures 以及 Titan 子架構需要修改編譯核心時的參數，Debian &releasename; 能夠安裝到所有的 alpha 子架構上。 </para>
+  </sect2>
+<!--   End of file hardware/supported/alpha.xml -->
+
+<!-- Start of file hardware/supported/arm.xml -->
+
+
+  <sect2 arch="arm"
+><title
+>中央處理器，主機板和顯示的支援</title>
+
+<para
+>每種不同的 ARM 架構要求使用各自的核心。因此，標準 Debian 發行套件只支援安裝在一些最常見的系統上。但 Debian 的其他使用環境仍可以被<emphasis
+>任何</emphasis
+> ARM CPU 使用，包括 xscale 在內。 </para>
+
+<para
+>大多數的 ARM CPU 可以運行在任一位元排列 (big-endian 或 little-endian) 模式下，但是目前幾乎所有的系統實作都是使用 little-endian 模式。Debian 現在也只支援 little-endian ARM 系統。 </para>
+
+<para
+>常見被支援的系統有 <variablelist>
+<varlistentry>
+<term
+>Netwinder</term>
+<listitem
+><para
+>其實這是一組以StrongARM 110 CPU 和 Intel 21285 北橋晶片為基礎架構的機器名稱。其中包括：Netwinder (也許是最常見的 ARM 機器)、CATS (也稱為 EB110ATX)、EBSA 285 和 Compaq personal server (cps，也叫 skiff)。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Bast</term>
+<listitem
+><para
+>此為一新式的 ARM 920 主機板，搭載一顆 266MHz Samsung 處理器。它整合了 IDE、USB、序列、並列、音效、顯示、快閃記憶體和兩個以太網路連接埠。此系統擁有一個很好的 boot-loader (也可以在 CATS 和 Riscstation 系統上找到)。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>RiscPC</term>
+<listitem
+><para
+>該機器發佈 1994 年，是最早支援的硬體。它在 ROM 裡面包含了 RISC OS，Linux 可以使用 linloader 從該 OS 啟動。RiscPC 有一種模組化的 CPU 卡，典型的配備有 30MHz 610, 40MHz 710 或 233MHz Strongarm 110 CPU。主機板整合了 IDE、SVGA 顯示卡、並列埠、單一列埠、PS/2 鍵盤和專有的滑鼠接埠。依據不同的配置，專門的模組擴充允許最多安裝八塊擴充卡，其中的一些模組有 Linux 驅動程式。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Riscstation</term>
+<listitem
+><para
+>這是一款廉價的 56MHz 7500FE 機器，它內建有顯示、IDE、PS/2 鍵盤和滑鼠，以及兩個序列埠。由於價格的原由，處理器的能力顯得不足。它有兩種配置，一個帶有 RISC OS，另一個具有簡單的 boot-loader。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>LART</term>
+<listitem
+><para
+>這是一個由愛好者建立的模組化開放硬體平台。安裝 Debian 需要 KSB 擴充板。 </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+  </sect2>
+<!--   End of file hardware/supported/arm.xml -->
+
+<!-- Start of file hardware/supported/hppa.xml -->
+
+
+  <sect2 arch="hppa"
+><title
+>中央處理器，主機板和顯示的支援</title>
+<para
+>主要支援 <emphasis
+>&architecture;</emphasis
+> 的風味有兩個：PA-RISC 1.1 和 PA-RISC 2.0。PA-RISC 1.1 系統目標是 32 位元處理器，2.0 架構的目標是 64 位元處理器。一些系統可以運行任一種核心。兩者的使用環境都是 32 位元的。將來也許會有 64 位元的使用環境。 </para>
+  </sect2>
+
+<!--   End of file hardware/supported/hppa.xml -->
+
+<!-- Start of file hardware/supported/i386.xml -->
+
+
+  <sect2 arch="i386"
+><title
+>中央處理器，主機板和顯示的支援</title>
+<para
+>被支援的周邊設備資訊可以在 <ulink url="&url-hardware-howto;"
+>Linux Hardware Compatibility HOWTO</ulink
+> 中找到。本節只是基本的概況。 </para>
+
+   <sect3
+><title
+>中央處理器</title>
+<para
+>幾乎所有的 x86 架構處理器都被支援；這包括了 AMD 和 VIA (前身為 Cyrix) 處理器。而 Athlon XP 和 Intel P4 Xeon也有支援。但是，Linux <emphasis
+>不能</emphasis
+>在 286 或更早的處理器上運行。 </para>
+   </sect3>
+
+   <sect3 id="bus"
+><title
+>I/O 匯流排</title>
+<para
+>系統匯流排為主機板的一部分，功能為使 CPU 和周邊設備，如儲存裝置通訊。您的電腦必須使用 ISA、EISA、PCI、微通道架構 (MCA，用於 IBM's PS/2 排線) 或者 VESA Local 匯流排(VLB, 有時稱為 VL 匯流排)。 </para>
+   </sect3>
+  </sect2>
+
+<!--   End of file hardware/supported/i386.xml -->
+
+<!-- Start of file hardware/supported/ia64.xml -->
+
+<!--   End of file hardware/supported/ia64.xml -->
+
+<!-- Start of file hardware/supported/m68k.xml -->
+
+  <sect2 arch="m68k"
+><title
+>中央處理器，主機板和顯示的支援</title>
+<para
+>以 M68000 (<emphasis
+>&architecture;</emphasis
+>) 為基礎架構的支援資訊請參考 <ulink url="&url-m68k-faq;"
+>Linux/m68k 常見問答集</ulink
+>。本節只是基本概述。 </para
+><para
+>移植到 &architecture; 的 Linux 可以運行在任何具有分頁記憶體管理單位 (Paged Memory Management Unit, PMMU) 和浮點處理單位 (floating-point unit, FPU) 的 680x0 上面。這包括配備 68851 PMMU 的 68020、68030，以及其它更好的處理器，不包括 <quote
+>EC</quote
+> 系列的 680x0 處理器。請參考 <ulink url="&url-m68k-faq;"
+>Linux/m68k 常見問答集</ulink
+>以瞭解更多資訊。 </para
+><para
+>有四個主要被 <emphasis
+>&architecture;</emphasis
+> 支援的風味為： Amiga, Atari, Macintosh 和 VME 機器。 Amiga 與 Atari 是首批 Linux 移植的兩個系統；並且，它們也是被 Debian 支援得最好的兩個移植。Debian 與 Linux 核心對 Macintosh 系列的 支援都是不完整的，請參考 <ulink url="&url-m68k-mac;"
+>Linux m68k for Macintosh</ulink
+> 以瞭解專案狀況的其所支援的硬體。BVM 和 Motorola VMEbus 單主機板電腦最近才加入 Debian 的支援行列。其它 &architecture; 架構的移植工作如 Sun3 架構與 NeXT black box 還在進行中，而且不被 Debian 支援。 </para>
+  </sect2>
+
+
+
+<!--   End of file hardware/supported/m68k.xml -->
+
+<!-- Start of file hardware/supported/mips.xml -->
+
+
+  <sect2 arch="mips"
+><title
+>中央處理器，主機板和顯示的支援</title>
+<para
+>Debian 目前在 &arch-title; 上支援兩種子架構：<itemizedlist
+> <listitem
+><para
+> SGI IP22：該平台包括的 SGI Indy、Indigo 2 和 Challenge S。由於這些機器非常相似，在本文件中所指的 SGI Indy 同樣也代表 Indigo 2 與 Challenge S。 </para
+></listitem
+> <listitem
+><para
+> Broadcom BCM91250A (SWARM)：此為 ATX 規格的試用主機板，此架構以 Broadcom 的 SiByte 處理器家族為基礎。</para
+></listitem
+> </itemizedlist
+> 關於支援 mips/mipsel 機器的完整資訊請見 <ulink url="&url-linux-mips;"
+>Linux-MIPS 網頁</ulink
+>。以下只涉及 Debian 安裝程式所支援的系統。如果您在尋找其它子架構的支援資訊，請聯繫<ulink url="&url-list-subscribe;"
+> debian-&architecture; 通信論壇</ulink
+>。 </para>
+
+   <sect3
+><title
+>中央處理器</title>
+<para
+>Debian 安裝系統以 big-endian MIPS 支援 SGI IP22, SGI Indy, Indigo 2 和 具有 R4000, R4400 和 R5000 處理器的 Challenge S。本安裝程式支援配有兩個 SB-1 核心和一個 SB1250 晶片的 Broadcom BCM91250A 試用主機板的 SMP 模式。 </para
+><para
+>一些 MIPS 機器既可在 big-endian 也可以在 little-endian 模式下運行。關於 little-endian MIPS，請閱讀 mipsel 架構的相關文件。 </para>
+   </sect3>
+  </sect2>
+
+<!--   End of file hardware/supported/mips.xml -->
+
+<!-- Start of file hardware/supported/mipsel.xml -->
+
+
+  <sect2 arch="mipsel"
+><title
+>中央處理器，主機板和顯示的支援</title>
+<para
+>Debian 目前在 &arch-title; 上支援三種子架構：<itemizedlist
+> <listitem
+><para
+> DECstation：支援各種機型的 DECstation。</para
+></listitem
+> <listitem
+><para
+> Cobalt Microserver：只適用以 MIPS 為基礎的 Cobalt 機器。包括 Cobalt Qube、RaQ、Qube2 和 RaQ2，以及 Gateway Microserver。</para
+></listitem
+> <listitem
+><para
+> Broadcom BCM91250A (SWARM)：此為 ATX 規格的試用主機板，此架構以 Broadcom 的 SiByte 處理器家族為基礎。</para
+></listitem
+> </itemizedlist
+> 關於支援 mips/mipsel 機器的完整資訊請見 <ulink url="&url-linux-mips;"
+>Linux-MIPS 網頁</ulink
+>。以下只涉及 Debian 安裝程式所支援的架構。如果您在尋找其它子架構的支援資訊，請聯繫<ulink url="&url-list-subscribe;"
+> debian-&architecture; 通信論壇</ulink
+>. </para>
+
+   <sect3
+><title
+>中央處理器/機器類型</title>
+
+<para
+>目前 Debian 安裝系統以 little-endian MIPS 支援配有 R3000 和 R4000/R4400 處理器的 DECstation。Debian 安裝系統可以在下列機器上工作： </para
+><para>
+
+<informaltable>
+<tgroup cols="4">
+<thead>
+<row>
+  <entry
+>系統類型</entry
+><entry
+>處理器</entry
+><entry
+>代號(Code-name)</entry>
+  <entry
+>Debian 子架構</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>DECstation 5000/1xx</entry>
+  <entry
+>R3000</entry>
+  <entry
+>3MIN</entry>
+  <entry
+>r3k-kn02</entry>
+</row
+><row>
+  <entry
+>DECstation 5000/150</entry>
+  <entry
+>R4000</entry>
+  <entry
+>3MIN</entry>
+  <entry
+>r4k-kn04</entry>
+</row
+><row>
+  <entry
+>DECstation 5000/200</entry>
+  <entry
+>R3000</entry>
+  <entry
+>3MAX</entry>
+  <entry
+>r3k-kn02</entry>
+</row
+><row>
+  <entry
+>DECstation 5000/240</entry>
+  <entry
+>R3000</entry>
+  <entry
+>3MAX+</entry>
+  <entry
+>r3k-kn02</entry>
+</row
+><row>
+  <entry
+>DECstation 5000/260</entry>
+  <entry
+>R4400</entry>
+  <entry
+>3MAX+</entry>
+  <entry
+>r4k-kn04</entry>
+</row
+><row>
+  <entry
+>Personal DECstation 5000/xx</entry>
+  <entry
+>R3000</entry>
+  <entry
+>Maxine</entry>
+  <entry
+>r3k-kn02</entry>
+</row
+><row>
+  <entry
+>Personal DECstation 5000/50</entry>
+  <entry
+>R4000</entry>
+  <entry
+>Maxine</entry>
+  <entry
+>r4k-kn04</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para
+><para
+>具有序列控制台 (安裝時需要) 的所有 Cobalt 機器都被支援。 </para
+><para
+>本安裝程式支援配有兩個 SB-1 核心和一個 SB1250 晶片的 Broadcom BCM91250A 試用主機板的 SMP 模式。 </para>
+   </sect3>
+
+   <sect3
+><title
+>支援的控制台選項</title>
+<para
+>序列控制台可在所有支援的 DECstations (9600 bps, 8N1) 上運作。為了使用序列控制台，您必須在啟動安裝程式映像檔時加上 <literal
+>console=ttyS</literal
+> 核心參數 (<replaceable
+>x</replaceable
+> 是終端連接的序列埠編號 &mdash; 通常為 <literal
+>2</literal
+>，但 Personal DECstations 是 <literal
+>2</literal
+>)。在 3MIN 和 3MAX+ (DECstation 5000/1xx, 5000/240 和 5000/260)上，本地控制台可搭配 PMAG-BA 和 PMAGB-B 圖形選項使用。 </para
+><para
+>如果您想要把 Linux 系統作為序列終端機，最簡單的方法就是執行 <command
+>cu</command
+><footnote
+> <para
+>。在 Woody 裡該指令屬於 <classname
+>uucp</classname
+> 軟體套件，但在以後的發佈版本中它屬於其他的軟體套件。</para
+> </footnote
+>。例如： <informalexample
+><screen>
+$ cu -l /dev/ttyS1 -s 9600
+</screen
+></informalexample
+> 其中 <literal
+>-l</literal
+> (line) 是設定使用的序列埠號，<literal
+>-s</literal
+> (speed) 是設置連接速度 (鮑率9600)。 </para
+><para
+>Cobalt 和 Broadcom BCM91250A 都使用 115200 bps。 </para>
+   </sect3>
+  </sect2>
+<!--   End of file hardware/supported/mipsel.xml -->
+
+<!-- Start of file hardware/supported/powerpc.xml -->
+
+
+  <sect2 arch="powerpc"
+><title
+>中央處理器，主機板和顯示的支援</title>
+<para
+>有四個主要支援的 <emphasis
+>&architecture;</emphasis
+> 子架構：PMac (Power-Macintosh)，PReP，APUS (Amiga Power-UP System) 和 CHRP 機器。每種子架構都有各自的啟動方式。並還有四種不同的核心風味，以支援不同的處理。 </para
+><para
+>移植到其它 <emphasis
+>&architecture;</emphasis
+> 架構的工作如 Be-Box 與 MBX 仍在進行中，尚未被 Debian 支援。將來我們也許會有 64 位元的移植版本。 </para>
+
+   <sect3
+><title
+>核心風味</title>
+
+<para
+>在 Debian 中有四種以處理器分類的 powerpc 核心： <variablelist>
+<varlistentry>
+<term
+>powerpc</term>
+<listitem
+><para
+>大多數系統使用這種核心風味，它支援 PowerPC 601、 603、604、740、750 與 7400 處理器。所有 Apple Power Macintosh 以後的系統包括 G4 都使用這些處理器之一。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>power3</term>
+<listitem
+><para
+>POWER3 處理器用於早期的 IBM 64 位元伺服器系統：已知的型號包括 IntelliStation POWER Model 265、pSeries 610 與 640，以及 RS/6000 7044-170、7044-260 和 7044-270。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>power4</term>
+<listitem
+><para
+>POWER4 處理器用於最新的 IBM 64 位伺服器系統：已知的型號包括 pSeries 615、630、650、655、670 和 690。 </para
+><para
+>Apple G5 以 POWER4 為基礎架構，也是使用這種核心。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>apus</term>
+<listitem
+><para
+>這種核心風味支援 Amiga Power-UP 系統。 </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+
+   </sect3>
+
+   <sect3
+><title
+>Power Macintosh (pmac) 子架構</title>
+
+<para
+>Apple (以及其它一些製造商 &mdash; 例如 Power Computing) 生產了一系列以 PowerPC 處理器為基礎的 Macintosh 電腦。為了架構支援，它們被劃分為 NuBus、OldWorld PCI 和 NewWorld。 </para
+><para
+>使用 680x0 系列的 Macintosh 電腦不屬於 PowerPC 家族，而是 m68k 機器。這些機器的型號以 <quote
+>Mac II</quote
+> 開頭或是使用 3 位數字的型號，如 Centris 650 或 Quadra 950。Apple iMac PowerPC 之前的機型是 4 位數字。 </para
+><para
+>debian/powerpc 目前還不支援 NuBus 系統。單核心的 Linux/PPC 架構不支援這些機器；而且必須使用 MkLinux Mach 微核心，該核心尚未被 Debian 支援。它們包括：<itemizedlist
+> <listitem
+><para
+> Power Macintosh 6100, 7100, 8100 </para
+></listitem
+> <listitem
+><para
+> Performa 5200, 6200, 6300 </para
+></listitem
+> <listitem
+><para
+> Powerbook 1400, 2300 和 5300 </para
+></listitem
+> <listitem
+><para
+> Workgroup Server 6150, 8150, 9150 </para
+></listitem
+> </itemizedlist
+> 對這些機器提供有限支援的 Linux 核心位於 <ulink url="http://nubus-pmac.sourceforge.net/"
+></ulink
+>。 </para
+><para
+>OldWorld 系統為大多數配有軟碟機和 PCI 匯流排的 Power Macintosh。大多數以 603、603e、604 和 604e 的 Power Macintosh 為基礎的機器都是 OldWorld。米色的 G3 系統也是 OldWorld 的。 </para
+><para
+>被稱做 NewWorld PowerMacs 是那些有半透明塑料外殼的機器。包括所有的 iBook、G4 系統、藍色的 G3 系統、和大多數 1999 年及以後生產的 PowerBook。NewWorld PowerMacs 也是 1998 下半年以後製造，使用 <quote
+>ROM in RAM</quote
+> MacOS 的系統。 </para
+><para
+>Apple 硬體的規格說明位於 <ulink url="http://www.info.apple.com/support/applespec.html"
+>AppleSpec</ulink
+>， 另外，對於舊硬體請參閱 <ulink url="http://www.info.apple.com/support/applespec.legacy/index.html"
+>AppleSpec Legacy</ulink
+>。 </para
+><para>
+
+<informaltable>
+<tgroup cols="3">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<colspec colname="c3"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>型號名稱/編號</entry>
+  <entry
+>世代</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry morerows="22"
+>Apple</entry>
+  <entry
+>iMac Bondi Blue, 5 Flavors, Slot Loading</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>iMac Summer 2000, Early 2001</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>iMac G5</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>iBook, iBook SE, iBook Dual USB</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>iBook2</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>iBook G4</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh Blue and White (B&amp;W) G3</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh G4 PCI, AGP, Cube</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh G4 Gigabit Ethernet</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh G4 Digital Audio, Quicksilver</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh G5</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook G3 FireWire Pismo (2000)</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook G3 Lombard (1999)</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook G4 Titanium</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook G4 Aluminum</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Xserve G5</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Performa 4400, 54xx, 5500</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Performa 6360, 6400, 6500</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh 4400, 5400</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh 7200, 7300, 7500, 7600</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh 8200, 8500, 8600</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh 9500, 9600</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh (Beige) G3 Minitower</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh (Beige) Desktop, All-in-One</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook 2400, 3400, 3500</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook G3 Wallstreet (1998)</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Twentieth Anniversary Macintosh</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Workgroup Server 7250, 7350, 8550, 9650, G3</entry>
+  <entry
+>OldWorld</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>Power Computing</entry>
+  <entry
+>PowerBase, PowerTower / Pro, PowerWave</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>PowerCenter / Pro, PowerCurve</entry>
+  <entry
+>OldWorld</entry>
+</row>
+
+<row>
+  <entry
+>UMAX</entry>
+  <entry
+>C500, C600, J700, S900</entry>
+  <entry
+>OldWorld</entry>
+</row>
+
+<row>
+  <entry
+>APS</entry>
+  <entry
+>APS Tech M*Power 604e/2000</entry>
+  <entry
+>OldWorld</entry>
+</row>
+
+<row>
+  <entry
+>Motorola</entry>
+  <entry
+>Starmax 3000, 4000, 5000, 5500</entry>
+  <entry
+>OldWorld</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+
+   </sect3>
+
+   <sect3
+><title
+>PReP 子架構</title>
+
+<para>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>型號名稱/編號</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry morerows="4"
+>Motorola</entry>
+  <entry
+>Firepower, PowerStack Series E, PowerStack II</entry>
+</row
+><row>
+  <entry
+>MPC 7xx, 8xx</entry>
+</row
+><row>
+  <entry
+>MTX, MTX+</entry>
+</row
+><row>
+  <entry
+>MVME2300(SC)/24xx/26xx/27xx/36xx/46xx</entry>
+</row
+><row>
+  <entry
+>MCP(N)750</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>IBM RS/6000</entry>
+  <entry
+>40P, 43P</entry>
+</row
+><row>
+  <entry
+>Power 830/850/860 (6070, 6050)</entry>
+</row
+><row>
+  <entry
+>6030, 7025, 7043</entry>
+</row
+><row>
+  <entry
+>p640</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+
+   </sect3>
+
+   <sect3
+><title
+>CHRP 子架構</title>
+
+<para>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>型號名稱/編號</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>IBM RS/6000</entry>
+  <entry
+>B50, 43P-150, 44P</entry>
+</row>
+<row>
+  <entry
+>Genesi</entry>
+  <entry
+>Pegasos I, Pegasos II</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+
+   </sect3>
+
+   <sect3
+><title
+>APUS 子架構</title>
+
+<para>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>型號名稱/編號</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>Amiga Power-UP Systems (APUS)</entry>
+  <entry
+>A1200, A3000, A4000</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+   </sect3>
+  </sect2>
+<!--   End of file hardware/supported/powerpc.xml -->
+
+<!-- Start of file hardware/supported/s390.xml -->
+
+
+  <sect2 arch="s390"
+><title
+>S/390 與 zSeries 機器類型</title>
+<para
+>關於 S/390 和 zSeries 機器的完整支援資訊請參閱 IBM 的 Redbook <ulink url="http://www.redbooks.ibm.com/pubs/pdfs/redbooks/sg246264.pdf"
+>Linux for IBM eServer zSeries and S/390: Distributions</ulink
+> 第 2.1 章節，或者源於 <ulink url="http://oss.software.ibm.com/developerworks/opensource/linux390/index.shtml"
+>developerWorks 網站</ulink
+>的<ulink url="http://oss.software.ibm.com/developerworks/opensource/linux390/documentation-2.4.shtml"
+>技術細節網頁</ulink
+>。簡而言之，G5、Multiprise 3000、G6 以及所有的 zSeries 都可以得到完整的支援﹔Multiprise 2000、G3 和 G4 機器使用 IEEE 浮點模擬來支援，因此會降低性能。 </para>
+  </sect2>
+
+<!--   End of file hardware/supported/s390.xml -->
+
+<!-- Start of file hardware/supported/sparc.xml -->
+
+
+  <sect2 arch="sparc" id="sparc-cpus"
+><title
+>中央處理器，主機板和顯示的支援</title>
+<para
+>目前 <emphasis
+>&architecture;</emphasis
+> 的移植版支援多種 Sparc 系統。最常見的 Sparc 系統標誌是 sun4、sun4c、sun4m、sun4d 與 sun4u。目前我們不支援非常老的 sun4 硬體，但支援其它的系統。Sun4d 缺少這方面的測試，可能有潛在的核心穩定性問題。Sun4c 和 Sun4m，最常見的老 Sparc 硬體，包括 SparcStation 1, 1+, IPC, IPX 以及 SparcStation LX, 5, 10 和 20 也是如此。UltraSPARC 一類的系統也歸於 sun4u，使用 sun4u 的安裝核心。不過有一些屬於支援範圍內的系統其實還沒有被支援。已知的有 AP1000 multicomputer 和 Tadpole Sparcbook 1。請參閱 <ulink url="&url-sparc-linux-faq;"
+>Linux for SPARCProcessors 常見問答集</ulink
+>以取得更多資訊。 </para>
+
+   <sect3
+><title
+>記憶體配置</title>
+<para
+>一些老的 Sun 工作站，如著名的 Sun IPX 和 Sun IPC，記憶體插槽對應於固定位置的記憶體位址。因此，未插上記憶體的插槽，將會在記憶體空間中留下空隙。Linux 安裝要求連續的記憶體區塊用來掛載核心與初始化 RAMdisk。如果沒有連續的記憶體區塊就會產生 <quote
+>Data Access Exception</quote
+>。 </para
+><para
+>所以，您必須配置您的記憶體使得最低位址的記憶體區塊至少有連續的 8Mb 空間。在上面提到的 IPX 與 IPC 中，記憶體插槽以 16Mb 為映射邊界。這意味著您必須在插槽 0 插上足夠大的 SIMM，用以儲存核心與 RAMdisk。因此，4Mb 就<emphasis
+>不</emphasis
+>夠用了。 </para
+><para
+>例如：在 Sun IPX 機器上，您有一條 16Mb SIMM 和一條 4Mb SIMM。有四個 SIMM 插槽 (0, 1, 2, 3)。[插槽 0 位於 SBUS 連接器的最遠端]。因此您必須把 16Mb SIMM 插在插槽 0 上，並且我們建議將 4Mb SIMM 插在插槽 2 上。 </para>
+   </sect3>
+
+   <sect3
+><title
+>圖形顯示配置</title>
+<para
+>常常會有主機板內嵌但不被啟動的 framebuffer (例如 sun IPC 上的 bwtwo) 被插在 SBUS 槽上配有加速 buffer 的 SBUS 卡所取代，這種狀況特別常發生於老的 Sun 工作站。在 Solaris/SunOS 上這不會造成任何問題，因為它們都會被初始化。 </para
+><para
+>然而，在 Linux 下卻會造成問題。在啟動時 PROM 監視器會顯示輸出到這個外加卡上﹔但 Linux 核心啟動資訊卻指向最初主機板上的內建 framebuffer，從而<emphasis
+>不會</emphasis
+>在螢幕上留下任何錯誤資訊，表面上看起來就像機器卡在掛載 RAMdisk 的步驟。 </para
+><para
+>為了避免這個問題，將監視器(如果需要)連接到插在最小編號的 SBUS 槽上的顯示卡(主機板上的計數低於外接槽)。另外一個方法是使用序列控制台。 </para>
+   </sect3>
+  </sect2>
+<!--   End of file hardware/supported/sparc.xml -->
+
+  <sect2 id="gfx" arch="not-s390"
+><title
+>圖形介面卡</title>
+
+<para arch="i386"
+>您應該讓終端控制台使用 VGA 相容的顯示介面。幾乎所有的新顯卡都相容 VGA。在不使用 X11 支援的情況下，您也可以用古老的 CGA, MDA 或 HGA 工作。 注意，在本文所述的安裝過程中並不會使用 X11 圖形界面。 </para
+><para
+>Debian 對顯示卡的支援決定於 XFree86 的 X11 系統。大多數 AGP，PCI 和 PCI 顯示卡都能在 XFree86 下工作。更多的關於圖形匯流排、顯示卡、顯示器和指點設備的支援情況請參閱 <ulink url="&url-xfree86;"
+></ulink
+>。Debian &release; 包含 XFree86 &x11ver; 版。 </para
+><para arch="mips"
+>XFree86 X11 window 系統僅支援 SGI Indy。Broadcom BCM91250A 試用主機板具有標準的 3.3v PCI 插槽，並且可選配顯示卡支援模擬 VGA 或者 Linux framebuffer。詳見 BCM91250A 的<ulink url="&url-bcm91250a-hardware;"
+>相容列表</ulink
+>。 </para
+><para arch="mipsel"
+>XFree86 X11 window 系統支援某些 DEC 工作站機型。Broadcom BCM91250A 試用主機板具有標準的 3.3v PCI 插槽，並且可選配顯示卡支援模擬 VGA 或者 Linux framebuffer。詳見 BCM91250A 的<ulink url="&url-bcm91250a-hardware;"
+>相容列表</ulink
+>。 </para>
+
+  </sect2>
+
+  <sect2 arch="i386" id="laptops"
+><title
+>筆記型電腦</title>
+<para
+>筆記型電腦當然也受到支援。筆記型電腦通常使用特製或專有的硬體。要瞭解您的筆記型電腦是否能在 GNU/Linux 下正常工作，請參考 <ulink url="&url-x86-laptop;"
+>Linux 筆記型電腦網頁</ulink
+> </para>
+   </sect2>
+
+
+  <sect2 condition="defaults-smp">
+<title
+>多處理器</title>
+
+<para
+>多處理器 &mdash; 又稱為 <quote
+>symmetric multi-processing</quote
+> 或 SMP &mdash; 在本硬體架構下是受到支援的。標準的 Debian &release; 核心在編譯時已經加入了 SMP 功能。因為 SMP 的核心也能在非 SMP 的系統下啟動，只不過多些系統負擔，所以這並不會影響安裝。 </para
+><para
+>為了最佳化單處理器系統核心，您需要替換標準的 Debian 核心。您可以在 <xref linkend="kernel-baking"/> 找到相關的討論。目前(核心版本 &kernelversion;)停用 SMP 選項的方法是在核心設定的 <quote
+>&smp-config-section;</quote
+> 小節中取消 <quote
+>&smp-config-option;</quote
+> 選項。 </para>
+
+  </sect2>
+
+
+  <sect2 condition="supports-smp">
+ <title
+>多處理器</title>
+<para
+>多處理器 &mdash; 又稱為 <quote
+>symmetric multi-processing</quote
+> 或 SMP &mdash; 在本硬體架構下是受到支援的。但是，標準的 Debian &release; 核心並不支援 SMP。這不會影響安裝，因為非 SMP 的核心也能在 SMP 的系統下啟動，核心只會使用第一個處理器。 </para
+><para
+>為了使用多處理器的好處，您必須替換標準的 Debian 核心。您可以在 <xref linkend="kernel-baking"/> 找到相關的討論。目前 (核心版本 &kernelversion;) 啟用 SMP 的方法是在核心設定的 <quote
+>&smp-config-section;</quote
+> 小節中選擇 <quote
+>&smp-config-option;</quote
+> 選項。 </para>
+  </sect2>
+
+  <sect2 condition="supports-smp-sometimes">
+ <title
+>多處理器</title>
+<para
+>多處理器 &mdash; 又稱為 <quote
+>symmetric multi-processing</quote
+> 或 SMP &mdash; 在本架構架構下是受到支援的，並且有一個預先編譯的 Debian 核心映像檔已經開啟這項功能。支援 SMP 的預設核心是否被安裝，取決於您的安裝媒體。這並不會影響安裝，因為非 SMP 的核心也能在 SMP 的系統下啟動，只不過核心只使用第一個處理器。 </para
+><para
+>為了使用多處理器的好處，您應該檢查支援 SMP 的核心是否被安裝，如果沒有，請選擇一個合適的核心套件。您也可以編譯一個自定的核心來支援 SMP。相關的討論可以在 <xref linkend="kernel-baking"/> 找到。目前 (核心版本 &kernelversion;) 啟用 SMP 選項的方法是在核心設定的 <quote
+>&smp-config-option;</quote
+> 小節中選擇 <quote
+>&smp-config-option;</quote
+>。 </para>
+  </sect2>
+ </sect1>
+<!--   End of file hardware/hardware-supported.xml -->
+
+<!-- Start of file hardware/installation-media.xml -->
+
+ <sect1 id="installation-media">
+ <title
+>安裝媒介</title>
+
+<para
+>本章將幫助您選擇安裝 Debian 可用的不同媒介。例如，您的電腦上有一個軟碟機，它就可以用來安裝 Debian。這裡有一整章專門用於說明安裝媒介：<xref linkend="install-methods"/>，並且列出了每種類型的優缺點。當您閱讀那一章的時候，可能要返回來參考本頁。 </para>
+
+  <sect2 condition="supports-floppy-boot"
+><title
+>軟碟</title>
+<para
+>在某些條件下，您不得不從軟碟做首次啟動。通常，您所需的只是一個 3.5 英吋高密度(1440kB)軟碟。 </para
+><para arch="powerpc"
+>對於 CHRP，軟碟已經被停止支援。 </para>
+  </sect2>
+
+  <sect2
+><title
+>CD-ROM/DVD-ROM</title>
+
+<note
+><para
+>每當在本手冊中看到<quote
+>光碟</quote
+>，它泛指 CD-ROM 和 DVD-ROM。因為從作業系統的角度來看，它們所用的技術是相同的。這套論屏除那些既不屬於 SCSI 也不屬於 IDE/ATAPI 的老式非標準 CD-ROM 光碟機。 </para
+></note
+><para
+>一些架構支援透過光碟機的安裝方式。在支援光碟機開機的機器上，您可以完成<phrase arch="not-s390"
+>無軟碟 (floppy-less)</phrase
+> <phrase arch="s390"
+>無磁帶 (tape-less)</phrase
+> 的安裝。即使您的系統不支援從 CD-ROM 開機，您也可以結合其他技術在開機後使用光碟機來安裝系統，請參閱 <xref linkend="boot-installer"/>。 </para
+><para arch="i386"
+>SCSI 和 IDE/ATAPI CD-ROM 都是被支援的。另外，Linux 支援的所有非標準 CD 介面 (例如 Mitumi 與 Matsushita 的光碟機)也被開機片支援。但是，這些機型需要特別指定啟動參數或者其他處理才能工作，而且從這些非標準的介面啟動可能會失敗。<ulink url="&url-cd-howto;"
+>Linux CD-ROM HOWTO</ulink
+> 包含一些關於在 Linux 下使用 CD-ROM 的詳盡資訊。 </para
+><para arch="i386"
+>USB光碟機也是被支援的。而 FireWire 設備則是透過 ohci1394 和 sbp2 驅動程式來支援。 </para
+><para arch="alpha"
+>只要 SRM 控制台能支援相應的控制器，&arch-title; 上的 SCSI 和 IDE/ATAPI光碟機就能取得支援。這將會把許多附加的控制卡排除在外，但是大多數由製造商提供的內建 IDE 和 SCSI 晶片以及控制卡都應該能夠工作。要想知道您的設備是否被 SRM 控制台支援，請參閱 <ulink url="&url-srm-howto;"
+>SRM HOWTO</ulink
+>。 </para
+><para arch="arm"
+>所有的 ARM 機器都支援 IDE/ATAPI光碟機。在 RiscPC 上也支援 SCSI光碟機。 </para
+><para arch="mips"
+>在 SGI 的機器上，以光碟機開機需要一台能使用 512 位元組邏輯塊的 SCSI光碟機。很多 PC 市場的 SCSI 光碟機並不具有這個能力。如果您的光碟機上有標註為 <quote
+>Unix/PC</quote
+> 或 <quote
+>512/2048</quote
+> 的跳線，請將其至於 <quote
+>Unix</quote
+> 或 <quote
+>512</quote
+> 的位置上。要開始安裝，請從韌體上選擇 <quote
+>System installation</quote
+> 選項。Broadcom BCM91250A 支援的標準 IDE 設備包括光碟機，但由於其韌體不能識別光碟機，所以在此並不提供針對此平台的光碟映像。 </para
+><para arch="mipsel"
+>在 DEC 工作站(DECstations)上，以光碟機開機需要一台能使用 512 位元組邏輯塊的 SCSI光碟機。很多 PC 市場的 SCSI光碟機並不具有這個能力。如果您的光碟機上有標註為 <quote
+>Unix/PC</quote
+> 或 <quote
+>512/2048</quote
+> 的跳線，請將其至於 <quote
+>Unix</quote
+> 或 <quote
+>512</quote
+> 的位置上。 </para
+><para arch="mipsel"
+>CD 1 包含 r3k-kn02 子架構 (以 R3000 為基礎的 DEC 5000/1xx 和 5000/240 工作站以及以 R3000 DEC 為基礎的個人工作站型號) 的安裝程式，CD 2 的安裝程式用於 r4k-kn04 子架構 (以 R4x00 為基礎的DEC 5000/150 和 5000/260 工作站以及 DEC 5000/50 個人工作站)。 </para
+><para arch="mipsel"
+>要從光碟開機，在韌體提示後使用指令 <userinput
+>boot<replaceable
+>#</replaceable
+>/rz<replaceable
+>id</replaceable
+></userinput
+> 其中<replaceable
+>#</replaceable
+> 是指定開機的 TurboChannel 設備編號(DEC 工作站上大多數使用 3)，<replaceable
+>id</replaceable
+>是光碟機的 SCSI ID。如果您需要指定額外的參數，可以按照下面語法選擇添加： </para
+><para arch="mipsel">
+
+<userinput
+>boot <replaceable
+>#</replaceable
+>/rz<replaceable
+>id</replaceable
+> param1=value1 param2=value2 ...</userinput>
+
+</para>
+  </sect2>
+
+  <sect2
+><title
+>硬碟</title>
+
+<para
+>從硬碟開機安裝系統是許多硬體架構的另外一個選擇。這將要求其他的作業系統從硬體載入安裝程式。 </para
+><para arch="m68k"
+>事實上，從本地硬碟安裝對大多數 &architecture; 機器來說是推薦的做法。 </para
+><para arch="sparc"
+>雖然 &arch-title; 不允許從 SunOS (Solaris) 啟動，但您可以從一個 SunOS 的分割區 (UFS slices) 進行安裝。 </para>
+  </sect2>
+
+  <sect2 condition="bootable-usb"
+><title
+>USB 隨身碟</title>
+
+<para
+>許多 Debian 機器只在設定系統和急救用途時才需要軟碟機和光碟機。如果您使用過伺服器，您也許已經想過如何省掉這些設備，改用 USB 隨身碟來安裝和 (在必需時) 恢復系統。這對那些沒有足夠空間容納不必要設備的小型系統非常有用。 </para>
+  </sect2>
+
+  <sect2
+><title
+>網路</title>
+
+<para condition="supports-tftp"
+>您還可以從網路<emphasis
+>啟動 (boot)</emphasis
+> 系統。<phrase arch="mips"
+> 這是在 Mips 下的推薦安裝方式</phrase
+> </para
+><para condition="supports-nfsroot"
+>無磁碟安裝；使用網路從區域網路開機，並使用 NFS 掛載所有的本地檔案系統是另一種選擇。 </para
+><para
+>在安裝了作業系統的核心以後，您可以使用任何一種網路連接方式 (包括安裝完基本系統以後使用 PPP) 透過 FTP 或 HTTP 安裝剩餘的系統。 </para>
+  </sect2>
+
+  <sect2
+><title
+>Un*x 或 GNU 系統</title>
+
+<para
+>如果您正在使用其它的類 Unix 系統，也可以用它來安裝 &debian; 而無須本手冊其他部分所描述的 &d-i; 使用方法。這類安裝方法可能對那些因為硬體不支援或機器停產的使用者有用。如果您對此技術感興趣，請直接跳到 <xref linkend="linux-upgrade"/>。 </para>
+  </sect2>
+
+  <sect2
+><title
+>支援的儲存系統</title>
+
+<para
+>Debian 開機磁碟包括一個最可能在所有支援的系統上運作的核心。不幸的是，這將產生一個龐大的核心，其中包括許多您的機器不需要的驅動程式 (參考<xref linkend="kernel-baking"/> 學習如何編譯自己的核心)。在一般狀況下，支援最大範圍內的設備是被期許的，這將使得 Debian 可以在盡可能多的硬體上安裝。 </para
+><para arch="i386"
+>一般說來，Debian 安裝系統支援軟碟機、IDE 設備、IDE 軟碟機、平行 IDE 設備、SCSI 控制器和設備、USB 以及 FireWire。檔案系統支援 FAT、Win-32 FAT extensions (VFAT)、 NTFS、以及其他一些格式。 </para
+><para arch="i386"
+>模擬 <quote
+>AT</quote
+> 硬碟介面的軟碟介面，通常稱為 MFM、RLL、IDE 或 ATA 是受支援的。用於 IBM XT 電腦非常陳舊的 8 位元硬碟控制器只以一個模組支援。大部分廠商生產的 SCSI 磁碟控制器都能取得支援。請參考 <ulink url="&url-hardware-howto;"
+>Linux Hardware Compatibility HOWTO</ulink
+> 以取得更詳細資訊。 </para
+><para arch="m68k"
+>基本上所有 Linux 核心支援的儲存系統都被 Debian 安裝系統所支援。注意，目前的Linux 核心仍不支援 Macintosh 上的軟碟，並且 Debian 安裝系統也不支援 Amigas 的軟碟。Atari 上也支援 Macintosh HFS 系統，並以模組支援 AFFS。Mac 機器支援 Atari (FAT) 檔案系統。 Amigas 支援 FAT 檔案系統，HFS 則是受模組支援。 </para
+><para arch="sparc"
+>所有 Linux 核心支援的儲存系統也都被開機系統支援。下列 SCSI 驅動程式被預設核心支援：<itemizedlist
+> <listitem
+><para
+> Sparc ESP </para
+></listitem
+> <listitem
+><para
+> PTI Qlogic,ISP </para
+></listitem
+> <listitem
+><para
+> Adaptec AIC7xxx </para
+></listitem
+> <listitem
+><para
+> NCR 與 Symbios 53C8XX </para
+></listitem
+> </itemizedlist
+> IDE 系統(例如 UltraSPARC 5)是受支援的。請參考 <ulink url="&url-sparc-linux-faq;"
+>Linux for SPARC Processors 常見問答集</ulink
+>以瞭解更多關於 Linux 核心支援 SPARC 硬體的情況。 </para
+><para arch="alpha"
+>所有 Linux 核心支援的儲存系統也都被開機系統支援。這包括 SCSI 和 IDE 硬碟。但是注意，在許多系統上，SRM 控制台不能從 IDE 驅動器上啟動，而且且 Jensen 不能從軟碟開機。(請參考 <ulink url="&url-jensen-howto;"
+></ulink
+> 以瞭解更多關於從 Jensen 開機的資訊) </para
+><para arch="powerpc"
+>所有 Linux 核心支援的儲存系統也都被開機系統支援。注意目前的 Linux 核心還不支援 CHRP 系統上的軟碟。 </para
+><para arch="hppa"
+>所有 Linux 核心支援的儲存系統也都被開機系統支援。注意目前的 Linux 核心還不支援軟碟機。 </para
+><para arch="mips"
+>所有 Linux 核心支援的儲存系統也都被開機系統所支援。 </para
+><para arch="s390"
+>所有 Linux 核心支援的儲存系統也都被開機系統所支援。這意味著 FBA 和 ECKD DASD 可以被舊的 Linux disk layout (ldl) 和新的 common S/390 disk layout (cdl) 支援。 </para>
+
+  </sect2>
+
+ </sect1>
+<!--   End of file hardware/installation-media.xml -->
+
+<!-- Start of file hardware/supported-peripherals.xml -->
+
+ <sect1 id="supported-peripherals">
+ <title
+>周邊設備與其他硬體</title>
+<para arch="not-s390"
+>Linux 支援眾多的硬體設備，例如：滑鼠、印表機、掃瞄器、PCMCIA 和 USB 設備。然而，在安裝系統的時候並不需要其中的大部分設備。 </para
+><para arch="i386"
+>USB 硬體通常運作得很好，只有一些 USB 鍵盤需要額外地設定 (請參閱 <xref linkend="usb-keyboard-config"/>)。 </para
+><para arch="i386"
+>另外，請參閱 <ulink url="&url-hardware-howto;"
+>Linux Hardware Compatibility HOWTO</ulink
+> 來判斷您的硬體是否由 Linux 支援。 </para
+><para arch="s390"
+>從 XPRAM 和磁帶安裝的軟體套件不受本系統支援。所有要安裝的軟體套件必須位於 DASD 上或者透過 NFS、HTTP、FTP 從網路上取得。 </para
+><para arch="mips"
+>Broadcom BCM91250A 試用主機板提供標準的 3.3v 32 位元和 64 位元 PCI 插槽，以及 USB 連接埠。 </para
+><para arch="mipsel"
+>Broadcom BCM91250A 試用主機板提供標準的 3.3v 32 位元和 64 位元 PCI 插槽，以及 USB 連接埠。Cobalt RaQ 不支援額外的設備，但 Qube 有一個 PCI 插槽。 </para>
+</sect1>
+
+ <sect1 arch="not-s390"
+><title
+>特別為 GNU/Linux 採購硬體</title>
+
+<para
+>現在有一些零售商出售的系統是<ulink url="&url-pre-installed;"
+>預先安裝版</ulink
+>的 Debian 或者其他 GNU/Linux。您會為此多花一些錢，但能買來一份安心，因為這些硬體都已經確保能被 GNU/Linux 很好地支援。 </para
+><para arch="m68k"
+>不幸的是，很少會有零售商出售新 &arch-title; 機器。 </para
+><para arch="i386"
+>如果您不得不購買一台搭配 Windows 作業系統販售的機器，請仔細閱讀 Windows 附帶的軟體授權，您也許可以拒絕該授權並從零售商那裡取得一定的折扣。請參考 <ulink url="&url-windows-refund;"
+></ulink
+> 以瞭解更多的資訊。 </para
+><para
+>無論是購買一個搭配 Linux 販售的系統，還是一個已經用過的系統，檢查 Linux 核心是否支援您的硬體仍然很重要。請檢查您的硬體是否出現在上面的參考資料中。讓推銷員 (或者其他人) 知道您是在為 Linux 系統採購設備。請支援對 Linux 友好的硬體銷售商。 </para>
+
+  <sect2
+><title
+>避免專有或封閉的硬體</title>
+<para
+>一些硬體製造商拒絕告訴我們如何為他們的硬體撰寫驅動程式。其他的則要求簽署不公開的協議才能取用文件，以阻止我們發佈 Linux 驅動程式原始碼。 </para
+><para arch="m68k"
+>另一個例子是老式 Macintosh 產品線的專有硬體。事實上，Macintosh 硬體沒有公佈任何規格書與文件，特別是 ADB 控制器 (用於滑鼠和鍵盤)、軟碟控制器、所有的圖形顯示加速硬體和 CLUT 處理器 (雖然我們不支援絕大多數內建顯示晶片的 CLUT 處理器)。總之，這就是為什麼 Linux 的 Macintosh 移植板的進度總是滯留於其他移植版之後的原因。 </para
+><para
+>因為我們沒有被授權取用這些設備的文件，它們自然不會在 Linux 下運作。您可以幫我們去告訴那些製造商，要求他們釋出文件。如果有足夠多的人要求，他們將認識到自由軟體社群也是一個重要的市場。 </para>
+</sect2>
+
+
+  <sect2 arch="i386"
+><title
+>Windows 專用硬體</title>
+<para
+>Windows 規格的調變解調器和印表機的增長是一個令人不安的趨勢。在某些情況下它們專為微軟的 Windows 作業系統所設計設計並且標有 <quote
+>WinModem</quote
+> 或 <quote
+>專為以 Windows 為基礎的電腦製造</quote
+>字樣。這通常是省掉硬體的內嵌處理器，將其工作交給 Windows 驅動程式並由您的電腦的處理器執行。這樣做是為了降低硬體成本，但是這樣常常<emphasis
+>不能</emphasis
+>為使用者節省任何開銷，並且可能還會與相同功能但保留內嵌處理器的設備昂貴。 </para
+><para
+>有兩個原因讓您應當避免使用 Windows 規格的硬體。首先，這些製造商一般不提供用於編寫 Linux 驅動程式的資料。通常，這些設備的軟硬體介面是專有的，即使有相關資料，若不簽署封閉的協議仍舊無法得到它們。這就排除了被自由軟體使用的可能，因為自由軟體的開發者不會將它們的軟體原始碼封閉起來。其次，這些設備是沒有內嵌處理器的，作業系統必須承擔本該由這些處理器完成的工作，而且經常是在<emphasis
+>即時</emphasis
+>的優先等級之下，因此處理器在驅動這些設備時就無法運行您的程式。因為典型的 Windows 使用者並不像 Linux 使用者那樣對多工有強烈要求，這些製造商希望 Windows 使用者不會注意到他們的硬體對處理器造成的負擔。但是，任何多工作業系統，甚至是 Windows 2000 或 XP，都要忍受這些製造商因省略內嵌處理器而造成的性能下降。 </para
+><para
+>您可以要求製造商發佈相關的文件和資料以改善這種情況，使我們可以為他們的硬體撰寫程式，但最好還是避免使用這些硬體，直到它們被列入 <ulink url="&url-hardware-howto;"
+>Linux Hardware Compatibility HOWTO</ulink
+> 為止。 </para>
+</sect2>
+
+
+  <sect2 id="Parity-RAM">
+  <title
+>假的或<quote
+>虛擬</quote
+>奇偶檢驗隨機存取記憶體</title>
+<para
+>如果您到電腦商店購買奇偶檢驗隨機存取記憶體(Parity RAM)，您可能買到 <emphasis
+>虛擬奇偶檢驗</emphasis
+>隨機存取記憶體，而不是 <emphasis
+>真正的奇偶檢驗</emphasis
+>的隨機存取記憶體。虛擬奇偶檢驗 SIMM 經常 (並非總是)可以被區分出來，因為它們比非奇偶檢驗隨機存取記憶體多一個晶片，且那片晶片比其他的都要小。虛擬奇偶檢驗 SIMM 與非奇偶檢驗隨機存取記憶體工作方式相同。當記憶體中有一個位元出錯時，它們無法像主機板上的真奇偶檢驗隨機存取記憶體那樣告訴您有一位元的隨機存取記憶體發生錯誤。不要為虛擬奇偶檢驗隨機存取記憶體多付錢，而應該為真奇偶檢驗 SIMM 多付錢，因為您真正為每 8 位元多買了一位元。 </para
+><para
+>如果您想得到關於 &arch-title; 隨機存取記憶體的完整資訊，以及什麼才是最值得購買的隨機存取記憶體，請參閱 <ulink url="&url-pc-hw-faq;"
+>PC Hardware 常見問答集</ulink
+>。 </para
+><para arch="alpha"
+>大多數，但不是全部的 Alpha 系統都要求用真奇偶檢驗隨機存取記憶體。 </para>
+
+  </sect2>
+
+ </sect1>
+<!--   End of file hardware/supported-peripherals.xml -->
+
+<!-- Start of file hardware/memory-disk-requirements.xml -->
+
+ <sect1 id="memory-disk-requirements">
+ <title
+>記憶體與硬碟空間的需求</title>
+
+<para
+>您需要至少 &minimum-memory; 的記憶體和 &minimum-fs-size; 硬碟空間。對最小的以控制台為基礎的系統 (包括所有標準軟體套件) 需要250MB。如果您要安裝適當的軟體，包括 X Window 系統，以及一些開發工具和函式庫，需要至少400MB。對於一個基本的桌面系統，需要幾 GB 的空間。 </para
+><para arch="m68k"
+>在 Amiga 上，FastRAM 的大小與記憶體需求總和相關。而且，不支援 16 位元的 Zorro RAM 卡，您要用 32 位元的。<command
+>amiboot</command
+> 程式可以被用來停用 16 位元隨機存取記憶體，請參閱 <ulink url="&url-m68k-faq;"
+>Linux/m68k 常見問答集</ulink
+>。最近的核心應該要能夠自動停用 16 位元的隨機存取記憶體。 </para
+><para arch="m68k"
+>在 Atari 上，ST-RAM 和 Fast RAM (TT-RAM) 都可以被 Linux 所使用。許多使用者報告在 Fast RAM 上核心運作有問題，因此 Atari 開機程式將核心放在 ST-RAM，最小需要 2MB 的 ST-RAM。您需要額外的 12 MB 或更多的 TT-RAM。 </para
+><para arch="m68k"
+>在 Macintosh 上，需要注意 RAM-based video (RBV)。實體位址 0 的記憶體區段用於顯示記憶體，使得預設的核心掛載位址無效。替代用的核心記憶體區段與 RAMdisk 至少需要 4MB。 </para
+><para arch="m68k">
+
+<emphasis condition="FIXME"
+>FIXME: is this still true?</emphasis>
+
+</para>
+
+ </sect1>
+<!--   End of file hardware/memory-disk-requirements.xml -->
+
+<!-- Start of file hardware/network-cards.xml -->
+
+ <sect1 id="network-cards">
+ <title
+>網路連接硬體</title>
+
+<para arch="i386"
+>大多數的 PCI 和很多舊的 ISA 網卡都有支援。但一些網路介面卡不被多數 Debian 安裝磁碟支援，如 AX.25 卡與通訊協定; NI16510 EtherBlaster 卡、Schneider &amp; Koch G16 卡，以及 Zenith Z-Note 內建網卡。微通道 (MCA) 網卡不被標準的安裝系統支援，但可以參考 <ulink url="&url-linux-mca;"
+>Linux on MCA</ulink
+> 以取得一些 (舊的) 指引。安裝系統還不支援 FDDI 網路和通訊協定。 </para
+><para arch="i386"
+>至於 ISDN，用在 (老式) 德國 1TR6 上的 D-channel 通訊協定不被支援，Spellcaster BRI ISDN 板也不被 &d-i; 支援。 </para>
+
+<para arch="m68k"
+>任何受 Linux 核心支援的網路介面卡 (NIC) 也全都被開機片支援。您可能需要將網路卡驅動程式以模組掛載。同樣的，請參考 <ulink url="&url-m68k-faq;"
+></ulink
+> 以瞭解詳細資訊。 </para>
+
+<para arch="sparc"
+>下列網路介面卡 (NIC) 被可開機核心直接支援： <itemizedlist>
+ <listitem
+><para
+>Sun LANCE </para
+></listitem>
+ <listitem
+><para
+>Sun Happy Meal </para
+></listitem>
+</itemizedlist>
+
+</para
+><para arch="sparc"
+>下列網路介面卡以模組的形式支援。安裝過程中，它們可以在驅動程式被安裝之後被啟用。然而，因為 OpenPROM 的神奇魔法，您仍可以從這些設備開機： <itemizedlist>
+ <listitem
+><para
+>Sun BigMAC </para
+></listitem>
+ <listitem
+><para
+>Sun QuadEthernet </para
+></listitem>
+ <listitem
+><para
+>MyriCOM Gigabit Ethernet </para
+></listitem>
+</itemizedlist>
+
+</para
+><para arch="alpha"
+>任何受 Linux 核心支援的網路介面卡 (NIC) 也全都被開機片支援。您可能需要將網路卡驅動程式作為模組掛載。 </para
+><para arch="powerpc"
+>任何受 Linux 核心支援的網路介面卡 (NIC) 也全都被開機片支援。您可能需要將網路卡驅動程式作為模組掛載。 </para
+><para arch="hppa"
+>任何受 Linux 核心支援的網路介面卡 (NIC) 也全都被開機片支援。您可能需要將網路卡驅動程式作為模組掛載。 </para
+><para arch="ia64"
+>任何受 Linux 核心支援的網路介面卡 (NIC) 也全都被開機片支援。您可能需要將網路卡驅動程式作為模組掛載。 </para
+><para arch="mips"
+>任何受 Linux 核心支援的網路介面卡 (NIC) 也全都被開機片支援。您可能需要將網路卡驅動程式作為模組掛載。 </para
+><para arch="mipsel"
+>因為核心的限制，DECstation 上只有主機板內建的網路介面取得支援，TurboChannel 網卡現在還不能運作。 </para
+><para arch="s390"
+>任何受 Linux 核心支援的網路介面卡 (NIC) 也全都被開機片支援。所有的網路卡驅動程式都被編譯成了模組，因此您需要在最初的網路設置過程中加載其中一個。支援的網路設備有： <itemizedlist>
+ <listitem
+><para
+>Channel to Channel (CTC) 和 ESCON connection (實際或模擬) </para
+></listitem>
+ <listitem
+><para
+>OSA-2 Token Ring/Ethernet 和 OSA-Express Fast Ethernet (non-QDIO) </para
+></listitem>
+<listitem
+><para
+>Inter-User Communication Vehicle (IUCV) &mdash; 僅對 VM guests 有效 </para
+></listitem>
+<listitem
+><para
+>QDIO 模式的 OSA-Express，HiperSockets 和 Guest-LANs </para
+></listitem>
+</itemizedlist>
+
+</para>
+
+<para arch="arm"
+>以下網路介面卡在 NetWinder 和 CATS 機器上被開機片直接支援： <itemizedlist>
+ <listitem
+><para
+>PCI-based NE2000 </para
+></listitem>
+ <listitem
+><para
+>DECchip Tulip </para
+></listitem>
+</itemizedlist>
+
+</para
+><para arch="arm"
+>下列網路介面卡在 RiscPC 上被開機片直接支援： <itemizedlist>
+ <listitem
+><para
+>Ether1 </para
+></listitem>
+ <listitem
+><para
+>Ether3 </para
+></listitem>
+ <listitem
+><para
+>EtherH </para
+></listitem>
+</itemizedlist>
+
+</para
+><para arch="arm"
+>如果您的網卡出現在上述列表中，整個安裝過程可以透過網路進行而不需要光碟或軟碟。 </para
+><para arch="arm"
+>任何受 Linux 核心支援的網路介面卡 (NIC) 也全都被開機片支援。您可能需要將網路驅動程式作為模組掛載。這意味著您不得不使用其他媒介來安裝作業系統核心。 </para>
+
+ </sect1>
+<!--   End of file hardware/network-cards.xml -->
+
+</chapter>
+<!--   End of file hardware/hardware.xml -->

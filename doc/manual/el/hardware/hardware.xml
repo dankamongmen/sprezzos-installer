@@ -1,0 +1,2505 @@
+<!-- Start of file hardware/hardware.xml -->
+
+<chapter id="hardware-req">
+ <title
+>Απαιτήσεις Συστήματος</title>
+
+<para
+>Η ενότητα αυτή περιέχει πληροφορίες σχετικά με το υλικό που χρειάζεστε για να ξεκινήσετε με το Debian. Θα βρείτε επίσης συνδέσμους σε παραπέρα πληροφορίες για το υλικό που υποστηρίζεται από το GNU και το Linux. </para>
+
+
+<!-- Start of file hardware/hardware-supported.xml -->
+
+ <sect1 id="hardware-supported">
+ <title
+>Υποστηριζόμενο Υλικό</title>
+
+<para
+>To Debian δεν βάζει κάποιες απαιτήσεις υλικού πέρα από αυτές που έχουν ο πυρήνας του Linux και τα εργαλεία του GNU. Κατά συνέπεια οποιαδήποτε αρχιτεκτονική ή πλατφόρμα στην οποία έχουν υλοποιηθεί ο πυρήνας του Linux, η libc, ο <command
+>gcc</command
+> κλπ. και για την οποία υπάρχει μια υλοποίηση του Debian μπορεί να τρέξει το Debian. Παρακαλούμε, δείτε τις σελίδες των υλοποιήσεων (Ports) στο <ulink url="&url-ports;"
+></ulink
+> για περισσότερες λεπτομέρειες για συστήματα της αρχιτεκτονικής &arch-title; που έχουν δοκιμαστεί με το Debian. </para
+><para
+>Δεν γίνεται μια προσπάθεια να περιγραφούν όλες διαφορετικές διαμορφώσεις υλικού που υποστηρίζονται για την αρχιτεκτονική &arch-title;, αντίθετα η ενότητα αυτή περιέχει γενικές πληροφορίες και δείκτες σε μέρη όπου μπορεί να βρει κανείς επιπρόσθετες πληροφορίες. </para>
+
+  <sect2
+><title
+>Υποστηριζόμενες Αρχιτεκτονικές</title>
+
+<para
+>Το Debian &release; υποστηρίζει έντεκα κύριες αρχιτεκτονικές και αρκετές παραλλαγές κάθε αρχιτεκτονικής γνωστές και σαν <quote
+>γεύσεις</quote
+>. </para
+><para>
+
+<informaltable>
+<tgroup cols="4">
+<thead>
+<row>
+  <entry
+>Αρχιτεκτονική</entry
+><entry
+>Debian Designation </entry>
+  <entry
+>Υποαρχιτεκτονική</entry
+><entry
+>Γεύση</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry morerows="2"
+>Βασισμένη σε Intel x86</entry>
+  <entry morerows="2"
+>i386 </entry>
+  <entry morerows="2"
+></entry>
+  <entry
+>vanilla </entry>
+</row
+><row>
+  <entry
+>speakup </entry>
+</row
+><row>
+  <entry
+>linux26 </entry>
+</row>
+
+<row>
+  <entry morerows="5"
+>Motorola 680x0 </entry>
+  <entry morerows="5"
+>m68k </entry>
+  <entry
+>Atari </entry>
+  <entry
+>atari  </entry>
+</row
+><row>
+  <entry
+>Amiga </entry>
+  <entry
+>amiga </entry>
+</row
+><row>
+  <entry
+>Macintosh 68k</entry>
+  <entry
+>mac</entry>
+</row
+><row>
+  <entry morerows="2"
+>VME</entry>
+  <entry
+>bvme6000 </entry>
+</row
+><row>
+  <entry
+>mvme147 </entry>
+</row
+><row>
+  <entry
+>mvme16x </entry>
+</row>
+
+<row>
+  <entry
+>DEC Alpha </entry>
+  <entry
+>alpha </entry>
+  <entry
+></entry>
+  <entry
+></entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>Sun SPARC </entry>
+  <entry morerows="1"
+>sparc </entry>
+  <entry morerows="1"
+></entry>
+  <entry
+>sun4cdm </entry>
+</row
+><row>
+  <entry
+>sun4u </entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>ARM και StrongARM</entry>
+  <entry morerows="3"
+>arm</entry>
+  <entry morerows="3"
+></entry>
+  <entry
+>netwinder </entry>
+</row
+><row>
+  <entry
+>riscpc </entry>
+</row
+><row>
+  <entry
+>shark </entry>
+</row
+><row>
+  <entry
+>lart </entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>IBM/Motorola PowerPC </entry>
+  <entry morerows="3"
+>powerpc</entry>
+  <entry
+>CHRP </entry>
+  <entry
+>chrp </entry>
+</row
+><row>
+  <entry
+>PowerMac </entry>
+  <entry
+>pmac </entry>
+</row
+><row>
+  <entry
+>PReP </entry>
+  <entry
+>prep </entry>
+</row
+><row>
+  <entry
+>APUS </entry>
+  <entry
+>apus</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>HP PA-RISC </entry>
+  <entry morerows="1"
+>hppa </entry>
+  <entry
+>PA-RISC 1.1 </entry>
+  <entry
+>32</entry>
+</row
+><row>
+  <entry
+>PA-RISC 2.0 </entry>
+  <entry
+>64</entry>
+</row>
+
+<row>
+  <entry
+>Βασισμένη σε Intel ia64</entry>
+  <entry
+>ia64 </entry>
+  <entry
+></entry>
+  <entry
+></entry>
+</row>
+
+<row>
+  <entry morerows="2"
+>MIPS (big endian) </entry>
+  <entry morerows="2"
+>mips </entry>
+  <entry morerows="1"
+>SGI Indy/Indigo 2 </entry>
+  <entry
+>r4k-ip22 </entry>
+</row
+><row>
+  <entry
+>r5k-ip22 </entry>
+</row
+><row>
+  <entry
+>Broadcom BCM91250A (SWARM) </entry>
+  <entry
+>sb1-swarm-bn </entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>MIPS (little endian) </entry>
+  <entry morerows="3"
+>mipsel </entry>
+  <entry
+>Cobalt </entry>
+  <entry
+>cobalt </entry>
+</row
+><row>
+  <entry morerows="1"
+>DECstation </entry>
+  <entry
+>r4k-kn04 </entry>
+</row
+><row>
+  <entry
+>r3k-kn02 </entry>
+</row
+><row>
+  <entry
+>Broadcom BCM91250A (SWARM) </entry>
+  <entry
+>sb1-swarm-bn </entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>IBM S/390 </entry>
+  <entry morerows="1"
+>s390 </entry>
+  <entry
+>IPL από VM-reader και DASD</entry>
+  <entry
+>generic </entry>
+</row
+><row>
+  <entry
+>IPL από ταινία</entry>
+  <entry
+>ταινία</entry>
+</row>
+
+</tbody
+></tgroup
+></informaltable>
+
+</para
+><para
+>To κείμενο αυτό καλύπτει την εγκατάσταση για την αρχιτεκτονική <emphasis
+>&arch-title;</emphasis
+>. Αν ψάχνετε για πληροφορίες σε οποιαδήποτε από τις άλλες υποστηριζόμενες από το Debian αρχιτεκτονικές κοιτάξτε στις σελίδες <ulink url="http://www.debian.org/ports/"
+>Debian-Ports</ulink
+>. </para
+><para condition="new-arch"
+>Αυτή είναι η πρώτη επίσημη έκδοση του &debian; για την αρχιτεκτονική &arch-title; Αισθανόμαστε ότι έχει δοκιμαστεί αρκετά ώστε να κυκλοφορήσει. Όμως επειδή δεν έχει την έκθεση (και άρα την δοκιμασία από τους χρήστες) που έχουν κάποιες άλλες αρχιτεκτονικές ίσως συναντήσετε μερικά προβλήματα. Χρησιμοποιήστε το <ulink url="&url-bts;"
+>Bug Tracking System</ulink
+> για να αναφέρετε οποιαδήπτε προβλήματα. Σιγουρευτείτε να δηλώσετε ότι το σφάλμα είναι στην πλατφόρμα &arch-title; Ίσως επίσης να είναι απαραίτητο να χρησιμοποιήσετε τη λίστα αλληλογραφίας <ulink url="&url-list-subscribe;"
+>debian-&architecture; mailing list</ulink
+>. </para>
+
+  </sect2>
+
+<!-- supported cpu docs -->
+
+<!-- Start of file hardware/supported/alpha.xml -->
+
+
+  <sect2 arch="alpha" id="alpha-cpus"
+><title
+>CPU, Μητρικές, και Υποστήριξη Video</title>
+<para
+>Ολοκληρωμένη πληροφορία για τα υποστηριζόμενα συστήματα DEC Alpha μπορεί να βρεθεί στο <ulink url="&url-alpha-howto;"
+>Linux Alpha HOWTO</ulink
+>. Ο σκοπός της ενότητας αυτής είναι η περιγραφή των συστημάτων που υποστηρίζονται από τις δισκέττες εκκίνησης. </para
+><para
+>Τα συστήματα Alpha υποδιαιρούνται σε διάφορους τύπους λόγω των διαφορετικών γενεών μητρικών και υποστηριζόμενων chipsets. Διαφορετικά συστήματα (<quote
+>υποαρχιτεκτονικές</quote
+>) έχουν συνήθως ριζικά διαφορετικό σχεδιασμό και δυνατότητες. Επομένως και η διαδιασία της εγκατάστασης και ακόμα πιο σημαντικά της εκκίνησης μπορεί να διαφέρει από σύστημα σε σύστημα. </para
+><para
+>Ο επόμενος πίνακας καταγράφει τους τύπους συστημάτων που υποστηρίζονται από το σύστημα εγκατάστασης του Debian. Ο πίνακας υποδεικνύει επίσης το <emphasis
+>κωδικό όνομα</emphasis
+> των τύπων αυτών των συστημάτων, το οποίο θα πρέπει να γνωρίζετε όταν ξεκινάτε την εγκατάσταση: </para>
+
+<informaltable>
+<tgroup cols="4">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<colspec colname="c3"/>
+<colspec colname="c4"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>Τύποι Υλικού</entry>
+  <entry
+>Ψευδώνυμα</entry
+><entry
+>Εικόνα MILO</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry morerows="3"
+>ALCOR </entry>
+  <entry
+>AlphaStation 500 5/266.300 </entry>
+  <entry
+>Maverick </entry>
+  <entry
+>alcor </entry>
+</row
+><row>
+  <entry
+>AlphaStation 500 5/333...500 </entry>
+  <entry
+>Bret </entry>
+  <entry
+>alcor </entry>
+</row
+><row>
+  <entry
+>AlphaStation 600/266...300 </entry>
+  <entry
+>Alcor </entry>
+  <entry
+>alcor </entry>
+</row
+><row>
+  <entry
+>AlphaStation 600/300...433 </entry>
+  <entry
+>XLT</entry>
+  <entry
+>xlt</entry>
+</row>
+
+<row>
+  <entry
+>BOOK1 </entry>
+  <entry
+>AlphaBook1 (φορητός)</entry>
+  <entry
+>Alphabook1/Burns </entry>
+  <entry
+>book1 </entry>
+</row>
+
+<row>
+  <entry morerows="7"
+>AVANTI </entry>
+  <entry
+>AlphaStation 200 4/100...166 </entry>
+  <entry
+>Mustang </entry>
+  <entry
+>avanti </entry>
+</row
+><row>
+  <entry
+>AlphaStation 200 4/233 </entry>
+  <entry
+>Mustang+ </entry>
+  <entry
+>avanti </entry>
+</row
+><row>
+  <entry
+>AlphaStation 205 4/133...333 </entry>
+  <entry
+>LX3</entry>
+  <entry
+>avanti </entry>
+</row
+><row>
+  <entry
+>AlphaStation 250 4/300 </entry>
+  <entry
+>M3+</entry>
+  <entry
+>avanti </entry>
+</row
+><row>
+  <entry
+>AlphaStation 255 4/133...333 </entry>
+  <entry
+>LX3+ </entry>
+  <entry
+>avanti </entry>
+</row
+><row>
+  <entry
+>AlphaStation 300 4/266 </entry>
+  <entry
+>Melmac </entry>
+  <entry
+>avanti </entry>
+</row
+><row>
+  <entry
+>AlphaStation 400 4/166 </entry>
+  <entry
+>Chinet </entry>
+  <entry
+>avanti </entry>
+</row
+><row>
+  <entry
+>AlphaStation 400 4/233...300 </entry>
+  <entry
+>Avanti </entry>
+  <entry
+>avanti </entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>EB164 </entry>
+  <entry
+>AlphaPC164 </entry>
+  <entry
+>PC164 </entry>
+  <entry
+>pc164 </entry>
+</row
+><row>
+  <entry
+>AlphaPC164-LX </entry>
+  <entry
+>LX164 </entry>
+  <entry
+>lx164  </entry>
+</row
+><row>
+  <entry
+>AlphaPC164-SX </entry>
+  <entry
+>SX164 </entry>
+  <entry
+>sx164 </entry>
+</row
+><row>
+  <entry
+>EB164 </entry>
+  <entry
+>EB164 </entry>
+  <entry
+>eb164 </entry>
+</row>
+
+<row>
+  <entry morerows="2"
+>EB64+ </entry>
+  <entry
+>AlphaPC64 </entry>
+  <entry
+>Cabriolet </entry>
+  <entry
+>cabriolet </entry>
+</row
+><row>
+  <entry
+>AlphaPCI64 </entry>
+  <entry
+>Cabriolet </entry>
+  <entry
+>cabriolet </entry>
+</row
+><row>
+  <entry
+>EB64+ </entry>
+  <entry
+>EB64+ </entry>
+  <entry
+>eb64p </entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>EB66 </entry>
+  <entry
+>EB66 </entry>
+  <entry
+>EB66 </entry>
+  <entry
+>eb66 </entry>
+</row
+><row>
+  <entry
+>EB66+ </entry>
+  <entry
+>EB66+ </entry>
+  <entry
+>eb66p </entry>
+</row>
+
+<row>
+  <entry morerows="2"
+>JENSEN </entry>
+  <entry
+>DEC 2000 Model 300(S) </entry>
+  <entry
+>Jensen </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>DEC 2000 Model 500 </entry>
+  <entry
+>Culzen </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>DECpc 150 </entry>
+  <entry
+>Jensen </entry>
+  <entry
+>N/A</entry>
+</row>
+
+<row>
+  <entry morerows="7"
+>MIATA </entry>
+  <entry
+>Personal WorkStation 433a </entry>
+  <entry
+>Miata </entry>
+  <entry
+>miata </entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 433au </entry>
+  <entry
+>Miata </entry>
+  <entry
+>miata </entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 466au </entry>
+  <entry
+>Miata </entry>
+  <entry
+>miata </entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 500a </entry>
+  <entry
+>Miata </entry>
+  <entry
+>miata </entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 500au </entry>
+  <entry
+>Miata </entry>
+  <entry
+>miata </entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 550au </entry>
+  <entry
+>Miata </entry>
+  <entry
+>miata </entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 600a </entry>
+  <entry
+>Miata </entry>
+  <entry
+>miata </entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 600au </entry>
+  <entry
+>Miata </entry>
+  <entry
+>miata </entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>MIKASA </entry>
+  <entry
+>AlphaServer 1000 4/200 </entry>
+  <entry
+>Mikasa </entry>
+  <entry
+>mikasa </entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000 4/233..266  </entry>
+  <entry
+>Mikasa+ </entry>
+  <entry
+>mikasa </entry>
+</row
+><row>
+  <entry
+> AlphaServer 1000 5/300</entry>
+  <entry
+>Mikasa-Pinnacle </entry>
+  <entry
+>mikasa </entry>
+</row
+><row>
+  <entry
+> AlphaServer 1000 5/300</entry>
+  <entry
+>Mikasa-Primo </entry>
+  <entry
+>mikasa </entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>NAUTILUS </entry>
+  <entry
+>UP1000 </entry>
+  <entry
+>Nautilus </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>UP1100 </entry>
+  <entry
+>Galaxy-Train/Nautilus Jr</entry>
+  <entry
+>N/A</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>NONAME </entry>
+  <entry
+>AXPpci33 </entry>
+  <entry
+>Noname </entry>
+  <entry
+>noname </entry>
+</row
+><row>
+  <entry
+>UDB</entry>
+  <entry
+>Multia </entry>
+  <entry
+>noname </entry>
+</row>
+
+<row>
+  <entry morerows="6"
+>NORITAKE </entry>
+  <entry
+>AlphaServer 1000A 4/233...266 </entry>
+  <entry
+>Noritake </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000A 5/300 </entry>
+  <entry
+>Noritake-Pinnacle </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000A 5/333...500 </entry>
+  <entry
+>Noritake-Primo </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer 800 5/333...500 </entry>
+  <entry
+>Corelle </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaStation 600 A </entry>
+  <entry
+>Alcor-Primo </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>Digital Server 3300 </entry>
+  <entry
+>Corelle </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>Digital Server 3300R </entry>
+  <entry
+>Corelle </entry>
+  <entry
+>N/A</entry>
+</row>
+
+<row>
+  <entry
+>PLATFORM 2000 </entry>
+  <entry
+>P2K</entry>
+  <entry
+>P2K</entry>
+  <entry
+>p2k</entry>
+</row>
+
+<row>
+  <entry morerows="4"
+>RAWHIDE </entry>
+  <entry
+>AlphaServer 1200 5/xxx </entry>
+  <entry
+>Tincup/DaVinci </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer 4000 5/xxx </entry>
+  <entry
+>Wrangler/Durango </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer 4100 5/xxx </entry>
+  <entry
+>Dodge </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>Digital Server 5300 </entry>
+  <entry
+>Tincup/DaVinci </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>Digital Server 7300 </entry>
+  <entry
+>Dodge </entry>
+  <entry
+>N/A</entry>
+</row>
+
+<row>
+  <entry morerows="5"
+>RUFFIAN </entry>
+  <entry
+>DeskStation AlphaPC164-UX </entry>
+  <entry
+>Ruffian </entry>
+  <entry
+>ruffian </entry>
+</row
+><row>
+  <entry
+>DeskStation RPL164-2 </entry>
+  <entry
+>Ruffian </entry>
+  <entry
+>ruffian </entry>
+</row
+><row>
+  <entry
+>DeskStation RPL164-4 </entry>
+  <entry
+>Ruffian </entry>
+  <entry
+>ruffian </entry>
+</row
+><row>
+  <entry
+>DeskStation RPX164-2 </entry>
+  <entry
+>Ruffian </entry>
+  <entry
+>ruffian </entry>
+</row
+><row>
+  <entry
+>DeskStation RPX164-4 </entry>
+  <entry
+>Ruffian </entry>
+  <entry
+>ruffian </entry>
+</row
+><row>
+  <entry
+>Samsung AlphaPC164-BX </entry>
+  <entry
+>Ruffian </entry>
+  <entry
+>ruffian </entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>SABLE </entry>
+  <entry
+>AlphaServer 2000 4/xxx </entry>
+  <entry
+>Demi-Sable </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer 2000 5/xxx </entry>
+  <entry
+>Demi-Gamma-Sable </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer 2100 4/xxx </entry>
+  <entry
+>Sable </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer 2100 5/xxx </entry>
+  <entry
+>Gamma-Sable </entry>
+  <entry
+>N/A</entry>
+</row>
+
+<row>
+  <entry
+>TAKARA </entry>
+  <entry
+>21164 PICMG SBC </entry>
+  <entry
+>Takara </entry>
+  <entry
+>takara </entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>TITAN </entry>
+  <entry
+>AlphaServer DS15 </entry>
+  <entry
+>HyperBrick2 </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS25 </entry>
+  <entry
+>Granite </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer ES45 </entry>
+  <entry
+>Privateer </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>UNKNOWN </entry>
+  <entry
+>Yukon </entry>
+  <entry
+>N/A</entry>
+</row>
+
+<row>
+  <entry morerows="12"
+>TSUNAMI </entry>
+  <entry
+>AlphaServer DS10 </entry>
+  <entry
+>Webbrick </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS10L </entry>
+  <entry
+>Slate </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS20 </entry>
+  <entry
+>Catamaran/Goldrush </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS20E </entry>
+  <entry
+>Goldrack </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS20L </entry>
+  <entry
+>Shark </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer ES40 </entry>
+  <entry
+>Clipper </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>DP264 </entry>
+  <entry
+>DP264 </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>SMARTengine 21264 PCI/ISA SBC </entry>
+  <entry
+>Eiger </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>UNKNOWN </entry>
+  <entry
+>Warhol </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>UNKNOWN </entry>
+  <entry
+>Windjammer </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>UP2000 </entry>
+  <entry
+>Swordfish </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>XP1000 </entry>
+  <entry
+>Monet/Brisbane </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>XP900 </entry>
+  <entry
+>Webbrick </entry>
+  <entry
+>N/A</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>WILDFIRE </entry>
+  <entry
+>AlphaServer GS160 </entry>
+  <entry
+>Wildfire </entry>
+  <entry
+>N/A</entry>
+</row
+><row>
+  <entry
+>AlphaServer GS320 </entry>
+  <entry
+>Wildfire </entry>
+  <entry
+>N/A</entry>
+</row>
+
+<row>
+  <entry
+>XL</entry>
+  <entry
+>XL-233...266 </entry>
+  <entry
+>XL</entry>
+  <entry
+>xl</entry>
+</row>
+
+</tbody
+></tgroup
+></informaltable>
+
+<para
+>Υπάρχει η άποψη ότι το Debian &releasename; υποστηρίζει εγκατάσταση σε όλες τις υποαρχιτεκτονικές alpha με την εξαίρεση την ARC-only Ruffian και XL υποαρχιτεκτονικές καθώς και την Titan, που απαιτεί μια αλλαγή στις επιλογές χτισίματος του πυρήνα. </para>
+  </sect2>
+<!--   End of file hardware/supported/alpha.xml -->
+
+<!-- Start of file hardware/supported/arm.xml -->
+
+
+  <sect2 arch="arm"
+><title
+>CPU, Μητρικές, και Υποστήριξη Video</title>
+
+<para
+>Κάθε ξεχωριστή αρχιτεκτονική ARM απαιτεί τον δικό της πυρήνα. Εξαιτίας αυτού η στάνταρ διανομή του Debian υποστηρίζει εγκατάσταση σε έναν αριθμό των πιο συνηθισμένων συστημάτων. Όμως η Debian userland μπορεί να χρησιμοποιηθεί από <emphasis
+>οποιονδήποτε</emphasis
+> επεξεργαστή ARM περιλαμβανομένου του xscale. </para>
+
+<para
+>Οι περισσότεροι επεξεργαστές ARM μπορούν να τρέξουν και στις δυο καταστάσεις endian (big ή little). Παρόλα αυτά σχεδόν όλες οι υπάρχουσες υλοποιήσεις χρησιμοποιούν little-endian. Το Debian υποστηρίζει για την ώρα μόνο little-endian ΑRM συστήματα. </para>
+
+<para
+>Τα πιο συνηθισμένα συστήματα που υποστηρίζονται είναι <variablelist>
+<varlistentry>
+<term
+>Netwinder </term>
+<listitem
+><para
+>Αυτό είναι στην πραγματικότητα το όνομα μιας ομάδας μηχανημάτων που βασίζονται στον επεξεργαστή StrongARM 110 και το chipset Intel 21285 Northbridge. Περιλαμβάνει  μηχανήματα όπως: Netwinder (πιθανόν ένα από τα πιο συνηθισμένα κουτιά ARM), CATS (επίσης γνωστό και σαν EB110ATX), EBSA 285 και Compaq personal server (cps γνωστό και σαν skiff). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Bast </term>
+<listitem
+><para
+>Αυτή είναι μια μοντέρνα μητρική ARM 920 με ένα επεξεργαστή Samsung 266 MHz. Έχει ενσωματωμένα IDE, USB, Serial, Parallel, audio, video, flash και δυο θύρες ethernet. Το σύστημα αυτό έχει επίσης έναν καλό φορτωτή εκκίνησης που μπορεί επίσης να βρεθεί στα συστήματα CATS και Riscstation. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>RiscPC </term>
+<listitem
+><para
+>Το μηχάνημα αυτό είναι το πρώτο υποστηριζόμενο σύστημα. Κυκλοφόρησε το 1994. Έχει το RISC OS στην ROM και το Linux μπορεί να εκκινηθεί από αυτό το OS με χρήση του linloader. Το RiscPC έχει μια modular κάρτα CPU τυπικά με έναν επεξεργαστή 30MHz 610, 40MHz  710 ή 233MHz Strongarm 110 CPU.Η μητρική έχει ενσωματωμένα ΙDE, SVGA video, παράλληλη θύρα, μια σειριακή θύρα, πληκτρολόγια PS/2 και ιδιόκτητη θύρα για ποντίκι.Το επίσης ιδιόκτητο module expansion bus επιτρέπει την προσθήκη μέχρι οκτώ καρτών επέκτασης ανάλογα με τη διαμόρφωση. Αρκετά από τα module αυτά έχουν οδηγούς για Linux. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Riscstation </term>
+<listitem
+><para
+>Υπάρχει ακόμα ένα φτηνό μηχάνημα βασισμένο στον επεξεργαστή 7500FE στα 56MHz με ενσωματωμένο video, IDE, PS/2 πληκτρολόγιο και ποντίκι και δύο σειριακές θύρες. Η απουσία υπολογιστικής ισχύος του αντισταθμίζεται από την τιμή του. Μπορεί να βρεθεί σε δυο διαμορφώσεις μία με το RISC OS και μία με έναν απλό φορτωτή εκκίνησης. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>LART </term>
+<listitem
+><para
+>Αυτή είναι μια ανοιχτή modular πλατφόρμα υλικού με σκοπό την κατασκευή από κάποιους με πραγματικό ενθουσιασμό. Για να μπορεί να χρησιμοποιηθεί για εγκατάσταση του Debian απαιτεί την μητρική επέκτασης KSB. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+  </sect2>
+<!--   End of file hardware/supported/arm.xml -->
+
+<!-- Start of file hardware/supported/hppa.xml -->
+
+
+  <sect2 arch="hppa"
+><title
+>CPU, Μητρικές, και Υποστήριξη Video</title>
+<para
+>Υπάρχουν δύο κύριες γεύσεις υποστήριξης για την αρχιτεκτονική <emphasis
+>&architecture;</emphasis
+>: PA-RISC 1.1 και PA-RISC 2.0. Η αρχιτεκτονική PA-RISC 1.1 απευθύνεται σε 32-μπιτους επεξεργαστές ενώ η αρχιτεκτονική 2.0 σε 64-μπιτους. Μερικά συστήματα μπορούν να τρέχουν και τους δύο τύπους πυρήνα. Και στις δυο περιπτώσεις ο πυρήνας userland είναι 32-μπιτος. Υπάρχει η δυνατότητα για 64-μπιτο πυρήνα userland στο μέλλον. </para>
+  </sect2>
+
+<!--   End of file hardware/supported/hppa.xml -->
+
+<!-- Start of file hardware/supported/i386.xml -->
+
+
+  <sect2 arch="i386"
+><title
+>CPU, Μητρικές, και Υποστήριξη Video</title>
+<para
+>Πλήρεις πληροφορίες σχετικά με τα υποστηριζόμενα περιφερειακά μπορούν να βρεθούν στην σελίδα <ulink url="&url-hardware-howto;"
+>Linux Hardware Compatibility HOWTO</ulink
+>. Η παρούσα ενότητα απλά περιγράφει τα βασικότερα σημεία. </para>
+
+   <sect3
+><title
+>CPU</title>
+<para
+>Σχεδόν όλοι οι επεξεργαστές που βασίζονται στην αρχιτεκτονική x86 υποστηρίζονται. Αυτό περιλαμβάνει επίσης και τους επεξεργαστές AMD και VIA (πρώην Cyrix). Επίσης νεώτεροι επεξργαστές όπως οι Athlon XP και οι Intel P4 Xeon υποστηρίζονται. Όμως το Linux <emphasis
+>δεν</emphasis
+> θα τρέξει σε επεξεργαστές 286 ή παλιότερους. </para>
+   </sect3>
+
+   <sect3 id="bus"
+><title
+>I/O Bus </title>
+<para
+>Το system bus είναι το μέρος εκείνο της μητρικής που επιτρέπει την επικοινωνία της CPU με περιφερειακά όπως συσκευές αποθήκευσης. Ο υπολογιστής σας θα πρέπει να χρησιμοποιεί ένα από τα ISA, EISA, PCI, Microchannel Architecture (MCA, που χρησιμοποιείται από την σειρά PS/2 της IBM) ή το VESA Local Bus (VLB, μερικές φορές καλούμενο και VL bus). </para>
+   </sect3>
+  </sect2>
+
+<!--   End of file hardware/supported/i386.xml -->
+
+<!-- Start of file hardware/supported/ia64.xml -->
+
+<!--   End of file hardware/supported/ia64.xml -->
+
+<!-- Start of file hardware/supported/m68k.xml -->
+
+  <sect2 arch="m68k"
+><title
+>CPU, Μητρικές, και Υποστήριξη Video</title>
+<para
+>Πλήρεις πληροφορίες σχετικά με τα υποστηριζόνεμα συστήματα (<emphasis
+>&architecture;</emphasis
+>) που βασίζονται στην αρχιτεκτονική M68000 μπορούν να βρεθούν στη σελίδα <ulink url="&url-m68k-faq;"
+>Linux/m68k FAQ</ulink
+>. Η παρούσα ενότητα περιγράφει μόνο τα βασικά. </para
+><para
+>Η υλοποίηση του Linux στην αρχιτεκτονική &architecture; τρέχει σε οποιονδήποτε επεξεργαστή 680x0 με PMMU (Paged Memory Management Unit) και FPU (floating-point unit). Αυτό περιλαμβάνει και τους επεξεργαστές 68020 με εξωτερική 68851 PMMU, τους επεξεργαστές 68030 ή νεώτερους αλλά όχι την σειρά <quote
+>EC</quote
+> των επεξεργαστών 680x0 . Δείτε την σελίδα <ulink url="&url-m68k-faq;"
+> m68k</ulink
+>για πλήρεις λεπτομέρειες. </para
+><para
+>Υπάρχουν τέσσερα κύρια είδη υποστηριζόμενων αρχιτεκτονικών <emphasis
+>&architecture;</emphasis
+>: μηχανήματα Amiga Atari Macintosh και VME. Τα Amiga και Atari ήταν τα πρώτα μηχανήματα στα οποία υλοποιήθηκε το Linux. Είναι ακόμα οι δυο υλοποιήσεις με την καλλίτερη υποστήριξη. Η γραμμή των Macintosh έχει μάλλον ελλιπή υποστήριξη, τόσο από το Debian όσο και τον πυρήνα Linux. Δείτε τη σελίδα <ulink url="&url-m68k-mac;"
+>Linux m68k for Macintosh </ulink
+> σχετικά με την κατάσταση του project και το υποστηριζόμενο υλικό. Οι υπολογιστές BVM και Motorola single board VMEbus είναι οι πιο πρόσφατες προσθήκες στη λίστα των μηχανημάτων που υποστηρίζονται από το Debian. Υλοποιήσεις σε άλλες αρχιτεκτονικές της &architecture; όπως οι Sun3 και το NeXT black box είναι στη διαδικασία να ακολουθήσουν αλλά δεν υποστηρίζονται ακόμα αυτή τη στιγμή από το Debian. </para>
+  </sect2>
+
+
+
+<!--   End of file hardware/supported/m68k.xml -->
+
+<!-- Start of file hardware/supported/mips.xml -->
+
+
+  <sect2 arch="mips"
+><title
+>CPU, Μητρικές, και Υποστήριξη Video</title>
+<para
+>To Debian στην αρχιτεκτονική &arch-title; υποστηρίζει δυο υποαρχιτεκτονικές: <itemizedlist
+><listitem
+><para
+>SGI IP 22: αυτή η πλατφόρμα περιλαμβάνει τα μηχανήματα SGI Indy, Indigo 2 και Challenge S. Καθώς τα μηχανήματα αυτά είναι αρκετά παρόμοια, όποτε αναφερόμαστε στο κείμενο αυτό σε μηχανήματα SGI Indy αυτό εννοεί επίσης και τα μηχανήματα Indigo 2 και Challenge S.</para
+></listitem
+> <listitem
+><para
+>Broadcom BCM91250A (SWARM): πρόκειται για μια μητρική τύπου ATX από την Broadcom για δοκιμές και βασίζεται στην οικογένεια επεξεργαστών SiByte </para
+></listitem
+></itemizedlist
+> Πλήρεις πληροφορίες για τα υποστηριζόμενα μηχανήματα mips mipsel μπορούν να βρεθούν στη σελίδα <ulink url="&url-linux-mips;"
+>Linux-MIPS homepage </ulink
+>Στη συνέχεια μόνο τα μηχανήματα που υποστηρίζονται από το Debian θα καλυφθούν, Αν ψάχνετε για πληροφορίες σχετικά με άλλες υποαρχιτεκτονικές, παρακαλούμε δείτε την λίστα αλληλογραφίας <ulink url="&url-list-subscribe;"
+>debian-&architecture; mailing list</ulink
+>. </para>
+
+   <sect3
+><title
+>CPU</title>
+<para
+>Στα μηχανήματα SGI IP22, SGI Indy, Indigo 2 και Challenge S με επεξεργαστές R 4000, R4400, R4600 και R5000 εγκαταστάσεις του Debian υποστηρίζονται μόνο για big endian MIPS. Η δοκιμαστική μητρική BCM91250A έρχεται με έναν επεξεργαστή SB1250 με δύο πυρήνες SB-1 που υποστηρίζονται σε κατάσταση SMP (Συμμετρικής Πολυεπεξεργασίας) από τον εγκαταστάτη. </para
+><para
+>Μερικά μηχανήματα MIPS μπορούν να λειτουργήσουν τόσο σε κατάσταση big όσο και little endian. Για μηχανήματα MIPS little endian παρακαλούμε διαβάστε την τεκμηρίωση για την αρχιτεκτονική mipsel. </para>
+   </sect3>
+  </sect2>
+
+<!--   End of file hardware/supported/mips.xml -->
+
+<!-- Start of file hardware/supported/mipsel.xml -->
+
+
+  <sect2 arch="mipsel"
+><title
+>CPU, Μητρικές, και Υποστήριξη Video</title>
+<para
+>To Debian στην αρχιτεκτονική &arch-title; υποστηρίζει προς το παρόν τρεις υποαρχιτεκτονικές: <itemizedlist
+><listitem
+><para
+> DECstation: υποστηρίζονται διάφορα μοντέλα DECstation</para
+></listitem
+><listitem
+><para
+> Cobalt Microserver: μόνο μηχανήματα Cobalt βασισμένα σε MIPS καλύπτονται εδώ. Αυτά περιλαμβάνουν τα Cobalt Qube,RaQ, Qube2 και RaQ2 και το Gateway Microserver.</para
+></listitem
+> <listitem
+><para
+> Broadcom BCM91250A (SWARM): πρόκειται για μια μητρική τύπου ATX από την Broadcom για δοκιμές και βασίζεται στην οικογένεια επεξεργαστών SiByte. </para
+></listitem
+></itemizedlist
+> Aναλυτικές πληροφορίες για τα υποστηριζόμενα μηχανήματα mips/mipsel μπορούν να βρεθούν στη σελίδα <ulink url="&url-linux-mips;"
+>Linux-MIPS homepage </ulink
+>Στη συνέχεια μόνο τα μηχανήματα που υποστηρίζονται από το Debian θα καλυφθούν, Αν ψάχνετε για πληροφορίες σχετικά με άλλες υποαρχιτεκτονικές, παρακαλούμε δείτε την λίστα αλληλογραφίας <ulink url="&url-list-subscribe;"
+>debian-&architecture; mailing list</ulink
+>. </para>
+
+   <sect3
+><title
+>Τύποι CPU/Mηχανήματος</title>
+
+<para
+>Προς το παρόν μόνο μηχανήμτα DECstations με επεξεργαστές R3000 και R4000/Ρ4400 υποστηρίζονται από τον εγκαταστάτη του Debian σε συστήματα little endian MIPS.To σύστημα εγκατάστασης του Debian δουλεύει στα εξής μηχανήματα: </para
+><para>
+
+<informaltable>
+<tgroup cols="4">
+<thead>
+<row>
+  <entry
+>Τύπος συστήματος</entry
+><entry
+>CPU</entry
+><entry
+>Κωδική-ονομασία</entry>
+  <entry
+>Υποαρχιτεκτονική Debian</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>DECstation 5000/1xx </entry>
+  <entry
+>R3000 </entry>
+  <entry
+>3MIN </entry>
+  <entry
+>r3k-kn02 </entry>
+</row
+><row>
+  <entry
+>DECstation 5000/150 </entry>
+  <entry
+>R4000 </entry>
+  <entry
+>3MIN </entry>
+  <entry
+>r4k-kn04 </entry>
+</row
+><row>
+  <entry
+>DECstation 5000/200 </entry>
+  <entry
+>R3000 </entry>
+  <entry
+>3MAX </entry>
+  <entry
+>r3k-kn02 </entry>
+</row
+><row>
+  <entry
+>DECstation 5000/240 </entry>
+  <entry
+>R3000 </entry>
+  <entry
+>3MAX+ </entry>
+  <entry
+>r3k-kn02 </entry>
+</row
+><row>
+  <entry
+>DECstation 5000/260 </entry>
+  <entry
+>R4400 </entry>
+  <entry
+>3MAX+ </entry>
+  <entry
+>r4k-kn04 </entry>
+</row
+><row>
+  <entry
+>Personal DECstation 5000/xx </entry>
+  <entry
+>R3000 </entry>
+  <entry
+>Maxine </entry>
+  <entry
+>r3k-kn02 </entry>
+</row
+><row>
+  <entry
+>Personal DECstation 5000/50 </entry>
+  <entry
+>R4000 </entry>
+  <entry
+>Maxine </entry>
+  <entry
+>r4k-kn04 </entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para
+><para
+>Υποστηρίζονται όλα τα μηχανήμτα Cobalt που διαθέτουν σειριακή κονσόλα (η οποία είναι απαραίτητη για την εγκατάσταση). </para
+><para
+>Η δοκιμαστική μητρική BCM91250A έρχεται με έναν επεξεργαστή SB1250 με δύο πυρήνες SB-1 που υποστηρίζονται σε κατάσταση SMP (Συμμετρικής Πολυεπεξεργασίας) από τον εγκαταστάτη. </para>
+   </sect3>
+
+   <sect3
+><title
+>Υποστηριζόμενες επιλογές κονσόλας</title>
+<para
+>Σειριακή κονσόλα διαθέτουν όλα τα υποστηριζόμενα DECstations (9600 bps, 8N1). Για να χρησιμοποιήσετε τη σειριακή κονσόλα θα πρέπει να εκκινήσετε τον εγκαταστάτη με την παράμετρο στον πυρήνα <literal
+>console=ttyS</literal
+><replaceable
+>x</replaceable
+>, (όπου <replaceable
+>x</replaceable
+> είναι ο αριθμός της σειριακής θύρας στην οποία έχετε συνδέσει την κονσόλα &mdash; συνήθως  <literal
+>2</literal
+>, αλλά <literal
+>0</literal
+> για τα Personal DECstations). Σε μηχανήματα 3MIN και 3MAX+ (DECstation 5000/1xx, 5000/240 και 5000/260) είναι διαθέσιμη μια τοπική κονσόλα με τις επιλογές γραφικών PMAG-BA και PMAGB-B). </para
+><para
+>Αν πρέπει να χρησιμοποιήσετε ένα σύστημα Linux σαν σειριακό τερματικό, ένας εύκολος τρόπος να το κάνετε αυτό είναι τρέχοντας σε αυτό την εντολή <command
+>cu</command
+><footnote
+> <para
+>Στην έκδοση Woody η εντολή αυτή ήταν μέρος του πακέτου <classname
+>uucp</classname
+>, αλλά σε μεταγενέστερες εκδόσεις είναι διαθέσιμο σαν ξεχωριστό πακέτο. </para
+></footnote
+>. Παράδειγμα: <informalexample
+><screen
+> 
+ $ cu -l /dev/ttyS1 -s 9600
+</screen
+></informalexample
+> όπου η επιλογή <literal
+>-l</literal
+> (line) ορίζει την σειριακή θύρα που είναι να χρησιμοποιηθεί και η επιλογή <literal
+>-s</literal
+>(speed) ορίζει την ταχύτητα της σύνδεσης (9600 bits per second). </para
+><para
+>Τόσο τα συστήματα Cobalt όσο και τα Broadcom BCM91250A χρησιμοποιούν 115200 bps. </para>
+   </sect3>
+  </sect2>
+<!--   End of file hardware/supported/mipsel.xml -->
+
+<!-- Start of file hardware/supported/powerpc.xml -->
+
+
+  <sect2 arch="powerpc"
+><title
+>CPU, Μητρικές, και Υποστήριξη Video</title>
+<para
+>Υπάρχουν τέσσερεις κύριες υποστηριζόμενες υποαρχιτεκτονικές για την αρχιτεκτονική <emphasis
+>&architecture;</emphasis
+>:PMac (Power-Macintosh), PReP, APUS (Amiga Power-UP System) και μηχανήματα CHRP. Κάθε υποαρχιτεκτονική έχει την δικιά της μέθοδο εκκίνησης. Επιπλέον, υπάρχουν τέσσερα διαφορετικά είδη πυρήνων (γεύσεις) που υποστηρίζουν διαφορετικές παραλλαγές επεξεργαστών. </para
+><para
+>Υλοποιήσεις σε άλλες <emphasis
+>&architecture;</emphasis
+> αρχιτεκτονικές, όπως οι Be-Box και MBX, προετοιμάζονται αλλά δεν υποστηρίζονται ακόμα από το Debian. Ίσως να έχουμε και μια 64-μπιτη υλοποίηση στο μέλλον. </para>
+
+   <sect3
+><title
+>Γεύσεις του πυρήνα</title>
+
+<para
+>Υπάρχουν τέσσερις γεύσεις του πυρήνα για powerpc στο Debian βασιζόμενοι στον τύπο της CPU: <variablelist>
+<varlistentry>
+<term
+>powerpc</term>
+<listitem
+><para
+>Τα περισσότερα συστήματα χρησιμοποιούν αυτό το είδος πυρήνα, που υποστηρίζει τους επεξεργαστές PowerPC 601, 603, 604, 740, 750, και 7400. λα τα συστήματα Apple Power Macintosh συμπεριλαμβανομένων των G4 χρησιμοποιούν έναν από αυτούς τους επεξεργαστές. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>power3 </term>
+<listitem
+><para
+>Ο επεξεργαστής POWER3 χρησιμοποιείται σε παλιότερα συστήματα 64-μπιτων server της IBM: γνωστά μοντέλα περιλαμβάνουν τα IntelliStation POWER Model 265, pSeries 610 και 640, και RS/6000 7044-170, 7044-260, και 7044-270. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>power4 </term>
+<listitem
+><para
+>Ο επεξεργαστής POWER4 χρησιμοποιείται σε πιο πρόσφατα συστήματα 64-μπιτων server της IBM: γνωστά μοντέλα περιλαμβάνουν τα pSeries 615, 630, 650, 655, 670, και 690. </para
+><para
+>Ο επεξεργαστής Apple G5 βασίζεται επίσης στην αρχιτεκτονική POWER4 και χρησιμοποιεί αυτό το είδος πυρήνα. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>apus</term>
+<listitem
+><para
+>Αυτό το είδος πυρήνα υποστηρίζει τα συστήματα Amiga Power-UP System. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+
+   </sect3>
+
+   <sect3
+><title
+>Η Υποαρχιτεκτονική Macintosh (pmac)</title>
+
+<para
+>Η Apple (και για ένα σύντομο διάστημα μερικοί άλλοι κατασκευαστές &mdash; για παράδειγμα η Power Computing), κατασκευάζει μια σειρά υπολογιστών Macintosh βασισμένων στον επεξεργαστή PowerPC. Από την άποψη της αρχιτεκτονικής υποστήριξης κατηγοριοποιούνται σε NuBus, OldWorld PCI και NewWorld. </para
+><para
+>Υπολογιστές Macintosh που χρησιμοποιούν τη σειρά επεξεργαστών 680x0 δεν ανήκουν στην οικογένεια PowerPC αλλά αντίθετα είναι μηχανήματα m68k. Τα μοντέλα αυτά αρχίζουν με <quote
+>Mac II</quote
+> ή έχουν ένα 3-ψήφιο αριθμό μοντέλου όπως Centris 650 ή Quadra 950. Τα μοντέλα PowerPC της Apple πριν τον iMac έχουν τετραψήφιους αριθμούς. </para
+><para
+>Συστήματα NuBus δεν υποστηρίζονται αυτή τη στιγμή από το debian/powerpc.H αρχιτεκτονική του μονολιθικού πυρήνα Linux/PPC δεν έχει υποστήριξη για τα μηχανήματα αυτά, οπότε κάποιος θα πρέπει να χρησιμοποιήσει τον μικροπυρήνα MkLinux Mach, τον οποίον δεν υποστηρίζει ακόμα το Debian. Tα μηχανηματα αυτά περιλαμβάνουν τα: <itemizedlist
+><listitem
+><para
+> Power Macintosh 6100, 7100, 8100</para
+></listitem
+><listitem
+><para
+>Performa 5200, 6200, 6300</para
+></listitem
+><listitem
+><para
+>Powerbook 1400, 2300 και 5300</para
+></listitem
+><listitem
+><para
+> Workgroup Server 6150, 8150, 9150</para
+></listitem
+></itemizedlist
+>. Ένας πυρήνας Linux και περιορισμένη υποστήριξη για τα μηχανήματα αυτά είναι διαθέσιμα στο <ulink url="http://nubus-pmac.sourceforge.net/"
+></ulink
+> </para
+><para
+>Συστήματα OldWorld είναι τα περισσότερα μηχανήματα Power Macintosh με έναν οδηγό δισκέττας και ένα PCI bus. Τα περισσότερα συστήματα Power Macintosh βασισμένα σε επεξεργαστές 603, 603e, 604 και 604e είναι μηχανήματα OldWorld. Τα συστήματα Beige G3 είναι επίσης OldWorld. </para
+><para
+>Οι λεγόμενοι NewWorld PowerMac είναι όλα τα συστήματα PowerMac σε διαφανή έγχρωμα πλαστικά κουτιά. Αυτά περιλαμβάνουν όλους τους iMac, τα iBook, τα συστήματα G4, τα συτήματα G3 μπλε χρώματος, και τα περισσότερα PowerBook κατασκευασμένα από το 1999 και ύστερα. Τα συστήματα NewWorld PowerMac είναι επίσης γνωστό ότι χρησιμοποιούν το σύστημα <quote
+>ROM in RAM</quote
+> για το MacOS και έχουν κατασκευαστεί από τα μέσα του 1998 και μετά. </para
+><para
+>Προδιαγραφές για μηχανήματα Apple είναι διαθέσιμες στο <ulink url="http://www.info.apple.com/support/applespec.html"
+>AppleSpec</ulink
+>και για παλιότερο υλικό στο<ulink url="http://www.info.apple.com/support/applespec.legacy/index.html"
+>AppleSpec Legacy</ulink
+>. </para
+><para>
+
+<informaltable>
+<tgroup cols="3">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<colspec colname="c3"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>Μοντέλο Ονομασία/Αριθμός</entry>
+  <entry
+>Γενιά</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry morerows="22"
+>Apple </entry>
+  <entry
+>iMac Bondi Blue, 5 Flavors, Slot Loading </entry>
+  <entry
+>NewWorld </entry>
+</row
+><row>
+  <entry
+>iMac Καλοκαίρι 2000, Αρχές του 2001 </entry>
+  <entry
+>NewWorld </entry>
+</row
+><row>
+  <entry
+>iMac G5 </entry>
+  <entry
+>NewWorld </entry>
+</row
+><row>
+  <entry
+>iBook, iBook SE, iBook Dual USB </entry>
+  <entry
+>NewWorld </entry>
+</row
+><row>
+  <entry
+>iBook2 </entry>
+  <entry
+>NewWorld </entry>
+</row
+><row>
+  <entry
+>iBook G4 </entry>
+  <entry
+>NewWorld </entry>
+</row
+><row>
+  <entry
+>Power Macintosh Μπλε και Λευκός (B&amp;W) G3</entry>
+  <entry
+>NewWorld </entry>
+</row
+><row>
+  <entry
+>Power Macintosh G4 PCI, AGP, Cube </entry>
+  <entry
+>NewWorld </entry>
+</row
+><row>
+  <entry
+>Power Macintosh G4 Gigabit Ethernet </entry>
+  <entry
+>NewWorld </entry>
+</row
+><row>
+  <entry
+>Power Macintosh G4 Digital Audio, Quicksilver </entry>
+  <entry
+>NewWorld </entry>
+</row
+><row>
+  <entry
+>Power Macintosh G5 </entry>
+  <entry
+>NewWorld </entry>
+</row
+><row>
+  <entry
+>PowerBook G3 FireWire Pismo (2000) </entry>
+  <entry
+>NewWorld </entry>
+</row
+><row>
+  <entry
+>PowerBook G3 Lombard (1999) </entry>
+  <entry
+>NewWorld </entry>
+</row
+><row>
+  <entry
+>PowerBook G4 Titanium </entry>
+  <entry
+>NewWorld </entry>
+</row
+><row>
+  <entry
+>PowerBook G4 Aluminum </entry>
+  <entry
+>NewWorld </entry>
+</row
+><row>
+  <entry
+>Xserve G5 </entry>
+  <entry
+>NewWorld </entry>
+</row
+><row>
+  <entry
+>Performa 4400, 54xx, 5500 </entry>
+  <entry
+>OldWorld </entry>
+</row
+><row>
+  <entry
+>Performa 6360, 6400, 6500 </entry>
+  <entry
+>OldWorld </entry>
+</row
+><row>
+  <entry
+>Power Macintosh 4400, 5400 </entry>
+  <entry
+>OldWorld </entry>
+</row
+><row>
+  <entry
+>Power Macintosh 7200, 7300, 7500, 7600 </entry>
+  <entry
+>OldWorld </entry>
+</row
+><row>
+  <entry
+>Power Macintosh 8200, 8500, 8600 </entry>
+  <entry
+>OldWorld </entry>
+</row
+><row>
+  <entry
+>Power Macintosh 9500, 9600 </entry>
+  <entry
+>OldWorld </entry>
+</row
+><row>
+  <entry
+>Power Macintosh (Beige) G3 Minitower </entry>
+  <entry
+>OldWorld </entry>
+</row
+><row>
+  <entry
+>Power Macintosh (Beige) Desktop, Όλα-σε-ένα</entry>
+  <entry
+>OldWorld </entry>
+</row
+><row>
+  <entry
+>PowerBook 2400, 3400, 3500 </entry>
+  <entry
+>OldWorld </entry>
+</row
+><row>
+  <entry
+>PowerBook G3 Wallstreet (1998) </entry>
+  <entry
+>OldWorld </entry>
+</row
+><row>
+  <entry
+>Twentieth Anniversary Macintosh </entry>
+  <entry
+>OldWorld </entry>
+</row
+><row>
+  <entry
+>Workgroup Server 7250, 7350, 8550, 9650, G3 </entry>
+  <entry
+>OldWorld </entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>Power Computing </entry>
+  <entry
+>PowerBase, PowerTower / Pro, PowerWave </entry>
+  <entry
+>OldWorld </entry>
+</row
+><row>
+  <entry
+>PowerCenter / Pro, PowerCurve </entry>
+  <entry
+>OldWorld </entry>
+</row>
+
+<row>
+  <entry
+>UMAX </entry>
+  <entry
+>C500, C600, J700, S900 </entry>
+  <entry
+>OldWorld </entry>
+</row>
+
+<row>
+  <entry
+>APS</entry>
+  <entry
+>APS Tech M*Power 604e/2000 </entry>
+  <entry
+>OldWorld </entry>
+</row>
+
+<row>
+  <entry
+>Motorola </entry>
+  <entry
+>Starmax 3000, 4000, 5000, 5500 </entry>
+  <entry
+>OldWorld </entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+
+   </sect3>
+
+   <sect3
+><title
+>Υποαρχιτεκτονική PReP</title>
+
+<para>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>Μοντέλο Ονομασία/Αριθμός</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry morerows="4"
+>Motorola </entry>
+  <entry
+>Firepower, PowerStack Series E, PowerStack II </entry>
+</row
+><row>
+  <entry
+>MPC 7xx, 8xx </entry>
+</row
+><row>
+  <entry
+>MTX, MTX+ </entry>
+</row
+><row>
+  <entry
+>MVME2300(SC)/24xx/26xx/27xx/36xx/46xx </entry>
+</row
+><row>
+  <entry
+>MCP(N)750 </entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>IBM RS/6000 </entry>
+  <entry
+>40P, 43P </entry>
+</row
+><row>
+  <entry
+>Power 830/850/860 (6070, 6050) </entry>
+</row
+><row>
+  <entry
+>6030, 7025, 7043 </entry>
+</row
+><row>
+  <entry
+>p640 </entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+
+   </sect3>
+
+   <sect3
+><title
+>Υποαρχιτεκτονική CHRP</title>
+
+<para>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>Μοντέλο Ονομασία/Αριθμός</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>IBM RS/6000 </entry>
+  <entry
+>B50, 43P-150, 44P </entry>
+</row>
+<row>
+  <entry
+>Genesi </entry>
+  <entry
+>Pegasos I, Pegasos II </entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+
+   </sect3>
+
+   <sect3
+><title
+>Υποαρχιτεκτονική APUS</title>
+
+<para>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>Μοντέλο Ονομασία/Αριθμός</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>Amiga Power-UP Systems (APUS) </entry>
+  <entry
+>A1200, A3000, A4000 </entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+   </sect3>
+  </sect2>
+<!--   End of file hardware/supported/powerpc.xml -->
+
+<!-- Start of file hardware/supported/s390.xml -->
+
+
+  <sect2 arch="s390"
+><title
+>Μηχανήματα τύπου S/390 και zSeries</title>
+<para
+>Ολοκληρωμένες πληροφορίες σχετικά με τα υποστηριζόμενα συστήματα S/390 και zSeries μπορούν να βρεθούν στο Redbook της IBM <ulink url="http://www.redbooks.ibm.com/pubs/pdfs/redbooks/sg246264.pdf"
+> Linux for IBM eServer zSeries and S/390: Distributions</ulink
+> στο κεφάλαιο 2.1 ή στο <ulink url="http://oss.software.ibm.com/developerworks/opensource/linux390/documentation-2.4.shtml"
+>technical details web page</ulink
+> στο <ulink url="http://oss.software.ibm.com/developerworks/opensource/linux390/index.shtml"
+>developerWorks</ulink
+>. Με λίγα λόγια συστήματα G5, Multiprise 3000, G6 και όλα της σειράς zSeries υποστηρίζονται πλήρως. Μηχανήματα Multiprise 2000, G3 και G4 υποστηρίζονται με ΙΕΕΕ προσομοίωση κινητού σημείου (floating point) και συνεπώς με μειωμένες επιδόσεις. </para>
+  </sect2>
+
+<!--   End of file hardware/supported/s390.xml -->
+
+<!-- Start of file hardware/supported/sparc.xml -->
+
+
+  <sect2 arch="sparc" id="sparc-cpus"
+><title
+>CPU, Μητρικές, και Υποστήριξη Video</title>
+<para
+>Αυτή τη στιγμή η υλοποίηση στην αρχιτεκτονική <emphasis
+>&architecture;</emphasis
+> υποστηρίζει αρκετούς τύπους συστημάτων Sparc. Οι πιο συνηθισμένοι τύποι συστημάτων Sparc είναι οι sun4, sun4c, sun4m, sun4d και sun4u. Προς το παρόν δεν υποστηρίζουμε πολύ παλιό υλικό sun4, αλλά τα υπόλοιπα συστήματα υποστηρίζονται. Συστηήματα Sun4d είναι τα λιγότερο δοκιμασμένα, οπότε θα πρέπει να περιμένετε μερικά προβλήματα σταθερότητας του πυρήνα. Οι τύποι Sun4c και Sun4m, οι πιο συνηθισμένοι από το παλιότερο υλικό Sparc, περιλαμβάνουν συστήματα όπως τα SparcStation 1, 1+, ΙPC, IPX και τα SparcStation LX, 5, 10 και 20 αντίστοιχα. Τα συστήματα κλάσης UltraSPARC περιλαμβάνονται στον τύπο sun4u και υποστηρίζονται με τη χρήση του σετ των εικόνων εγκατάστασης sun4u. Υπάρχουν και συστήματα που ανήκουν στους παραπάνω τύπους αλλά είναι γνωστό ότι δεν υποστηρίζονται. Τέτοια μη υποστηριζόμενα συστήματα είναι τα AP1000 multicomputer και το Tadpole Sparcbook 1. Δείτε το <ulink url="&url-sparc-linux-faq;"
+>Linux for SPARCProcessors FAQ</ulink
+> για πλήρεις πληροφορίες. </para>
+
+   <sect3
+><title
+>Ρύθμιση της Μνήμης</title>
+<para
+>Μερικοί παλιότεροι σταθμοί εργασίας, κυρίως οι Sun IPX και Sun IPC έχουν θήκες μνήμης που βρίσκονται σε συγκεκριμένες τοποθεσίες στη φυσική μνήμη. Κατά συνέπεια αν δεν συμπληρωθούν οι θέσεις αυτές θα υπάρχουν κενά στον χώρο της φυσικής μνήμης. O πυρήνας του Linux απαιτεί ένα συνεχόμενο μπλοκ μνήμης για το φόρτωμα του πυρήνα και του αρχικού δίσκου μνήμης RAM. Αν αυτό δεν είναι διαθέσιμο, θα προκύψει ένα σφάλμα τύπου <quote
+>Data Access Exception</quote
+>. </para
+><para
+>Θα πρέπει λοιπόν να ρυθμίσετε την μνήμη ώστε το χαμηλότερο μπλοκ μνήμης να είναι συνεχόμενο για τουλάχιστον 8ΜΒ. Στα συστήματα IPX και IPC που αναφέραμε παραπάνω, θήκες μνήμης αντιστιχοίζονται στα όρια των 16ΜΒ. Στην ουσία αυτό σημαίνει ότι θα πρέπει να έχετε ένα αρκετά μεγάλο SIMM στην θήκη μηδέν για να χωρέσει τον πυρήνα και την αρχική RAMdisk.Στην περίπτωση αυτή τα 4ΜΒ <emphasis
+>δεν</emphasis
+> είναι αρκετά. </para
+><para
+>Παράδειγμα: Σε ένα σύστημα Sun IPX έχετε ένα τσιπ SIMM 16MB και ένα 4MB. Yπάρχουν τέσσερις θήκες SIMM (0,1,2,3). [H θήκη μηδέν είναι η πιο απομακρυσμένη από τους συνδέσμους SBUS]. Θα πρέπει λοιπόν να εγκαταστήσετε τo τσιπ SIMM των 16ΜΒ στην θήκη 0, οπότε συνίσταται να εγκαταστήσετε την SIMM των 4ΜΒ στην θήκη 2. </para>
+   </sect3>
+
+   <sect3
+><title
+>Ρύθμιση Γραφικών</title>
+<para
+>Ειδικά στην περίπτωση παλιότερων σταθμών εργασίας Sun, είναι πολύ συνηθισμένο να υπάρχει πάνω στην μητρική ένας framebuffer που στην συνέχεια αντικαταστήθηκε (για παράδειγμα το bwtwo σε ένα sun IPC) και μια κάρτα SBUS που πιθανόν να περιέχει έναν μεταγενέστερα επιταχυνόμενο buffer που έχει μπει σε μια υποδοχή SBUS. Κάτω από το Solaris/SunOS αυτό δεν αποτελεί πρόβλημα καθώς και οι δυο κάρτες αναγνωρίζονται από την αρχή κανονικά. </para
+><para
+>Στο Linux όμως αυτό μπορεί να προκαλέσει πρόβλημα γιατί η οθόνη εκκίνησης PROM μπορεί να βγάλει την έξοδό της σε αυτήν την επιπρόσθετη κάρτα ενώ τα μηνύματα εκκίνησης του πυρήνα του Linux να βγαίνουν στην αρχική κάρτα framebuffer που βρίσκεται στην μητρική, <emphasis
+>μην</emphasis
+> αφήνοντας έτσι μηνύματα λαθους στην οθόνη και εμφανίζοντας το μηχάνημα σαν να έχει κολλήσει στην φάση φόρτωσης της RAMdisk. </para
+><para
+>Για να αποφύγετε αυτό το πρόβλημα, συνδέστε την οθόνη (αν απαιτείται) στην κάρτα οθόνης με την χαμηλότερα αριθμημένη υποδοχή SBUS (στην μητρική η κάρτα μετράει πιο κάτω από τις εξωτερικές υποδοχές). Εναλλακτικά, μπορείτε να χρησιμοποιήσετε μια σειριακή κονσόλα. </para>
+   </sect3>
+  </sect2>
+<!--   End of file hardware/supported/sparc.xml -->
+
+  <sect2 id="gfx" arch="not-s390"
+><title
+>Κάρτα Γραφικών</title>
+
+<para arch="i386"
+>Για την τερματική κονσόλα θα πρέπει να χρησιμοποιήσετε ένα interface οθόνης που να είναι συμβατό-με-VGA. Σχεδόν οποιαδήποτε σύγχρονη οθόνη είναι συμβατή-με-VGA. Παλιότερα πρότυπα, όπως τα CGA, MDA ή HGA μπορεί επίσης να δουλέψουν εφόσον δεν θα χρειαστείτε υποστήριξη για X11. Σημειώστε ότι το σύστημα X11 δεν χρησιμοποιείται κατά την διαδικασία εγκατάστασης που περιγράφεται στο παρόν κείμενο. </para
+><para
+>Η υποστήριξη που παρέχει το Debian για γραφικά interface καθορίζεται από την υποκείμενη υποστήριξη που υπάρχει στο σύστημα Χ11 του XFree86. Οι περισσότερες κάρτες οθόνης AGP, PCI και PCIe δουλεύουν με το XFree86. Λεπτομέρειες για τις υποστηριζόμενες κάρτες γραφικών, bus (διαγωγούς), οθόνες και συσκευές pointing μπορούν να βρεθούν στο <ulink url="&url-xfree86;"
+></ulink
+>. Το Debian &release; έρχεται με την έκδοση &x11ver; του XFree86. </para
+><para arch="mips"
+>Το παραθυρικό σύστημα Χ11 του XFree86 υποστηρίζεται μόνο στα συστήματα SGI Indy. H μητρική Broadcom BCM91250A evaluation board έχει στάνταρ υποδοχές PCI των 3.3v και υποστηρίζει VGA με προσομοίωση ή το Linux framebuffer σε επιλεγμένες μόνο γραφικές κάρτες. Μπορείτε να βρείτε μια <ulink url="&url-bcm91250a-hardware;"
+>Λίστα συμβατότητας</ulink
+> για συστήματα BCM91250A. </para
+><para arch="mipsel"
+>Το παραθυρικό σύστημα Χ11 του XFree86 υποστηρίζεται σε μερικά συστήματα DECstation. H μητρική Broadcom BCM91250A evaluation board έχει στάνταρ υποδοχές PCI των 3.3v και υποστηρίζει VGA με προσομοίωση ή το Linux framebuffer σε επιλεγμένες μόνο γραφικές κάρτες. Μπορείτε να βρείτε μια <ulink url="&url-bcm91250a-hardware;"
+>Λίστα συμβατότητας</ulink
+> για συστήματα BCM91250A. </para>
+
+  </sect2>
+
+  <sect2 arch="i386" id="laptops"
+><title
+>Φορητοί υπολογιστές</title>
+<para
+>Υποστηρίζονται επίσης φορητοί υπολογιστές. Οι φορητοί υπολογιστές είναι συχνά εξειδικευμένοι ή περιέχουν ιδιόκτητο (proprietary) υλικό. Για να βρείτε αν ο φορητός σας υπολογιστής δουλεύει καλά με το GNU/Linux, κοιτάξτε στο <ulink url="&url-x86-laptop;"
+>Linux Laptop pages</ulink
+> </para>
+   </sect2>
+
+
+  <sect2 condition="defaults-smp">
+<title
+>Πολλαπλοί Επεξεργαστές</title>
+
+<para
+>Υποστήριξη για πολλούς επεξεργαστές &mdash; γνωστή και σαν <quote
+>συμμετρική πολυ-επεξεργασία</quote
+> ή SMP &mdash; επίσης παρέχεται για την αρχιτεκτονική αυτή. Ο στάνταρ πυρήνας του Debian &release; έχει χτιστεί με υποστήριξη SMP. Αυτό δεν είναι αποτρεπτικό για την εγκατάσταση, αφού ο πυρήνας SMP μπορεί να εκκινήσει σε μη πολυεπεξεργαστικά συστήματα. Απλά ο πυρήνας στην περίπτωση αυτή θα δημιουργήσει μια μικρή επιβάρυνση. </para
+><para
+>Για να βελτιστοποιήσετε τον πυρήνα για συστήματα με ένα επεξεργαστή, θα πρέπει να αντικαταστήσετε τον προκαθορισμένο πυρήνα του Debian. Μπορείτε να βρείτε μια συζήτηση του πώς να το κάνετε αυτό στο <xref linkend="kernel-baking"/>. Προς το παρόν (με την έκδοση του πυρήνα &kernelversion;) ο τρόπος για να απενεργοποιήσετε την συμμετρική πολυεπεξεργασία (SMP) είναι αποεπιλέγοντας την<quote
+>&smp-config-option;</quote
+> στην ενότητα <quote
+>&smp-config-section;</quote
+> των ρυθμίσεων του πυρήνα. </para>
+
+  </sect2>
+
+
+  <sect2 condition="supports-smp">
+ <title
+>Πολλαπλοί Επεξεργαστές</title>
+<para
+>Υποστήριξη για πολλούς επεξεργαστές &mdash; γνωστή και σαν <quote
+>συμμετρική πολυ-επεξεργασία</quote
+> ή SMP &mdash; υπάρχει για την αρχιτεκτονική αυτή. Όμως ο καθορισμένος πυρήνας του Debian &release; δεν έχει υποστήριξη για SMP. Αυτό δεν είναι αποτρεπτικό για την εγκατάσταση, αφού ο κανονικός πυρήνας χωρίς υποστήριξη SMP μπορεί να εκκινήσει σε πολυεπεξεργαστικά συστήματα. Απλά ο πυρήνας στην περίπτωση αυτή θα χρησιμοποιήσει μόνο τον πρώτο επεξεργαστή. </para
+><para
+>Για να αξιοποιήσετε τους επιπλέον επεξεργαστές, θα πρέπει να αντικαταστήσετε τον προκαθορισμένο πυρήνα του Debian. Μπορείτε να βρείτε μια συζήτηση του πώς να το κάνετε αυτό στο <xref linkend="kernel-baking"/>. Προς το παρόν (με την έκδοση του πυρήνα &kernelversion;) ο τρόπος για να ενεργοποιήσετε την συμμετρική πολυεπεξεργασία (SMP) είναι επιλέγοντας <quote
+>&smp-config-option;</quote
+> στην ενότητα <quote
+>&smp-config-section;</quote
+> των ρυθμίσεων του πυρήνα. </para>
+  </sect2>
+
+  <sect2 condition="supports-smp-sometimes">
+ <title
+>Πολλαπλοί Επεξεργαστές</title>
+<para
+>Υποστήριξη για πολλούς επεξεργαστές &mdash; γνωστή και σαν <quote
+>συμμετρική πολυ-επεξεργασία</quote
+> ή SMP &mdash; υπάρχει για την αρχιτεκτονική αυτή και υποστηρίζεται από έναν προετοιμασμένο πυρήνα του Debian. Ανάλογα με το μέσο εγκατάστασης που χρησιμοποιείτε, ο πυρήνας με δυνατότητα SMP μπορεί να εγκατασταθεί ή και να μην εγκατασταθεί αυτόματα. Αυτό δεν εμποδίζει την εγκατάσταση, αφού ο κανονικός, χωρίς υποστήριξη SMP, πυρήνας μπορεί να εκκινήσει σε πολυεπεξεργαστικά συστήματα. Απλά ο πυρήνας στην περίπτωση αυτή θα χρησιμοποιήσει μόνο τον πρώτο επεξεργαστή. </para
+><para
+>Για να αξιοποιήσετε τους επιπλέον επεξεργαστές, θα πρέπει να ελέγξετε αν έχετε εγκαταστήσει ένα πακέτο πυρήνα με υποστήριξη SMP και αν αυτό δεν συμβαίνει να διαλέξετε ένα κατάλληλο τέτοιο πακέτο. Μπορείτε επίσης να φτιάξετε τον δικό σας προσαρμοσμένο πυρήνα ώστε να έχει υποστήριξη SMP. Μπορείτε να βρείτε μια συζήτηση του πώς να το κάνετε αυτό στο <xref linkend="kernel-baking"/>. Προς το παρόν (με την έκδοση του πυρήνα &kernelversion;) ο τρόπος για να ενεργοποιήσετε την συμμετρική πολυεπεξεργασία (SMP) είναι επιλέγοντας <quote
+>&smp-config-option;</quote
+> στην ενότητα <quote
+>&smp-config-section;</quote
+> των ρυθμίσεων του πυρήνα. </para>
+  </sect2>
+ </sect1>
+<!--   End of file hardware/hardware-supported.xml -->
+
+<!-- Start of file hardware/installation-media.xml -->
+
+ <sect1 id="installation-media">
+ <title
+>Μέσα Εγκατάστασης</title>
+
+<para
+>Η ενότητα αυτή θα σας βοηθήσει να προσδιορίσετε τα διαφορετικά μέσα που μπορείτε να χρησιμοποιήσετε για να εγκαταστήσετε το Debian. Για παράδειγμα, αν έχετε μια συσκευή δισκέττας μπορείτε να την χρησιμοποιήσετε για να εγκαταστήσετε το Debian. Υπάρχει ένα ολόκληρο κεφάλαιο αφιερωμένο στα διάφορα μέσα <xref linkend="install-methods"/>, που παραθέτει τα πλεονεκτήματα και μειονεκτήματα κάθε τύπου μέσου. Πιθανόν να θελήσετε να επιστρέψετε στην σελίδα αυτή μόλις φτάσετε στην ενότητα εκείνη. </para>
+
+  <sect2 condition="supports-floppy-boot"
+><title
+>Δισκέττες</title>
+<para
+>Σε μερικές περιπτώσεις μπορεί να πρέπει να κάνετε την πρώτη εκκίνησή σας από τις δισκέττες. Σε γενικές γραμμές το μόνο που θα χρειαστείτε είναι μια συσκευή δισκεττών υψηλής-πυκνότητας (1440 kilobytes) των 3,5 ιντσών. </para
+><para arch="powerpc"
+>Για συστήματα CHRP, η υποστήριξη της συσκευής δισκέττας είναι προς το παρόν μη διαθέσιμη. </para>
+  </sect2>
+
+  <sect2
+><title
+>CD-ROM/DVD-ROM </title>
+
+<note
+><para
+>Όποτε βλέπετε στο κείμενο αυτό μια αναφορά σε <quote
+>CD-ROM</quote
+> αυτή εφαρμόζεται τόσο σε ROM όσο και σε DVD-ROM, γιατί και οι δύο τεχνολογίες είναι πραγματικά ίδιες από την σκοπιά του λειτουργικού συστήματος, με εξαίρεση κάποιες πολύ παλιές και όχι συνηθισμένες συσκευές CD-ROM που δεν είναι ούτε SCSI ούτε IDE/ATAPI. </para
+></note
+><para
+>Εγκατάσταση βασισμένη σε CD-ROM υποστηρίζεται για μερικές αρχιτεκτονικές. Σε μηχανήματα που υποστηρίζουν εκκίνηση από CD-ROM, θα πρέπει να είσαστε σε θέση να κάνετε μια εγκατάσταση εντελώς <phrase arch="not-s390"
+>χωρίς δισκέττα</phrase
+> <phrase arch="s390"
+>χωρίς ταινία</phrase
+>. Ακόμα και αν το σύστημά σας δεν υποστηρίζει εκκίνηση από το CD-ROM, μπορείτε ακόμα και τότε να χρησιμοποιήσετε το CD-ROΜ σε συνδυασμό με τις άλλες τεχνικές για να εγκαταστήσετε το σύστημά σας, από την στιγμή που θα έχετε καταφέρει να εκκινήσετε με κάποιο άλλο μέσο, δείτε και την ενότητα <xref linkend="boot-installer"/>. </para
+><para arch="i386"
+>Υποστηρίζονται τόσο SCSI όσο και IDE/ATAPI συσκευές CD-ROM. Επιπλέον, οι δίσκοι εκκίνησης υποστηρίζουν όλους τους μη-συνηθισμένους τύπους για CD που υποστηρίζονται από το Linux (όπως συσκευές Mitsumi και Matsushita). Όμως τα μοντέλα αυτά πιθανόν να χρειάζονται ειδικές παραμέτρους εκκίνησης ή άλλη φροντίδα για να λειτουργήσουν ενώ η εκκίνηση από αυτούς τους μη-συνηθισμένους τύπους είναι μάλλον απίθανη. Η σελίδα <ulink url="&url-cd-howto;"
+>Linux CD-ROM HOWTO</ulink
+> περιέχει σε βάθος πληροφορίες για την χρήση των CD-ROM με το Linux. </para
+><para arch="i386"
+>Συσκευές USB CD-ROM υποστηρίζονται επίσης καθώς και συσκευές FireWire που υποστηρίζονται από τους οδηγούς ohci1394 και sbp2. </para
+><para arch="alpha"
+>Τόσο SCSI όσο και IDE/ATAPI συσκευές CD-ROM υποστηρίζονται στην αρχιτεκτονική &arch-title;, από τη στιγμή που ο ελεγκτής υποστηρίζεται από την κονσόλα SRM. Αυτό αποκλείει πολλές επιπρόσθετες κάρτες ελεγκτών αλλά τα περισσότερα ενσωματωμένα τσιπ IDE και SCSI και κάρτες ελεγκτών που παρέχονται από τον κατασκευαστή αναμένεται να λειτουργούν. Για να βρείτε αν οι συσκευές σας υποστηρίζονται από την κονσόλα SRM δείτε το <ulink url="&url-srm-howto;"
+>SRM HOWTO</ulink
+>. </para
+><para arch="arm"
+>Συσκευές CD-ROM IDE/ATAPI υποστηρίζονται σε όλα τα μηχανήματα ARM. Σε μηχανήματα RiscPC, υποστηρίζονται επίσης και SCSI CD-ROM. </para
+><para arch="mips"
+>Σε μηχανήματα SGI, η εκκίνηση από CD-ROM απαιτεί μια συσκευή SCSI CD-ROM ικανή να λειτουργεί με ένα λογικό μπλοκ 512 byte. Πολλές από τις συσκευές CD-DROM που πουλιούνται στην αγορά PC δεν έχουν αυτή τη δυνατότητα. Αν το CD-ROM σας έχει ένα jumper με την επιγραφή <quote
+>Unix/PC</quote
+> ή <quote
+>512/2048</quote
+> τοποθετήστε το στην θέση <quote
+>Unix</quote
+> ή <quote
+>512</quote
+>. Για να αρχίσετε την εγκατάσταση απλά επιλέξτε <quote
+>Εγκατάσταση Συστήματος</quote
+> στο firmware. Η μητρική BCM91250A υποστηρίζει συνηθισμένες συσκευές IDE συμπεριλαμβανομένων των συσκευών CD-ROM,αλλά εικόνες των CD δεν είναι αυτή τη στιγμή διαθέσιμες για την πλατφόρμα αυτή γιατί το firmware δεν αναγνωρίζει τις συσκευές CD. </para
+><para arch="mipsel"
+>Σε μηχανήματα DECstation, η εκκίνηση από CD-ROM απαιτεί μια συσκευή SCSI CD-ROM ικανή να λειτουργεί με ένα λογικό μπλοκ 512 byte. Αρκετές από τις συσκευές SCSI CD-DROM που υπάρχουν στην αγορά των PC, δεν έχουν αυτή τη δυνατότητα. Αν το CD-ROM σας έχει ένα jumper με την επιγραφή <quote
+>Unix/PC</quote
+> ή <quote
+>512/2048</quote
+> τοποθετήστε το στην θέση <quote
+>Unix</quote
+> ή <quote
+>512</quote
+>. </para
+><para arch="mipsel"
+>Το CD 1 περιέχει τον εγκαταστάτη για την υποαρχιτεκτονική r3k-kn02 (τα βασισμένα στο R3000 DECstation 5000/1xx και 5000/240 καθώς και τα βασισμένα επίσης στο R3000 μοντέλα Personal DECstation), το CD 2 έχει τον εγκαταστάτη για την υποαρχιτεκτονική r4k-kn04 (τα βασισμένα σε R4x00 συστήματα DECstation 5000/150 και 5000/260 καθώς και τα Personal DECstation 5000/50). </para
+><para arch="mipsel"
+>Για να εκκινήσετε από το CD δώστε την εντολή <userinput
+>boot <replaceable
+>#</replaceable
+>/rz<replaceable
+>id</replaceable
+></userinput
+> στο προτρεπτικό του firmware, όπου <replaceable
+>#</replaceable
+> είναι ι αριθμός της συσκευής TurboChannel από την οποία γίνεται η εκκίνηση (η 3 στα περισσότερα DECstation) και <replaceable
+>id</replaceable
+> είναι το SCSI ID της συσκευής CD-ROM. Αν χρειάζεται να περάσετε επιπλέον παραμέτρους, αυτές μπορούν προαιρετικά να παρατεθούν με την ακόλουθη σύνταξη: </para
+><para arch="mipsel">
+
+<userinput
+>boot <replaceable
+>#</replaceable
+>/rz<replaceable
+>id</replaceable
+> param1=value1 param2=value2...</userinput>
+
+</para>
+  </sect2>
+
+  <sect2
+><title
+>Σκληρός Δίσκος</title>
+
+<para
+>Η εκκίνηση του συστήματος εγκατάστασης από τον σκληρό δίσκο είναι επίσης μια άλλη δυνατότητα για αρκετές αρχιτεκτονικές. Αυτό απαιτεί την ύπαρξη ενός άλλου λειτουργικού συστήματος που θα φορτώσει τον εγκαταστάτη στον σκληρό δίσκο. </para
+><para arch="m68k"
+>Στην πραγματικότητα, η εγκατάσταση από τον τοπικό σας δίσκο είναι η προτιμητέα τεχνική εγκατάστασης για τα περισσότερα μηχανήματα της αρχιτεκτονικής &architecture;. </para
+><para arch="sparc"
+>Αν και η αρχιτεκτονική &arch-title; δεν επιτρέπει εκκίνηση από το SunOS (Solaris),μπορείτε να εγκαταστήσετε από μια κατάτμηση SunOS (UFS slices). </para>
+  </sect2>
+
+  <sect2 condition="bootable-usb"
+><title
+>USB stick μνήμης</title>
+
+<para
+>Πολλά συστήματα Debian χρειάζονται τις συσκευές δισκέττας και/ή CD-ROM μόνο για την ρύθμιση του συστήματος και για λόγους "διάσωσης". Aν χειρίζεστε μερικούς server θα έχετε πιθανόν ήδη σκεφτεί να παραλείψετε όλες αυτές τις συσκευές και να χρησιμοποιήσετε ένα στικ μνήμης USB για την εγκατάσταση και (όποτε είναι απαραίτητο) την ανάκτηση του συστήματος. Αυτό είναι χρήσιμο επίσης για μικρά συστήματα που δεν έχουν πολύ χώρο για άχρηστες συσκευές. </para>
+  </sect2>
+
+  <sect2
+><title
+>Δίκτυο</title>
+
+<para condition="supports-tftp"
+>Μπορείτε επίσης να <emphasis
+>εκκινήσετε</emphasis
+> το σύστημά σας από το δίκτυο. <phrase arch="mips"
+>Αυτή είναι η προτιμητέα τεχνική εγκατάστασης για συστήματα Mips.</phrase
+> </para
+><para condition="supports-nfsroot"
+>Η εγκατάσταση χωρίς δίσκο, με χρήση διακτυακής εκκίνησης από ένα τοπικό δίκτυο και με προσάρτηση σε NFS όλων των τοπικών συστημάτων αρχείων, είναι μια άλλη δυνατότητα. </para
+><para
+>Αφού έχει εγκατασταθεί ο πυρήνας του λειτουργικού συστήματος, μπορείτε να εγκαταστήσετε το υπόλοιπο σύστημα μέσω οποιουδήποτε είδους δικτυακής σύνδεσης (συμπεριλαμβανομένης σύνδεσης PPP μετά την εγκατάσταση του βασικού συστήματος), μέσω FTP ή HTTP. </para>
+  </sect2>
+
+  <sect2
+><title
+>Σύστημα Un*x ή GNU</title>
+
+<para
+>Αν τρέχετε ένα άλλο σύστημα τύπου Unix μπορείτε να το χρησιμοποιήσετε για να εγκαταστήσετε το &debian; χωρίς να χρησιμοποιήσετε τον &d-i; που περιγράφεται στο υπόλοιπο αυτού του εγχειριδίου. Αυτός ο τρόπος εγκατάστασης είναι χρήσιμος για χρήστες με μη υποστηριζόμενο υλικό ή για συστήματα που δεν έχουν την πολυτέλεια να τεθούν εκτός λειτουργίας. Αν ενδιαφέρεστε για την τεχνική αυτή πηγαίνετε στην ενότητα <xref linkend="linux-upgrade"/>. </para>
+  </sect2>
+
+  <sect2
+><title
+>Υποστηριζόμενα συστήματα Αποθήκευσης</title>
+
+<para
+>Οι δίσκοι εκκίνησης του Debian περιέχουν έναν πυρήνα που είναι φτιαγμένος ώστε να τρέχει στον μεγαλύτερο δυνατό αριθμό συστημάτων. Δυστυχώς αυτό έχει σαν αποτέλεσμα έναν μεγαλύτερο σε μέγεθος πυρήνα, που περιλαμβάνει πολλούς οδηγούς που δεν θα χρησιμοποιηθούν στο μηχάνημά σας (δείτε το <xref linkend="kernel-baking"/> για να μάθετε πώς να φτιάξετε τον δικό σας πυρήνα). Η υποστήριξη του ευρύτερου δυνατού φάσματος συσκευών είναι επιθυμητή γενικά, για να εξασφαλίσει ότι το Debian μπορεί να εγκατασταθεί στην ευρύτερη δυνατή ποικιλία υλικού. </para
+><para arch="i386"
+>Γενικά, το σύστημα εγκατάστασης του Debian περιλαμβάνει υποστήριξη για δισκέττες, συσκευές IDE, δισκέττες IDE, συσκευές IDE παράλληλης θύρας, ελεγκτές και συσκευές SCSI, USB και FireWire. Τα υποστηριζόμενα συστήματα αρχείων περιλαμβάνουν μεταξύ άλλων τα FAT, Win-32 FAT επεκτάσεις (VFAT), και NTFS. </para
+><para arch="i386"
+>Υποστηρίζονται επίσης οι διεπαφές δίσκων που ονομάζονται συνήθως MFM, RLL, IDE, ή ATA και προσομοιώνουν την διεπαφή σκληρών δίσκων ,<quote
+>AT</quote
+>. Πολύ παλιοί 8μπιτοι ελεγκτές ελεγκτών σκληρών δίσκων που χρησιμοποιούνταν στον υπολογιστή IBM XT υποστηρίζονται μόνο σαν module. Ελεγκτές δίσκων SCSI από πολλούς διαφορετικούς κατασκευαστές υποστηρίζονται. Δείτε το <ulink url="&url-hardware-howto;"
+>Linux Hardware Compatibility HOWTO</ulink
+> για περισσότερες λεπτομέρειες. </para
+><para arch="m68k"
+>Σχεδόν όλα τα συστήματα αποθήκευσης που υποστηρίζονται από τον πυρήνα του Linux υποστηρίζονται από το σύστημα εγκατάστασης του Debian. Σημειώστε ότι ο παρών πυρήνας του Linux δεν υποστηρίζει καθόλου δισκέττες σε Macintosh και το σύστημα εγκατάστασης του Debian δεν υποστηρίζει δισκέττες σε Amiga. Σε συστήματα Atari υποστηρίζονται επίσης το σύστημα αρχείων Macintosh HFS και το AFFS σαν module. Συστήματα Mac υποστηρίζουν το σύστημα αρχείων Atari (FAT). Συστήματα Amiga υποστηρίζουν το σύστημα αρχείων FAT και το HFS σαν module. </para
+><para arch="sparc"
+>Κάθε σύστημα αποθήκευσης που υποστηρίζεται από τον πυρήνα του Linux υποστηρίζεται επίσης από το σύστημα εκκίνησης. Οι ακόλουθοι οδηγοί SCSI υποστηρίζονται από τον προκαθορισμένο πυρήνα: <itemizedlist
+> <listitem
+><para
+> Sparc ESP </para
+></listitem
+> <listitem
+><para
+> PTI Qlogic,ISP </para
+></listitem
+> <listitem
+><para
+> Adaptec AIC7xxx </para
+></listitem
+> <listitem
+><para
+> NCR και Symbios 53C8XX </para
+></listitem
+> </itemizedlist
+>. Συστήματα IDE (όπως τα UltraSPARC 5) υποστηρίζονται επίσης. Δείτε το <ulink url="&url-sparc-linux-faq;"
+>Linux for SPARC Processors FAQ</ulink
+> για περισσότερες πληροφορίες σχετικά με το υλικό σε SPARC που υποστηρίζεται από τον πυρήνα του Linux. </para
+><para arch="alpha"
+>Οποιοδήποτε σύστημα αποθήκευσης υποστηριζόμενο από τον πυρήνα του Linux υποστηρίζεται επίσης από το σύστημα εκκίνησης. Αυτό περιλαμβάνει τόσο τους δίσκους SCSI όσο και IDE. Σημειώστε όμως ότι σε πολλά συστήματα η κονσόλα SRM δεν μπορεί να εκκινήσει από δίσκους IDE και συστήματα Jensen δεν μπορούν να εκκινήσουν από δισκέττες. (δείτε το <ulink url="&url-jensen-howto;"
+></ulink
+> για περισσότερες πληροφορίες για την εκκίνηση σε συστήματα Jensen).  </para
+><para arch="powerpc"
+>Οποιοδήποτε σύστημα αποθήκευσης υποστηρίζεται από τον πυρήνα του Linux υποστηρίζεται επίσης και από το σύστημα εκκίνησης. Σημειώστε ότι ο παρών πυρήνας του Linux δεν υποστηρίζει καθόλου συσκευές δισκέττας σε συστήματα CHRP. </para
+><para arch="hppa"
+>Οποιοδήποτε σύστημα αποθήκευσης υποστηρίζεται από τον πυρήνα του Linux υποστηρίζεται επίσης και από το σύστημα εκκίνησης. Σημειώστε ότι ο παρών πυρήνας του Linux δεν υποστηρίζει συσκευές δισκέττας. </para
+><para arch="mips"
+>Οποιοδήποτε σύστημα αποθήκευσης υποστηρίζεται από τον πυρήνα του Linux υποστηρίζεται επίσης και από το σύστημα εκκίνησης. </para
+><para arch="s390"
+>Οποιοδήποτε σύστημα αποθήκευσης υποστηρίζεται από τον πυρήνα του Linux υποστηρίζεται επίσης και από το σύστημα εκκίνησης. Αυτό σημαίνει ότι FBA και ECKD DASD υποστηρίζονται από την παλιά διάταξη δίσκων του Linux (ldl) και την καινούρια κοινή διάταξη δίσκων S/390 (cdl). </para>
+
+  </sect2>
+
+ </sect1>
+<!--   End of file hardware/installation-media.xml -->
+
+<!-- Start of file hardware/supported-peripherals.xml -->
+
+ <sect1 id="supported-peripherals">
+ <title
+>Περιφερειακά και άλλο Υλικό</title>
+<para arch="not-s390"
+>Το Linux υποστηρίζει μια μεγάλη ποικιλία από συσκευές υλικού όπως ποντίκια, εκτυπωτές, σαρωτές, και συσκευές PCMCIA και USB. Παρόλα αυτά, οι περισσότερες από τις συσκευές αυτές δεν είναι απαραίτητες κατά την εγκατάσταση του συστήματος. </para
+><para arch="i386"
+>Συσκευές USB λειτουργούν άψογα σε γενικές γραμμές, μόνο μερικά πληκτρολόγια USB μπορεί να απαιτούν επιπλέον ρυθμίσεις (κοιτάξτε το <xref linkend="usb-keyboard-config"/>). </para
+><para arch="i386"
+>Δείτε και πάλι το <ulink url="&url-hardware-howto;"
+>Linux Hardware Compatibility HOWTO</ulink
+> για να προσδιορίσετε αν το συγκεκριμένο υλικό σας υποστηρίζεται από το Linux. </para
+><para arch="s390"
+>Εγκατάσταση πακέτων από XPRAM και ταινίες δεν υποστηρίζονται από αυτό το σύστημα. Όλα τα πακέτα που θέλετε να εγκαταστήσετε θα πρέπει να είναι διαθέσιμα σε DASD ή από το δίκτυο με χρήση NFS, HTTP ή FTP. </para
+><para arch="mips"
+>Η μητρική Broadcom BCM91250A evaluation board διαθέτει συνηθισμένες θέσεις PCI 3.3v των 32 bit και των 64 bit καθώς και συνδέσμους USB. </para
+><para arch="mipsel"
+>Η μητρική Broadcom BCM91250A evaluation board διαθέτει συνηθισμένες θέσεις PCI 3.3v των 32 bit και των 64 bit καθώς και συνδέσμους USB. Συστήματα Cobalt RaQ δεν έχουν υποστήριξη για επιπλέον συσκευές αλλά το Qube έχει μια θέση PCI. </para>
+</sect1>
+
+ <sect1 arch="not-s390"
+><title
+>Αγοράζοντας υλικό ειδικά για το GNU/Linux</title>
+
+<para
+>Υπάρχουν αρκετοί προμηθευτές που διαθέτουν στην αγορά συστήματα με <ulink url="&url-pre-installed;"
+>προεγκατεστημένο</ulink
+> το Debian ή άλλες διανομές GNU/Linux . ίσως πληρώσετε κάτι παραπάνω για αυτό το προνόμιο, αλλά αυτό σας δίνει ταυτόχρονα μια σχετική ηρεμία με τη σιγουριά ότι το υλικό σας είναι καλά υποστηριζόμενο από το GNU/Linux. </para
+><para arch="m68k"
+>Δυστυχώς είναι πολύ σπάνιο να βρείτε κάποιον κατασκευαστή που να προσφέρει οποιαδήποτε καινούρια μηχανήματα &arch-title; . </para
+><para arch="i386"
+>Αν πρέπει να αγοράσετε κάποιο μηχάνημα που έρχεται μαζί με Windows διαβάστε προσεκτικά την άδεια χρήσης λογισμικού των Windows. Πιθανόν να μπορείτε να απορρίψετε την άδεια αυτή και να έχετε μια επιστροφή χρημάτων από τον προμηθευτή σας. Ψάχνοντας στο διαδίκτυο για <quote
+>windows refund</quote
+> ίσως σας δώσει χρήσιμες πληροφορίες που να σας βοηθήσουν σ' αυτό. </para
+><para
+>Άσχετα από το αν έχετε αγοράσει ένα σύστημα που έρχεται με Linux ή ακόμα και ένα χρησιμοποιημένο σύστημα, είναι πάντα σημαντικό να ελέγξετε ότι το υλικό σας υποστηρίζεται από τον πυρήνα του Linux. Ελέγξτε αν το υλικό σας καταγράφεται στις αναφορές που βρήκατα παραπάνω. Πληροφορήστε τον πωλητή σας ότι θέλετε να αγοράσετε ένα σύστημα Linux. Υποστηρίξτε προμηθευτές που είναι φιλικοί προς το Linux. </para>
+
+  <sect2
+><title
+>Αποφύγετε κλειστό ή Proprietary υλικό</title>
+<para
+>Μερικοί κατασκευαστές υλικού απλά δεν μας λένε πώς να γράψουμε οδηγούς για υλικό αυτό.Άλλοι δεν μας επιτρέπουν να έχουμε πρόσβαση στην τεκμηρίωσή τους αν δεν υπογράψουμε προηγουμένως μια συμφωνία μη-αποκάλυψης (non-disclosure) που δεν θα μας επέτρεπε να διανείμουμε τον πηγαίο κώδικα σε Linux. </para
+><para arch="m68k"
+>Ένα άλλο παράδειγμα είναι το ιδιόκτητο-κλειστό υλικό στην γραμμή των παλιότερων μηχανημάτων Macintosh. Στην πραγματικότητα καμμιά τεκμηρίωση ή προδιαγραφές δεν έχουν κυκλοφορήσει ποτέ για οποιοδήποτε υλικό από Macintosh, ιδιαίτερα για τον ελεγκτή ADB (που χρησιμοποιείται από το πληκτρολόγια και το ποντίκι), τον ελεγκτή δισκέττας και την επιτάχυνση και την διαχείριση CLUT του υλικού της οθόνης (αν και τώρα υποστηρίζουμε διαχείριση CLUT σε όλα σχεδόν τα εσωτερικά τσιπ οθόνης). Με λίγα λόγια, αυτό εξηγεί γιατί η υλοποίηση του Linux σε Macintosh υστερεί σχετικά με άλλες υλοποιήσεις του Linux. </para
+><para
+>Αφού δεν έχουμε αποκτήσει πρόσβαση στην τεκνηρίωση αυτών των συσκευών αυτές απλά δεν θα λειτουργήσουν στο Linux.Μπορείτε να βοηθήσετε ζητώντας από τους κατασκευαστές τέτοιου υλικού να διανείμουν την τεκμηρίωση. Αν το ζητήσουν αυτο αρκετοί χρήστες, οι κατασκευαστές θα συνειδητοποιήσουν ότι η κοινότητα του ελεύθερου λογισμικού είναι μια σημαντική αγορά. </para>
+</sect2>
+
+
+  <sect2 arch="i386"
+><title
+>Υλικό ειδικά για Windows</title>
+<para
+>Μια ενοχλητική τάση είναι ο πολλαπλασιασμός των modem και των εκτυπωτών που απευθύνονται ειδικά στα Windows. Σε μερικές περιπτώσεις είναι ειδικά σχεδιασμένα ώστε να λειτουργούν κάτω από το λειτουργικό σύστημα Μicrosoft Windows και έχουν την επιγραφή ,<quote
+>WinModem</quote
+> ή <quote
+>Made especially for Windows-based computers</quote
+>. Αυτό γίνεται γενικά με την αφαίρεση των εμβαπτισμένων επεξεργαστών του συγκεκριμένου υλικού και το πέρασμα της λειτουργίας που τους σε έναν οδηγό των Windows που τρέχει από τον κύριο επεξεργαστή του υπολογιστή. Η στρατηγική αυτή κάνει το υλικό φθηνότερο αλλά η εξοικονόμιση αυτή συχνά <emphasis
+>δεν</emphasis
+> περνά στον χρήστη και τέτοιο υλικό φτάνει να είναι μερικές φορές ακόμα και ακριβότερο από ισοδύναμες συσκευές που διατηρούν την ενσωματωμένη ευφυΐα τους. </para
+><para
+>Θα πρέπει να αποφύγετε υλικό σχεδιασμένο ειδικά για Windows για δυο λόγους. Ο πρώτος είναι ότι οι κατασκευαστές δεν κάνουν γενικά διαθέσιμες τις πηγές για το γράψιμο οδηγών στο Linux. Γενικά, το interface για το υλικό και το λογισμικό είναι κλειστά και η τεκμηρίωση δεν είναι διαθέσιμη χωρίς την υπογραφή μιας συμφωνίας μη-αποκάλυψης (non-disclosure) αν μια τέτοια συμφωνία είναι καν δυνατή. Αυτό αποκλείει την χρήση του υλικού από το ελεύεθερο λογισμικό αφού οι συγγραφείς ελεύθερου λογισμικού διαθέτουν δημόσια τον πηγαίο κώδικά των προγραμμάτων τους. Ο δεύτερος λόγος είναι ότι όταν από τέτοιες συσκευές αφαιρεθούν οι ενσωματωμένοι επεξεργαστές τους, το λειτουργικό σύστημα πρέπει να αναλάβει την δουλειά του επεξεργαστή αυτού, συχνά σε προτεραιότητα <emphasis
+>πραγματικού χρόνου</emphasis
+>, οπότε ο πεξεργαστής του μηχανήματός σας δεν είναι διαθέσιμος για να τρέχει τις εφαρμογές σας τη στιγμή που λειτουργεί αυτές τις συσκευές. Καθώς ένας χρήστης των Windows δεν χρησιμοποιεί συνήθως πολυ-επεξεργασία τόσο έντονα όσο ένας χρήστης του Linux, ο κατασκευαστής ελπίζει ότι ο χρήστης των Windows απλά δεν θα προσέξει την επιβάρυνση που αυτό το υλικό βάζει στον κεντρικό επεξεργαστή.Όμως, οποιοδήποτε πολυ-επεξεργαστικό λειτουργικό σύστημα, ακόμα και τα Windows 2000 ή XP, υποφέρει από μειωμένη απόδοση όταν οι κατασκευαστές περιφερειακών παρακάμπτουν την ενσωματωμένη επεξεργαστική ισχύ του υλικού τους. </para
+><para
+>Μπορείτε να βοηθήσετε στην κατάσταση αυτή ενθαρρύνοντας αυτούς τους κατασκευαστές να διανείμουν την τεκμηρίωση και όσες άλλες πηγές είναι απαραίτητες για να προγραμματίσουμε για το υλικό τους, αλλά η καλλίτερη στρατηγική είναι απλά να αποφύγετε αυτό το είδος υλικού μέχρι να καταγραφεί σαν λειτουργήσιμο στην λίστα <ulink url="&url-hardware-howto;"
+>Linux Hardware Compatibility HOWTO</ulink
+>. </para>
+</sect2>
+
+
+  <sect2 id="Parity-RAM">
+  <title
+>Ψευδής ή <quote
+>Εικονική</quote
+> Ομότιμη RAM</title>
+<para
+>Αν ζητήσετε Parity RAM σε ένα κατάστημα υπολογιστών, θα πάρετε πιθανόν κομμάτια <emphasis
+>εικονικής</emphasis
+> μνήμης parity αντί για <emphasis
+>πραγματική</emphasis
+> μνήμη parity. SIMM εικονικής μνήμης parity μπορεί συνήθως (αλλά όχι πάντα) να ξεχωρίσουν γιατί έχουν μόνο ένα επιπλέον τσιπ από ισοδύναμα SIMM non-parity μνήμης, και αυτό το επιπλέον τσιπ είναι μικρότερο από τα υπόλοιπα. SIMM εικονικής parity δουλεύουν ακριβώς όπως αυτά της μνήμης non-parity. Μπορούν να σας πουν πότε έχετε ένα σφάλμα μνήμης RAM ακόμα και σε ένα-μπιτ ακριβώς όπως και τσιπ SIMM πραγματικής parity σε μια μητρική που υλοποιεί την ομοτιμία. Μην πληρώσετε ποτέ περισσότερο για μια virtual-parity SIMM από ότι για μια non-parity. Περιμένετε να πληρώσετε λίγο περισσότερο για SIMM πραγματικής parity γιατί στην πραγματικότητα ένα παραπάνω μπιτ μνήμης για κάθε 8 μπιτ. </para
+><para
+>Αν θέλετε ολοκληρωμένες πληροφορίες για ζητήματα μνήμης RAM στην αρχιτεκτονική &arch-title; και για το ποια είναι η καλλίτερη μνήμη RAM για να αγοράσετε, δείτε το <ulink url="&url-pc-hw-faq;"
+>PC Hardware FAQ</ulink
+>. </para
+><para arch="alpha"
+>Τα περισσότερα, αν όχι όλα, τα συστήματα Alpha απαιτούν πραγματικά-ομότιμη μνήμη RAM. </para>
+
+  </sect2>
+
+ </sect1>
+<!--   End of file hardware/supported-peripherals.xml -->
+
+<!-- Start of file hardware/memory-disk-requirements.xml -->
+
+ <sect1 id="memory-disk-requirements">
+ <title
+>Απαιτήσεις Μνήμης και χώρου Δίσκου</title>
+
+<para
+>Θα πρέπει να έχετε τουλάχιστον &minimum-memory; μνήμης και τουλάχιστον &minimum-fs-size; χώρου σκληρού δίσκου. Για ένα ελάχιστο σύστημα κονσόλας (όλα τα συνηθισμένα πακέτα) απαιτούνται 250ΜΒ. Αν θέλετε να εγκαταστήσετε μια εύλογη ποσότητα λογισμικού, περιλαμβανομένου του συστήματος X Window καθώς και μερικά προγράμματα για ανάπτυξη/προγραμματισμό και βιβλιοθήκες, θα χρειαστείτε τουλάχιστον 400ΜΒ. Για ένα λίγο πολύ πλήρες σύστημα γραφείου θα χρειαστείτε μερικά gigabyte. </para
+><para arch="m68k"
+>Σε συστήματα Amiga το μέγεθος της FastRAM σχετίζεται με τις απαιτήσεις συνολικής μνήμης. Επίσης η χρήση καρτών Zorro με 16-μπιτη RAM δεν υποστηρίζεται. Θα χρειαστείτε 32-μπιτη RAM. To πρόγραμμα <command
+>amiboot</command
+> μπορεί να χρησιμοποιηθεί για να απενεργοποιήσετε την 16-μπιτη RAM, δείτε το <ulink url="&url-m68k-faq;"
+>Linux/m68k FAQ</ulink
+>. Πρόσφατοι πυρήνες θα απενεργοποιήσουν την 16-μπιτη μνήμη RAM αυτόματα. </para
+><para arch="m68k"
+>Σε συστήματα Atari, τόσο μνήμη ST-RAM όσο και Fast RAM (TT-RAM) χρησιμοποιούνται από το Linux. Αρκετοί χρήστες αναφέρουν προβλήματα με το τρέξιμο του πυρήνα στην ίδια την FastRAM οπότε η bootstrap του Atari θα τοποθετήσει τον πυρήνα στην ST-RAM. Η ελάχιστη απαίτηση για μνήμη ST-RAM είναι 2 ΜΒ. Θα χρειαστείτε επιπλέον 12 ΜΒ ή περισσότερα για TT-RAM. </para
+><para arch="m68k"
+>Σε συστήματα Macintosh, θα πρέπει να ληφθεί προσοχή σε μηχανήματα με μνήμη οθόνης βασισμένη στην RAM (RBV).Το τμήμα της RAM στην φυσική διεύθυνση 0 χρησιμοποιείται σαν μνήμη οθόνης αχρηστεύοντας έτσι την προκαθορισμένη θέση φόρτωσης του πυρήνα. Το εναλλακτικό τμήμα της RAM που θα χρησιμοποιηθεί από τον πυρήνα και τον δίσκο μνήμης RAMdisk πρέπει να είναι τουλάχιστον 4ΜΒ. </para
+><para arch="m68k">
+
+<emphasis condition="FIXME"
+>ΔΙΟΡΘΩΣΕ ΜΕ: αυτό είναι ακόμα αλήθεια?</emphasis>
+
+</para>
+
+ </sect1>
+<!--   End of file hardware/memory-disk-requirements.xml -->
+
+<!-- Start of file hardware/network-cards.xml -->
+
+ <sect1 id="network-cards">
+ <title
+>Υλικό Δικτυακής Σύνδεσης</title>
+
+<para arch="i386"
+>Οι περισσότερες κάρτες δικτύου τύπου PCI καθώς και παλιότερες ISA υποστηρίζονται. Μερικές κάρτες δικτύου δεν υποστηρίζονται από ταυς περισσότερους δίσκους εγκατάστασης του Debian, όπως οι κάρτες και τα πρωτόκολλα AX.25, κάρτες NI16510 EtherBlaster, Schneider &amp; κάρτες Koch G16 και η ενσωματωμένη κάρτα Zenith Z-Note. Κάρτες δικτύου Microchannel (MCA) δεν υποστηρίζονται από το συνηθισμένο σύστημα εγκατάστασης, αλλά δείτε το <ulink url="&url-linux-mca;"
+>Linux on MCA</ulink
+> για κάποιες (παλιότερες) οδηγίες. Δίκτυα FDDI επίσης δεν υποστηρίζονται από τους δίσκους εγκατάστασης, τόσο οι κάρτες όσο και τα πρωτόκολλα. </para
+><para arch="i386"
+>Όσον αφορά το ISDN, το πρωτόκολλο D-channel για τις (παλιότερες) German 1TR6 δεν υποστηρίζονται. Μητρικές Spellcaster BRI ISDN επίσης δεν υποστηρίζονται από τον &d-i;. </para>
+
+<para arch="m68k"
+>Όλoι οι τύποι καρτών δικτύου (NIC) που υποστηρίζονται από τον πυρήνα του Linux θα πρέπει επίσης να υποστηρίζονται από τους δίσκους εκκίνησης. Πιθανόν να χρειαστεί να φορτώσετε τον οδηγό δικτύου σαν module. Δείτε και πάλι το <ulink url="&url-m68k-faq;"
+></ulink
+> για πλήρεις λεπτομέρειες. </para>
+
+<para arch="sparc"
+>Οι ακόλουθοι τύποι κάρτας δικτύου (NIC) υποστηρίζονται κατευθείαν από τον εκκινήσιμο πυρήνα: <itemizedlist>
+ <listitem
+><para
+>Sun LANCE  </para
+></listitem>
+ <listitem
+><para
+>Sun Happy Meal  </para
+></listitem>
+</itemizedlist>
+
+</para
+><para arch="sparc"
+>Οι παρακάτω κάρτες δικτύου υποστηρίζοντται σαν αρθρώματα. Μπορούν να ενεργοποιηθούν από τη στιγμή που οι οδηγοί έχουν εγκατασταθεί κατά την αρχική ρύθμιση. Παρόλα αυτά, χάρη στην "μαγεία" του OpenPROM, μπορείτε να εκκινήσετε άμεσα από τις παρακάτω συσκευές: <itemizedlist>
+ <listitem
+><para
+>Sun BigMAC  </para
+></listitem>
+ <listitem
+><para
+>Sun QuadEthernet  </para
+></listitem>
+ <listitem
+><para
+>MyriCOM Gigabit Ethernet  </para
+></listitem>
+</itemizedlist>
+
+</para
+><para arch="alpha"
+>Όλoι οι τύποι καρτών δικτύου (NIC) που υποστηρίζονται από τον πυρήνα του Linux θα πρέπει επίσης να υποστηρίζονται από τους δίσκους εκκίνησης. Πιθανόν να χρειαστεί να φορτώσετε τον οδηγό δικτύου σαν module. </para
+><para arch="powerpc"
+>Όλoι οι τύποι καρτών δικτύου (NIC) που υποστηρίζονται από τον πυρήνα του Linux θα πρέπει επίσης να υποστηρίζονται από τους δίσκους εκκίνησης. Πιθανόν να χρειαστεί να φορτώσετε τον οδηγό δικτύου σαν module. </para
+><para arch="hppa"
+>Όλoι οι τύποι καρτών δικτύου (NIC) που υποστηρίζονται από τον πυρήνα του Linux θα πρέπει επίσης να υποστηρίζονται από τους δίσκους εκκίνησης. Πιθανόν να χρειαστεί να φορτώσετε τον οδηγό δικτύου σαν module. </para
+><para arch="ia64"
+>Όλoι οι τύποι καρτών δικτύου (NIC) που υποστηρίζονται από τον πυρήνα του Linux θα πρέπει επίσης να υποστηρίζονται από τους δίσκους εκκίνησης. Πιθανόν να χρειαστεί να φορτώσετε τον οδηγό δικτύου σαν module. </para
+><para arch="mips"
+>Όλoι οι τύποι καρτών δικτύου (NIC) που υποστηρίζονται από τον πυρήνα του Linux θα πρέπει επίσης να υποστηρίζονται από τους δίσκους εκκίνησης. Πιθανόν να χρειαστεί να φορτώσετε τον οδηγό δικτύου σαν module. </para
+><para arch="mipsel"
+>Λόγω περιορισμών του πυρήνα μόνο οι κάρτες δικτύου που βρίσκονται πάνω στην μητρική σε συστήματα DECstation υποστηρίζονται.Κάρτες δικτύου TurboChannel δεν δουλεύουν προς το παρόν. </para
+><para arch="s390"
+>Όλoι οι τύποι καρτών δικτύου (NIC) που υποστηρίζονται από τον πυρήνα του Linux θα πρέπει επίσης να υποστηρίζονται από τους δίσκους εκκίνησης. Όλοι οι οδηγόι δικτύου έχουν ενσωματωθεί σαν αρθρώματα οπότε χρειάζεται να φορτώσετε ένα κατά την αρχική ρύθμιση του δικτύου. Η λίστα των υποστηριζόμενων συσκευών δικτύου είναι: <itemizedlist>
+ <listitem
+><para
+>Σύνδεση Channel to Channel (CTC) και ESCON (πραγματική ή εξομοιωμένη) </para
+></listitem>
+ <listitem
+><para
+>OSA-2 Token Ring/Ethernet και OSA-Express Fast Ethernet (όχι-QDIO) </para
+></listitem>
+<listitem
+><para
+>Inter-User Communication Vehicle (IUCV) &mdash; διαθέσιμη μόνο για VM φιλοξενούμενα συστήματα </para
+></listitem>
+<listitem
+><para
+>OSA-Express σε κατάσταση QDIO, HiperSockets και Guest-LAN </para
+></listitem>
+</itemizedlist>
+
+</para>
+
+<para arch="arm"
+>Οι ακόλουθες δικτυκές διεπαφές υποστηρίζονται κατευθείαν από τους δίσκους εκκίνησης σε μηχανήματα NetWinder και CATS: <itemizedlist>
+ <listitem
+><para
+>PCI-τύπου NE2000 </para
+></listitem>
+ <listitem
+><para
+>DECchip Tulip  </para
+></listitem>
+</itemizedlist>
+
+</para
+><para arch="arm"
+>Οι ακόλουθοι τύποι καρτών δικτύου υποστηρίζονται από τους δίσκους εκκίνησης σε RiscPC: <itemizedlist>
+ <listitem
+><para
+>Ether1  </para
+></listitem>
+ <listitem
+><para
+>Ether3  </para
+></listitem>
+ <listitem
+><para
+>EtherH  </para
+></listitem>
+</itemizedlist>
+
+</para
+><para arch="arm"
+>Αν η κάρτα σας αναφέρεται στην παραπάνω λίστα τότε ολόκληρη η εγκατάσταση μπορεί να γίνει από το δίκτυο χωρίς την ανάγκη για CD-ROM ή δισκέττες. </para
+><para arch="arm"
+>Οποιαδήποτε άλλη κάρτα δικτύου (NIC) που υποστηρίζεται από τον πυρήνα του Linux θα πρέπει επίσης να υποστηρίζεται από τους δίσκους εκκίνησης. ϊσως να πρέπει να φορτώσετε τον οδηγό της κάρτας σαν module, κάτι που σημαίνει ότι θα πρέπει να εγκαταστήσετε τον πυρήνα του λειτουργικού συστήματος και τα αρθρώματα χρησιμοποιώντας κάποιο άλλο μέσο. </para>
+
+ </sect1>
+<!--   End of file hardware/network-cards.xml -->
+
+</chapter>
+<!--   End of file hardware/hardware.xml -->

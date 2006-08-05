@@ -1,0 +1,436 @@
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 31138 -->
+
+ <sect1 condition="supports-tftp" id="install-tftp">
+ <title>Preparació dels fitxers per a l'arrencada en xarxa TFTP</title>
+<para>
+
+Si teniu una màquina connectada a una xarxa d'àrea local, podeu
+arrencar-la des d'una altra màquina de la xarxa fent servir TFTP. Si
+voleu arrencar el sistema d'instal·lació des d'una altra màquina, els
+fitxers d'arrencada hauran de col·locar-se a llocs específics d'aquesta,
+la qual ha de configurar-se a fi de permetre l'arrencada de la vostra.
+
+</para><para>
+
+Heu d'instal·lar un servidor TFTP, i en nombroses màquines, cal també un
+servidor BOOTP
+<phrase condition="supports-rarp">, o un servidor RARP</phrase>
+<phrase condition="supports-dhcp">, o un servidor DHCP</phrase>.
+
+</para><para>
+
+<phrase condition="supports-rarp">El protocol de resolució inversa
+d'adreces (RARP) és una manera d'indicar al vostre client les adreces
+IP que ha d'emprar. Una altra manera és fer servir el protocol BOOTP.</phrase>
+
+<phrase condition="supports-bootp">BOOTP és un protocol IP que
+indica a l'ordinador la seua pròpia adreça IP i el lloc de la xarxa
+on obtenir la imatge d'arrencada.</phrase>
+
+<phrase arch="m68k">Hi ha una altra alternativa en sistemes VMEbus:
+l'adreça IP es pot configurar manualment en una ROM d'arrencada.</phrase>
+
+<phrase condition="supports-dhcp">El DHCP (Protocol de configuració
+dinàmica d'ordinadors centrals) és una extensió més flexible, i
+compatible, del BOOTP. Alguns sistemes sols es poden configurar fent
+servir el DHCP.</phrase>
+
+</para><para arch="powerpc">
+
+Per als PowerPC, si teniu una màquina NewWorld Power Macintosh, és bona
+idea emprar el DHCP en lloc del BOOTP. Algunes de les màquines més noves
+no poden arrencar si empreu el BOOTP.
+
+</para><para arch="alpha">
+
+A diferència de l'Open Firmware de màquines Sparc i PowerPC, la consola
+SRM <emphasis>no</emphasis> fa servir el RARP per obtenir les adreces
+IP, i per tant heu d'emprar el BOOTP per arrencar en xarxa l'Alpha<footnote>
+
+<para>
+Els sistemes Alpha també es poden arrencar en xarxa amb el DECNet MOP
+(Protocol d'operacions de manteniment), però això no s'explica aquí.
+Probablement el vostre operador OpenVMS local estarà disposat a
+ajudar-vos en cas que realment tingueu necessitat d'emprar el MOP per
+arrencar Linux al vostre Alpha.
+</para>
+
+</footnote>. També podeu introduir la configuració IP de les interfícies
+de xarxa directament en la consola SRM.
+
+</para><para arch="hppa">
+
+Algunes màquines HPPA més antigues (p.ex. 715/75) usen l'RBOOTD en lloc
+del BOOTP. Hi ha un paquet <classname>rbootd</classname> a l'abast en
+Debian.
+
+</para><para>
+
+El protocol de transferència trivial de fitxers (TFTP) s'empra per posar
+a disposició del client la imatge d'arrencada. En teoria, es pot usar
+qualsevol servidor de qualsevol plataforma que implemente aquests
+protocols. Els exemples d'aquesta secció ofereixen instruccions per al
+SunOS 4.x, el SunOS 5.x (i.e. Solaris), i el GNU/Linux.
+
+<note arch="i386"><para>
+
+El mètode PXE d'arrencada TFTP, o entorn d'execució d'arrencada prèvia,
+requereix un servidor TFTP que permeta l'ús de <userinput>tsize</userinput>.
+En un servidor &debian;, els paquets <classname>atftpd</classname> i
+<classname>tftpd-hpa</classname> són adients; és recomanable el
+<classname>tftpd-hpa</classname>.
+
+</para></note>
+
+</para>
+
+&tftp-rarp.xml;
+&tftp-bootp.xml;
+&tftp-dhcp.xml;
+
+  <sect2 id="tftpd">
+  <title>Habilitació del servidor TFTP</title>
+<para>
+
+Per a posar en marxa el servidor TFTP, assegureu-vos primer que teniu
+activat el <command>tftpd</command>. Per fer-ho, el fitxer
+<filename>/etc/inetd.conf</filename> ha de tenir quelcom semblant a la
+línia següent:
+
+<informalexample><screen>
+tftp dgram udp wait nobody /usr/sbin/tcpd in.tftpd /tftpboot
+</screen></informalexample>
+
+Els paquets Debian solen configurar-ho per defecte correctament.
+
+</para><para>
+
+Examineu el fitxer i recordeu el directori que heu indicat com a argument
+de l'<command>in.tftpd</command>; us caldrà després. En algunes versions
+de l'<command>in.tftpd</command>, l'argument <userinput>-l</userinput>
+fa que s'arxiven tots els fitxers de registre de peticions al sistema;
+això és d'utilitat a l'hora de fer comprovacions d'errors d'arrencada. Si
+heu hagut de canviar el <filename>/etc/inetd.conf</filename>, cal que
+indiqueu al procés actiu <command>inetd</command> que el fitxer ha canviat.
+En màquines Debian s'ha d'executar <userinput>/etc/init.d/inetd
+reload</userinput>; en d'altres, esbrineu la identitat (ID) del procés
+<command>inetd</command> i executeu
+<userinput>kill -HUP <replaceable>pid-d'inetd</replaceable></userinput>.
+
+</para><para arch="mips">
+
+Si aneu a instal·lar Debian en una màquina SGI i el servidor TFTP empra
+GNU/Linux amb Linux 2.4, heu de posar això al servidor:
+
+<informalexample><screen>
+# echo 1 &gt; /proc/sys/net/ipv4/ip_no_pmtu_disc
+</screen></informalexample>
+
+per desactivar la funcionalitat Path MTU discovery, altrament la PROM
+d'Indy no podrà descarregar el nucli. A més, assegureu-vos que els
+paquets TFTP s'envien des d'un port origen no major que el 32767, o la
+descàrrega s'estancarà després del primer paquet. Per evitar aquest
+error de la PROM amb el Linux 2.4.X, feu el següent,
+
+<informalexample><screen>
+# echo "2048 32767" &gt; /proc/sys/net/ipv4/ip_local_port_range
+</screen></informalexample>
+
+a fi d'ajustar el rang de ports origen que empra el servidor TFTP de Linux.
+
+</para>
+  </sect2>
+
+  <sect2 id="tftp-images">
+  <title>Poseu les imatges del TFTP al seu lloc</title>
+<para>
+
+Després, col·loqueu la imatge d'arrencada TFTP que us calga, i que figura
+a <xref linkend="where-files"/>, al directori d'imatges d'arrencada del
+<command>tftpd</command>. Normalment, el directori té el nom
+<filename>/tftpboot</filename>. Haureu de fer un enllaç des d'aquest
+fitxer al fitxer que emprarà el <command>tftpd</command> per arrencar un
+client determinat. Malauradament, el nom del fitxer el determina el client
+TFTP, i no hi existeix cap norma ben establerta.
+
+</para><para arch="powerpc">
+
+En màquines NewWorld Power Macintosh, heu d'establir el carregador
+d'arrencada <command>yaboot</command> com a imatge d'arrencada TFTP.
+Amb això el <command>yaboot</command> enviarà les imatges del nucli i
+el RAMdisk a través del TFTP mateix. Per arrencar en xarxa, feu servir
+<filename>yaboot-netboot.conf</filename>. Només cal reanomenar-lo com
+<filename>yaboot.conf</filename> al directori del TFTP.
+
+</para><para arch="i386">
+
+Per a arrencar amb PXE, sols cal el tarball
+<filename>netboot/netboot.tar.gz</filename>. Simplement extragueu-lo
+al directori d'imatge d'arrencada del <command>tftpd</command>.
+Assegureu-vos que el servidor dhcp està configurat per passar
+<filename>/pxelinux.0</filename> al <command>tftpd</command> com a
+nom del fitxer d'arrencada.
+
+</para><para arch="ia64">
+
+Per a arrencar amb PXE, sols cal el tarball
+<filename>netboot/netboot.tar.gz</filename>. Simplement extragueu-lo al
+directori d'imatge d'arrencada <command>tftpd</command>. Assegureu-vos
+que el servidor dhcp està configurat per passar
+<filename>/debian-installer/ia64/elilo.efi</filename> al
+<command>tftpd</command> com a nom del fitxer d'arrencada.
+
+</para>
+
+   <sect3 arch="mipsel">
+   <title>Imatges de TFTP per a DECstation</title>
+<para>
+
+Per a DECstations, hi ha fitxers tftpimage de cada subarquitectura,
+els quals contenen el nucli i l'instal·lador en un únic fitxer. La
+convenció quant al nom és
+<replaceable>subarquitectura</replaceable>/netboot-boot.img.
+Copieu el fitxer tftpimage que voleu fer servir a
+<userinput>/tftpboot/tftpboot.img</userinput> si esteu emprant els
+ajusts del BOOTP/DHCP dels exemples descrits amunt.
+
+</para><para>
+
+El firmware de les DECstation arrenca mitjançant el TFTP amb l'ordre
+<userinput>boot<replaceable>#</replaceable>/tftp</userinput>, on
+<replaceable>#</replaceable> és el número del dispositiu TurboChannel
+des del qual s'arrenca. En la majoria de DECstations és <quote>3</quote>.
+Si el servidor BOOTP/DHCP no proporciona el nom del fitxer o necessiteu
+passar-hi paràmetres addicionals, podeu afegir-los amb la següent
+sintaxi:
+
+</para><para>
+
+<userinput>boot #/tftp/nom-de-fitxer param1=valor1 param2=valor2 ...</userinput>
+
+</para><para>
+
+Nombroses revisions del firmware DECstation tenen un problema respecte
+de l'arrencada en xarxa: la transferència comença, però al cap d'una
+estona s'atura amb un <computeroutput>a.out err</computeroutput>. Això
+pot ser degut a:
+
+<orderedlist>
+<listitem><para>
+
+El firmware no respon a les peticions ARP durant la transferència TFTP,
+cosa que provoca un missatge d'acabament del temps de l'ARP i l'aturada
+de la transferència. La solució consisteix a afegir l'adreça MAC de la
+targeta Ethernet de la DECstation estàticament a la taula ARP del servidor
+TFTP. Això es fa executant <userinput>arp -s
+<replaceable>adreça-IP</replaceable>
+<replaceable>adreça-MAC</replaceable></userinput> com a superusuari a la
+màquina que fa de servidor TFTP. L'adreça MAC de la DECstation es pot
+obtenir introduint <command>cnfg</command> a l'indicador del firmware de
+la DECstation.
+
+</para></listitem>
+<listitem><para>
+
+El firmware té un límit de mida dels fitxers que poden arrencar-se
+mitjançant el TFTP.
+
+</para></listitem>
+</orderedlist>
+
+Hi ha també revisions del firmware revisions que no poden arrencar-se amb
+el TFTP. Podeu trobar informació sobre les diferents revisions del firmware
+a les pàgines web del NetBSD:
+<ulink url="http://www.netbsd.org/Ports/pmax/board-list.html#proms"></ulink>.
+
+</para>
+   </sect3>
+
+   <sect3 arch="alpha">
+   <title>Arrencada TFTP dels Alpha</title>
+<para>
+
+En els Alpha, heu d'especificar el nom del fitxer (com un camí relatiu al
+directori de la imatge d'arrencada) amb l'argument
+<userinput>-file</userinput> de l'ordre <userinput>boot</userinput> a l'SRM,
+o bé ajustant la variable d'entorn <userinput>BOOT_FILE</userinput>. També
+es pot proporcionar el nom del fitxer a través del BOOTP (en ISC
+<command>dhcpd</command>, feu servir la directriu
+<userinput>filename</userinput>). A diferència de l'Open Firmware, en SRM
+<emphasis>no hi ha nom del fitxer per defecte</emphasis>, per tant
+<emphasis>heu</emphasis> d'especificar un nom de fitxer amb algun d'aquests
+mètodes.
+
+</para>
+   </sect3>
+
+   <sect3 arch="sparc">
+   <title>Arrencada TFTP de l'SPARC</title>
+<para>
+
+Per exemple, les arquitectures SPARC empren els noms de la subarquitectura,
+com ara <quote>SUN4M</quote> o <quote>SUN4C</quote>; en alguns casos,
+l'arquitectura es deixa en blanc, de manera que el fitxer buscat pel client
+és <filename>ip-del-client-en-hex</filename>. Així, si la subarquitectura és
+SUN4C, i la IP és 192.168.1.3, el nom del fitxer és
+<filename>C0A80103.SUN4C</filename>. Per a determinar això fàcilment
+introduïu l'ordre següent en un intèrpret d'ordres (s'assumeix que la IP de la màquina
+és 10.0.0.4).
+
+<informalexample><screen>
+$ printf '%.2x%.2x%.2x%.2x\n' 10 0 0 4
+</screen></informalexample>
+
+Això indica la IP en hexadecimal; per obtenir el nom de fitxer correcte,
+canvieu totes les lletres a majúscules i afegiu-hi si cal el nom de la
+subarquitectura.
+
+</para><para>
+
+També podeu obligar alguns sistemes sparc a cercar un nom específic
+afegint-lo al final de l'ordre d'arrencada de
+l'OpenPROM, p.ex. <userinput>boot net my-sparc.image</userinput>. Aquest
+ha de ser-hi al directori on cerca el servidor TFTP.
+
+</para>
+   </sect3>
+
+   <sect3 arch="m68k">
+   <title>Arrencada TFTP dels BVM/Motorola</title>
+<para>
+
+En els sistemes BVM i Motorola VMEbus copieu els fitxers
+&bvme6000-tftp-files; a <filename>/tftpboot/</filename>.
+
+</para><para>
+
+Després, configureu les ROM d'arrencada o el servidor BOOTP per a carregar
+inicialment el fitxers <filename>tftplilo.bvme</filename> o el
+<filename>tftplilo.mvme</filename> des del servidor TFTP. Dirigiu-vos
+al fitxer <filename>tftplilo.txt</filename> de la subarquitectura per
+obtenir informació addicional específica del sistema.
+
+</para>
+   </sect3>
+
+   <sect3 arch="mips">
+   <title>Arrencada TFTP dels SGI Indys</title>
+<para>
+
+En els SGI Indys el <command>bootpd</command> proporciona el nom del
+fitxer TFTP. Es dóna o com a <userinput>bf=</userinput> en
+<filename>/etc/bootptab</filename> o com a opció
+<userinput>filename=</userinput> en <filename>/etc/dhcpd.conf</filename>.
+
+</para>
+   </sect3>
+
+   <sect3 arch="mips">
+   <title>Arrencada TFTP del Broadcom BCM91250A</title>
+<para>
+
+No cal que configureu el DHCP de manera especial perquè passareu el
+camí complet del fitxer al carregat al CFE.
+
+</para>
+   </sect3>
+
+  </sect2>
+
+<!-- FIXME: commented out since it seems too old to be usable and a current
+            way is not known
+
+  <sect2 id="tftp-low-memory">
+  <title>TFTP Installation for Low-Memory Systems</title>
+<para>
+
+On some systems, the standard installation RAMdisk, combined with the
+memory requirements of the TFTP boot image, cannot fit in memory.  In
+this case, you can still install using TFTP, you'll just have to go
+through the additional step of NFS mounting your root directory over
+the network as well.  This type of setup is also appropriate for
+diskless or dataless clients.
+
+</para><para>
+
+First, follow all the steps above in <xref linkend="install-tftp"/>.
+
+<orderedlist>
+<listitem><para>
+
+Copy the Linux kernel image on your TFTP server using the
+<userinput>a.out</userinput> image for the architecture you are
+booting.
+
+</para></listitem>
+<listitem><para>
+
+Untar the root archive on your NFS server (can be the same system as
+your TFTP server):
+
+<informalexample><screen>
+# cd /tftpboot
+# tar xvzf root.tar.gz
+</screen></informalexample>
+
+Be sure to use the GNU <command>tar</command> (other tar programs, like the
+SunOS one, badly handle devices as plain files).
+
+</para></listitem>
+<listitem><para>
+
+Export your <filename>/tftpboot/debian-sparc-root</filename> directory
+with root access to your client.  E.g., add the following line to
+<filename>/etc/exports</filename> (GNU/Linux syntax, should be similar
+for SunOS):
+
+<informalexample><screen>
+/tftpboot/debian-sparc-root <replaceable>client</replaceable>(rw,no_root_squash)
+</screen></informalexample>
+
+NOTE: <replaceable>client</replaceable> is the host name or IP address recognized
+by the server for the system you are booting.
+
+</para></listitem>
+<listitem><para>
+
+Create a symbolic link from your client IP address in dotted notation
+to <filename>debian-sparc-root</filename> in the
+<filename>/tftpboot</filename> directory.  For example, if the client
+IP address is 192.168.1.3, do
+
+<informalexample><screen>
+# ln -s debian-sparc-root 192.168.1.3
+</screen></informalexample>
+
+</para></listitem>
+</orderedlist>
+
+</para>
+
+  </sect2>
+
+  <sect2 condition="supports-nfsroot">
+  <title>Installing with TFTP and NFS Root</title>
+<para>
+
+Installing with TFTP and NFS Root is similar to
+<xref linkend="tftp-low-memory"/> because you don't want to
+load the RAMdisk anymore but boot from the newly created NFS-root file
+system.  You then need to replace the symlink to the tftpboot image by
+a symlink to the kernel image (for example,
+<filename>linux-a.out</filename>).
+
+</para><para>
+
+RARP/TFTP requires all daemons to be running on the same server (the
+workstation is sending a TFTP request back to the server that replied
+to its previous RARP request).
+
+</para>
+
+
+  </sect2>
+END FIXME -->
+ </sect1>

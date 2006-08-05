@@ -1,0 +1,352 @@
+<!-- Start of file welcome/welcome.xml -->
+
+<chapter id="welcome"
+><title
+>欢迎使用 Debian</title>
+<para
+>本章将简要介绍 Debian 计划和 &debian;。如果您已经对 Debian 计划的历史和 &debian; 发行版有一定的了解，请略过本章。 </para>
+
+
+<!-- Start of file welcome/what-is-debian.xml -->
+
+ <sect1 id="what-is-debian">
+ <title
+>什么是 Debian？</title>
+<para
+>Debian 是一个致力于自由软件开发并宣扬自由软件基金会之理念的自愿者组织。Debian 计划创建于 1993 年。当时，Ian Murdock 发出一份公开信，邀请软件开发者们参与构建一个基于较新的 Linux 内核的完整而紧密的软件发行版。经过多年的成长，那群由 <ulink url="&url-fsf-intro;"
+>自由软件基金会</ulink
+> 资助并受 <ulink url="&url-gnu-intro;"
+>GNU</ulink
+> 哲理影响的爱好者已经演变为一个拥有大约 &num-of-debian-developers; 位 <firstterm
+>Debian 开发人员的组织</firstterm
+>。 </para
+><para
+>Debian 开发人员所做的工作包括有： <ulink url="&url-debian-home;"
+>Web</ulink
+> 和 <ulink url="&url-debian-ftp;"
+>FTP</ulink
+> 站点管理、图形设计、软件许可协议的法律分析、编写文档，当然，还有维护软件包。 </para
+><para
+>为了传递我们的理念并吸引那些与 Debian 有着相同信仰的开发人员，Debian 计划发表了众多文档，以阐明我们的价值观和成为 Debian 开发人员的意义。 <itemizedlist>
+<listitem
+><para
+><ulink url="&url-social-contract;"
+>Debian 社群契约</ulink
+> 是一份 Debian 对自由软件社群的承诺声明。任何同意遵守此社群契约的人都可以成为 <ulink url="&url-new-maintainer;"
+>维护人员</ulink
+>。任何维护人员都能将新软件引入 Debian &mdash;条件是此软件必须满足我们对“自由”的标准要求，并且软件包必须符合我们的质量水准。 </para
+></listitem>
+<listitem
+><para
+><ulink url="&url-dfsg;"
+>Debian 自由软件准则(DFSG)</ulink
+> 是一份清晰简洁的有关 Debian 的自由软件标准的声明。在自由软件运动中，DFSG 是一份非常有影响力的文档，并且以其为基础衍生出了 <ulink url="&url-osd;"
+>开放源代码定义</ulink
+>。 </para
+></listitem>
+<listitem
+><para
+><ulink url="&url-debian-policy;"
+>Debian 政策文档</ulink
+>是一份有关 Debian 计划质量标准的规格说明书。 </para
+></listitem>
+</itemizedlist>
+</para
+><para
+>Debian 开发人员还参与了许多其它计划。有些是专注于 Debian 的，还有些则是面向 Linux 社区。例如： <itemizedlist>
+<listitem
+><para
+><ulink url="&url-lsb-org;"
+>Linux Standard Base</ulink
+> (LSB) 是一个针对 GNU/Linux 系统标准化的项目，它将使第三方软件和硬件开发者能更容易的为“普通”的 Linux 设计程序和设备驱动，而不仅仅是为某个特定的 GNU/Linux 发行版进行开发。 </para
+></listitem>
+<listitem
+><para
+><ulink url="&url-fhs-home;"
+>Filesystem Hierarchy Standard</ulink
+> (FHS) 则是朝 Linux 文件系统布局标准化方向的一种努力。FHS 将使软件开发者能集中精力设计程序，而不需要担心软件包在不同的 GNU/Linux 发行版的安装。 </para
+></listitem>
+<listitem
+><para
+><ulink url="&url-debian-jr;"
+>Debian Jr.</ulink
+> 是一个内部项目，目标是确保 Debian 能向年幼的用户提供一些有用的东西。 </para
+></listitem>
+</itemizedlist>
+
+</para
+><para
+>关于 Debian 的更多信息，请阅读 <ulink url="&url-debian-faq;"
+>Debian FAQ</ulink
+>。 </para>
+
+ </sect1>
+
+<!--   End of file welcome/what-is-debian.xml -->
+
+<!-- Start of file welcome/what-is-linux.xml -->
+
+ <sect1 id="what-is-linux">
+ <title
+>什么是 GNU/Linux？</title>
+<para
+>Linux 是一种计算机操作系统： 一系列能让您与计算机进行交互操作并运行其它程序的程序。 </para
+><para
+>操作系统由多种基础程序构成。它们使计算机可以与用户进行交流并接受指令，读取数据或将其写入硬盘、磁带或打印机，控制内存的使用，以及运行其它软件。操作系统最重要的组成部分是内核。在 GNU/Linux 系统中，Linux 就是内核组件。而该系统的其余部分主要是由 GNU 工程编写和提供的程序组成。因为单独的 Linux 内核并不能成为一个可以正常工作的操作系统，所以我们更倾向使用 <quote
+>GNU/Linux</quote
+> 一词来表达人们通常所说的 <quote
+>Linux</quote
+>。 </para
+><para
+>Linux 是以 Unix 操作系统为原型创造的。自从诞生之日起，它就被设计成一种多任务、多用户的系统。这些特点使 Linux 完全不同于其它著名的操作系统。事实上，Linux 比您所能想象到更加特别。与其它操作系统绝然相反的是，没人真正拥有 Linux，其大部分开发工作都是由无偿的志愿者完成的。 </para
+><para
+>后来演变为 GNU/Linux 系统的开发工作开始于 1984 年。当时，<ulink url="http://www.gnu.org/"
+>自由软件基金会</ulink
+> 开始研发被称为 GNU 的自由的类 Unix 操作系统。 </para
+><para
+>GNU 工程开发了大量用于 Unix&trade; 的自由软件工具和类 Unix 操作系统，例如 Linux。这些工具使用户能执行从日常俗事(例如在系统中复制和删除文件) 到神秘操作(例如书写和编译程序或对多种文档格式进行熟练的编辑工作) 的各种任务。 </para
+><para
+>虽然有许多组织和个人都对 Linux 的发展作出了帮助，但是自由软件基金会依然是最大的单个贡献者。他不仅仅创造了绝大部分在 Linux 中使用的工具，还为 Linux 的存在提供了理论和社会基础。 </para
+><para
+><ulink url="&url-kernel-org;"
+>Linux 内核</ulink
+> 的首次面世是在 1991 年。当时，名为 Linus Torvalds 的芬兰计算机科学系学生在 Usenet 新闻组 <userinput
+>comp.os.minix</userinput
+> 上发布了一种 Minix 替代内核的早期版本。请看 Linux International 的 <ulink url="&url-linux-history;"
+>Linux 历史</ulink
+>。 </para
+><para
+>在几个可信赖代理人的帮助下，Linus Torvalds 一直协调着数百位开发人员的工作。有关 <userinput
+>linux-kernel</userinput
+> 邮件列表上讨论内容的每周纪要在 <ulink url="&url-kernel-traffic;"
+>Kernel Traffic</ulink
+>上可以看到。更多有关 <userinput
+>linux-kernel</userinput
+> 邮件列表的信息请参考 <ulink url="&url-linux-kernel-list-faq;"
+>linux-kernel 邮件列表问答</ulink
+>。 </para
+><para
+>Linux 用户在挑选软件方面有着极大的自由。例如，Linux 用户可以选择几十种不同的命令行外壳和多种图形桌面。这通常让其它操作系统的用户手足无措，他们甚至从来没想过命令行和桌面其实是可以更换的。 </para
+><para
+>Linux 很少会崩溃、适合在同一时间运行多个程序，而且比大多数操作系统更为安全。有了这些优势，Linux 成为在服务器市场上增长最快的操作系统。近来，它还开始在家庭和商业用户中变得越来越流行。 </para>
+
+ </sect1>
+
+<!--   End of file welcome/what-is-linux.xml -->
+
+<!-- Start of file welcome/what-is-debian-linux.xml -->
+
+ <sect1 id="what-is-debian-linux">
+ <title
+>什么是 &debian;?</title>
+<para
+>将 Debian 哲学与方法论，GNU 工具集、Linux 内核，以及其他重要的自由软件 结合在一起所构成的独特的软件发行版称为 &debian;。该发行版由大量的软件 <emphasis
+>包</emphasis
+> 组成。发行版中的每个软件包都包含了执行文件、脚本、文档和配置信息，并拥有一位<emphasis
+>维护者</emphasis
+>，其职责是保持软件包更新、跟踪 bug 报告，并与软件源作者保持联络。我们巨大的用户群，结合 bug 跟踪系统可以确保问题被及时发现和修复。 </para
+><para
+>Debian 对细节的注重使我们可以生产出高质、稳定和灵活的发行版。安装程序可以方便地使之应用到各种场合，从精简的防火墙到 桌面科学工作站，甚至高端网络服务器都可以轻松胜任。 </para
+><para
+>Debian 在高级用户中非常流行的原因在于它具有优秀的技术，而且它对 Linux 的深入贡献满足了社区的需求与期望。Debian 为 Linux 引入的许多特性现在已经成为了非常通用的标准。 </para
+><para
+>例如，Debian 是第一种使用包管理系统的 Linux 发行版，它让安装和删除软件变得非常容易。而且它还是第一个可以不用重新安装就能升级的 Linux 发行版。 </para
+><para
+>Debian 一直充当着 Linux 开发的带头人。它的开发过程是开源开发模式如何工作的范例 &mdash; 即使是用于创建和维护一个完整操作系统这样复杂的任务。 </para
+><para
+>Debian 与其他 Linux 发行版最大的不同之处在于包管理系统的特性。这些工具给予 Debian 系统管理员对安装到系统上的软件包的完全控制，包括安装单个软件包和自动升级整个操作系统。个别软件包也可以被保护不被升级。您甚至可以告诉包管理系统哪些软件是您自己编译的以及它们所需要的依赖关系。 </para
+><para
+>为了提防 <quote
+>特洛伊木马</quote
+> 和其他恶意软件，更好地保护您的系统，Debian 服务器会校验 Debian 注册维护人员所上传的软件包。Debian 的打包人员也会特别注意以安全的方式配置软件包。当发布出去的软件包有安全问题时，通常会很快被修复。依靠 Debian 的简易更新选项，安全更新可以通过互联网自动下载和安装。 </para
+><para
+>为您的 &debian; 系统寻求技术支持和联络 Debian 开发人员的主要的，也是最好的方法是通过 Debian 计划的邮件列表(书写本文时已有 &num-of-debian-maillists; 个邮件列表)进行沟通。订阅这些列表的最简单方法是访问 <ulink url="&url-debian-lists-subscribe;"
+> Debian 邮件列表订阅页</ulink
+> 并填写相应表单。 </para>
+
+ </sect1>
+<!--   End of file welcome/what-is-debian-linux.xml -->
+
+<!-- Start of file welcome/what-is-debian-hurd.xml -->
+
+<!-- conditionalised because the hurd port is not yet an official debian
+release -->
+ <sect1 id="what-is-debian-hurd" condition="unofficial-build">
+ <title
+>什么是 Debian GNU/Hurd?</title>
+
+<para
+>Debian GNU/Hurd 是将 Debian GNU 系统的 Linux 宏内核替换为 GNU Hurd &mdash; 运行在 GNU Mach 微内核上的一组服务。Hurd 还没有完成，不适合日常应用，但开发仍在继续。Hurd 当前仅为 i386 体系开发，当系统稳定之后也会移植到其他的体系。 </para
+><para
+>要了解更多信息，请参阅 <ulink url="http://www.debian.org/ports/hurd/"
+> Debian GNU/Hurd 移植页面</ulink
+> 以及 <email
+>debian-hurd@lists.debian.org</email
+> 邮件列表。 </para>
+
+ </sect1>
+<!--   End of file welcome/what-is-debian-hurd.xml -->
+
+<!-- Start of file welcome/getting-newest-inst.xml -->
+
+ <sect1 id="getting-newest-inst">
+ <title
+>获得 Debian</title>
+
+<para
+>关于如何从因特网上下载 &debian; 或者购买官方 Debian 光盘的信息，请参阅 <ulink url="&url-debian-distrib;"
+>发行网页</ulink
+>。<ulink url="&url-debian-mirrors;"
+>Debian 镜像列表</ulink
+> 包含完整的 Debian 官方镜像，您可以很容易找到最近的一个。 </para
+><para
+>Debian 可以很容易地在安装之后升级。如果需要，安装步骤将帮助您建立系统，使您可以在安装之后立即进行升级。 </para>
+
+ </sect1>
+<!--   End of file welcome/getting-newest-inst.xml -->
+
+<!-- Start of file welcome/getting-newest-doc.xml -->
+
+ <sect1 id="getting-newest-doc">
+ <title
+>获得本文档最新版本</title>
+
+<para
+>本文档会不断地修订。请查阅 <ulink url="&url-release-area;"
+> Debian &release; 页面</ulink
+> 以了解最近的关于 &release; 版 &debian; 系统的的信息。更新的安装手册也可以从 <ulink url="&url-install-manual;"
+>官方安装手册页</ulink
+>得到。 </para>
+
+ </sect1>
+<!--   End of file welcome/getting-newest-doc.xml -->
+
+<!-- Start of file welcome/doc-organization.xml -->
+
+ <sect1 id="doc-organization">
+ <title
+>文档的组织</title>
+
+<para
+>本文意在成为 Debian 的新手的使用手册。尽管它对用户的专业知识水平已 经做了尽量少的假设，但我们还是设想您对计算机硬件如何工作有一个基本 的了解。 </para
+><para
+>专业用户可以在本手册中找到一些有趣的参考信息，包括最小安装尺寸，Debian 安装程序支持的硬件细节，等等。我们鼓励专业用户有选择性的浏览本文档。 </para
+><para
+>基本上，本手册是以单线方式组织，文章内容将沿着安装进程由始至终进行。以下是安装 &debian; 的步骤，以及每步相关的章节： <orderedlist>
+<listitem
+><para
+>确定您的硬件是否满足安装系统的要求，位于 <xref linkend="hardware-req"/>。 </para
+></listitem>
+<listitem
+><para
+>备份系统，在安装 Debian 之前进行必要的规划和硬件配置，位于 <xref linkend="preparing"/>。如果需要多重引导系统，您可能需要为 Debian 创建分区空间。 </para
+></listitem>
+<listitem
+><para
+>在 <xref linkend="install-methods"/>，您可以获得所选安装方式所需要的安装文件。 </para
+></listitem>
+<listitem
+><para
+><xref linkend="boot-installer"/> 讲述的是如何启动安装系统。本章还将讨论如何解决这步操作中会遇到的问题。 </para
+></listitem>
+<listitem
+><para
+>执行真正的安装是在 <xref linkend="d-i-intro"/>。其中涉及选择语言，设置周边驱动模块，设置网络连接以从 Debian 服务器上获得后续安装文件(如果您不是采用光盘方式安装)，给硬盘分区和安装最小工作系统。(有关如何为 Debian 系统建立分区的背景知识位于 <xref linkend="partitioning"/>。) </para
+></listitem>
+<listitem
+><para
+>从您新安装的基本系统启动，然后执行一些额外的设置任务，<xref linkend="boot-new"/>。 </para
+></listitem>
+<listitem
+><para
+>安装额外的软件位于 <xref linkend="install-packages"/>。 </para
+></listitem>
+</orderedlist>
+
+</para
+><para
+>一旦您安装完系统，可以阅读 <xref linkend="post-install"/>。该章将解释在哪里寻找更多有关 Unix 和 Debian 的信息，以及如何替换您的内核。 </para
+><para
+>最后，是关于本文档的信息以及如何贡献您的想法，<xref linkend="administrivia"/>。 </para>
+
+ </sect1>
+
+ <sect1 condition="FIXME">
+ <title
+>欢迎给文档提供帮助</title>
+
+<para
+>对于任何帮助、建议，特别是补丁，我们都非常感谢。本文档的工作版本在 <ulink url="&url-d-i-alioth-manual;"
+></ulink
+>。在那里，您可以看到本文档的所有不同语言与硬件体系版本的列表。 </para
+><para
+>当然，本文的源码也是公开的。请查阅 <xref linkend="administrivia"/> 以了解如何贡献您的想法。我们欢迎建议，批评，补丁和错误报告(请针对 &d-i-manual; 软件包进行提交，但是请先检查该问题是否已经被报告过)。 </para>
+ </sect1>
+<!--   End of file welcome/doc-organization.xml -->
+
+<!-- Start of file welcome/about-copyright.xml -->
+
+ <sect1>
+<title
+>关于版权与软件协议 </title>
+
+<para
+>我们相信您曾经阅读过许多商业软件的许可证 &mdash; 它们通常要求您只能在一台计算机上使用一份软件拷贝。本系统与它们完全不同。我们鼓励您将拷贝用到您学校或商业机构的每台计算机上。将安装介质借给朋友，并帮助他们安装到他们的计算机上！您甚至可以制造上千份拷贝，然后 <emphasis
+>出售</emphasis
+> 它们 &mdash; 虽然有一些限制。您安装和使用系统的自由权利因为 Debian 是基于 <emphasis
+>自由软件</emphasis
+>。 </para
+><para
+>称软件为 <emphasis
+>自由</emphasis
+> 并不意味着该软件没有版权，也不是指包含该软件的 CD 必须免费分派。自由软件，某种程度上意味着您不须为分发和使用这些程序付费。自由软件还是指任何人可以扩展、改写、修改该软件，并且他们工作的成果也这样发布。 <note
+><para
+>注意，Debian 计划因为考虑用户实用性，也有不符合我们自由规则的软件包存在。这些软件包不属于官方发行版，只存在于 <userinput
+>contrib</userinput
+> 或 <userinput
+>non-free</userinput
+> Debian 镜像区域或者第三方的 CD-ROM 中，请参阅 <ulink url="&url-debian-faq;"
+>Debian FAQ</ulink
+> 的 <quote
+>The Debian FTP archives</quote
+> 章节以了解档案布局和内容的更多信息。 </para
+></note>
+
+</para
+><para
+>系统中很多软件所使用的许可证都是 <emphasis
+>GNU</emphasis
+> <emphasis
+>General Public License (通用公共许可证)</emphasis
+>，通常简称为 <quote
+>the GPL</quote
+>。GPL 要求您将程序的<emphasis
+>源码</emphasis
+>随您发布的二进制拷贝一起提供；许可证的这项规定确保任何用户都可以修改软件。正是由于此规定，所有这些程序的源码<footnote
+> <para
+>对于如何根据 Debian 源码包寻找、解包和创建二进制软件包，请查阅 <ulink url="&url-debian-faq;"
+>Debian FAQ</ulink
+> 的<quote
+>Basics of the Debian Package Management System</quote
+>章节。</para
+> </footnote
+>都可以在 Debian 系统中得到。 </para
+><para
+>Debian 中的程序还有许多其他形式的版权声明和软件许可证。您可以在您的系统中找到每个软件包相关的版权和许可证，它们位于 <filename
+>/usr/share/doc/<replaceable
+>软件包名</replaceable
+>/copyright </filename
+> ，这些文件在您将软件包安装到系统后就存在了。 </para
+><para
+>关于 Debian 如何判断软件是否足够自由到可以包括在主发行版中的信息，请参阅 <ulink url="&url-dfsg;"
+>Debian 自由软件准则</ulink
+>。 </para
+><para
+>在此，最重要的法律声明是此软件 <emphasis
+>无担保</emphasis
+>。程序员创造此软件为的是使社群受益，而不能保证软件适用于任何特定用途。但是，因为软件是自由的，您可以修改此软件以使其能适用于您的需要 &mdash; 并享用其他人采用这种途径扩展后的修改成果。 </para>
+ </sect1>
+<!--   End of file welcome/about-copyright.xml -->
+
+</chapter>
+<!--   End of file welcome/welcome.xml -->

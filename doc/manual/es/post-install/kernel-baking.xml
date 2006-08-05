@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 31905 -->
+<!-- Revisado por Steve Langasek -->
+<!-- Revisado Rudy Godoy, 23 feb. 2005 -->
+
+ <sect1 id="kernel-baking"><title>Compilar un nuevo núcleo</title>
+<para>
+
+¿Por qué querría alguien compilar un nuevo núcleo? La mayoría de las
+veces no será necesario puesto que el núcleo estándar entregado
+con Debian gestiona la mayoría de configuraciones. Además, Debian
+ofrece habitualmente varios núcleos alternativos. Así, debería comprobar
+si hay un paquete de imagen de núcleo alternativa que se ajuste mejor
+a su hardware. En cualquier caso
+es útil compilar un nuevo núcleo para:
+
+<itemizedlist>
+<listitem><para>
+
+tratar necesidades especiales de hardware, o conflictos de los mismos con
+núcleos predeterminados.
+
+</para></listitem>
+<listitem><para>
+
+utilizar opciones del núcleo que no están soportadas en los núcleos preparados,
+como puede ser el caso del soporte de memoria elevada (más de 4GB).
+
+</para></listitem>
+
+<listitem><para>
+
+optimizar el núcleo eliminando controladores no usados para acelerar
+el tiempo de arranque.
+
+</para></listitem>
+<listitem><para>
+
+crear un núcleo monolítico en lugar de uno modular.
+
+</para></listitem>
+<listitem><para>
+
+ejecutar un núcleo actualizado o de desarrollo.
+
+</para></listitem>
+<listitem><para>
+
+aprender más de los núcleos de Linux.
+
+</para></listitem>
+</itemizedlist>
+
+</para>
+
+  <sect2><title>Gestión de la imagen del núcleo</title>
+<para>
+
+No tenga temor de intentar compilar el núcleo. Es divertido y fructífero.
+
+</para><para>
+
+Para compilar un núcleo al <quote>estilo Debian</quote>,
+necesita algunos paquetes:
+<classname>fakeroot</classname>,
+<classname>kernel-package</classname>,
+<phrase condition="classic-kpkg"><classname>kernel-source-&kernelversion;</classname>
+(la versión más reciente en el momento de editar este documento),</phrase>
+<phrase condition="common-kpkg"><classname>linux-source-2.6</classname></phrase>
+y algunos otros que probablemente ya estén instalados (vea
+<filename>/usr/share/doc/kernel-package/README.gz</filename> si desea una
+lista completa.
+
+</para><para>
+
+Este método creara un «.deb» para su núcleo fuente y, si tiene módulos
+no estándares, construya también un «.deb» con dependencia sincronizada de
+los mismos. Es la mejor forma de gestionar imágenes del núcleo;
+<filename>/boot</filename> albergará el núcleo, el fichero «System.map» y
+el fichero de registro del fichero «config» activo para la construcción.
+
+</para><para>
+
+Observe que no <emphasis>tiene</emphasis> que compilar su núcleo
+<quote>al estilo Debian</quote>; pero creemos que usar el sistema de paquetes para
+gestionar su núcleo es realmente más seguro y sencillo. De hecho, puede
+obtener las fuentes de su núcleo directamente de Linus en lugar de
+<phrase condition="classic-kpkg"><classname>kernel-source-&kernelversion;</classname>,</phrase>
+<phrase condition="common-kpkg"><classname>linux-source-2.6</classname>,</phrase>
+y aún así usar el método de compilación <classname>kernel-package</classname>.
+
+</para><para>
+
+Note que puede encontrar documentación completa sobre el uso de
+<classname>kernel-package</classname> en
+<filename>/usr/doc/kernel-package</filename>. Esta sección sólo contiene un
+breve tutorial.
+
+</para><para>
+
+A partir de ahora, asumiremos que tiene acceso completo al sistema
+y que va a extraer las fuentes del núcleo en algún lugar de su
+directorio personal<footnote>
+
+<para>
+
+Hay otras ubicaciones donde puede extraer las fuentes del núcleo y
+construir su núcleo a medida, pero ésta es la forma más sencilla ya
+que no requiere de permisos adicionales.
+
+</para>
+
+</footnote>. También daremos por supuesto que la versión de su
+núcleo es &kernelversion;. Ubíquese en el directorio
+donde desee desempaquetar las fuentes del
+núcleo, extraiga las fuentes del
+mismo usando
+<phrase condition="classic-kpkg"><userinput>tar xjf
+/usr/src/kernel-source-&kernelversion;.tar.bz2</userinput></phrase>
+<phrase condition="common-kpkg"><userinput>tar xjf
+/usr/src/linux-source-&kernelversion;.tar.bz2</userinput></phrase>
+, y cámbiese al directorio
+<phrase condition="classic-kpkg"><filename>kernel-source-&kernelversion;</filename></phrase>
+<phrase condition="common-kpkg"><filename>linux-source-&kernelversion;</filename></phrase>
+que se habrá creado.
+
+</para><para>
+
+Ahora puede configurar su núcleo. Ejecute
+<userinput>make xconfig</userinput> si tiene X11 instalado,
+configurado y ejecutándose, <userinput>make menuconfig</userinput> en
+otro caso (necesitará instalar <classname>libncurses5-dev</classname>). Tómese
+su tiempo para leer la ayuda en línea y escoja cuidadosamente. Cuando
+tenga duda, a menudo es mejor incluir el controlador de dispositivo
+(el software que maneja el hardware periférico, como tarjetas Ethernet,
+controladoras SCSI, etc.) del que no está seguro. Tenga cuidado: Otras
+opciones no relacionadas con un hardware específico deberían dejarse en
+su valor predeterminado si no las comprende. No olvide seleccionar
+<quote>Kernel module loader</quote> (para la autocarga de módulos) en
+<quote>Loadable module support</quote> (éste no es elegido por omisión).
+Su instalación Debian experimentará problemas si no lo incluye.
+
+</para><para>
+
+Limpie el árbol de fuentes y reinicie los parámetros de
+<classname>kernel-package</classname>. Para hacerlo, ejecute
+<userinput>make-kpkg clean</userinput>.
+
+</para><para>
+
+Ahora, compile el núcleo: <userinput>fakeroot /usr/sbin/make-kpkg
+--revision=custom.1.0 kernel_image</userinput>. Por supuesto, puede
+cambiar el número de la versión <quote>1.0</quote>
+por cualquier otro valor; éste sólo es el número
+de versión que usará para seguir la pista a los núcleos que haya
+construido. Igualmente puede sustituir <quote>custom</quote> por
+cualquier otra palabra (por ejemplo, un nombre de máquina).
+La compilación del núcleo puede tomar un buen
+tiempo, dependiendo de la potencia de su máquina.
+
+</para><para condition="supports-pcmcia">
+
+Si necesita soporte PCMCIA, también necesitará instalar el paquete
+<classname>pcmcia-source</classname>. Desempaquete el fichero tar comprimido
+con gzip, como superusuario en el directorio <filename>/usr/src</filename>
+(es importante que los módulos se encuentren donde se espera que estén, a
+saber, <filename>/usr/src/modules</filename>). Luego, como superusuario,
+ejecute <userinput>make-kpkg modules_image</userinput>.
+
+</para><para>
+
+Una vez finalizada la compilación, puede instalar su núcleo
+personalizado como cualquier paquete. Como superusuario, ejecute
+<userinput>dpkg -i ../kernel-image-&kernelversion;-<replaceable>subarquitectura</replaceable>_custom.1.0_&architecture;.deb</userinput>.
+La parte <replaceable>subarquitectura</replaceable> es una subarquitectura
+opcional,
+<phrase arch="i386"> como <quote>i586</quote>, </phrase> dependiendo de las opciones
+que haya establecido en el núcleo.
+<userinput>dpkg -i kernel-image...</userinput>
+instalará el núcleo, junto con otros ficheros de soporte. Por ejemplo,
+<filename>System.map</filename> será adecuadamente instalado (de gran ayuda
+para depuración de problemas con el núcleo), y también se instalará
+<filename>/boot/config-&kernelversion;</filename>, conteniendo su actual
+configuración. Su nuevo paquete
+<classname>kernel-image-&kernelversion;</classname> es también lo
+suficientemente listo como para usar automáticamente usar el gestor de
+de arranque de su plataforma y actualizar así la información de la imagen
+del núcleo, la cual le permita arrancar sin necesidad de ejecutarlo nuevamente.
+Deberá instalar también el paquete de módulos si lo ha hecho, como por ejemplo,
+en el caso de que tenga PCMCIA.
+
+</para><para>
+
+Es momento de reiniciar el sistema: lea cuidadosamente cualquier advertencia
+que pueda haberse producido, luego ejecute <userinput>shutdown -r now</userinput>.
+
+</para><para>
+
+<phrase condition="etch">Si desea más información sobre los núcleos de Debian
+y la compilación del núcleo consulte el <ulink url="&url-kernel-handbook;">Debian Linux Kernel
+Handbook</ulink>.</phrase>
+Consulte la excelente documentación disponible en
+<filename>/usr/share/doc/kernel-package</filename>
+si desea más información sobre <classname>kernel-package</classname>.
+
+</para>
+
+</sect2>
+</sect1>

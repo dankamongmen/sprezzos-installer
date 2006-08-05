@@ -1,0 +1,4 @@
+input-modules-${kernel:Version}
+
+# Support for firewire CD-ROMs (and disks, I think)
+firewire-core-modules-${kernel:Version}

@@ -1,0 +1,1651 @@
+debian-installer (20050317sarge1) stable; urgency=low
+
+  * Frans Pop
+    - Add build dependencies needed for PDF and TXT builds of the manual.
+    - Make main build script for the manual fail on errors.
+    - Introduce cascading stylesheet for the HTML version of the manual.
+    - Final update of the manual and translations for Sarge version.
+  * Joey Hess
+    - Copyright file updates for 2005.
+    - Switch amd64 back to 2.6.8 kernel; 2.6.10 is not preferred. Closes: #307306
+  * Kurt Roeckx
+    - Rename libdevmapper1.00-udeb to libdevmapper1.01-udeb for monolithic
+      image. It's only build for amd64.  (Closes: #306976)
+    - Change amd64 kernel from 2.6.8-10 to 2.6.8-11.
+  * Colin Watson
+    - Set default SUITE to sarge.
+  * Frans Pop
+    - Update kernel versions for Sarge security updates with ABI change.
+    - Copyright file update for 2006.
+    - Release targeted at Sarge 3.1r3 point release.
+
+ -- Frans Pop <fjp@debian.org>  Fri,  4 Aug 2006 19:19:56 +0200
+
+debian-installer (20050317) unstable; urgency=low
+
+  * Frans Pop
+    - Add German and Russian for official builds of the manual
+    - Add PDF and TXT formats for official builds of the manual
+  * Martin Michlmayr
+    - Mention rootdev in the ARM manual, thanks Kyle McMartin.
+    - Use the correct TFTP filename for ARM Netwinder.
+    - Remove bogus information about noinitrd option from ARM manual.
+    - Mention option needed for serial console installations on
+      ARM Netwinder, thanks thanks Kyle McMartin.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 17 Mar 2005 10:54:07 -0500
+
+debian-installer (20050305) unstable; urgency=high
+
+  * Thiemo Seufer
+    - Do an e2fsck for the extra floppy images.
+    - Handle sparse files in cramfs images more efficiently.
+    - Use cramfs images for mips/r4k-ip22 and mips/r5k-ip22.
+    - Add cramfsprogs build-dep for mips.
+  * Colin Watson
+    - Add acpi-modules to the amd64 cdrom, hd-media, monolithic, and netboot
+      initrds, so that rootskel can turn the fan on.
+    - Use dependency resolution for ide-modules, nic-modules,
+      pcmcia-storage-modules, scsi-common-modules, scsi-modules, and
+      usb-storage-modules on powerpc, and remove several modules from
+      powerpc-extra-modules that only belong on certain images. This removes
+      cdrom-core-modules and fs-common-modules from netboot images, and adds
+      parport-modules to apus/cdrom (I think it was missing by mistake).
+    - Add support for kernel-specific pkg-lists entries: use lines like
+      "package [2.2 2.4]" or "package * [2.6]". Should eventually form a
+      simpler replacement for the kernel_specific directory.
+    - Include initrd.list on amd64/i386 images.
+    - Add hd-media image for powerpc, including a boot.img.gz designed for
+      use on USB sticks.
+    - Document USB booting on powerpc. This involved splitting out the
+      documentation for USB booting on i386 a bit.
+    - Since power3 and power4 no longer build images with the 2.4 kernel,
+      remove their KERNELVERSION_2.4 variables and kernel-build-2.4*
+      build-dependencies.
+    - Switch libparted1.6-0 build-dependency to libparted1.6-12.
+    - Fix support for multiple words in KERNELVERSION.
+  * Christian Perrier
+    - Add the list of needed characters for Belarussian
+    - Add the list of needed characters for Esperanto
+  * Martin Michlmayr
+    - Switch Cobalt to use the new-style initrd parameter rd_start and
+      rd_size.
+  * Stephen R. Marenka
+    - Add m68k/amiga startup scripts with thanks to and the permission of
+      Christian T. Steigies <cts@debian.org>.
+  * Frans Pop
+    - Implement new-generation build scripts for sarge branch.
+    - Make kernel-version for sparc64 ide-modules variable by using an
+      #include rather than the full module name.
+    - Add gawk and poxml build dependencies (required for the manual)
+  * Joshua Kwan
+    - Change sparc kernels to use 2.6.8-2 udebs.
+  * Joey Hess
+    - Add new usb-modules to sparc64 images to support usb keyboard on sun
+      blades.
+    - Move all utilities in build/ into build/util/, except daily-build,
+      which is hardcoded in many cron jobs.
+    - Fix two cases where the pkg-lists dependency checker printed warnings
+      about dependencies that were actually ok.
+    - Manual correction re debconf/priority.
+    - Don't fail to build if sources.list has a cdrom entry in it
+      (don't try to use the cdrom as a udeb source, either).
+    - Switch i386, ia64, alpha, hppa, and s390 to use the -2 kernel abiname.
+    - Add text frontend to alpha netboot image for general old-timey keenness.
+    - Dropped hppa 2.4 images.
+    - Removed various things from the hppa 2.6 netboot initrd to make
+      it small enough to work again.
+    - Add cdrom-modules to hppa cdrom initrd, this is a new package as of the
+      -2 kernel.
+    - Add socket-modules to all hppa initrds, also newly modularised.
+  * Bdale Garbee
+    - hppa 2.6 cdrom initrd needs more modules
+  * Kurt Roeckx
+    - Remove unused config files for amd64.
+    - Update kernel version for amd64 to 2.6.8-10
+    - Update netboot and monolithic config files for amd64 to match i386.
+  * Sven Luther
+    - Adapted to new 2.4.27-3 and 0.64 powerpc kernel .deb and .udebs and
+      mkvmlinuz.
+
+ -- Joey Hess <joeyh@debian.org>  Sat,  5 Mar 2005 13:07:49 -0500
+
+debian-installer (20041227) unstable; urgency=low
+
+  * Joey Hess
+    - Add module-init-tools to build deps for ia64 to fix truncated
+      modules.dep files and USB keyboard.
+    - Add it for sparc too.
+    - Add discover1 to even the 2.4 hppa images. Yes, there are no modules
+      there, but this allows the de4x5 blacklist code in hw-detect to notice
+      that discover1 wants to load de4x5, and blacklist it, avoiding a
+      crash when the installed system boots.
+    - Add 2.6 netboot image for hppa. Includes a move of the 2.4 netboot
+      image into the netboot/ directory for consistency.
+    - Fix SUITE setting so debian/rules can override it. I guess this never
+      worked as intended before!
+  * Christian Perrier
+    - Add 7 missing characters to installer/build/needed-characters/ar
+      Thanks to Naidim Shaikli and Arabeyes contributors
+  * Martin Michlmayr
+    - Add a ramdisk_size parameter to sb1-swarm-bn's boot configuration
+      file since the initrd is now bigger than what the kernel expects.
+  * fjpop
+    - Implement new-generation build scripts for sarge branch.
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 27 Dec 2004 21:26:29 -0500
+
+debian-installer (20041118) unstable; urgency=HIGH
+
+  * Joey Hess
+    - Add debian-installer/locale=C to s390 parmfile to work around
+      bug #281538 in languagechooser.
+    - Add module-init-tools to build deps for hppa, to fix FTBFS.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 18 Nov 2004 14:12:41 -0500
+
+debian-installer (20041115) unstable; urgency=HIGH
+
+  * Bdale Garbee
+    - Enable hppa 2.6 cd initrd building now that we have suitable udebs
+    - freshen hppa configs, adding modules udebs for hppa 2.6 kernels, etc
+    - update hppa kernel versions
+    - add discover udebs to hppa 2.6 package list
+  * Steve Langasek
+    - Extensive alpha-related edits to the install manual; it should now
+      exhibit more than a remote correspondence to the installer itself.
+  * Stephen R. Marenka
+    - Explicitly note in manual that m68k 2.2 kernels should use initrd22
+      ramdisks.
+    - Fix m68k/bvme6000 links in manual.
+    - Add mac53c9x kernel parameter notes to manual.
+  * Joey Hess
+    - Add network-preseed to s390 initrd.
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 15 Nov 2004 16:00:10 -0500
+
+debian-installer (20041027) unstable; urgency=HIGH
+
+  * Colin Watson
+    - Remove asian-root floppy for powerpc, and make the root floppy
+      English-only. The 2.6 root floppy now fits. Closes: #276826
+  * Joey Hess
+    - Remove fdisk-udeb from overfull mips initrds. The priority/dependency
+      situation will be dealt with in another way.
+    - This build also contains important fixes in languagechooser,
+      kbd-chooser, and hw-detect, lowmem.
+    - Missing Romanian characters were added. Closes: #278099
+    - Back to building using udebs from testing since testing is now
+      consistent.
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 27 Oct 2004 13:11:07 -0400
+
+debian-installer (20041014) unstable; urgency=HIGH
+
+  * Colin Watson
+    - Fix ramdisk root device path in manual.
+  * Joey Hess
+    - Disabled hppa 2.6 cd initrd building until we have udebs.
+    - Disabled m68k vme floppy building since building the boot floppy
+      requires root.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 14 Oct 2004 15:04:57 -0400
+
+debian-installer (20041012) unstable; urgency=high
+
+  * Joey Hess
+    - Add cdebconf-text-udeb to netboot i386 image.
+    - Fix font reduction to include translations from driver floppies.
+      Closes: #274396
+    - Preseeding doc updates. Closes: #274486
+    - Build-depend on cramfsprogs on ia64, needed for 2.6 kernels.
+    - Back to building using udebs in sid to catch the latest set of
+      translation updates and other fixes since pre-rc2.
+    - upx-ucl-beta 1.93 is broken. Avoid building with this version.
+      The safe version to use, 1.91, is in testing. Closes: #275378
+    - Make image builds run as root (as part of the binary-arch step),
+      rather than as fakeroot, since fakeroot is broken on mips and mipsel.
+    - Add nic-modules to the speakup net-drivers floppy. Closes: #275703
+    - Add nano and terminfo to access floppy.
+  * Joshua Kwan
+    - sparc cdrom initrd should have scsi-modules. Also added ide-modules.
+      closes: #273308
+    - Remove localized floppies for sparc32 (now English only),
+      closes: #269971
+    - Remove sparc64 entries from silo.floppy.conf.
+  * Jeff Bailey
+    - Begin adding 2.6 support for hppa.
+  * Thiemo Seufer
+    - Mips manual update.
+  * Martin Michlmayr
+    - Put fb-modules on the sb1-swarm-bn/netboot initrd to allow "desktop
+      like" installations with framebuffer and USB keyboards.
+  * Colin Watson
+    - Update apus kernels to 2.4.27.
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 12 Oct 2004 13:48:37 -0400
+
+debian-installer (20041001) unstable; urgency=high
+
+  * Sven Luther
+    - Switched to 2.6.8-4 and 2.4.27-1 kernels for powerpc.
+  * Thiemo Seufer
+    - Handle arch/subarch specific kernel module udeb inclusion.
+  * Joey Hess
+    - Add page markers to the syslinux help screens.
+    - Update install manual section 3.5 to note that d-i can resize fat,
+      and to de-emphasise the fips stuff. Closes: #265029
+    - Finish moving installation howto to manual.
+    - Remove now-useless index.en.html.
+    - 24 mb installs are now possible on i386.
+    - Add -- to the end of the syslinux kernel append lines so user-params
+      can work.
+    - Add preseed udebs to initrds and document preseeding in manual.
+      Closes: #265988
+    - Bump genext2fs build dep to avoid building images with broken versions.
+    - Remove the ugly and no longer needed genext2fs size hack.
+    - Remove the last uses of load-installer, replacing them with
+      download-installer.
+    - i386 updated to 2.6.8 and 2.4.27 kernels.
+    - Add acpi-modules to i386 2.6 initrds so the fan can be turned on.
+      Closes: #264584.
+    - Remove function key descriptions from the bottom of the ia64 help
+      screens, as in my experience the function keys only work from the
+      menu screen.
+    - Make ia64 boot screens somewhat more generic so they can be used for
+      netboot or other image types besides CD.
+    - Use only one elilo.conf for netboot and CD.
+    - Revamp the ia64 netboot, provide a netboot.tar.gz image that contains
+      a fully preconfigured netboot setup with boot menus for 2.6 and 2.4.
+      Make the dest tree have the same layout.
+    - Add -- markers to elilo.cfg boot options.
+    - Update i386 and amd64 netboot to follow ia64. Note that the tarballs
+      have been renamed.
+    - Fix ia64 miniiso support to not hardcode use of specific boot image,
+      remove the miniiso type, and generate a netboot miniiso instead.
+    - Simplify bootscreen-subst parameters.
+    - Based on a patch from Alex Owen, make syslinux help screens explain
+      on serial consoles how to press function keys there, and add a pxelinux
+      config file for 9600 baud serial consoles, available by changing the
+      pxelinux.cfg link.
+    - Comment out the "NewWorld MacOS Installation Files" section of the
+      install manual as it's out of date and has broken links. Closes: #269526
+    - Add support for depenency resolution to pkg-lists. For now it has to be
+      turned on on a per-package basis by appending an asterisk to the line,
+      since many udebs have messed up dependencies and inter-image
+      dependencies are not accounted for.
+    - Make pkg-list warn about unsatisfied dependencies.
+    - Use dependency resolution for the nic-modules package, as its
+      dependencies vary from arch to arch and kernel to kernel. Fixes various
+      missing deps on i386 and ia64.
+    - Use dependency resolution for scsi-modules to get rid of the
+      kernel_specific hack.
+    - Drop scsi-modules and usb-storage-modules from ia64 netboot image.
+    - Put efi-reader on ia64 cdrom image.
+    - Remove ia64-extra-modules hack, not needed thanks to nic-modules and
+      scsi-modules dependency resolution.
+    - Add dependencies of nic-usb-modules to net-drivers floppy (usb-modules
+      was missing).
+    - Remove useless (and missing dependencies) usb-storage-modules from
+      cd-drivers floppy. This made space to add back full pcmcia support on
+      this floppy.
+    - Add options to elilo boot menu for serial console installs, as I tire
+      of typing them.
+    - Split access-drivers floppy into net and cd drivers and updated these
+      floppies to 2.4.27.
+    - Remove ide and scsi modules from various arches netboot images.
+    - Move some files to a doc/devel subdirectory.
+    - Moved partman docs over from packages/partman, and build them as part
+      of the doc build process. Add build dep on debiandoc-sgml.
+    - Also moved in partman-auto recipe documentation.
+    - Added example preseed file for automated installs.
+    - Rewrote design.txt.
+    - Use text frontend for ia64 installs via serial console by default,
+      since the default ia64 serial console is 9600 baud.
+    - Add English to i386 root floppies. Closes: #269971
+    - Set build date to the version date from the changelog when doing
+      official builds, so all builds of a given version claim the same date.
+    - Add a dummy entry to the status file for that gives the overall version
+      of the installer image.
+    - Build-Depend on syslinux 2.11-0.1 to get fix for parameter bug.
+    - Drop all languages from root floppy. Drop all other localised versions
+      of root floppy. Document how to make a custom root floppy containing
+      the language(s) you need.
+      (PC 101: If you can't satisfy everyone, satisfy no-one.)
+    - Move countrychooser back to the root floppy.
+    - Add wireless-tools-udeb and nic-usb-modules to the root floppy because
+      we have the space, so why not?
+    - Update hppa to 2.4.27 kernel. Without testing it, but the 2.4.25 kernel
+      udebs are no longer available. We need hppa developers..
+    - Patch from Jö Fahlke to consistently refer to DEBCONF_FRONTEND in docs.
+      debconf/frontend doesn't work everywhere yet, and it's better to only
+      support one option.
+  * dann frazier
+    - Add ia64 elilo .msg files from Jim Lieb
+    - Add ia64 2.6 image build goo, contributed by Jim Lieb
+      Closes: #267689
+    - Move ia64 2.6 flavor to 2.6.8-1
+    - Move ia64 2.4 flavor to 2.4.27-1
+    - Make 2.6 the default for ia64
+    - Add elilo.conf options for faster serial consoles
+    - Add a hint about text mode to the elilo boot params screen
+  * Bastian Blank
+    - Drop the whole bunch of languages on s390.
+  * Stephen R. Marenka
+    - Modify m68k/atari bootargs to default to
+      debian-installer/framebuffer=false.
+    - Update m68k manual.
+    - Add bootfloppy.cfg for all vme.
+    - Enable vme builds.
+    - m68k image reorganization.
+    - Add some m68k/q40 support.
+    - Update all m68k 2.4 kernels to 2.4.27.
+    - Add preseed to nativehd/m68k.
+    - Fix m68k/atari bootargs kernel.
+  * Martin Michlmayr
+    - Improve manifest descriptions of the Broadcom BCM1250 (SWARM)
+      evaluation board.
+    - Put a SiByl TFTP boot configuration script to sb1-swarm-bn/netboot.
+    - Put the SiByl boot loader to sb1-swarm-bn/netboot.
+    - Update the Cobalt manifest descriptions to reflect reality
+      (the config now uses NFS, not TFTP).
+    - Create an nfsroot tar file for Cobalt which can easily be extracted
+      (containing all files including proper symlinks).
+    - Switch mips and mipsel over to 2.4.27.
+    - Put USB and input modules on the sb1-swarm-bn/netboot initrd to allow
+      "desktop like" installations with framebuffer and USB keyboards.
+    - Make sure that the serial console on Cobalt gets turned on.
+    - Update installation menu for mips and mipsel.
+    - Cleanup the ARM config files: declare most variables in one place and
+      use them in various other configs.  This makes it easier to switch
+      kernels and makes the code easier to maintain.
+    - Switch ARM over to 2.4.27.
+  * Kurt Roeckx
+    - Use kernel version 2.6.8-3 on amd64.
+    - Remove "2.6" in all amd64 flavours since it's the only we have.
+  * Steve Langasek
+    - install manual updates for the alpha architecture
+  * Christian Perrier
+    - Added build/needed-characters/hi with the help of Pankaj
+  * Claus Hindsgaul
+    - Removed (untranslated) Danish doc files leaving only the very
+      few translated files for a potential future translation effort.
+  * Bastian Blank
+    - s390 updated to 2.4.27 kernel.
+  * Norbert Tretkowski
+    - switch alpha over to 2.4.27.
+  * Christian Perrier
+    - Added the "Harakat" characters to Arabic needed characters.
+      U+064B - U+0652
+  * Colin Watson
+    - Debian CDs haven't used /install/powermac for a long time. Switch the
+      d-i minimal CD targets to use plain /install.
+    - Add -- to the end of the yaboot kernel append lines so user-params can
+      work.
+    - Don't clean at the end of the daily build (we already clean at the
+      start).
+    - Move socket-modules from powerpc root-2 to root, otherwise syslogging
+      won't work.
+    - Remove serial-modules from root-2. It's only needed for strange PPP
+      stuff which is not needed on the floppies.
+    - Remove PCMCIA support and wireless tools from root-2. The floppies are
+      only needed on OldWorld, which probably either won't have PCMCIA or
+      will have built-in networking. In the rare cases where this might be
+      needed, you can always throw the udeb on a floppy.
+    - Remove nic-extra-modules from powerpc net-drivers. We've changed the
+      module udebs so that all drivers likely to be needed on OldWorld are
+      in nic-modules.
+    - Move everything else from root-2 to net-drivers, and remove root-2.
+  * Steve Langasek
+    - Trim various unneeded udebs from the alpha netboot and cdrom
+      initrds.
+  * Thiemo Seufer
+    - Add all_rebuild convenience rule.
+    - Add the SGI firmware default sashARCS name to bootfiles.
+
+ -- Joey Hess <joeyh@debian.org>  Fri,  1 Oct 2004 16:07:11 -0400
+
+debian-installer (20040801) unstable; urgency=medium
+
+  * Joey Hess
+    - Work around a bug in genext2fs that causes it to produce 1441k floppies.
+      Closes: #262266
+    - Add ipv6-modules and wireless-tools-udeb back to net-drivers floppy.
+    - Built with newer version of lowmem.
+    - Temporarily add libnewt0.51 to build depends to work around libnewt-dev
+      dependency breakage.
+  * Stephen R. Marenka
+    - Update m68k manual.
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 31 Jul 2004 15:28:53 -0400
+
+debian-installer (20040728) unstable; urgency=low
+
+  * Steve Langasek
+    - Add additional missing ligature characters and harakat
+      (diacritics) to needed-characters/ar.
+  * Thiemo Seufer
+    - Add /dev/null to the image tree if !USERDEVFS.
+  * Bastian Blank
+    - Remove countrychooser and languagechoose from generic type.
+  * Joey Hess
+    - Switch release builds back to using udebs from testing.
+    - Add firewire-core-modules to the 2.6 kernel_specific nic-modules list, as
+      used by i386, amd64, and powerpc, all of which were just changed so that
+      nic-modules depend on firewire-modules for 2.6 kernels.
+    - Remove ipv6-modules and wireless-tools-udeb from the i386 net-drivers
+      floppy to get back under the floppy size limit. Closes: #261625
+    - Numerous fixes and updates to the installer manual, including
+      improved docs on PXE booting for i386 (Closes: #232252),
+      rewritten section of downloading files that avoids bad links and
+      outdated image names (Closes: #246890), document ramdisk_size for lilo
+      and grub booting better (Closes: #255821).
+    - i386 kernel no longer support rarp, disable that in install manual.
+      Closes: #250027 ; Same for hppa. Closes: #250026
+    - Integrate installation howto into manual. The old text format howto is
+      left for now until we update all links and docs to point to the new one.
+    - Full package builds build the manual in official build mode.
+  * Stephen R. Marenka
+    - Kill second set of m68k initrds, genext2fs seems to work.
+    - Add /dev/null to userdevfs-dev.txt.
+    - Update m68k manual.
+  * Colin Watson
+    - Document 'install video=ofonly' instead of 'install-safe', which is
+      going away (it caused combinatorial explosion in the yaboot prompt on
+      full CDs).
+    - Add fb-modules and floppy-modules to powerpc cdrom and netboot
+      initrds.
+  * Bastian Blank
+    - Update s390 manual: remove mention of second initrd and devfs.
+  * Martin Michlmayr
+    - Add cobalt-scripts and colo-udeb to the Cobalt initrd.
+  * Sven Luther
+    - Switch default powerpc kernel to 2.6.
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 28 Jul 2004 17:54:19 -0400
+
+debian-installer (20040715) unstable; urgency=low
+
+  * Sven Luther
+    - Removed the -chrp image and renamed the -chrp-rs6k to -chrp,
+      as the addnote doesn't stop it from working on chrp.
+    - Fixed build for 2.6 -chrp kernels with builtin initrd.
+      only prep is missing now.
+  * Colin Watson
+    - Add usb-storage-modules and scsi-common-modules to the powerpc cdrom
+      initrds.
+    - Add cdrom-core-modules, input-modules, firewire-core-modules, and
+      scsi-core-modules to the powerpc 2.6 cdrom initrds. Should actually
+      work now.
+    - Add pcmcia udebs to powerpc net_drivers floppy and netboot images.
+    - Move $(TREE)/usr/lib/kernel-image-$(KERNELVERSION) out of the way to
+      $(TEMP)/lib when building boot images. powerpc subarchitectures that
+      need to use mkvmlinuz should now be able to do so.
+    - For every initrd, output an initrd.list file containing the packages
+      and their versions used to construct it.
+    - debootstrap-udeb is now priority optional. Add it back into monolithic
+      images.
+    - Drop G5 images; power4 works on G5s as of linux-kernel-di-powerpc-2.6
+      0.62. Build power4 netboot 2.6 images.
+    - Remove install-safe and expert-safe targets, advising people to add
+      'video=ofonly' instead. The -safe targets have got rather out of hand
+      on full CDs, so I'd like to think about removing them there.
+    - daily-build copies the previous build before rsyncing up the new one.
+      This saved 82MB of upload for my powerpc build.
+    - Add nic-shared-modules to powerpc netboot images, needed by
+      nic-modules.
+    - Bump powerpc 2.6 kernels to 2.6.7. Add firmware-modules, much as on
+      i386.
+    - Build-depend on module-init-tools on architectures with 2.6 images.
+  * Joey Hess
+    - Split out a new cyrllic root floppy on i386 as the regular root floppy
+      is full again.
+    - Fix stats for images without kernels.
+    - Fixes to INSTALLATION-HOWTO from Jan Minar. Closes: #253868
+    - Change netcfg/use_dhcp to netcfg/disable_dhcp in syslinux boot screens
+      and elsewhere.
+    - Update i386 to the 2.6.7 kernel.
+    - Add firmware-modules to i386 images that have either nic-modules or
+      scsi-modules on them. Make this happen only for the 2.6 kernel, using a
+      nasty pkg-lists/kernel_specific technique since we lack dependency
+      resolution in pkg-lists.
+    - Go back to pulling udebs from unstable when building official images.
+    - Produce a single hd-media boot image that includes both kernels.
+    - Parameterise filenames and paths in the syslinux.cfg files so that
+      files can have different names or locations.
+    - Provide a pxeboot.tar.gz on i386 that can just be untarred into a
+      tftpserver file space for easy PXE boot setup, and update
+      INSTALLATION-HOWTO.
+    - Merge the i386 and amd64 syslinux data and image build code.
+    - Add support for dual kernel minisos.
+    - Use the 2.4.46 kernel for speakup.
+    - Add pcmcia-cs to netboot initrd.
+  * Joshua Kwan
+    - Change netcfg/use_dhcp to netcfg/disable_dhcp in manual.
+  * Steve Langasek
+    - Add shaped Arabic characters to the needed-characters set
+    - Bump kernelversion to 2.4.26 for alpha
+    - Add libfribidi0-udeb to the package list for everything except floppy
+    - Add mideast-root floppy flavor and split languages for bidi support
+  * Goswin von Brederlow
+    - Update amd64 kernel version, and input-modules are now compiled in.
+      Closes: #253536
+  * Martin Michlmayr
+    - Start Cobalt netboot install via NFS instead of TFTP.
+  * Thiemo Seufer
+    - Use 2.4.26 kernels for mips, mipsel.
+  * Bastian Blank
+    - Use 2.4.26 for s390.
+    - Add network-console on s390.
+  * Kurt Roeckx
+    - Update kernel version for amd64 to 2.6.7-3 and use input-modules again.
+    - Reenable the monolithic target for amd64.
+    - Update config files to match i386 changes.
+    - Change kernel version for amd64 to 2.6.7-4.
+    - Change kernel version for amd64 to 2.6.7-5.
+  * Stephen R. Marenka
+    - Build second set of m68k initrds using dd/mke2fs instead of genext2fs.
+    - Update m68k kernel versions.
+  * Christian Perrier/Arash Bijanzadeh
+    - Added build/needed-characters/fa for Farsi characters
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 15 Jul 2004 15:15:34 -0400
+
+debian-installer (20040528) unstable; urgency=low
+
+  * Martin Michlmayr
+    - Include bogl-bterm-udeb on the arm netboot image again.
+  * Colin Watson
+    - Add fs-common-modules to powerpc 2.6 initrds; isofs.ko needs it.
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 28 May 2004 17:52:25 -0400
+
+debian-installer (20040527) unstable; urgency=low
+
+  * Colin Watson
+    - Bump powerpc 2.6 kernels to 2.6.6.
+    - Add pcmcia-cs, pcmcia-modules, and pcmcia-storage-modules to the
+      powerpc cdrom initrd so that hw-detect finds my wireless network card.
+    - Add powerpc, power3, power4, and g5 2.6 cdrom images.
+    - Move yaboot up from /install/powermac/ to /install/, in line with
+      debian-cd.
+  * Kurt Roeckx
+    - Add amd64 support based on i386.  Only uses 2.6 kernels.
+  * Stephen R. Marenka
+    - m68k: initrd is over 10MB, so bump up to 13MB.
+    - m68k: drop eject-udeb from pkg-lists to solve build problems.
+  * Joey Hess
+    - Switch boot logo back to the klowner one, the new logo confused some
+      users who conused it with screen display problems.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 27 May 2004 08:18:33 -0400
+
+debian-installer (20040522) unstable; urgency=low
+
+  * Stephen R. Marenka
+    - m68k make vme bootable, requires root to build (not on by default).
+    - m68k add atari to normal build.
+  * Thiemo Seufer
+    - Fix mipsel CD boot, and remove some cruft from mipsel/boot/delo.conf.
+  * Colin Watson
+    - Add 2.6 kernel version information to power3 and power4 configs.
+    - Add e2fsprogs-udeb to monolithic list, since it's now priority
+      optional.
+  * Joey Hess
+    - Merge changes back from rc1 branch, module-init-tools-udeb is back.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 20 May 2004 13:33:46 -0300
+
+debian-installer (20040520) unstable; urgency=low
+
+  * Joey Hess
+    - Busybox 2.6 support is still very broken, reinstate the use of
+      module-init-tools-udeb on 2.6 images.
+    - Releasing from rc1 branch, as these changes would break builds from
+      unstable, which does not currently include module-init-tools-udeb.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 20 May 2004 11:52:54 -0300
+
+debian-installer (20040518.1) unstable; urgency=low
+
+  * Joshua Kwan
+    - Build from a fresh checkout. Lesson has been learned.
+
+ -- Joshua Kwan <joshk@triplehelix.org>  Tue, 18 May 2004 15:06:32 -0700
+
+debian-installer (20040518) unstable; urgency=low
+
+  * Stephen R. Marenka
+    - m68k atari cleanup and make bootable.
+    - m68k manifest cleanup.
+    - m68k specify keymaps in configs, remove from pkglists (except cdrom).
+    - m68k add atari build-deps: atari-bootstrap, dosfstools, mtools.
+    - m68k amiga: bump to 2.4.26.
+    - m68k vme updates.
+    - m68k separate 2.2-based cdrom initrd.
+    - m68k add vme build-deps: vmelilo, m68k-vme-tftplilo
+    - m68k add USERDEVFS_SIZE to make 2.2 initrd's size configurable.
+    - m68k add bootfloppy targets for mac and amiga.
+  * Martin Michlmayr
+    - Build-depend on a version of colo which has TFTP support.
+    - Add a configuration script to the Cobalt images for automatic
+      TFTP boot.
+    - Add socket-modules to the SWARM netboot image.
+    - Temporarily remove modules for USB detection from the SWARM
+      netboot images since we don't have the right kernel modules yet.
+    - Remove fdisk-udeb from the mipsel netboot and cdrom images and
+      from the arm netboot images.
+    - Add little-endian netboot images for the SWARM.
+    - Add a monolithic image for SWARM on mips and mipsel for testing
+      purposes, but don't active it by default.
+    - Add mdcfg-utils and mdadm-udeb to pkg-lists/monolithic/common;
+      partman-md needs it.
+    - Add lvm2-udeb and libdevmapper1.00-udeb to pkg-lists/monolithic/common
+      for partman-lvm.
+    - Build-depend on version 1.3-5 or higher of genext2fs in order to fix
+      initrd problems found and fixed by Vince Sanders.
+  * Bastian Blank
+    - busybox is not longer kernel dependent.
+    - Only call depmod if there are modules in the tree.
+    - Make TEMP and DEST resolvable in the config.
+  * Thiemo Seufer
+    - mips config cleanup, no changes in behaviour.
+    - Cleanup the Makefile's System.map handling.
+  * Joey Hess
+    - Add cdrom-core-modules to hd-media as it is not on the iso,
+      and partman needs to find cdroms to set up the fstab properly.
+    - Add pcmcia-storage-modules to the cd-drivers floppy. The rest of pcmcia
+      support is too lasge to fit on the floppy, so for now the net-drivers
+      floppy will also have to be loaded to access pcmcia cdroms.
+    - Update i386 kernel to 2.4.26 (with the SATA backports).
+    - Add sata-modules to hd-media and to the isolinux image.
+    - Add nic-usb-modules to net-drivers floppy.
+    - Document noapic on f5.txt. Closes: #238609
+    - Set apt to retry 3 times to guard against intermittent network problems
+      and make builds more robust.
+    - Move firewire stuff to isolinux CD initrd; the el-toritoc CD initrd
+      is full.
+    - Remove ppp-modules udeb from net_drivers floppy images, which do not
+      have ppp-udeb on them.
+    - Pull udebs from testing when building official images.
+    - Disable monolithic image type on i386, because it is large, mostly
+      useful for testing, and currenlty cannot build against testing because
+      of a missing mdcfg-utils.
+  * Colin Watson
+    - Reduce the four cloned-and-hacked yaboot.conf files to one, with the
+      type substituted in at build time.
+    - Remove redundant discover1-udeb and discover1-data-udeb from powerpc
+      monolithic list.
+    - Add cramfs initrd support.
+    - Add support for powerpc 2.6 installs, currently monolithic-only.
+    - stats targets cope with TEMP_INITRD being empty.
+    - powerpc-small root floppy was out of space; split off an asian-root
+      floppy, the same as we already have for i386. Closes: #246958
+    - Drop console-keymaps-amiga from non-apus powerpc initrds.
+    - Add lvmcfg-utils to pkg-lists/monolithic/common for now; partman-lvm
+      needs it.
+    - Arrange for there actually to be a kernel on the powerpc-small boot
+      floppy again. This is slightly moot, though, as we don't have miboot
+      yet so it's still not bootable ...
+    - Add eject-udeb to powerpc CDs.
+    - Comment out powerpc monolithic target again, since the images tarball
+      is already quite enormous enough and monolithic is mainly intended for
+      developer testing.
+    - Add leading slash to "etc/hostname" in manual (closes: #249101).
+  * Steve Langasek
+    - Change netboot target for alpha now that netabootwrap is in the
+      archive, and add an appropriate versioned build-dep.
+  * Vincent Sanders
+    - Add fsck to check ext2 initrd.
+  * Joshua Kwan
+    - Bump ramdisk_size for sparc to 8192.
+    - add self to Uploaders
+
+ -- Joshua Kwan <joshk@triplehelix.org>  Tue, 18 May 2004 10:43:43 -0700
+
+debian-installer (20040430) unstable; urgency=low
+
+  * Rebuilt w/o i386 stuff in localudebs (argh).
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 29 Apr 2004 20:36:47 -0400
+
+debian-installer (20040429) unstable; urgency=HIGH
+
+  * Rebuild with hw-detect 0.93.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 29 Apr 2004 13:52:01 -0400
+
+debian-installer (20040428) unstable; urgency=low
+
+  * Joey Hess
+    - The new discover2 udebs DO NOT WORK, so we're not going to use them
+      for beta4. Switched the 2.6 images to use discover1.
+    - This build includes languagechooser 1.18.1 and cdebconf 0.64
+      with some fixes. The cdebconf update is only needed for i386, and the
+      languagechooser change is not RC, so this build is only needed for i386;
+      the rest can use yesterday's build.
+    - Update the installation howto for os-prober and 2.6 changes.
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 27 Apr 2004 23:46:58 -0400
+
+debian-installer (20040427) unstable; urgency=low
+
+  * Joshua Kwan
+    - there is no cdrom-core-modules-2.4.24-sparc32-di
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 27 Apr 2004 11:21:36 -0400
+
+debian-installer (20040426) unstable; urgency=low
+
+  * Joey Hess
+    - Try to fix the sparc cdrom build, nic-pci-modules-2.4.26-sparc64-di is
+      not in the archive, and will not be in beta4.
+    - Final build for beta4.
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 26 Apr 2004 15:12:33 -0400
+
+debian-installer (20040424) unstable; urgency=low
+
+  * Bdale Garbee
+    - trim hppa kernel command line options to stay under palo size limit
+  * Joey Hess
+    - daily-build will produce a machine readable overview.log
+    - discover2-udeb is renamed to discover-udeb
+    - Stop using evil tabs in f7.txt. Closes: #245634
+  * Bastian Blank
+    - Define a correct EXTRANAME for s390/tape.
+    - Kernels depends on unpacked tree.
+  * Martin Michlmayr
+    - Include the Cobolt boot loader on the netboot image.
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 24 Apr 2004 11:54:27 -0400
+
+debian-installer (20040422) unstable; urgency=low
+
+  * Bdale Garbee
+    - add a new MISC target to the build Makefile, which makes it easy to 
+      deliver a set of additional files to the target directory.  use it to 
+      deliver the bootloader and config file (elilo.efi and elilo.conf) for 
+      ia64 netboot.
+    - add ia64 netboot instructions to the manual
+  * Martin Michlmayr
+    - Use the 2.4.25 images for the DECstation CD-ROM images.
+  * Colin Watson
+    - Remove yaboot timeout. Ten seconds was too short, at least.
+  * Joey Hess
+    - Comment out the rest of the sparc floppies.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 22 Apr 2004 12:22:05 -0400
+
+debian-installer (20040421.2) unstable; urgency=low
+
+  * Colin Watson
+    - Set HOME=$(TEMP) while running hformat so that it doesn't require
+      write access to the real $HOME/.hcwd, and clean up .hcwd afterwards.
+    - Comment out miboot invocation for now; it's still not in the archive.
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 21 Apr 2004 13:41:15 -0400
+
+debian-installer (20040421) unstable; urgency=low
+
+  * Joey Hess
+    - Add a f3.txt.with26 to the cd_info tarball. It's the same as f3.txt,
+      but with additional targets linux26 and expert26. This can be used
+      as the f3.txt for CD images that include both kernels.
+    - Turn off sparc floppy building, it does not autobuild because it needs
+      root.
+    - Add hfsutils [powerpc] to build deps.
+  * Martin Michlmayr
+    - Don't include ext3-modules in the netboot image on arm/netwinder,
+      arm/riscpc and arm/ricstation since they are now (as of
+      linux-kernel-di-arm (0.54)) built into the kernel.
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 21 Apr 2004 11:34:17 -0400
+
+debian-installer (20040420) unstable; urgency=low
+
+  * Joshua Kwan
+    - Add missing build-dependency on genromfs [sparc].
+  * Joey Hess
+    - Document netcfg/use_dhcp and hw-detect/start_pcmcia in syslinux f7.txt.
+    - Update the polverini_b logo, and make it the default logo.
+    - Turn on German manual building.
+  * Colin Watson
+    - Use ramdisk-size-subst for all yaboot configurations.
+    - Drop append="ramdisk_size=<n>" in yaboot configurations in favour of
+      initrd-size=<n>.
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 20 Apr 2004 09:50:47 -0400
+
+debian-installer (20040417) unstable; urgency=low
+
+  * Thiemo Seufer
+    - Tell clean to remove tree-unpack stamp files.
+  * Colin Watson
+    - Sync hfs.map with debian-cd, adding .sit (see #186837).
+    - Add parted-udeb to powerpc monolithic list.
+  * Joey Hess
+    - Access floppy is out of space, so drop all non-English text from
+      it (any better ideas?).
+    - For the monolithic target, include all kernel module udebs matching the
+      kernel from localudebs, and also any non-kernel udebs, automatically, to
+      make building custom kernels easier
+    - Add a pkg-lists/kernel_specific, for 2.4 and 2.6, currently
+      discover varies depending on the kernel major version, and there is a
+      hack to use module-init-tools over busybox for 2.6.
+    - Also add a kernel_specific isa-pnp-modules list, since 2.4 has the
+      module and package, and 2.6 does not.
+    - Add a new field to pkg-lists to get the kernel major version, and a
+      KERNELMAJOR variable.
+    - Add a monolithic_2.6 image type, a hd-media_2.6, and a netboot_2.6,
+      none currently on by default, that use the 2.6 kernel. So far for i386
+      only.
+    - Also added 2.6 versions of the cdrom targets, though the el-torito
+      one is out of space and disabled.
+  * Martin Michlmayr
+    - Add a netboot image for MIPS based Cobalt machines.
+    - Use 2.4.25 kernels for mips and mipsel.
+  * Joshua Kwan
+    - Add all sorts of sparc/sparc64 floppy support, with a net-drivers
+      disk for sparc64.
+    - Add cdrom-core-modules dependency for cdrom/sparc.cfg, but only
+      for sparc64. Hardcode it in because we don't support ${kernel:Version}
+      in package names that aren't always available on one of the
+      architectures being built for.
+      (Closes: #242343, #239136, #239887, #240577)
+  * Bastian Blank
+    - Respect EXTRANAME in kernel installation. (closes: #244209)
+    - Add s390 to build/choose-subarch-env.
+    - Use make magic to pull that script in.
+  * Per Olofsson
+    - Don't do PCMCIA config reduction as it doesn't take enough modules
+      into account. Closes: #243563.
+  * Stephen R Marenka
+    - Fix FTBFS on m68k. Closes: #244209
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 18 Apr 2004 20:06:52 -0400
+
+debian-installer (20040411) unstable; urgency=low
+
+  * Colin Watson
+    - Add powerpc support for monolithic image type, for the powerpc subarch
+      only since it's quite large and mostly useful for testing. Disabled
+      for the moment until new kernel packages arrive in the archive.
+    - Fix up powerpc CD image targets, which had bitrotted (a number of the
+      variables they used weren't defined).
+  * Martin Michlmayr
+    - Clarify description of mips/sb1-swarm-bn's netboot images.
+  * Bastian Blank
+    - Split tree target.
+    - Add generic and s390-tape type.
+    - Build generic and tape medium on s390.
+    - Move correct kernel images.
+    - Add s390 boot files.
+    - s390 uses 2.4.25-1 kernels.
+  * Joey Hess
+    - Some reworking of the syslinux help screens.
+    - Widen the non-US exclusion regexp, fix FTBFS on gag.com arm autobuilder.
+    - Deal better with duplicate udebs.
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 11 Apr 2004 19:09:43 -0400
+
+debian-installer (20040405) unstable; urgency=low
+
+  * The "will voltaire SIGILL today?" release.
+
+  * Karsten Merker
+    - Include DEC keymaps on mipsel.
+  * Bastian Blank
+    - Make daily-build a little bit more reliable.
+  * Martin Michlmayr
+    - Add better sucharchitecture handling for choosing which udebs
+      to include on different images.
+    - Only include DEC keymaps on DECstations (r3k-kn02 and r4k-kn04).
+    - Include discover on the netboot images on the Broadcom SWARM and
+      on MIPS based Cobalt machines.
+    - Include usb-discover and USB keymaps on the netboot images on
+      the Broadcom SWARM.
+    - Build depend on discover on mips and mipsel.
+
+ -- Joey Hess <joeyh@debian.org>  Tue,  6 Apr 2004 00:22:23 -0400
+
+debian-installer (20040403) unstable; urgency=low
+
+  * Martin Michlmayr
+    - Add delo to Build-Depends on mipsel.
+    - Enable autobuilding on mipsel.
+  * Martin Michlmayr, Vincent Sanders
+    - Enable autobuilding on arm.
+  * Joey Hess
+    - Fix alpha netboot to use discover1-udeb, to avoid build failure.
+ 
+ -- Joey Hess <joeyh@debian.org>  Wed, 31 Mar 2004 16:43:13 -0500
+
+debian-installer (20040402) unstable; urgency=low
+
+  * Joey Hess
+    - Add copyright info for the manual to debian/copyright.
+    - Add logo by Alessandro Polverini and Andrea Mottola.
+      Not the default until the Debian version is corrected though.
+    - Add logo copyright info to debian/copyright.
+    - Fix access floppy building with 2.6 kernel, same as root floppy was
+      fixed earlier.
+    - Out of space on the root floppy again. Split off a asian-root floppy.
+    - Remove the pcmcia stuff from the cd-drivers floppy, it was too big.
+    - Force the driver floppies to be of size FLOPPY_SIZE.
+    - Add custom-kernel.txt
+    - Add new image type, "monolithic", which build an initrd and a miniiso
+      that contain all standard priority udebs, and does not need any other
+      udebs to install Debian. This simple image type will be much easier to
+      use for custom d-i builds, as you don't need to set up a CD or a mirror.
+      It's also great for testing changes to $RANDOM_UDEB.
+    - Add build-dep on grep-dctrl, used by monolithic image build process.
+    - Add build-dep on bzip2 for powerpc, used by powerpc-builtin-initrd.sh to
+      unpack the kernel tree.
+    - Add build-dep on libparted1.6-0, needed during monolithic build
+      due to versioned dependencies sillyness.
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 31 Mar 2004 16:43:13 -0500
+
+debian-installer (20040331) unstable; urgency=low
+
+  * Joey Hess
+    - Add udebs to support pcmcia cdroms to the pkg-lists for isolinux initrd,
+      and to the cd-drivers floppy.
+    - Add the kernel udeb to the root floppy pkg lists. It will be removed
+      from the free dring build, but this will both give us an entry for the
+      kernel in the status file, to prevent anna from doing bad things, and
+      also will provide a System.map for depmod to run against, fixing
+      builds on 2.6 kernels.
+    - Removed the demo type.
+    - Changed make demo and make shell to per-type targets.
+    - Fixed the uml target similarly.
+    - Added a qemu target, currently it can only handle booting floppies.
+    - Remove broken and useless debian-installer-demo package.
+      Closes: #218560
+    - Add a debian-installer-manual package, mostly to serve as the autobilder
+      sentinal package.
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 30 Mar 2004 16:24:08 -0500
+
+debian-installer (20040330) unstable; urgency=low
+
+  * Sven Luther
+    - Added powerpc-builtin-initrd.sh script to build kernels with builtin
+      initrd, and actually build the initrd builtin kernels for all targets
+      except powerpc-small floppies.
+    - Enabled powerpc/apus nativehd and cdrom-apus targets.
+  * Joey Hess
+    - Some manifest fixups.
+  * Colin Watson
+    - Add manifest info for powerpc.
+    - Document netcfg/use_dhcp in boot-parameters.txt.
+    - Bump kernel version in powerpc docs to 2.4.25.
+  * Vincent Sanders
+    - Add boot.init to netwinder netboot target
+    - Add discover to ARM targets
+    - Add Ext3 to apropriate ARM targets
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 30 Mar 2004 14:29:16 -0500
+
+debian-installer (20040326) unstable; urgency=low
+
+  * Sven Luther
+    - Disabled powerpc-small/floppy/boot and boot-ofonly until miboot makes it
+      to the archive.
+    - added missing kernel-only/powerpc pkg-list.
+  * Joey Hess
+    - Remove irda-modules from the i386 net-drivers floppy, which
+      was over size. Closes: #240192
+    - Turn off powerpc-small build until it is fixed.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 25 Mar 2004 23:35:29 -0500
+
+debian-installer (20040325) unstable; urgency=low
+
+  * Sven Luther
+    - Added support for multiple powerpc kernel flavours/subarches.
+  * Jeremie Koenig
+    - Added support for oldworld pmac booting.
+      => Problem : doesn't build on 2.6 kernel systems.
+      => Problem : miboot is not in the archive yet.
+  * Steve Langasek
+    - Fix the udeb list for alpha netboot, since we were conspicuously
+      missing all of the nic modules (among other things).
+    - Bump us to 2.4.25-1 on alpha, now that udebs are in the archive.
+  * Colin Watson
+    - Change comments in yaboot.conf files to say sarge, not woody.
+  * Martin Michlmayr
+    - Add a netboot image for mips/sb1-swarm-bn, the Broadcom MIPS
+      development board "SWARM" (BCM91250A).
+  * Joey Hess
+    - Try to add manifest info for hppa.
+  * Vincent Sanders
+    - Add support for pkg-lists to have kernel module packages on selected 
+      targets.
+    - change ARM netboot target to use this functionality
+    - add several more ARM configurations
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 25 Mar 2004 20:24:53 -0500
+
+debian-installer (20040323) unstable; urgency=low
+
+  * Thiemo Seufer
+    - Make mips mini-ISO bootable.
+  * Vincent Sanders
+    - ARM: make bast and netwinder subarches build and install from netboot
+  * Joey Hess
+    - Remove the status.udeb symlink; udpkg has been changed to use regular
+      status.
+    - Only some thinkpads need the floppy=thinkpad bot parameter, it seems.
+      Closes: #238306
+    - Turn on building of Dutch translation of installation manual (by Frans
+      Pop).
+    - Calculate an appropriate ramdisk_size and substitute it into
+      syslinux.cfg on the fly.
+    - Add rebuild_<image> targets for convenience.
+  * David Nusinow
+    - Change to discover1 and discover1-data udebs, as part of the discover
+      transition.
+  * Sven Luther
+    - Early powerpc-small support for old world floppies. Not yet working
+      though.
+    - Added support for building power3 and power4 images in addition to
+      powerpc.
+    - Early untested apus support stuff.
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 23 Mar 2004 21:31:31 -0500
+
+debian-installer (20040321) unstable; urgency=low
+
+  * Joey Hess
+    - Move countrychooser off of the i386 root floppy, and onto
+      the net-drivers and cd-drivers floppys, freeing 50k.
+      load-floppy now runs before it.
+    - Reenable all translations for root floppy again, though this can't last.
+    - Always include /dev/console, even for images that will use devfs.
+      This means that netboot users will not have to remember the devfs=mount.
+    - Left devfs=mount in syslinux.cfg anyway, out of general caution.
+    - Add another dh_testroot call before udebs are downloaded.
+    - Document debian-installer/probe/usb=false in syslinux f7.txt.
+    - Docs are now included in the source package.
+    - Remove the INSTALLATION-HOWTO copy hack.
+    - Add docbook, docbook-xml, docbook-xsl, xsltproc to build deps.
+    - Add the installation manual to the image tarballs.
+    - Use svn up in daily-build; we moved to subversion.
+    - Allow passing languages and arches to manual/build/build.sh in env
+      variables.
+  * dann frazier
+    - Fix installs w/ USB keyboards w/ ia64 cdroms.  Add input-modules to the
+      pkglist, and fix ia64.cfg, which was pointing at the non-smp kernel.
+      This caused the build to put modules.dep in the wrong directory, causing
+      modprobe to fail - will need linux-kernel-di 0.50 to build.
+  * Stephen R. Marenka
+    - Add nic-shared-modules to nativehd/m68k pkg-list.
+    - Update m68k demo.cfg to fix build problem.
+    - Bumped amiga to 2.4.25, all other subarchs 2.2.25.
+  * Jeff Bailey
+    - hppa: Add miniiso target.
+    - hppa: Clean up existing targets so they produce something useful.
+    - ia64: Add miniiso target.
+    - ia64: Clean up cdrom target.
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 21 Mar 2004 23:33:26 -0500
+
+debian-installer (20040315) unstable; urgency=low
+
+  * One more build for beta3 after all, since we forgot to update the
+    installation howto for partman. Also, ftp-master has not accepted the old
+    one, so this causes no extra delay.
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 14 Mar 2004 21:09:03 -0500
+
+debian-installer (20040314) unstable; urgency=low
+
+  * Steve Langasek <vorlon@debian.org>
+    - Add MANIFEST entries for alpha netboot and cdrom images.
+    - Add a miniiso target for alpha, based on the same target for mips.
+    - Add the demo target for alpha as well.
+  * Anton Zinoviev
+    - add smyleys of partman to graphic.utf
+    - add needed-characters/{bg,ru}
+  * Joey Hess
+    - Change NO_I18N to DROP_LANG, a perl regexp of languages not to include.
+    - We're out of space on the root i386 floppy, so I have dropped some
+      languages from this floppy: ar ro sl pl sv bs
+  * Several updated translations in udebs.
+  * Final for beta3.
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 14 Mar 2004 17:19:41 -0500
+
+debian-installer (20040313) unstable; urgency=low
+
+  * Joey Hess
+    - Add input-modules to ia64 netboot and cdrom lists. Needed for USB
+      keyboard.
+    - Add missing usb-discover to ia64 cdrom.
+    - Add a kernel to the demo image type, because this is necessary to get
+      the System.map so depmod will work on 2.6. The kernel is currently
+      included in the demo image; I suppose you could use it somehow, and I
+      didn't want to risk breaking builds by removing it.
+    - Add alpha and s390 to the arch list, in case someone want to try to get
+      them working for the release.
+  * Jeff Bailey
+    - Don't let daily-build fail on unset locales variables.
+    - sparc: New cdrom target.
+    - sparc: rearrange some of the kernel handling.
+  * Bastian Blank
+    - Add cdebconf-text-udeb on s390.
+    - Move hw-detect and bogl-bterm-udeb from common to i386, m68k, mips for 
+      demo.
+  * Several updated translations in udebs.
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 13 Mar 2004 16:10:31 -0500
+
+debian-installer (20040311) unstable; urgency=low
+
+  * Thiemo Seufer
+    - Fix mini-ISO generation for mips.
+  * Jeremie Koenig
+    - Don't run dpkg-architecture in submakes as that is slow.
+  * Also includes updated udebs, including a fix for the netcfg not run
+    problem.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 11 Mar 2004 14:46:14 -0500
+
+debian-installer (20040310) unstable; urgency=low
+
+  * Christian Perrier
+    - added needed-characters/cy for Welsh
+  * Stephen R. Marenka
+    - more m68k fixups.
+    - move m68k to unified cdrom.
+  * Joey Hess
+    - add lowmemcheck to the base pkg-list.
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 10 Mar 2004 00:17:32 -0500
+
+debian-installer (20040308) unstable; urgency=low
+
+  * Thomas Poindessous
+    - Add palo [hppa] to build depends, since 20040303 didn't build because of
+      this.
+    - Add variables in build/config/m68k/demo.cfg to fix demo building
+  * Joey Hess
+    - Switch speakup kernel to 2.4.24-speakup.
+    - Use the speakup kernel modules on the access boot floppy and
+      access-drivers floppy. Were using the regular i386 modules!
+    - Switch m68k/amiga to 2.4.24 (was 2.4.20; build failed due to missing
+      udeb).
+  * Stephen R Marenka
+    - More m68k config fixups.
+  * dannf
+    - update ia64 to 2.4.25 kernel
+  * luther
+    - update powerpc to 2.4.25 kernel
+
+ -- Thomas Poindessous <thomas@poindessous.com>  Sun,  7 Mar 2004 14:29:55 +0100
+
+debian-installer (20040306) unstable; urgency=low
+
+  * Bastian Blank
+    - Move kbd-chooser, bogl-bterm-udeb, hw-detect, ethdetect, netcfg from
+      netboot/common to netboot/i386 (other arches not fixed).
+    - Add netcfg-static and libiw27-udeb to metboot/s390.
+  * Joey Hess
+    - Fix all the other architectures netboot.
+    - Include characters from needed-characters/?? into the unifont.bdf.
+      Closes: #235998
+    - Add dummy arch_boot_screens for ia64.
+    - Turn on image building for sparc. They're almost usable..
+  * Stephen R. Marenka
+    - More m68k config fixups.
+  * Thomas Poindessous
+    - add some variables in config/sparc/demo.cfg. Some variables are only
+      use for a correct ./pkg-list argument parsing.
+
+ -- Joey Hess <joeyh@debian.org>  Thu,  4 Mar 2004 19:03:57 -0500
+
+debian-installer (20040303) unstable; urgency=low
+
+  * Joey Hess
+    - Do not library reduce the CDs against net-drivers, only cd-drivers.
+      It was making the el torito ones too large, and it is unnecessary.
+    - Add $(TREE)/usr/lib to mklibs search path, so it can find
+      libdebconfclient0.
+    - Turn on hppa in debian/control.
+    - Add libiw27 to build depends, as netcfg has a versioned dep on it.
+      Not actually used though.
+
+ -- Joey Hess <joeyh@debian.org>  Tue,  2 Mar 2004 13:28:15 -0500
+
+debian-installer (20040302) unstable; urgency=low
+
+  * Joey Hess
+    - Switch i386 to the 2.4.25 kernel.
+    - Add libdebian-installer4 to build-deps. This is because
+      libdebian-installer4 cannot do versioned provudes, and some
+      udebs have versioned deps on libdebian-installer4.
+  * Some m68k changes.
+
+ -- Joey Hess <joeyh@debian.org>  Mon,  1 Mar 2004 12:42:37 -0500
+
+debian-installer (20040301) unstable; urgency=low
+
+  * Joey Hess
+    - Add some support for subtypes of images that have their pkg-lists
+      derived from another type.
+    - Add a cdrom/isolinux subtype that includes all the SCSI disk drivers,
+      and build the cdrom initrd using this type. The cdrom boot.img still
+      uses the smaller initrd so it will still fit on El Torito.
+    - Removed the xfs flavoured cdrom, since 2.4.25 will have xfs standard.
+    - Add m68k as an arch in the control file.
+  * Joshua Kwan
+    - Fixed broken sparc32_netboot build. Same fix as the one for 
+      sparc64_netboot.
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 28 Feb 2004 14:56:38 -0500
+
+debian-installer (20040227) unstable; urgency=low
+
+  * Thiemo Seufer
+    - Create MAINFEST for mipsel.
+    - Add mini-ISO targets for mips, mipsel.
+    - Small Makefile cleanup.
+    - Unbreak i386 mini-ISO generation.
+    - Add dhcp-client-udeb for mips, udhcpc is to broken.
+    - Use subarch kernel names for mips, mipsel. Improve mini-ISO support.
+    - Don't trigger the tree target for mini-ISOs.
+    - Remove only the current TARGETs in the _clean rule, not everyone.
+  * Jeff Bailey
+    - sparc: Add manifest lines to configuration file.
+    - ia64: Add manifest lines to configuration file.
+    - Bump mklibs dependancy to 0.1.15.  Fixes needed for sparc.
+    - Uncomment ths' code for handling multiple System.map files,
+      conditionalise with VERSIONED_SYSTEM_MAP
+    - sparc: Define VERSIONED_SYSTEM_MAP
+    - sparc: Define EXTRANAME in netboot.cfg
+    - daily-build: Use rm -rf for removing daily directory
+    - sparc: Define netboot as separate for sparc32 and sparc64 until
+      tilo works again.
+    - sparc: Setup miniiso target.  ths says that this is the Right Thing.
+    - sparc: Remove cdrom target.
+    - sparc: Add demo target.
+    - tftpboot.sh: Accept sparc64 as a reasonable alias for sun4u.
+    - sparc: Add boot screen and silo.conf
+    - sparc: do not define USERDEVFS
+    - sparc: Require silo
+
+    We *can* eradicate ROMFS in your lifetime!
+
+    - Remove all references to romfs as a valid option.
+    - sparc: silo.conf fixes from Ben Collins
+    - sparc: debian.txt - update to reflect new expert mode
+  * Stephen R. Marenka
+    - m68k: mac build fixes.
+    - m68k: add build support for amiga.
+    - m68k: demo build.
+    - m68k: add initial subarch support for atari and vme's.
+    - m68k: add m68k to floppy pkg-lists.
+  * Joey Hess
+    - add support for pkg-lists/*/local files (not in CVS), for building
+      test images
+    - di-utils is now part of base
+    - fix pcmcia-config-reduce call
+    - set the syslinux timeout to 0 on floppys, to match the CD
+    - put syslinux boot screens back on boot floppy and hd-media
+    - copy System.map to $(TEMP) instead of deleting it, I understand sparc
+      needs this
+    - add the libiw27-udeb to every list that includes netcfg
+    - add libdebconfclient to pkg-lists/base; it is marginally smaller than
+      having mklibs copy in the system one. Remove build-dep.
+    - same for libdebian-installer-4-udeb, although it is not currently any
+      smaller
+    - before running mklibs, copy all the libs from lib and usr/lib in the
+      initrd to a temporary directory, and add that to mklib's search path
+      with -L. This will make it avoid copying in large versions of libs from
+      the build system if there is already a small version available in the
+      initrd.
+    - removed the slow, buggy code that added unneccessary and often wrong
+      "-reduced" entries to the status file
+  * Sylvain Ferriol
+    - Add plip-modules to the net_drivers floppy.
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 23 Feb 2004 20:46:31 -0500
+
+debian-installer (20040209) unstable; urgency=low
+
+  * Steve Langasek
+    - Use -di flavored kernels for alpha
+    - build-depend on aboot for alpha (needed for making
+      floppies/CDs bootable)
+    - include srm-modules and socket-modules in the alpha initrd
+    - tell d-i that alpha CDROMs don't use a floppy image, just an
+      initrd and kernel
+    - upgrade to 2.4.24 for alpha kernels
+  * Thiemo Seufer
+    - Remove dead apt-get code in the Makefile.
+    - Redesigned build system. Major changes to the configuration
+      handling for all architectures. Closes: #215508
+    - Remove arhcdetect from m68k config, it is already in the generic
+      config.
+    - Fix broken alpha build, input-modules isn't created for -di
+      kernel flavour.
+    - Adjust daily-build script for the new build system.
+    - Remove special handling for "default", it was broken anyway.
+    - Switch back sparc kernel handling in tftpboot.sh to the old value.
+    - Add support for MANIFEST files. Closes: #231767
+    - Fix genromfs invocation, found by Thomas Poindessous.
+  * Thomas Poindessous
+    - Remove redundant kbd-chooser from netboot pkg-list.
+    - Add discover, discover-data to sparc netboot image. Closes: #227853
+    - Correct netboot image building on sparc. Closes: #228519
+  * Joey Hess
+    - Copyright date updates.
+    - Add wireless-tools to the net_drivers floppy and the netboot initrd.
+    - Switch the kernel to 2.4.24 for i386.
+    - Document vga=771 option for laptops with display problems.
+      Closes: #229904
+    - Add syslinux splash image by Matthew A. Nicholson, and another by
+      Klowner, and still another by Volkan YAZICI.
+    - Make all the syslinux help screens leave graphics mode when displayed.
+    - Hack syslinux.txt so it all fits on one line, the same line as the boot:
+      prompt.
+    - Add ${BOOTPROMPT} expansion to bootscreen-subst, to make it easy 
+      to make the last line in a syslinux screen not have a newline at EOF
+      on the image, while still being easily editable.
+    - Switch cdroms from load-installer to load-cdrom. This is to work around
+      limitations in main-menu (see #218774). Driver floppy loading will now
+      be started by cdrom-detect if it fails to find a CD.
+    - Version the mtools build-dep. Closes: #225584
+    - Let HOST, BASEDIR, or DIR be set in the environment before running
+      daily-build, to override the defaults.
+    - Fix up miniiso creation to fit into the new build system better.
+    - Turn on miniiso creation for netboot, so there is a
+      dest/netboot/mini.iso that behaves the same as a netboot would.
+    - Add a dest/cdrom/debian-cd_info.tar.gz with the syslinux screens
+      and splash image, for eventual use by debian-cd.
+    - Convert the miniiso to use isolinux, to support any size initrd.
+    - Improvements to manifest generation and formatting.
+  * Richard Hirst
+    - ia64: Fix cdrom to autoboot, and tidy up kernel params.  Partial
+      fix for 227114.
+    - ia64: Change to 2.4.22 -di kernel, and include usb storage modules,
+      and ide/scsi core modules.  Partial fix for 227114.
+    - Increase ia64 'floppy' image to 10MB, and initrd to 24MB
+    - hppa: Add config/type/netboot-hppa, so TYPE=netboot generates a lifimage
+    - hppa: include fdisk-udeb in pkglists so we can partition.
+    - hppa: include text frontend, as it is useful for debugging.
+    - hppa: fix up palo cmdline for netboot lifimage
+  * Stephen R. Marenka
+    - m68k: update/create pkg-lists/cdrom/m68k pkg-lists/netboot/m68k.
+    - m68k: add some more devices to help support 2.2.25.
+  * Jeff Bailey
+    - sparc: Update config/arch/linux-sparc to show 2.4.24 and di flavour
+    - sparc: Remove ide-modules and scsi-modules - they're built in.
+    - sparc: Update kernel version in mirror-udeb list.
+    - sparc: Update config/sparc.cfg to show 2.4.24 and di flavour
+
+ -- Joey Hess <joeyh@debian.org>  Mon,  9 Feb 2004 13:07:04 -0500
+
+debian-installer (20040102) unstable; urgency=low
+
+  * Another day, another build. This one has updated busybox in it.
+
+ -- Joey Hess <joeyh@debian.org>  Fri,  2 Jan 2004 14:48:13 -0500
+
+debian-installer (20040101) unstable; urgency=low
+
+  * Giuseppe Sacco
+    - Corrected a small error in make/arch/linux-powerpc about
+    - the creation of a boot.msg
+  * Joey Hess
+    - Minor consistency fix in f10.txt.
+
+ -- Joey Hess <joeyh@debian.org>  Thu,  1 Jan 2004 13:48:56 -0500
+
+debian-installer (20031230) unstable; urgency=low
+
+  * Giuseppe Sacco
+    - Changed the KERNEL_FLAVOUR for powerpc to -di
+  * Joey Hess
+    - i386 will work on 32 mb now, update system requirements in syslinux help
+      screen
+    - Remove the encoding grep, all non-utf8 encodings should be fixed now.
+    - Fix make dependency loop on hppa and sparc where FLOPPY_SIZE is not set.
+      Closes: #225389
+    - Add expert and expert-safe boot modes to yaboot.
+    - Pass devfs=mount,dall in yaboot.conf for new powerpc kernel.
+    - Add build date to yaboot boot.msg.
+  * Thiemo Seufer
+    - Sanitize mips/mipsel image creation.
+  * Vincent Sanders
+    - Initial ARM port
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 30 Dec 2003 16:25:49 -0500
+
+debian-installer (20031226) unstable; urgency=low
+
+  * Thiemo Seufer
+    - "make reallyclean" should really clean.
+    - Fix build failure, images/ wasn't created.
+  * Joey Hess
+    - Add fakeroot to build-depends, as the debian/rules uses it in the build
+      target. Should fix FTBFS on mips.
+    - Don't put docs under images/, so debian-cd will find them.
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 26 Dec 2003 21:15:47 -0500
+
+debian-installer (20031223) unstable; urgency=low
+
+  * Joey Hess
+    - Generate bootable hd-media images, not just the initrd.
+      These can be written directly the usb memory stick, then mounted
+      and a d-i iso copied in. As they're quite big (and sparse),
+      they are gzipped.
+    - NB: The above change means you need 128+ mb more free space to
+      build this package on i386.
+    - If System.map is included in the kernel image udeb, pass it to depmod
+      via -F and delete it when done. This is to support building on systems
+      running 2.6.
+    - Remove ide modules stuff from net drivers floppy. I don't know why it
+      was there, but its deps were not met and this could cause ugly messages 
+      during install.
+    - Remove the same ide modules from i386 netboot.
+    - Document the bootkbd boot parameter in syslinux f7.txt.
+    - Add "expert" mode boot to syslinux, which sets DEBCONF_PRIORITY=low.
+    - Include a doc/index.en.html in the install-images tarball, so
+      debian-cd will find some documentation and not include the boot floppies
+      docs.
+    - Include INSTALLATION-HOWTO there too, by way of a gross, gross hack.
+    - netcfg reorg
+    - scsi-common-modules reorg
+    - Grep out several encodings that confuse reduce-font:
+      ISO-8859-*, EUC-JP, CP1251. This is a temporary hackaround to get it
+      building again.
+    - Access floppy filled up, so move the network stuff to the access_drivers
+      floppy. That filled up access_drivers, so comment out SCSI support at
+      least for now.
+    - Turn ia64 back on, let's see if it builds now.
+  * Thiemo Seufer
+    - Build the demo tree only for architectures which support it.
+    - Don't build images for the demo target.
+    - Ensure TYPE=demo for the Makefile's demo target.
+    - Remove stamp files for tree and get_udebs at the begin of their rule,
+      create them at the rule's end.
+    - Ignore errors for the all_clean target.
+    - Don't use USERDEVFS for linux-mips.
+    - Fix 'make clean' if type demo is unsupported.
+  * Marco d'Itri
+    - Add preliminary support for .ko kernel modules.
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 13 Dec 2003 18:44:06 -0500
+
+debian-installer (20031212) unstable; urgency=low
+
+  * Joey Hess
+    - Switch i386 to using dhcp-client rather than pump for netboot.
+      Left it using pump on other arches that did not already use dhcp-client,
+      at least for now.
+    - Switch i386, hppa, and ia64 to dhcp-client rather than udhcp
+      on the root floppy.
+    - Switch powerpc to pump on the root floppy.
+    - Switch i386 to dhcp-client rather than udhcp on the access floppy.
+    - Switch from pump to dhcp-client on powerpc.
+    - Add disk labels to the i386 floppy images, for use by the bootfloppy
+      initrd, and maybe later by the floppy retreiver, etc.
+    - In debian/rules, if the changelog is unreleased, use unstable as the
+      DISTRIBUTION.
+    - makelabel takes the build date as its second parameter. Calculating
+      BUILD_DATE once at the start to avoid inconsistencies during
+      long/midnight builds.
+    - Add MEDIA_TYPE to configs for bootable image types.
+    - Add DEBIAN_VERSION to config.
+    - Add bootscreen-subst to substitute these variables into boot screens.
+    - Make a syslinux help screen, for all i386 syslinuxed boot media.
+      Includes the build date, debian version, and media type, and is derived
+      from isolinux help texts on the sarge cds, but modified to actually
+      match d-i:
+        - remove boot flavor docs, as we currently have no flavors
+        - remove rescue stuff, as d-i is not currently also a rescue disk
+        - reduce number of colors used for cleaner look
+        - remove mention of non-free
+        - try to make the prerequisites documentation somewhere close to
+          reality -- 64 mb ram and 256 mb disk.
+        - make every boot message screen 22 lines long, followed by a blank
+          line (which is in turn followed by the boot: prompt), for consistent
+          display
+        - remove references in f4.txt to a nonexistant table
+        - remove documentation of mono and vga16:off, as they do not work with
+          d-i
+        - remove keytimer hack documentation, that was for boot-floppies
+        - add documentation of d-i's boot time parameters, including the new
+          debian-installer/framebuffer=false
+        - remove the mailing list subscription info; boot time is not the
+          time to tell the user about this. In its place, make f9.txt be
+          about Debian.
+      - Remove DEBCONF_DEBUG setting from syslinux.cfg.
+      - Use bootscreen-subst on powerpc's boot.msg, too.
+      - Comment out the udeb apt status file stuff in get-packages, now is not
+        the time to be breaking the build with that.
+      - Build depend on elilo on ia64. This had better be the last one.
+  * Goswin von Brederlow
+    - Moved fetching of (u)debs into get-packages shell script.
+    - Changed sources.list to sources.list.udeb, added sources.list.deb.
+    - Allowed "deb file:/..." urls in /etc/apt/sources.list, (Closes: #221031)
+      simplified sed expression and change file to copy urls.
+    - Add explaining error message when apt-get update fails
+    - get-packages: Only seed dpkg status with libs when getting udebs
+    - pkg-lists/cdrom/alpha: missing input-modules-${kernel:Version}
+    - pkg-lists/mirror_udeb: lists for a partial mirror suitable for the CDs
+    - Drop pump-udeb (netboot on alpha, s390 and sparc) in favour of
+      dhcp-client-udeb
+    - debain/control: added Build-Depends: mkisofs
+    - daily-build: changed to copy last days images and rsync new ones
+    - daily-build: don't let the builder wait for logs, use tee
+    - No discover for mips/mipsel
+    - Added arch mips to the debian-installer.deb (Closes: #221534)
+  * Thiemo Seufer
+    - Fix error handling in tftpboot.sh
+  * Chris Tillman
+    - Add DEBCONF_PRIORITY note to powerpc boot message.
+    - Add MacRISC3 & 4 to ofboot.b for compatibility with G4/G5 powerpcs
+  * Mario Lang
+    - Add new boot floppy flavour "speakup" which uses a speakup-enabled
+      kernel version.
+    - Update the access flavour to use the same kernel version as the
+      speakup flavour.
+    - Update the access_drivers common and i386 pkg-list.
+  * Thiemo Seufer
+    - Sanitize tftpboot.sh. It aborts now on errors and won't move/copy
+      files around without good reason. Changed mipsel image generation
+      to t-rex.
+    - Add pkg-lists/netboot/mips.
+    - Add fdisk to the mips/mipsel CD images, add AT keyboard support
+      to mips image.
+    - Add AT keyboard support to mips demo image.
+    - Polish make/arch/linux-mips{,el} a bit.
+    - Switch config/arch/linux-mips to kernel 2.4.22 with -di flavour.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 13 Nov 2003 14:39:21 -0500
+
+debian-installer (20031113) unstable; urgency=low
+
+  * Joey Hess
+    - Add new loop-modules to bootfloppy, hd-media.
+    - Move input-modules from root floppy to bootfloppy, as the new
+      rootskel-bootfloppy prompts for the user to hit enter.
+    - Remove redundant usb-discover and usb-modules from root floppy;
+      the boot floppy takes care of that.
+    - Remove fat-modules and floppy-modules from the root floppy; they
+      boot floppy loads them.
+    - Create DEST before copying in DEST_KERNEL.
+    - ia64 build-depends on dosfstools. Closes: #219919
+    - sparc build-depends on genromfs. Closes: #220208
+    - remove brltty from everything except access. It is causing problems
+      (#219928) on sparc at least.
+    - add nic-extra-modules to netboot for i386, as it fits and netboot
+      should support as much as it can
+    - try to get full UTF-8 going on netboot
+    - add nano to netboot
+  * Richard Hirst
+    - Add mtools as a build-dep for ia64
+
+ -- Joey Hess <joeyh@debian.org>  Sun,  9 Nov 2003 19:59:13 -0500
+
+debian-installer (20031109) unstable; urgency=low
+
+  * Richard Hirst
+    - Remove efi-reader from ia64 cdrom pkglist for now; the one in the
+      archive is linked against libdebian-installer3 which is no longer
+      available.
+    - Stop including debootstrap-udeb in cdrom pkg-list for ia64.
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 07 Nov 2003 22:31:07 +0000
+
+debian-installer (20031106.1) unstable; urgency=low
+
+  * Enable ia64 in control file. (Build report from Jeff Bailey)
+  * Idempotency fix in debian/rules install.
+  * Put in some stuff to allow for more than one release per day.
+
+ -- Joey Hess <joeyh@debian.org>  Thu,  6 Nov 2003 15:12:48 -0500
+
+debian-installer (20031106) unstable; urgency=low
+
+  * Improved the copyright file, decided not to try to list the copyright
+    of every component of the images.
+  * Uppercased the md5sums filename.
+  * New retriever menu setup:
+    - add load-floppy and download-installer to floppy
+    - add load-installer to cdrom, netboot
+    - add load-iso to hd-media
+    - add load-cdrom, hw-detect-full, ide-core-modules, and cdrom-detect
+      to cd_drivers, which is actually usable now
+  * Remove pcmcia-udeb from pkg-lists, hw-detect took over.
+  * Make d-i-demo catch SIGINT, clean up properly.
+  * Fix kernel module package names in udeb_include for driver floppies.
+  * Alastair McKinstry:
+    - Add additional shade characters to fix the scroll bar in the newt
+      frontend.
+    - The terminfo entries are now provided by di-utils-terminfo, not
+      the Makefile.
+  * Richard Hirst:
+    - Misc ia64 fixes - define KERNEL_FLAVOUR, clean up pkglists, etc
+  * Improved the description of debian-installer-demo. Closes: #219255
+  * Build includes new cdebconf, fixed partconf, fixed bogl-bterm redraw
+    problems, etc, etc. Many other fixes and improvements.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 30 Oct 2003 15:12:38 -0500
+
+debian-installer (20031029) unstable; urgency=low
+
+  * Initial release.
+  * This includes a deb that lets a demo of the installer be run
+    (and triggers autobuilders), but the main payload is the
+    debian-installer-images tarball, which is designed to be unpacked
+    by ftp-master into the ftp site.
+  * Set architecture to i386, powerpc for now. More will be added
+    once d-i works on them well enough to distribute images.
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 22 Oct 2003 16:16:21 -0400
