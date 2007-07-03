@@ -1,0 +1,290 @@
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 32427 -->
+
+ <sect1 id="boot-troubleshooting">
+ <title>Resolució de problemes del procés d'instal·lació</title>
+<para>
+</para>
+
+  <sect2 condition="supports-floppy-boot" id="unreliable-floppies">
+  <title>Fiabilitat dels disquets</title>
+
+<para>
+
+El major problema de la gent que empra disquets per a instal·lar Debian
+sembla ser la fiabilitat dels disquets.
+
+</para><para>
+
+El disquet d'arrencada és el que té els problemes pitjors, car el
+maquinari el llegeix directament, abans de l'arrencada del Linux.
+Sovint, el maquinari no llegeix tan bé com ho fa el controlador de la
+disquetera del Linux, i en cas que llegisca dades incorrectes, pot fins
+i tot aturar-se sense donar cap missatge d'error. També hi pot haver
+fallades en els disquets dels controladors, la majoria dels quals
+es manifesten donant una gran quantitat de missatges d'errors d'I/O.
+
+</para><para>
+
+Si trobeu que se us atura el procés d'instal·lació en un disquet determinat,
+la primera cosa que s'ha de fer és tornar a descarregar-ne la imatge i
+escriure-la a un disquet <emphasis>diferent</emphasis>. Potser no n'hi haja
+prou de tornar a formatar el disquet problemàtic, fins i tot si sembla que
+s'ha tornat a formatar i s'ha escrit sense cap error. De vegades és útil
+provar d'escriure el disquet en un sistema diferent.
+
+</para><para>
+
+Un usuari ha informat que va haver d'escriure les imatges a
+<emphasis>tres</emphasis> disquets diferents fins que l'últim li va
+funcionar com calia.
+
+</para><para>
+
+D'altres han informat que només els ha calgut tornar a arrencar unes
+poques vegades amb el mateix disquet. Això és degut a errors del
+maquinari o del firmware dels controladors de la disquetera.
+
+</para>
+  </sect2>
+
+  <sect2><title>Configuració de l'arrencada</title>
+
+<para>
+
+Si teniu problemes i el nucli es penja durant l'arrencada,
+no reconeix els perifèrics o les unitats no es reconeixen com cal,
+cal primer de tot comprovar els paràmetres d'arrencada, tal com
+s'indica a <xref linkend="boot-parms"/>.
+
+</para><para>
+
+Si esteu fent servir un nucli configurat per vosaltres en lloc del de
+l'instal·lador, assegureu-vos que teniu configurat
+<userinput>CONFIG_DEVFS</userinput>. L'instal·lador necessita
+<userinput>CONFIG_DEVFS</userinput>.
+
+</para><para>
+
+Sovint, els problemes desapareixen si traieu maquinari addicional i
+perifèrics, i proveu aleshores d'arrencar de nou. <phrase arch="i386">Els
+mòdems interns, les targetes de so, i els dispositius Plug-n-Play poden ser
+especialment problemàtics.</phrase>
+
+</para><para>
+
+Si el sistema té una gran quantitat de memòria, superior a 512 MiB,
+i l'instal·lador es penja en arrencar el nucli, potser haureu d'indicar
+un argument d'arrencada a fi de limitar la quantitat de memòria que pot
+veure el nucli, com ara <userinput>mem=512m</userinput>.
+
+</para>
+  </sect2>
+
+  <sect2 arch="i386" id="i386-boot-problems">
+  <title>Problemes d'instal·lació usuals en &arch-title;</title>
+<para>
+
+Hi ha alguns problemes usuals en la instal·lació que es poden solucionar
+o evitar indicant certs paràmetres d'arrencada a l'instal·lador.
+
+</para><para>
+
+Alguns sistemes tenen disquets amb les <quote> línies de canvi del disc (DCL)
+invertides</quote>. Si rebeu errors de lectura del disquet, fins i tot si
+esteu segurs que el disquet està bé, proveu el paràmetre
+<userinput>floppy=thinkpad</userinput>.
+
+</para><para>
+
+En altres sistemes, com l'IBM PS/1 o el ValuePoint (que tenen controladores
+de disc ST-506), la unitat IDE pot no ser reconeguda com cal. Novament,
+intenteu-ho primer sense paràmetres i comproveu si la unitat es reconeix
+com cal. Si no, determineu la geometria de la unitat (cilindres, capçaleres
+i sectors), i empreu el paràmetre
+<userinput>hd=<replaceable>cilindres</replaceable>,<replaceable>capçaleres</replaceable>,<replaceable>sectors</replaceable></userinput>.
+
+</para><para>
+
+Si la màquina és molt antiga i el nucli es penja després del missatge
+<computeroutput>Checking 'hlt' instruction...</computeroutput>, aleshores
+empreu l'argument d'arrencada <userinput>no-hlt</userinput>, el qual
+deshabilita la comprovació.
+
+</para><para>
+
+Si la pantalla comença a comportar-se de manera estranya mentre s'arrenca el
+nucli, per exemple es posa blanca, negra, o mostra un batibull de píxels
+colorejats, potser la tarjeta de vídeo és problemàtica i no fa com cal la
+commutació al framebuffer. Podeu emprar el paràmetre d'arrencada
+<userinput>debian-installer/framebuffer=false</userinput> o
+<userinput>video=vga16:off</userinput> per a deshabilitar la consola del
+framebuffer. A causa de les limitacions de la funcionalitat de la consola,
+únicament hi haurà a l'abast la llengua anglesa per a la instal·lació.
+Consulteu <xref linkend="boot-parms"/> per als detalls.
+
+</para>
+
+  <sect3>
+  <title>Bloqueig del sistema durant la configuració del PCMCIA</title>
+<para>
+
+Alguns models de portàtil de Dell peten quan la detecció de dispositius
+PCMCIA tracta d'accedir a algunes adreces de hardware. Altres portàtils
+tenen problemes semblants. Si teniu un problema com aquest i no us cal la
+funcionalitat PCMCIA durant la instal·lació, podeu deshabilitar-la amb el
+paràmetre d'arrencada <userinput>hw-detect/start_pcmcia=false</userinput>.
+Podeu configurar-la després de la instal·lació i excloure el rang de
+recursos que causa problemes.
+
+</para><para>
+
+També podeu arrencar l'instal·lador en mode expert. Haureu d'introduir les
+opcions del rang de recursos que calen per al maquinari. Per exemple, si
+teniu un portàtil Dell dels esmentats abans, heu d'introduir
+<userinput>exclude port 0x800-0x8ff</userinput>. Hi ha una llista d'opcions
+usuals del rang de recursos a <ulink
+url="http://pcmcia-cs.sourceforge.net/ftp/doc/PCMCIA-HOWTO-1.html#ss1.12">la secció
+Configuració dels recursos del sistema del COM ES FA el PCMCIA (en anglès)</ulink>.
+Tingueu en compte que s'han d'ometre les comes quan introduïu aquest valor a
+l'instal·lador.
+
+</para>
+   </sect3>
+
+   <sect3>
+   <title>Bloqueig del sistema durant la càrrega dels mòduls USB</title>
+<para>
+
+Normalment, el nucli prova d'instal·lar els mòduls USB i el controlador
+del teclat USB a fi de permetre l'ús d'alguns teclats USB no estàndard.
+Tanmateix, hi ha alguns sistemes USB trencats on el controlador es penja
+en carregar-lo. Una possible solució pot ser deshabilitar el controlador
+USB en la configuració de la BIOS de la placa base. Una altra opció és
+introduir el paràmetre <userinput>debian-installer/probe/usb=false</userinput>
+a l'indicador d'arrencada, per evitar la càrrega dels mòduls.
+
+</para>
+   </sect3>
+  </sect2>
+
+  <sect2 id="kernel-msgs">
+  <title>Com interpretar els missatges del nucli durant l'arrencada</title>
+
+<para>
+
+Durant la seqüència d'arrencada, podeu veure nombrosos missatges del tipus
+<computeroutput>can't find <replaceable>quelcom</replaceable>
+</computeroutput>, o <computeroutput><replaceable>quelcom</replaceable> not
+present</computeroutput>, <computeroutput>can't initialize
+<replaceable>quelcom</replaceable></computeroutput>, o fins i tot
+<computeroutput>this driver release depends on
+<replaceable>quelcom</replaceable></computeroutput>.
+No us heu de preocupar per la majoria d'aquests missatges. Els veieu perquè
+el nucli dels sistema d'instal·lació s'ha fet perquè funcione a ordinadors
+amb molts dispositius perifèrics diferents. Òbviament, cap ordinador té
+tots els dispositius possibles, per tant el sistema operatiu potser es
+queixarà en cercar perifèrics que no hi ha. Potser veureu també que el
+sistema fa una pausa momentània. Això ocorre quan s'espera la resposta
+d'un dispositiu i aquest no hi és. Si trobeu que hi triga massa, podeu
+fer-vos després un kernel a mida (vegeu <xref linkend="kernel-baking"/>).
+
+</para>
+  </sect2>
+
+
+  <sect2 id="problem-report">
+  <title>Informes d'error</title>
+<para>
+
+Si aconseguiu completar la fase inicial d'arrencada però no podeu completar
+la instal·lació, l'opció Informes d'error del menú pot ser-vos útil.
+<phrase condition="sarge">
+Copia els arxius d'errors del sistema i informació sobre la configuració a
+un disquet proporcionat per l'usuari.</phrase>
+<phrase condition="etch">
+Us permet emmagatzemar a un disquet els arxius d'errors del sistema i
+informació sobre la configuració de l'instal·lador, o bé descarregar-los a
+un navegador web.
+</phrase>
+
+Aquesta informació pot proporcionar-vos pistes sobre què ha anat malament i
+com arreglar-ho.  Si aneu a emetre un informe d'error podeu afegir-hi
+aquesta informació.
+
+</para><para>
+
+Podeu trobar altres missatges d'instal·lació pertinents a
+<filename>/var/log/</filename> durant la instal·lació, i a
+<filename>/var/log/debian-installer/</filename>
+després que l'ordinador s'haja arrencat en el sistema ja instal·lat.
+
+</para>
+  </sect2>
+
+  <sect2 id="submit-bug">
+  <title>Emissió d'informes d'error</title>
+<para>
+
+Si encara teniu problemes, podeu enviar un informe d'instal·lació. Us animem
+a enviar també informes en cas que la instal·lació haja reeixit, per poder
+disposar de la major quantitat d'informació possible sobre el major nombre
+de configuracions de maquinari.
+
+</para><para condition="etch">
+
+Si teniu un sistema Debian en funcionament, la manera més fàcil d'emetre un
+informe d'instal·lació és instal·lar els paquets installation-report i
+reportbug (<command>apt-get install installation-report reportbug</command>)
+i executar l'ordre <command>reportbug installation-report</command>.
+
+</para><para>
+
+Empreu aquesta fitxa per als informes d'instal·lació, i emeteu-lo com un
+informe d'error respecte del pseudopaquet
+<classname>installation-reports</classname>, enviant-lo a
+<email>submit@bugs.debian.org</email> (en anglès).
+
+<informalexample><screen>
+Package: installation-reports
+
+Boot method: &lt;Com heu arrencat l'instal·lador Amb un CD? Amb un disquet? En xarxa?&gt;
+Image version: &lt;Indiqueu-ne la data i d'on l'heu obtinguda&gt;
+Date: &lt;Data i hora de la instal·lació&gt;
+
+Machine: &lt;Descripció de la màquina (p.ex., IBM Thinkpad R32)&gt;
+Processor:
+Memory:
+Partitions: &lt;empreu la informació de l'ordre df -Tl; preferentment la de la taula de particions sense cap format (raw)&gt;
+
+Informació d' lspci i lspci -n:
+
+Base System Installation Checklist:
+[O] = OK, [E] = Error (please elaborate below), [ ] = didn't try it
+
+Initial boot worked:    [ ]
+Configure network HW:   [ ]
+Config network:         [ ]
+Detect CD:              [ ]
+Load installer modules: [ ]
+Detect hard drives:     [ ]
+Partition hard drives:  [ ]
+Create file systems:    [ ]
+Mount partitions:       [ ]
+Install base system:    [ ]
+Install boot loader:    [ ]
+Reboot:                 [ ]
+
+Comentaris/Problemes:
+
+&lt;Descripció detallada de la instal·lació i qualsevol pensada, comentari
+      o idea que hàgeu tingut durant la instal·lació inicial.&gt;
+</screen></informalexample>
+
+En l'informe de l'error, descriviu el problema, incloent-hi els darrers
+missatges del nucli si es tracta d'una penjada d'aquest. Descriviu els
+passos que heu fet que han conduït al sistema a l'estat problemàtic.
+
+</para>
+  </sect2>
+ </sect1>

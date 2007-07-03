@@ -1,0 +1,1791 @@
+<!-- Start of file preparing/preparing.xml -->
+
+<chapter id="preparing">
+ <title
+>开始安装 &debian; 之前</title>
+<para
+>本章用于处理在启动安装程序安装 Debian 之前的准备工作。这包括备份您的数据，搜集您硬件的信息，以及获取其他一些必要的信息。 </para>
+
+
+<!-- Start of file preparing/install-overview.xml -->
+
+ <sect1 id="install-overview">
+ <title
+>安装概述</title>
+<para
+>先说一下有关重新安装的事情。使用 Debian 时，极少出现必须进行完全重新 安装的情况，可能导致这种情况的大多是硬盘的物理故障。 </para
+><para
+>许多常见的操作系统在遇到严重错误或者要升级到新的版本时，必须进行重新安装。就算不需要完全重新安装，您通常还得把您的各种程序在新的系统里也再重新安装一遍才行。 </para
+><para
+>在 &debian; 里，如果操作系统遇到出错的情况，大多数的时候您都能把它修复而不用重新安装。在这里，升级不再需要进行大规模的安装操作，您可以就地升级它，而这些程序也总能和新版的操作系统和平共处。如果一个程序的新版本需要其他程序的更新的版本来支持它，Debian 软件包管理系统会自动帮您确定所有必须的软件并把它们安装上。关键是，Debian 为了避免重新安装而做了大量努力，所以您 尽可以不用去烦心这些问题了：我们的安装程序<emphasis
+>不是</emphasis
+> 设计用来重装您的旧系统的。 </para
+><para
+>这是安装过程的每个步骤： </para>
+
+<orderedlist>
+<listitem
+><para
+>把将要用来安装系统的硬盘上的所有数据或者文档都备份下来； </para
+></listitem>
+<listitem
+><para
+>在开始整个安装过程之前，收集您的计算机的硬件信息和可能会用到的文档； </para
+></listitem>
+<listitem
+><para
+>在硬盘上为 Debian 留出可以用来创建分区的空间； </para
+></listitem>
+<listitem
+><para
+>如果您不是使用 Debian 安装光盘，请寻找和(或)下载安装程序软件，还有用于您电脑上的特殊硬件的驱动程序； </para
+></listitem>
+<listitem
+><para
+>设置从磁带、软盘、USB 盘，或者其它存有系统启动文件的设备上启动 (对于大多数 Debian 安装光盘的使用者来说，可以直接用这些光盘启动)； </para
+></listitem>
+<listitem
+><para
+>启动安装系统； </para
+></listitem>
+<listitem arch="not-s390"
+><para
+>选择要安装的语言； </para
+></listitem>
+<listitem arch="not-s390"
+><para
+>如果可能，激活网络连接； </para
+></listitem>
+
+<listitem arch="s390"
+><para
+>配置一个网络接口； </para
+></listitem>
+<listitem arch="s390"
+><para
+>开启新系统的 ssh 连接； </para
+></listitem>
+<listitem arch="s390"
+><para
+>加上一个或多个直接存取设备(DASD)； </para
+></listitem>
+
+<listitem
+><para
+>创建并挂载用来安装 Debian 的分区； </para
+></listitem>
+<listitem
+><para
+>等待自动下载、安装和设置 <firstterm
+>基本系统</firstterm
+>。 </para
+></listitem>
+<listitem
+><para
+>安装 <firstterm
+>启动引导器(boot loader)</firstterm
+> ，它负责启动 &debian; 和(或)已有的其他系统。 </para
+></listitem>
+<listitem
+><para
+>第一次加载新安装的系统，做一些系统初始设定； </para
+></listitem>
+<listitem arch="s390"
+><para
+>开启新系统的 ssh 连接； </para
+></listitem>
+<listitem
+><para
+>选择安装您要使用的其他的软件 (<firstterm
+>程序单元</firstterm
+> 和/或 <firstterm
+>软件包</firstterm
+>)； </para
+></listitem>
+</orderedlist>
+
+<para
+>如果您在安装过程中遇到问题，下面的信息可以帮助您找到每个步骤里涉及到那些软件包。有关这场安装“戏剧”的“主角”的介绍： </para
+><para
+>安装软件，<classname
+>debian-installer</classname
+>，是本手册的关注焦点。她将探测硬件并挂载相应的驱动程序，还要指导 <classname
+>dhcp-client</classname
+> 去设置网络连接，还将运行 <classname
+>debootstrap</classname
+> 去安装基本系统的软件包。在这个过程中，还有许多其他程序扮演着各自的角色，而 <classname
+>debian-installer</classname
+> 将一直到您第一次启动新系统时才完成她的使命。 </para
+><para
+>在加载新装的基本系统时，<classname
+>base-config</classname
+> 指导您添加用户、设置时区(通过 <classname
+>tzsetup</classname
+>)，并进行软件包安装系统的配置(使用 <classname
+>apt-setup</classname
+>)。然后，它将启动 <classname
+>tasksel</classname
+> 程序来安装以相互关系分成的几个大组软件，或者 <classname
+>aptitude</classname
+> 程序来让您挑选单独的软件包。 </para
+><para
+>当 <classname
+>debian-installer</classname
+> 程序运行结束，系统首次加载之前，您只有一个非常简单的基于命令行的系统。除非您在最后一个步骤里用 <classname
+>tasksel</classname
+> 或 <classname
+>aptitude</classname
+> 选择安装了能在您的显示器上显示窗口的图形界面，否则它将不会被自动安装。因为许多 &debian; 系统是被用作服务器，它们的工作根本不需要任何图形化的用户界面，所以它在这里只是一个可选项。 </para
+><para arch="not-s390"
+>要知道，X 系统是与 <classname
+>debian-installer</classname
+> 完全分开的，实际上它的使用要复杂得多。X 窗口安装系统的安装和问题解答不在本手册所关注的范围之内。 </para>
+ </sect1>
+
+<!--   End of file preparing/install-overview.xml -->
+
+<!-- Start of file preparing/backup.xml -->
+
+ <sect1 id="backup">
+ <title
+>记得备份您的所有数据！</title>
+<para
+>开始安装之前，请确定您已经把系统中所有数据都进行了备份。除了购买机器时预装的操作系统以外，如果这是您计算机上的第一个其他操作系统，很可能您得对硬盘进行重新分区，来给 Debian 腾出安装的空间。不管您用什么程序，分区都会使硬盘上的所有数据全部丢失。在我们的安装过程中使用的分区程序经过多年使用，被证明非常可靠，但它的功能也非常强大，您可能会为一次错误操作而付出代价。即使是已经备份过数据，您也要谨慎使用，最好在每次操作之前先认真考虑一下： 两分钟的思考可能会为您节省几个小时的不必要的恢复工作。 </para
+><para
+>如果您是想把电脑做成多重引导的系统，请先确定您手头上有电脑里已经存在的这些操作系统的安装介质。特别是当您把启动盘重新分区以后，您可能会发现必须重新安装原有操作系统的启动引导程序，某些情况下，还得重新安装该操作系统并恢复受影响分区上的文件。 </para>
+
+<para arch="m68k"
+>除了 BVM 和摩托罗拉 VMEbus 系列的计算机外，m68k 系统的计算机唯一支持的安装方式就是用 AmigaOS、TOS 或 MacOS 的引导程序从本地的硬盘或软盘上启动。所以，对于这种类型的计算机，您必须要有原来的操作系统用来启动 Linux。而为了在 BVM 和摩托罗拉 VMEbus 系列的计算机上启动 Linux，<quote
+>BVMBug</quote
+>或<quote
+>16xBug</quote
+>引导存储器是必须的。 </para>
+
+ </sect1>
+<!--   End of file preparing/backup.xml -->
+
+<!-- Start of file preparing/needed-info.xml -->
+
+ <sect1 id="needed-info">
+ <title
+>一些有用的信息</title>
+
+  <sect2>
+  <title
+>文档</title>
+
+   <sect3>
+   <title
+>安装手册</title>
+
+<para condition="for_cd"
+>您正在阅读的文档，是纯文本、HTML 或者 PDF 格式。 </para>
+
+<itemizedlist condition="for_cd"
+>&list-install-manual-files; </itemizedlist>
+
+<para condition="for_wdo"
+>您正在阅读的文档，是 Debian &releasename; 发行版安装指南的正式版本; 还有<ulink url="&url-release-area;/installmanual"
+>各种文件格式和不同语种的翻译</ulink
+>。 </para>
+
+<para condition="for_alioth"
+>您正在阅读的文档，是 Debian 下一个发行版安装指南的开发版本; 还有 <ulink url="&url-d-i-alioth-manual;"
+>各种文件格式和不同语种的翻译</ulink
+>。 </para>
+
+</sect3>
+
+
+   <sect3
+><title
+>硬件文档</title>
+<para
+>通常包含设置和使用您硬件的有用信息。 </para>
+
+ <!-- We need the arch dependence for the whole list to ensure proper xml
+      as long as not architectures have a paragraph -->
+ <itemizedlist arch="i386;m68k;alpha;sparc;mips;mipsel">
+<listitem arch="i386"
+><para>
+
+<ulink url="&url-hardware-howto;"
+>Linux 硬件兼容性指南</ulink>
+
+</para
+></listitem>
+
+<listitem arch="m68k"
+><para>
+
+<ulink url="&url-m68k-faq;"
+>Linux/m68k FAQ</ulink>
+
+</para
+></listitem>
+
+<listitem arch="alpha"
+><para>
+
+<ulink url="&url-alpha-faq;"
+>Linux/Alpha FAQ</ulink>
+
+</para
+></listitem>
+
+<listitem arch="sparc"
+><para>
+
+<ulink url="&url-sparc-linux-faq;"
+>Linux for SPARC Processors FAQ</ulink>
+
+</para
+></listitem>
+
+<listitem arch="mips;mipsel"
+><para>
+
+<ulink url="&url-linux-mips;"
+>Linux/Mips website</ulink>
+
+</para
+></listitem>
+
+</itemizedlist>
+   </sect3>
+
+
+   <sect3 arch="s390">
+   <title
+>&arch-title; Hardware References</title>
+<para
+>在 &arch-title; 上 Linux 2.4 版内核的安装指引和设备驱动程序 (DASD, XPRAM, Console, tape, z90 crypto, chandev, network) </para>
+
+<itemizedlist>
+<listitem
+><para>
+
+<ulink url="http://oss.software.ibm.com/developerworks/opensource/linux390/docu/l390dd08.pdf"
+>设备驱动程序与安装命令</ulink>
+
+</para
+></listitem>
+</itemizedlist>
+
+<para
+>IBM Redbook 讲述了如何将 Linux 与 zSeries 的 z/VM 和 &arch-title; 硬件组合。 </para>
+
+<itemizedlist>
+<listitem
+><para>
+
+<ulink url="http://www.redbooks.ibm.com/pubs/pdfs/redbooks/sg244987.pdf"
+>用于 &arch-title; 的 Linux</ulink>
+
+</para
+></listitem>
+</itemizedlist>
+
+<para
+>IBM Redbook 介绍了可用于 mainframe 的 Linux 发行版。其中没有关于 Debian 的章节，但对于所有的 &arch-title; 发行版，基本的安装概念是相同的。 </para>
+
+<itemizedlist>
+<listitem
+><para>
+
+<ulink url="http://www.redbooks.ibm.com/pubs/pdfs/redbooks/sg246264.pdf"
+>Linux for IBM eServer zSeries and &arch-title;: Distributions</ulink>
+
+</para
+></listitem>
+</itemizedlist>
+   </sect3>
+
+  </sect2>
+
+  <sect2 id="fsohi">
+  <title
+>提供硬件信息的资源</title>
+<para
+>许多情况下，安装程序能自动检测您的硬件。但作为预备，我们建议您还是在安装之前熟悉一下您的硬件比较好。 </para
+><para
+>获取硬件信息的途径有： </para>
+
+<itemizedlist>
+<listitem
+><para
+>每个硬件附带的手册。 </para
+></listitem>
+<listitem
+><para
+>您计算机的 BIOS 配置画面。在计算机启动时，您可以通过按组合键查看这些画面。请从您的手册确认组合键。通常，它是 <keycap
+>Delete</keycap
+> 键。 </para
+></listitem>
+<listitem
+><para
+>每个硬件的包装盒。 </para
+></listitem>
+
+<listitem arch="i386"
+><para
+>Windows 控制面板里面的系统窗口。 </para
+></listitem>
+<listitem
+><para
+>其他操作系统里面的系统命令或工具，包括文件管理器的显示。该资源对了解 RAM 和硬盘特别有用。 </para
+></listitem>
+<listitem
+><para
+>您的系统管理员或者互联网服务提供商。他们可以告诉您所需的网络和 e-mail 配置信息。 </para
+></listitem>
+</itemizedlist>
+
+<para>
+
+<table>
+<title
+>安装所需的硬件信息</title>
+<tgroup cols="2">
+<thead>
+<row>
+  <entry
+>硬件</entry
+><entry
+>您需要了解的信息</entry>
+</row>
+</thead>
+
+<tbody>
+<row arch="not-s390">
+  <entry morerows="5"
+>硬盘</entry>
+  <entry
+>拥有的容量</entry>
+</row>
+<row arch="not-s390"
+><entry
+>它们在系统上的次序</entry
+></row>
+<row arch="not-s390">
+  <entry
+>是 IDE 还是 SCSI(大多数计算机上是 IDE)</entry>
+</row>
+<row arch="not-s390"
+><entry
+>可用空间</entry
+></row>
+<row arch="not-s390"
+><entry
+>分区。</entry
+></row>
+<row arch="not-s390">
+  <entry
+>安装有其他操作系统的分区。</entry>
+</row>
+
+<row arch="not-s390">
+  <entry morerows="5"
+>显示器</entry>
+  <entry
+>型号与制造商。</entry>
+</row>
+<row arch="not-s390"
+><entry
+>支持的分辨率。</entry
+></row>
+<row arch="not-s390"
+><entry
+>水平扫描频率。</entry
+></row>
+<row arch="not-s390"
+><entry
+>垂直扫描频率。</entry
+></row>
+<row arch="not-s390">
+  <entry
+>支持的颜色深度(颜色数)</entry>
+</row>
+<row arch="not-s390"
+><entry
+>屏幕尺寸。</entry
+></row>
+
+<row arch="not-s390">
+  <entry morerows="3"
+>鼠标</entry>
+  <entry
+>类型：串口、PS/2 或 USB。</entry>
+</row>
+<row arch="not-s390"
+><entry
+>端口。</entry
+></row>
+<row arch="not-s390"
+><entry
+>制造商。</entry
+></row>
+<row arch="not-s390"
+><entry
+>按键数。</entry
+></row>
+
+<row arch="not-s390">
+  <entry morerows="1"
+>网络</entry>
+  <entry
+>型号与制造商。</entry>
+</row>
+<row arch="not-s390"
+><entry
+>适配器类型。</entry
+></row>
+
+<row arch="not-s390">
+  <entry morerows="1"
+>打印机</entry>
+  <entry
+>型号与制造商。</entry>
+</row>
+<row arch="not-s390"
+><entry
+>支持的打印分辨率。</entry
+></row>
+
+<row arch="not-s390">
+  <entry morerows="2"
+>视频卡</entry>
+  <entry
+>型号与制造商。</entry>
+</row>
+<row arch="not-s390"
+><entry
+>可用显存</entry
+></row>
+<row arch="not-s390">
+  <entry
+>支持的分辨率和颜色数(还需检验您显示器的能力)。</entry>
+</row>
+
+<row arch="s390">
+  <entry morerows="1"
+>DASD</entry>
+  <entry
+>设备数。</entry>
+</row>
+<row arch="s390"
+><entry
+>可用空间</entry
+></row>
+
+<row arch="s390">
+  <entry morerows="2"
+>网络</entry>
+  <entry
+>适配器类型。</entry>
+</row>
+<row arch="s390"
+><entry
+>设备数。</entry
+></row>
+<row arch="s390"
+><entry
+>OSA 卡的相对适配器号。</entry
+></row>
+
+</tbody
+></tgroup
+></table>
+
+</para>
+  </sect2>
+
+  <sect2>
+  <title
+>硬件兼容性</title>
+
+<para
+>多数品牌的产品在 Linux 上运行不会遇到麻烦。而且，对 Linux 的硬件支持每天都在改善。然而，Linux 仍然不能像某些操作系统那样可以在各种不同的硬件上运行。 </para
+><para arch="i386"
+>特别是，Linux 通常不能驱动那些需要某些版本 Windows 才运行的硬件上。 </para
+><para arch="i386"
+>虽然可以让某些 Windows 规格的硬件运行在 Linux 上，但这通常需要额外的工作。另外，对应 Windows 规格硬件的 Linux 驱动程序常指定在某一特定版本的 Linux 内核上。因此，它们很快就会被废弃。 </para
+><para arch="i386"
+>被称为 win-modem 的设备是这类硬件的典型。但打印机和其他设备也有是 Windows 规格的。 </para
+><para
+>您可以通过以下方式检验硬件兼容性： <itemizedlist>
+<listitem
+><para
+>检查制造商的网站来得到新的驱动程序。 </para
+></listitem>
+<listitem
+><para
+>查看关于仿真信息的网站或者手册。不常见的品牌有时可以使用常见品牌设备的驱动程序或者设置。 </para
+></listitem>
+<listitem
+><para
+>检查您计算机体系的 Linux 兼容性列表网站。 </para
+></listitem>
+<listitem
+><para
+>搜索互联网查找其他用户的经验。 </para
+></listitem>
+</itemizedlist>
+
+</para>
+  </sect2>
+
+  <sect2>
+  <title
+>网络设置</title>
+
+<para
+>如果您的计算机一天 24 小时都连在网上(即，以太网或等价的连接 &mdash; 而不是拨号连接)，您需要向您的网络系统管理员咨询这项信息。 <itemizedlist>
+<listitem
+><para
+>您的主机名(您也许可以自己决定)。 </para
+></listitem>
+<listitem
+><para
+>您的域名。 </para
+></listitem>
+<listitem
+><para
+>您的计算机 IP 地址。 </para
+></listitem>
+<listitem
+><para
+>您网络的网络掩码。 </para
+></listitem>
+<listitem
+><para
+>路由经过的默认网关的 IP 地址，如果您的网络 <emphasis
+>有</emphasis
+> 网关的话。 </para
+></listitem>
+<listitem
+><para
+>您的网络中作为 DNS(域名服务) 服务器的系统。 </para
+></listitem>
+</itemizedlist>
+
+</para
+><para condition="supports-dhcp"
+>另一方面，如果您的系统管理员告诉您有 DHCP 服务器可用，并且推荐使用，那么您不需了解这项信息，因为 DHCP 服务器会在安装过程中直接提供。 </para
+><para
+>如果您有一个无线网络，您应该找出： <itemizedlist>
+<listitem
+><para
+>您的无线网络的 ESSID。 </para
+></listitem>
+<listitem
+><para
+>WEP 安全 key(如果可用)。 </para
+></listitem>
+</itemizedlist>
+
+</para>
+  </sect2>
+
+ </sect1>
+<!--   End of file preparing/needed-info.xml -->
+
+<!-- Start of file preparing/minimum-hardware-reqts.xml -->
+
+ <sect1 id="minimum-hardware-reqts">
+<title
+>满足最低的硬件要求</title>
+<para
+>一旦您收集好您的计算机上硬件配置的相关信息，再复查一下您的硬件，就可以让您如愿以偿，安装上系统。 </para
+><para arch="not-s390"
+>基于您的需求，您也许可以用低于下面表格所列的配置装上系统。但是，如果无视这些建议的话，多数用户会安装失败。 </para
+><para arch="i386"
+>奔腾 100 是桌面系统的最低推荐配置，而 奔腾 II-300 则是服务器要求的最低推荐配置。 </para
+><para arch="m68k"
+>在 m68k 机器上安装，推荐使用 68030 或更快的处理器。您可能用比推荐稍小的硬盘空间就能完成安装。 </para
+><para arch="powerpc"
+>任何一台 OldWorld 或 NewWorld PowerPC 都可以用作一个不错的桌面系统。要是作服务器的话，建议至少要 132 Mhz 的机器才行。 </para>
+
+<table>
+<title
+>推荐的最低系统配置</title>
+<tgroup cols="3">
+<thead>
+<row>
+  <entry
+>安装类别</entry
+><entry
+>内存</entry
+><entry
+>硬盘</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>无桌面的系统</entry>
+  <entry
+>24 M</entry>
+  <entry
+>450 M</entry>
+</row
+><row>
+  <entry
+>桌面系统</entry>
+  <entry
+>64 M</entry>
+  <entry
+>1 G</entry>
+</row
+><row>
+  <entry
+>服务器</entry>
+  <entry
+>128 M</entry>
+  <entry
+>4 G</entry>
+</row>
+
+</tbody
+></tgroup
+></table>
+
+<para
+>这里有些常规 Debian 系统配置的样本。要了解各类软件需要占多大的硬盘空间，请参考<xref linkend="tasksel-size-list"/>。 </para>
+<variablelist>
+
+<varlistentry>
+ <term
+>常规服务器</term>
+ <listitem
+><para
+>这里有一台小型服务器范例，它适用于精简型服务器，即没有为 shell 的用户安装过多合用称手的软件。这类服务器 安装有：一个 FTP 服务、一个 web 服务、DNS、NIS 以及 POP 服务。这些服务总共需要用掉 100MB 的磁盘空间，您还需要另外算上服务所需的 数据占用的空间。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry arch="not-s390">
+ <term
+>桌面</term>
+ <listitem
+><para
+>标准的桌面用机安装有 X 窗口系统、完整的桌面环境、音频软件、编辑器等。这些软件包将总共需要约 2G 空间，尽管也可以不用这么多。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry arch="not-s390">
+ <term
+>工作控制台</term>
+ <listitem
+><para
+>这是被高度精简的用户机器，它没有安装 X 窗口系统或者 X 软件。可能适用于笔记本电脑或者手持计算机。其所需空间约为 140MB。 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+ <term
+>开发人员</term>
+ <listitem
+><para
+>这是包括所有开发软件包的桌面设置，例如 Perl、C、C++ 等。其所需空间约为 475MB。若是您为了其它用途，而另行安装了 X11 和其它的软件包，那么您需要为这类机器规划出约 800MB 空间。 </para
+></listitem>
+</varlistentry>
+
+</variablelist
+><para
+>要提醒您的是上面说的空间大小并没有把其它任何资料数据包含在内。这通常包含用户的文件、信件或者用户的数据。一般来说，最好在为您自己的文件和数据分配空间时，规划得宽裕一些。尤其是 <filename
+>/var</filename
+> 分区里装有许多 Debian 的特定状态信息和类似日志文件这样普通内容。<command
+>dpkg</command
+>所用的文件(含有所有已安装软件包的信息)很容易就会消耗掉 20MB。另外，<command
+>apt-get</command
+> 会在安装前将下载的软件包放在这里。您应当最少分配 100MB 的空间给 <filename
+>/var</filename
+>。 </para>
+
+ </sect1>
+
+<!--   End of file preparing/minimum-hardware-reqts.xml -->
+
+<!-- Start of file preparing/non-debian-partitioning.xml -->
+
+ <sect1 id="non-debian-partitioning">
+ <title
+>为多重启动系统事先分区</title>
+<para
+>为您的硬盘分区仅仅指的是将您的硬盘空间切分成几块。分区之后，每一块都是独立于其余部分的单独空间。这和在一个大房子里砌几堵墙有几分相似，如果您在其中一间房间里安置家具，那么这不会对其它房间有任何影响。 </para
+><para arch="s390"
+>本节中所有提到<quote
+>硬盘</quote
+>的地方，您应当把它理解为 &arch-title; 世界中的 DASD 或者 VM minidisk。同时，在这里，一台机器意指的是 LPAR 或者客户虚拟机。 </para
+><para
+>如果您已经在您的机器中安装有操作系统 <phrase arch="i386"
+> (Windows 9x, Windows NT/2000/XP, OS/2, MacOS, Solaris, FreeBSD, &hellip;) </phrase
+> <phrase arch="alpha"
+> (Tru64 (Digital UNIX), OpenVMS, Windows NT, FreeBSD, &hellip;) </phrase
+> <phrase arch="s390"
+> (VM, z/OS, OS/390, &hellip;) </phrase
+> <phrase arch="m68k"
+> (Amiga OS, Atari TOS, Mac OS, &hellip;) </phrase
+> 同时也希望把 Linux 装在同一块硬盘上，那么您就必须重新对硬盘分区。Debian 需要它自己专用 的硬盘分区。它不能被安装在 Windows 或者 MacOS 的分区上。它可以与其它 Linux 系统共享 一些分区，但是我们在这里不会对此进行说明。最起码，您要为 Debian 的根目录准备一个专用的 分区。 </para
+><para
+>您可以通过当前的操作系统中的分区工具软件来获知您现在的分区状况<phrase arch="i386"
+>，如 fdisk 和 PartitionMagic</phrase
+><phrase arch="powerpc"
+>，如 Drive Setup、HD Toolkit 和 MacTools</phrase
+><phrase arch="m68k"
+>，如 HD SC Setup、HDToolBox 和 SCSITool</phrase
+><phrase arch="s390"
+>，如 VM diskmap</phrase
+>分区工具软件总会提供一种办法让您查看现有的分区情况，而不作任何改动。 </para
+><para
+>通常情况下，改动一个已经建立文件系统的分区，会导致其中的数据信息遭到损毁。因而，您应当在重新分区之前总是先做一下备份。继续拿房子作比喻，在移动墙壁时，您最好在把挡路的家具都移开，否则就要冒家具被毁坏的危险。 </para
+><para arch="hppa" condition="FIXME">
+
+<emphasis
+>FIXME: write about HP-UX disks?</emphasis>
+
+</para
+><para
+>如果您的计算机配有不只一块硬盘，您或许可以考虑把其中一块硬盘专门分配给 Debian 使用。这样的话，您就不用在启动安装系统前再对那块硬盘进行分区了，安装程序自带的分区程序会 漂亮地完成这个任务。 </para
+><para
+>若是您的机器只有一块硬盘，而且您愿意把原来的操作系统全盘替换成 &debian;，那么您可以在启动安装系统后，待到安装时再进行分区(<xref linkend="partman"/>)。但是，只有当您使用存储于磁带、CD-ROM 或者联网的机器上的安装系统，并从它们启动安装程序时，上面的话才适用于您的情形。试想一下：假如您用放在硬盘上的文件启动，再在安装系统中对同一块 硬盘进行分区，这就会擦除那些启动文件，这时恐怕您只能祈求上苍保佑第一次就安装成功吧。在这种 情况下，若要让您的机器恢复正常，至少您还可以有几个办法可选，比如原先系统的安装磁带或 CD。 </para
+><para
+>倘若您的机器已经有多个分区，并且通过删除或替换它们中的一个或多个就能为 安装提供足够的空间，那么您一样也可以把分区操作延后，到安装时再使用 Debian 安装程序自带的分区工具。不过，您还是应当继续读完下面的文档，因为可能会存在一些特殊的情形。比如，分区表中现有分区的顺序问题，这也许会令您不得不在安装前先分好区。 </para
+><para arch="i386"
+>如果您的计算机上有 FAT 或 NTFS 文件系统，它被 DOS 和 Windows 使用，您可以等到用 Debian 安装程序中的分区工具来重新调整文件系统的大小。 </para
+><para
+>如果您的情况不属于上面任何一种，那么您需要在开始安装之前，事先为 Debian 腾出可用于 分区的空间。要是有分区是为其它操作系统准备的，您最好用该操作系统自己的分区软件来新建 这些分区。我们建议您 <emphasis
+>不要</emphasis
+> 用其它操作系统里的工具为 Debian 创建 Linux 分区。也就是说，您应当仅仅创建要保留的操作系统自身的分区。 </para
+><para
+>倘若您打算在同一台机器上安装多个操作系统的话，您应当在安装 Linux 之前，先把所有其它 系统都装好。Windows 和其它操作系统的安装过程可能会让您无法启动 Linux，也可能会怂恿您重新格式化不属于它们自己的分区。 </para
+><para
+>尽管您可以在这些操作之后再恢复回来，也可以避免它们，但是首先安装原有的系统就能够 帮您免除这些烦恼。 </para
+><para arch="powerpc"
+>为了能让 OpemFirmware 自动启动 &debian; Linux 分区必须被安置在其它分区之前，特别是 MacOS 的启动分区。在事先分区时，这一点您必须牢记在心。即，您必须在其它 可引导分区 <emphasis
+>之前</emphasis
+> 为 Linux 预留一个分区。(专门留给 Apple 的硬盘驱动程序的那些小分区并不是可引导的。) 您可以在真正安装时，用 Linux 的分区工具来删除当初预留的分区，再用 Linux 的分区取而代之。 </para
+><para
+>如果您现在有一块硬盘，这块硬盘上仅有一个分区(这是桌面电脑的通常设置)，同时您希望 能多重启动原有的操作系统和 Debian，那么您就需要： <orderedlist>
+<listitem
+><para
+>备份计算机里所有的数据。 </para
+></listitem>
+<listitem
+><para
+>从原有操作系统的安装介质(如 CD-ROM 和 磁带)启动。<phrase arch="powerpc"
+>当从 MacOS CD 启动时，按住 <keycap
+>c</keycap
+> 键不放，这样就能启用 CD 作为当前的 MacOS 系统。</phrase
+> </para
+></listitem>
+<listitem
+><para
+>使用原有系统里的分区工具来新建属于原来系统的分区。为 &debian; 或者预留一个分区，或者腾出一块空闲空间。 </para
+></listitem>
+<listitem
+><para
+>把原有的操作系统安装到属于它的新分区上。 </para
+></listitem>
+<listitem
+><para
+>启动到原有的操作系统，以确保一切正常，再下载 Debian 安装程序的启动文件。 </para
+></listitem>
+<listitem
+><para
+>启动 Debian 安装程序，并继续安装 Debian。 </para
+></listitem>
+</orderedlist>
+
+</para>
+
+
+<!-- Start of file preparing/nondeb-part/alpha.xml -->
+
+
+  <sect2 arch="alpha"
+><title
+>Tru64 UNIX 下分区</title>
+<para
+>Tru64 UNIX，前身是 Digital UNIX，更早是 OSF/1，采用的分区方式类似于 BSD 的<quote
+>disk label</quote
+>，它允许每个磁盘上最多八个分区。分区命名在 Linux 下从<quote
+>1</quote
+>到<quote
+>8</quote
+>，在 UNIX 下是按<quote
+>字母次序</quote
+>从<quote
+>a</quote
+>到<quote
+>h</quote
+>。Linux 内核 2.2 或更高的版本是<quote
+>1</quote
+>对应<quote
+>a</quote
+>，<quote
+>2</quote
+>对应<quote
+>b</quote
+>，依此类推。例如，<filename
+>rz0e</filename
+> 是在 Tru64 UNIX 中的命名，而 <filename
+>sda5</filename
+> 是在 Linux 里的名称。 </para
+><para
+>Tru64 磁盘标签下的分区可以重叠。此外，如果以前磁盘在 Tru64 下使用，<quote
+>c</quote
+>分区要求扩展到整个磁盘(因此会覆盖其他所有的非空分区)。在 Linux 下这是 <filename
+>sda3</filename
+> 源于 <filename
+>sda</filename
+> (<filename
+>sdb3</filename
+> 对应于 <filename
+>sdb</filename
+>，等等)。然而，&d-i; 使用的 partman 分区工具当前尚不能处理重叠的分区。因此，目前不推荐在 Tru64 和 Debian 之间共享磁盘。完成安装之后，Tru64 的磁盘分区可以挂载到 Debian 之下。 </para
+><para
+>另外一个约定俗成的要求是分区<quote
+>a</quote
+>起始于磁盘开始处，因此它总包含具有磁盘标签的引导块。如果您从该磁盘启动 Debian，您至少需要给它 2MB 空间以在存储 aboot 和内核。注意，此分区仅为兼容考虑；您千万不要将文件系统置于其上，否则会破坏数据。 </para
+><para
+>我们可以，也有理由，让 UNIX 和 Linux 共享交换分区。这时就需要在该分区上使用 <command
+>mkswap</command
+>。因为 UNIX 将破坏 swap 标志，所以每次从 UNIX 到 Linux 重启后都要重新执行一次。您可以让 <command
+>mkswap</command
+> 从 Linux 的启动脚本里面运行，时间是在用 <command
+>swapon -a</command
+> 添加交换分区之前。 </para
+><para
+>如果您想在 Linux 中挂载 UNIX 分区，注意 Digital UNIX 可以使用两种不同的文件系统类型，UFS 和 AdvFS，而 Linux 只能识别前者。 </para>
+  </sect2>
+
+  <sect2 arch="alpha"
+><title
+>Windows NT 下分区</title>
+
+<para
+>Windows NT 使用 PC 风格的分区表。如果您要处理已存在的 FAT 或 NTFS 分区，推荐使用 Windows NT 本身的工具(或者，照惯例，您可以用 AlphaBIOS 配置菜单里面的工具重新分区)。否则，真没有必要从 Windows 来分区，Linux 的分区工具可以做得更好。注意，如果您运行 NT，磁盘管理器也许会建议您写一个<quote
+>harmless signature</quote
+>到您的非 Windows 的磁盘上。<emphasis
+>千万别</emphasis
+>让它那样做，这个标志会破坏该分区上的信息。 </para
+><para
+>如果您计划从 ARC/AlphaBIOS/ARCSBIOS 控制台引导 Linux，您也许需要给 MILO 一个(小的) FAT 分区。5 Mb 就足够了。如果已经安装了 Windows NT，它的 6 Mb 启动分区可以用来满足此要求。Debian &releasename; 不支持安装 MILO。如果您的系统上已经有 MILO，或者从其他介质安装，Debian 仍然可以从 ARC 启动。 </para>
+  </sect2>
+<!--   End of file preparing/nondeb-part/alpha.xml -->
+
+<!-- Start of file preparing/nondeb-part/i386.xml -->
+
+
+  <sect2 arch="i386"
+><title
+>从 DOS 或 Windows 分区</title>
+<para
+>如果您想在已有的 FAT 或 NTFS 分区上动手，那么建议您或者按照下面介绍的方案操作，或者使用 Windows 或者 DOS 自己的工具软件。否则的话，真的没必要从 DOS 或者 Windows 分区，一般来说，Linux 的分区软件会做得更好。 </para
+><para
+>但是，如果您有一块 IDE 接口的大硬盘，而且使用的既不是 LBA 寻址或 overlay 驱动 (有时候硬盘厂商会提供这种驱动)，也没用新款(1998 年以后)的支持大硬盘访问扩展的 BIOS，那么您必须小心地划分 Debian 的引导(boot)分区。在这种情形下，您一定要把引导分区分在 硬盘开始的 1024 柱面之内(BIOS 不换算的话，大约 524 MB)。为此，您可能需要移动硬盘上的 FAT 或 NTFS 分区。 </para>
+
+   <sect3 id="lossless">
+   <title
+>在 DOS、Win-32 或者 OS/2 上的无损分区 </title>
+
+<para
+>各常见的安装中，其中有一种就是希望在已经安装有 DOS(含 Windows 3.1)、Win32(如 Windows 95、98、Me、NT、2000、XP) 或者 OS/2 的系统上加装 Debian 到同一块硬盘的同时，保留原有系统。注意，安装程序支持重设被 DOS 和 Windows 使用的 FAT 和 NTFS 文件系统的容量。您只需启动安装程序，选择 <menuchoice
+> <guimenuitem
+>手动修改分区表</guimenuitem
+> </menuchoice
+> 选项，并选择需要调整大小的分区，指定新的尺寸。在多数情况下您毋须使用下面说明的方法。 </para
+><para
+>在您继续之前，您应该先想好如何分割硬盘。本节所述的方法只会把一个分区一分为二。分出来的其中一片放原来的操作系统，而另一片则归 Debian 使用。在 Debian 的 安装过程中，您会有机会把您认为合适的那部分硬盘划归 Debian 使用。比如说，用作交换分区或者放置文件系统。 </para
+><para
+>办法就是在更改分区信息之前，把这个分区中的所有的数据移到分区的前面部分，这样数据就会分毫无损。有一点很重要，即，在移动数据之后，和重新分区之前这段时间之内，尽量不要往分区的后部写数据。否则就会减少从能该分区分出去的空间大小。 </para
+><para
+>第一件需要的东西是一份 <command
+>fips</command
+> 的拷贝。您可以从离您最近的 Debian 镜像里的 <filename
+>tools/</filename
+> 目录下载它。解开这个 zip 压缩文件，把 <filename
+>RESTORRB.EXE</filename
+>、<filename
+>FIPS.EXE</filename
+> 和 <filename
+>ERRORS.TXT</filename
+> 复制到一张启动软盘里。您可以用在 DOS 下面用 <filename
+>sys a:</filename
+> 来制作启动盘。<command
+>fips</command
+> 带有相当不错的文档，您也许会想看看的。倘若您正在用磁盘压缩驱动程序或者磁盘管理器，那么您绝对有必要读一下那个文档。在您为这块硬盘清理磁盘碎片<emphasis
+>之前</emphasis
+> 请先做一张启动盘并好好阅读那份文档。 </para
+><para
+>下一件要做的事，是把所有的数据移动到分区的前面部分。DOS 自 6.0 后就带有 <command
+>defrag</command
+> 程序，它可以很方便地完成这个任务。请参阅 <command
+>fips</command
+> 文档查看其他可用来执行此任务的软件列表。要提醒一下，如果您用的是 Windows 9x，那么必须在 Windows 里运行 <command
+>defrag</command
+>，原因是 DOS 不能识别 Windows 95 及其以后版本所使用的支持长文件名的 VFAT 分区。 </para
+><para
+>磁盘碎片清理程序(defragmenter)运行完毕后(如果是硬盘比较大，那么得等上一会儿了)，用您在软驱里生成的 <command
+>fips</command
+> 软盘重启。只须输入 <filename
+>a:\fips</filename
+> 然后按照提示操作。 </para
+><para
+>需要提醒一下，如果觉得 <command
+>fips</command
+> 不好用，还有许多其它的分区工具可供差遣。 </para>
+   </sect3>
+
+   <sect3 id="partitioning-for-dos"
+><title
+>为 DOS 分区</title>
+
+<para
+>如果您用 Linux 的工具软件来为 DOS 硬盘分区，或者改动 DOS 分区的大小的话，请注意，有许多人在这样做了以后，在使用新分出来的或者大小被改变的 FAT 分区的过程中发现存在着各种各样的问题。举例来说，有些人回报说发现性能下降，有的人则在使用 <command
+>scandisk</command
+> 时发现有一致性(consistent)的问题，还有其它在 DOS 或 Windows 中发现的各种古怪的错误。 </para
+><para
+>显然，当您为 DOS 新建分区或者改动分区大小时，最好总是把第一个扇区全部清零。在运行 DOS 的 <command
+>format</command
+> 命令之前，在 Linux 系统中，像这样做： <informalexample
+><screen
+># dd if=/dev/zero of=/dev/hdXX bs=512 count=4
+</screen
+></informalexample>
+
+</para>
+   </sect3>
+  </sect2>
+<!--   End of file preparing/nondeb-part/i386.xml -->
+
+<!-- Start of file preparing/nondeb-part/m68k.xml -->
+
+
+  <sect2 arch="m68k"
+><title
+>在 AmigaOS 下分区</title>
+<para
+>如果您运行 AmigaOS，您可以使用 <command
+>HDToolBox</command
+> 程序在安装之前调整您的分区。 </para>
+  </sect2>
+
+  <sect2 arch="m68k"
+><title
+>在 Atari TOS 下分区</title>
+<para
+>Atari 的分区 ID 是三个 ASCII 字符，<quote
+>LNX</quote
+>用于数据，<quote
+>SWP</quote
+>用于交换分区。如果使用小内存安装方式，还需要一个小的 Minix 分区(大约 2MB)，它的 ID 是<quote
+>MNX</quote
+>。错误的设置分区 ID 不仅会因为 Debian 无法识别分区而中断安装进程，还会造成 TOS 使用 Linux 分区，让硬盘驱动程序混乱，使得整个磁盘无法访问。 </para
+><para
+>有很多第三方的分区工具(Atari <command
+>harddisk</command
+> 工具不允许修改分区 ID)，本手册无法对它们都进行详细说明。下面的说明涵盖了 <command
+>SCSITool</command
+> (来自 Hard+Soft GmBH)。 <orderedlist>
+<listitem
+><para
+>启动 <command
+>SCSITool</command
+> 然后选择您要分区的磁盘(<guimenu
+>Disk</guimenu
+> 菜单中的 <guimenuitem
+>select</guimenuitem
+>)。 </para
+></listitem>
+<listitem
+><para
+>从 <guimenu
+>Partition</guimenu
+> 菜单，选择 <guimenuitem
+>New</guimenuitem
+> 来添加新分区或者修改现有分区的大小，或选择 <guimenuitem
+>Change</guimenuitem
+> 来修改指定的分区。除非您已经创建了合适大小的分区并只想修改分区 ID，否则 <guimenuitem
+>New</guimenuitem
+> 大概是最佳选择。 </para
+></listitem>
+<listitem
+><para
+>在 <guimenuitem
+>New</guimenuitem
+> 选项中，从提示初始设置的对话框里选择 <guilabel
+>existing</guilabel
+>。接下来的窗口显示的是现有分区的列表，您可以通过滚动按钮进行调节，或者直接点击条图。分区列表的第一列是分区类型，点击文本框就可以编辑它。当您完成分区设置，用 <guibutton
+>OK</guibutton
+> 按钮保存并离开窗口。 </para
+></listitem>
+<listitem
+><para
+>在 <guimenuitem
+>Change</guimenuitem
+> 选项中，从列表里面选择要修改的分区，然后在对话框中选择 <guilabel
+>other systems</guilabel
+>。接下来的窗口会列出该分区位置的详细信息，并让您修改分区 ID。用 <guibutton
+>OK</guibutton
+> 按钮保存并离开窗口。 </para
+></listitem>
+<listitem
+><para
+>记下您为了使用 Linux 而创建或修改的每个分区的 Linux 名称 &mdash; 参考 <xref linkend="device-names"/>。 </para
+></listitem>
+<listitem
+><para
+>退出 <command
+>SCSITool</command
+> 使用 <guimenuitem
+>Quit</guimenuitem
+> 选项，位于 <guimenu
+>File</guimenu
+> 菜单下。计算机将重新启动以确保 TOS 会使用修改过的分区表。如果您修改了任何 TOS/GEM 分区，它们将会失效并要重新初始化(我们已经告诉过您需要备份磁盘上的所有数据，不是吗？)。 </para
+></listitem>
+</orderedlist>
+
+</para
+><para
+>在 Linux/m68k 中有一个分区工具，在安装系统中被称为 <command
+>atari-fdisk</command
+>，但是我们现在建议您使用 TOS 分区编辑器或其他的磁盘工具来对硬盘分区。如果您的分区编辑器没有编辑分区类型的选项，您可以在后续阶段做这项重要任务 (从启动临时安装 RAMdisk)。<command
+>SCSITool</command
+> 是我们所知的唯一支持选择任意分区类型的分区编辑器。也许还有其他的，请选择一个符合您要求的工具。 </para>
+</sect2>
+
+  <sect2 arch="m68k"
+><title
+>在 MacOS 下分区</title>
+<para
+>Macintosh 下经过测试的分区工具包括 <command
+>pdisk</command
+>、<command
+>HD SC Setup</command
+> 7.3.5 (Apple)、<command
+>HDT</command
+> 1.8 (FWB)、<command
+>SilverLining</command
+> (LaCie) 和 <command
+>DiskTool</command
+> (Tim Endres, GPL)。对 <command
+>HDT</command
+> 和 <command
+>SilverLining</command
+> 要完整版。Apple 工具需要打补丁才能识别第三方的磁盘 (如何给 <command
+>HD SC Setup</command
+> 打补丁(使用 <command
+>ResEdit</command
+>)的说明位于 <ulink url="http://www.euronet.nl/users/ernstoud/patch.html"
+></ulink
+>)。 </para
+><para
+>对基于 IDE 的 Mac，您需要使用 <command
+>Apple Drive Setup</command
+> 为 Linux 分区创建空闲空间，然后在 Linux 下完成分区，或者使用 MacOS 版的 pdisk，它可以从 MkLinux FTP 服务器获得。 </para>
+</sect2>
+
+<!--   End of file preparing/nondeb-part/m68k.xml -->
+
+<!-- Start of file preparing/nondeb-part/sparc.xml -->
+
+
+  <sect2 arch="sparc"
+><title
+>在 SunOS 下分区</title>
+
+<para
+>从 SunOS 分区非常完美。事实上，如果您倾向在同一台计算机上使用 SunOS 和 Debian，推荐在安装 Debian 之前使用 SunOS 进行分区。Linux 内核可以识别 Sun 的磁盘标签，因此不会有任何问题。只需要在启动盘的首 1GB 范围里面给 Debian 根分区留有足够空间。您也可以将内核映像放在 UFS 分区里，如果这比设定根分区的位置更简单的话。SILO 支持从 EXT2 (Linux)、UFS (SunOS)、romfs 和 iso9660 (CDROM) 分区启动 Linux 和 SunOS。 </para>
+  </sect2>
+
+  <sect2 arch="sparc"
+><title
+>从 Linux 或其他 OS 分区</title>
+
+<para
+>无论使用什么系统分区，您要确保在您的启动盘上创建<quote
+>Sun disk label</quote
+>标签。这是 OpenBoot PROM 能识别的唯一分区方案，也是您唯一可以启动的方案。在 <command
+>fdisk</command
+> 里面，<keycap
+>s</keycap
+> 键用于创建 Sun 磁盘标签。您只须在没有 Sun 磁盘标签的磁盘上执行这个操作。如果您使用了一个被 PC (或其他体系)格式化过的磁盘，您必须创建新的磁盘标签，不然会有磁盘排列问题出现。 </para
+><para
+>您也许使用 <command
+>SILO</command
+> 作为您的 boot loader (运行操作系统内核的小程序)。<command
+>SILO</command
+> 对分区尺寸和位置有明确的要求，请参阅 <xref linkend="partitioning"/>。 </para>
+  </sect2>
+<!--   End of file preparing/nondeb-part/sparc.xml -->
+
+<!-- Start of file preparing/nondeb-part/powerpc.xml -->
+
+
+  <sect2 arch="powerpc"
+><title
+>在 MacOS/OSX 下分区</title>
+
+<para
+><application
+>Apple Drive Setup</application
+> 程序可以在 MacOS CD 的 <filename
+>Utilities</filename
+> 文件夹里面找到。它并不能调整已经存在的分区，而仅限于一次性完成整个磁盘的分区。硬盘分区并不会展现在 <application
+>Drive Setup</application
+> 中。 </para
+><para
+>记住要为 GNU/Linux 创建一个占位用的是分区，最好是磁盘布局中的第一个。它的类型无关紧要，在后面的 &debian; 安装程序中，它会被删除并替换。 </para
+><para
+>如果您计划同时安装 MacOS 9 与 OS X，最好为 OS 9 和 OS X 创建不同的分区。如果将它们安装在同一分区，就必须使用 <application
+>Startup Disk</application
+> (并重启)来选择它们两个，而在启动时是无法对两个操作系统进行选择的。使用不同的分区，如果在启动时按住 <keycap
+>option</keycap
+> 键就可以显示出 OS 9 和 OS X 两个不同的选项，而且这些分开的选项也可以被安装到 <application
+>yaboot</application
+> 启动菜单里面。还有，Startup Disk 将无法保证其他可挂载的分区的可靠性，这可能会影响 GNU/Linux 启动。OS 9 和 OS X 分区从 OS 9 和 OS X 中都能访问。 </para
+><para
+>GNU/Linux 不能读取 UFS 分区，但支持 HFS+ (又称 MacOS Extended) 分区。OS X 要求使用这两个分区类型之一作为引导分区。MacOS 9 能安装到 HFS (又称 MacOS Standard) 或 HFS+ 上。建一个交换信息分区就可以很方便地在 MacOS 和 GNU/Linux 系统间共享信息。HFS，HFS+ 和 MS-DOS FAT 分区都能被 MacOS 和 Linux 支持。 </para>
+  </sect2>
+<!--   End of file preparing/nondeb-part/powerpc.xml -->
+
+ </sect1>
+<!--   End of file preparing/non-debian-partitioning.xml -->
+
+<!-- Start of file preparing/pre-install-bios-setup.xml -->
+
+ <sect1 id="pre-install-bios-setup">
+ <title
+>安装前的硬件和操作系统的相关设置</title>
+<para
+>在本节中，我们将讨论安装之前有关硬件设置的一些问题。如果这些问题的确存在的话，您就需要在安装 Debian 前先做一些准备工作了。一般来说，准备工作包括：检查固件(firmware) 以及为您的系统修改固件中的设定。所谓<quote
+>固件</quote
+>就是硬件运行所需的核心软件。它在系统引导过程(即开机之后)中起到了至关重要的作用。我们同时也会着重提出一些硬件问题，您系统上这些硬件问题在将会影响到 &debian; 的可靠性。 </para>
+
+
+<!-- Start of file preparing/bios-setup/i386.xml -->
+
+
+  <sect2 arch="i386" id="bios-setup"
+><title
+>BIOS 设置菜单的使用</title>
+
+<para
+>BIOS 为引导您的机器提供了基本的帮助，进而能让您的操作系统能访问您的硬件。您的系统应该会有 BIOS 的设置菜单，通过它，我们就能配置 BIOS。在进行安装 前，您 <emphasis
+>一定要</emphasis
+> 确保您 BIOS 的设置是正确无误的。否则，可能会导致经常性的系统崩溃或者根本无法安装 Debian。 </para
+><para
+>本节接下来的部分取自 <ulink url="&url-pc-hw-faq;"
+></ulink
+>中对<quote
+>如何进入 CMOS 设置菜单</quote
+>一问的回答。您怎样才能进入 BIOS(或<quote
+>CMOS</quote
+>) 设置菜单取决于 BIOS 软件的作者是谁： </para>
+
+<!-- From: burnesa@cat.com (Shaun Burnet) -->
+<variablelist>
+
+<varlistentry>
+ <term
+>AMI BIOS</term>
+ <listitem
+><para
+><keycap
+>Delete</keycap
+> 键，在 POST(开机自检) 过程中 </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+ <term
+>Award BIOS</term>
+ <listitem
+><para
+><keycombo
+> <keycap
+>Ctrl</keycap
+><keycap
+>Alt</keycap
+><keycap
+>Esc</keycap
+> </keycombo
+>，或 <keycap
+>Delete</keycap
+>键，在 POST 过程中 </para
+></listitem>
+</varlistentry>
+
+<varlistentry
+><term
+>DTK BIOS</term>
+ <listitem
+><para
+><keycap
+>Esc</keycap
+>键，在 POST 过程中 </para
+></listitem>
+</varlistentry>
+
+<varlistentry
+><term
+>IBM PS/2 BIOS</term>
+ <listitem
+><para
+><keycombo
+> <keycap
+>Ctrl</keycap
+><keycap
+>Alt</keycap
+><keycap
+>Insert</keycap
+> </keycombo
+> 在按下面的组合键之后 <keycombo
+> <keycap
+>Ctrl</keycap
+><keycap
+>Alt</keycap
+><keycap
+>Delete</keycap
+> </keycombo
+> </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+ <term
+>Phoenix BIOS</term>
+ <listitem
+><para
+><keycombo
+> <keycap
+>Ctrl</keycap
+><keycap
+>Alt</keycap
+><keycap
+>Esc</keycap
+> </keycombo
+> 或 <keycombo
+> <keycap
+>Ctrl</keycap
+><keycap
+>Alt</keycap
+><keycap
+>S</keycap
+> </keycombo
+> 或 <keycap
+>F1</keycap
+> </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>若希望知道有关 BIOS 其它功能和设置的信息，您可以参阅 <ulink url="&url-invoking-bios-info;"
+></ulink
+>。 </para
+><para
+>有些 &arch-title; 架构的机器在 BIOS 中没有附带 CMOS 设置菜单。要对它们进行设置，就需要有相应的 CMOS 设置软件。如果您没有与您机器对应的安装或者诊断盘片，那么您不妨试一下共享软件或自由软件。请去以下网址找找看 <ulink url="&url-simtel;"
+></ulink
+>。 </para>
+  </sect2>
+
+  <sect2 arch="i386" id="boot-dev-select"
+><title
+>选择引导设备</title>
+
+<para
+>许多 BIOS 的设置菜单都能让您选择用来引导系统的设备。我们来设置一下，让它先在 <filename
+>A:</filename
+> (第一个软驱)中找寻可引导的操作系统，不行的话，再在第一个 CD-ROM 设备(有可能就是 <filename
+>D:</filename
+> 或 <filename
+>E:</filename
+>)中找，然后接着在 <filename
+>C:</filename
+>(第一块硬盘)找。照这样设定的话，就能让您从软盘或者 CD-ROM 引导。这是安装 Debian 最常用的两个引导设备。 </para
+><para
+>如果您有较新型号的 SCSI 控制器，而且您的 CD-ROM 是接在它上面的，那么您很可能 可以从这个 CD-ROM 引导。您所要做的仅仅是在您的控制器的 SCSI-BIOS 的设置中 允许从 CD-ROM 引导系统。 </para
+><para
+>另外一个常见的选项是从 USB 存储器(也叫 USB 记忆棒或者 U 盘)引导。有些 BIOS 支持从 USB 存储器直接引导，而有的 BIOS 不行。如果要从 USB 设备引导系统的话，您可能需要在 BIOS 设置中，让系统从 <quote
+>Removable drive</quote
+> 或者 <quote
+>USB-ZIP</quote
+> 引导。 </para
+><para
+>下面讲述了有关如何设置启动顺序的一些细节。请记住，在安装完 Linux 后，要恢复原来的启动顺序，这样，您就能像以前一样从硬盘启动了。 </para>
+
+   <sect3 id="ctbooi">
+   <title
+>修改 IDE 接口计算机的引导顺序</title>
+
+<orderedlist>
+<listitem
+><para
+>当您的计算机启动时，可以按下某些键进入 BIOS 的设置软件。一般来说，按 <keycap
+>Delete</keycap
+> 键就可以了。若要知道按键的确切信息，可以参考硬件的相关文档。 </para
+></listitem>
+<listitem
+><para
+>在 BIOS 设置软件中可以查看引导顺序。具体在 BIOS 的什么地方看，这和您的 BIOS 有关。不管如何，您要找的是列有驱动器名的栏位。 </para
+><para
+>对 IDE 机器而言，列表里常见的表项是 C、A、cdrom 或者 A、C、cdrom。 </para
+><para
+>C 就是硬盘，而 A 则是软驱。 </para
+></listitem>
+<listitem
+><para
+>修改启动顺序的设置，让 CD-ROM 或者软盘排在第一位。通常，用 <keycap
+>Page Up</keycap
+>或者 <keycap
+>Page Down</keycap
+> 键能够循环地选中可能的选项。 </para
+></listitem>
+<listitem
+><para
+>然后，保存您对设置的修改。屏幕上的提示会告诉您如何才能保存您的配置。 </para
+></listitem>
+</orderedlist>
+   </sect3>
+
+   <sect3 id="ctboos">
+   <title
+>修改 SCSI 接口计算机的引导顺序</title>
+<para>
+
+<orderedlist>
+<listitem
+><para
+>当您的计算机启动时，可以按下某些键进入 SCSI 的设置软件。 </para
+><para
+>计算机启动过程中，您可以在内存检测结束后，当屏幕出现如何进入 BIOS 设置程序的提示的时候，启动 SCSI 设置软件。 </para
+><para
+>您要按的键通常因设置软件而不同。一般来说，是按 <keycombo
+><keycap
+>Ctrl</keycap
+><keycap
+>F2</keycap
+></keycombo
+>。若要知道按键的确切信息，还是要参考硬件的相关文档。 </para
+></listitem>
+<listitem
+><para
+>找到用来修改引导顺序的工具软件。 </para
+></listitem>
+<listitem
+><para
+>通过这个工具软件修改设置，让光盘驱动器的 SCSI ID 排在列表的首位。 </para
+></listitem>
+<listitem
+><para
+>然后，保存您对设置的修改。屏幕上的提示会告诉您如何才能保存您的配置。通常，您需要按下 <keycap
+>F10</keycap
+>。 </para
+></listitem>
+</orderedlist>
+
+</para>
+   </sect3>
+  </sect2>
+
+  <sect2 arch="i386">
+  <title
+>BIOS 设置的其余项目</title>
+
+   <sect3 id="cd-settings"
+><title
+>CD-ROM 的设置</title>
+<para
+>有些 BIOS 系统(如 Award BIOS)允许让您能自动设置 CD 的读取速度。应当尽量不要那样设置，相反，应该把它设成最低速。要是您碰到了 <userinput
+>seek failed</userinput
+> 的错误提示，那么就有可能是您的设置问题了。 </para>
+   </sect3>
+
+   <sect3
+><title
+>扩展内存与扩充内存</title>
+<para
+>如果您的系统同时提供了扩<emphasis
+>展</emphasis
+>(extended)和 扩<emphasis
+>充</emphasis
+>(expanded)内存，那么就把扩展内存设置得尽量大一些，而把扩充内存设置得尽量小。Linux 需要使用扩展内存，但无法利用扩充内存。 </para>
+   </sect3>
+
+   <sect3
+><title
+>病毒保护</title>
+<para
+>禁用您的 BIOS 提供的所有病毒警告功能。如果您安装了防病毒卡或是其它特定的硬件，请在运行 GNU/Linux 期间，把它禁用或者拆除。它们与 GNU/Linux 是不兼容的。更进一步说，归功于文件系统的权限管理和 Linux 内核的内存保护机制，病毒已然绝迹<footnote
+> <para
+> 在安装完成之后，如果您希望的话也可以重新开启启动扇区保护功能这并不会为 Linux 带来任何额外的安全保护，但如果您还运行着 Windows，它还是有可能帮助您避免一场灾难。在启动管理器安装并设置好之后，就不再需要更动主引导扇区(MBR)了。</para
+> </footnote
+>。 </para>
+   </sect3>
+
+   <sect3
+><title
+>内存映像</title>
+<para
+>您的主板或许会有 <emphasis
+>内存映像</emphasis
+>(shadow RAM)或者 BIOS caching 的功能设置。您可能会发现<quote
+>Video BIOS Shadow</quote
+>、<quote
+>C800-CBFF Shadow</quote
+>等等的设置选项。<emphasis
+>禁用</emphasis
+>所有的内存映象。内存映像被用来提高对主板上或者某些控制卡上的 ROM 的访问速度。一旦 Linux 启动之后，它就不会再使用这些 ROM。Linux 弃之不用的原因是：Linux 自己提供了更快的32位的软件来替代了 ROM 中的16位程序的功能。禁用内存映像就可以让程序能使用更多的常规内存。而继续开启内存映像则有可能妨碍 Linux 存取硬件设备。 </para>
+   </sect3>
+
+   <sect3
+><title
+>内存空洞</title>
+<para
+>如果您的 BIOS 有类似<quote
+>15&ndash;16 MB Memory Hole</quote
+>的选项，请禁用它。如果您有那么多内存的话，Linux 就会认为在那儿应该能找到内存块。 </para
+><para
+>我们收到报告称，有一款 Intel 的主板，它的设置中有名为<quote
+>LFB</quote
+>或<quote
+>Linear Frame Buffer</quote
+>的选项。该选项有两个选择：<quote
+>Disabled</quote
+>和<quote
+>1 Megabyte</quote
+>。请把它设为<quote
+>1 Megabyte</quote
+>。如果禁用它，那么读取安装软盘时将会出错，而系统最后会崩溃。在撰写本文时，我们尚无法弄清这个设备出了什么问题 &mdash; 现在仅仅知道，如果这样设置，那么就一切正常，否则的话就不行。 </para>
+   </sect3>
+
+<!-- no other platforms other than x86 provide this sort of thing, AFAIK -->
+
+   <sect3
+><title
+>高级电源管理</title>
+<para
+>倘若您的主板提供了高级电源管理(APM)的支持，请配置让 APM 来管理电源。请同时禁用 doze、standby、suspend、nap 和 sleep 模式，另外还要禁用硬盘的电源关闭定时器。Linux 可以接管所有这些模式的控制权，而且能比 BIOS 的电源管理做得更好。 </para>
+   </sect3>
+  </sect2>
+<!--   End of file preparing/bios-setup/i386.xml -->
+
+<!-- Start of file preparing/bios-setup/m68k.xml -->
+
+
+  <sect2 arch="m68k" id="firmware-revs">
+  <title
+>固件修订版和已有的 OS 配置</title>
+
+<para
+>&arch-title; 机器通常自行配置，不需要设置固件。但是，您应该确定您用了适宜的 ROM 和系统补丁。在 Macintosh 上，推荐使用 MacOS 
+>= 7.1 的版本，这是由于版本 7.0.1 在视频驱动方面包含 bug，它会阻挡 boot loader 禁止视频中断，造成 boot 挂起。在 BVM VMEbus 系统上，您应该确定使用 BVMBug 修订版 G 或更新的 boot ROM。BVMBug boot ROM 不属于 BVM 系统的标准配置，但可用从 BVM 免费获取。 </para>
+
+  </sect2>
+
+<!--   End of file preparing/bios-setup/m68k.xml -->
+
+<!-- Start of file preparing/bios-setup/powerpc.xml -->
+
+
+  <sect2 arch="powerpc" id="invoking-openfirmware">
+  <title
+>使用 OpenFireware</title>
+<para
+>通常在 &arch-title; 系统上不需要去设置 BIOS(称为 OpenFirmware)。OpenFirmware 常常配备 PReP 与 CHRP，但这也意味着依不同厂商而不同。您必须参阅计算机手册中相关的硬件文档。 </para
+><para
+>在 &arch-title; 的 Macintoshe 机器上，您在启动时通过 <keycombo
+><keycap
+>Command</keycap
+> <keycap
+>option</keycap
+> <keycap
+>O</keycap
+> <keycap
+>F</keycap
+></keycombo
+> 命令使用 OpenFirmware。一般情况下，它会按时钟顺序检验击键，但也会与不同的型号有关。参阅 <ulink url="&url-netbsd-powerpc-faq;"
+></ulink
+> 了解更多提示。 </para
+><para
+>OpenFirmware 的提示看起来像： <informalexample
+><screen>
+ok
+0 &gt;
+</screen
+></informalexample
+> 注意旧型号的 &arch-title; Mac 机器，OpenFirmware 与用户交互所用的默认和 某些硬连线的 I/O 是通过串行(调制解调器)端口进行的。如果您在这样的机器上使用 OperFirmware，您只会看到黑屏。在这种情况下，需要用通过调制解调器端口连接到另外一台电脑上的终端程序来与 OpenFirmware 交互。 </para
+><para
+>运行在 OldWorld Beige G3 机器上的 OF 版本 2.0f1 和 2.4 的 OpenFirmware 是坏的。这些机器如果没有打固件补丁，就不能够从硬盘启动。固件的补丁包括 <application
+>System Disk 2.3.1</application
+> 工具，位于 Apple 的 <ulink url="ftp://ftp.apple.com/developer/macosxserver/utilities/SystemDisk2.3.1.smi.bin"
+></ulink
+>。在 MacOS 上解包并运行它，选择保存按钮使固件补丁安装到 nvram。 </para>
+  </sect2>
+<!--   End of file preparing/bios-setup/powerpc.xml -->
+
+<!-- Start of file preparing/bios-setup/sparc.xml -->
+
+
+  <sect2 arch="sparc" id="invoking-openboot"
+><title
+>使用 OpenBoot</title>
+
+<para
+>OpenBoot 提供了启动 &arch-title; 所需的基本功能。虽然做得比 x86 体系 BIOS 更好一些，但功能是非常接近的。Sun 的启动 PROM 内置了 forth 解释器，可以让您对计算机做很多事情，如诊断，简单脚本，等等。 </para
+><para
+>为了得到启动提示符，您需要按住 <keycap
+>Stop</keycap
+> 键(在老式的 type 4 键盘上，使用 <keycap
+>L1</keycap
+> 键，如果您有一个 PC 键盘适配器，使用 <keycap
+>Break</keycap
+> 健)并按下 <keycap
+>A</keycap
+> 键。启动 PROM 将给出提示符，可能是 <userinput
+>ok</userinput
+> 或者 <userinput
+>&gt;</userinput
+>。优先使用 <userinput
+>ok</userinput
+> 提示符。如果您得到的是旧风格的提示符，按下 <keycap
+>n</keycap
+> 键得到新风格的提示符。 </para
+><para
+>如果您使用的是串口控制台，发送 break 到机器。在 Minicom 下，使用 <keycap
+>Ctrl-A F</keycap
+>，在 cu 下，按下 <keycap
+>Enter</keycap
+>，然后键入 <userinput
+>%~break</userinput
+>。如果您使用其他的程序，查看终端模拟器相关的文档。 </para>
+  </sect2>
+
+  <sect2 arch="sparc" id="boot-dev-select-sun">
+  <title
+>选择引导设备</title>
+
+<para
+>您可以使用 OpenBoot 从指定设备启动，也可以能改变默认启动设备。但您需要了解 OpenBoot 如何命名设备的细节，它与 Linux 命名方法有很大差别，说明在 <xref linkend="device-names"/>。另外，该命令会依 OpenBoot 的版本不同而略有区别。更多关于 OpenBoot 的信息请参考 <ulink url="&url-openboot;"
+>Sun OpenBoot Reference</ulink
+>。 </para
+><para
+>一般来说，在较新的修订版中，您可以使用 OpenBoot 设备，如<quote
+>floppy</quote
+>、<quote
+>cdrom</quote
+>、<quote
+>net</quote
+>、<quote
+>disk</quote
+>或<quote
+>disk2</quote
+>。这些是显而易见的含义，<quote
+>net</quote
+>即指设备是从网络启动。另外，设备名可以明确指定磁盘分区，如<quote
+>disk2:a</quote
+>将启动磁盘 disk2 的第一个分区。完整的 OpenBoot 设备命名形式为 <informalexample
+> <screen>
+<replaceable
+>driver-name</replaceable
+>@
+<replaceable
+>unit-address</replaceable
+>:
+<replaceable
+>device-arguments</replaceable>
+</screen
+></informalexample
+>。在旧版的 OpenBoot 中，设备命名有些不同：软盘设备称为<quote
+>/fd</quote
+>，SCSI 磁盘形式是<quote
+>sd(<replaceable
+>controller</replaceable
+>, <replaceable
+>disk-target-id</replaceable
+>, <replaceable
+>disk-lun</replaceable
+>)</quote
+>。<userinput
+>show-devs</userinput
+> 命令在新版的 OpenBoot 中用于查看当前的配置设备。对于完整的信息，和您使用的版本，请参考 <ulink url="&url-openboot;"
+>Sun OpenBoot Reference</ulink
+>。 </para
+><para
+>要从指定的设备启动，请使用 <userinput
+>boot <replaceable
+>device</replaceable
+></userinput
+> 命令。您可以通过 <userinput
+>setenv</userinput
+> 命令将它设为默认方式。但变量的名称对不同版本有所改变。在 OpenBoot 1.x 中，请使用 <userinput
+>setenv boot-from <replaceable
+>device</replaceable
+></userinput
+> 命令。在稍后的 OpenBoot 修订版本中，请使用 <userinput
+>setenv boot-device <replaceable
+>device</replaceable
+></userinput
+> 命令。注意，它也可以通过使用 Solaris 上的 <command
+>eeprom</command
+> 命令或者修改 <filename
+>/proc/openprom/options/</filename
+> 中相应的文件来进行配置，例如，Linux 下使用： <informalexample
+><screen>
+# echo disk1:1 &gt; /proc/openprom/options/boot-device
+</screen
+></informalexample
+> 或在 Solaris下执行： <informalexample
+><screen
+>eeprom boot-device=disk1:1
+</screen
+></informalexample>
+
+</para>
+  </sect2>
+<!--   End of file preparing/bios-setup/sparc.xml -->
+
+<!-- Start of file preparing/bios-setup/s390.xml -->
+
+
+  <sect2 arch="s390"
+><title
+>BIOS 设置</title>
+<para
+>为了安装 &debian; 到 &arch-title; 或者 zSeries 机器上，您首先要将内核引导进系统。在此平台上的启动机制与其他类型，特别是类 PC 的系统，有着本质上的不同：它根本就没有软盘驱动器。您还会注意到此平台上的另外一个显著差异：大多数(如果不是全部)的时间，您将借助于其他客户机上的 telnet 这样的软件或者一个浏览器，通过远程方式使用。这归因于该系统上的 3215/3270 控制台是线型，而不是字符型的。 </para
+><para
+>Linux 在该平台上可以是本地化方式运行于裸机上，以所谓的 LPAR(Logical Partition) 方式或者 由 VM 系统提供的虚拟机方式。您可以在所有的系统上使用启动磁带；您也可以使用其他的介质，但它们并不一定都可用。例如，您可以在虚拟机上使用虚拟读卡器，或者在 HMC (Hardware Management Console) 可用的情况下，从 LPAR 上的 HMC 启动。 </para
+><para
+>在真正进行安装之前，您必须仔细检查一些设计和准备步骤。IBM 已经有整个过程的文档，例如，如何准备安装介质和如何从该介质启动。这里复制那些信息既不需也不必。但基于必须给计算机所准备的信息资源和启动需要的安装介质，我们会在此说明需要哪些规格的 Debian 数据，以及在哪里能找到它们。当您在客户端对话中看到欢迎画面，再返回本文档查看 Debian 规格的安装步骤。 </para>
+  </sect2>
+
+  <sect2 arch="s390">
+  <title
+>本地化(Native)和 LPAR 安装</title>
+<para
+>请参考 <ulink url="http://www.redbooks.ibm.com/pubs/pdfs/redbooks/sg244987.pdf"
+> Linux for &arch-title;</ulink
+> Redbook 第 5 章和 <ulink url="http://www.redbooks.ibm.com/pubs/pdfs/redbooks/sg246264.pdf"
+> Linux for IBM eServer zSeries and &arch-title;: Distributions</ulink
+> Redbook 第 3.2 节有关如何为 Linux 建立 LPAR 的部分。 </para>
+  </sect2>
+
+  <sect2 arch="s390">
+  <title
+>作为一个 VM guest 安装</title>
+
+<para
+>请参考 <ulink url="http://www.redbooks.ibm.com/pubs/pdfs/redbooks/sg244987.pdf"
+> Linux for &arch-title;</ulink
+> Redbook 第 6 章和 <ulink url="http://www.redbooks.ibm.com/pubs/pdfs/redbooks/sg246264.pdf"
+> Linux for IBM eServer zSeries and &arch-title;: Distributions</ulink
+> Redbook 第 3.1 节有关如何为运行 Linux 建立 VM guest 的部分。 </para
+><para
+>您需要从 <filename
+>generic</filename
+> 子目录复制所有的文件到您的 CMS 磁盘。确保 <filename
+>kernel.debian</filename
+> 和 <filename
+>initrd.debian</filename
+> 是以固定 80 字符记录长度的二近制形式进行传输。 </para>
+  </sect2>
+
+  <sect2 arch="s390">
+  <title
+>建立安装服务器</title>
+
+<para
+>如果您没有连接到互联网(直接或者间接通过 web 代理)，您需要创建一个您的 S/390 能访问的本地安装服务器。该服务器包含所有您需要安装的软件包，并可以通过 NFS，HTTP 或 FTP 访问。 </para
+><para
+>安装服务器需要从任意 &debian; 镜像复制精确的目录结构，当然只需 s390 和一些独立于体系的文件。您也可以复制所有的安装 CD 到这样的目录树中。 </para
+><para condition="FIXME">
+
+<emphasis
+>FIXME: more information needed &mdash; from a Redbook?</emphasis>
+
+</para>
+  </sect2>
+<!--   End of file preparing/bios-setup/s390.xml -->
+
+  <sect2
+><title
+>需要留心的硬件问题</title>
+<para arch="not-s390"
+>有很多人曾试过把他们的 90 MHz 的 CPU 超频到 100 MHz 使用，以及其他诸如此类的做法。这有时可行，但是它有赖于外界的温度和其他因素，而且超频可能会损毁您的系统。这个文档的 作者之一曾把他的系统超频使用了有一年，从那以后他的系统在编译操作系统的内核时，总是发现 <command
+>gcc</command
+> 的运行被意外的信号中止了。后来，当把 CPU 的频率 调回它的标称速度后，问题迎刃而解。 </para
+><para arch="not-s390"
+>如果内存模块有故障的话(或者出现其他会使数据发生异变的硬件故障)，<command
+>gcc</command
+> 编译器经常是第一个停止工作的程序。因为它会生成庞大的数据结构，并把它们在内存中频繁移动。一旦这些 数据结构中有错，就会导致程序执行非法指令或者访问不存在的地址空间。表现出症状就是<command
+>gcc</command
+> 被一个意外的信号中止运行。 </para
+><para arch="m68k"
+>Atari TT 内存条因其在 Linux 下的内存故障而获臭名。无论您 碰到了何种怪异的问题，请至少试试换用 ST-RAM 来运行内核。Amiga 的用户可能需要用 booter menfile 来排除部分内存。<phrase condition="FIXME"
+><emphasis
+> FIXME: more description of this needed. </emphasis
+></phrase
+> </para
+><para arch="i386"
+>最好的主板应该会支持奇偶校验内存(parity RAM)，它在会发现内存中有一个位错误时向您报告。可惜的是，主板并没有办法修正这个错误，因此它通常会在向您报告内存故障之后 立即崩溃。不管怎样，报告内存故障总归比不声不响地在您的数据中插入错误数据 要强。所以，最好的系统应当配备支持奇偶校验和实奇偶校验(true-parity)的内存。另外还可以参阅： <xref linkend="Parity-RAM"/>。 </para
+><para arch="i386"
+>如果您配备有实奇偶校验的内存，而且您的主板也支持这种内存，那么请一定要 在 BIOS 的设置里开启相应的选项，好让主板在发现奇偶校验错时发生中断。 </para>
+
+   <sect3 arch="i386"
+><title
+>加速(Turbo)开关</title>
+<para
+>有许多系统带有一个 <emphasis
+>turbo</emphasis
+> 开关，通过这个开关可以控制 CPU 的 运行速度。请把它调节到“高速”。如果您的 BIOS 能让您禁用对加速开关的软件控制(或者 对 CPU 速度的软件控制)，那么就请禁用它，这会将系统锁定为高速运行模式。我们曾受到过报告称，在某台特别的系统上，当 Linux 在自动检测(搜寻硬件设备)时，会无意中触动加速开关的软件控制。 </para>
+   </sect3>
+
+   <sect3 arch="i386"
+><title
+>Cyrix 出品的 CPU 和软盘错误</title>
+<para
+>许多 Cyrix CPU 的用户在安装时，必须禁用系统的高速缓存(cache)。如果不这样的话，就会发生软盘错误。如果您禁用了高速缓存，请在安装完成后重新开启它。因为如果您继续 禁用的话，系统会变慢 <emphasis
+>很多</emphasis
+>。 </para
+><para
+>我们并不认为这一定是 Cyrix CPU 的过错。Linux 或许能想办法避免它。我们将继续 关注这个问题。基于技术上的好奇，我们猜测这可能是系统从 16 位切换到 32 位模式时，导致高速缓存失效造成的。 </para>
+   </sect3>
+
+   <sect3 arch="i386"
+><title
+>外设硬件的设置</title>
+<para
+>您也许必须得修改您计算机外设板卡上的一些设置或者跳线。有的板卡有设置菜单，而另一些则使用 跳线。本文档无意为您提供所有硬件设备的全面信息，只不过希望能提供一些有用的提示。 </para
+><para
+>如果有板卡提供了<quote
+>内存映射(mapped memory)</quote
+>，那么这块内存应该被映射到介于 0xA0000 和 0xFFFFF (从 640K 到正好 1M)的某块地方，也可以映射到您系统中总内存容量后 1 MB 以上的地址。 </para>
+   </sect3>
+
+   <sect3 arch="i386" id="usb-keyboard-config">
+   <title
+>USB BIOS 支持与键盘</title>
+<para
+>倘若您没有 AT 键盘，只有一个 USB 的键盘的话，您需要在 BIOS 设置里开启老式 AT 键盘模拟功能。这只在安装系统使用 USB 模式失败的情况下进行。反之，对其他系统(特别是便携机)也许您的键盘没有响应，这需要禁止老式 USB 支持。请查阅您的主板手册并查看 BIOS 中<quote
+>Legacy keyboard emulation</quote
+>或<quote
+>USB keyboard support</quote
+>选项。 </para>
+   </sect3>
+
+   <sect3
+><title
+>大于 64 MB 内存</title>
+<para
+>Linux 内核有时不能检测出您系统中的内存大小。如果这正符合您的情况，请参阅一下<xref linkend="boot-parms"/>。 </para>
+   </sect3>
+  </sect2>
+ </sect1>
+<!--   End of file preparing/pre-install-bios-setup.xml -->
+
+</chapter>
+<!--   End of file preparing/preparing.xml -->

@@ -1,0 +1,42 @@
+#include "base"
+#include "kernel"
+
+# Include all standard priority udebs and all kernel modules matching the
+# kernel onto the miniiso. The idea is that here we have a very simple form
+# of d-i that does not need a Packages file anywhere, so it much easier to
+# build. These lists are produced during build.
+#include "standard-udebs"
+#include "kernel-module-udebs"
+
+#include "busybox"
+
+# Other udebs that are not standard priority, but are still needed.
+# (Some of these are dependencies of standard priority udebs..)
+cdebconf-newt-udeb
+# Used by countrychooser
+iso-3166-udeb
+# Need to choose a mirror for debootstrap to download Debian from.
+choose-mirror
+# Network setup stuff.
+ethdetect
+netcfg
+# used by netcfg
+libiw27-udeb
+# needed by partman
+partman-basicmethods
+partman-partitioning
+libparted1.6-udeb
+# used by partman-basicfilesystems, partman-ext3
+e2fsprogs-udeb
+# used by partman-lvm
+lvmcfg-utils
+lvm2-udeb
+libdevmapper1.01-udeb
+# used by partman-md
+mdcfg-utils
+mdadm-udeb
+# used by base-installer
+debootstrap-udeb
+
+file-preseed
+libfribidi0-udeb

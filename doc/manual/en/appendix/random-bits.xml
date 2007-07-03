@@ -1,0 +1,12 @@
+<!-- retain these comments for translator revision tracking -->
+<!-- $Id$ -->
+<!-- copied version: 29687 -->
+
+<appendix id="random-bits"><title>Random Bits</title>
+
+&example-preseed.xml;
+&files.xml;
+&chroot-install.xml;
+&plip.xml;
+
+</appendix>

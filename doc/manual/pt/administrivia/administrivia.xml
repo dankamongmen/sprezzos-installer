@@ -1,0 +1,97 @@
+<!-- Start of file administrivia/administrivia.xml -->
+
+<appendix id="administrivia">
+ <title
+>Administrivia</title>
+
+
+ <sect1 id="about">
+ <title
+>Acerca deste Documento</title>
+
+<para
+>Este manual foi criado para o debian-installer do Sarge, baseado no manual de instalação do Woody para boot-floppies, que foi baseado em manuais de instalação anteriores, e no manual da distribuição Progeny, que foi lançado sob a GPL em 2003. </para
+><para
+>Este Documento é escrito em DocBook XML. Os formatos exportados são gerados por vários programas que utilizam informação dos pacotes <classname
+>docbook-xml</classname
+> e <classname
+>docbook-xsl</classname
+>. </para
+><para
+>Para aumentar a facilidade de manter este documento, usamos um número de capacidades do XML, tais como atributos de identidades e perfis. Estes últimos têm o papel semelhante a variáveis e condicionantes em linguagens de programação. A fonte em XML deste documento contém informação para cada arquitectura diferente &mdash; são utilizados perfis de atributos para isolar certas partes de texto que são específicos de cada arquitectura. </para>
+ </sect1>
+
+ <sect1 id="contributing">
+ <title
+>Contribuir para este documento</title>
+
+<para
+>Se tem problemas ou sugestões relacionadas com este documento, deverá submeter um relatório de erro deste pacote <classname
+>debian-installer-manual</classname
+>. Veja o pacote <classname
+>reportbug</classname
+> ou leia a documentação online do <ulink url="&url-bts;"
+>Debian Bug Tracking System</ulink
+>. Seria melhor se primeiro pudesse verificar os <ulink url="&url-bts;debian-installer-manual"
+> relatórios de erro existentes acerca do debian-installer-manual</ulink
+> para verificar se o seu problema já foi detectado. Caso seja o caso, poderá fornecer informação adicional de confirmação ou ajuda para <email
+><replaceable
+>XXXX</replaceable
+>@bugs.debian.org</email
+>, onde <replaceable
+>XXXX</replaceable
+> é o numero para o erro já comunicado. </para
+><para
+>Melhor ainda, obtenha uma cópia da fonte do DocBook deste documento, e produza patches para ele. A fonte em DocBook deste documento pode ser encontrada no <ulink url="&url-d-i-websvn;"
+>WebSVN do debian-installer</ulink
+>. Se não está familiarizado com o DocBook, não se preocupe: existe um simples texto no directório manual que o irá ajudar a começar. É como html, mas orientado para o significado do texto mais do que a sua apresentação. Patches submetidos para a mailing list debian-boot (veja abaixo) são bem-vindos. Para instruções de como descarregar as fontes via SVN, veja o <ulink url="&url-d-i-readme;"
+>README</ulink
+> do directório da fonte. </para
+><para
+>Por favor <emphasis
+>não</emphasis
+> contacte os autores deste documento directamente. Existe também uma lista de discussão para o &d-i;, que inclui discussões sobre este manual. A mailing list é <email
+>debian-boot@lists.debian.org</email
+>. Instruções para a subscrição desta lista podem ser encontradas na página de <ulink url="&url-debian-lists-subscribe;"
+>Subscrições de Mailing Lists da Debian</ulink
+>; ou então, pode navegar o <ulink url="&url-debian-list-archives;"
+>Arquivo de Mailing List da Debian</ulink
+> online. </para>
+
+ </sect1>
+
+ <sect1 id="contributors">
+ <title
+>Maiores Contribuições</title>
+
+<para
+>Este Documento foi escrito originalmente por Bruce Perens, Sven Rudolph, Igor Grobman, James Treacy, e Adam Di carlo. Sebastian Ley escreveu o Howto de Instalação. Muitos, muitos utilizadores e programadores de Debian contribuíram para este documento. Deve ser feita uma nota especial para Michael Schimtz (suporte para m68k), Frank Neummann (Autor original do <ulink url="&url-m68k-old-amiga-install;"
+>manual de instalação para Amiga</ulink
+>), Arto Astala, Eric Delaunay/Ben Collins (informação sobre SPARC), Tapio Lehtonen, e Stéphane Bortzmeyer pelas numerosas edições e textos. Nós temos que agradecer a Pascal Le Bail que informação útil sobre como iniciar a partir de drives USB. Miroslav Kuře documentou muitas das novas funcionalidades do debian-installer do Sarge. </para
+><para
+>Textos e informação extremamente útil foi encontrada no HOWTO de Jim Mintha para iniciar utilizando a rede (URL não disponível), no <ulink url="&url-debian-faq;"
+>Debian FAQ</ulink
+>, no <ulink url="&url-m68k-faq;"
+>Linux/m68k FAQ</ulink
+>, no <ulink url="&url-sparc-linux-faq;"
+>Linux for SPARC Processors FAQ</ulink
+>, no <ulink url="&url-alpha-faq;"
+>Linux/Alpha FAQ</ulink
+>, entre outros. Os maintainers destes recursos disponíveis livremente e ricas fontes de informação devem ser reconhecidos. </para
+><para
+>Neste manual a secção de instalações chrooted (<xref linkend="linux-upgrade"/>) derivou em parte de documentos com copyright de Karsten M. Self. </para
+><para arch="i386"
+>Neste manual a secção de instalações através de plip (<xref linkend="plip"/> foi baseada no <ulink url="&url-plip-install-howto;"
+>PLIP-Install-HOWTO</ulink
+> por Gilles Lamiral. </para>
+ </sect1>
+
+ <sect1 id="trademarks">
+ <title
+>Reconhecimento de Marcas Registadas</title>
+<para
+>Todas as marcas registadas são propriedade dos seus respectivos donos. </para>
+ </sect1>
+</appendix>
+
+<!--   End of file administrivia/administrivia.xml -->

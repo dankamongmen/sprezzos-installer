@@ -1,0 +1,400 @@
+<!-- Start of file post-install/post-install.xml -->
+
+<chapter id="post-install">
+ <title
+>下一步該做什麼</title>
+
+
+<!-- Start of file post-install/new-to-unix.xml -->
+
+
+ <sect1 id="unix-intro">
+ <title
+>如果您不熟悉 Unix</title>
+<para
+>如果您不熟悉 Unix，您也許應該出去買些書來讀。還可以從 <ulink url="&url-debian-reference;"
+>Debian Reference</ulink
+> 找到到大量有用的資訊。<ulink url="&url-unix-faq;"
+>Unix 常見問答集</ulink
+>中包含了大量的 Usenet 文件，它提供很有用的參考。 </para
+><para
+>Linux 是 Unix 的實作。<ulink url="&url-ldp;"
+>Linux 文件計劃 (LDP)</ulink
+> 收集了大量的 HOWTO 和 Linux 的線上書籍。這些文件絕大部分可以在本地安裝；只要安裝 <classname
+>doc-linux-html</classname
+> 套件 (HTML 版本) 或者 <classname
+>doc-linux-text</classname
+> 套件 (ASCII 版本)，然後在 <filename
+>/usr/share/doc/HOWTO</filename
+> 裡面就能找到。在 Debian 軟體套件裡面也提供 LDP HOWTO 的國際化版本。 </para>
+
+ </sect1>
+<!--   End of file post-install/new-to-unix.xml -->
+
+<!-- Start of file post-install/orientation.xml -->
+
+
+ <sect1 id="debian-orientation"
+><title
+>讓您自己轉向 Debian</title>
+<para
+>Debian 和其它的發行版有些不同。即使您熟悉其它發行版的 Linux，您也應該了解 Debian 的一些東西，以便保持您的系統處在整潔良好的狀態。本章包含的內容可以幫助您了解 Debian﹔但這並不是一個如何使用 Debian 的入門指南，而僅僅是對整個系統的一個粗略的介紹。 </para>
+
+  <sect2
+><title
+>Debian 軟體套件系統</title>
+<para
+>要掌握的最重要概念是 Debian 的軟體套件系統。事實上，您系統的絕大部分都該由軟體套件系統來控制。包括：<itemizedlist
+> <listitem
+><para
+> <filename
+>/usr</filename
+> (除了 <filename
+>/usr/local</filename
+> 之外)</para
+></listitem
+> <listitem
+><para
+> <filename
+>/var</filename
+> (您可以建立 <filename
+>/var/local</filename
+>，在那裡面進行安全的操作) </para
+></listitem
+> <listitem
+><para
+> <filename
+>/bin</filename
+> </para
+></listitem
+> <listitem
+><para
+> <filename
+>/sbin</filename
+> </para
+></listitem
+> <listitem
+><para
+> <filename
+>/lib</filename
+> </para
+></listitem
+> </itemizedlist
+> 例如，如果您替換了 <filename
+>/usr/bin/perl</filename
+>，它可以正常工作，但以後您升級了 <classname
+>perl</classname
+> 軟體套件，那個檔案仍將被替換回來。有經驗的使用者可以將軟體套件設置為 ``hold'' 狀態，以避免這種情況，這需要使用 <command
+>aptitude</command
+>。 </para
+><para
+>apt 是最好的安裝方法之一。您可以使用命令列模式的 <command
+>apt-get</command
+> 或者全螢幕文字模式的 <application
+>aptitude</application
+>。注意 apt 也可以讓您合並 main，contrib 以及 non-free 版本的軟體套件，從而使您可以在使用標準版本的同時使用限制出口的軟體套件。 </para>
+  </sect2>
+
+  <sect2
+><title
+>應用程式版本管理</title>
+<para
+>可選版本的應用程式可以透過 update-alternatives 來管理。 如果您維護著多個版本的應用程式，請參閱 update-alternatives 的 man 手冊。 </para>
+  </sect2>
+
+  <sect2
+><title
+>任務排程管理</title>
+<para
+>任何系統管理員權限內的任務都必須位於 <filename
+>/etc</filename
+> 內，這是因為它們都是設定檔。如果您有一些需要以管理員身份每天 (daily)，每周 (weekly) 或每月 (monthly) 執行的定期任務，請將它們放置在 <filename
+>/etc/cron.{daily,weekly,monthly}</filename
+> 中。它們將在 <filename
+>/etc/crontab</filename
+> 中被啟用，然後按照檔案名稱的字典順序依次執行。 </para
+><para
+>另一方面，如果您有某個定期任務需要以某個特定的使用者身份執行，或者需要在某個特定時刻或以特定周期執行，您也許可以使用 <filename
+>/etc/crontab</filename
+> 或 <filename
+>/etc/cron.d/whatever</filename
+>，後者會更好一些。這些特殊的檔案可以包含額外的設定項目，允許您指定運行該定期任務的使用者帳戶。 </para
+><para
+>在任何情況下，您只需編輯這些檔案，cron 將會自動處理它們。沒有必要再執行某個特殊的指令。欲了解更多的資訊，請參閱 cron(8)，crontab(5)，以及 <filename
+>/usr/share/doc/cron/README.Debian</filename
+>。 </para>
+  </sect2>
+ </sect1>
+<!--   End of file post-install/orientation.xml -->
+
+<!-- Start of file post-install/reactivating-win.xml -->
+
+
+ <sect1 arch="i386" id="reactivating-win">
+ <title
+>重新啟動 DOS 和 Windows</title>
+<para
+>安裝好基本系統並寫入 <emphasis
+>主開機記錄</emphasis
+> 後，您就可以啟動 Linux，但也可能什麼都沒有。這將由您在安裝中所作的選擇決定。本章告訴您，如何重新啟動舊系統，以便可以再次啟動 DOS 或 Windows。 </para
+><para
+><command
+>LILO</command
+> 是一個 boot-loader，它遵循 PC 的習慣，透過它您可以啟動 Linux 之外的其他作業系統。該 boot-loader 透過 <filename
+>/etc/lilo.conf</filename
+> 檔案進行設定。當您編輯過該檔案之後，您必須執行 <command
+>lilo</command
+> 程式。這是因為只有您執行過該程式後，所做的更改才能生效。 </para
+><para
+>在 <filename
+>lilo.conf</filename
+> 檔案中的關鍵部分是包含關鍵字 <userinput
+>image</userinput
+> 和 <userinput
+>other</userinput
+> 的那一行，以及在其之後的設定。它們用來描述可被 <command
+>LILO</command
+> 開機的系統。這樣的系統可以包含一個核心 (<userinput
+>image</userinput
+>)，一個根分割區，額外的核心參數等，以及可開機另一個非 Linux 作業系統 (<userinput
+>other</userinput
+>) 的設定。這些關鍵字可使用多次。這些系統在設定檔中的順序很重要，因為它將決定哪個作業系統會自動開機，例如，時間到但(<userinput
+>delay</userinput
+>) <command
+>LILO</command
+> 沒有被按下 <keycap
+>shift</keycap
+> 鍵中止的情況下。 </para
+><para
+>剛剛安裝好一個全新的 Debian 後，只有目前系統被設定成用 <command
+>LILO</command
+>開機。如果您想啟動另一個 Linux 核心，您必須編輯 <filename
+>/etc/lilo.conf</filename
+> 設定檔，在其中加入如下行：<informalexample
+><screen>
+&additional-lilo-image;
+</screen
+></informalexample
+> 對一個基本安裝而言，只有第一行是必需的。如果您想了解關於其它兩個選項的更多資訊，請參閱 <command
+>LILO</command
+> 的文件。該文件位於 <filename
+>/usr/share/doc/lilo/</filename
+> 目錄中，您所需閱讀的文件是 <filename
+>Manual.txt</filename
+>。如果您想快速了解如何啟動系統，您也可以參閱 <command
+>LILO</command
+> 的 man 手冊，<filename
+>lilo.conf</filename
+> 是關於設定檔關鍵字的說明，<filename
+>lilo</filename
+> 則是將新設定安裝到到開機磁區的說明。 </para
+><para
+>注意，在 &debian; 中還有其它可用的 boot-loader，例如 GRUB (在 <classname
+>grub</classname
+> 套件中)，CHOS (在 <classname
+>chos</classname
+> 套件中)，Extended-IPL (在 <classname
+>extipl</classname
+> 套件中)，loadlin (在 <classname
+>loadlin</classname
+> 套件中) 等。 </para>
+ </sect1>
+<!--   End of file post-install/reactivating-win.xml -->
+
+<!-- Start of file post-install/further-reading.xml -->
+
+ <sect1 id="further-reading"
+><title
+>更多閱讀資訊</title>
+<para
+>如果您想查閱某個程式的更詳細資料，應該先試試 <userinput
+>man<replaceable
+> 程式名稱</replaceable
+></userinput
+>，或者 <userinput
+>info<replaceable
+> 程式名稱</replaceable
+></userinput
+>。 </para
+><para
+>在 <filename
+>/usr/share/doc</filename
+> 目錄裡有很多有用的文件，特別是 <filename
+>/usr/share/doc/HOWTO</filename
+> 和 <filename
+>/usr/share/doc/FAQ</filename
+> 裡有很多值得一讀的文章。如果您想回報臭蟲報告，請先查閱這些文件： <filename
+>/usr/share/doc/debian/bug*</filename
+>。針對某個程式，其有關於 Debian 的內容可以查閱文件： <filename
+>/usr/share/doc/(package name)/README.Debian</filename
+>。 </para
+><para
+>在 <ulink url="http://www.debian.org/"
+>Debian 網站</ulink
+> 上有大量的 Debian 相關文件。尤其是 <ulink url="http://www.debian.org/doc/FAQ/"
+>Debian 常見問答集</ulink
+>和 <ulink url="http://lists.debian.org/"
+>Debian 郵件論壇檔案庫</ulink
+>可能會對您有很大幫助。Debian 社群是靠使用者們自己的力量支撐起來的。如果您想要訂閱 Debian 的郵件論壇，請到：<ulink url="http://www.debian.org/MailingLists/subscribe"
+>訂閱郵件論壇</ulink
+>網頁。 </para
+><para
+>在 GNU/Linux 世界裡，最常用的文件資料來源是：<ulink url="http://www.tldp.org/"
+>Linux 文件計劃</ulink
+>。在這裡您可以找到有關於 GNU/Linux 系統關於各個部分非常有價值的 HOWTO 文件以及其他指引。 </para>
+
+ </sect1>
+<!--   End of file post-install/further-reading.xml -->
+
+<!-- Start of file post-install/kernel-baking.xml -->
+
+ <sect1 id="kernel-baking"
+><title
+>編譯新核心</title>
+<para
+>為什麼有些人想要編譯新核心？Debian 的預設核心已經包含了絕大部分設定，所以編譯新核心並不是必需的。然而，基於以下理由，編譯新核心還是很有用的： <itemizedlist>
+<listitem
+><para
+>支援某些特殊的硬體，或者預設的核心設定和某些硬體衝突。 </para
+></listitem>
+<listitem
+><para
+>支援某些沒有包含在預裝核心中的硬體或選項，例如 APM 或 SMP。 </para
+></listitem>
+<listitem
+><para
+>透過刪除無用的驅動程式來優化核心，以減少開機時間。 </para
+></listitem>
+<listitem
+><para
+>使用某些不被預設核心所支援的選項 (例如 high memory 支援)。 </para
+></listitem>
+<listitem
+><para
+>使用最新的核心或開發中的核心。 </para
+></listitem>
+<listitem
+><para
+>嘗試新東西，向您的朋友炫耀。 </para
+></listitem>
+</itemizedlist>
+
+</para>
+
+  <sect2
+><title
+>核心映像管理</title>
+<para
+>不要害怕嘗試編譯核心。它很有趣而且很有好處。 </para
+><para
+>為了以 Debian 的方式編譯核心，您需要一些軟體套件：<classname
+>kernel-package</classname
+>，<classname
+>kernel-source-&kernelversion;</classname
+> (與此文件寫作時間最接近的版本)，<classname
+>fakeroot</classname
+> 以及其它一些您可能已經安裝過的軟體套件 (請參閱 <filename
+>/usr/share/doc/kernel-package/README.gz</filename
+> 以取得完整的列表)。 </para
+><para
+>此方法將從您的核心原始碼建立一個 .deb 檔案，並且，如果您有非標準模組，將同時建立它們的同步相依 .deb 檔案。這是一個管理核心的較好的方法﹔<filename
+>/boot</filename
+> 目錄將保存核心，System.map，以及目前編譯的活動設定檔紀錄。 </para
+><para
+>注意您不<emphasis
+>需要</emphasis
+>以 <quote
+>Debian 方式</quote
+>編譯核心﹔但我們發現使用軟體套件系統來管理您的核心確實可以更加安全和簡單。事實上，您可以直接從 Linus 那裡而不是 <classname
+>kernel-source-&kernelversion;</classname
+> 取得核心原始碼，並仍然使用 <classname
+>kernel-package</classname
+> 的編譯方法。 </para
+><para
+>注意您可以找到完整的文件，透過使用 <classname
+>kernel-package</classname
+> 它在 <filename
+>/usr/share/doc/kernel-package</filename
+>裡。本節只包含一個簡單的入門指南。 </para
+><para
+>此後，我們假設您具有操作您機器的權力，可以將核心原始碼解壓縮到您的 home 目錄<footnote
+> <para
+> 也可以在其他目錄解開核心原始碼並建立自定義核心，但是不需要額外的權限是最簡單的方式。 </para
+> </footnote
+>。我們還假設您的核心版本是 "&kernelversion;。確定您處於打算解開核心原始碼的目錄，然後使用 <userinput
+>tar xjf /usr/src/kernel-source-&kernelversion;.tar.bz2</userinput
+> 解壓縮並進入 <filename
+>kernel-source-&kernelversion;</filename
+> 剛才建立的目錄。 </para
+><para
+>現在，您可以開始設定您的核心了。如果您已經安裝並正在執行 X11， 請執行 <userinput
+>make xconfig</userinput
+>﹔否則請執行 <userinput
+>make menuconfig</userinput
+> (必須已經安裝好 <classname
+>libncurses5-dev</classname
+>)。請花點時間閱讀線上說明並仔細地選擇。如果有任何疑慮，通常把您所不確定的設備驅動程式 (用來管理周邊硬體的軟體，例如以太網路卡、SCSI 控制器等) 一起編譯會比較好一點。注意：對於與特殊硬體無關的其它選項，如果您不了解它們，最好保持預設值。不要忘記選擇 <quote
+>Kernel module loader</quote
+> 中的 <quote
+>Loadable module support</quote
+> (它們預設並沒有被選擇)。否則，您的 Debian 安裝將會遇到問題。 </para
+><para
+>清除原始碼樹並復原 <classname
+>kernel-package</classname
+> 參數。也就是使用 <userinput
+>make-kpkg clean</userinput
+>。 </para
+><para
+>現在，開始編譯核心：<userinput
+>fakeroot make-kpkg --revision=custom.1.0 kernel_image</userinput
+>。其中版本號 <quote
+>1.0</quote
+> 可以隨便您修改﹔它僅用來追蹤您的核心編譯的版本號。同樣地，您也可以用任何您喜歡的單詞替換 <quote
+>custom</quote
+> (例如，您的主機名稱)。編譯核心可能要花費較長的時間，這取決於您的機器的性能。 </para
+><para condition="supports-pcmcia"
+>如果您需要支援 PCMCIA，您必須安裝 <classname
+>pcmcia-source</classname
+> 軟體套件。以 root 身份將用 gzip 壓縮的 tar 檔案解壓到 <filename
+>/usr/src</filename
+> 目錄內 (注意模組必須位於它們所應處的位置，即 <filename
+>/usr/src/modules</filename
+>)。然後，以 root 身份執行 <userinput
+>make-kpkg modules_image</userinput
+>。 </para
+><para
+>一旦編譯完成，您就可以像安裝其它軟體套件一樣安裝您的核心。以 root 身份，執行 <userinput
+>dpkg -i ../kernel-image-&kernelversion;-<replaceable
+>subarchitecture</replaceable
+>_custom.1.0_&architecture;.deb</userinput
+>。其中 <replaceable
+>subarchitecture</replaceable
+> 部分是一個可選的子結構，<phrase arch="i386"
+> 例如 <quote
+>i586</quote
+>, </phrase
+> 這取決於您所設置的核心選項。<userinput
+>dpkg -i kernel-image...</userinput
+> 將安裝核心以及其它的一些支援檔案。例如 <filename
+>System.map</filename
+> 可能會被安裝 (用來輔助除錯核心問題)，<filename
+>/boot/config-&kernelversion;</filename
+> 也將被安裝，它包含了您目前的設定。新的 <classname
+>kernel-image-&kernelversion;</classname
+> 軟體套件將會自動使用您系統上的 boot-loader 來更新開機區，因此您不必重新執行 boot-loader 即可開機系統。如果您建立了一個模組軟體套件，例如 PCMCIA，您也必須同時安裝該軟體套件。 </para
+><para
+>下面到了重新啟動系統的時刻了﹔請仔細閱讀前述步驟所產生的所有警告資訊，然後執行 <userinput
+>shutdown -r now</userinput
+>。 </para
+><para
+>欲取得關於 <classname
+>kernel-package</classname
+> 的更多資訊，請參閱 <filename
+>/usr/share/doc/kernel-package</filename
+>。 </para>
+  </sect2>
+ </sect1>
+<!--   End of file post-install/kernel-baking.xml -->
+
+</chapter>
+<!--   End of file post-install/post-install.xml -->

@@ -1,0 +1,190 @@
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 28672 -->
+
+ <sect1 id="install-overview">
+ <title>Resum del procés d'instal·lació</title>
+<para>
+
+D'entrada, una nota sobre les reinstal·lacions. En Debian, és ben
+rar que es done la circumstància d'haver de tornar a fer una instal·lació
+completa del sistema; la fallada mecànica del disc dur potser siga la
+causa més comuna.
+
+</para><para>
+
+Nombrosos sistemes operatius d'ús generalitzat poden requerir una
+instal·lació completa quan es donen fallades crítiques o quan cal
+actualitzar-los. Fins i tot si no cal una instal·lació completament nova,
+sovint els programes que empreu s'hauran de tornar a instal·lar perquè
+funcionen correctament en el nou sistema operatiu.
+
+</para><para>
+
+Sota &debian;, quan les coses van malament és molt més probable que el
+sistema operatiu s'haja de reparar abans que reemplaçar-lo. Les
+actualitzacions mai no requereixen una instal·lació completa; sempre
+podeu actualitzar-hi al sistema estant. A més, els programes són gairebé
+sempre compatibles amb les noves versions del sistema operatiu. Si una
+nova versió d'un programa requereix programari nou addicional, el sistema
+de paquets de Debian garanteix la identificació i la instal·lació
+automàtiques del programari que cal. És a dir, s'ha posat molta cura a
+evitar la necessitat de tornar a instal·lar, per tant penseu-hi com a
+veritable últim recurs. L'instal·lador <emphasis>no</emphasis> s'ha
+dissenyat per tornar a fer instal·lacions sobre un sistema ja existent.
+
+</para><para>
+
+Aquí hi ha les instruccions amb els passos que es faran durant el procés
+d'instal·lació.
+
+</para>
+
+<orderedlist>
+<listitem><para>
+
+Feu una còpia de seguretat de qualssevol dades o documents que tingueu al
+disc dur on voleu fer la instal·lació.
+
+</para></listitem>
+<listitem><para>
+
+Recopileu informació sobre el vostre ordinador i sobre qualsevulla
+documentació necessària abans de començar la instal·lació.
+
+</para></listitem>
+<listitem><para>
+
+Creeu un espai particionable per a la Debian al disc dur.
+
+</para></listitem>
+<listitem><para>
+
+Localitzeu i/o descarregueu el programari de l'instal·lador i els fitxers
+de qualsevol controlador que necessite la vostra màquina (tret dels usuaris
+del CD de Debian).
+
+</para></listitem>
+<listitem><para>
+
+Configureu les cintes/disquets/llapis USB d'arrencada, o poseu on calga els
+fitxers d'arrencada (la majoria dels usuaris dels CD de Debian poden
+arrencar des d'un d'ells).
+
+</para></listitem>
+<listitem><para>
+
+Arrenqueu el sistema d'instal·lació.
+
+</para></listitem>
+<listitem arch="not-s390"><para>
+
+Seleccioneu la llengua d'instal·lació.
+
+</para></listitem>
+<listitem arch="not-s390"><para>
+
+Activeu la connexió ethernet de xarxa, si s'escau.
+
+</para></listitem>
+
+<listitem arch="s390"><para>
+
+Configureu una interfície de xarxa.
+
+</para></listitem>
+<listitem arch="s390"><para>
+
+Obriu una connexió ssh per al nou sistema.
+
+</para></listitem>
+<listitem arch="s390"><para>
+
+Afegiu-hi un o més DASD (Dispositiu d'emmagatzematge d'accés directe).
+
+</para></listitem>
+
+<listitem><para>
+
+Creeu i munteu les particions en què s'instal·larà la Debian.
+
+</para></listitem>
+<listitem><para>
+
+Superviseu la descàrrega/instal·lació/configuració automàtiques del
+<firstterm>sistema base</firstterm>.
+
+</para></listitem>
+<listitem><para>
+
+Instal·leu un <firstterm>carregador d'arrencada</firstterm>
+que puga iniciar &debian; i/o un altre sistema que tingueu.
+
+</para></listitem>
+<listitem><para>
+
+Carregueu per primera vegada el sistema acabat d'instal·lar, i feu-hi
+alguns ajusts inicials.
+
+</para></listitem>
+<listitem arch="s390"><para>
+
+Obriu una connexió ssh per al nou sistema.
+
+</para></listitem>
+<listitem><para>
+
+Instal·leu programari addicional (<firstterm>tasques</firstterm>
+i/o <firstterm>paquets</firstterm>), segons us parega.
+
+</para></listitem>
+</orderedlist>
+
+<para>
+
+Si teniu problemes durant la instal·lació, és útil saber quins paquets
+s'han instal·lat i en quins passos. En el drama de la instal·lació, els
+actors principals són:
+
+</para><para>
+
+L'instal·lador, el <classname>debian-installer</classname>, que és
+l'objecte principal d'aquest manual. Detecta el maquinari i carrega els
+controladors adients, fa servir el <classname>dhcp-client</classname>
+per establir la connexió de xarxa, i executa el
+<classname>debootstrap</classname> a fi d'instal·lar els paquets del
+sistema base. N'hi ha més, d'actors que fan papers menors en aquest
+procés, però el <classname>debian-installer</classname> ha complert el
+seu quan carregueu el nou sistema per primera vegada.
+
+</para><para>
+
+A més de carregar el nou sistema base, el <classname>base-config</classname>
+supervisa l'addició d'usuaris, estableix una zona horària (emprant el
+<classname>tzsetup</classname>), i configura el sistema d'instal·lació
+de paquets (emprant l'<classname>apt-setup</classname>). Després
+executa el <classname>tasksel</classname>, el qual es pot fer servir per
+seleccionar grups grans de programes interrelacionats, i també pot executar
+l'<classname>aptitude</classname>, que permet triar paquets de programari
+un per un.
+
+</para><para>
+
+Quan el <classname>debian-installer</classname> finalitza, abans de la
+primera càrrega del sistema, sols disposeu d'un sistema controlat per línia
+d'ordres molt bàsic. La interfície gràfica que mostra finestres al vostre
+monitor no s'instal·larà si no la seleccioneu durant els passos finals,
+bé amb el <classname>tasksel</classname> o bé amb
+l'<classname>aptitude</classname>. Això és opcional perquè nombrosos
+sistemes &debian; són servidors, els quals no necessiten cap interfície
+gràfica per funcionar.
+
+</para><para arch="not-s390">
+
+Per tant, tingueu en compte que el sistema X està completament separat
+del <classname>debian-installer</classname>; de fet, és més complicat que
+aquest. Tant la instal·lació del sistema X de finestres com els problemes
+relacionats amb ella estan fora de l'abast d'aquest manual.
+
+</para>
+ </sect1>
+

@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- original version: 31616 -->
+<!-- actualizado por rudy, 5 diciembre 2004 -->
+<!-- revisado Francisco García <franciscomanuel.garcia@hispalinux.es>, 27 enero 2005 -->
+<!-- revisado rudy, 24 feb. 2005 -->
+
+  <sect2 arch="i386"><title>Arranque desde un CD-ROM</title>
+
+&boot-installer-intro-cd.xml;
+
+<!-- We'll comment the following section until we know exact layout -->
+<!--
+El CD #1 del juego de CD-ROM oficial de Debian para &arch-title;
+presentará un cursor <prompt>boot:</prompt> en la mayoría del hardware.
+Pulse <keycap>F3</keycap> para ver la lista de opciones de núcleo
+disponibles desde las que puede arrancar. Simplemente escriba el nombre
+de la <quote>variante</quote> (idepci, vanilla, compact, bf24) en el cursor
+<prompt>boot:</prompt> seguido de &enterkey;.
+
+</para><para>
+
+Si su hardware no puede arrancar desde imágenes múltiples,
+ponga uno de los otros CDs en la unidad. Aparentemente la mayoría
+de unidades de CD-ROM SCSI no soportan el arranque desde
+múltiples imágenes de <command>isolinux</command>, por lo que los
+usuarios con CD-ROMs SCSI deberán intentarlo con el CD2 (vanilla),
+CD3 (compact) o CD5 (bf2.4).
+
+</para><para>
+
+Cada uno de los CDs del 2 al 5 arrancará una <quote>variante</quote> diferente dependiendo
+en que tipo de CD-ROM esté insertado. Vea <xref linkend="kernel-choice"/>
+para información sobre las distintas <quote>variantes</quote>. Esta es la disposición
+de las variantes en los diferentes CD-ROMs:
+
+<variablelist>
+<varlistentry>
+<term>CD 1</term><listitem><para>
+
+Permite una selección de las imágenes de núcleo desde el cual arrancar
+(la variante <quote>idepci</quote> es la predeterminada, si no elige nada).
+
+</para></listitem></varlistentry>
+<varlistentry>
+<term>CD 2</term><listitem><para>
+
+Arranca la variante <quote>vanilla</quote>.
+
+</para></listitem></varlistentry>
+<varlistentry>
+<term>CD 3</term><listitem><para>
+
+Arranca la variante <quote>compact</quote>.
+
+</para></listitem></varlistentry>
+<varlistentry>
+<term>CD 4</term><listitem><para>
+
+Arranca la variante <quote>idepci</quote>.
+
+</para></listitem></varlistentry>
+<varlistentry>
+<term>CD 5</term><listitem><para>
+
+Arranca la variante <quote>bf2.4</quote>.
+
+</para></listitem></varlistentry>
+
+ </variablelist>
+
+</para><para>
+
+-->
+
+  </sect2>
+
+<!-- FIXME the documented procedure does not exactly work, commented out
+     until fixes
+
+  <sect2 arch="i386" id="install-from-dos">
+  <title>Arranque desde una partición de DOS</title>
+
+&boot-installer-intro-hd.xml;
+
+<para>
+
+Arranque DOS (no Windows) sin ningún controlador cargado. Para hacer
+esto, presione <keycap>F8</keycap> en el momento exacto (y opcionalmente
+elija la opción <quote>safe mode command prompt only</quote>). Ingrese en el subdirectorio
+para la variante que elija, p. ej.:
+
+<informalexample><screen>
+cd c:\install
+</screen></informalexample>.
+
+Seguidamente, ejecute <command>install.bat</command>.
+Se cargará el núcleo y después el sistema de instalación.
+
+</para><para>
+
+Por favor, tenga en cuenta que existe un problema con loadlin (#142421) que
+impide que <filename>install.bat</filename> pueda usarse con
+la variante bf2.4. El síntoma de este problema es el mensaje de error
+<computeroutput>invalid compressed format</computeroutput>.
+
+</para>
+  </sect2>
+
+END FIXME -->
+
+  <sect2 arch="i386" id="boot-initrd">
+  <title>Arranque desde linux usando <command>LILO</command> o
+  <command>GRUB</command></title>
+
+<para>
+Para arrancar el instalador desde el disco duro, primero deberá
+descargar los ficheros necesarios como se describe en
+<xref linkend="boot-drive-files"/>.
+</para>
+
+<para>
+Si intenta usar el disco duro solamente para arrancar y descargar
+todo a través de la red, deberá descargar el fichero
+<filename>netboot/debian-installer/i386/initrd.gz</filename> y su
+núcleo correspondiente.
+Esto le permite reparticionar el disco duro desde donde arrancó el
+instalador, aunque debe hacerlo con cuidado.
+</para>
+
+<para>
+Alternativamente, si desea mantener una partición existente en el
+disco duro sin modificarla durante la instalación, debe descargar el
+fichero <filename>hd-media/initrd.gz</filename> y su núcleo correspondiente,
+así como copiar una iso de CD en el disco duro (asegúrese de que el nombre
+del fichero termine en <literal>.iso</literal>). Entonces el instalador puede arrancar
+desde el disco duro e instalar desde la imagen de CD, sin necesitar la red.
+</para>
+
+<para>
+Para <command>LILO</command>, deberá configurar dos cosas esenciales en
+/etc/lilo.conf:
+<itemizedlist>
+<listitem><para>
+
+para cargar <filename>initrd.gz</filename> del instalador al momento del
+arranque;
+
+</para></listitem>
+<listitem><para>
+
+y hacer que el núcleo <filename>vmlinuz</filename> use este disco RAM como
+su partición raíz.
+
+</para></listitem>
+</itemizedlist>
+
+Este es un ejemplo de <filename>/etc/lilo.conf</filename>:
+
+</para><para>
+
+<informalexample><screen>
+image=/boot/newinstall/vmlinuz
+       label=newinstall
+       initrd=/boot/newinstall/initrd.gz
+       root=/dev/ram0
+       append="<phrase condition="sarge">devfs=mount,dall </phrase>ramdisk_size=12000"
+</screen></informalexample>
+
+Para más detalles, vea las páginas de manual de
+<citerefentry><refentrytitle>initrd</refentrytitle>
+<manvolnum>4</manvolnum></citerefentry> y
+<citerefentry><refentrytitle>lilo.conf</refentrytitle>
+<manvolnum>5</manvolnum></citerefentry>. Ahora ejecute
+<userinput>lilo</userinput> y reinicie.
+
+</para><para>
+
+El procedimiento para <command>GRUB</command> es bastante similar. Localice su
+<filename>menu.lst</filename> en el directorio <filename>/boot/grub/</filename>
+(algunas veces está en <filename>/boot/boot/grub/</filename>), y añada las
+siguientes líneas:
+
+<informalexample><screen>
+title  Nueva instalacion
+kernel (hd0,0)/boot/newinstall/vmlinuz root=/dev/ram0 ramdisk_size=17000
+initrd (hd0,0)/boot/newinstall/initrd.gz
+</screen></informalexample>
+
+y reinicie.<phrase condition="sarge"> Si falla el arranque puede intentar añadir
+<userinput>devfs=mount,dall</userinput> a la línea <quote>kernel</quote>.</phrase>
+
+</para><para>
+Tenga en cuenta que puede tener que ajustar el valor de
+<userinput>ramdisksize</userinput>
+en función del tamaño de la imagen initrd.
+Desde este momento en adelante, no habrá diferencia entre
+<command>GRUB</command> o <command>LILO</command>.
+
+</para>
+  </sect2>
+
+  <sect2 arch="i386" id="usb-boot">
+  <title>Arranque desde un dispositivo de memoria USB</title>
+<para>
+
+Asumimos que ha preparado todo conforme se describe en <xref
+linkend="boot-dev-select"/> y <xref linkend="boot-usb-files"/>. Ahora
+simplemente conecte su dispositivo de memoria USB en alguno de los
+conectores USB libres y reinicie el ordenador. El sistema deberá arrancar,
+y debería presentar un cursor <prompt>boot:</prompt>. Aquí puede
+ingresar argumentos de arranque adicionales o simplemente presionar
+&enterkey;.
+
+</para><para>
+
+Si su ordenador no puede arrancar desde dispositivos de
+memoria USB, todavía puede usar un disquete para efectuar el arranque
+inicial y luego cambiar a USB. Arranque su sistema como se describe en
+<xref linkend="floppy-boot"/>; el núcleo en el disquete de arranque debería
+detectar su dispositivo de memoria USB automáticamente. Cuando le pregunte por
+el disquete raíz, simplemente presione &enterkey;. Debería ver iniciarse
+el &d-i;.
+
+</para>
+  </sect2>
+
+  <sect2 arch="i386" id="floppy-boot">
+  <title>Arranque desde disquetes</title>
+<para>
+
+Debería haber descargado previamente las imágenes que necesita y creado los
+disquetes desde éstas como se explica en <xref linkend="create-floppy"/>.
+<!-- missing-doc FIXME If you need to, you can also modify the boot floppy; see
+<xref linkend="rescue-replace-kernel"/>. -->
+
+</para><para>
+
+Para arrancar el instalador desde el disquete, introdúzcalo en la unidad de
+disquete primaria, apague el sistema como lo haría normalmente, luego enciéndalo
+nuevamente.
+
+</para><para>
+
+Para instalar desde una unidad LS-120 (versión ATAPI) con un juego
+de disquetes, necesitará especificar la ubicación virtual de la
+unidad de disquete. Puede hacer esto con el argumento de arranque
+<emphasis>root=</emphasis>, añadiendo el dispositivo asignado por el
+controlador de disquetes IDE. Por ejemplo, si su unidad LS-120 está
+conectada como el primer dispositivo IDE (maestro) en el segundo
+cable, debe ingresar
+<userinput>linux root=/dev/hdc</userinput> en el cursor de arranque.
+La instalación desde unidades LS-120 solamente está soportada por
+núcleos 2.4 y superiores.
+
+</para><para>
+
+Note que en algunas máquinas, <keycombo><keycap>Control</keycap>
+<keycap>Alt</keycap> <keycap>Supr</keycap></keycombo> no reinicia
+la máquina apropiadamente, por lo que se recomienda reiniciar en
+forma <quote>forzada</quote> o total. Si está instalando desde un sistema operativo
+existente (p. ej. desde un sistema DOS) no tiene opción. De otro modo,
+por favor reinicie en forma <quote>forzada</quote> o total cuando arranque.
+
+</para><para>
+
+Se accederá al disquete, debería ver una pantalla que presente
+el disquete de arranque y finalice mostrando el cursor
+<prompt>boot:</prompt>.
+
+</para><para>
+
+Cuando presione &enterkey;, debería ver el mensaje
+<computeroutput>Loading...</computeroutput>, seguido de
+<computeroutput>Uncompressing Linux...</computeroutput>, y
+luego una pantalla llena de información sobre el hardware
+de su sistema. Puede encontrar más información sobre esta fase
+del proceso de arranque en <xref linkend="kernel-msgs"/>.
+
+</para><para>
+
+Después de arrancar el disquete de arranque, se solicita el
+disquete marcado como <quote>root</quote>. Insértelo en la unidad y presione
+&enterkey;, los contenidos se cargarán en memoria. El programa
+instalador <command>debian-installer</command> se cargará
+automáticamente.
+
+</para>
+  </sect2>
+
+  <sect2 arch="i386" id="boot-tftp"><title>Arranque con TFTP</title>
+
+&boot-installer-intro-net.xml;
+
+<para>
+
+Existen varias formas de realizar un arranque con TFTP en i386.
+
+</para>
+
+   <sect3><title>Tarjetas de red o placas base que soportan PXE</title>
+<para>
+
+Podría ser que su tarjeta de red o placa base provea la
+funcionalidad de arranque PXE. Lo que es una reimplementación
+de <trademark class="trade">Intel</trademark> del arranque TFTP.
+De ser su caso podría tener la posibilidad de configurar su BIOS
+para arrancar desde la red.
+
+</para>
+   </sect3>
+
+   <sect3><title>Tarjeta de red con bootROM</title>
+<para>
+
+Podría ser que su tarjeta de red (NIC) provea la funcionalidad
+de arranque usando TFTP.
+
+</para><para condition="FIXME">
+
+Déjenos (<email>&email-debian-boot-list;</email>) saber como
+lo efectuó. Por favor, haga referencia a este documento.
+
+</para>
+   </sect3>
+
+   <sect3><title>Etherboot</title>
+<para>
+
+El <ulink url="http://www.etherboot.org">proyecto etherboot</ulink>
+provee disquetes de arranque e incluso <quote>bootroms</quote> que efectúan un
+arranque usando TFTP.
+
+</para>
+   </sect3>
+
+  </sect2>
+
+  <sect2 arch="i386"><title>El cursor de arranque</title>
+<para>
+
+Cuando arranca el instalador, se le presentará una pantalla gráfica amigable
+con el logo de Debian y el cursor de arranque:
+
+<informalexample><screen>
+Press F1 for help, or ENTER to boot:
+</screen></informalexample>
+
+(<quote>Pulse F1 para ayuda o ENTER para arrancar:</quote>, n. del t.)
+En el cursor de arranque puede pulsar simplemente  &enterkey; para arrancar
+el instalador con las opciones por omisión o introducir un método de arranque
+específico y, opcionalmente, parámetros de arranque.
+
+</para><para>
+
+Puede encontrar información, que le podría ser útil, sobre los parámetros
+de arranque y las opciones de arranque presionando las teclas
+<keycap>F2</keycap> a <phrase
+condition="sarge"><keycap>F7</keycap></phrase><phrase
+condition="etch"><keycap>F8</keycap></phrase>.  Si añade parámetros a la línea
+de órdenes de arranque, asegúrese de escribir el método de arranque (el
+predeterminado es <userinput>linux</userinput>) y un espacio después del primer
+parámetro (p. ej. <userinput>linux floppy=thinkpad</userinput>). 
+
+<note><para>
+
+Si está instalando el sistema a través de un sistema de gestión remoto que
+dispone de un interfaz de texto a la consola VGA puede que no vea la pantalla
+gráfica inicial cuando arranque el instalador. De hecho, puede que ni siquiera
+vea el cursor de arranque. Algunos ejemplos de estos sistemas son la consola de
+texto de Compaq <quote>integrated Lights Out</quote> (iLO) y la consola de HP
+<quote>Integrated Remote Assistant</quote> (IRA).
+En estos casos puede simplemente presionar F1 a ciegas
+<footnote>
+
+<para>
+
+En algunos casos tiene que utilizar una secuencia de escape en estos
+dispositivos para poder ejecutar esa pulsación de tecla. Por ejemplo, el
+dispositivo IR utiliza <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap>
+</keycombo>,&nbsp;<keycap>1</keycap>.
+
+</para>
+
+</footnote> para saltar esta pantalla y mostrar el texto de ayuda.  Una vez
+salga de la pantalla de inicio y dentro del texto de ayuda se le mostrarán sus
+pulsaciones de teclado en el cursor como suele ser habitual. Si quiere evitar
+que el instalador utilice el <quote>framebuffer</quote> durante la instalación
+puede añadir la opción
+<userinput>debian-installer/framebuffer=false</userinput> en el cursor de
+arranque tal y como se describe en el texto de ayuda.
+
+
+</para></note>
+
+</para>
+
+  </sect2>

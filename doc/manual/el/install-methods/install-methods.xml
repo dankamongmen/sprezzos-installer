@@ -1,0 +1,1715 @@
+<!-- Start of file install-methods/install-methods.xml -->
+
+<chapter id="install-methods">
+ <title
+>Αποκτώντας τα Μέσα Εγκατάστασης του Συστήματος</title>
+
+
+<!-- Start of file install-methods/official-cdrom.xml -->
+
+ <sect1 id="official-cdrom">
+ <title
+>Επίσημες Συλλογές των CD-ROM του &debian;</title>
+<para
+>Ο ευκολότερος με διαφορά τρόπος για να εγκαταστήσετε το &debian; είναι από ένα Επίσημο σετ CD-ROM του Debian. Μπορείτε να αγοράσετε ένα τέτοιο σετ από έναν προμηθευτή (δείτε τη σελίδα <ulink url="&url-debian-cd-vendors;"
+>CD vendors page</ulink
+>). Μπορείτε επίσης να κατεβάσετε είδωλα των CD-ROM από έναν κατοπτριστή αρχείων του Debian και να φτιάξετε έτσι το δικό σας σετ, αν έχετε μια γρήγορη δικτυακή σύνδεση και έναν εγγραφέα CD (δείτε τη σελίδα <ulink url="&url-debian-cd;"
+>Debian CD</ulink
+>για λεπτομερείς οδηγίες). Αν έχετε ένα σετ Debian CD και τα CD είναι εκκινήσιμα από το μηχάνημά σας, μπορείτε να προχωρήσετε κατευθείαν στην ενότητα <xref linkend="boot-installer"/>; έχει καταβληθεί μεγάλη προσπάθεια ώστε να εξασφαλιστεί ότι τα αρχεία που οι περισσότεροι χρήστες θα χρειαστούν βρίσκονται στα CD. Αν και ένα πλήρες σύνολο των εκτελέσιμων πακέτων απαιτεί αρκετά CD, είναι απίθανο να χρειαστείτε πακέτα που να βρίσκονται από το τρίτο CD και μετά. Μπορείτε επίσης να εξετάσετε την εκδοχή της έκδοσης σε DVD, που σώζει αρκετό χώρο στο ράφι σας και σα γλιτώνει από τον μαραθώνιο της διαρκούς αλλαγής CD. </para
+><para
+>Αν το μηχάνημά σας δεν υποστηρίζει εκκίνηση από CD, αλλά διαθέτετε ένα σετ CD, μπορείτε να χρησιμοποιήσετε μια εναλλακτική στρατηγική όπως <phrase condition="supports-floppy-boot"
+>δισκέττα,</phrase
+> <phrase arch="s390"
+>κασέτα, προσομοίωση κασέτας,</phrase
+> <phrase condition="bootable-disk"
+>σκληρός δίσκος,</phrase
+> <phrase condition="bootable-usb"
+>usb stick,</phrase
+> <phrase condition="supports-tftp"
+>δικτυακή εκκίνηση,</phrase
+> ή φορτώστε χειροκίνητα τον πυρήνα από το CD για να ξεκινήσετε αρχικά τον εγκαταστάτη του συστήματος. Τα αρχεία που χρειάζεστε για να ξεκινήσετε με ένα άλλο μέσο βρίσκονται επίσης στο CD; η οργάνωση της δικτυακής αρχειοθήκης του Debian και του καταλόγου στο CD είναι ταυτόσημα. Έτσι όταν στη συνέχεια δίνονται διαδρομές για αρχεία της αρχειοθήκης για συγκεκριμένα αρχεία που χρειάζεστε για την εκκίνηση, κοιτάξτε γι' αυτά τα αρχεία στους ίδιους καταλόγους και υποκαταλόγους στο CD σας. </para
+><para
+>Όταν ξεκινήσει ο εγκαταστάτης, θα είστε σε θέση να αποκτήσετε όλα τα υπόλοιπα απαραίτητα για τον εγκαταστάτη αρχεία από το CD. </para
+><para
+>Αν δεν έχετε ένα σετ από CD, τότε θα πρέπει να κατεβάσετε τα αρχεία συστήματος του εγκαταστάτη και να τα τοποθετήσετε σε<phrase arch="s390"
+>μία κασέτα εγκατάστασης</phrase
+> <phrase condition="supports-floppy-boot"
+>μία δισκέττα ή</phrase
+> <phrase condition="bootable-disk"
+>ένα σκληρό δίσκο ή</phrase
+> <phrase condition="bootable-usb"
+>ένα usb stick ή</phrase
+> <phrase condition="supports-tftp"
+>έναν συνδεδεμένο υπολογιστή</phrase
+> ώστε να μπορέσουν να χρησιμοποιηθούν για την εκκίνηση του εγκαταστάτη. </para>
+
+ </sect1>
+<!--   End of file install-methods/official-cdrom.xml -->
+
+<!-- Start of file install-methods/downloading-files.xml -->
+
+ <sect1 id="downloading-files">
+ <title
+>Λήψη Αρχείων από τους Κατοπτριστές αρχείων του Debian</title>
+
+<para
+>Για να βρείτε τον πλησιέστερο (και άρα πιθανόν τον γρηγορότερο) κατοπτριστή αρχείων δείτε το σύνδεσμο <ulink url="&url-debian-mirrors;"
+>λίστα των κατοπτριστών αρχείων του Debian</ulink
+>. </para
+><para
+>Όταν κατεβάζετε αρχεία από έναν κατοπτριστή αρχείων του Debian, σιγουρευτείτε ότι κατεβάζετε τα αρχεία σε <emphasis
+>δυαδική</emphasis
+> κατάσταση, όχι σε αυτόματη ή κατάσταση κειμένου. </para>
+
+  <sect2 id="where-files">
+  <title
+>Πού να βρείτε Είδωλα της Εγκατάστασης</title>
+
+<para
+>Τα είδωλα της εγκατάστασης βρίσκονται για κάθε κατοπτριστή αρχείων Debian στον κατάλογο <ulink url="&url-debian-installer;/images"
+>debian/dists/&releasename;/main/installer-&architecture;/current/images/</ulink
+>&mdash; το αρχείο <ulink url="&url-debian-installer;/images/MANIFEST"
+>MANIFEST</ulink
+> καταγράφει κάθε είδωλο και τον ρόλο της. </para>
+
+
+<!-- Start of file install-methods/download/alpha.xml -->
+
+
+   <sect3 arch="alpha"
+><title
+>Αρχεία Εγκατάστασης σε Alpha</title>
+<para
+>Αν διαλέξετε να εκκινήσετε από κονσόλα ARC firmware χρησιμοποιώντας <command
+>MILO</command
+>, θα πρέπει επίσης να ετοιμάσετε μια δισκέττα που να περιέχει το <command
+>MILO</command
+> και το <command
+>LINLOAD.EXE</command
+>από τις αντίστοιχα διατιθέμενα είδωλα δισκεττών. Δείτε το <xref linkend="alpha-firmware"/> για περισσότερες πληροφορίες σχετικά με firmware και φορτωτές εκκίνησης για Alpha. Οι εικόνες των δισκεττών μπορούν να βρεθούν στον κατάλογο <filename
+>MILO</filename
+> με το όνομα <filename
+>milo_<replaceable
+>subarchitecture</replaceable
+>.bin</filename
+>. </para
+><para
+>Δυστυχώς, τα είδωλα αυτά <command
+>MILO</command
+> δεν μπόρεσαν να δοκιμαστούν και πιθανόν να μην δουλεύουν για όλες τις υποαρχιτεκτονικές. Αν βρείτε ότι δεν δουλεύουν για σας, προσπαθήστε αντιγράφοντας το κατάλληλο εκτελέσιμο <command
+>MILO</command
+> στη δισκέττα (<ulink url="&disturlftp;main/disks-alpha/current/MILO/"
+></ulink
+>). Σημειώστε ότι αυτά τα εκτελέσιμα <command
+>MILO</command
+> δεν υποστηρίζουν <quote
+>sparse superblocks</quote
+> για το σύστημα αρχείων ext2 , κατά συνέπεια δεν μπορείτε να τις χρησιμοποιήσετε για το φόρτωμα πυρήνων από πρόσφατα δημιουργημένα τέτοια συστήματα αρχείων. Σαν μια πρόχειρη λύση μπορείτε να βάλετε τον πυρήνα στο τμήμα FAT δίπλα στο <command
+>MILO</command
+>. </para
+><para
+>Τα εκτελέσιμα <command
+>MILO</command
+> είναι συγκεκριμένα για κάθε πλατφόρμα. Δείτε το <xref linkend="alpha-cpus"/> για να προσδιορίσετε την κατάλληλη εικόνα <command
+>MILO</command
+> για τη δική σας πλατφόρμα Alpha .  </para>
+   </sect3>
+<!--   End of file install-methods/download/alpha.xml -->
+
+<!-- Start of file install-methods/download/arm.xml -->
+
+
+   <sect3 arch="arm" id="riscpc-install-files">
+   <title
+>Αρχεία εγκατάστασης για RiscPC</title>
+<para
+>Ο εγκαταστάτης για RiscPC εκκινείται αρχικά από το RISC OS. Όλα τα απαραίτητα αρχεία δίνονται με ένα αρχείο Zip, &rpc-install-kit;. Κατεβάστε αυτό το αρχείο στο μηχάνημα σας RISC OS, αντιγράψτε τις συνιστώσες <filename
+>linloader.!Boot</filename
+> στη θέση τους , και τρέξτε το <filename
+>!dInstall</filename
+>.  </para>
+   </sect3>
+
+   <sect3 arch="arm" id="netwinder-install-files">
+   <title
+>Αρχεία εγκατάστασης NetWinder</title>
+<para
+>Ο ευκολότερος τρόπος για να εκκινήσετε ένα σύστημα NetWinder είναι μέσω του δικτύου χρησιμοποιώντας το διατιθέμενο είδωλο TFTP &netwinder-boot-img;. </para>
+   </sect3>
+
+   <sect3 arch="arm" id="cats-install-files">
+   <title
+>Αρχεία εγκατάστασης CATS</title>
+<para
+>Η μόνη υποστηριζόμενη μέθοδος εκκίνησης ενός συστήματος CATS είναι με τη χρήση του σύνθετου ειδώλου&cats-boot-img; που μπορεί να φορτωθεί από οποιαδήποτε συσκευή προσβάσιμη από τον φορτωτή εκκίνησης Cyclone. </para>
+   </sect3>
+<!--   End of file install-methods/download/arm.xml -->
+
+<!-- Start of file install-methods/download/powerpc.xml -->
+
+<!-- commented out as it seems out of date and the links are broken
+
+   <sect3 arch="powerpc" id="newworld-install-files">
+   <title
+>NewWorld MacOS Installation Files </title>
+<para>
+
+For floppy-less installation on NewWorld Macs, it may be most
+convenient to obtain all the necessary files packaged into one Stuffit
+archive from
+<ulink url="&url-powerpc-of;"
+></ulink
+> (separate instructions are
+included in the archive). Otherwise, obtain the normal installation
+files listed above. Retrieve the files to an HFS (not HFS+) partition
+on your system.  You will also need the <filename
+>yaboot</filename
+> and
+<filename
+>yaboot.conf</filename
+> files from the
+<ulink url="&downloadable-file;new-powermac/"
+>new-powermac</ulink
+> or
+<ulink url="&downloadable-file;powermac/"
+>powermac</ulink
+> archive folder.
+However, the newest G4 PowerMacs, and those that work without MacOS 9,
+need the newest version of <command
+>yaboot</command
+>; the one in the
+archive will not work. Obtain the newest version from
+<ulink url="http://penguinppc.org/projects/yaboot/"
+></ulink
+>.
+
+</para>
+   </sect3>
+
+-->
+<!--   End of file install-methods/download/powerpc.xml -->
+
+<!-- Start of file install-methods/download/m68k.xml -->
+
+
+   <sect3 arch="m68k" id="kernel-22">
+   <title
+>Επιλέγοντας έναν πυρήνα</title>
+
+<para
+>Μερικές υποαρχιτεκτονικές m68k δίνουν την επιλογή πυρήνα για την εγκατάσταση. Σε γενικές γραμμές συνιστούμε να δοκιμάσετε πρώτα τις πιο πρόσφατες εκδόσεις. Αν η υποαρχιτεκτονική ή το μηχάνημά σας χρειάζεται να χρησιμοποιήσει έναν πυρήνα 2.2.x, βεβαιωθείτε ότι επιλέξατε ένα από τα είδωλα που υποστηρίζει πυρήνες της σειράς  2.2.x (δείτε σχετικά το σύνδεσμο<ulink url="&disturl;/main/installer-&architecture;/current/images/MANIFEST"
+>MANIFEST</ulink
+>). </para>
+<para
+>Όλα τα είδωλα του m68k για χρήση με πυρήνες 2.2.x, απαιτούν την παράμετρο πυρήνα &ramdisksize;. </para>
+   </sect3>
+<!--   End of file install-methods/download/m68k.xml -->
+
+  </sect2>
+
+ </sect1>
+<!--   End of file install-methods/downloading-files.xml -->
+
+<!-- Start of file install-methods/ipl-tape.xml -->
+
+ <sect1 arch="s390" id="ipl-tape">
+ <title
+>Δημιουργία μιας κασέτας IPL</title>
+
+<para
+>Αν δεν μπορείτε να εκκινήσετε το σύστημα (IPL) από ένα CD-ROM και δεν χρησιμοποιείτε VM θα πρέπει να δημιουργήσετε πρώτα μια κασέτα IPL. Αυτό περιγράφεται στην ενότητα 3.4.3 του βιβλίου <ulink url="http://www.redbooks.ibm.com/pubs/pdfs/redbooks/sg246264.pdf"
+>Linux for IBM eServer zSeries and S/390: Distributions</ulink
+> Redbook. Τα αρχεία που χρειάζεται να γράψετε στην κασέτα είναι (με αυτή τη σειρά): <filename
+>kernel.debian</filename
+>, <filename
+>parmfile.debian</filename
+> και <filename
+>initrd.debian</filename
+>. Τα αρχεία μπορούν να κατέβουν από τον υποκατάλογο <filename
+>tape</filename
+>, δείτε το <xref linkend="where-files"/>, </para>
+ </sect1>
+
+<!--   End of file install-methods/ipl-tape.xml -->
+
+<!-- Start of file install-methods/create-floppy.xml -->
+
+ <sect1 condition="supports-floppy-boot" id="create-floppy">
+ <title
+>Γράφοντας Δισκέτες από Είδωλα Δισκετών</title>
+<para
+>Εκκινήσιμες δισκέττες χρησιμοποιούνται γενικά σαν τελευταία λύση για την εκκίνηση του εγκαταστάτη σε συστήματα που δεν μπορούν να ξεκινήσουν από ένα CD ή από άλλο μέσο. </para
+><para arch="powerpc"
+>Σύμφωνα με αναφορές η εκκίνηση με δισκέττες αποτυχαίνει σε USB οδηγούς δισκεττών σε Mac. </para
+><para arch="m68k"
+>Εκκίνηση από δισκέττες δεν υποστηρίζεται σε Amiga ή σε 68k Mac. </para
+><para
+>Τα είδωλα δισκετών είναι αρχεία που περιέχουν το πλήρες περιεχόμενο μιας δισκέττας σε <emphasis
+>raw</emphasis
+>μορφή.  Τέτοια είδωλα, όπως ένα <filename
+>boot.img</filename
+>, δεν μπορούν απλά να αντιγραφούν σε έναν οδηγό δισκέττας. Απαιτείται η χρήση ενός ειδικού προγράμματος για να γραφεί ένα αρχείο ειδώλου σε δισκέττα σε <emphasis
+>raw</emphasis
+> κατάσταση απαιτείται η χρήση ενός ειδικού προγράμματος. Κι αυτό γιατί οι εικόνες αυτές είναι raw αναπαραστάσεις της δισκέττας. Απαιτείται να δημιουργηθεί ένα <emphasis
+>αντίγραφο τομέα</emphasis
+> των δεδομένων από το αρχείο στη δισκέττα. </para
+><para
+>Υπάρχουν διαφορετικές τεχνικές για τη δημιουργία δισκεττών από είδωλα δισκεττών, που εξαρτώνται από την πλατφόρμα σας. Αυτή η ενότητα περιγράφει πώς να δημιουργήσετε δισκέττες από είδωλα δισκεττών σε διαφορετικές πλατφόρμες. </para
+><para
+>Ανεξάρτητα από τη μέθοδο που θα χρησιμοποιήσετε για τη δημιουργία των δισκεττών σας, θα πρέπει να θυμηθείτε να εφαρμόσετε το κουμπί της προστασίας εγγραφής, μετά την εγγραφή τους, ώστε να σιγουρευτείτε ότι δεν θα καταστραφούν από αμέλεια. </para>
+
+  <sect2
+><title
+>Γράφοντας Είδωλα Δισκεττών από ένα σύστημα Linux ή Unix</title>
+<para
+>Για να γράψετε ένα είδωλο δισκέττας σε δισκέττα, πιθανόν να χρειαστείτε πρόσβαση σαν χρήστης root στο σύστημα. Τοποθετήστε μια καλή, κενή δισκέττα στον οδηγό. Στη συνέχεια χρησιμοποιήστε την εντολή <informalexample
+><screen>
+dd if=<replaceable
+>file</replaceable
+> of=/dev/fd0 bs=1024 conv=sync ; sync
+</screen
+></informalexample
+> όπου <replaceable
+>file</replaceable
+> είναι ένα από τα αρχεία των ειδώλων δείτε <xref linkend="downloading-files"/> για το τι μπορεί να είναι το αρχείο <replaceable
+>file</replaceable
+>). Το <filename
+>/dev/fd0</filename
+> είναι ένα κοινά χρησιμοποιούμενο όνομα για μια συσκευή δισκέττας, που μπορεί να είναι διαφορετικό στο σταθμό εργασίας σας <phrase arch="sparc"
+>(στο Solaris, είναι <filename
+>/dev/fd/0</filename
+>)</phrase
+>.Η εντολή μπορεί να επιστρέψει στο προτρεπτικό (prompt) πριν να ολοκληρωθεί από το Unix η εγγραφή της δισκέττας, οπότε θα πρέπει να κοιτάξετε για τη φωτεινή ένδειξη του "δισκου σε λειτουργία" και βεβαιωθείτε ότι αυτό έχει σβήσει και ότι η δισκέττα έχει σταματήσει να περιστρέφεται πριν να την απομακρύνετε από τη συσκευή. Σε κάποια συστήματα θα πρέπει να τρέξετε μια εντολή για την εξαγωγή της δισκέττας από τη συσκευή. <phrase arch="sparc"
+>(στο Solaris, χρησιμοποιήστε <command
+>eject</command
+>, δείτε την σελίδα οδηγιών χρήσης) </phrase
+>. </para
+><para
+>Κάποια συστήματα προσπαθούν να προσαρτήσουν αυτόματα μια δισκέττα όταν την τοποθετείτε στη συσκευή. Πιθανόν να πρέπει να απενεργοποιήσετε το χαρακτηριστικό αυτό πριν να σας επιτρέψει ο σταθμός εργασίας σας να γράψετε μια δισκέττα σε <emphasis
+>raw μορφή</emphasis
+>.  Δυστυχώς, το πώς θα το πετύχετε αυτό αλλάζει ανάλογα με το λειτουργικό σύστημά σας..<phrase arch="sparc"
+> Στο Solaris, μπορείτε να "παίξετε" με τη διαχείριση των δίσκων για να έχετε raw πρόσβαση στη δισκέττα. Πρώτα, σιγουρευτείτε ότι η δισκέττα προσαρτάται αυτόματα (χρησιμοποιώντας την εντολή <command
+>volcheck</command
+> ή την ισοδύναμή της στο διαχειριστή αρχείων). Μετά χρησιμοποιήστε μια εντολή <command
+>dd</command
+> του τύπου που είδαμε παραπάνω αντικαθιστώντας απλά  το όνομα της συσκευής <filename
+>/dev/fd0</filename
+> με το <filename
+>/vol/rdsk/<replaceable
+>floppy_name</replaceable
+></filename
+>, όπου <replaceable
+>floppy_name</replaceable
+> είναι το όνομα που δόθηκε στη δισκέττα κατά την μορφοποίησή της  (δισκέττες χωρίς μια τέτοια ονομασία παίρνουν εξ ορισμού το όνομα <filename
+>unnamed_floppy</filename
+>). Για άλλα συστήματα ρωτήστε τον διαχειριστή του συστήματός σας. </phrase
+> </para
+><para arch="powerpc"
+>Αν γράφετε μια δισκέττα σε powerpc Linux,θα χρειαστεί να την εξάγετε. Το πρόγραμμα <command
+>eject</command
+> το κάνει αυτό με πολύ όμορφο τρόπο, καλό θα είναι να το εγκαταστήσετε. </para>
+
+  </sect2>
+
+
+<!-- Start of file install-methods/floppy/i386.xml -->
+
+
+<!--  This is not set off for i386 only, because many people will have -->
+<!--  access to a PC in order to make a floppy for other arches. -->
+
+  <sect2
+><title
+>Γράφοντας είδωλα δισκεττών σε DOS, Windows, ή OS/2</title>
+
+<para
+>Αν έχετε πρόσβαση σε ένα μηχάνημα i386, μπορείτε να χρησιμοποιήσετε ένα από τα παρακάτω προγράμματα για να αντιγράψετε τις εικόνες στις δισκέττες. </para
+><para
+>Τα προγράμματα <command
+>rawrite1</command
+> και <command
+>rawrite2</command
+> μπορούν να χρησιμοποιηθούν με το MS-DOS. Για να χρησιμοποιήσετε τα προγράμματα αυτά πρώτα σιγουρευτείτε ότι έχετε εκκινήσει σε DOS. Προσπαθήστε να τα χρησιμοποιήσετε μέσα από ένα παράθυρο DOS στα Windows, καθώς ένα διπλό κλικ στα προγράμματα αυτά από τον Windows Explorer <emphasis
+>δεν</emphasis
+> αναμένεται να δουλέψει. </para
+><para
+>Το πρόγραμμα <command
+>rwwrtwin</command
+> τρέχει σε Windows 95, NT, 98, 2000, ME, XP και πιθανά μεταγενέστερες εκδόσεις. Για να το χρησιμοποιήσετε θα πρέπει να αποσυμπιέσετε την βιβλιοθήκη diskio.dll στον ίδιο κατάλογο. </para
+><para
+>Τα εργαλεία αυτά μπορούν να βρεθούν στα επίσημα CD-ROM του Debian και κάτω από τον κατάλογο <filename
+>/tools</filename
+>. </para>
+  </sect2>
+<!--   End of file install-methods/floppy/i386.xml -->
+
+<!-- Start of file install-methods/floppy/m68k.xml -->
+
+
+  <sect2 arch="m68k"
+><title
+>Εγγραφή ειδώλων δισκέττας σε συστήματα Atari</title>
+<para
+>Θα βρείτε το πρόγραμμα &rawwrite.ttp; στον ίδιο κατάλογο όπου βρίσκονται οι εικόνες των δισκεττών. Ξεκινήστε το πρόγραμμα με διπλό κλικ πάνω στο εικονίδιο του προγράμματος, και πληκτρολογήστε το όνομα της εικόνας δισκέττας που θέλετε να γραφτεί στη δισκέττα στη γραμμή εντολών της κονσόλας του προγράμματος TOS. </para>
+
+  </sect2>
+
+  <sect2 arch="m68k"
+><title
+>Εγγραφή ειδώλων δισκεττών σε συστήματα Macintosh</title>
+<para
+>Δεν υπάρχει εφαρμογή στο λειτουργικό MacOS για την εγγραφή εικόνων δισκεττών σε δισκέττα (και δεν υπάρχει νόημα στο να κάνετε κάτι τέτοιο καθώς δεν μπορείτε να χρησιμοποιήσετε αυτές τις δισκέττες για να ξεκινήσετε το σύστημα εγκατάστασης ή να εγκαταστήσετε τον πυρήνα ή τα modules στον Macintosh). Παρ' όλα αυτά, τα αρχεία είναι απαραίτητα για την εγκατάσταση του λειτουργικού συστήματος και των modules, αργότερα στην πορεία της εγκατάστασης. </para>
+
+  </sect2>
+<!--   End of file install-methods/floppy/m68k.xml -->
+
+<!-- Start of file install-methods/floppy/powerpc.xml -->
+
+
+  <sect2 arch="powerpc"
+><title
+>Εγγραφή ειδώλων δισκέττας από το MacOS</title>
+<para
+>Ένα AppleScript, το <application
+>Make Debian Floppy</application
+>, διατίθεται για την εγγραφή δισκεττών από τις διατιθέμενες εικόνες των δισκεττών. Μπορείτε να το κατεβάσετε από τον σύνδεσμο <ulink url="ftp://ftp2.sourceforge.net/pub/sourceforge/debian-imac/MakeDebianFloppy.sit"
+></ulink
+>. Για να το χρησιμοποιήσετε απλά αποσυμπιέστε το στην επιφάνεια εργασίας σας, και στη συνέχεια τραβήξτε οποιοδήποτε αρχείο εικόνας δίσκου σε αυτό. Θα πρέπει να έχετε το πρόγραμμα Applescript εγκατεστημένο και ενεργοποιημένο στον διαχειριστή επεκτάσεων. Το πρόγραμμα Disk Copy θα σας ζητήσει να επιβεβαιώσετε ότι θέλετε να διαγράψετε τη δισκέττα και να προχωρήσετε στην εγγραφή του αρχείου εικόνας σε αυτήν. </para
+><para
+>Μπορείτε επίσης να χρησιμοποιήσετε κατευθείαν το εργαλείο του MacOS <command
+>Disk Copy</command
+>, ή το ελεύθερο εργαλείο <command
+>suntar</command
+>. Το αρχείο <filename
+>root.bin</filename
+> είναι ένα παράδειγμα μιας εικόνας δισκέττας. Χρησιμοποιήστε μια από τις ακόλουθες μεθόδους για τη δημιουργία μιας δισκέττας από μια εικόνα δισκέττας με αυτά τα εργαλεία. </para>
+
+   <sect3>
+   <title
+>Εγγραφή Ειδώλων Δίσκων με το <command
+>Disk Copy</command
+></title>
+<para
+>Αν δημιουργείτε το είδωλο δισκέττας από αρχεία που βρίσκονταν αρχικά στο επίσημο CD του &debian; τότε οι παράμετροι Type και Creator είναι ήδη σωστά ρυθμισμένοι. Τα παρακάτω <command
+>Creator-Changer</command
+> βήματα είναι απαραίτητα μόνο αν κατεβάσατε τα αρχεία από έναν κατοπτριστή αρχείων του Debian. </para>
+<orderedlist>
+<listitem
+><para
+>Αποκτήστε το <ulink url="&url-powerpc-creator-changer;"
+>Creator-Changer</ulink
+> και χρησιμοποιήστε το για να ανοίξετε το αρχείο <filename
+>root.bin</filename
+>file. </para
+></listitem>
+<listitem
+><para
+>Αλλάξτε την παράμετρο Creator σε <userinput
+>ddsk</userinput
+> (Disk Copy), και την παράμετρο Type σε <userinput
+>DDim</userinput
+> (binary floppy image). Προσέξτε ότι στα πεδία υπάρχει διάκριση κεφαλαίων-πεζών. </para
+></listitem>
+<listitem
+><para
+><emphasis
+>Σημείωση:</emphasis
+> Στον Finder, χρησιμοποιήστε <userinput
+>Get Info</userinput
+> για να εμφανίσετε την πληροφορία του Finder για το είδωλο της δισκέττας, και τσεκάρετε με <quote
+>X</quote
+> το κουτί <userinput
+>File Locked</userinput
+> ώστε το MacOS να μην μπορεί να απομακρύνει τα block εκκίνησης σε περίπτωση που το είδωλο προσαρτηθεί κατά τύχη. </para
+></listitem>
+    <listitem
+><para
+>Αποκτήστε το <command
+>Disk Copy</command
+>; αν έχετε ένα σύστημα MacOS ή CD είναι πιθανόν να έχετε ήδη το εργαλείο αυτό, διαφορετικά δοκιμάστε στο <ulink url="&url-powerpc-diskcopy;"
+></ulink
+>. </para
+></listitem>
+<listitem
+><para
+>Τρέξτε το <command
+>Disk Copy</command
+>, και επιλέξτε <menuchoice
+> <guimenu
+>Utilities</guimenu
+> <guimenuitem
+>Make a Floppy</guimenuitem
+> </menuchoice
+> από το μενού <userinput
+>Utilities</userinput
+>, τότε επιλέξτε το <emphasis
+>κλειδωμένο</emphasis
+> αρχείο ειδώλου από τον διάλογο που εμφανίζεται. Θα σας ζητηθεί να εισάγετε μια δισκέττα και στη συνέχεια αν θέλετε πραγματικά να τη διαγράψετε. Όταν τελειώσετε θα αποβάλλει τη δισκέττα. </para
+></listitem>
+</orderedlist>
+
+   </sect3>
+
+   <sect3>
+   <title
+>Εγγραφή Ειδώλων Δίσκων με το <command
+>suntar</command
+></title>
+<para>
+
+<orderedlist>
+<listitem
+><para
+>Αποκτήστε το πρόγραμμα <command
+>suntar</command
+> από το <ulink url="&url-powerpc-suntar;"
+></ulink
+>. Ξεκινήστε την εφαρμογή <command
+>suntar</command
+> και επιλέξτε <quote
+>Overwrite Sectors...</quote
+> από το μενού <userinput
+>Special</userinput
+>. </para
+></listitem>
+<listitem
+><para
+>Εισάγετε τη δισκέττα όπως σας ζητείται, στη συνέχεια πατήστε &enterkey; (ξεκινώντας από τον τομέα 0). </para
+></listitem>
+<listitem
+><para
+>Επιλέξτε το αρχείο <filename
+>root.bin</filename
+> στον διάλογο ανοίγματος-αρχείου. </para
+></listitem>
+<listitem
+><para
+>Μετά την πετυχημένη δημιουργία της δισκέττας, επιλέξτε <menuchoice
+> <guimenu
+>File</guimenu
+> <guimenuitem
+>Eject</guimenuitem
+> </menuchoice
+> από το μενού <userinput
+>File</userinput
+>. Αν υπάρχουν λάθη στην εγγραφή της δισκέττας, απλά δοκιμάστε με μια άλλη. </para
+></listitem>
+</orderedlist>
+Πριν χρησιμοποιήσετε τη δισκέττα που δημιουργήσατε, <emphasis
+>βάλτε το tab προστασίας εγγραφής</emphasis
+>! Διαφορετικά αν την προσαρτήσετε τυχαία στο MacOS, το MacOS θα την καταστρέψει. </para>
+   </sect3>
+  </sect2>
+<!--   End of file install-methods/floppy/powerpc.xml -->
+
+ </sect1>
+
+<!--   End of file install-methods/create-floppy.xml -->
+
+<!-- Start of file install-methods/boot-usb-files.xml -->
+
+ <sect1 condition="bootable-usb" id="boot-usb-files">
+ <title
+>Προετοιμασία Αρχείων για Εκκίνηση από ένα USB Stick μνήμης</title>
+
+<para
+>Για την προετοιμασία του USB stick θα χρειαστείτε ένα σύστημα που τρέχει ήδη GNU/Linux και υποστηρίζει USB. Πρέπει να βεβαιωθείτε ότι το usb-storage kernel module είναι φορτωμένο  (<userinput
+>modprobeusb-storage</userinput
+>) και προσπαθήστε να βρείτε σε ποια συσκευή SCSI έχει αντιστοιχiσθεί το USB stick (στο παράδειγμα μας χρησιμοποιούμε τη συσκευή<filename
+>/dev/sda</filename
+>). Για να γράψετε στο stick,  θα πρέπει πιθανόν να απενεργοποιήσετε την προστασία εγγραφής. </para
+><para
+>Σημειώστε ότι το USB stick πρέπει να έχει μέγεθος τουλάχιστον 128 MB (διαφορετικά setups είναι δυνατά αν ακολουθήσετε το  <xref linkend="usb-copy-flexible"/>). </para>
+
+  <sect2 id="usb-copy-easy">
+  <title
+>Αντιγράψτε τα αρχεία &mdash; ο εύκολος τρόπος </title>
+<para arch="i386"
+>Υπάρχει ένα συγκεντρωτικό αρχείο <filename
+>hd-media/boot.img.gz</filename
+> που περιέχει όλα τα αρχεία του εγκαταστάτη (μαζί με τον πυρήνα) καθώς και το <command
+>SYSLINUX</command
+> και τα αρχεία ρύθμισης του. Το μόνο που έχετε να κάνετε είναι να αποσυμπιέσετε το αρχείο κατευθείαν στο USB stick: <informalexample
+><screen
+># zcat boot.img.gz &gt; /dev/<replaceable
+>sda</replaceable
+>
+</screen
+></informalexample>
+
+</para
+><para arch="powerpc"
+>Υπάρχει ένα συγκεντρωτικό αρχείο <filename
+>hd-media/boot.img.gz</filename
+> που περιέχει όλα τα αρχεία του εγκαταστάτη (συμπεριλαμβανομένου του πυρήνα) καθώς και την εντολή <command
+>yaboot</command
+> και το αρχείο ρύθμισεών της. Δημιουργήστε μια διαμέριση τύπου "Apple_Bootstrap" στο USB stick χρησιμοποιώντας την εντολή <command
+>mac-fdisk</command
+>'s <userinput
+>C</userinput
+> και εξάγετε την εικόνα κατευθείαν σ΄αυτό: <informalexample
+><screen
+># zcat boot.img.gz &gt; /dev/<replaceable
+>sda2</replaceable
+>
+</screen
+></informalexample>
+
+</para>
+<warning
+><para
+>Η χρήση αυτής της μεθόδου θα καταστρέψει ο,τιδήποτε υπάρχει ήδη στην συσκευή. Βεβαιωθείτε ότι χρησιμοποιείτε το σωστό όνομα συσκευής για το USB stick σας. </para
+></warning>
+<para
+>Μετά από αυτό, προσαρτήστε το USB stick μνήμης (<userinput
+>mount <replaceable arch="i386"
+>/dev/sda</replaceable
+> <replaceable arch="powerpc"
+>/dev/sda2</replaceable
+> /mnt</userinput
+>), που θα έχει τώρα ένα <phrase arch="i386"
+> FAT</phrase
+> <phrase arch="powerpc"
+>HFS</phrase
+> σύστημα αρχείων, και αντιγράψτε σε αυτό το είδωλο ενός  Debian netinst ή businesscard ISO. Σημειώστε ότι το όνομα των αρχείων αυτών πρέπει να τελειώνει σε  <filename
+>.iso</filename
+>.Αποπροσαρτήστε το stick (<userinput
+>umount /mnt</userinput
+>) και έχετε τελειώσει. </para>
+  </sect2>
+
+  <sect2 id="usb-copy-flexible">
+  <title
+>Αντιγράψτε τα αρχεία &mdash; ο ευέλικτος τρόπος</title>
+<para
+>Αν θέλετε μεγαλύτερη ευελιξία ή απλά θέλετε να ξέρετε τι ακριβώς συμβαίνει, θα πρέπει να χρησιμοποιήσετε την ακόλουθη μέθοδο για την τοποθέτηση των αρχείων στο stick. </para>
+
+
+<!-- Start of file install-methods/usb-setup/i386.xml -->
+
+   <sect3 arch="i386">
+   <title
+>Κατάτμηση ενός USB stick σε &arch-title;</title>
+<para
+>Θα δείξουμε πώς μπορείτε να ρυθμίσετε το stick μνήμης ώστε να χρησιμοποιήσει το πρώτο τμήμα αντί ολόκληρης της συσκευής. </para
+><note
+><para
+>Από τη στιγμή που τα περισσότερα USB stick έρχονται προρυθμισμένα με ένα μοναδικό τμήμα FAT16, το πιθανότερο είναι ότι δεν θα χρειαστεί να επανακατατμήσετε ή επαναμορφοποιήσετε το stick.  Αν πρέπει παρόλα αυτά να κάνετε κάτι τέτοιο, χρησιμοποιήστε το  <command
+>cfdisk</command
+> ή ένα οποιοδήποτε άλλο εργαλείο κατάτμησης για να δημιουργήσετε ένα τμήμα FAT16 και μετά πληκτρολογήστε: <informalexample
+><screen>
+# mkdosfs /dev/<replaceable
+>sda1</replaceable>
+</screen
+></informalexample
+> Προσέξτε και πάλι να χρησιμοποιήσετε το σωστό όνομα συσκευής για το USBstick. Η εντολή <command
+>mkdosfs</command
+> περιέχεται στο πακέτο <classname
+>dosfstools</classname
+>. </para
+></note
+><para
+>Για να ξεκινήσουμε τον πυρήνα αμέσως μετά την εκκίνηση από το USB stick, θα πρέπει να βάλουμε έναν φορτωτή εκκίνησης στο stick. Αν και οποιοσδήποτε φορτωτής εκκίνησης (πχ. <command
+>LILO</command
+>) θα δούλευε, είναι πιο βολικό να χρησιμοποιήσετε το <command
+>SYSLINUX</command
+>, μιας και χρησιμοποιεί τμήμα με FAT16 και μπορεί να προρυθμιστεί με την απλή διόρθωση ενός αρχείου κειμένου. Οποιοδήποτε λειτουργικό σύστημα που υποστηρίζει το σύστημα αρχείων FAT μπορεί να χρησιμοποιηθεί για να γίνουν αλλαγές στη ρύθμιση του φορτωτή εκκίνησης. </para
+><para
+>Για να βάλετε το <command
+>SYSLINUX</command
+> στο τμήμα με το FAT16 στο USB stick σας, εγκαταστήστε τα πακέτα  <classname
+>syslinux</classname
+> και <classname
+>mtools</classname
+> στο σύστημά σας και πληκτρολογήστε<informalexample
+><screen>
+# syslinux /dev/<replaceable
+>sda1</replaceable>
+</screen
+></informalexample
+> Και πάλι φροντίστε να χρησιμοποιήσετε το σωστό όνομα για τη συσκευή σας. Το τμήμα δεν πρέπει να είναι προσαρτημένο κατά την εκκίνηση του <command
+>SYSLINUX</command
+>. Η διαδικασία αυτή γράφει έναν τομέα εκκίνησης στο τμήμα και δημιουργεί το αρχείο <filename
+>ldlinux.sys</filename
+> που περιέχει τον κώδικα του φορτωτή εκκίνησης. </para
+><para
+>Προσαρτήστε το τμήμα  (<userinput
+>mount /dev/sda1/mnt</userinput
+>) και αντιγράψτε τα ακόλουθα αρχεία από τις αρχειοθήκες του Debian στο stick: <itemizedlist
+><listitem
+><para
+><filename
+>vmlinuz</filename
+> (εκτελέσιμο του πυρήνας)</para
+></listitem
+><listitem
+><para
+><filename
+>initrd.gz</filename
+> (αρχική εικόνα ramdisk)</para
+></listitem
+><listitem
+><para
+><filename
+>syslinux.cfg</filename
+> (αρχείο ρύθμισης του SYSLINUX )</para
+></listitem
+><listitem
+><para
+>Προαιρετικά modules του πυρήνα</para
+></listitem
+></itemizedlist
+>Αν θέλετε να ονομάσετε διαφορετικά τα αρχεία παρακαλούμε σημειώστε ότι το<command
+>SYSLINUX</command
+> μπορεί να επεξεργαστεί μόνο ονόματα αρχείων τύπου DOS(8.3). </para
+><para
+>Το αρχείο ρυθμίσεων <filename
+>syslinux.cfg</filename
+> πρέπει να περιέχει τουλάχιστον τις ακόλουθες δύο γραμμές:<informalexample
+><screen>
+default vmlinuz
+append initrd=initrd.gz ramdisk_size=10000 root=/dev/ram devfs=mount,dall rw
+</screen
+></informalexample
+> Προσέξτε ότι η παράμετρος <userinput
+>ramdisk_size</userinput
+> πιθανόν να πρέπει να μεγαλώσει ανάλογα με την εικόνα ramdisk που εκκινείτε. Αν η εκκίνηση αποτύχει, μπορείτε να δοκιμάσετε να προσθέσετε την παράμετρο <userinput
+>devfs=mount,dall</userinput
+> στη γραμμή <quote
+>append</quote
+> </para>
+   </sect3>
+<!--   End of file install-methods/usb-setup/i386.xml -->
+
+<!-- Start of file install-methods/usb-setup/powerpc.xml -->
+
+   <sect3 arch="powerpc">
+   <title
+>Κατάτμηση ενός USB stick σε &arch-title;</title>
+<para
+>Τα περισσότερα stick USB δεν έρχονται προ-ρυθμισμένα ώστε το Open Firmware να μπορεί να εκκινήσει από αυτά, οπότε θα πρέπει να επαναδιαμερίσετε το stick. Σε συστήματα Mac, τρέξτε την εντολή <userinput
+>mac-fdisk /dev/sda</userinput
+>, αρχικοποιήστε έναν καινούριο χάρτη διαμέρισης με την εντολή <userinput
+>i</userinput
+> και δηιουργήστε μια καινούρια κατάτμηση τύπου Apple_Bootstrap με την εντολή <userinput
+>C</userinput
+>. (Σημειώστε ότι η πρώτη "κατάτμηση" θα είναι πάντα ο ίδιος ο χάρτης διαμέρισης). Στη συνέχεια πληκτρολογήστε <informalexample
+><screen>
+$ hformat /dev/<replaceable
+>sda2</replaceable>
+</screen
+></informalexample
+> προσέχοντας ότι χρησιμοποιείτε το σωστό όνομα συσκευής για το stick USB. η εντολή <command
+>hformat</command
+> περιέχεται στο πακέτο του Debian <classname
+>hfsutils</classname
+>. </para
+><para
+>Για να ξεκινήσετε τον πυρήνα μετά την εκκίνηση από το USB stick, θα πρέπει να τοποθετήσετε έναν φορτωτή εκκίνησης στο stick. Ο φορτωτής εκκίνησης <command
+>yaboot</command
+> μπορεί να εγκατασταθεί σε ένα σύστημα αρχείων HFS και μπορεί να επαναρυθμιστεί απλά διορθώνοντας ένα αρχείο κειμένου. Οποιοδήποτε λειτουργικό σύστημα υποστηρίζει το σύστημα αρχείων HFS μπορεί να χρησιμοποιηθεί για να γίνουν αλλαγές στην ρύθμιση του φορτωτή εκκίνησης. </para
+><para
+>Το συνηθισμένο εργαλείο <command
+>ybin</command
+> που έρχεται μαζί με το πακέτο <command
+>yaboot</command
+> δεν καταλαβαίνει από συσκευές αποθήκευσης USB, οπότε θα πρέπει να εγκαταστήσετε το <command
+>yaboot</command
+> με το χέρι χρησιμοποιώντας τα εργαλεία του <classname
+>hfsutils</classname
+>. Πληκτρολογήστε <informalexample
+><screen>
+$ hmount /dev/sda2
+$ hcopy -r /usr/lib/yaboot/yaboot :
+$ hattrib -c UNIX -t tbxi :yaboot
+$ hattrib -b :
+$ humount
+</screen
+></informalexample
+> Και πάλι, προσέξτε να χρησιμοποιήσετε το σωστό όνομα για την συσκευή. Η κατάτμηση δεν θα πρέπει να προσαρτηθεί για κάποιον άλλο λόγο κατά τη διάρκεια αυτής της διαδικασίας, η οποία γράφει τον φορτωτή εκκίνησης στην κατάτμηση και χρησιμοποιεί τα εργαλεία για το HFS για να την "σημαδέψει" με τέτοιο τρόπο ώστε να μπορεί να εκκινηθεί από το Open Firmware. Έχοντας κάνει όλα αυτά, ο υπόλοιπος χώρος του stick USB μπορεί να προετοιμαστεί χρησιμοποιώντας τα συνηθισμένα εργαλεία του Unix. </para
+><para
+>Προσαρτήστε την κατάτμηση (<userinput
+>mount /dev/sda2 /mnt</userinput
+>) και αντιγράψτε τα παρακάτω αρχεία από τις αρχειοθήκες του Debian στο stick: <itemizedlist>
+<listitem
+><para
+><filename
+>vmlinux</filename
+> (εκετελέσιμο αρχείο πυρήνα) </para
+></listitem>
+<listitem
+><para
+><filename
+>initrd.gz</filename
+> (εικόνα αρχικού δίσκου μνήμης ramdisk) </para
+></listitem>
+<listitem
+><para
+><filename
+>yaboot.conf</filename
+> (αρχείο ρυθμίσεων του yaboot) </para
+></listitem>
+<listitem
+><para
+><filename
+>boot.msg</filename
+> (προαιρετικό μήνυμα εκκίνησης) </para
+></listitem>
+<listitem
+><para
+>Προαιρετικά αρθρώματα πυρήνα </para
+></listitem>
+</itemizedlist>
+
+</para
+><para
+>Το αρχείο ρυθμίσεων <filename
+>yaboot.conf</filename
+> πρέπει να περιέχει τις ακόλουθες γραμμές: <informalexample
+><screen>
+default=install
+root=/dev/ram
+
+message=/boot.msg
+
+image=/vmlinux
+        label=install
+        initrd=/initrd.gz
+        initrd-size=10000<phrase condition="sarge">
+        append="devfs=mount,dall --"</phrase>
+        read-only
+</screen
+></informalexample
+> Παρακαλούμε προσέξτε ότι η παράμετρος <userinput
+>initrd-size</userinput
+> πιθανόν να πρέπει να αυξηθεί ανάλογα με την εικόνα ramdisk που εκκινείτε. </para>
+   </sect3>
+<!--   End of file install-methods/usb-setup/powerpc.xml -->
+
+   <sect3>
+   <title
+>Προσθήκη ενός ειδώλου ISO</title>
+<para
+>Τώρα θα πρέπει να τοποθετήσετε οποιοδήποτε είδωλο από Debian ISO (businesscard, netinst ή και το πλήρες CD) στο stick σας (εφόσον χωράει). Το όνομα του αρχείου πρέπει να τελειώνει σε <filename
+>.iso</filename
+>. </para
+><para
+>Αν θέλετε να κάνετε εγκατάσταση πάνω από το δίκτυο, χωρίς την χρήση ενός ειδώλου ISO, προφανώς θα παραλείψετε το προηγούμενο βήμα. Επιπλέον θα πρέπει να χρησιμοποιήσετε το αρχικό είδωλο ramdisk από τον κατάλογο <filename
+>netboot</filename
+> αντί του καταλόγου  <filename
+>hd-media</filename
+>, επειδή το είδωλο <filename
+>hd-media/initrd.gz</filename
+> δεν έχει υποστήριξη για δίκτυο. </para
+><para
+>Όταν τελειώσετε, αποπροσαρτήστε το USB stick μνήμης (<userinput
+>umount /mnt</userinput
+>) και ενεργοποιήστε την προστασία εγγραφής. </para>
+   </sect3>
+
+   <!-- TODO: doesn't this section belong later? -->
+   <sect3 arch="i386">
+   <title
+>Εκκίνηση από το USB stick</title>
+<warning
+><para
+>Αν το σύστημά σας αρνείται να εκκινήσει, τότε το stick ίσως περιέχει ένα μη έγκυρο Κύριο Αρχείο Εκκίνησης (MBR). Για να το διορθώσετε αυτό, χρησιμοποιήστε την εντολή <command
+>install-mbr</command
+> από το πακέτο <classname
+>mbr</classname
+>: <informalexample
+><screen
+># install-mbr /dev/<replaceable
+>sda</replaceable
+> 
+</screen
+></informalexample>
+
+</para
+></warning>
+   </sect3>
+  </sect2>
+ </sect1>
+<!--   End of file install-methods/boot-usb-files.xml -->
+
+<!-- Start of file install-methods/boot-drive-files.xml -->
+
+ <sect1 condition="bootable-disk" id="boot-drive-files">
+ <title
+>Προετοιμασία των αρχείων για Εκκίνηση από Σκληρό Δίσκο</title>
+<para
+>O εγκαταστάτης μπορεί να ξεκινήσει χρησιμοποιώντας αρχεία εκκίνησης τοποθετημένα σε ένα υπάρχον τμήμα του σκληρού δίσκου και που ενεργοποιούνται είτε μέσα από ένα άλλο λειτουργικό σύστημα είτε καλώντας έναν  φορτωτή εκκίνησης (boot loader) κατευθείαν από το BIOS. </para
+><para
+>Μια πλήρης,<quote
+>καθαρά δικτυακή</quote
+> εγκατάσταση μπορεί να γίνει χρησιμοποιώντας αυτή την τεχνική. Κάτι που παρακάμπτει όλες τις δυσκολίες των αφαιρέσιμων μέσων, όπως την εύρεση και εγγραφή εικόνων CD ή το παίδεμα με πολυάριθμες και αναξιόπιστες δισκέττες. </para
+><para arch="i386"
+>Ο εγκαταστάτης δεν μπορεί να ξεκινήσει από αρχεία σε ένα NTFS σύστημα αρχείων. </para
+><para arch="powerpc"
+>Ο εγκαταστάτης δεν μπορεί να ξεκινήσει όταν τα αρχεία είναι σε HFS+ σύστημα αρχείων που τα λειτουργικά συστήματα MacOS System 8.1 και μετέπειτα ίσως χρησιμοποιούν. Όλοι οι NewWorld PowerMac χρησιμοποιούν HFS+. Για να προσδιορίσετε αν το υπάρχον σύστημα αρχείων σας είναι HFS+, επιλέξτε <userinput
+>Get Info</userinput
+> για τον εν λόγω δίσκο. Συστήματα αρχείων HFS εμφανίζονται σαν <userinput
+>Mac OS Standard</userinput
+>, ενώ αυτά που είναι HFS+ έχουν την ένδειξη <userinput
+>Mac OS Extended</userinput
+>. Πρέπει να έχετε ένα τμήμα με HFS για να μπορέσετε να ανταλλάξετε αρχεία μεταξύ του MacOS και του Linux, και συγκεκριμένα τα αρχεία που κατεβάζετε. </para
+><para arch="powerpc"
+>Ανάλογα με το αν το σύστημά σας είναι <quote
+>NewWorld</quote
+> ή <quote
+>OldWorld</quote
+> Mac, χρησιμοποιούνται διαφορετικά προγράμματα για εγκατάσταση από το σκληρό δίσκο. </para>
+
+  <sect2 arch="i386" id="files-lilo">
+  <title
+>Εκκίνηση του εγκαταστάτη από το σκληρό δίσκο με χρήση <command
+>LILO</command
+> ή <command
+>GRUB</command
+></title>
+<para
+>Η ενότητα αυτή εξηγεί πώς να προσθέσετε ή ακόμα και να αντικαταστήσετε την υπάρχουσα εγκατάστασή σας του Linux χρησιμοποιώντας είτε το <command
+>LILO</command
+> ή το <command
+>GRUB</command
+>. </para
+><para
+>Στη διάρκεια της εκκίνησης, και οι δύο φορτωτές εκκίνησης υποστηρίζουν το φόρτωμα στην μνήμη όχι μόνο του πυρήνα αλλά και ενός ειδώλου δίσκου (disk image). Αυτός ο δίσκος RAM μπορεί να χρησιμοποιηθεί σαν ριζικό σύστημα αρχείων από τον πυρήνα. </para
+><para
+>Αντιγράψτε τα ακόλουθα αρχεία από τις αρχειοθήκες του Debian σε μια βολική τοποθεσία στο σκληρό σας δίσκο, για παράδειγμα στο <filename
+>/boot/newinstall/</filename
+>. <itemizedlist>
+<listitem
+><para
+><filename
+>vmlinuz</filename
+> (αρχείο πυρήνα) </para
+></listitem>
+<listitem
+><para
+><filename
+>initrd.gz</filename
+> (είδωλο δίσκου μνήμης) </para
+></listitem>
+</itemizedlist>
+
+</para
+><para
+>Τέλος, για να ρυθμίσετε τον φορτωτή εκκίνησης προχωρήστε στην ενότητα <xref linkend="boot-initrd"/>. </para>
+  </sect2>
+
+
+  <sect2 arch="powerpc" id="files-oldworld">
+  <title
+>Εκκίνηση του Εγκαταστάτη από το σκληρό δίσκο για OldWorld Macs</title>
+<para
+>Η δισκέττα <filename
+>boot-floppy-hfs</filename
+> χρησιμοποιεί την εφαρμογή <application
+>miBoot</application
+> για την έναρξη της εγκατάστασης του Linux, που δεν μπορεί όμως να χρησιμοποιηθεί για την εκκίνηση του σκληρού δίσκου. Το <application
+>BootX</application
+>, που εκκινείται από το MacOS, υποστηρίζει εκκίνηση από αρχεία τοποθετημένα στο σκληρό δίσκο και μπορεί επίσης να χρησιμοποιηθεί για τη διπλή εκκίνηση του MacOS και του Linux μετά την ολοκλήρωση της εγκατάστασης του Debian. Για το μοντέλο Performa 6360, φαίνεται ότι η εντολή <command
+>quik</command
+> δεν μπορεί να καταστήσει το δίσκο εκκινήσιμο.  Κατά συνέπεια το <application
+>BootX</application
+> είναι απαραίτητο γι αυτό το μοντέλο. </para
+><para
+>Κατεβάστε και αποσυμπιέστε τη διανομή του <application
+>BootX</application
+>, διαθέσιμη στο <ulink url="&url-powerpc-bootx;"
+></ulink
+>, ή στον κατάλογο <filename
+>dists/woody/main/disks-powerpc/current/powermac</filename
+> των http/ftp καθρεφτών του Debian και στα επίσημα Debian CD. Χρησιμοποιήστε το <application
+>Stuffit Expander</application
+> για την εξαγωγή των αρχείων από το συμπιεσμένο αρχείο. Μέσα στο πακέτο υπάρχει ένας κενός φάκελος που ονομάζεται <filename
+>Linux Kernels</filename
+>. Κατεβάστε τα <filename
+>linux.bin</filename
+> και <filename
+>ramdisk.image.gz</filename
+> από τον κατάλογο <filename
+>disks-powerpc/current/powermac</filename
+>, και τοποθετήστε τα στον κατάλογο <filename
+>Linux Kernels</filename
+> και τοποθετήστε τον τελευταίο στο ενεργό System Folder. </para>
+  </sect2>
+
+  <sect2 arch="powerpc" id="files-newworld">
+  <title
+>Εκκίνηση του Εγκαταστάτη από το σκληρό δίσκο για NewWorld Macs</title>
+<para
+>Οι NewWorld PowerMac υποστηρίζουν εκκίνηση από το δίκτυο ή από ένα ISO9660 CD-ROM, καθώς και τη φόρτωση ELF εκτελέσιμων κατευθείαν από το δίσκο. Τα μηχανήματα αυτά θα ξεκινήσουν κατευθείαν μέσω του <command
+>yaboot</command
+>, που υποστηρίζει το φόρτωμα του πυρήνα και ενός δίσκου RAM κατευθείαν από ένα τμήμα ext2, καθώς και διπλή εκκίνηση με το MacOS. Εκκίνηση του εγκαταστάτη από το δίσκο είναι ιδιαίτερα κατάλληλη για νεώτερα μηχανήματα χωρίς οδηγούς δισκέττας. Το <command
+>BootX</command
+> δεν υποστηρίζεται και δεν πρέπει να χρησιμοποιείται σε NewWorld PowerMac συστήματα. </para
+><para
+><emphasis
+>Αντιγράψτε</emphasis
+> (και όχι να μεταφέρετε) τα ακόλουθα τέσσερα αρχεία που κατεβάσατε νωρίτερα από τις αρχειοθήκες του Debian, στο ριζικό επίπεδο του δίσκου σας (κάτι που επιτυγχάνεται με <keycap
+>option</keycap
+>-dragging κάθε αρχείου στο εικονίδιο του σκληρού δίσκου). <itemizedlist>
+<listitem
+><para>
+
+<filename
+>vmlinux</filename>
+
+</para
+></listitem>
+<listitem
+><para>
+
+<filename
+>initrd.gz</filename>
+
+</para
+></listitem>
+<listitem
+><para>
+
+<filename
+>yaboot</filename>
+
+</para
+></listitem>
+<listitem
+><para>
+
+<filename
+>yaboot.conf</filename>
+
+</para
+></listitem>
+</itemizedlist>
+
+</para
+><para
+>Σημειώστε τον αριθμό του τμήματος MacOS στην οποία τοποθετήσατε τα αρχεία. Αν έχετε το πρόγραμμα <command
+>pdisk</command
+> για MacOS, μπορείτε να χρησιμοποιήσετε την εντολή L για τον έλεγχο του αριθμού αυτού, τον οποίο θα χρειαστείτε για την εντολή που θα πληκτρολογήσετε στην προτροπή του Open Firmware κατά την εκκίνηση του εγκαταστάτη. </para
+><para
+>Για την εκκίνηση του εγκαταστάτη προχωρήστε στην ενότητα <xref linkend="boot-newworld"/>. </para>
+  </sect2>
+ </sect1>
+<!--   End of file install-methods/boot-drive-files.xml -->
+
+<!-- Start of file install-methods/install-tftp.xml -->
+
+ <sect1 condition="supports-tftp" id="install-tftp">
+ <title
+>Προετοιμασία Αρχείων για δικτυακή εκκίνηση με TFTP</title>
+<para
+>Αν το μηχάνημά σας είναι συνδεδεμένο σε ένα τοπικό δίκτυο (local area network), μπορείτε ίσως να το εκκινήσετε από ένα άλλο μηχάνημα μέσω του δικτύου αυτού χρησιμοποιώντας TFTP. Αν προτίθεστε να εκκινήσετε το σύστημα εγκατάστασης από ένα άλλο μηχάνημα, τα αρχεία εκκίνησης θα πρέπει να τοποθετηθούν σε συγκεκριμένες θέσεις στο μηχάνημα αυτό, το οποίο πρέπει επίσης να είναι ρυθμισμένο ώστε να υποστηρίζει την εκκίνηση του συγκεκριμένου μηχανήματός σας. </para
+><para
+>Θα πρέπει να στήσετε έναν εξυπηρετητή TFTP, και για περισσότερα μηχανήματα έναν εξυπηρετητή BOOTP <phrase condition="supports-rarp"
+>, ή έναν εξυπηρετητή RARP</phrase
+> <phrase condition="supports-dhcp"
+>, ή έναν εξυπηρετητή DHCP</phrase
+>. </para
+><para
+><phrase condition="supports-rarp"
+>Το Reverse Address Resolution Protocol (RARP) είναι ένας τρόπος να πείτε στον client ποια διεύθυνση IP  να χρησιμοποιήσει ο ίδιος. Ένας άλλος τρόπος είναι να χρησιμοποιήσετε το πρωτόκολλο BOOTP. </phrase
+> <phrase condition="supports-bootp"
+>Το BOOTP είναι ένα πρωτόκολλο IP που πληροφορεί έναν υπολογιστή για το ποια είναι η διεύθυνση του IP και από πού στο δίκτυο να αποκτήσει μια εικόνα εκκίνησης. </phrase
+><phrase arch="m68k"
+> Μια άλλη εναλλακτική λύση σε συστήματα VMEbus: η διεύθυνση IP μπορεί να δοθεί χειροκίνητα στην μνήμη εκκίνησης ROM. </phrase
+><phrase condition="supports-dhcp"
+>Το πρωτόκολλο DHCP (Dynamic Host Configuration Protocol) είναι μια πιο ευέλικτη και συμβατή προς τα πίσω επέκταση του πρωτοκόλλου BOOTP. Κάποια συστήματα μπορούν να ρυθμιστούν μόνο μέσω του πρωτοκόλλου αυτού. </phrase
+> </para
+><para arch="powerpc"
+>Για την αρχιτεκτονική PowerPC, αν έχετε ένα μηχάνημα NewWorld Power Macintosh, είναι μια καλή ιδέα να χρησιμοποιήσετε DHCP αντί για BOOTP. Μερικά από τα πιο πρόσφατα μηχανήματα δεν μπορούν να εκκινήσουν με χρήση του BOOTP. </para
+><para arch="alpha"
+>Σε αντίθεση με το Open Firmware που βρίσκουμε στα μηχανήματα Sparc και PowerPC, η κονσόλα SRM <emphasis
+>δεν</emphasis
+> θα χρησιμοποιήσει το RARP για να πάρει την διεύθυνσή του IP, και συνεπώς πρέπει να χρησιμοποιήσετε BOOTP για εκκίνηση από το δίκτυο ενός συστήματος Alpha. <footnote
+> <para
+> Συστήματα Alpha μπορούν να εκκινηθούν από το δίκτυο με χρήση του πρωτοκόλλου DECNet MOP (Maintenance Operations Protocol), κάτι που δεν καλύπτεται όμως εδώ. Υποθέτουμε ότι ο τοπικός εκπρόσωπος του OpenVMS θα σας βοηθήσει με χαρά στην περίπτωση που έχετε κάποια διακαή ανάγκη να χρησιμοποιήσετε το MOP για να εκκινήσετε το Linux στο σύστημά σας Alpha. </para
+></footnote
+> Μπορείτε επίσης να εισάγετε τις ρυθμίσεις για το IP των δικτυακών interfaces κατευθείαν από την κονσόλα SRM. </para
+><para arch="hppa"
+>Μερικά παλιότερα μηχανήματα HPPA (πχ. 715/75) χρησιμοποιούν RBOOTD αντί για BOOTP. Υπάρχει για το Debian διαθέσιμο ένα πακέτο <classname
+>rbootd</classname
+>  </para
+><para
+>Το πρωτόκολλο TFTP (Trivial File Transfer Protocol) χρησιμοποιείται για το σερβίρισμα της εικόνας εκκίνησης στον "πελάτη". Θεωρητικά, οποιοσδήποτε server, σε οποιαδήποτε πλατφόρμα, που υλοποιεί αυτά τα πρωτόκολλα, μπορεί να χρησιμοποιηθεί. Στα παραδείγματα αυτής της ενότητας, θα δώσουμε εντολές για SunOS 4.x, SunOS 5.x (δηλ. το Solaris), και GNU/Linux. <note arch="i386"
+><para
+>Για να χρησιμοποιήσετε την μέθοδο Pre-boot Execution Environment (PXE) για εκκίνηση με TFTP, θα χρειαστείτε έναν εξυπηρετητή TFTP με υποστήριξη <userinput
+>tsize</userinput
+>. Σε έναν &debian; server, τα πακέτα <classname
+>atftpd</classname
+> είναι<classname
+>tftpd-hpa</classname
+> κατάλληλα; συνιστούμε επίσης το πακέτο <classname
+>tftpd-hpa</classname
+>. </para
+></note>
+
+</para>
+
+
+<!-- Start of file install-methods/tftp/rarp.xml -->
+
+
+  <sect2 condition="supports-rarp" id="tftp-rarp">
+   <title
+>Ρυθμίζοντας έναν εξυπηρετητή RARP</title>
+<para
+>Για να ρυθμίσετε έναν server RARP, θα πρέπει να ξέρετε την διεύθυνση Ethernet (αλλιώς διεύθυνση MAC) των συστημάτων πελατών όπου θα γίνουν οι εγκαταστάσεις. Αν δεν ξέρετε αυτήν την πληροφορία, μπορείτε:<phrase arch="sparc"
+> να την εντοπίσετε από τα αρχικά μηνύματα στην εκκίνηση της OpenPROM, να χρησιμοποιήσετε την εντολή OpenBoot <userinput
+>.enet-addr</userinput
+>, ή </phrase
+> να εκκινήσετε σε κατάσταση <quote
+>Rescue</quote
+> (πχ., από μια δισκέττα διάσωσης (rescue floppy) και να χρησιμοποιήσετε την εντολή <userinput
+>/sbin/ifconfig eth0</userinput
+>. </para
+><para
+>Σε ένα σύστημα server RARP που χρησιμοποιεί πυρήνα Linux 2.2.x, θα πρέπει να "γεμίσετε" με τιμές τον πίνακα RARP του πυρήνα. Για να το κάνετε αυτό, τρέξτε τις ακόλουθες εντολές: <informalexample
+><screen>
+# <userinput
+>/sbin/rarp -s 
+<replaceable
+>client-hostname</replaceable>
+<replaceable
+>client-enet-addr</replaceable
+></userinput>
+
+# <userinput
+>/usr/sbin/arp -s 
+<replaceable
+>client-ip</replaceable>
+<replaceable
+>client-enet-addr</replaceable
+></userinput>
+</screen
+></informalexample
+> Αν πάρετε ένα μήνυμα λάθους <informalexample
+><screen>
+SIOCSRARP: Invalid argument
+</screen
+></informalexample
+> πιθανόν να πρέπει να φορτώσετε το RARP module του πυρήνα ή να ξαναχτίσετε τον πυρήνα με υποστήριξη για RARP.  Δοκιμάστε την εντολή <userinput
+>modprobe rarp</userinput
+> και μετά την εντολή <command
+>rarp</command
+> ξανά. </para
+><para
+>Σε ένα σύστημα με RARP server που χρησιμοποιεί πυρήνα Linux 2.4.x, δεν υπάρχει RARP module, και θα έπρεπε αντί γι' αυτό να χρησιμοποιήσετε το πρόγραμμα <command
+>rarpd</command
+>. Η διαδικασία είναι παρόμοια με αυτήν που χρησιμοποιείται για το SunOS στην επόμενη παράγραφο. </para
+><para
+>Για το λειτουργικό σύστημα SunOS, πρέπει να σιγουρευτείτε ότι η διεύθυνση της κάρτας Ethernet για τον πελάτη περιλαμβάνεται στη βάση <quote
+>ethers</quote
+> (είτε στο αρχείο <filename
+>/etc/ethers</filename
+>, είτε μέσω NIS/NIS+) και στην βάση ``hosts''. Στη συνέχεια θα πρέπει να ξεκινήσετε τον δαίμονα RARP. Στο σύστημα SunOS 4, δώστε την εντολή (σαν χρήστης root): <userinput
+>/usr/etc/rarpd -a</userinput
+>; στο SunOS 5, χρησιμοποιήστε την εντολή <userinput
+>/usr/sbin/rarpd -a</userinput
+>. </para>
+  </sect2>
+<!--   End of file install-methods/tftp/rarp.xml -->
+
+<!-- Start of file install-methods/tftp/bootp.xml -->
+
+
+  <sect2 condition="supports-bootp" id="tftp-bootp">
+  <title
+>Ρυθμίζοντας έναν εξυπηρετητή BOOTP</title>
+<para
+>Υπάρχουν δύο εξυπηρετητές BOOTP διαθέσιμοι για το GNU/Linux, ο CMU <command
+>bootpd</command
+> ενώ ο άλλος είναι στην πραγματικότητα ένας DHCP server, ο ISC <command
+>dhcpd</command
+>, που περιλαμβάνονται στα πακέτα <classname
+>bootp</classname
+> και <classname
+>dhcp</classname
+> στο &debian;. </para
+><para
+>Για να χρησιμοποιήσετε τον CMU <command
+>bootpd</command
+>, πρέπει πρώτα να <quote
+>αποσχολιάσετε</quote
+> (ή να προσθέσετε) την σχετική γραμμή στο αρχείο <filename
+>/etc/inetd.conf</filename
+>. Στο &debian;, μπορείτε να τρέξετε την εντολή <userinput
+>update-inetd --enable bootps</userinput
+>, και μετά <userinput
+>/etc/init.d/inetd reload</userinput
+> ώστε να ενεργοποιηθούν οι αλλαγές. Σε άλλα συστήματα, η ζητούμενη γραμμή πρέπει να είναι όπως: <informalexample
+><screen>
+bootps  dgram  udp  wait  root  /usr/sbin/bootpd  bootpd -i -t 120
+</screen
+></informalexample
+> Τώρα, θα πρέπει να δημιουργήσετε ένα αρχείο <filename
+>/etc/bootptab</filename
+>, το οποίο έχει ανάλογη με την οικεία και "κρυπτογραφημένη" μορφή των παλιών καλών BSD αρχείων <filename
+>printcap</filename
+>, <filename
+>termcap</filename
+>, και <filename
+>disktab</filename
+>. Δείτε την σελίδα χρήσης του <filename
+>bootptab</filename
+> για περισσότερες πληροφορίες. Για τον server CMU <command
+>bootpd</command
+>, θα πρέπει να ξέρετε την διεύθυνση MAC του συστήματος "πελάτη". Εδώ είναι ένα παράδειγμα αρχείου <filename
+>/etc/bootptab</filename
+>: <informalexample
+><screen>
+client:\
+  hd=/tftpboot:\
+  bf=tftpboot.img:\
+  ip=192.168.1.90:\
+  sm=255.255.255.0:\
+  sa=192.168.1.1:\
+  ha=0123456789AB:
+</screen
+></informalexample
+> Θα πρέπει να αλλάξετε τουλάχιστον την επιλογή <quote
+>ha</quote
+>, που προσδιορίζει την διεύθυνση υλικού του πελάτη. Η επιλογή <quote
+>bf</quote
+> προσδιορίζει το αρχείο που θα έπρεπε ένας πελάτης να ανακτήσει μέσω TFTP. Δείτε το σύνδεσμο <xref linkend="tftp-images"/> για περισσότερες πληροφορίες. <phrase arch="mips"
+> Σε συστήματα SGI Indy μπορείτε απλά να μπείτε στην οθόνη εντολών και να πληκτρολογήσετε <userinput
+>printenv</userinput
+>. Η τιμή της μεταβλητής <userinput
+>eaddr</userinput
+> είναι η διεύθυνση MAC του πελάτη.</phrase
+> </para
+><para
+>Αντίθετα, η ρύθμιση του BOOTP με τον ISC server <command
+>dhcpd</command
+> είναι πραγματικά εύκολη, γιατί αντιμετωπίζει τους πελάτες BOOTP σαν μια σχετικά ειδική περίπτωση πελατών DHCP. Μερικές αρχιτεκτονικές απαιτούν μια πολύπλοκη ρύθμιση για την εκκίνηση πελατών μέσω BOOTP.  Αν η δική σας είναι μια από αυτές, διαβάστε την ενότητα <xref linkend="dhcpd"/>. Διαφορετικά, μπορείτε πιθανόν να τα καταφέρετε απλά προσθέτοντας το προστακτικό <userinput
+>allow bootp</userinput
+> στο κομμάτι των ρυθμίσεων για το υποδίκτυο που περιέχει τον πελάτη, και επενεκκινήστε τον server <command
+>dhcpd</command
+> με την εντολή <userinput
+>/etc/init.d/dhcpd restart</userinput
+>. </para>
+  </sect2>
+<!--   End of file install-methods/tftp/bootp.xml -->
+
+<!-- Start of file install-methods//tftp/dhcp.xml -->
+
+  <sect2 condition="supports-dhcp" id="dhcpd">
+   <title
+>Ρυθμίζοντας έναν εξυπηρετητή DHCP</title>
+<para
+>Ένας server DHCP που είναι ελεύθερο λογισμικό είναι ο <command
+>dhcpd</command
+>. Στο &debian;, είναι διαθέσιμος στο πακέτο <classname
+>dhcp</classname
+>.Αυτό είναι ένα παράδειγμα αρχείου ρυθμίσεων για τον server αυτόν (συνήθως το αρχείο <filename
+>/etc/dhcpd.conf</filename
+>): <informalexample
+><screen>
+option domain-name "example.com";
+option domain-name-servers ns1.example.com;
+option subnet-mask 255.255.255.0;
+default-lease-time 600;
+max-lease-time 7200;
+server-name "servername";
+
+subnet 192.168.1.0 netmask 255.255.255.0 {
+  range 192.168.1.200 192.168.1.253;
+  option routers 192.168.1.1;
+}
+
+host clientname {
+  filename "/tftpboot/tftpboot.img";
+  server-name "servername";
+  next-server servername;
+  hardware ethernet 01:23:45:67:89:AB; 
+  fixed-address 192.168.1.90;
+}
+</screen
+></informalexample
+> Σημείωση: το καινούριο (και προτιμητέο) πακέτο <classname
+>dhcp3</classname
+> χρησιμοποιεί το αρχείο <filename
+>/etc/dhcp3/dhcpd.conf</filename
+>. </para
+><para
+>Στο παράδειγμα αυτό, υπάρχει ένας server με όνομα <replaceable
+>servername</replaceable
+> που κάνει όλη τη δουλειά ενός DHCP και TFTP server και μιας δικτυακής πύλης. Είναι σχεδόν βέβαιο ότι θα πρέπει να αλλάξετε τις επιλογές για το όνομα τομέα (domain name) καθώς και το όνομα του server και της διεύθυνσης της κάρτας δικτύου του πελάτη. Η επιλογή<replaceable
+>filename</replaceable
+> θα πρέπει να είναι το όνομα του αρχείου που θα ανακτηθεί μέσω TFTP. </para
+><para
+>Μετά την έκδοση του αρχείου ρυθμίσεων του <command
+>dhcpd</command
+>, επανεκκινήστε τον εξυπηρετητή με την εντολή <userinput
+>/etc/init.d/dhcpd restart</userinput
+>. </para>
+
+   <sect3 arch="i386">
+   <title
+>Ενεργοποίηση Εκκίνησης με τη μέθοδο PXE στη ρύθμιση του DHCP</title>
+<para
+>Εδώ έχουμε άλλο ένα παράδειγμα αρχείου <filename
+>dhcp.conf</filename
+> που χρησιμοποιεί την μέθοδο Pre-boot Execution Environment (PXE) για το TFTP.<informalexample
+><screen>
+option domain-name "example.com";
+
+default-lease-time 600;
+max-lease-time 7200;
+
+allow booting;
+allow bootp;
+
+# Η επόμενη παράγραφος θα πρέπει να τροποποιηθεί ώστε να ταιριάζει στην περίπτωσή σας 
+subnet 192.168.1.0 netmask 255.255.255.0 {
+  range 192.168.1.200 192.168.1.253;
+  option broadcast-address 192.168.1.255;
+# the gateway address which can be different
+# (access to the internet for instance)
+  option routers 192.168.1.1;
+# indicate the dns you want to use
+  option domain-name-servers 192.168.1.3;
+}
+
+group {
+ next-server 192.168.1.3;
+ host tftpclient {
+# tftp client hardware address
+  hardware ethernet  00:10:DC:27:6C:15;
+  filename "/tftpboot/pxelinux.0";
+ }
+}
+</screen
+></informalexample
+> Σημειώστε ότι για εκκίνηση με τη μέθοδο PXE, το όνομα αρχείου του πελάτη <filename
+>pxelinux.0</filename
+> είναι ένας φορτωτής εκκίνησης, και όχι μια εικόνα πυρήνα (δείτε την ενότητα <xref linkend="tftp-images"/> παρακάτω) </para>
+   </sect3>
+  </sect2>
+<!--   End of file install-methods//tftp/dhcp.xml -->
+
+  <sect2 id="tftpd">
+  <title
+>Ενεργοποίηση του εξυπηρετητή TFTP</title>
+<para
+>Για να προετοιμάσετε τον TFTP server, θα πρέπει πρώτα να βεβαιωθείτε ότι ο δαίμονας <command
+>tftpd</command
+> είναι ενεργοποιημένος. Αυτή η ενεργοποίηση γίνεται συνήθως περιλαμβάνοντας μια γραμμή όπως η ακόλουθη στο αρχείο <filename
+>/etc/inetd.conf</filename
+>: <informalexample
+><screen>
+tftp dgram udp wait nobody /usr/sbin/tcpd in.tftpd /tftpboot
+</screen
+></informalexample
+> Τα πακέτα Debian θα κάνουν αυτές τις ρυθμίσεις σωστά από την πρώτη στιγμή με την εγκατάστασή τους. </para
+><para
+>Κοιτάξτε το αρχείο αυτό και φροντίστε να θυμάστε τον κατάλογο που χρησιμοποιείται σαν όρισμα του <command
+>in.tftpd</command
+> καθώς θα το χρειαστείτε στη συνέχεια. Το όρισμα <userinput
+>-l</userinput
+> επιτρέπει σε κάποιες εκδόσεις του <command
+>in.tftpd</command
+> να καταγράφει όλες τις αιτήσεις που δέχεται στα αρχεία καταγραφής του συστήματος, κάτι που είναι χρήσιμο στη διάγνωση λαθών κατά την εκκίνηση. Αν πρέπει για κάποιο λόγο να αλλάξετε το αρχείο <filename
+>/etc/inetd.conf</filename
+>, θα πρέπει να ενημερώσετε γι' αυτό τον δαίμονα <command
+>inetd</command
+> που τρέχει για την αλλαγή αυτή. Σε ένα μηχάνημα Debian, τρέξτε  <userinput
+>/etc/init.d/inetd reload</userinput
+>; σε άλλα μηχανήματα, βρείτε τον αριθμό της διαδικασίας για τον <command
+>inetd</command
+>, και τρέξτε <userinput
+>kill -HUP <replaceable
+>inetd-pid</replaceable
+></userinput
+>. </para
+><para arch="mips"
+>Αν προτίθεστε να εγκαταστήσετε το Debian σε ένα μηχάνημα SGI και ο εξυπηρετητής σας TFTP είναι ένα κουτί GNU/Linux με πυρήνα 2.4, θα πρέπει να ρυθμίσετε τα ακόλουθα στον εξυπηρετητή σας: <informalexample
+><screen>
+# echo 1 &gt; /proc/sys/net/ipv4/ip_no_pmtu_disc
+</screen
+></informalexample
+> για να απενεργοποιήσετε το Path MTU discovery, διαφορετικά η μνήμη PROM του Indy δεν μπορεί να κατεβάσει τον πυρήνα. Επιπλέον, σιγουρευτείτε ότι τα πακέτα TFTP στέλνονται από μια πόρτα στην πηγή όχι μεγαλύτερη από την 32767, διαφορετικά το κατέβασμα θα "κολλήσει" μετά το πρώτο πακέτο. Και πάλι, είναι ο πυρήνας Linux 2.4.X που μεταφέρει αυτό το σφάλμα στην PROM και μπορείτε να το αποφύγετε βάζοντας <informalexample
+><screen>
+# echo "2048 32767" 
+> /proc/sys/net/ipv4/ip_local_port_range
+</screen
+></informalexample
+> για την προσαρμογή του εύρους των θυρών που χρησιμοποιεί ο εξυπηρετητής TFTP στο Linux. </para>
+  </sect2>
+
+  <sect2 id="tftp-images">
+  <title
+>Μεταφορά των ειδώλων TFTP στη θέση τους</title>
+<para
+>Στη συνέχεια, τοποθετήστε την εικόνα εκκίνησης του TFTP, όπως βρίσκεται στο <xref linkend="where-files"/>, στον κατάλογο των ειδώλων εκκίνησης του <command
+>tftpd</command
+>. Γενικά, ο κατάλογος αυτός θα είναι ο <filename
+>/tftpboot</filename
+>.  Θα πρέπει να δημιουργήσετε έναν σύνδεσμο από το αρχείο αυτό στο αρχείο που ο εξυπηρετητής <command
+>tftpd</command
+> θα χρησιμοποιήσει για την εκκίνηση ενός συγκεκριμένου πελάτη. Δυστυχώς, το αρχείο αυτό καθορίζεται από τον πελάτη του TFTP, και δεν υπάρχουν γι' αυτό σταθερά πρότυπα. </para
+><para arch="powerpc"
+>Σε μηχανήματα NewWorld Power Macintosh, θα πρέπει να ρυθμίσετε τον φορτωτή εκκίνησης <command
+>yaboot</command
+> σαν την εικόνα εκκίνησης του TFTP. Το <command
+>Yaboot</command
+> θα ανακτήσει τότε τα είδωλα του πυρήνα και του δίσκου RAM (RAMdisk) μέσω του ίδιου του TFTP. Για δικτυακή εκκίνηση, χρησιμοποιήστε το αρχείο <filename
+>yaboot-netboot.conf</filename
+>. Απλά μετονομάστε το σε <filename
+>yaboot.conf</filename
+> στον κατάλογο του TFTP. </para
+><para arch="i386"
+>Για εκκίνηση με τη μέθοδο PXE, ό,τι χρειάζεστε βρίσκεται στο συμπιεσμένο αρχείο <filename
+>netboot/netboot.tar.gz</filename
+>. Απλά αποσυμπιέστε το αρχείο στον κατάλογο του ειδώλου εκκίνησης του <command
+>tftpd</command
+>. Βεβαιωθείτε ότι ο εξυπηρετητής dhcp έχει ρυθμιστεί να περάσει το <filename
+>/pxelinux.0</filename
+> στον δαίμονα <command
+>tftpd</command
+> σαν το όνομα του αρχείου για εκκίνηση. </para
+><para arch="ia64"
+>Για εκκίνηση με τη μέθοδο PXE, ό,τι χρειάζεστε βρίσκεται στο συμπιεσμένο αρχείο <filename
+>netboot/netboot.tar.gz</filename
+>. Απλά αποσυμπιέστε το αρχείο στον κατάλογο του ειδώλου εκκίνησης του <command
+>tftpd</command
+>. Βεβαιωθείτε ότι ο εξυπηρετητής dhcp είναι ρυθμισμένος να περνά το <filename
+>/debian-installer/ia64/elilo.efi</filename
+> στον <command
+>tftpd</command
+> σαν το όνομα του αρχείου εκκίνησης. </para>
+
+   <sect3 arch="mipsel">
+   <title
+>Είδωλα TFTP για DECstation</title>
+<para
+>Για μηχανήματα DECstation, υπάρχουν αρχεία tftpimage για κάθε υποαρχιτεκτονική, που περιέχουν τόσο τον πυρήνα όσο και τον εγκαταστάτη σε ένα αρχείο. Η σύμβαση όσο αφορά την ονομασία είναι: <replaceable
+>subarchitecture</replaceable
+>/netboot-boot.img. Αντιγράψτε το αρχείο tftpimage που θα θέλατε να χρησιμοποιήσετε σαν <userinput
+>/tftpboot/tftpboot.img</userinput
+> αν δουλεύετε με τα παραδείγματα ρυθμίσεων για BOOTP/DHCP που περιγράψαμε παραπάνω. </para
+><para
+>Το firmware για DECstation εκκινείται από το TFTP με την εντολή <userinput
+>boot <replaceable
+>#</replaceable
+>/tftp</userinput
+>, όπου <replaceable
+>#</replaceable
+> είναι ο αριθμός της συσκευής TurboChannel από την οποία θα εκκινήσουμε. Στα περισσότερα συστήματα DECstation αυτός ο αριθμός είναι <quote
+>3</quote
+>. Αν ο server BOOTP/DHCP δεν παρέχει το όνομα του αρχείου ή θα πρέπει εσείς να δώσετε επιπρόσθετα ορίσματα, αυτά μπορούν να δοθούν επιλεκτικά με την ακόλουθη σύνταξη: </para
+><para>
+
+<userinput
+>boot #/tftp/filename param1=value1 param2=value2 ...</userinput>
+
+</para
+><para
+>Αρκετές αναβαθμίσεις τέτοιων firmware φαίνεται να έχουν πρόβλημα σχετικά με τη δικτυακή εκκίνηση: η μεταφορά αρχίζει, αλλά μετά από λίγη ώρα σταματά με ένα σφάλμα <computeroutput
+>a.out err</computeroutput
+>. Αυτό μπορεί να έχει διάφορες αιτίες:<orderedlist
+><listitem
+><para
+> Το firmware δεν ανταποκρίνεται στις αιτήσεις ARP κατά τη διάρκεια μιας μεταφοράς με TFTP. Αυτό οδηγεί σε ένα ARP timeout και η μεταφορά σταματά. Η λύση γι' αυτό είναι να προσθέσουμε τη διεύθυνση MAC της κάρτας Ethernet στο σύστημα DECstation στατικά στον πίνακα ARP του server TFTP. Αυτό γίνεται τρέχοντας την εντολή <userinput
+>arp -s <replaceable
+>IP-address</replaceable
+> <replaceable
+>MAC-address</replaceable
+></userinput
+> σαν root στο μηχάνημα που λειτουργεί σαν server TFTP. H διεύθυνση MAC του DECstation μπορεί να τη δει κανείς εισάγοντας την εντολή <command
+>cnfg</command
+> στην προτροπή του firmware του DECstation.</para
+></listitem
+><listitem
+><para
+> Το firmware έχει ένα όριο μεγέθους για τα αρχεία που μπορούν να εκκινηθούν με TFTP.</para
+></listitem
+></orderedlist
+>Υπάρχουν ακόμα και εκδόσεις του firmware που δεν μπορούν να εκκινήσουν καθόλου μέσω TFTP. Μια επισκόπηση των διαφορετικών εκδόσεων firmware μπορούν να βρεθούν στις σελίδες του NetBSD: <ulink url="http://www.netbsd.org/Ports/pmax/board-list.html#proms"
+></ulink
+>. </para>
+   </sect3>
+
+   <sect3 arch="alpha">
+   <title
+>Εκκίνηση με TFTP για Alpha</title>
+<para
+>Στην αρχιτεκτονική Alpha, θα πρέπει να προσδιορίσετε το όνομα του αρχείου (σαν σχετική διαδρομή ως προς τον κατάλογο της εικόνας εκκίνησης) χρησιμοποιώντας το όρισμα <userinput
+>-file</userinput
+> στην εντολή του SRM <userinput
+>boot</userinput
+>, ή θέτοντας την μεταβλητή περιβάλλοντος <userinput
+>BOOT_FILE</userinput
+>. Εναλλακτικά, το όνομα αρχείου μπορεί να δοθεί μέσω BOOTP (στον δαίμονα ISC <command
+>dhcpd</command
+>, χρησιμοποιήστε το προστακτικό (directive) <userinput
+>filename</userinput
+>). Σε αντίθεση με το Open Firmware, δεν υπάρχει  <emphasis
+>δεδομένο από πριν όνομα αρχείου</emphasis
+> στην SRM, οπότε <emphasis
+>πρέπει</emphasis
+> να προσδιορίσετε ένα τέτοιο όνομα με μια από τις δυο αυτές μεθόδους. </para>
+   </sect3>
+
+   <sect3 arch="sparc">
+   <title
+>Εκκίνηση με TFTP για SPARC</title>
+<para
+>Αρχιτεκτονικές SPARC χρησιμοποιούν για παράδειγμα τα ονόματα των υποαρχιτεκτονικών, όπως τα <quote
+>SUN4M</quote
+>  ή <quote
+>SUN4C</quote
+>; σε μερικές περιπτώσεις, η αρχιτεκτονική αφήνεται κενή, οπότε το αρχείο που αναζητά ο πελάτης (client) είναι απλά η δεκαεξαδική διεύθυνσή του IP <filename
+>client-ip-in-hex</filename
+>. Επομένως, αν η υποαρχιτεκτονική σας είναι ένα σύστημα SUN4C, και η διεύθυνσή του IP είναι 192.168.1.3, το όνομα του αρχείου θα είναι <filename
+>C0A80103.SUN4C</filename
+>. Ένας εύκολος τρόπος για να την προσδιορίσετε είναι εισάγοντας την ακόλουθη εντολή σε ένα κέλυφος (υποθέτοντας ότι η επιθυμητή/επιδιωκόμενη διεύθυνση IP είναι 10.0.0.4). <informalexample
+><screen>
+$ printf '%.2x%.2x%.2x%.2x\n' 10 0 0 4
+</screen
+></informalexample
+> Αυτό θα επιστρέψει την διεύθυνση IP σε δεκαεξαδική μορφή; για να πάρετε το σωστό όνομα αρχείου, θα χρειαστεί να αλλάξετε όλα τα γράμματα σε κεφαλαία και αν απαραίτητο και αν απαραίτητο να προσθέσετε στο τέλος το όνομα της υποαρχιτεκτονικής. </para
+><para
+>Μπορείτε επίσης να αναγκάσετε μερικά συστήματα sparc να κοιτάξουν για ένα συγκεκριμένο όνομα αρχείου προσθέτοντάς το στο τέλος της εντολής εκκίνησης OpenPROM, όπως για παράδειγμα <userinput
+>boot net my-sparc.image</userinput
+>. Αυτό το αρχείο πρέπει να βρίσκεται ακόμα στον κατάλογο όπου ψάχνει ο server TFTP. </para>
+   </sect3>
+
+   <sect3 arch="m68k">
+   <title
+>Εκκίνηση TFTP για BVM/Motorola</title>
+<para
+>Για συστήματα BVM και Motorola VMEbus αντιγράψετε τα αρχεία &bvme6000-tftp-files; στον κατάλογο <filename
+>/tftpboot/</filename
+>. </para
+><para
+>Στη συνέχεια, ρυθμίστε τις μνήμες ROM εκκίνησης ή τον εξυπηρετητή BOOTP ώστε να φορτώσουν αρχικά τα αρχεία <filename
+>tftplilo.bvme</filename
+> ή <filename
+>tftplilo.mvme</filename
+> από τον εξυπηρετητή TFTP. Αναφερθείτε στο αρχείο <filename
+>tftplilo.txt</filename
+> της υποαρχιτεκτονικής σας για περισσότερες πληροφορίες σχετικά με τις ρυθμίσεις για συγκεκριμένα συστήματα. </para>
+   </sect3>
+
+   <sect3 arch="mips">
+   <title
+>Εκκίνηση TFTP για SGI Indy</title>
+<para
+>Σε συστήματα SGI Indy μπορείτε να στηριχθείτε στον δαίμονα <command
+>bootpd</command
+> για την προμήθεια του ονόματος του αρχείου TFTP. Δίνεται είτε σαν το δεδομένο <userinput
+>bf=</userinput
+> στο αρχείο <filename
+>/etc/bootptab</filename
+> ή σαν η επιλογή <userinput
+>filename=</userinput
+> στο αρχείο <filename
+>/etc/dhcpd.conf</filename
+>. </para>
+   </sect3>
+
+   <sect3 arch="mips">
+   <title
+>Εκκίνηση TFTP με Broadcom BCM91250A</title>
+<para
+>Δεν χρειάζεται να κάνετε κάποια ειδική ρύθμιση για το DHCP επειδή θα περάσετε την πλήρη διαδρομή για το αρχείο που θα φορτωθεί στο CFE. </para>
+   </sect3>
+
+  </sect2>
+
+<!-- FIXME: commented out since it seems too old to be usable and a current
+            way is not known
+
+  <sect2 id="tftp-low-memory">
+  <title
+>TFTP Installation for Low-Memory Systems</title>
+<para>
+
+On some systems, the standard installation RAMdisk, combined with the
+memory requirements of the TFTP boot image, cannot fit in memory.  In
+this case, you can still install using TFTP, you'll just have to go
+through the additional step of NFS mounting your root directory over
+the network as well.  This type of setup is also appropriate for
+diskless or dataless clients.
+
+</para
+><para>
+
+First, follow all the steps above in <xref linkend="install-tftp"/>.
+
+<orderedlist>
+<listitem
+><para>
+
+Copy the Linux kernel image on your TFTP server using the
+<userinput
+>a.out</userinput
+> image for the architecture you are
+booting.
+
+</para
+></listitem>
+<listitem
+><para>
+
+Untar the root archive on your NFS server (can be the same system as
+your TFTP server):
+
+<informalexample
+><screen
+>
+# cd /tftpboot
+# tar xvzf root.tar.gz
+</screen
+></informalexample>
+
+Be sure to use the GNU <command
+>tar</command
+> (other tar programs, like the
+SunOS one, badly handle devices as plain files).
+
+</para
+></listitem>
+<listitem
+><para>
+
+Export your <filename
+>/tftpboot/debian-sparc-root</filename
+> directory
+with root access to your client.  E.g., add the following line to
+<filename
+>/etc/exports</filename
+> (GNU/Linux syntax, should be similar
+for SunOS):
+
+<informalexample
+><screen
+>
+/tftpboot/debian-sparc-root <replaceable>client</replaceable>(rw,no_root_squash)
+</screen
+></informalexample>
+
+NOTE: <replaceable
+>client</replaceable
+> is the host name or IP address recognized
+by the server for the system you are booting.
+
+</para
+></listitem>
+<listitem
+><para>
+
+Create a symbolic link from your client IP address in dotted notation
+to <filename
+>debian-sparc-root</filename
+> in the
+<filename
+>/tftpboot</filename
+> directory.  For example, if the client
+IP address is 192.168.1.3, do
+
+<informalexample
+><screen
+>
+# ln -s debian-sparc-root 192.168.1.3
+</screen
+></informalexample>
+
+</para
+></listitem>
+</orderedlist>
+
+</para>
+
+  </sect2>
+
+  <sect2 condition="supports-nfsroot">
+  <title
+>Installing with TFTP and NFS Root</title>
+<para>
+
+Installing with TFTP and NFS Root is similar to
+<xref linkend="tftp-low-memory"/> because you don't want to
+load the RAMdisk anymore but boot from the newly created NFS-root file
+system.  You then need to replace the symlink to the tftpboot image by
+a symlink to the kernel image (for example,
+<filename
+>linux-a.out</filename
+>).
+
+</para
+><para>
+
+RARP/TFTP requires all daemons to be running on the same server (the
+workstation is sending a TFTP request back to the server that replied
+to its previous RARP request).
+
+</para>
+
+
+  </sect2>
+END FIXME -->
+ </sect1>
+<!--   End of file install-methods/install-tftp.xml -->
+
+<!-- Start of file install-methods/automatic-install.xml -->
+
+ <sect1 id="automatic-install">
+ <title
+>Αυτόματη Εγκατάσταση</title>
+<para
+>Για εγκατάσταση σε πολλαπλούς υπολογιστές είναι δυνατό να πραγματοποιήσουμε πλήρως αυτοματοποιημένες εγκαταστάσεις. Πακέτα Debian που στοχεύουν σε αυτό περιλαμβάνουν: <classname
+>fai</classname
+> (που χρησιμοποιεί έναν εξυπηρετητή  εγκατάστασης), <classname
+>replicator</classname
+>, <classname
+>systemimager</classname
+>, <classname
+>autoinstall</classname
+>, και τον ίδιο τον Debian Installer. </para>
+
+  <sect2 id="preseed">
+  <title
+>Αυτόματη εγκατάσταση με χρήση του Debian Installer </title>
+<para
+>Ο εγκαταστάτης του Debian υποστηρίζει αυτοματοποιημένες εγκαταστάσεις με τη βοήθεια αρχείων προρύθμισης. Ένα τέτοιο αρχείο μπορεί να φορτωθεί από το δίκτυο ή από αφαιρούμενα μέσα και να χρησιμοποιηθεί για την συμπλήρωση απαντήσεων σε ερωτήσεις που θα τεθούν κατά τη διάρκεια της διαδικασίας εγκατάστασης. </para
+><para condition="etch"
+>Πλήρης τεκμηρίωση σχετικά με τις προρυθμίσεις που συμπεριλαμβάνουν ένα πραγματικό παράδειγμα, που μπορείτε να το επεξεργαστείτε οι ίδιοι, βρίσκεται στο <xref linkend="appendix-preseed"/>. </para
+><para condition="sarge"
+>Αν και οι περισσότεροι διάλογοι που χρησιμοποιούνται από τον &d-i; μπορούν να γίνουν preseeded χρησιμοποιώντας αυτή τη μέθοδο, υπάρχουν μερικές αξιοσημείωτες εξαιρέσεις. Είναι δυνατόν να(επανα)διαμερίσετε έναν ολόκληρο δίσκο ή να χρησιμοποιήσετε διαθέσιμο ελεύθερο χώρο σε έναν δίσκο, αλλά δεν είναι δυνατόν να χρησιμοποιήσετε υπάρχουσες κατατμήσεις. Δεν μπορείτε προς το παρόν να χρησιμοποιήσετε προρρυθμίσεις για να διαμορφώσετε RAID ή LVM. <phrase condition="sarge"
+> Επίσης, και με την εξαίρεση των αρθρωμάτων των οδηγών δικτύου, δεν είναι δυνατόν να προρρυθμίσετε τις παραμέτρους αρθρωμάτων του ;πυρήνα.</phrase
+> </para
+><para condition="sarge"
+>Το αρχείο προρυθμίσεων είναι σε μορφή που χρησιμοποιείται από την εντολή debconf-set-selections. Ένα καλά τεκμηριωμένο και πραγματικό παράδειγμα που μπορείτε να εκδόσετε είναι το <xref linkend="example-preseed"/>. </para
+><para condition="sarge"
+>Εναλλακτικά, ένας τρόπος να πάρετε μια πλήρη λίστα με όλες τις τιμές που μπορούν να γίνουν preseeded είναι να κάνετε μια χειροκίνητη εγκατάσταση, και μετά να χρησιμοποιήσετε την εντολή <filename
+>debconf-get-selections</filename
+>, από το πακέτο <classname
+>debconf-utils</classname
+> για να περάσετε τόσο την βάση του debconf όσο και του cdebconf που είναι στον κατάλογο var/log/debian-installer/cdebconf σε ένα μοναδικό αρχείο:<informalexample
+><screen>
+$ debconf-get-selections --installer &gt; <replaceable
+>file</replaceable>
+$ debconf-get-selections &gt;&gt; <replaceable
+>file</replaceable>
+</screen
+></informalexample
+> Το αρχείο όμως που δημιουργείται με τον τρόπο αυτό περιέχει και μερικά αντικείμενα που που δεν θα πρέπει να γίνουν preseeded, οπότε το αρχείο στο <xref linkend="example-preseed"/> είναι ένα καλλίτερο σημείο εκκίνησης για τους περισσότερους χρήστες. </para
+><para condition="sarge"
+>Από την στιγμή που έχετε ένα αρχείο προρυθμίσεων, μπορείτε να το εκδόσετε αν θέλετε και να το ανεβάσετε σε έναν διακομιστή ιστοσελίδων, ή να το αντιγράψετε στο μέσο εκκίνησης του installer. Όπου και να το τοποθετήσετε θα πρέπει να δώσετε μια παράμετρο στον installer κατά την εκκίνηση ώστε να ενημερωθεί ότι πρέπει να χρησιμοποιήσει αυτό το αρχείο. </para
+><para condition="sarge"
+>Για να κάνετε τον installer να χρησιμοποιήσει ένα αρχείο προρυθμίσεων που κατεβάσατε από το δίκτυο, προσθέστε το preseed/url=http://url/to/preseed.cfg στις παραμέτρους εκκίνησης του πυρήνα. Φυσικά οι προρυθμίσεις δεν μπορούν να ενεργοποιηθούν μέχρι ο installer να μπορέσει να ρυθμίσει το δίκτυο, οπότε η μέθοδος αυτή είναι κυρίως χρήσιμη εφόσον ο installer μπορεί να ρυθμίσει το δίκτυο μέσω DHCP χωρίς την διατύπωση ερωτήσεων. Πιθανόν να θέλετε να θέσετε την προτεραιότητα της εγκατάστασης σε "κρίσιμη"  για την αποφυγή ερωτήσεων κατά το διάστημα ρύθμισης του δικτύου. Κοιτάξτε το <xref linkend="installer-args"/>. </para
+><para condition="sarge"
+>Για να βάλετε ένα αρχείο προρυθμίσεων σε ένα CD, θα πρέπει να επανεκδώσετε το ISO image ώστε να συμπεριλάβει το αρχείο σας. Δείτε τη σελίδα βοήθειας του mkisofs για λεπτομέρειες. Εναλλακτικά, βάλτε το preseed αρχείο σε μια δισκέττα, και χρησιμοποιήστε το όρισμα preseed/file=/floppy/preseed.cfg </para
+><para arch="i386" condition="sarge"
+>Αν πρόκειται να εκκινήσετε από ένα USB stick μνήμης, τότε μπορείτε απλά να αντιγράψετε το αρχείο με τις προρυθμίσεις στο σύστημα αρχείων του stick μνήμης, και εκδώστε το αρχείο syslinux.cfg ώστε να προσθέσετε την preseed/file=/hd-media/preseed.cfg στις παραμέτρους εκκίνησης του πυρήνα. </para>
+  </sect2>
+ </sect1>
+<!--   End of file install-methods/automatic-install.xml -->
+
+</chapter>
+<!--   End of file install-methods/install-methods.xml -->

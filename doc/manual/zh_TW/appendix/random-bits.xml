@@ -1,0 +1,1263 @@
+<!-- Start of file appendix/random-bits.xml -->
+
+<appendix id="random-bits"
+><title
+>其他</title>
+
+
+<!-- Start of file appendix/example-preseed.xml -->
+
+<sect1 id="example-preseed">
+<title
+>預先設定檔範例</title>
+
+<para
+>這是一個完整的用於自動安裝的預先設定檔的實例。使用的說明在 <xref linkend="automatic-install"/>。您可以在使用該檔案前移除某些行前面的註解。 <note
+><para
+>為了能在手冊中正確示範這個例子，我們不得不分割一些設定行。透過使用行連接符號 <quote
+>\</quote
+> 和下一行的縮排標記。在實際的設定檔中，這些分割的設定行必須合併成 <emphasis
+>單獨的一行</emphasis
+>。 如果您沒有這樣做，預先設定檔會造成不可預估的失敗。 </para
+><para
+>一個<quote
+>乾淨的</quote
+>範例檔包含在安裝光碟的 <filename
+>/doc/install/manual</filename
+> 目錄，網際網路上位於 <ulink url="&url-example-preseed;"
+></ulink
+>。 </para
+></note>
+
+<informalexample
+><screen
+>#### 修改 syslinux.cfg.
+
+# 修改 syslinux.cfg (或類似的檔案) 並在各行尾端加入核心參數。
+#
+# 您至少要加入一項參數以告知安裝程式預先設定檔的位置。
+# 如果您從 USB 媒介安裝，使用以下參數，並將預先設定檔放在 USB 隨身碟的最上層
+# 目錄。
+#   preseed/file=/hd-media/preseed
+# 如果您以網路開機，使用以下參數：
+#   preseed/url=http://host/path/to/preseed
+# 如果您使用光碟，您可以設定:
+#   preseed/file=/cdrom/preseed
+# 請確定把預先設定檔複製到您所指定的位置。
+# 
+# 您可以指定檢查和 (checksum) 數值來確保安裝程式取得正確的預先設定檔。
+# 目前必須使用 md5sum 檢查和，一旦檢查和被指定，就必須和檔案的檢查和相同，
+# 否則安裝程式將會拒絕使用此檔案。(Sarge 安裝程式不支援檢查和功能) 
+#
+#   preseed/url/checksum=5da499872becccfeda2c4872f9171c3d
+#   preseed/file/checksum=5da499872becccfeda2c4872f9171c3d
+#
+# 您也許想要在預先設定檔中設置 debconf/priority=critical 以省略大部分問題 (
+# 儘管在接下來的預先設置中您可能會遺漏某些參數)。您也可以將倒數設定為 1，這
+# 樣就不用按下 enter 鍵來啟動安裝程式。
+# 
+# 語言、國家和鍵盤配置無法在預先設定檔中做預設，因為這些問題會在預先設定檔被
+# 載入之前提出。欲略過這些問題，請加入核心參數。
+# 如果您使用 sarge 安裝程式，請加入以下三項：
+#
+#    languagechooser/language-name=English
+#    countrychooser/shortlist=US
+#    console-keymaps-at/keymap=us
+#
+# 較新版本的安裝程式只需要兩項：
+#
+#    debian-installer/locale=en_US
+#    console-keymaps-at/keymap=us
+#
+# 請注意，核心最多接受 8 個命令列參數、8 個環境選項 (包括被安裝程式自動帶入
+# 的參數)。如果超過這兩個限制，2.4 版的核心會忽略超過的參數，而 2.6 版的核心
+# 會產生錯誤 (panic)。比 2.6.9 更新的核心版本可以使用 32 個命令列參數和 32 
+# 個環境選項。
+#
+# 大部分狀況下，可以移除 'vga=normal' 此一預設選項，藉此加入更多預設參數。
+
+#### 介殼命令
+
+# d-i的預先設置是不安全的，安裝程式將不會檢查這類設定檔中的參數是否會造成暫
+# 存滿溢或是設定不足。因此，請確定您從可信任的地方存取預先設定檔！接下來將詳
+# 述在安裝程式中執行介殼命令的方法，這非常的實用。
+
+# 這個命令應該在讀取預先設定檔之後立刻被執行
+#d-i preseed/early_command              string \
+#    wget http://url/to/my.udeb -O /tmp/my.udeb; udpkg -i /tmp/my.udeb
+
+# 這個命令在安裝程式結束的前一步執行，但 /target 目錄必須存在且可以使用。
+#d-i preseed/late_command               string \
+#    for deb in /hd-media/*.deb; do cp $deb /target/tmp; \
+#    chroot /target dpkg -i /tmp/$(basename $deb); done
+
+# 這個指令在 base-config 執行的時候被執行。
+#base-config base-config/early_command  string echo hi mom
+
+# 這個指令在 base-config 結束之後、login: 提示號之前被執行。如果您想安裝某些
+# 軟體套件，或是調整系統設定，這將是一個好方法。
+#base-config base-config/late_command   string \
+#    apt-get install zsh; chsh -s /bin/zsh
+
+#### 網路設定
+
+# 如果您從網路開機，這部分內容當然不適用。但如果您是以 USB 隨碟或是光碟開機
+# ，您仍可以設定核心的網路設定參數以從網路讀取預先設定檔
+
+# 如果有可用連線，netcfg 將會選擇其中一條。如果有一條以上的連線，將不會顯示
+# 連線清單。
+d-i  netcfg/choose_interface            select auto
+
+# 如果您想要手動設定網路，請參考以下方法：
+#d-i netcfg/disable_dhcp                boolean true
+#d-i netcfg/get_nameservers             string 192.168.1.1
+#d-i netcfg/get_ipaddress               string 192.168.1.42
+#d-i netcfg/get_netmask                 string 255.255.255.0
+#d-i netcfg/get_gateway                 string 192.168.1.1
+#d-i netcfg/confirm_static              boolean true
+
+# 請注意，任何從 DHCP 取得的主機名稱和網域名稱將會蓋過以下設定，但是設定以下
+# 參數仍可以在從 DHCP 取得資料的請況下避免顯示對話框.
+d-i  netcfg/get_hostname                string unassigned-hostname
+d-i  netcfg/get_domain                  string unassigned-domain
+
+# 取消煩人的 WEP 密鑰對話框。
+d-i  netcfg/wireless_wep                string
+# 某些 ISP 供應商用奇怪的 DHCP 主機名稱來當作密碼一類的用途。
+#d-i netcfg/dhcp_hostname               string radish
+
+#### 設定鏡像站
+
+d-i  mirror/country                     string enter information manually
+d-i  mirror/http/hostname               string http.us.debian.org
+d-i  mirror/http/directory              string /debian
+d-i  mirror/suite                       string testing
+d-i  mirror/http/proxy                  string 
+
+### 分割磁區
+
+# 如果系統還有剩餘空間，您可以要求只分割該剩餘空間。
+#d-i partman-auto/init_automatically_partition \
+#    select Use the largest continuous free space
+
+# 或者，您可以選擇要被分割的磁碟，設備的名稱可以用 devfs 格式或是傳統的 
+# 非devfs 格式指定。例如，第一個磁碟的 devfs 名稱為：
+d-i  partman-auto/disk                  string /dev/discs/disc0/disc
+
+# 您可以選擇任何預設的分割方式：
+d-i  partman-auto/choose_recipe         select \
+     All files in one partition (recommended for new users)
+#d-i partman-auto/choose_recipe         select Desktop machine
+#d-i partman-auto/choose_recipe         select Multi-user workstation
+
+# 或是提供您自己的分割方式...
+# 設定分割方法的格式請參考 devel/partman-auto-recipe.txt。
+# 如果您有任何其他的分割方式設定檔，您也可以直接指定：
+#d-i partman-auto/expert_recipe_file    string /hd-media/recipe
+
+# 如果沒有，您可以加入一行設定，下面範例會建立一個 /boot 小分割區，大小適中
+# 的置換分割區，並把剩下的空間分配給根分割區：
+#d-i partman-auto/expert_recipe         string boot-root :: \
+#    20 50 100 ext3 $primary{ } $bootable{ } method{ format } format{ } \
+#    use_filesystem{ } filesystem{ ext3 } mountpoint{ /boot } . \
+#    500 10000 1000000000 ext3 method{ format } format{ } \
+#    use_filesystem{ } filesystem{ ext3 } mountpoint{ / } . \
+#    64 512 300% linux-swap method{ swap } format{ } . 
+# 下面用適合閱讀的格式表示同樣的設定，以利您參考：
+#    boot-root ::
+#       40 50 100 ext3
+#          $primary{ } $bootable{ }
+#          method{ format } format{ }
+#          use_filesystem{ } filesystem{ ext3 }
+#          mountpoint{ /boot }
+#       .
+#       500 10000 1000000000 ext3
+#          method{ format } format{ }
+#          use_filesystem{ } filesystem{ ext3 }
+#          mountpoint{ / }
+#       .
+#       64 512 300% linux-swap
+#          method{ swap } format{ }
+#       .
+
+# 以下設定使 partman 不確認就開始分割。
+d-i partman/confirm_write_new_label     boolean true
+d-i partman/choose_partition            select \
+    Finish partitioning and write changes to disk
+d-i partman/confirm                     boolean true
+
+#### 安裝 boot-loader
+
+# Grub 是預設的 boot-loader (在 x86 下)，如果您想安裝 lilo，移除下面設定的
+# 註解：
+#d-i grub-installer/skip                boolean true
+
+# 請安心使用以下設定，這將使 grub 在沒有其他作業系統的情況下自動安裝
+# 到 MBR。
+d-i  grub-installer/only_debian         boolean true
+
+# 這會讓 grub-installer 在有其他作業系統的狀況下仍安裝 grub 到 MBR。這可能會
+# 您無法啟動其他作業系統。
+d-i  grub-installer/with_other_os       boolean true
+
+# 或者，若您想要把 grub 安裝到 MBR 以外的地方，把下面數行加上註解：
+#d-i grub-installer/bootdev             string (hd0,0)
+#d-i grub-installer/only_debian         boolean false
+#d-i grub-installer/with_other_os       boolean false
+
+##### 結束安裝程序的第一階段
+
+# 取消安裝即將結束的訊息。
+d-i  prebaseconfig/reboot_in_progress   note 
+
+
+##### 預先設定 base-config
+
+# 取消介紹訊息。
+base-config  base-config/intro          note
+
+# 取消最後的訊息
+base-config  base-config/login          note
+
+# 如果您安裝了顯示管理程式，但又不想在 base-config 結束後立刻啟動之：
+#base-config base-config/start-display-manager        boolean false
+
+# 安裝程式的某些版本能夠回報您安裝了什麼，預設為不回報，但是送出回報能夠幫
+# 助專案得知哪些軟體很熱門，並將之放入光碟中。
+#popularity-contest popularity-contest/participate    boolean false
+
+###### 設定時區
+
+# 決定硬體時間是否被設定成 GMT 時間。
+base-config  tzconfig/gmt                             boolean true
+
+# 簡單的時區預設。您可以選擇任何可用的設定值給 $TZ。請參考
+# /usr/share/zoneinf/ 中的選項
+base-config  tzconfig/preseed_zone                    string US/Eastern
+
+# 時區的預先設置曾經很複雜，舊的設定方式將完整描述於下文，如果您正在使用 sarge，
+# 您需要下面的方法。
+
+# 如果您告訴安裝程式您位於美國，那麼您可以用此變數設定時區。
+# (選項有：Eastern, Central, Mountain, Pacific, Alaska, Hawaii, Aleutian, 
+# Arizona East-Indiana, Indiana-Starke, Michigan, Samoa, other)
+base-config  tzconfig/choose_country_zone/US          select Eastern
+# 如果您位於加拿大
+# (選項有：Newfoundland, Atlantic, Eastern, Central,
+# East-Saskatchewan, Saskatchewan, Mountain, Pacific, Yukon, other)
+base-config  tzconfig/choose_country_zone/CA          select Eastern
+# 如果您位於巴西 (Choices are: East, West, Acre,
+# DeNoronha, other)
+base-config  tzconfig/choose_country_zone/BR          select East
+# 很多國家只有一個時區，如果您告訴安裝程式您位於那些國家之一，您可以透過以
+# 下問題來選擇標準時區。
+base-config  tzconfig/choose_country_zone_single      boolean true
+# 這個問題是為了確認上述中具有多個時區國家之外的國家。您可以選擇其中一個時
+# 區或是 "other"。
+#base-config tzconfig/choose_country_zone_multiple    select 
+
+###### 設定帳號
+
+# 欲設定 root 的密碼，您必須在這個檔案中以明文表示。這不是個好做法，請小心
+# 使用！
+#passwd passwd/root-password            password r00tme
+#passwd passwd/root-password-again      password r00tme
+
+# 如果您想跳過建立一般使用者帳號的步驟：
+#passwd passwd/make-user                boolean false
+
+# 或者，您可以預先設定使用者全名和登入帳號。
+#passwd passwd/user-fullname            string Debian User
+#passwd passwd/username                 string debian
+# 以及密碼，但請小心使用這個設定！
+#passwd passwd/user-password            password insecure
+#passwd passwd/user-password-again      password insecure
+
+###### 設定 Apt
+
+# 這個問題決定在第二階段中軟體套件的來源，可選的有 cdrom、http、ftp、
+# filesystem 和 edit source list manually。
+# by hand
+base-config  apt-setup/uri_type         select http
+
+# 如果您選擇 ftp 或 http，您將會被詢問國家和鏡像站。
+base-config  apt-setup/country          select enter information manually
+base-config  apt-setup/hostname         string http.us.debian.org
+base-config  apt-setup/directory        string /debian
+# Stop after choosing one mirror.
+base-config  apt-setup/another          boolean false
+
+# 您可以選擇是否安裝 non-free 和 contrib 軟體。
+#base-config apt-setup/non-free         boolean true
+#base-config apt-setup/contrib          boolean true
+
+# 啟用安全更新。
+base-config  apt-setup/security-updates boolean true
+
+###### 選擇軟體套件
+
+# 您可以選擇安裝任何組合的可用軟體集。本文中可用的軟體集有：
+# Desktop environment, Web server, Print server, DNS server, File server
+# Mail server, SQL database 和 manual package selection。最後一個選項將會
+# 執行 aptitude。您也可以不安裝軟體集，並以其他方式強迫安裝其他軟體套件。
+tasksel      tasksel/first   multiselect Desktop environment
+#tasksel     tasksel/first   multiselect Web server, Mail server, DNS server
+
+###### 郵件設定
+
+# 在一般安裝中，exit 只會問兩個問題，下面告訴您如何跳過這兩個問題。您也可以
+# 設置更複雜的預先設定。
+exim4-config exim4/dc_eximconfig_configtype \
+    select no configuration at this time
+exim4-config exim4/no_config boolean true
+
+# 建議您對任何您建立的使用者帳號作以下的設定，如果這個選項留白，那麼 
+# postmaster 的郵件將會存到 /var/mail/mail.
+exim4-config exim4/dc_postmaster        string 
+
+###### 設定 X
+
+# 您也可以預先設定 Debian 的 X。但是您可能需要知道顯示硬體的細節，因為 
+# Debian 的 X 設定程式不會自動設定所有的參數。
+
+# X 可以正確偵測某些顯示卡的驅動程式，但如果您使用預先設定，您將會蓋過自動
+# 偵測的結果。不過，VESA 能在大多數狀況下使用。
+#xserver-xfree86 xserver-xfree86/config/device/driver select vesa
+
+# 這裡必須警告您，如果 X 無法偵測到滑鼠，它將會不斷嘗試。所以，如果您預先設定
+# 了滑鼠，那麼就有可能陷入偵測不到滑鼠的無限迴圈。
+#xserver-xfree86 xserver-xfree86/autodetect_mouse     boolean true
+
+# 建議您使用自動偵測顯示器
+xserver-xfree86 xserver-xfree86/autodetect_monitor    boolean true
+# 如果使用液晶顯示器，請註解下面設定。
+#xserver-xfree86 xserver-xfree86/config/monitor/lcd   boolean true
+# X 有三種階級來設定顯示器，下面是 "medium" 階級的設定，理當永久可用。而
+# "simple" 階級可能不會永久可用，至於 "advanced" 則會詢問非常多問題。
+xserver-xfree86  xserver-xfree86/config/monitor/selection-method \
+    select medium
+xserver-xfree86  xserver-xfree86/config/monitor/mode-list \
+    select 1024x768 @ 60 Hz
+
+###### 其他
+
+# 根據您所安裝的軟體，或是安裝過程中出現的錯誤，其他問題可能會被提及。您也可
+# 預先設定它們。您可以藉由執行安裝程式，並且執行下面指令以取得其他問題的
+# 清單：
+#   debconf-get-selections --installer 
+> file
+#   debconf-get-selections 
+>
+> file
+
+# 如果您喜歡，您可以帶入其他預先設定檔到此檔案中。那些檔案中的設定將會覆蓋本
+# 檔案之前有設定的部份。您可以帶入一個以上的預先設定檔，請以空白格開。這些
+# 檔案也可以帶入它們自己的預先設定指令。請注意，如果檔案路徑是以相對路徑
+# 表示，那麼將從帶入它們的父檔案所處位置開始。
+#d-i preseed/include                    string x.cfg
+
+# 安裝程式在使用預先設定檔之前得確認該檔案的檢查和。目前只支援 md5sum，按照
+# 引入的檔案順序列出這些檔案的檢查和。(Sarge 安裝程式不支援檢查和。)
+#d-i pressed/include/checksum                string 5da499872becccfeda2c4872f9171c3d
+
+# 或者您可以更靈活的設定，下面的介殼命令會決定預先設定設定檔的名稱。例如，
+# 在 USB 隨身碟 (在這個範例中，為一內建讀卡機) 下的設定檔之中切換：
+#d-i preseed/include_command            string \
+#    if $(grep -q "GUID: 0aec3050aec305000001a003" /proc/scsi/usb-storage-*/*); \
+#    then echo kraken.cfg; else echo otherusb.cfg; fi
+# 在安裝之前您可以檢查您的預先設置檔語法是否正確，請使用：
+#   debconf-set-selections -c preseed.cfg
+</screen
+></informalexample>
+
+</para>
+</sect1>
+<!--   End of file appendix/example-preseed.xml -->
+
+<!-- Start of file appendix/files.xml -->
+
+
+ <sect1 id="linuxdevices"
+><title
+>Linux 裡的設備</title>
+<para
+>在 Linux 裡，您會在 <filename
+>/dev</filename
+>發現許多很特別的檔案。這些檔案被稱為設備檔。在 Unix 世界裡，存取硬體的方式有些不一樣。這些特別的檔案的背後其實運行著驅動程式，而正是驅動程式控制著硬體。設備檔就是存取真實的系統元件的介面。<filename
+>/dev</filename
+> 目錄下的檔案的各種特性也和普通檔案大相逕庭。下面列舉了最重要的一些設備檔。 </para
+><para>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>fd0</filename
+></entry>
+  <entry
+>第一個軟碟機</entry>
+</row
+><row>
+  <entry
+><filename
+>fd1</filename
+></entry>
+  <entry
+>第二個軟碟機</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>hda</filename
+></entry>
+  <entry
+>在第一個 IDE 埠(Master)的 IDE 硬碟/光碟機</entry>
+</row
+><row>
+  <entry
+><filename
+>hdb</filename
+></entry>
+  <entry
+>在第一個 IDE 埠(Slave)的 IDE 硬碟/光碟機</entry>
+</row
+><row>
+  <entry
+><filename
+>hdc</filename
+></entry>
+  <entry
+>在第二個 IDE 埠(Master)的 IDE 硬碟/光碟機</entry>
+</row
+><row>
+  <entry
+><filename
+>hdd</filename
+></entry>
+  <entry
+>在第二個 IDE 埠(Slave)的 IDE 硬碟/光碟機</entry>
+</row
+><row>
+  <entry
+><filename
+>hda1</filename
+></entry>
+  <entry
+>在第一塊 IDE 硬碟上的第一個分割區</entry>
+</row
+><row>
+  <entry
+><filename
+>hdd15</filename
+></entry>
+  <entry
+>在第四塊 IDE 硬碟上的第十五個分割區</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>sda</filename
+></entry>
+  <entry
+>SCSI ID 最小(例如 0)的 SCSI 硬碟</entry>
+</row
+><row>
+  <entry
+><filename
+>sdb</filename
+></entry>
+  <entry
+>下一個 SCSI ID (例如 1)的 SCSI 硬碟</entry>
+</row
+><row>
+  <entry
+><filename
+>sdc</filename
+></entry>
+  <entry
+>下一個 SCSI ID (例如 2)的 SCSI 硬碟</entry>
+</row
+><row>
+  <entry
+><filename
+>sda1</filename
+></entry>
+  <entry
+>在第一塊 SCSI 硬碟上的第一個分割區</entry>
+</row
+><row>
+  <entry
+><filename
+>sdd10</filename
+></entry>
+  <entry
+>在第四塊 SCSI 硬碟上的第十個分割區</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>sr0</filename
+></entry>
+  <entry
+>SCSI ID 最小的 SCSI 光碟機</entry>
+</row
+><row>
+  <entry
+><filename
+>sr1</filename
+></entry>
+  <entry
+>下一個 SCSI ID 的 SCSI 光碟機</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>ttyS0</filename
+></entry>
+  <entry
+>序列埠 0，即 MS-DOS 下的 COM1</entry>
+</row
+><row>
+  <entry
+><filename
+>ttyS1</filename
+></entry>
+  <entry
+>序列埠 1，即 MS-DOS 下的 COM2</entry>
+</row
+><row>
+  <entry
+><filename
+>psaux</filename
+></entry>
+  <entry
+>PS/2 滑鼠設備</entry>
+</row
+><row>
+  <entry
+><filename
+>gpmdata</filename
+></entry>
+  <entry
+>虛擬設備，中繼從GPM(滑鼠)服務傳來的資料</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>cdrom</filename
+></entry>
+  <entry
+>指向光碟機的符號鏈結</entry>
+</row
+><row>
+  <entry
+><filename
+>mouse</filename
+></entry>
+  <entry
+>指向滑鼠設備檔的符號鏈結</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>null</filename
+></entry>
+  <entry
+>所有指向該設備的東西都會消失</entry>
+</row
+><row>
+  <entry
+><filename
+>zero</filename
+></entry>
+  <entry
+>可以從該設備永無休止地讀出零</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+
+  <sect2>
+<title
+>設定您的滑鼠</title>
+
+<para
+>無論在 Linux 的控制台(console)裡(透過 gpm)，還是在 X 視窗環境之中，您都可以使用滑鼠。這兩種用法是可以相容的，只要設定 gpm 中繼程式，令其將信號流往 X 伺服器： <informalexample
+><screen>
+mouse =&gt; /dev/psaux  =&gt; gpm =&gt; /dev/gpmdata -&gt; /dev/mouse =&gt; X
+         /dev/ttyS0             (repeater)        (symlink)
+         /dev/ttyS1
+</screen
+></informalexample
+> 把中繼程式的通訊協定設為原始(raw)模式(在 <filename
+>/etc/gpm.conf</filename
+> 裡)，同時在 <filename
+>/etc/X11/XF86Config</filename
+> 或者 <filename
+>/etc/X11/XF86Config-4</filename
+> 裡設定，讓 X 使用原始的滑鼠協定。 </para
+><para
+>用這種方法使用 gpm 的話，就算在 X 裡也有其優勢。如果不小心把滑鼠拔下來後，只要像這樣重新啟動 gpm 就可以了：<informalexample
+><screen>
+# /etc/init.d/gpm restart
+</screen
+></informalexample
+> 如此就可以在軟體層面上重新連接滑鼠，而不用重新啟動 X。 </para
+><para
+>如果您停用 gpm，或者因為某些原因沒有安裝它，請確定設定檔讓 X 從滑鼠設備 (例如 /dev/psaux) 直接讀取資料。欲知詳情，請參閱三鍵滑鼠的迷您指南，即 <filename
+>/usr/share/doc/HOWTO/en-txt/mini/3-Button-Mouse.gz</filename
+>、<userinput
+>man gpm</userinput
+>、<filename
+>/usr/share/doc/gpm/FAQ.gz</filename
+> 以及 <ulink url="&url-xfree86;current/mouse.html"
+>README.mouse</ulink
+>。 </para
+><para arch="powerpc"
+>對 PowerPC 來說，需要在 <filename
+>/etc/X11/XF86Config</filename
+> 或者 <filename
+>/etc/X11/XF86Config-4</filename
+> 設定滑鼠設備為 <userinput
+>"/dev/input/mice"</userinput
+>。 </para
+><para arch="powerpc"
+>當您的滑鼠只有一個按鍵的時候，現有的核心具有模擬三鍵滑鼠的能力。只需將下面加入 <filename
+>/etc/sysctl.conf</filename
+> 檔案。 <informalexample
+><screen
+># 模擬三鍵滑鼠
+# 啟用模擬
+/dev/mac_hid/mouse_button_emulation = 1
+# 按下 F11 則送出滑鼠中鍵訊號
+/dev/mac_hid/mouse_button2_keycode = 87
+# 按下 F12 則送出滑鼠右鍵訊號
+/dev/mac_hid/mouse_button3_keycode = 88
+# 對於其他不同的按鍵，使用 showkey 指令來得知其編碼。
+</screen
+></informalexample>
+
+</para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="tasksel-size-list">
+ <title
+>各軟體集所需的磁碟空間</title>
+
+<!-- Note for d-i and manual maintainers
+ Sizes of tasks should be determined by running "tasksel new" on a system
+ that been fully installed without selecting any tasks. By selecting a
+ task together with the "manual selection" option, aptitude will be started
+ and show the sizes for the task. After deselecting the packages to be
+ installed, quit aptitude and repeat for other tasks.
+ Space requirements need to be determined from tasksel as tasksel will not
+ install recommended packages while selecting a task from aptitude will.
+-->
+
+<para
+>在 i386 架構上，基本的安裝預設使用 2.4 核心，需要 573MB 的磁碟空間，這裡面包含了標準軟體套件。 </para
+><para
+>下面的表格一一列出了 tasksel 中每個軟體集所需的磁碟空間大小。該列表是使用 aptitude 產生的。請注意，有些軟體集之間會有相重疊的部分，所以兩個軟體集一同 安裝後所佔的空間，可能會小於這兩個軟體集分別安裝所佔的空間。 </para
+><para
+>注意您需要將表格中列出的大小加上基本安裝大小以決定分割區的大小。多數列出的大小如 <quote
+>安裝大小</quote
+> 將用在 <filename
+>/usr</filename
+>﹔列在 <quote
+>下載大小</quote
+> 是(臨時地)用在 <filename
+>/var</filename
+>。 </para
+><para>
+
+<informaltable
+><tgroup cols="4">
+<thead>
+<row>
+  <entry
+>軟體集</entry>
+  <entry
+>安裝大小 (MB)</entry>
+  <entry
+>下載大小 (MB)</entry>
+  <entry
+>安裝所需空間 (MB)</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>桌面</entry>
+  <entry
+>1392</entry>
+  <entry
+>460</entry>
+  <entry
+>1852</entry>
+</row>
+
+<row>
+  <entry
+>Web 伺服器</entry>
+  <entry
+>36</entry>
+  <entry
+>12</entry>
+  <entry
+>48</entry>
+</row>
+
+<row>
+  <entry
+>印表機伺服器</entry>
+  <entry
+>168</entry>
+  <entry
+>58</entry>
+  <entry
+>226</entry>
+</row>
+
+<row>
+  <entry
+>DNS 伺服器</entry>
+  <entry
+>2</entry>
+  <entry
+>1</entry>
+  <entry
+>3</entry>
+</row>
+
+<row>
+  <entry
+>檔案伺服器</entry>
+  <entry
+>47</entry>
+  <entry
+>24</entry>
+  <entry
+>71</entry>
+</row>
+
+<row>
+  <entry
+>郵件伺服器</entry>
+  <entry
+>10</entry>
+  <entry
+>3</entry>
+  <entry
+>13</entry>
+</row>
+
+<row>
+  <entry
+>SQL 資料庫</entry>
+  <entry
+>66</entry>
+  <entry
+>21</entry>
+  <entry
+>87</entry>
+</row>
+
+</tbody>
+</tgroup
+></informaltable>
+
+<note
+><para
+><emphasis
+>桌面</emphasis
+> 軟體集將同時安裝 Gnome 和 KDE 桌面環境。 </para
+></note>
+
+</para
+><para
+>如果安裝英文之外的其他語言，<command
+>tasksel</command
+> 在語言有對應 locale 時，可以自動安裝 <firstterm
+>localization task</firstterm
+>。每種語言需要的空間不同﹔您應該給 200MB 以上的空間用於下載和安裝。 </para>
+ </sect1>
+<!--   End of file appendix/files.xml -->
+
+<!-- Start of file appendix/chroot-install.xml -->
+
+ <sect1 id="linux-upgrade">
+ <title
+>透過 Unix/Linux 系統來安裝 &debian;</title>
+
+<para
+>本節說明了如何透過現有的 Unix 或 Linux 系統來安裝 &debian;，而非使用本手冊後面要談到的基於 ncurses，由選單驅動的安裝軟體。這篇<quote
+>交叉安裝(cross-install)</quote
+> HOWTO 是應使用者的要求而撰寫的。他們原來是 Redhat、Mandrake 和 SUSE 的使用者，現轉而使用 &debian;。在本節中，我們假設您對於輸入 *nix 指令以及在檔案系統中穿梭移動並不生疏。同時，在本節中，<prompt
+>$</prompt
+> 符號表示這個指令是在使用者當前使用的系統中輸入的，而 <prompt
+>#</prompt
+> 則表示這個指令是在 Debian chroot 環境中輸入的。 </para
+><para
+>您一旦根據自己的需求設定好了新的 Debian 系統，就可以將您的原來系統中的使用者資料(如果有的話)全部遷移到 Debian 裡去。然後就能繼續爽了。一言以蔽之，這是一次<quote
+>不關機</quote
+>的 &debian; 安裝。同時，這也是處理那些因為硬體原因不能透過任何開機或者安裝媒介完成安裝的權宜之計。 </para>
+
+  <sect2>
+  <title
+>準備開始</title>
+<para
+>根據需要，用已經安裝的 *nix 的分割區工具重新分割詞區，要劃分出至少一個檔案系統外加 置換分割區。您如果只用控制台(console)的話，至少要準備 150MB 空間，倘若想要裝 X， 就需要至少 300MB 的空間了。 </para
+><para
+>在您的分割區上建立檔案系統。舉例來說，如果要在 <filename
+>/dev/hda6</filename
+> 分割區(以後的例子中，將把它作為 root 分割區) 建立一個 ext3 格式的檔案系統： <informalexample
+><screen>
+# mke2fs -j /dev/hda6
+</screen
+></informalexample
+> 如果想建立的是 ext2 格式的檔案系統，就要去掉 <userinput
+>-j</userinput
+>。 </para
+><para
+>初始化並啟用置換分割區(請把分割區編號替換成您希望用作置換分割區的分割區編號): <informalexample
+><screen>
+# mkswap /dev/hda5
+# sync; sync; sync
+# swapon /dev/hda5
+</screen
+></informalexample
+> 把一個分割區掛載(mount)到 <filename
+>/mnt/debinst</filename
+>(這是安裝的位置，將來作為您新系統的根(<filename
+>/</filename
+>)檔案系統)。掛載點的名稱是任意的，後面的步驟將會用到它。 <informalexample
+><screen
+># mkdir /mnt/debinst
+# mount /dev/hda6 /mnt/debinst
+</screen
+></informalexample>
+
+</para>
+  </sect2>
+
+  <sect2>
+  <title
+>安裝 <command
+>debootstrap</command
+></title>
+<para
+>Debian 安裝程式使用的軟體，同時也為官方所採用，被用來安裝基系統的工具是 <command
+>debootstrap</command
+>。它使用了 <command
+>wget</command
+> 和 <command
+>ar</command
+>，否則就僅僅依賴 <classname
+>/bin/sh</classname
+>。如果您的系統裡沒有 <command
+>wget</command
+> 和 <command
+>ar</command
+>，請安裝。然後再下載並安裝 <command
+>debootstrap</command
+>。 </para
+><para
+>如果您用的是以 rpm 為基礎的系統，那麼可以用 alien 將 .deb 檔案轉換成為 .rpm 檔案，或者下載已被包裝成 rpm 套件的版本，它位於 <ulink url="http://people.debian.org/~blade/install/debootstrap"
+></ulink
+> </para
+><para
+>或者您也可以透過下面的步驟手動安裝它。先新建一個工作目錄，它被用來放置解壓縮後的 .deb 文件： <informalexample
+><screen>
+# mkdir work
+# cd work
+</screen
+></informalexample
+> <command
+>debootstrap</command
+> 的二進位檔被包裝餘 Debian 的檔案庫中(請確保選擇了與您架構相對應的檔案)。下載位於 <ulink url="http://ftp.debian.org/debian/pool/main/d/debootstrap/"
+> pool</ulink
+> 的<command
+>debootstrap</command
+> .deb，把它拷貝到工作目錄，並從該檔案解壓縮出這些二進位檔。要把二進位檔安裝到系統中，您必須要擁有 root 的權限。 <informalexample
+><screen
+># tar -xf debootstrap_0.X.X_arch.deb
+# cd /
+# zcat /full-path-to-work/work/data.tar.gz | tar xv
+</screen
+></informalexample>
+
+</para>
+  </sect2>
+
+  <sect2>
+  <title
+>執行 <command
+>debootstrap</command
+></title>
+<para
+><command
+>debootstrap</command
+> 執行後，會自己從檔案庫直接下載所需的檔案。您可以把下面的命令列範例中的 <userinput
+>http.us.debian.org/debian</userinput
+> 替換成任何一個 Debian 檔案庫的鏡像站。選擇鏡像站時，可以根據您的網路情況選擇較近的一個。鏡像的列表在 <ulink url="http://www.debian.org/misc/README.mirrors"
+></ulink
+>。 </para
+><para
+>如果您已經把一張 &releasename; 版本的 &debian; CD 掛載在 <filename
+>/cdrom</filename
+>，那麼也可以把 http URL 替換成 file URL，即：<userinput
+>file:/cdrom/debian/</userinput
+> </para
+><para
+>請將下列架構中的一個替換 <replaceable
+>ARCH</replaceable
+> 於 <command
+>debootstrap</command
+> 指令中： <userinput
+>alpha</userinput
+>, <userinput
+>arm</userinput
+>, <userinput
+>hppa</userinput
+>, <userinput
+>i386</userinput
+>, <userinput
+>ia64</userinput
+>, <userinput
+>m68k</userinput
+>, <userinput
+>mips</userinput
+>, <userinput
+>mipsel</userinput
+>, <userinput
+>powerpc</userinput
+>, <userinput
+>s390</userinput
+>，或 <userinput
+>sparc</userinput
+>。 <informalexample
+><screen
+># /usr/sbin/debootstrap --arch ARCH &releasename; \\
+     /mnt/debinst http://http.us.debian.org/debian
+</screen
+></informalexample>
+
+</para>
+  </sect2>
+
+  <sect2>
+  <title
+>基本系統的設定</title>
+<para
+>現在您在硬碟上已經裝上了一套真正的 Debian 作業系統，儘管它還很瘦小。<command
+>Chroot</command
+> 用來進入該系統： <informalexample
+><screen
+># LANG= chroot /mnt/debinst /bin/bash
+</screen
+></informalexample>
+
+</para>
+
+   <sect3>
+   <title
+>分割區的掛載</title>
+<para
+>您需要新建 <filename
+>/etc/fstab</filename
+>。 <informalexample
+><screen>
+# editor /etc/fstab
+</screen
+></informalexample
+> 這裡有個樣板，您不妨根據自己的情況來修改它： <informalexample
+><screen>
+# /etc/fstab: static file system information.
+#
+# file system    mount point   type    options                  dump pass
+/dev/XXX         /             ext2    defaults                 0    0
+/dev/XXX         /boot         ext2    ro,nosuid,nodev          0    2
+
+/dev/XXX         none          swap    sw                       0    0
+proc             /proc         proc    defaults                 0    0
+
+/dev/fd0         /mnt/floppy   auto    noauto,rw,sync,user,exec 0    0
+/dev/cdrom       /mnt/cdrom    iso9660 noauto,ro,user,exec      0    0
+
+/dev/XXX         /tmp          ext2    rw,nosuid,nodev          0    2
+/dev/XXX         /var          ext2    rw,nosuid,nodev          0    2
+/dev/XXX         /usr          ext2    rw,nodev                 0    2
+/dev/XXX         /home         ext2    rw,nosuid,nodev          0    2
+</screen
+></informalexample
+> 您可以透過 <userinput
+>mount -a</userinput
+> 來掛載您的 <filename
+>/etc/fstab</filename
+> 中所標明的所有檔案系統，您也可以一個一個地分別掛載這些檔案系統，像：<informalexample
+><screen>
+# mount /path   # e.g.: mount /usr
+</screen
+></informalexample
+> 您可以多次掛載 proc 檔案系統。儘管通常把它掛載到 /proc，但是它還是可以被掛載到任意的地方。如果您沒有用 <userinput
+>mount -a</userinput
+>，那麼請一定要在接著做之前先把 proc 掛載好： <informalexample
+><screen
+># mount -t proc proc /proc
+</screen
+></informalexample>
+
+</para>
+   </sect3>
+
+   <sect3>
+   <title
+>鍵盤的設定</title>
+<para
+>若要設定您的鍵盤，請： <informalexample
+><screen
+># dpkg-reconfigure console-data
+</screen
+></informalexample>
+
+</para>
+   </sect3>
+
+   <sect3>
+   <title
+>網路的設定</title>
+<para
+>要設定網路的話，請修改 <filename
+>/etc/network/interfaces</filename
+>, <filename
+>/etc/resolv.conf</filename
+> 和 <filename
+>/etc/hostname</filename
+>。 <informalexample
+><screen>
+# 編輯器 /etc/network/interfaces 
+</screen
+></informalexample
+> 這裡有些從 <filename
+>/usr/share/doc/ifupdown/examples</filename
+> 取出的範例: <informalexample
+><screen>
+######################################################################
+# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
+# See the interfaces(5) manpage for information on what options are 
+# available.
+######################################################################
+
+# 我們永遠需要 loopback 介面。
+#
+auto lo
+iface lo inet loopback
+
+# 使用 DHCP：
+#
+# auto eth0
+# iface eth0 inet dhcp
+
+# 靜態 IP 的設置範例 (broadcast 和 gateway 不一定要設定)：
+#
+# auto eth0
+# iface eth0 inet static
+#     address 192.168.0.42
+#     network 192.168.0.0
+#     netmask 255.255.255.0
+#     broadcast 192.168.0.255
+#     gateway 192.168.0.1
+</screen
+></informalexample
+> 填入您的 nameserver(s) 和搜索指令到 <filename
+>/etc/resolv.conf</filename
+>: <informalexample
+><screen>
+# 編輯器 /etc/resolv.conf
+</screen
+></informalexample
+> 這裡有個簡單的 <filename
+>/etc/resolv.conf</filename
+>: <informalexample
+><screen>
+search hqdom.local\000
+nameserver 10.1.1.36
+nameserver 192.168.9.100
+</screen
+></informalexample
+> 輸入您的系統的主機名(2 到 63 個字元)：<informalexample
+><screen>
+# echo DebianHostName &gt; /etc/hostname
+</screen
+></informalexample
+> 如果您有多張網卡，在您修改 <filename
+>/etc/modules</filename
+> 檔案時，一定要按照期望的順序排列驅動模組的名字。這樣的話，在系統啟動時，每塊網卡就能取得您所預期的 interface 名稱了(eth0、eth1 等等)。 </para>
+   </sect3>
+
+   <sect3>
+   <title
+>時區、使用者和 APT 的設定</title>
+<para
+>設定您的時區，添加一個普通使用者，再執行下面的指令選擇您的 <command
+>apt</command
+> 來源 <informalexample
+><screen
+># /usr/sbin/base-config new
+</screen
+></informalexample>
+
+</para>
+   </sect3>
+
+   <sect3>
+   <title
+>locales 的設定</title>
+<para
+>要配置您的 locale 設定，以便使用英語以外的其它語言，就需要安裝提供 locales 支援的軟體套件，同時設定之： <informalexample
+><screen>
+# apt-get install locales
+# dpkg-reconfigure locales
+</screen
+></informalexample
+> 【注意】：在此之前必須設定好 apt，即在 base-config 階段就設定好它。在使用非 ASCII 或 latin1 的字元集的 locale 之前，請先參閱相應的本地化指南(localisation HOWTO)。 </para>
+   </sect3>
+  </sect2>
+
+  <sect2>
+  <title
+>核心的安裝</title>
+<para
+>您若想啟動這個系統，您很可能還需要一個 Linux 核心和一個 boot loader。 可以用下面指令找到那些目前可用的被打好包的核心 <informalexample
+><screen>
+# apt-cache search kernel-image
+</screen
+></informalexample
+> 接下來把您所選中的核心的軟體套件名稱作為命令列的參數來安裝它。 <informalexample
+><screen
+># apt-get install kernel-image-<replaceable
+>2.X.X-arch-etc</replaceable
+>
+</screen
+></informalexample>
+
+</para>
+  </sect2>
+
+  <sect2>
+<title
+>Boot Loader 的設定</title>
+<para
+>要讓您的 &debian; 系統能夠啟動，還要設定您的 boot loader，好讓它能已安裝的核心並用上新的根分割區。注意 debootstrap 不會安裝 boot loader， 因此您要在 Debian 的 chroot 中使用 apt-get 完成。 </para
+><para arch="i386"
+>透過查閱 <userinput
+>info grub</userinput
+> 或 <userinput
+>man lilo.conf</userinput
+> 可以得到一些有關設定 bootloader 的提示。如果您希望保留用來安裝 Debian 的那個系統，那麼就在現有的 grub <filename
+>menu.lst</filename
+> 或 <filename
+>lilo.conf</filename
+> 裡為 Debian 系統的安裝添加一組設定就可以了。對於 <filename
+>lilo.conf</filename
+> 您也可以把這個檔案拷貝到新的系統裡，然後在新的系統裡編輯它。當您修改好設定檔，執行 lilo (請記住，您在哪個系統裡執行 lilo，它就會用哪個系統裡的 <filename
+>lilo.conf</filename
+> )。 </para
+><para arch="i386"
+>下面有一個簡單的 <filename
+>/etc/lilo.conf</filename
+> 例子： <informalexample
+><screen
+>boot=/dev/hda6
+root=/dev/hda6
+install=/boot/boot-menu.b
+delay=20
+lba32
+image=/vmlinuz
+label=Debian
+</screen
+></informalexample>
+
+</para
+><para arch="powerpc"
+>透過查閱 <userinput
+>man yaboot.conf</userinput
+> 可以得到一些有關設定 bootloader 的提示。如果您希望繼續保留用來安裝 Debian 的那個系統，那麼在 <filename
+>yaboot.conf</filename
+> 裡為 Debian 系統的安裝添加一組設定就可以了。您也可以把這個檔案拷貝到新的系統裡，然後在新的系統裡編輯它。當您修改設定之後，執行 ybin (請記住，您在哪個系統執行 yaboot 它就會用哪個系統裡的 <filename
+>lilo.conf</filename
+> )。 </para
+><para arch="powerpc"
+>下面有一個簡單的 <filename
+>/etc/yaboot.conf</filename
+> 例子： <informalexample
+><screen>
+boot=/dev/hda2
+device=hd:
+partition=6
+root=/dev/hda6
+magicboot=/usr/lib/yaboot/ofboot
+timeout=50
+image=/vmlinux
+label=Debian
+</screen
+></informalexample
+> 在有些電腦上，您或許應該把 <userinput
+>ide0:</userinput
+> 換成 <userinput
+>hd:</userinput
+>。 </para>
+  </sect2>
+ </sect1>
+<!--   End of file appendix/chroot-install.xml -->
+
+</appendix>
+<!--   End of file appendix/random-bits.xml -->

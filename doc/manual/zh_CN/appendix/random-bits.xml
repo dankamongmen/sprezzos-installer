@@ -1,0 +1,1513 @@
+<!-- Start of file appendix/random-bits.xml -->
+
+<appendix id="random-bits"
+><title
+>其他</title>
+
+
+<!-- Start of file appendix/example-preseed.xml -->
+
+<sect1 id="example-preseed" condition="sarge">
+<title
+>预设置文件实例</title>
+
+<para
+>这是一个完整的用于自动安装的预设置文件的实例。使用的说明在 <xref linkend="automatic-install"/>。您可以在使用该文件前去除某些行前面的注释。 </para>
+
+<note
+><para
+>为了能在手册中正确显示这个例子，我们不得不分割一些行。通过使用行连接符 <quote
+>\</quote
+> 和下一行的缩进标明。在实际的预置文件中，这些分割的行必须合并成 <emphasis
+>单独的一行</emphasis
+>。如果您没有这样做，预设置文件会造成不可预估的失败。 </para
+><para
+><quote
+>clean</quote
+> 例子文件位于 &urlset-example-preseed;。 </para
+></note>
+
+<para>
+
+
+<!-- Start of file appendix/example-preseed-sarge.xml -->
+
+<informalexample condition="sarge"
+><screen
+>#### Startup.
+
+# To use a preseed file, you'll first need to boot the installer,
+# and tell it what preseed file to use. This is done by passing the
+# kernel a boot parameter, either manually at boot or by editing the
+# syslinux.cfg (or similar) file and adding the parameter to the end
+# of the append line(s) for the kernel.
+#
+# If you're netbooting, use this:
+#   preseed/url=http://host/path/to/preseed
+# If you're remastering a CD, you could use this:
+#   preseed/file=/cdrom/preseed
+# If you're installing from USB media, use this, and put the preseed file
+# in the toplevel directory of the USB stick.
+#   preseed/file=/hd-media/preseed
+# Be sure to copy this file to the location you specify.
+#
+# Some parts of the installation process cannot be automated using
+# some forms of preseeding, because the questions are asked before
+# the preseed file is loaded. For example, if the preseed file is
+# downloaded over the network, the network setup must be done first.
+# One reason to use initrd preseeding is that it allows preseeding
+# of even these early steps of the installation process.
+#
+# If a preseed file cannot be used to preseed some steps, the install can
+# still be fully automated, since you can pass preseed values to the kernel
+# on the command line. Just pass path/to/var=value for any of the preseed
+# variables listed below.
+#
+# While you're at it, you may want to throw a debconf/priority=critical in
+# there, to avoid most questions even if the preseeding below misses some.
+# And you might set the timeout to 1 in syslinux.cfg to avoid needing to hit
+# enter to boot the installer.
+#
+# Note that the kernel accepts a maximum of 8 command line options and
+# 8 environment options (including any options added by default for the
+# installer). If these numbers are exceeded, 2.4 kernels will drop any
+# excess options and 2.6 kernels will panic. With kernel 2.6.9 or newer,
+# you can use 32 command line options and 32 environment options.
+#
+# Some of the default options, like 'vga=normal' may be safely removed
+# for most installations, which may allow you to add more options for
+# preseeding.
+
+# It is not possible to use preseeding to set language, country, and
+# keyboard. Instead you should use kernel parameters. Example:
+# languagechooser/language-name=English
+# countrychooser/shortlist=US
+# console-keymaps-at/keymap=us
+
+#### Network configuration.
+
+# Of course, this won't work if you're loading your preseed file from the
+# network! But it's great if you're booting from CD or USB stick. You can
+# also pass network config parameters in on the kernel params if you are
+# loading preseed files from the network.
+
+# netcfg will choose an interface that has link if possible. This makes it
+# skip displaying a list if there is more than one interface.
+d-i netcfg/choose_interface select auto
+
+# If you have a slow dhcp server and the installer times out waiting for
+# it, this might be useful.
+#d-i netcfg/dhcp_timeout string 60
+
+# If you prefer to configure the network manually, here's how:
+#d-i netcfg/disable_dhcp boolean true
+#d-i netcfg/get_nameservers string 192.168.1.1
+#d-i netcfg/get_ipaddress string 192.168.1.42
+#d-i netcfg/get_netmask string 255.255.255.0
+#d-i netcfg/get_gateway string 192.168.1.1
+#d-i netcfg/confirm_static boolean true
+
+# Note that any hostname and domain names assigned from dhcp take
+# precedence over values set here. However, setting the values still
+# prevents the questions from being shown even if values come from dhcp.
+d-i netcfg/get_hostname string unassigned-hostname
+d-i netcfg/get_domain string unassigned-domain
+
+# Disable that annoying WEP key dialog.
+d-i netcfg/wireless_wep string
+# The wacky dhcp hostname that some ISPs use as a password of sorts.
+#d-i netcfg/dhcp_hostname string radish
+
+#### Mirror settings.
+
+d-i mirror/country string enter information manually
+d-i mirror/http/hostname string http.us.debian.org
+d-i mirror/http/directory string /debian
+d-i mirror/suite string testing
+d-i mirror/http/proxy string
+
+#### Partitioning.
+
+# If the system has free space you can choose to only partition that space.
+#d-i partman-auto/init_automatically_partition \
+#    select Use the largest continuous free space
+
+# Alternatively, you can specify a disk to partition. The device name can
+# be given in either devfs or traditional non-devfs format.
+# For example, to use the first disk devfs knows of:
+d-i partman-auto/disk string /dev/discs/disc0/disc
+
+# You can choose from any of the predefined partitioning recipes:
+d-i partman-auto/choose_recipe select \
+     All files in one partition (recommended for new users)
+#d-i partman-auto/choose_recipe select Desktop machine
+#d-i partman-auto/choose_recipe select Multi-user workstation
+
+# Or provide a recipe of your own...
+# The recipe format is documented in the file devel/partman-auto-recipe.txt.
+# If you have a way to get a recipe file into the d-i environment, you can
+# just point at it.
+#d-i partman-auto/expert_recipe_file string /hd-media/recipe
+
+# If not, you can put an entire recipe in one line. This example creates
+# a small /boot partition, suitable swap, and uses the rest of the space
+# for the root partition:
+#d-i partman-auto/expert_recipe string boot-root :: \
+#    20 50 100 ext3 $primary{ } $bootable{ } method{ format } format{ } \
+#    use_filesystem{ } filesystem{ ext3 } mountpoint{ /boot } . \
+#    500 10000 1000000000 ext3 method{ format } format{ } \
+#    use_filesystem{ } filesystem{ ext3 } mountpoint{ / } . \
+#    64 512 300% linux-swap method{ swap } format{ } .
+# For reference, here is that same recipe in a more readable form:
+#    boot-root ::
+#       40 50 100 ext3
+#          $primary{ } $bootable{ }
+#          method{ format } format{ }
+#          use_filesystem{ } filesystem{ ext3 }
+#          mountpoint{ /boot }
+#       .
+#       500 10000 1000000000 ext3
+#          method{ format } format{ }
+#          use_filesystem{ } filesystem{ ext3 }
+#          mountpoint{ / }
+#       .
+#       64 512 300% linux-swap
+#          method{ swap } format{ }
+#       .
+
+# This makes partman automatically partition without confirmation.
+d-i partman/confirm_write_new_label boolean true
+d-i partman/choose_partition select \
+    Finish partitioning and write changes to disk
+d-i partman/confirm boolean true
+
+#### Boot loader installation.
+
+# Grub is the default boot loader (for x86). If you want lilo installed
+# instead, uncomment this:
+#d-i grub-installer/skip boolean true
+
+# This is fairly safe to set, it makes grub install automatically to the MBR
+# if no other operating system is detected on the machine.
+d-i grub-installer/only_debian boolean true
+
+# This one makes grub-installer install to the MBR if if finds some other OS
+# too, which is less safe as it might not be able to boot that other OS.
+d-i grub-installer/with_other_os boolean true
+
+# Alternatively, if you want to install to a location other than the mbr,
+# uncomment and edit these lines:
+#d-i grub-installer/bootdev  string (hd0,0)
+#d-i grub-installer/only_debian boolean false
+#d-i grub-installer/with_other_os boolean false
+
+#### Finishing up the first stage install.
+
+# Avoid that last message about the install being complete.
+d-i prebaseconfig/reboot_in_progress note
+
+#### Shell commands.
+
+# d-i preseeding is inherently not secure. Nothing in the installer checks
+# for attempts at buffer overflows or other exploits of the values of a
+# preseed file like this one. Only use preseed files from trusted
+# locations! To drive that home, and because it's generally useful, here's
+# a way to run any shell command you'd like inside the installer,
+# automatically.
+
+# This first command is run as early as possible, just after
+# preseeding is read.
+#d-i preseed/early_command string anna-install some-udeb
+
+# This command is run just before the install finishes, but when there is
+# still a usable /target directory.
+#d-i preseed/late_command string echo foo 
+> /target/etc/bar
+
+# This command is run just as base-config is starting up.
+#base-config base-config/early_command string echo hi mom
+
+# This command is run after base-config is done, just before the login:
+# prompt. This is a good way to install a set of packages you want, or to
+# tweak the configuration of the system.
+#base-config base-config/late_command string \
+#    apt-get install zsh; chsh -s /bin/zsh
+
+###### Preseeding the 2nd stage of the installation.
+
+#### Preseeding base-config.
+
+# Avoid the introductory message.
+base-config base-config/intro note
+
+# Avoid the final message.
+base-config base-config/login note
+
+# If you installed a display manager, but don't want to start it immediately
+# after base-config finishes.
+#base-config base-config/start-display-manager boolean false
+
+# Some versions of the installer can report back on what you've installed.
+# The default is not to report back, but sending reports helps the project
+# determine what software is most popular and include it on CDs.
+#popularity-contest popularity-contest/participate boolean false
+
+#### Clock and time zone setup.
+
+# Controls whether or not the hardware clock is set to UTC.
+#base-config tzconfig/gmt boolean true
+# If you told the installer that you're in the United States, then you
+# can set the time zone using this variable.
+# (Choices are: Eastern, Central, Mountain, Pacific, Alaska, Hawaii,
+# Aleutian, Arizona East-Indiana, Indiana-Starke, Michigan, Samoa, other)
+#base-config tzconfig/choose_country_zone/US select Eastern
+# If you told it you're in Canada.
+# (Choices are: Newfoundland, Atlantic, Eastern, Central,
+# East-Saskatchewan, Saskatchewan, Mountain, Pacific, Yukon, other)
+#base-config tzconfig/choose_country_zone/CA select Eastern
+# If you told it you're in Brazil. (Choices are: East, West, Acre,
+# DeNoronha, other)
+#base-config tzconfig/choose_country_zone/BR select East
+# Many countries have only one time zone. If you told the installer you're
+# in one of those countries, you can choose its standard time zone via this
+# question.
+#base-config tzconfig/choose_country_zone_single boolean true
+# This question is asked as a fallback for countries other than those
+# listed above, which have more than one time zone. You can preseed one of
+# the time zones, or "other".
+#base-config tzconfig/choose_country_zone_multiple select
+
+#### Account setup.
+
+# To preseed the root password, you have to put it in the clear in this
+# file. That is not a very good idea, use caution!
+#passwd passwd/root-password password r00tme
+#passwd passwd/root-password-again password r00tme
+
+# If you want to skip creation of a normal user account.
+#passwd passwd/make-user boolean false
+
+# Alternatively, you can preseed the user's name and login.
+#passwd passwd/user-fullname string Debian User
+#passwd passwd/username string debian
+# And their password, but use caution!
+#passwd passwd/user-password password insecure
+#passwd passwd/user-password-again password insecure
+
+#### Apt setup.
+
+# This question controls what source the second stage installation uses
+# for packages. Choices are cdrom, http, ftp, filesystem, edit sources list
+# by hand
+base-config apt-setup/uri_type select http
+
+# If you choose ftp or http, you'll be asked for a country and a mirror.
+base-config apt-setup/country select enter information manually
+base-config apt-setup/hostname string http.us.debian.org
+base-config apt-setup/directory string /debian
+# Stop after choosing one mirror.
+base-config apt-setup/another boolean false
+
+# You can choose to install non-free and contrib software.
+#base-config apt-setup/non-free boolean true
+#base-config apt-setup/contrib boolean true
+
+# Do enable security updates.
+base-config apt-setup/security-updates boolean true
+
+#### Package selection.
+
+# You can choose to install any combination of tasks that are available.
+# Available tasks as of this writing include: Desktop environment,
+# Web server, Print server, DNS server, File server, Mail server,
+# SQL database, Laptop, Standard system, manual package selection. The
+# last of those will run aptitude. You can also choose to install no
+# tasks, and force the installation of a set of packages in some other
+# way. We recommend always including the Standard system task.
+tasksel tasksel/first multiselect Desktop environment, Standard system
+#tasksel tasksel/first multiselect Web server, Standard system
+
+#### Mailer configuration.
+
+# During a normal install, exim asks only a few questions. Here's how to
+# avoid even those. More complicated preseeding is possible.
+exim4-config exim4/dc_eximconfig_configtype \
+    select no configuration at this time
+exim4-config exim4/no_config boolean true
+exim4-config exim4/no_config boolean true
+
+# It's a good idea to set this to whatever user account you choose to
+# create. Leaving the value blank results in postmaster mail going to
+# /var/mail/mail.
+exim4-config exim4/dc_postmaster string
+
+#### X Configuration.
+
+# Preseeding Debian's X config is possible, but you probably need to know
+# some details about the video hardware of the machine, since Debian's X
+# configurator does not do fully automatic configuration of everything.
+
+# X can detect the right driver for some cards, but if you're preseeding,
+# you override whatever it chooses. Still, vesa will work most places.
+#xserver-xfree86 xserver-xfree86/config/device/driver select vesa
+
+# A caveat with mouse autodetection is that if it fails, X will retry it
+# over and over. So if it's preseeded to be done, there is a possibility of
+# an infinite loop if the mouse is not autodetected.
+#xserver-xfree86 xserver-xfree86/autodetect_mouse boolean true
+
+# Monitor autodetection is recommended.
+xserver-xfree86 xserver-xfree86/autodetect_monitor boolean true
+# Uncomment if you have an LCD display.
+#xserver-xfree86 xserver-xfree86/config/monitor/lcd boolean true
+# X has three configuration paths for the monitor. Here's how to preseed
+# the "medium" path, which is always available. The "simple" path may not
+# be available, and the "advanced" path asks too many questions.
+xserver-xfree86 xserver-xfree86/config/monitor/selection-method \
+    select medium
+xserver-xfree86 xserver-xfree86/config/monitor/mode-list \
+    select 1024x768 @ 60 Hz
+
+#### Everything else.
+
+# Depending on what software you choose to install, or if things go wrong
+# during the installation process, it's possible that other questions may
+# be asked. You can preseed those too, of course. To get a list of every
+# possible question that could be asked during an install, do an
+# installation, and then run these commands:
+#   debconf-get-selections --installer 
+> file
+#   debconf-get-selections 
+>
+> file
+
+# If you like, you can include other preseed files into this one.
+# Any settings in those files will override pre-existing settings from this
+# file. More that one file can be listed, separated by spaces; all will be
+# loaded. The included files can have preseed/include directives of their
+# own as well. Note that if the filenames are relative, they are taken from
+# the same directory as the preseed file that includes them.
+#d-i preseed/include string x.cfg
+
+# More flexibly, this runs a shell command and if it outputs the names of
+# preseed files, includes those files. For example, to switch configs based
+# on a particular usb storage device (in this case, a built-in card reader):
+#d-i preseed/include_command string \
+#    if $(grep -q "GUID: 0aec3050aec305000001a003" /proc/scsi/usb-storage-*/*); \
+#    then echo kraken.cfg; else echo otherusb.cfg; fi
+
+# To check the format of your preseed file before performing an install,
+# you can use debconf-set-selections:
+#   debconf-set-selections -c preseed.cfg
+</screen
+></informalexample>
+<!--   End of file appendix/example-preseed-sarge.xml -->
+
+</para>
+</sect1>
+<!--   End of file appendix/example-preseed.xml -->
+
+<!-- Start of file appendix/files.xml -->
+
+
+ <sect1 id="linuxdevices"
+><title
+>Linux 里的设备</title>
+<para
+>在 Linux 里，您会在 <filename
+>/dev</filename
+> 发现许多很特别的文件。这些文件被称为设备文件。在 Unix 世界里，访问硬件的方式有些不一样。这些特别的文件的背后其实运行着驱动程序，而正是驱动程序控制着硬件。设备文件就是访问真实的系统部件的接口。<filename
+>/dev</filename
+> 目录下的文件的各种特性也和普通文件大相径庭。下面列举了最重要的一些设备文件。 </para
+><para>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>fd0</filename
+></entry>
+  <entry
+>第一个软驱</entry>
+</row
+><row>
+  <entry
+><filename
+>fd1</filename
+></entry>
+  <entry
+>第二个软驱</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>hda</filename
+></entry>
+  <entry
+>在第一个 IDE 口(Master)的 IDE 硬盘/光驱</entry>
+</row
+><row>
+  <entry
+><filename
+>hdb</filename
+></entry>
+  <entry
+>在第一个 IDE 口(Slave)的 IDE 硬盘/光驱</entry>
+</row
+><row>
+  <entry
+><filename
+>hdc</filename
+></entry>
+  <entry
+>在第二个 IDE 口(Master)的 IDE 硬盘/光驱</entry>
+</row
+><row>
+  <entry
+><filename
+>hdd</filename
+></entry>
+  <entry
+>在第二个 IDE 口(Slave)的 IDE 硬盘/光驱</entry>
+</row
+><row>
+  <entry
+><filename
+>hda1</filename
+></entry>
+  <entry
+>在第一块 IDE 硬盘上的第一个分区</entry>
+</row
+><row>
+  <entry
+><filename
+>hdd15</filename
+></entry>
+  <entry
+>在第四块 IDE 硬盘上的第十五个分区</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>sda</filename
+></entry>
+  <entry
+>SCSI ID (比如 0)最小的 SCSI 硬盘</entry>
+</row
+><row>
+  <entry
+><filename
+>sdb</filename
+></entry>
+  <entry
+>下一个 SCSI ID (比如 1)的 SCSI 硬盘</entry>
+</row
+><row>
+  <entry
+><filename
+>sdc</filename
+></entry>
+  <entry
+>下一个 SCSI ID (比如 2)的 SCSI 硬盘</entry>
+</row
+><row>
+  <entry
+><filename
+>sda1</filename
+></entry>
+  <entry
+>在第一块 SCSI 硬盘上的第一个分区</entry>
+</row
+><row>
+  <entry
+><filename
+>sdd10</filename
+></entry>
+  <entry
+>在第四块 SCSI 硬盘上的第十个分区</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>sr0</filename
+></entry>
+  <entry
+>SCSI ID 最小的 SCSI 光驱</entry>
+</row
+><row>
+  <entry
+><filename
+>sr1</filename
+></entry>
+  <entry
+>下一个 SCSI ID 的 SCSI 光驱</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>ttyS0</filename
+></entry>
+  <entry
+>串口 0，即 MS-DOS 下的 COM1</entry>
+</row
+><row>
+  <entry
+><filename
+>ttyS1</filename
+></entry>
+  <entry
+>串口 1，即 MS-DOS 下的 COM2</entry>
+</row
+><row>
+  <entry
+><filename
+>psaux</filename
+></entry>
+  <entry
+>PS/2 鼠标设备</entry>
+</row
+><row>
+  <entry
+><filename
+>gpmdata</filename
+></entry>
+  <entry
+>伪设备，中转从GPM(鼠标)服务传来的数据</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>cdrom</filename
+></entry>
+  <entry
+>指向光驱的符号链接</entry>
+</row
+><row>
+  <entry
+><filename
+>mouse</filename
+></entry>
+  <entry
+>指向鼠标设备文件的符号链接</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+<informaltable
+><tgroup cols="2"
+><tbody>
+<row>
+  <entry
+><filename
+>null</filename
+></entry>
+  <entry
+>所有指向该设备的东西都会消失</entry>
+</row
+><row>
+  <entry
+><filename
+>zero</filename
+></entry>
+  <entry
+>可以从该设备永无休止地读出零</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+
+  <sect2>
+<title
+>设定您的鼠标</title>
+
+<para
+>无论在 Linux 的控制台(console)里(通过 gpm)，还是在 X 窗口环境之中，您都可以使用鼠标。这两种用法是可以兼容的，只要设置 gpm 转发器，令其让信号流往 X 服务器： <informalexample
+><screen>
+mouse =&gt; /dev/psaux  =&gt; gpm =&gt; /dev/gpmdata -&gt; /dev/mouse =&gt; X
+         /dev/ttyS0             (repeater)        (symlink)
+         /dev/ttyS1
+</screen
+></informalexample
+> 把转发器的协议设为直接(raw)模式(在 <filename
+>/etc/gpm.conf</filename
+> 里)，同时在 <filename
+>/etc/X11/XF86Config</filename
+> 或者 <filename
+>/etc/X11/XF86Config-4</filename
+> 里设置一下，让 X 使用原始的鼠标协议。 </para
+><para
+>用这种方法使用 gpm 的话，就算在 X 里也有其优势。如果不小心把鼠标拔下来后，只要像这样重新启动 gpm 就可以了： <informalexample
+><screen>
+# /etc/init.d/gpm restart
+</screen
+></informalexample
+> 如此就可以在软件层面上重新连接鼠标，而不用重启 X 了。 </para
+><para
+>如果您禁用了 gpm，或者因为某些原因没有安装它，请确保设置里是让 X 从鼠标设备(比如 /dev/psaux) 直接读取数据的。欲知详情，请参阅三键鼠标的迷您指南，即 <filename
+>/usr/share/doc/HOWTO/en-txt/mini/3-Button-Mouse.gz</filename
+>、<userinput
+>man gpm</userinput
+>、<filename
+>/usr/share/doc/gpm/FAQ.gz</filename
+> 以及 <ulink url="&url-xfree86;current/mouse.html"
+>README.mouse</ulink
+> 里设置一下，让 X 使用原始的鼠标协议。 </para
+><para arch="powerpc"
+>对 PowerPC 来说，需要在<filename
+>/etc/X11/XF86Config</filename
+>或者 <filename
+>/etc/X11/XF86Config-4</filename
+> 设置鼠标设备里或者 <userinput
+>"/dev/input/mice"</userinput
+>。 </para
+><para arch="powerpc"
+>当您的鼠标只有一个按键的时候，流行的内核具有模拟三健鼠标的能力。只需将下面行加入 <filename
+>/etc/sysctl.conf</filename
+> 文件。 <informalexample
+><screen
+># 3-button mouse emulation
+# turn on emulation
+/dev/mac_hid/mouse_button_emulation = 1
+# Send middle mouse button signal with the F11 key
+/dev/mac_hid/mouse_button2_keycode = 87
+# Send right mouse button signal with the F12 key
+/dev/mac_hid/mouse_button3_keycode = 88
+# For different keys, use showkey to tell you what the code is.
+</screen
+></informalexample>
+
+</para>
+  </sect2>
+ </sect1>
+
+ <sect1 id="tasksel-size-list">
+ <title
+>各软件集所需的磁盘空间</title>
+
+<!-- Note for d-i and manual maintainers
+ Sizes of tasks should be determined by running "tasksel new" on a system
+ that been fully installed without selecting any tasks. By selecting a
+ task together with the "manual selection" option, aptitude will be started
+ and show the sizes for the task. After deselecting the packages to be
+ installed, quit aptitude and repeat for other tasks.
+ Space requirements need to be determined from tasksel as tasksel will not
+ install recommended packages while selecting a task from aptitude will.
+-->
+
+<para
+>在 i386 架构上，基本的安装默认使用 2.4 内核，需要 573MB 的磁盘空间，这里面包含了所有的标准软件包。 </para
+><para
+>下面的表格一一列出了 tasksel 中每个软件集所需的磁盘空间大小。该报表是使用 aptitude 生成的。请注意，有些软件集之间会有相重叠的部分，所以两个软件集一同安装后所占的空间，可能会小于这两个软件集分别安装所占的空间。 </para
+><para
+>注意您需要将表格中列出的尺寸加上基本安装尺寸以决定分区的大小。多数列出的尺寸如<quote
+>安装尺寸</quote
+>将用在 <filename
+>/usr</filename
+>；列在<quote
+>下载尺寸</quote
+>是(临时地)用在 <filename
+>/var</filename
+>。 </para
+><para>
+
+<informaltable
+><tgroup cols="4">
+<thead>
+<row>
+  <entry
+>任务</entry>
+  <entry
+>安装尺寸 (MB)</entry>
+  <entry
+>下载尺寸 (MB)</entry>
+  <entry
+>用于安装所需空间 (MB)</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>桌面</entry>
+  <entry
+>1392</entry>
+  <entry
+>460</entry>
+  <entry
+>1852</entry>
+</row>
+
+<row>
+  <entry
+>Web 服务器</entry>
+  <entry
+>36</entry>
+  <entry
+>12</entry>
+  <entry
+>48</entry>
+</row>
+
+<row>
+  <entry
+>打印服务器</entry>
+  <entry
+>168</entry>
+  <entry
+>58</entry>
+  <entry
+>226</entry>
+</row>
+
+<row>
+  <entry
+>DNS 服务器</entry>
+  <entry
+>2</entry>
+  <entry
+>1</entry>
+  <entry
+>3</entry>
+</row>
+
+<row>
+  <entry
+>文件服务器</entry>
+  <entry
+>47</entry>
+  <entry
+>24</entry>
+  <entry
+>71</entry>
+</row>
+
+<row>
+  <entry
+>邮件服务器</entry>
+  <entry
+>10</entry>
+  <entry
+>3</entry>
+  <entry
+>13</entry>
+</row>
+
+<row>
+  <entry
+>SQL 数据库</entry>
+  <entry
+>66</entry>
+  <entry
+>21</entry>
+  <entry
+>87</entry>
+</row>
+
+</tbody>
+</tgroup
+></informaltable>
+
+<note
+><para
+><emphasis
+>桌面</emphasis
+> 任务将同时安装 Gnome 和 KDE 桌面环境。 </para
+></note>
+
+</para
+><para
+>如果安装英文之外的其他语言，<command
+>tasksel</command
+> 在语言有对应 locale 时，可以自动安装 <firstterm
+>localization task</firstterm
+>。每种语言需要的空间不同；您应该给 200MB 以上的空间用于下载和安装。 </para>
+ </sect1>
+<!--   End of file appendix/files.xml -->
+
+<!-- Start of file appendix/chroot-install.xml -->
+
+ <sect1 id="linux-upgrade">
+ <title
+>通过 Unix/Linux 系统来安装 &debian;</title>
+
+<para
+>本节说明了如何通过现有的 Unix 或 Linux 系统来安装 &debian;，而非使用本手册后面要谈到的由菜单驱动的安装软件。这篇<quote
+>交叉安装(cross-install)</quote
+> HOWTO 是应用户的要求而撰写的。他们原来是 Redhat、Mandrake 和 SUSE 的用户，现转而使用 &debian;。在本节中，我们假设您对于输入 *nix 命令以及在文件系统中穿梭移动并不生疏。同时，在本节中，<prompt
+>$</prompt
+> 标志着这个命令是在用户当前使用的系统中输入的，而 <prompt
+>#</prompt
+> 则表示这个命令是在 Debian chroot 环境中输入的。 </para
+><para
+>您一旦根据自己的要求配置好了新的 Debian 系统，就可以将您的原来系统中的用户数据(如果有的话)悉数迁移到 Debian 里去。然后就能继续爽了。一言以蔽之，这是一次<quote
+>不停机</quote
+>的 &debian; 安装。同时，这也是处理那些因为硬件原因不能通过任何引导或者安装介质完成安装的权宜之计。 </para>
+
+  <sect2>
+  <title
+>准备运动</title>
+<para
+>根据需要，用已经安装的 *nix 的分区工具重新分区，要划分出至少一个文件系统外加交换分区。您如果只用控制台(console)的话，至少要准备 150MB 空间，倘若想要装 X，就需要至少 300MB 的空间了。 </para
+><para
+>这里谈一下如何在您的分区上创建文件系统。举例来说，如果要在 <filename
+>/dev/hda6</filename
+> 分区(以后的例子中，将把它作为 root 分区) 建立一个 ext3 格式的文件系统，就像这样： <informalexample
+><screen>
+# mke2fs -j /dev/hda6
+</screen
+></informalexample
+> 如果想建立的是 ext2 格式的文件系统，就要去掉 <userinput
+>-j</userinput
+>。 </para
+><para
+>初始化并激活交换分区(请把分区编号替换成您希望用作交换分区的分区编号): <informalexample
+><screen>
+# mkswap /dev/hda5
+# sync; sync; sync
+# swapon /dev/hda5
+</screen
+></informalexample
+> 把一个分区挂载(mount)到 <filename
+>/mnt/debinst</filename
+>(这是安装的位置，将来作为您新系统的根(<filename
+>/</filename
+>)文件系统)。挂载点的名称是任意的，后面的步骤将会用到它。 <informalexample
+><screen
+># mkdir /mnt/debinst
+# mount /dev/hda6 /mnt/debinst
+</screen
+></informalexample>
+
+</para>
+<note
+><para
+>如果您打算将部分文件系统(例如，/usr)放到独立的分区，在进入下一阶段之前，需要手动创建和加载这些目录。 </para
+></note>
+  </sect2>
+
+  <sect2>
+  <title
+>安装 <command
+>debootstrap</command
+></title>
+<para
+>Debian 安装程序调用的软件，同时也为官方所采用，被用来安装基系统的工具是 <command
+>debootstrap</command
+>。它调用了 <command
+>wget</command
+> 和 <command
+>ar</command
+>，否则就仅仅依赖 <classname
+>/bin/sh</classname
+>。安装 <command
+>wget</command
+> 和 <command
+>ar</command
+> 如果您的系统里没有，然后再下载并安装 <command
+>debootstrap</command
+>。 </para
+><para
+>如果您用的是基于 rpm 的系统，那么可以用 alien 将 .deb 文件转换成为 .rpm 文件，或者下载已被打包成 rpm 包的版本，它位于 <ulink url="http://people.debian.org/~blade/install/debootstrap"
+></ulink
+> </para
+><para
+>或者您也可以通过下面的步骤手动安装它。先新建一个工作目录，它被用来安放解压缩后的 .deb 文件： <informalexample
+><screen>
+# mkdir work
+# cd work
+</screen
+></informalexample
+> <command
+>debootstrap</command
+> 的二进制文件被打包在 Debian 的归档文件中(请确保选择了与您架构相对应的文件)。下载 <command
+>debootstrap</command
+> .deb 它位于 <ulink url="http://ftp.debian.org/debian/pool/main/d/debootstrap/"
+> pool</ulink
+>，把它拷贝到工作目录，并从该文件解压缩出这些二进制文件。要把二进制文件安装到系统中，您必须要拥有 root 的权限。 <informalexample
+><screen
+># ar -x debootstrap_0.X.X_arch.deb
+# cd /
+# zcat /full-path-to-work/work/data.tar.gz | tar xv
+</screen
+></informalexample>
+
+</para
+><para
+>注意，运行 <command
+>debootstrap</command
+> 可能需要您有最小版本的 <classname
+>glibc</classname
+> (当前为 GLIBC_2.3)。 <command
+>debootstrap</command
+> 本身是一个 shell 脚本，但它会调用 <classname
+>glibc</classname
+> 的一下工具。 </para>
+  </sect2>
+
+  <sect2>
+  <title
+>运行 <command
+>debootstrap</command
+></title>
+<para
+><command
+>debootstrap</command
+> 执行后，它会自己从归档文件库直接下载所需的文件。您可以把下面的命令行例子中的 <userinput
+>http.us.debian.org/debian</userinput
+> 替换成任何一个 Debian 归档文件库的镜像。选择镜像时，可以根据您的网络情况选择较近的一个。镜像的列表在 <ulink url="http://www.debian.org/misc/README.mirrors"
+></ulink
+>。 </para
+><para
+>如果您已经把一张 &releasename; 版本的 &debian; CD 挂载在了 <filename
+>/cdrom</filename
+> 那么也可以把 http URL 替换成 file URL，即：<userinput
+>file:/cdrom/debian/</userinput
+> </para
+><para
+>请将下列架构中的一个替换 <replaceable
+>ARCH</replaceable
+> 于 <command
+>debootstrap</command
+> 命令中： <userinput
+>alpha</userinput
+>, <userinput
+>arm</userinput
+>, <userinput
+>hppa</userinput
+>, <userinput
+>i386</userinput
+>, <userinput
+>ia64</userinput
+>, <userinput
+>m68k</userinput
+>, <userinput
+>mips</userinput
+>, <userinput
+>mipsel</userinput
+>, <userinput
+>powerpc</userinput
+>, <userinput
+>s390</userinput
+>，或 <userinput
+>sparc</userinput
+>。 <informalexample
+><screen
+># /usr/sbin/debootstrap --arch ARCH &releasename; \\
+     /mnt/debinst http://http.us.debian.org/debian
+</screen
+></informalexample>
+
+</para>
+  </sect2>
+
+  <sect2>
+  <title
+>基系统的配置</title>
+<para
+>现在您在硬盘上已经装上了一套真正的 Debian 操作系统，尽管它还很瘦小。<command
+>Chroot</command
+> 用来进入该系统： <informalexample
+><screen
+># LANG= chroot /mnt/debinst /bin/bash
+</screen
+></informalexample>
+
+</para>
+
+   <sect3>
+   <title
+>分区的挂载</title>
+<para
+>您需要新建 <filename
+>/etc/fstab</filename
+>。<informalexample
+><screen>
+# editor /etc/fstab
+</screen
+></informalexample
+> 这里有个样板，您不妨根据自己的情况来修改它： <informalexample
+><screen>
+# /etc/fstab: static file system information.
+#
+# file system    mount point   type    options                  dump pass
+/dev/XXX         /             ext3    defaults                 0    1
+/dev/XXX         /boot         ext3    ro,nosuid,nodev          0    2
+
+/dev/XXX         none          swap    sw                       0    0
+proc             /proc         proc    defaults                 0    0
+
+/dev/fd0         /mnt/floppy   auto    noauto,rw,sync,user,exec 0    0
+/dev/cdrom       /mnt/cdrom    iso9660 noauto,ro,user,exec      0    0
+
+/dev/XXX         /tmp          ext3    rw,nosuid,nodev          0    2
+/dev/XXX         /var          ext3    rw,nosuid,nodev          0    2
+/dev/XXX         /usr          ext3    rw,nodev                 0    2
+/dev/XXX         /home         ext3    rw,nosuid,nodev          0    2
+</screen
+></informalexample
+> 您可以通过 <userinput
+>mount -a</userinput
+> 来挂载您的 <filename
+>/etc/fstab</filename
+> 中所标明的所有文件系统，您也可以一个一个地分别挂载这些文件系统，像： <informalexample
+><screen>
+# mount /path   # e.g.: mount /usr
+</screen
+></informalexample
+> 您可以多次挂载 proc 文件系统。尽管通常把它挂载到 /proc，但是它还是可以被挂载到任意的地方。如果您没有用 <userinput
+>mount -a</userinput
+>，那么请一定要再接着做之前先把 proc 挂载好： <informalexample
+><screen
+># mount -t proc proc /proc
+</screen
+></informalexample>
+
+</para
+><para
+><userinput
+>ls /proc</userinput
+> 命令现在应该列出非空目录。如果失败，您应该从 chroot: 以为加载 proc。 <informalexample
+><screen
+># mount -t proc proc /mnt/debinst/proc
+</screen
+></informalexample>
+
+</para>
+   </sect3>
+
+   <sect3>
+   <title
+>键盘的配置</title>
+<para
+>若要配置您的键盘，请： <informalexample
+><screen
+># dpkg-reconfigure console-data
+</screen
+></informalexample>
+
+</para
+><para
+>注意，在 chroot 里面不能设置键盘，但重新启动以后可以。 </para>
+   </sect3>
+
+   <sect3>
+   <title
+>网络的配置</title>
+<para
+>要配置网络，请修改 <filename
+>/etc/network/interfaces</filename
+>, <filename
+>/etc/resolv.conf</filename
+> 和 <filename
+>/etc/hostname</filename
+>。<informalexample
+><screen>
+# editor /etc/network/interfaces
+</screen
+></informalexample
+> 这里有些简单的例子，来自 <filename
+>/usr/share/doc/ifupdown/examples</filename
+>: <informalexample
+><screen>
+######################################################################
+# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
+# See the interfaces(5) manpage for information on what options are
+# available.
+######################################################################
+
+# We always want the loopback interface.
+#
+auto lo
+iface lo inet loopback
+
+# To use dhcp:
+#
+# auto eth0
+# iface eth0 inet dhcp
+
+# An example static IP setup: (broadcast and gateway are optional)
+#
+# auto eth0
+# iface eth0 inet static
+#     address 192.168.0.42
+#     network 192.168.0.0
+#     netmask 255.255.255.0
+#     broadcast 192.168.0.255
+#     gateway 192.168.0.1
+</screen
+></informalexample
+> 填入您的 nameserver(s) 和搜索指令到 <filename
+>/etc/resolv.conf</filename
+>: <informalexample
+><screen>
+# editor /etc/resolv.conf
+</screen
+></informalexample
+> 这里有个简单的 <filename
+>/etc/resolv.conf</filename
+>: <informalexample
+><screen>
+search hqdom.local\000
+nameserver 10.1.1.36
+nameserver 192.168.9.100
+</screen
+></informalexample
+> 输入您的系统的主机名 (2 到 63 个字符): <informalexample
+><screen>
+# echo DebianHostName &gt; /etc/hostname
+</screen
+></informalexample
+> 如果您有多块网卡，在您修改 <filename
+>/etc/modules</filename
+> 文件时，一定要按照期望的顺序排列驱动模块的名字。这样的话，在系统启动时，每块网卡就能获得您所预期的 interface 名称了 (eth0、eth1 等等)。 </para>
+   </sect3>
+
+   <sect3>
+   <title
+>时区、用户和 APT 的配置</title>
+<para
+>设置您的时区，添加一个普通用户，再运行下面的指令选择您的 <command
+>apt</command
+> 源 <informalexample
+><screen
+># /usr/sbin/base-config new
+</screen
+></informalexample>
+
+</para>
+   </sect3>
+
+   <sect3>
+   <title
+>locales 的设置</title>
+<para
+>要配置您的 locale 设定，以便使用英语以外的其它语言，就需要安装 提供 locales 支持的软件包，同时配置之： <informalexample
+><screen>
+# apt-get install locales
+# dpkg-reconfigure locales
+</screen
+></informalexample
+> 注意：在此之前必须配置好 apt，即在 base-config 阶段就配置好它。在使用非 ASCII 或 latin1 的字符集的 locale 之前，请先参阅相应的本地化指南(localisation HOWTO)。 </para>
+   </sect3>
+  </sect2>
+
+  <sect2>
+  <title
+>内核的安装</title>
+<para
+>您若想启动这个系统，您很可能还需要一个 Linux 内核和一个 boot loader。可以用下面指令找到那些目前可用的被打好包的内核 <informalexample
+><screen>
+# apt-cache search kernel-image
+</screen
+></informalexample
+> 接下来把您所选中的内核的软件包名作为命令行的参数来安装它。 <informalexample
+><screen
+># apt-get install kernel-image-<replaceable
+>2.X.X-arch-etc</replaceable
+>
+</screen
+></informalexample>
+
+</para>
+  </sect2>
+
+  <sect2>
+<title
+>Boot Loader 的设置</title>
+<para
+>要让您的 &debian; 系统能够启动，还要设置您的 boot loader，好让它能加载已安装的内核并用上新的根分区。注意 debootstrap 不会安装 boot loader，因此您要在 Debian 的 chroot 中使用 apt-get 完成。 </para
+><para arch="i386"
+>通过查阅 <userinput
+>info grub</userinput
+> 或 <userinput
+>man lilo.conf</userinput
+> 可以得到一些有关设置 bootloader 的提示。如果您希望保留用来安装 Debian 的那个系统，那么就在现有的 grub <filename
+>menu.lst</filename
+> 或 <filename
+>lilo.conf</filename
+> 里为 Debian 系统的安装添加一条配置就可以了。对于 <filename
+>lilo.conf</filename
+>您也可以把这个文件拷贝到新的系统里，然后在新的系统里编辑它。当您修改好配置，运行 lilo (请记住，您在哪个系统里运行 lilo，它就会用哪个系统里的 <filename
+>lilo.conf</filename
+> )。 </para
+><para arch="i386"
+>下面有一个简单的<filename
+>/etc/lilo.conf</filename
+> 作为例子： <informalexample
+><screen
+>boot=/dev/hda6
+root=/dev/hda6
+install=menu
+delay=20
+lba32
+image=/vmlinuz
+label=Debian
+</screen
+></informalexample>
+
+</para
+><para arch="powerpc"
+>通过查阅 <userinput
+>man yaboot.conf</userinput
+> 可以得到一些有关设置 bootloader 的提示。如果您希望继续保留用来安装 Debian 的那个系统，那么在 <filename
+>yaboot.conf</filename
+> 里为 Debian 系统的安装添加一条配置就可以了。您也可以把这个文件拷贝到新的系统里，然后在新的系统里编辑它。当您修改完毕配置，运行 ybin (请记住，您在哪个系统里运行 <filename
+>yaboot.conf</filename
+> )。 </para
+><para arch="powerpc"
+>下面有一个简单的<filename
+>/etc/yaboot.conf</filename
+> 作为例子： <informalexample
+><screen>
+boot=/dev/hda2
+device=hd:
+partition=6
+root=/dev/hda6
+magicboot=/usr/lib/yaboot/ofboot
+timeout=50
+image=/vmlinux
+label=Debian
+</screen
+></informalexample
+> 在有的电脑上，您或许应该把 <userinput
+>ide0:</userinput
+> 换成 <userinput
+>hd:</userinput
+>。 </para>
+  </sect2>
+ </sect1>
+<!--   End of file appendix/chroot-install.xml -->
+
+<!-- Start of file appendix/plip.xml -->
+
+ <sect1 id="plip" arch="i386">
+ <title
+>通过 Parallel Line IP (PLIP) 来安装 &debian;</title>
+
+<para
+>本节将说明在没有以太网卡的情况下，如何通过一条 Null-Modem 线(也称为 Null-Printer 线)，连接到远端网关计算机来安装 &debian;。充当网关的计算机应该连接到具有 Debian 镜像的网络(例如，互联网)。 </para
+><para
+>本附录里面的例子中，我们将建立一个 PLIP 连接，使用的网关通过拨号连接(ppp0)到互联网。我们还分别为目标和源系统的 PLIP 接口使用 192.168.0.1 和 192.168.0.2 IP 地址(这些地址在您的网络地址空间里面未被占用)。 </para
+><para
+>在安装时建立的 PLIP 连接，重新启动后在新安装的系统里面仍然可用(参阅 <xref linkend="boot-new"/>)。 </para
+><para
+>开始前，您需要检查一下源与目标系统并口的 BIOS 设置(IO 基地址和 IRQ)。常用的值为 <literal
+>io=0x378</literal
+>，<literal
+>irq=7</literal
+>。 </para>
+
+  <sect2>
+  <title
+>需求</title>
+
+<itemizedlist>
+<listitem
+><para
+>目标计算机，称为 <emphasis
+>target</emphasis
+>，将安装 Debian 在上面。 </para
+></listitem>
+<listitem
+><para
+>系统安装介质；参阅 <xref linkend="installation-media"/>。 </para
+></listitem>
+<listitem
+><para
+>另外一台连接到互联网的计算机，称为 <emphasis
+>source</emphasis
+>，功能是网关。 </para
+></listitem>
+<listitem
+><para
+>一条 DB-25 Null-Modem 线。参阅 <ulink url="&url-plip-install-howto;"
+>PLIP-Install-HOWTO</ulink
+> 了解这种线的更多信息，以及如何自己制作。 </para
+></listitem>
+</itemizedlist>
+
+  </sect2>
+
+  <sect2>
+  <title
+>建立源</title>
+<para
+>下面的脚本是一个简单例子，说明如何配置使用 ppp0 连接到互联网的充当网关的源计算机。 <informalexample
+><screen
+>#!/bin/sh
+
+# We remove running modules from kernel to avoid conflicts and to
+# reconfigure them manually.
+modprobe -r lp parport_pc
+modprobe parport_pc io=<replaceable
+>0x378</replaceable
+> irq=<replaceable
+>7</replaceable>
+modprobe plip
+
+# Configure the plip interface (plip0 for me, see dmesg | grep plip)
+ifconfig <replaceable
+>plip0 192.168.0.2</replaceable
+> pointopoint <replaceable
+>192.168.0.1</replaceable
+> netmask 255.255.255.255 up
+
+# Configure gateway
+modprobe iptable_nat
+iptables -t nat -A POSTROUTING -o <replaceable
+>ppp0</replaceable
+> -j MASQUERADE
+echo 1 
+> /proc/sys/net/ipv4/ip_forward
+</screen
+></informalexample>
+
+</para>
+  </sect2>
+
+  <sect2>
+  <title
+>安装目标</title>
+<para
+>用安装介质启动。安装需要使用专家模式; 在启动提示符下输入<userinput
+>expert</userinput
+>。下面是安装过程中不同阶段的应答。 </para>
+
+<orderedlist>
+<listitem
+><para>
+
+<guimenuitem
+>加载安装组件</guimenuitem>
+
+</para
+><para
+>从列表里面选择 <userinput
+>plip-modules</userinput
+> 选项; 它使安装系统可以使用 PLIP 驱动。 </para
+></listitem>
+<listitem
+><para>
+
+<guimenuitem
+>侦测网络硬件</guimenuitem>
+
+</para>
+
+ <itemizedlist>
+ <listitem
+><para
+>如果目标系统<emphasis
+>具有</emphasis
+>网卡，将显示侦测到的网卡的驱动模块列表。如果您希望强制 &d-i; 使用 plip，您应该排斥所有列出的驱动模块。显然，如果目标系统没有网卡，安装程序不会显示该列表。 </para
+></listitem>
+ <listitem
+><para
+>提示模块参数: Yes </para
+></listitem>
+ <listitem
+><para
+>因为前面没有网卡侦测/选择，安装程序将要求您从列表中选择网络驱动模块。选择 <userinput
+>plip</userinput
+> 模块。 </para
+></listitem>
+ <listitem
+><para
+>Additional parameters for module parport_pc: <userinput
+><replaceable
+>io=0x378 irq=7</replaceable
+></userinput
+> </para
+></listitem>
+ <listitem
+><para
+>Additional parameters for module plip: 保持空白 </para
+></listitem>
+ </itemizedlist>
+
+</listitem>
+<listitem
+><para>
+
+<guimenuitem
+>配置网络</guimenuitem>
+ 
+ <itemizedlist>
+ <listitem
+><para
+>Auto-configure network with DHCP: No </para
+></listitem>
+ <listitem
+><para
+>IP address: <userinput
+><replaceable
+>192.168.0.1</replaceable
+></userinput
+> </para
+></listitem>
+ <listitem
+><para
+>Point-to-point address: <userinput
+><replaceable
+>192.168.0.2</replaceable
+></userinput
+> </para
+></listitem>
+ <listitem
+><para
+>Name server addresses: 您可以使用与源计算机相同的地址 (参阅 <filename
+>/etc/resolv.conf</filename
+>) </para
+></listitem>
+ </itemizedlist>
+
+</para
+></listitem>
+</orderedlist>
+
+  </sect2>
+ </sect1>
+<!--   End of file appendix/plip.xml -->
+
+</appendix>
+<!--   End of file appendix/random-bits.xml -->

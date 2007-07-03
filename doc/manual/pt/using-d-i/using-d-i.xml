@@ -1,0 +1,1944 @@
+<!-- Start of file using-d-i/using-d-i.xml -->
+
+
+ <chapter id="d-i-intro"
+><title
+>Utilizar o Instalador Debian</title>
+
+ <sect1
+><title
+>Como Funciona o Instalador</title>
+<para
+>O Instalador Debian consiste num número de componentes com um propósito específico para executar cada tarefa da instalação. Cada componente executa a sua tarefa, perguntando ao utilizador as questões necessárias para fazer a sua tarefa. Às próprias questões são dadas prioridades, e a prioridade das questões a serem colocadas é definida quando é iniciado o instalador. </para
+><para
+>Quando é feita uma instalação por omissão, apenas serão colocadas as questões essenciais (de alta prioridade). Isto resulta num processo de instalação altamente automatizado, com pouca interacção por parte do utilizador. Os componentes são executados sequencialmente e de uma forma automatica; quais os componentes que são executados depende principalmente do método da instalação utilizado e do seu hardware. O instalador utilizará valores por omissão para as questões que não são colocadas. </para
+><para
+>Se existir um problema, o utilizador irá visualizar um ecrã de erro, e o menu do instalador poderá aparecer com o intuito de ser seleccionada uma acção alternativa. Se não existir qualquer problema, o utilizador nunca irá visualizar o menu do instalador, apenas irá responder a simples questões para cada mudança de componente. Notificações de erros sérios são ajustadas para prioridade <quote
+>crítica</quote
+> que faz com que o utilizador seja sempre notificado. </para
+><para
+>Algumas das omissões utilizadas pelo instalador poderão ser influenciadas passando argumentos de arranque quando o &d-i; está a iniciar. Se, por exemplo, você desejar forçar uma configuração de rede estática (se estiver disponível DHCP é utilizado por omissão), pode adicionar o parâmetro de arranque <userinput
+>netcfg/disable_dhcp=true</userinput
+>. Veja na <xref linkend="installer-args"/> as opções disponíveis. </para
+><para
+>Os utilizadores experientes poderão sentir-se mais confortáveis com uma interface conduzida pelo menu, onde cada passo é controlado pelo utilizador em vez do instalador executar automaticamente e sequencialmente cada passo. Para utilizar o instalador de forma manual, conduzido pelo menu, adicione o argumento de arranque <userinput
+>debconf/priority=medium</userinput
+>. </para
+><para
+>Se o seu hardware requer que sejam passadas opções de instalação para os módulos de kernel, irá necessitar de iniciar o instalador no modo <quote
+>expert</quote
+>. Isto pode ser feito utilizando o comando <command
+>expert</command
+> para iniciar o instalador ou adicionando o argumento de arranque <userinput
+>debconf/priority=low</userinput
+>. O Modo Expert dá-lhe total controlo sobre o &d-i;. </para
+><para
+>O modo gráfico do instalador normal é baseado em caracteres (diferente do interface gráfico, agora mais familiar). O rato não se encontra operacional neste ambiente. As seguintes teclas podem ser utilizadas para navegar nos vários diálogos. A tecla <keycap
+>Tab</keycap
+> ou a tecla seta para a <keycap
+>direita</keycap
+> movem para a <quote
+>frente</quote
+>, e a tecla <keycombo
+> <keycap
+>Shift</keycap
+> <keycap
+>Tab</keycap
+> </keycombo
+> ou a seta para a <keycap
+>esquerda</keycap
+> movem-se para <quote
+>trás</quote
+> através dos botões e selecções mostrados. As setas para <keycap
+>cima</keycap
+> e para <keycap
+>baixo</keycap
+> seleccionam diferentes itens contidos numa lista com scroll, e permitem ainda fazer movimentar à própria lista. Além disso, para longas listas pode ainda digitar um caracter para que a lista se movimente directamente para a secção de itens que comecem com a letra digitada e ainda usar as teclas <keycap
+>Pg-Up</keycap
+> e <keycap
+>Pg-Down</keycap
+> para movimentar a lista entre secções. A tecla <keycap
+>barra de espaços</keycap
+> selecciona um item como por exemplo uma checkbox. Utilize a tecla &enterkey; para activar as escolhas. </para
+><para arch="s390"
+>S/390 não suporta consolas virtuais. Pode abrir uma segunda e terceira sessão de ssh para ver os logs descrito abaixo. </para
+><para
+>As mensagens de erro são reencaminhadas para a terceira consola. Pode aceder a essa consola premindo as teclas <keycombo
+><keycap
+>Left Alt</keycap
+><keycap
+>F3</keycap
+></keycombo
+> (segurando a tecla <keycap
+>Alt</keycap
+> da esquerda enquanto prime a tecla de função <keycap
+>F3</keycap
+>); volte ao processo principal do instalador com <keycombo
+><keycap
+>Left Alt</keycap
+><keycap
+>F1</keycap
+></keycombo
+>. </para
+><para
+>Estas mensagens também podem ser encontradas em <filename
+>/var/log/messages</filename
+>. Após a instalação, este log é copiado para <filename
+>/var/log/debian-installer/messages</filename
+> no seu sistema. Outras mensagens de instalação podem ser encontradas, durante o processo de instalação em <filename
+>/var/log/</filename
+>, e após o seu computador iniciar no seu sistema acabado de instalar em <filename
+>/var/log/debian-installer/</filename
+>. </para>
+ </sect1>
+
+
+  <sect1 id="modules-list"
+><title
+>Introdução de Componentes</title>
+<para
+>Aqui está uma lista de componentes do instalador com uma breve descrição do propósito de cada componente. Se necessita de saber detalhes sobre como usar um componente em particular veja em <xref linkend="module-details"/>. </para>
+
+<variablelist>
+<varlistentry>
+
+<term
+>main-menu</term
+><listitem
+><para
+>Mostra ao utilizador durante o processo de instalação a lista de componentes, e inicia um componente quando seleccionado. Questões do Main-menu são ajustadas para prioridade média, se a sua prioridade estiver ajustada para alta ou crítica (por omissão é alta), não irá visualizar o menu. Por outro lado, se existir um erro que requer a sua intervenção, a prioridade da questão pode temporariamente baixar para permitir que resolva o problema, e nesse caso o menu pode aparecer. </para
+><para
+>Pode chegar ao menu principal seleccionando repetidamente a opção <quote
+>Voltar</quote
+> para retroceder todo o caminho para fora do componente em que actualmente se encontrar a correr. </para
+></listitem>
+</varlistentry>
+<varlistentry condition="sarge">
+
+<term
+>languagechooser</term
+><listitem
+><para
+>Mostra uma lista de idiomas e variantes de idiomas. O instalador irá mostrar mensagens no idioma escolhido a menos que a tradução para esse idioma não esteja completa. Quando uma tradução não está completa, são mostradas as mensagens em Inglês. </para
+></listitem>
+</varlistentry>
+<varlistentry condition="sarge">
+
+<term
+>countrychooser</term
+><listitem
+><para
+>Mostra uma lista de países. O utilizador pode escolher o país onde vive. </para
+></listitem>
+</varlistentry>
+<varlistentry condition="etch">
+
+<term
+>localechooser</term
+><listitem
+><para
+>Permite ao utilizador seleccionar as opções de localização para a instalação e para o sistema instalado: idioma, país e definições locais. O instalador irá mostrar mensagens no idioma escolhido a menos que a tradução para esse idioma não esteja completa, nesse caso algumas mensagens podem ser mostradas em Inglês. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>kbd-chooser</term
+><listitem
+><para
+>Mostra uma lista de teclados, a partir da qual o utilizador escolhe o modelo que coincide com o seu. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>hw-detect</term
+><listitem
+><para
+>Detecta automaticamente a maioria do hardware do sistema, incluindo placas de rede, discos, e PCMCIA. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>cdrom-detect</term
+><listitem
+><para
+>Procura e monta um CD de instalação Debian. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>netcfg</term
+><listitem
+><para
+>Configura as ligações de rede do computador de modo a que possa comunicar através da internet. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>iso-scan</term
+><listitem
+><para
+>Procura por sistemas de ficheiros ISO, que podem estar num CD-ROm ou num disco rígido. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>choose-mirror</term
+><listitem
+><para
+>Mostra uma lista de mirrors de ficheiros Debian. O utilizador pode escolher a source dos seus pacotes de instalação. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>cdrom-checker</term
+><listitem
+><para
+>Verifica a integridade de um CD-ROM. Deste modo o/a utilizador(a) pode assegurar-se que o CD-ROM de instalação não foi corrompido. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>lowmem</term
+><listitem
+><para
+>Lowmem tenta detectar sistemas com pouca memória e faz vários truques para remover da memória partes não necessárias do &d-i; (com o custo de algumas funcionalidades). </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>anna</term
+><listitem
+><para
+>Anna's Not Nearly APT. Instala pacotes que foram obtidos a partir do mirror escolhido ou de CD. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>partman</term
+><listitem
+><para
+>Permite ao utilizador particionar discos ligados ao sistema, criar sistemas de ficheiros nas partições seleccionadas, e liga-las aos pontos de montagem. Estão incluídas alguma funcionalidades interessantes tais como um modo totalmente automático ou suporte para LVM. Esta é a ferramenta de particionamento preferida em Debian. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>autopartkit</term
+><listitem
+><para
+>Particiona automaticamente um disco inteiro de acordo com as preferências pré-definidas do utilizador. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>partitioner</term
+><listitem
+><para
+>Permite ao utilizador particionar discos ligados ao sistema. É escolhido um programa apropriado de acordo com a arquitectura do seu computador. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>partconf</term
+><listitem
+><para
+>Mostra uma lista de partições, e cria sistemas de ficheiros nas partições seleccionadas de acordo com as instruções do utilizador. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>lvmcfg</term
+><listitem
+><para
+>Auxilia o utilizador com a configuração do <firstterm
+>LVM</firstterm
+> (Logical Volume Manager). </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>mdcfg</term
+><listitem
+><para
+>Permite ao utilizador configurar <firstterm
+>RAID</firstterm
+> por Software (Redundant Array of Inexpensive Disks). Este RAID por Software geralmente é superior aos controladores RAID de IDE baratos (pseudo hardware) que se encontram em motherboards novas. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>base-installer</term
+><listitem
+><para
+>Instala o conjunto de pacotes mais básicos que permitem ao computador operar sob Linux quando for reiniciado. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>os-prober</term
+><listitem
+><para
+>Detecta sistemas operativos actualmente instalados no computador e passa esta informação ao bootloader-installer, que pode oferecer-lhe a capacidade de adicionar os sistemas operativos detectados ao menu de arranque do gestor de arranque. Desta forma o utilizador durante o arranque pode facilmente escolher qual o sistema operativo em que quer arrancar. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>bootloader-installer</term
+><listitem
+><para
+>Instala um programa de gestor de arranque no disco rígido, que é necessário para o computador iniciar com Linux sem utilizar uma disquete ou CD-ROM. Muitos gestores de arranque permitem ao utilizador, cada vez que o computador arranca, escolher um sistema operativo alternativo. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>base-config</term
+><listitem
+><para
+>Disponibiliza caixas de diálogo para configurar os pacotes do sistema base de acordo com as preferências do utilizador. Isto é normalmente feito após o computador reiniciar; é a <quote
+>primeira vez</quote
+> que o seu novo sistema Debian corre. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term
+>shell</term
+><listitem
+><para
+>Permite ao utilizador executar uma shell a partir do menu, ou na segunda consola. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+
+<term condition="sarge"
+>bugreporter</term
+><term condition="etch"
+>save-logs</term
+><listitem
+><para
+>Disponibiliza um modo do utilizador registar informação numa disquete <phrase condition="etch"
+>, na rede, disco rígido, ou outro tipo de suporte  </phrase
+> quando é encontrado algum problema, de modo a posteriormente reportar de forma precisa os problemas de software do instalador aos Debian Developers. </para
+></listitem>
+</varlistentry>
+
+</variablelist>
+
+ </sect1>
+
+
+<!-- Start of file using-d-i/components.xml -->
+
+ <sect1 id="module-details">
+ <title
+>Utilizar Componentes Individuais</title>
+<para
+>Neste secção iremos descrever em detalhe cada componente do instalador. Os componentes foram agrupados em etapas que devem ser reconhecidas pelos utilizadores. Estão presentes pela ordem que aparecem durante a instalação. Note que nem todos os módulos irão ser utilizados para todas as instalações; os módulos que são utilizados dependem do método de instalação que você escolhe e do seu hardware. </para>
+
+  <sect2 id="di-setup">
+  <title
+>Preparar o Instalador Debian e a Configuração de Hardware</title>
+<para
+>Vamos assumir que o Instalador Debian iniciou e que você está perante o seu primeiro ecrã. Por esta altura, as compatibilidades do &d-i; ainda são bastante limitadas. Não sabe muito acerca do seu hardware, idioma preferido, ou que tarefa deve executar. Não se preocupe. O &d-i; é bastante inteligente, pode automaticamente testar o seu hardware, localizar o resto dos componentes e actualizar-se a ele próprio para uma instalação de sistema capaz. Contudo, ainda precisa ajudar o &d-i; com alguma informação que ele não consegue automaticamente detectar (como seleccionar o seu idioma preferido, configuração do teclado ou qual o mirror de rede desejado). </para
+><para
+>Você irá notar que o &d-i; executa a <firstterm
+>detecção de hardware</firstterm
+> várias vezes durante esta etapa. A primeira vez dirige-se especificamente ao hardware necessário para carregar componentes do instalador (e.g. o seu CD-ROM ou placa de rede). Como não estão disponíveis todos os drivers durante esta primeira execução, a detecção de hardware necessita de ser repetida posteriormente no processo. </para>
+
+
+<!-- Start of file using-d-i/modules/lowmem.xml -->
+
+  <sect3 id="lowmem">
+  <title
+>Verificar a memória disponível</title>
+
+<para
+>Uma das primeiras coisas que o &d-i; faz, é verificar a memória disponível. Se a memória disponível é limitada, este componente fará algumas alterações no processo de instalação que lhe irão permitir instalar o &debian; no seu sistema. </para
+><para
+>Durante uma instalação com pouca memória, nem todos os componentes estarão disponíveis. Uma das limitações é que você não poderá escolher um idioma para a instalação. </para>
+   </sect3>
+<!--   End of file using-d-i/modules/lowmem.xml -->
+
+<!-- Start of file using-d-i/modules/languagechooser.xml -->
+
+
+   <sect3 id="lang-chooser" condition="sarge">
+   <title
+>Escolha do Idioma</title>
+
+<para
+>Como primeiro passo da instalação, escolha o idioma no qual deseja que prossiga o processo da instalação. Os nomes dos idiomas estão listados em ambos os idiomas Inglês (esquerda) e no próprio idioma (direita); Os nomes do lado direito também são mostrados no script adequado para o idioma. A lista está ordenada pelos nomes em Inglês. </para
+><para
+>O idioma que você escolhe será utilizado para o resto do processo de instalação, desde que esteja disponível uma tradução para os diferentes ecrãs. Se não estiver disponível nenhuma tradução válida para o idioma seleccionado, o instalador utilizará o Inglês. O idioma seleccionado também será utilizado para ajudar a escolher uma configuração de teclado adequada. </para>
+   </sect3>
+<!--   End of file using-d-i/modules/languagechooser.xml -->
+
+<!-- Start of file using-d-i/modules/countrychooser.xml -->
+
+
+   <sect3 id="country-chooser" condition="sarge">
+   <title
+>Escolha do País</title>
+
+<para
+>Se você seleccionou um idioma na <xref linkend="lang-chooser"/> que tenha mais que um país associado (aplicável a Chinês, Inglês, Francês, e muitos outros idiomas), pode aqui especificar o idioma. Se você escolheu <guimenuitem
+>Outros</guimenuitem
+> no fundo da lista, ser-lhe-á apresentada uma lista de países, agrupados por continente. </para
+><para
+>Esta selecção será posteriormente utilizada no processo de instalação para escolher por omissão um fuso horário e um mirror Debian apropriado para a sua localização geográfica. Se os valores por omissão propostos pelo instalador não forem adequados, você poderá fazer uma escolha diferente. O país seleccionado, em conjunto com o idioma seleccionado, pode também afectar as definições locais para o seu novo sistema Debian. </para>
+   </sect3>
+<!--   End of file using-d-i/modules/countrychooser.xml -->
+
+<!-- Start of file using-d-i/modules/localechooser.xml -->
+
+
+   <sect3 id="localechooser" condition="etch">
+   <title
+>Selecção das Opções de Localização</title>
+
+<para
+>Na maioria dos casos as primeiras questões que lhe serão colocadas dizem respeito à selecção das opções de localização a serem utilizadas tanto na instalação como para o sistema a instalar. As opções de localização consistem no idioma, país e definições locais. </para
+><para
+>O idioma que escolher será utilizado para o resto do processo de instalação, na medida em que exista tradução nos diferentes diálogos disponíveis. Se não estiver disponível nenhuma tradução válida para o idioma seleccionado, o instalador utilizará por omissão o Inglês. </para
+><para
+>O país seleccionado será mais tarde utilizado no processo de instalação para escolher por omissão um fuso horário e um mirror Debian apropriado para a sua localização geográfica. O idioma e o país em conjunto serão utilizados para configurar as definições locais para o seu sistema e para o ajudar a configurar seleccionar o seu teclado. </para
+><para
+>Ser-lhe-á no inicio pedido para seleccionar o seu idioma preferido. A lista de idiomas encontra-se em Inglês (lado esquerdo) e na sua própria língua (lado direito); os nomes do lado direito mostram também o respectivo script para o idioma. A lista está disposta pelos nomes em Inglês. No topo da lista existe uma opção extra que lhe permite seleccionar as definições locais <quote
+>C</quote
+> em vez do idioma. Ao escolher a definição local <quote
+>C</quote
+> a sua instalação prosseguirá em Inglês, o sistema não terá suporte de definição local, já que não será instalado o pacote <classname
+>locales</classname
+>. </para
+><para
+>Se você seleccionou um idioma que é reconhecido por se tratar de um idioma não oficial para mais de um país <footnote
+> <para
+> Em termos técnicos: onde existem múltiplas definições locais para esse idioma que diferem nos códigos de país. </para
+> </footnote
+>, ser-lhe-á pedido em seguida o país. Se você escolheu <guimenuitem
+>Other</guimenuitem
+> no fundo da lista, ser-lhe-á apresentada uma lista de todos os países, agrupados por continente. Se o idioma tem apenas um único país associado, esse país será seleccionado automaticamente. </para
+><para
+>Uma definição local padrão será seleccionada com base no idioma e país escolhido. Se estiver a instalar em prioridade média ou baixa, terá a opção de seleccionar definições locais padrão diferentes e de seleccionar definições locais adicionais para serem geradas no sistema instalado. </para>
+   </sect3>
+<!--   End of file using-d-i/modules/localechooser.xml -->
+
+<!-- Start of file using-d-i/modules/kbd-chooser.xml -->
+
+   <sect3 id="kbd-chooser">
+   <title
+>Escolher um teclado</title>
+
+<para
+>Os teclados são normalmente construídos de acordo com os caracteres utilizados no seu idioma. Escolha um layout de acordo com o teclado que está a utilizar, ou se o seu teclado não estiver representado escolha um próximo. Quando a instalação do sistema terminar, você poderá escolher um layout de teclado a partir de uma gama maior de escolhas (como root execute <command
+>kbdconfig</command
+> após ter completado a instalação). </para
+><para
+>Mova a selecção para a escolha do teclado que deseja e carregue em &enterkey;. Utilize as teclas com setas para mover a selecção &mdash; estas estão no mesmo lugar em todas as configurações de teclado para idiomas nacionais, por isso são independentes da configuração do teclado. Um teclado 'estendido' é um que contém as teclas de <keycap
+>F1</keycap
+> até <keycap
+>F10</keycap
+> na linha superior. </para
+><para arch="mipsel"
+>Em DECstations não existe actualmente disponível nenhum keymap que possa ser carregado, por isso você tem que saltar a selecção de teclado e manter o keymap por omissão do kernel (LK201 US). Isto pode ser alterado de futuro porque depende de futuros desenvolvimentos do kernel para Linux/MIPS. </para
+><para arch="powerpc"
+>Existem dois layouts de teclado para teclados US; o layout qwerty/mac-usb-us (Apple USB) irá colocar a função Alt na tecla <keycap
+>Command/Apple</keycap
+> (na posição do teclado a seguir ao <keycap
+>espaço</keycap
+> idêntico à tecla <keycap
+>Alt</keycap
+> nos teclados de PC), enquanto que o layout querty/us (Standard) irá colocar a função Alt na tecla <keycap
+>Option</keycap
+> (gravada com 'alt' na maioria dos teclados Mac). Nos outros aspectos os dois layouts são similares. </para>
+
+<note arch="sparc"
+><para
+>Se está a instalar num sistema que tem um teclado Sun USB e iniciou o instalador com o kernel por omissão 2.4, o teclado não será correctamente identificado pelo sistema de instalação. O instalador irá mostrar uma lista com alguns keymaps do tipo Sun para escolher, mas escolher um desses irá resultar num teclado que não funciona. Se está a instalar com o kernel 2.6, não existe qualquer problema. </para
+><para
+>Para ter um teclado funcional, você deve iniciar o instalador com o parâmetro <userinput
+>debconf/priority=medium</userinput
+>. Quando você chegar à selecção de teclado<footnote
+> <para
+> Se você está a instalar com a prioridade por omissão você deve utilizar o botão<userinput
+>Voltar Atrás</userinput
+> para voltar ao menu do instalador quando lhe for mostrada uma lista de keymaps do tipo Sun. </para
+> </footnote
+>, escolha <quote
+>Sem teclado para configurar</quote
+> e irá deixar o keymap do kernel, que é correcto para teclados US. </para
+></note>
+   </sect3>
+<!--   End of file using-d-i/modules/kbd-chooser.xml -->
+
+<!-- Start of file using-d-i/modules/s390/netdevice.xml -->
+<!--   End of file using-d-i/modules/s390/netdevice.xml -->
+
+<!-- Start of file using-d-i/modules/ddetect.xml -->
+<!--   End of file using-d-i/modules/ddetect.xml -->
+
+<!-- Start of file using-d-i/modules/cdrom-detect.xml -->
+<!--   End of file using-d-i/modules/cdrom-detect.xml -->
+
+<!-- Start of file using-d-i/modules/iso-scan.xml -->
+
+   <sect3 id="iso-scan">
+   <title
+>Procurar a Imagem ISO do Instalador do Debian</title>
+<para
+>Quando se instala através do método <emphasis
+>hd-media</emphasis
+>, existirá um momento em que você tem de encontrar e montar uma imagem iso do Instalador Debian de modo a obter o resto dos ficheiros de instalação. O componente <command
+>iso-scan</command
+> faz exactamente isto. </para
+><para
+>Inicialmente, o <command
+>iso-scan</command
+> monta automaticamente todos os block devices (p. ex. partições) que tenham neles algum sistema de ficheiros conhecido e sequencialmente procura por ficheiros que terminam em <filename
+>.iso</filename
+> (ou <filename
+>.ISO</filename
+> para esse efeito). Tenha em atenção que a primeira tentativa procura apenas ficheiros no directório raiz e no primeiro nível dos subdirectórios (i.e. encontra <filename
+>/<replaceable
+>qualquercoisa</replaceable
+>.iso</filename
+>, <filename
+>/data/<replaceable
+>qualquercoisa</replaceable
+>.iso</filename
+>, mas não <filename
+>/data/tmp/<replaceable
+>qualquercoisa</replaceable
+>.iso</filename
+>). Após ter sido encontrada uma imagem iso, o <command
+>iso-scan</command
+> verifica o seu conteúdo para verificar se a imagem é ou não uma imagem iso válida do Debian. No primeiro caso termina, no último caso o <command
+>iso-scan</command
+> procura por outra imagem. </para
+><para
+>No caso da tentativa anterior de encontrar uma imagem iso do instalador falhar, o <command
+>iso-scan</command
+> irá perguntar-lhe se você deseja executar uma procura mais exaustiva. Esta tentativa não se limita a procurar nos directórios de mais alto nível, atravessando mesmo todo o sistema de ficheiros. </para
+><para
+>Se o <command
+>iso-scan</command
+> não descobrir a sua imagem iso do instalador, reinicie para o seu sistema operativo inicial e verifique se a imagem tem o nome correcto (que termina em <filename
+>.iso</filename
+>), se está colocada num sistema de ficheiros reconhecido pelo &d-i;, e se não está corrompida (verifique o checksum). Utilizadores experientes de Unix podem fazer isto na segunda consola, sem reiniciar. </para>
+   </sect3>
+<!--   End of file using-d-i/modules/iso-scan.xml -->
+
+<!-- Start of file using-d-i/modules/anna.xml -->
+<!--   End of file using-d-i/modules/anna.xml -->
+
+<!-- Start of file using-d-i/modules/netcfg.xml -->
+
+   <sect3 id="netcfg">
+   <title
+>Configuração de Rede</title>
+
+<para
+>Ao chegar a esta etapa, se o sistema detectar que possui mais do que um dispositivo de rede, ser-lhe-á pedido que indique qual o dispositivo para servir de interface de rede <emphasis
+>primário</emphasis
+>, isto é, o que será utilizado para a instalação. As outras interfaces de rede não serão configuradas nesta altura. Poderá configurar interfaces adicionais depois de completar a instalação, veja a página man <citerefentry
+> <refentrytitle
+>interfaces</refentrytitle
+> <manvolnum
+>5</manvolnum
+> </citerefentry
+> </para
+><para
+>Por omissão, o &d-i; tenta configurar a rede do seu computador automaticamente via DHCP. Se a detecção DHCP tiver sucesso estará efectuada a configuração. Se a procura não for bem sucedida, poderá ter sido causado por vários factores, desde o cabo de rede desligado, até uma configuração de DHCP errada. Ou talvez não exista mesmo um servidor de DHCP na sua rede local. Para futuras explicações confira as mensagens de erro na terceira consola. Em qualquer caso, ser-lhe-á perguntado se quer voltar a tentar, ou se quer efectuar uma configuração manual. Os servidores DHCP são por vezes lentos nas suas respostas, por isso se pensa que está tudo em ordem, tente novamente. </para
+><para
+>O manual de configuração da rede de um modo geral apresenta-lhe um certo número de questões sobre a sua rede, de salientar <computeroutput
+>endereço IP</computeroutput
+>, <computeroutput
+>Máscara de rede</computeroutput
+>, <computeroutput
+>Gateway</computeroutput
+>, <computeroutput
+>Endereços de servidores de nomes</computeroutput
+>, e um <computeroutput
+>Hostname</computeroutput
+>. Se tiver uma interface de rede wireless, ser-lhe-á pedido que forneça o seu <computeroutput
+>Wireless ESSID</computeroutput
+> e a <computeroutput
+>WEP key</computeroutput
+>. Preencha as respostas a partir da <xref linkend="needed-info"/>. </para
+><note
+><para
+>Existem alguns aspectos técnicos que pode ou não achar úteis: o programa assume que o endereço IP de rede é a operação lógica AND (dos bits) do seu endereço IP e da sua máscara de rede. O instalador adivinhará que o endereço de broadcast é bitwise ou o IP do seu sistema é a negação bitwise da máscara de rede. Adivinhará também a sua gateway. Se não souber responder a estas perguntas, utilize o guia do sistema &mdash; poderá se necessário modificar as opções depois do sistema ter sido instalado, editando o ficheiro <filename
+>/etc/network/interfaces</filename
+>. Alternativamente poderá instalar o <classname
+>etherconf</classname
+>, que irá guiá-lo passo a passo pela configuração da rede. </para
+></note>
+   </sect3>
+<!--   End of file using-d-i/modules/netcfg.xml -->
+
+<!-- Start of file using-d-i/modules/choose-mirror.xml -->
+
+<!--
+- Component is only selected and executed if the installer needs to load
+  installer components or the base system from the network
+  (either local or the internet).
+- This means you first have to configure a network interface.
+- A list of countries is displayed with the default based on the country you
+  selected earlier.
+- Note that not all mirrors are equal (see http://www.nl.debian.org/mirror/list)
+- Selection of a local mirror (at top of the list: manual selection).
+- After selecting a country, a list of mirrors in the country will be shown.
+
+- The selected mirror will be tested.
+- How to handle problems with mirrors.
+-->
+<!--   End of file using-d-i/modules/choose-mirror.xml -->
+
+  </sect2>
+
+  <sect2 id="di-partition">
+  <title
+>Particionar e Escolher os Pontos de Montagem</title>
+<para
+>Neste ponto, após a detecção do hardware ter sido feita uma última vez, o  &d-i; deverá estar no auge, configurado para as necessidades do utilizador e pronto para efectuar algum trabalho real. Como o título desta secção indica, a tarefa principal dos seguintes componentes resumem-se ao particionamento do disco, atribuição de pontos de montagem e opcionalmente configuração de aspectos relacionados com dispositivos LVM e RAID. </para>
+
+
+<!-- Start of file using-d-i/modules/s390/dasd.xml -->
+<!--   End of file using-d-i/modules/s390/dasd.xml -->
+
+<!-- Start of file using-d-i/modules/partman.xml -->
+
+   <sect3 id="partman">
+   <title
+>Particionar os Seus Discos</title>
+
+<para
+>Agora é altura de particionar os discos. Se não estiver à vontade com o particionamento, ou se quiser obter mais informações veja o <xref linkend="partitioning"/>. </para
+><para
+>No inicio ser-lhe-á dada a oportunidade de criar as partições de um modo automático no disco inteiro, ou no espaço livre do disco. Esta opção é também chamada modo de particionamento <quote
+>assistido</quote
+>. Se não quiser criar partições de um modo automático, escolha <guimenuitem
+>Editar manualmente a tabela de partições</guimenuitem
+> a partir do menu. </para
+><para
+>Se escolher o assistente de particionamento poderá escolher uma lista de esquemas listada abaixo. Todos os esquemas tem os seus prós e contras, alguns dos quais discutidos no <xref linkend="partitioning"/>. Se estiver inseguro opte pelo primeiro. Tenha em mente que o assistente de particionamento necessita de um espaço mínimo livre para funcionar. Se não disponibilizar 1GB de espaço (dependendo do esquema escolhido) o particionamento através do assistente irá falhar. </para>
+
+<informaltable>
+<tgroup cols="3">
+<thead>
+<row>
+  <entry
+>Esquema de criação das partições</entry>
+  <entry
+>Espaço mínimo</entry>
+  <entry
+>Partições criadas</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>Todos os ficheiros numa partição</entry>
+  <entry
+>600MB</entry>
+  <entry
+><filename
+>/</filename
+>, swap</entry>
+</row
+><row>
+  <entry
+>Computador de secretária</entry>
+  <entry
+>500MB</entry>
+  <entry
+><filename
+>/</filename
+>, <filename
+>/home</filename
+>, swap </entry>
+</row
+><row>
+  <entry
+>Estação de trabalho multi-utilizador</entry>
+  <entry
+>1GB</entry>
+  <entry
+><filename
+>/</filename
+>, <filename
+>/home</filename
+>, <filename
+>/usr</filename
+>, <filename
+>/var</filename
+>, <filename
+>/tmp</filename
+>, swap </entry>
+</row>
+
+</tbody
+></tgroup
+></informaltable>
+
+<para arch="ia64"
+>Se optar pelo particionamento automático para o seu sistema IA64, irá existir um partição adicional formatada como sistema de ficheiros de arranque FAT16 para o gestor de arranque EFI. Existirá também um item adicional no menu de formatação para manualmente criar uma partição como uma partição de arranque EFI. </para
+><para arch="alpha"
+>Se optar pelo particionamento automático para o seu sistema Alpha, uma partição não formatada adicional será alocada no inicio do seu disco para reservar espaço para o gestor de arranque. </para
+><para
+>Depois de escolher um esquema, o próximo ecrã irá mostrar-lhe a tabela da nova partição, incluindo informação sobre como, onde e de que forma serão as partições formatadas e onde serão montadas. </para
+><para
+>A lista de partições poderá parecer-se com esta: <informalexample
+><screen>
+  IDE1 master (hda) - 6.4 GB WDC AC36400L
+        #1 primary   16.4 MB     ext2       /boot
+        #2 primary  551.0 MB     swap       swap
+        #3 primary    5.8 GB     ntfs
+           pri/log    8.2 MB     FREE SPACE
+
+  IDE1 slave (hdb) - 80.0 GB ST380021A
+        #1 primary   15.9 MB     ext3
+        #2 primary  996.0 MB     fat16
+        #3 primary    3.9 GB     xfs        /home
+        #5 logical    6.0 GB     ext3       /
+        #6 logical    1.0 GB     ext3       /var
+        #7 logical  498.8 MB     ext3
+        #8 logical  551.5 MB     swap       swap
+        #9 logical   65.8 GB     ext2
+</screen
+></informalexample
+> Este exemplo mostra dois discos IDE divididos em várias partições; o primeiro disco possuí algum espaço livre. Cada linha de partição consiste no número de partição, o seu tipo, dimensão, flags opcionais, sistema de ficheiros, e ponto de montagem (se aplicáveis). </para
+><para
+>Está assim concluído o assistente de particionamento. Se estiver satisfeito com a tabela de partições gerada, pode escolher <guimenuitem
+>Terminar particionamento e escrever as alterações no disco</guimenuitem
+> a partir do menu, para implementar a nova tabela de partições (descrita no final desta secção). Se não estiver satisfeito, pode optar pela opção <guimenuitem
+>Desfazer as alterações às partições</guimenuitem
+> para correr o assistente de particionamento de novo ou modificar as alterações propostas como descritas antes para o particionamento manual. </para
+><para
+>Um ecrã similar ao que acabou de ser exibido será visualizado se tiver escolhido o particionamento manual, no entanto a sua actual tabela de partição será exibida sem os pontos de  montagem. Como configurar manualmente a tabela de partições e o uso de partições pelo seu novo sistema Debian será tema do resto desta secção. </para
+><para
+>Se escolher um disco completamente vazio que não possuí partições nem espaço livre, ser-lhe-á pedido que crie uma nova tabela de partição (isto é necessário para que possa criar novas partições). Após esta operação uma nova linha de nome <quote
+>ESPAÇO LIVRE</quote
+> deverá aparecer debaixo do disco seleccionado. </para
+><para
+>Se tiver seleccionado algum espaço livre, ser-lhe-á pedido que crie uma nova partição. Terá que responder a uma série de questões rápidas sobre a sua dimensão, tipo (primária ou lógica), e a sua localização (inicio ou final do espaço livre). Depois desta etapa, poderá visualizar informação detalhada da nova partição. Existem opções como ponto de montagem, opções de montagem, bootable flag, ou o modo de uso. Se não gostar dos valores pré-seleccionados por omissão, sinta-se à vontade para modificar o que quiser. Por exemplo, seleccionando a opção <guimenuitem
+>Usar Como:</guimenuitem
+>, poderá escolher diferentes sistemas de ficheiros para esta partição incluindo a possibilidade de usar a partição para swap, software RAID, LVM, ou não a usar de todo. Outra funcionalidade simpática é a possibilidade de copiar informação de uma partição já existente para esta última. Quando estiver satisfeito com a sua nova partição, seleccione <guimenuitem
+>Preparação da Partição Terminada</guimenuitem
+> e será enviado novamente para o ecrã principal do <command
+>partman</command
+>. </para
+><para
+>Se decidir que tem que alterar algo na sua partição, seleccione simplesmente  a partição e será apresentado o menu de configuração. Por este ser o mesmo ecrã da criação de uma nova  partição, poderá alterar as mesmas opções desta. O que poderá não ser óbvio à primeira vista é o facto de poder redimensionar a partição seleccionando o item que mostra a dimensão da partição. Os sistemas de ficheiros conhecidos como funcionais neste método são pelo menos o fat16, fat32, ext2, ext3 e swap. Este menu permite-lhe ainda apagar a partição. </para
+><para
+>Certifique-se que criou pelo menos duas partições: uma para o sistema de ficheiros <emphasis
+>root</emphasis
+> (que deverá ser montada como <filename
+>/</filename
+>) e outra para <emphasis
+>swap</emphasis
+>. Se se esquecer de montar o sistema de ficheiros root, o <command
+>partman</command
+> não lhe permitirá continuar até que corrija esta situação. </para
+><para arch="ia64"
+>Se se esqueceu de seleccionar e formatar uma partição de arranque EFI, o comando <command
+>partman</command
+> irá detectar e não o deixará continuar até que crie uma. </para
+><para
+>As capacidades do <command
+>partman</command
+> podem ser extendidas através de módulos de instalação, mas dependem da arquitectura do seu sistema. Assim se não conseguir obter todas as funcionalidades verifique todos os módulos necessários (p. ex. <filename
+>partman-ext3</filename
+>, <filename
+>partman-xfs</filename
+>, ou <filename
+>partman-lvm</filename
+>). </para
+><para
+>Assim que estiver satisfeito com o particionamento seleccione <guimenuitem
+>Terminar o particionamento e escrever as alterações no disco</guimenuitem
+> a partir do menu de particionamento. Ser-lhe-á apresentado um sumário das modificações efectuadas ao disco e pedida a confirmação para que os sistemas de ficheiros sejam criados conforme foram pedidos. </para>
+   </sect3>
+<!--   End of file using-d-i/modules/partman.xml -->
+
+<!-- Start of file using-d-i/modules/autopartkit.xml -->
+<!--   End of file using-d-i/modules/autopartkit.xml -->
+
+<!-- Start of file using-d-i/modules/partitioner.xml -->
+
+<!--   End of file using-d-i/modules/partitioner.xml -->
+
+<!-- Start of file using-d-i/modules/partconf.xml -->
+<!--   End of file using-d-i/modules/partconf.xml -->
+
+<!-- Start of file using-d-i/modules/lvmcfg.xml -->
+
+   <sect3 id="lvmcfg">
+   <title
+>Configurar o Logical Volume Manager (LVM)</title>
+<para
+>Se estiver a trabalhar com computadores num nível de administrador de sistema ou como utilizador <quote
+>avançado</quote
+>, já terá visto de certeza a situação em que alguma partição do disco (normalmente a mais importante) é pequena em espaço, enquanto que outras partições estão demasiado desaproveitadas e você tem que gerir a situação movendo informação de um lado para o outro, fazer links simbólicos, etc. </para
+><para
+>Para evitar a situação descrita pode utilizar o Logical Volume Manager (LVM). Dito doutra forma, o LVM pode combinar várias partições (<firstterm
+>physical volumes</firstterm
+> na linguagem do LVM) para formar um disco virtual (o chamado <firstterm
+>volume group</firstterm
+>), que pode ser dividido em partições virtuais (<firstterm
+>logical volumes</firstterm
+>). O que há a reter é que volumes lógicos (e com certeza volume groups contidos) podem ser separados fisicamente através de vários discos. </para
+><para
+>Quando se aperceber que necessita de mais espaço para a sua antiga partição<filename
+>/home</filename
+> de 160 GB, pode simplesmente acrescentar um novo disco de 300GB ao computador, adicioná-lo ao volume group e então  redimensionar o volume lógico que suporta o sistema de ficheiros <filename
+>/home</filename
+> e aí está &mdash; os seus utilizadores terão novamente espaço  na renovada partição de 460GB. Este exemplo naturalmente está um pouco simplificado. Se ainda não tiver lido deverá consultar o <ulink url="&url-lvm-howto;"
+>LVM HOWTO</ulink
+>. </para
+><para
+>A configuração do LVM no &d-i; é bastante simples. No inicio, terá que marcar as partições para serem usadas como volumes físicos para LVM. (Isto é feito no <command
+>partman</command
+> no menu <guimenu
+>Definições de Partição</guimenu
+> onde terá que seleccionar <menuchoice
+> <guimenu
+>Utilizar como:</guimenu
+> <guimenuitem
+>volume físico para LVM</guimenuitem
+> </menuchoice
+>.) Inicie então o módulo <command
+>lvmcfg</command
+> (quer directamente a partir do <command
+>partman</command
+> ou a partir do menu principal do &d-i;) e combine os volumes físicos ao volume group no menu <guimenuitem
+>Alterar volume groups (VG)</guimenuitem
+> . Depois disto deverá criar volumes lógicos no topo do volume groups a partir do menu <guimenuitem
+>Modificar logical volumes (LV)</guimenuitem
+>. <note arch="powerpc" condition="sarge"
+><para
+>Não existe um standard largamente aceite na identificação de partições contendo informação LVM no hardware Power Macintosh. Neste hardware particular, o procedimento atrás para criar volumes físicos e volume groups não funcionará. Existe um modo de contornar esta limitação, contando que esteja familiarizado com as ferramentas LVM. </para
+><para
+>Para instalar usando volumes lógicos num hardware Power Macintosh deverá criar todas as partições para os volumes lógicos de forma usual. No menu <guimenu
+>Partition settings</guimenu
+> deverá escolher <menuchoice
+><guimenu
+>Use as:</guimenu
+> <guimenuitem
+>Do Not Use</guimenuitem
+></menuchoice
+> para estas partições (ser-lhe-á colocada a opção de usar a partição como um volume físico). Quando terminar a criação das partições, deverá iniciar o gestor de volumes lógicos como habitual. No entanto, como não foram criados volumes físicos terá que aceder ao comando da shell disponível na segunda consola virtual (veja <xref linkend="shell"/>) e criá-los manualmente. </para
+><para
+>Utilize o comando <command
+>pvcreate</command
+> na linha de comando da shell para criar um volume físico em cada uma das partições escolhidas. Execute então o comando <command
+>vgcreate</command
+> para criar cada volume group que queira. Poderá ignorar qualquer erro em segurança sobre incorrecta metadata area header checksums e falhas de fysnc enquanto executa a operação. Quando tiver terminado a criação de todos os volume groups, deverá vir atrás para o primeiro terminal virtual e passar directamente para os itens de menu <command
+>lvmcfg</command
+> para a gestão dos volumes lógicos. Verá os seus volumes groups e pode criar os volumes lógicos que precisar da forma usual. </para
+></note>
+
+</para
+><para
+>Depois de voltar do  <command
+>lvmcfg</command
+> para o <command
+>partman</command
+>, verá qualquer volume lógico criado do mesmo modo que as partições normais (e deverá tratá-las como tal). </para>
+   </sect3>
+<!--   End of file using-d-i/modules/lvmcfg.xml -->
+
+<!-- Start of file using-d-i/modules/mdcfg.xml -->
+
+   <sect3 id="mdcfg">
+   <title
+>Configurar o Dispositivo Multidisk (Software RAID)</title>
+<para
+>Se tiver mais que um disco rígido <footnote
+><para
+> Para ser honesto, poderá construir um dispositivo MD mesmo a partir de partições residentes num disco rígido, mas não se provará útil. </para
+></footnote
+> no seu computador, poderá utilizar o comando <command
+>mdcfg</command
+> para configurar as drives para aumentar a perfomance e/ou maior fiabilidade na sua informação. O resultado é chamado <firstterm
+>Multidisk Device</firstterm
+> (ou seguido da sua variante mais famosa <firstterm
+>software RAID</firstterm
+>). </para
+><para
+>Os MD são basicamente um conjunto de partições localizadas em discos diferentes e combinadas em conjunto de modo a formar um dispositivo <emphasis
+>lógico</emphasis
+>. Este dispositivo pode ser utilizado como uma partição vulgar (p.ex. no <command
+>partman</command
+> poderá formatá-la, atribuir um ponto de montagem, etc.). </para
+><para
+>Os benefícios que irá ganhar dependem do tipo de dispositivo MD que está a criar. Actualmente os suportados são: <variablelist
+> <varlistentry
+> <term
+>RAID0</term
+><listitem
+><para
+> Visando principalmente a perfomance. RAID0 separa toda a informação que chega para dentro de <firstterm
+>stripes</firstterm
+> e distribuí a mesma de um modo idêntico para cada disco do array. Isto pode aumentar a velocidade das operações de leitura/gravação, mas quando um disco falha, perderá <emphasis
+>tudo</emphasis
+> (parte da informação está ainda nos discos saudáveis, a outra parte <emphasis
+>estava</emphasis
+> no disco que falhou. </para
+><para
+> Tipicamente o RAID0 utiliza-se para partições utilizadas para edição de vídeo. </para
+></listitem
+> </varlistentry
+> <varlistentry
+> <term
+>RAID1</term
+><listitem
+><para
+> É indicado para configurações onde a fiabilidade é a primeira preocupação. Consiste em várias (normalmente duas) partições iguais, onde cada partição contém exactamente a mesma informação. Isto significa basicamente três coisas. Primeiro, se um dos discos falha, poderá sempre ter a sua informação espelhada nos outros discos. Segundo, pode usar apenas uma fracção da capacidade disponível (mais precisamente, é a dimensão da partição mais pequena do RAID). Terceiro, as leituras dos ficheiros são balanceadas entre os discos o que poderá melhorar a performance num servidor, tal como um servidor de ficheiros que tende a ser carregado com mais leituras do que escritas de ficheiros. </para
+><para
+> Em opção pode utilizar um disco sobresselente no array que tomará o lugar do disco em falta em caso de falha do sistema. </para
+></listitem
+> </varlistentry
+> <varlistentry
+> <term
+>RAID5</term
+><listitem
+><para
+> É um  bom compromisso entre velocidade, fiabilidade e redundância de informação. RAID5 divide toda a informação que chega e distribuí de um modo idêntico para todos os discos (de um modo similar ao RAID0). Mas ao contrário do RAID0, o RAID5 também computa informação de  <firstterm
+>parity</firstterm
+>, que é escrita no disco que resta. O disco de paridade não é estático (este seria chamado RAID4), mas está constantemente a mudar, de modo que a informação de paridade esta identicamente distribuída em todos os discos. Quando um dos discos falha, a parte de informação que falta pode ser computada a partir das informação que restou e da sua paridade. O RAID5 deve consistir pelo menos em três partições activas. Em opção pode ter um disco alternativo no array que tomará o lugar do disco em falha. </para
+><para
+> Como pode ver o RAID5 possuí um grau de fiabilidade similar aos RAID1 adquirindo menor redundância. Por outro lado pode ser um pouco mais lento numa operação de escrita do que o RAID0 devido à computação da informação de paridade. </para
+></listitem
+> </varlistentry
+> </variablelist
+> Para resumir : <informaltable
+> <tgroup cols="5">
+<thead>
+<row>
+  <entry
+>Tipo</entry>
+  <entry
+>Dispositivos Mínimos</entry>
+  <entry
+>Dispositivo Sobresselente</entry>
+  <entry
+>Sobrevive a falhas de disco?</entry>
+  <entry
+>Espaço Disponível</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>RAID0</entry>
+  <entry
+>2</entry>
+  <entry
+>não</entry>
+  <entry
+>não</entry>
+  <entry
+>Dimensão da mais pequena partição multiplicada pelo número de dispositivos no RAID</entry>
+</row>
+
+<row>
+  <entry
+>RAID1</entry>
+  <entry
+>2</entry>
+  <entry
+>opcional</entry>
+  <entry
+>sim</entry>
+  <entry
+>Dimensão da partição RAID mais pequena</entry>
+</row>
+
+<row>
+  <entry
+>RAID5</entry>
+  <entry
+>3</entry>
+  <entry
+>opcional</entry>
+  <entry
+>sim</entry>
+  <entry
+>Dimensão da mais pequena partição multiplicada por (número de dispositivos no RAID menos um) </entry>
+</row>
+
+</tbody
+></tgroup
+></informaltable>
+
+</para
+><para
+>Se quiser saber toda a verdade sobre o software RAID, dê uma vista de olhos no <ulink url="&url-software-raid-howto;"
+>Software RAID HOWTO</ulink
+>. <note arch="powerpc" condition="sarge"
+><para
+>Não existe um standard largamente aceite para identificar partições que contenham dados RAID em hardware Power Macintosh. Isto significa que o &d-i; actualmente não suporta configurar RAID nesta plataforma. </para
+></note>
+
+</para
+><para
+>Para criar um dispositivo MD necessita de ter as partições desejadas marcadas para uso em RAID. (Isto é feito com o <command
+>partman</command
+> no menu <guimenu
+>Partition settings</guimenu
+> onde deverá escolher <menuchoice
+> <guimenu
+>Use as:</guimenu
+> <guimenuitem
+>physical volume for RAID</guimenuitem
+> </menuchoice
+>.) </para
+><warning
+><para
+>O suporte para MD é uma adição relativamente nova no instalador. Pode sofrer problemas em alguns níveis de RAID e em combinação com alguns gestores de arranque, se tentar utilizar MD no sistema de ficheiros root (<filename
+>/</filename
+>). Para utilizadores experientes, é possível contornar estes problemas executando alguma configuração ou passos na instalação de uma forma manual através da shell. </para
+></warning
+><para
+>Em seguida, deverá escolher <guimenuitem
+>Configurar RAID por software</guimenuitem
+> a partir do menu principal <command
+>partman</command
+>. No primeiro ecrã do <command
+>mdcfg</command
+> escolha simplesmente <guimenuitem
+>Criar dispositivo MD</guimenuitem
+>. Deverá ser-lhe apresentada uma lista com os vários tipos de dispositivos MD suportados a partir dos quais pode escolher um (p.ex. RAID1). O que se seguirá depende do tipo de MD que seleccionar. </para>
+
+<itemizedlist>
+<listitem
+><para
+>O RAID0 é simples &mdash; você será confrontado com uma lista de partições RAID disponíveis e a sua tarefa será apenas seleccionar as partições que formaram o MD. </para
+></listitem>
+<listitem
+><para
+>O RAID1 possuí mais alguns truques. Primeiro, ser-lhe-á pedido que introduza o número de dispositivos activos e o número de dispositivos sobresselentes que formaram o MD. De seguida, necessitará de seleccionar de uma lista de partições RAID as que serão activas e as que serão sobresselentes. O número de partições seleccionadas terá que ser igual ao número fornecido alguns segundos atrás. Não se preocupe. Se efectuar algum erro e seleccionar um número diferente de partições, o  &d-i; não lhe deixará continuar até que o erro seja corrigido. </para
+></listitem>
+<listitem
+><para
+>O RAID5 possuí uma configuração similar ao RAID1 com a excepção de que necessita de utilizar pelo menos <emphasis
+>três</emphasis
+> partições activas. </para
+></listitem>
+</itemizedlist>
+
+<para
+>É perfeitamente possível ter vários tipos de MD ao mesmo tempo. Por exemplo se tiver três discos rígidos de 200 GB dedicados a MD, cada uma contendo partições de 100 GB, pode combinar as primeiras partições nos três discos em RAID0 (partição rápida de 300GB para edição de vídeo) e usar as outras três partições (2 activas e 1 sobresselente) para RAID1 (muito fiável para uma partição <filename
+>/home</filename
+> de 100GB). </para
+><para
+>Depois de configurar os dispositivos MD de acordo com as suas preferências, pode executar <guimenuitem
+>Terminar</guimenuitem
+> <command
+>mdcfg</command
+> para voltar ao <command
+>partman</command
+> com vista à criação dos sistemas de ficheiros nos novos dispositivos MD e atribuí-los aos pontos de montagem habituais. </para>
+   </sect3>
+<!--   End of file using-d-i/modules/mdcfg.xml -->
+  </sect2>
+
+  <sect2 id="di-install-base">
+  <title
+>Instalar o Sistema Base</title>
+<para
+>Apesar desta fase ser a menos problemática, consome a maior parte do tempo da instalação pois executa o download, verifica e extrai todo o sistema base. Se tiver um computador ou uma ligação de rede lenta, poderá demorar algum tempo. </para>
+
+
+<!-- Start of file using-d-i/modules/base-installer.xml -->
+
+   <sect3 id="base-installer">
+   <title
+>Instalação do Sistema Base</title>
+
+<para
+>Durante a instalação da Base, as mensagens de extracção de pacotes e da configuração são redireccionadas  para o terminal <userinput
+>tty3</userinput
+>. Poderá aceder a este terminal premindo <keycombo
+><keycap
+>Left Alt</keycap
+><keycap
+>F3</keycap
+></keycombo
+>;  pode voltar ao processo principal do instalador com <keycombo
+><keycap
+>Left Alt</keycap
+><keycap
+>F1</keycap
+></keycombo
+>. </para
+><para
+>As mensagens de extracção/configuração geradas pela instalação da base são arquivadas em <filename
+>/var/log/messages</filename
+> quando a instalação é efectuada através de uma consola série. </para
+><para
+>Como parte da instalação, um kernel Linux irá ser instalado. Como primeira prioridade, o instalador ir-lhe-à escolher um que melhor coincide com o seu hardware. Nos modos de prioridade mais baixa, você poderá escolher a partir de uma lista de kernels disponíveis. </para>
+   </sect3>
+<!--   End of file using-d-i/modules/base-installer.xml -->
+  </sect2>
+
+  <sect2 id="di-make-bootable">
+  <title
+>Tornar o Sistema Iniciável</title>
+
+<para condition="supports-nfsroot"
+>Se estiver a efectuar a instalação numa estação de trabalho sem drive de disquetes obviamente que o arranque a partir do disco local deixa de ter significado, de modo que este passo é ignorado. <phrase arch="sparc"
+> Pode optar por correr o Openboot a partir da rede por omissão; veja <xref linkend="boot-dev-select-sun"/>.</phrase
+> </para
+><para
+>Note que o arranque de múltiplos sistemas operativos numa única máquina é ainda considerada uma arte obscura. Este documento não pretende documentar os vários gestores de arranque, os quais variam por arquitectura e por vezes até por sub-arquitectura. Deverá consultar a documentação do seu gestor de arranque para mais informações. </para>
+
+
+<!-- Start of file using-d-i/modules/os-prober.xml -->
+
+   <sect3 id="os-prober">
+   <title
+>Detecção de outros sistemas operativos</title>
+
+<para
+>Antes da instalação do gestor de arranque, o instalador tentará detectar outros sistemas operativos instalados na máquina. Se encontrar um sistema operativo que suporte, será informado no decurso da fase de instalação do gestor de arranque, e o computador será configurado para figurar no menu em adição ao Debian. </para
+><para
+>Note que o arranque de múltiplos sistemas operativos numa única máquina é ainda considerada uma arte obscura. O suporte automático para a detecção e configuração dos gestores de arranque para arranque de outros sistemas operativos variam por arquitectura e por vezes até por sub-arquitectura. Se não funcionar deverá consultar a documentação do seu gestor de arranque para mais informações. </para>
+
+<note condition="sarge"
+><para
+>O instalador pode falhar na detecção de outro sistema operativo se as partições contidas neste último se encontrarem montadas na altura em que a detecção ocorrer. Isto pode ocorrer se escolher um ponto de montagem (p.ex. /win) para uma partição contendo outro sistema operativo no <command
+>partman</command
+>, ou se tiver partições montadas manualmente a partir de uma consola. </para
+></note>
+
+   </sect3>
+<!--   End of file using-d-i/modules/os-prober.xml -->
+
+<!-- Start of file using-d-i/modules/alpha/aboot-installer.xml -->
+
+  <sect3 arch="alpha">
+  <title
+>Instalar o <command
+>aboot</command
+> num Disco Rígido</title>
+<para
+>Se tiver arrancado a partir de um SRM seleccionando esta opção, o instalador escreverá o <command
+>aboot</command
+> no primeiro sector do disco em que será instalado o Debian. Seja <emphasis
+>muito</emphasis
+> cuidadoso; <emphasis
+>não</emphasis
+> é possível arrancar múltiplos sistemas operativos (p. ex. GNU/Linux, Free/Open/NetBSD, OSF/1 a.k.a. Digital Unix a.k.a. Tru64 Unix, ou OpenVMS) a partir do mesmo disco. Se possuir também um sistema operativo diferente instalado no mesmo disco onde tiver instalado o Debian, terá que arrancar o GNU/Linux a partir de uma disquete. </para>
+  </sect3>
+<!--   End of file using-d-i/modules/alpha/aboot-installer.xml -->
+
+<!-- Start of file using-d-i/modules/hppa/palo-installer.xml -->
+
+  <sect3 arch="hppa">
+  <title
+><command
+>palo</command
+>-installer</title>
+<para
+>O gestor de arranque num PA-RISC é o <quote
+>palo</quote
+>. O <command
+>PALO</command
+> é muito similar na configuração e utilização ao <command
+>LILO</command
+>, com algumas excepções. Primeiro que tudo o <command
+>PALO</command
+> permite-lhe arrancar qualquer imagem de kernel na sua partição de arranque. Isto deve-se ao facto do <command
+>PALO</command
+> conseguir ler partições Linux. </para
+><para condition="FIXME"
+>hppa FIXME ( mais informação necessária ) </para>
+  </sect3>
+<!--   End of file using-d-i/modules/hppa/palo-installer.xml -->
+
+<!-- Start of file using-d-i/modules/i386/grub-installer.xml -->
+
+  <sect3 arch="i386">
+  <title
+>Instalar o Gestor de Arranque <command
+>Grub</command
+> num Disco Rígido</title>
+<para
+>Na gestor de arranque principal para &architecture; é chamado <quote
+>grub</quote
+>. O Grub é um gestor de arranque flexível e robusto e uma boa escolha quer para novatos quer para utilizadores experientes. </para
+><para
+>Por omissão, o grub será instalado no Master Boot Record (MBR), onde assumirá o controle do processo de arranque. Se preferir, pode instalá-lo em qualquer outro local. Veja o manual do grub para uma informação completa. </para
+><para
+>Se preferir não instalar o grub de todo, com o botão de voltar chegue ao menu principal e a partir daí seleccione o gestor de arranque que desejar. </para>
+  </sect3>
+<!--   End of file using-d-i/modules/i386/grub-installer.xml -->
+
+<!-- Start of file using-d-i/modules/i386/lilo-installer.xml -->
+
+  <sect3 arch="i386">
+  <title
+>Instalar o Gestor de Arranque <command
+>LILO</command
+> num Disco Rígido</title>
+<para
+>O segundo gestor de arranque de &architecture; é o <quote
+>LILO</quote
+>. É um programa antigo e complexo que oferece várias funcionalidades, nas quais se incluem a gestão de arranque do DOS, Windows e OS/2. Seja cuidadoso e leia as instruções na directoria <filename
+>/usr/share/doc/lilo/</filename
+> se tiver necessidades especiais; veja também o <ulink url="&url-lilo-howto;"
+>LILO mini-HOWTO</ulink
+>. </para>
+<note
+><para
+>Actualmente a instalação do LILO apenas criará entradas para sistemas operativos que possam ser carregados em <firstterm
+>chainloaded</firstterm
+>. O que significa que você poderá ter que adicionar uma entrada de menu para sistemas operativos como o GNU/Linux e GNU/Hurd depois da instalação. </para
+></note>
+<para
+>O &d-i; apresenta-lhe três escolhas para instalar o gestor de arranque <command
+>LILO</command
+>. <variablelist>
+<varlistentry>
+<term
+>Master Boot Record (MBR)</term
+><listitem
+><para
+>Deste modo o <command
+>LILO</command
+> assumirá o controlo de todo o processo de arranque. </para
+></listitem
+></varlistentry>
+<varlistentry>
+<term
+>nova partição Debian</term
+><listitem
+><para
+>Escolha esta opção para usar outro gestor de arranque. O <command
+>LILO</command
+> instalar-se-á no inicio da nova partição Debian e servirá como gestor de arranque secundário. </para
+></listitem
+></varlistentry>
+<varlistentry>
+<term
+>Outra escolha</term
+><listitem
+><para
+>Útil para utilizadores avançados que queiram instalar o <command
+>LILO</command
+> noutro local. Neste caso ser-lhe-á pedida a localização desejada. Pode utilizar nomes de estilo devfs, tais como os que começam por <filename
+>/dev/ide</filename
+>, <filename
+>/dev/scsi</filename
+>, e <filename
+>/dev/discs</filename
+>, tais como nomes tradicionais, <filename
+>/dev/hda</filename
+> ou <filename
+>/dev/sda</filename
+>. </para
+></listitem
+></varlistentry>
+</variablelist>
+
+</para
+><para
+>Se não conseguir voltar a arrancar o Windows 9x (ou o DOS) depois deste passo, terá que usar uma disquete de arranque do Windows 9x (MS-DOS) e utilizar o comando <userinput
+>fdisk /mbr</userinput
+> para reinstalar o master boot record do MS-DOS &mdash; no entanto isto significa que terá que utilizar outro método para voltar ao Debian! Para mais informação neste assunto leia por favor a <xref linkend="reactivating-win"/>. </para>
+  </sect3>
+<!--   End of file using-d-i/modules/i386/lilo-installer.xml -->
+
+<!-- Start of file using-d-i/modules/ia64/elilo-installer.xml -->
+
+  <sect3 arch="ia64">
+  <title
+>Instalar o Gestor de Arranque <command
+>ELILO</command
+> num Disco Rígido</title>
+<para
+>O gestor de arranque de &architecture; é chamado <quote
+>elilo</quote
+>. É um gestor de arranque à imagem do gestor de arranque <quote
+>lilo</quote
+> para a arquitectura x86 e utiliza um ficheiro de configuração semelhante. No entanto, em vez de escrever a MBR ou a partição de arranque do disco, copia os ficheiros necessários para uma partição do disco formatada como FAT e modifica o menu <guimenuitem
+>EFI Boot Manager</guimenuitem
+> no firmware para que este aponte para os ficheiros da partição EFI. O gestor de arranque <command
+>elilo</command
+> é composto na realidade por duas partes. O comando <filename
+>/usr/sbin/elilo</filename
+> gere a partição e copia ficheiros para esta. O programa <filename
+>elilo.efi</filename
+> é copiado para a partição EFI e executado pelo <quote
+>Gestor de Arranque EFI</quote
+> para que execute na realidade o arranque do kernel Linux. </para
+><para
+>A configuração do <quote
+>elilo</quote
+> e a sua instalação é efectuada como o último passo do processo de instalação dos pacotes básicos. O &d-i; irá apresentar-lhe uma lista de partições de disco potenciais que o mesmo achou apropriadas para uma partição EFI. Seleccione a partição que escolheu anteriormente na instalação, tipicamente uma partição no mesmo disco que contém o seu sistema de ficheiros <emphasis
+>root</emphasis
+>. </para>
+
+  <warning
+><title
+>Escolha a partição correcta!</title>
+
+<para
+>O critério para escolher a partição é o do sistema de ficheiros formatado em FAT com a flag set em <emphasis
+>boot</emphasis
+>. O &d-i; pode mostrar-lhe múltiplas escolhas dependendo do que encontrar quando procura em todos os discos, incluindo as partições EFI dos discos dos outros sistemas e das partições de diagnóstico do EFI. Lembre-se que o <command
+>elilo</command
+> pode formatar a partição durante a instalação, apagando todo o seu conteúdo! </para
+></warning>
+
+  </sect3>
+
+  <sect3 arch="ia64">
+  <title
+>Conteúdo das Partições EFI</title>
+
+<para
+>A partição EFI é uma partição formatada em FAT num dos discos rígidos do sistema, normalmente no mesmo disco que contem o sistema de ficheiros <emphasis
+>root</emphasis
+>. Não é montado normalmente num sistema a correr pois apenas é necessário pelo <quote
+>EFI Boot Manager</quote
+> para carregar o sistema e a parte do instalador <command
+>elilo</command
+> escrevendo para o sistema de ficheiros directamente. O utilitário <command
+>/usr/sbin/elilo</command
+> escreve para os seguintes ficheiros dentro da directoria <filename
+>efi/debian</filename
+> da partição EFI durante a instalação. Note que o <quote
+>EFI Boot Manager</quote
+> encontrará estes ficheiros utilizando o caminho <filename
+>fs<replaceable
+>n</replaceable
+>:\efi\debian</filename
+>. Podem existir outros ficheiros neste sistema de ficheiros ao longo do tempo conforme o sistema é actualizado ou reconfigurado. </para>
+
+<variablelist>
+
+<varlistentry>
+<term
+><filename
+>elilo.conf</filename
+></term>
+<listitem
+><para
+>Este é o ficheiro de configuração lido pelo gestor de arranque que é iniciado. É uma cópia do <filename
+>/etc/elilo.conf</filename
+> com os nomes dos ficheiros reescritos de modo a referir os ficheiros da partição EFI. </para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><filename
+>elilo.efi</filename
+></term>
+<listitem
+><para
+>Este é o primeiro programa de gestão de arranque que o <quote
+>EFI Boot Manager</quote
+> corre para arrancar o sistema. É o programa por detrás do <guimenuitem
+>Debian GNU/Linux</guimenuitem
+> item do comando de menu <quote
+>EFI Boot Manager</quote
+>. </para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><filename
+>initrd.img</filename
+></term>
+<listitem
+><para
+>Este é o sistema de ficheiros original utilizados para arrancar o kernel. É uma cópia do ficheiro referenciado no <filename
+>/etc/elilo.conf</filename
+>.  Numa instalação normal do Debian este ficheiro encontra-se em <filename
+>/boot</filename
+> e possui um link simbólico de <filename
+>/initrd.img</filename
+>. </para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><filename
+>readme.txt</filename
+></term>
+<listitem
+><para
+>É um pequeno ficheiro de texto que contem um aviso informando que a directoria é gerida pelo <command
+>elilo</command
+> e que qualquer alteração local será perdida na próxima vez que o <filename
+>/usr/sbin/elilo</filename
+> seja executado. </para
+></listitem
+></varlistentry>
+
+<varlistentry>
+<term
+><filename
+>vmlinuz</filename
+></term>
+<listitem
+><para
+>É o kernel comprimido. É uma cópia do ficheiro referido em <filename
+>/etc/elilo.conf</filename
+>. Numa instalação normal do Debian este ficheiro encontra-se em <filename
+>/boot</filename
+> e possui um link simbólico de <filename
+>/vmlinuz</filename
+>. </para
+></listitem
+></varlistentry>
+
+</variablelist>
+
+  </sect3>
+<!--   End of file using-d-i/modules/ia64/elilo-installer.xml -->
+
+<!-- Start of file using-d-i/modules/mips/arcboot-installer.xml -->
+
+  <sect3 arch="mips">
+  <title
+><command
+>arcboot</command
+>-installer</title>
+<para
+>O gestor de arranque no SGI Indys é o <command
+>arcboot</command
+>. Tem que ser instalado no mesmo disco rígido que o kernel (isto é efectuado automaticamente pelo instalador). O Arcboot suporta diferentes configurações que são configuradas em <filename
+>/etc/arcboot.conf</filename
+>. Cada configuração possui um nome único, a configuração por omissão criada pelo instalador é <quote
+>linux</quote
+>. Depois da instalação do arcboot, o sistema pode ser iniciado a partir do disco rígido através da configuração de algumas variáveis de firmware, introduzindo <informalexample
+><screen>
+<userinput
+> setenv SystemPartition scsi(<replaceable
+>scsi</replaceable
+>)disk(<replaceable
+>disk</replaceable
+>)rdisk(0)partition(0)</userinput>
+<userinput
+> setenv OSLoadPartition scsi(<replaceable
+>scsi</replaceable
+>)disk(<replaceable
+>disk</replaceable
+>)rdisk(0)partition(<replaceable
+>partnr</replaceable
+>)</userinput>
+<userinput
+> setenv OSLoader arcboot</userinput>
+<userinput
+> setenv OSLoadFilename <replaceable
+>config</replaceable
+></userinput>
+<userinput
+> setenv AutoLoad yes</userinput>
+</screen
+></informalexample
+> na linha de comando do firmware e depois executando <command
+>boot</command
+>. </para>
+
+<variablelist>
+<varlistentry>
+<term
+> <replaceable
+>scsi</replaceable
+> </term>
+<listitem
+><para
+>é o bus SCSI a partir do qual o arranque vai ser efectuado, <userinput
+>0</userinput
+> para controladores onboard. </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+> <replaceable
+>disk</replaceable
+> </term>
+<listitem
+><para
+>é o SCSI ID do disco rígido onde o <command
+>arcboot</command
+> está instalado </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+> <replaceable
+>partnr</replaceable
+> </term>
+<listitem
+><para
+>é o número da partição onde o <filename
+>/etc/arcboot.conf</filename
+> reside </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+> <replaceable
+>config</replaceable
+> </term>
+<listitem
+><para
+>é o nome da entrada na configuração<filename
+>/etc/arcboot.conf</filename
+>, que por omissão é <quote
+>linux</quote
+>. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+  </sect3>
+<!--   End of file using-d-i/modules/mips/arcboot-installer.xml -->
+
+<!-- Start of file using-d-i/modules/mipsel/colo-installer.xml -->
+<!--   End of file using-d-i/modules/mipsel/colo-installer.xml -->
+
+<!-- Start of file using-d-i/modules/mipsel/delo-installer.xml -->
+
+  <sect3 arch="mipsel">
+  <title
+><command
+>delo</command
+>-installer</title>
+<para
+>O gestor de arranque nas DECstations é o <command
+>DELO</command
+>. Tem que ser instalado no mesmo disco rígido do kernel (isto é efectuado automaticamente pelo instalador). O DELO suporta diferentes configurações que são configuradas em <filename
+>/etc/delo.conf</filename
+>. Cada configuração possui um nome único, a configuração por omissão criada pelo instalador é <quote
+>linux</quote
+>. Depois da instalação do DELO, o sistema pode ser iniciado a partir do disco rígido executando <informalexample
+><screen>
+<userinput
+>boot <replaceable
+>#</replaceable
+>/rz<replaceable
+>id</replaceable
+> <replaceable
+>partnr</replaceable
+>/<replaceable
+>name</replaceable
+></userinput>
+</screen
+></informalexample
+> na linha de comando do firmware. </para>
+
+<variablelist>
+<varlistentry>
+<term
+> <replaceable
+>#</replaceable
+> </term>
+<listitem
+><para
+>é o dispositivo TurboChannel a partir do qual se vai dar o arranque em maior parte das DECstations, <userinput
+>3</userinput
+> para controladores onboard </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+> <replaceable
+>id</replaceable
+> </term>
+<listitem
+><para
+>é o SCSI ID do disco rígido onde o <command
+>DELO</command
+> será instalado </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+> <replaceable
+>partnr</replaceable
+> </term>
+<listitem
+><para
+>é o número da partição onde o <filename
+>/etc/delo.conf</filename
+> reside </para
+></listitem>
+</varlistentry>
+<varlistentry>
+<term
+> <replaceable
+>nome</replaceable
+> </term>
+<listitem
+><para
+>é o nome da entrada na configuração <filename
+>/etc/delo.conf</filename
+>, por omissão <quote
+>linux</quote
+>. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+<para
+>No caso do <filename
+>/etc/delo.conf</filename
+> se encontrar na primeira partição do disco e a configuração por omissão ser iniciada, é suficiente para a sua utilização. <informalexample
+><screen
+><userinput
+>boot #/rz<replaceable
+>id</replaceable
+></userinput
+>
+</screen
+></informalexample>
+
+</para>
+  </sect3>
+<!--   End of file using-d-i/modules/mipsel/delo-installer.xml -->
+
+<!-- Start of file using-d-i/modules/powerpc/yaboot-installer.xml -->
+
+  <sect3 arch="powerpc">
+  <title
+>Instalar o <command
+>Yaboot</command
+> num Disco Rígido</title>
+<para
+>Os novos PowerMacs (meados de 1998 e mais recentes) utilizam o <command
+>yaboot</command
+> como gestor de arranque. O instalador configurará automaticamente o <command
+>yaboot</command
+>, de modo que apenas necessita de uma pequena partição de 820k de nome <quote
+>bootstrap</quote
+> e do tipo <emphasis
+>Apple_Bootstrap</emphasis
+>, criadas anteriormente pelo componente de particionamento. Se esta fase for completada com sucesso, o seu disco estará então preparado para arrancar e o OpenFirmware será configurado para iniciar o &debian;. </para>
+  </sect3>
+<!--   End of file using-d-i/modules/powerpc/yaboot-installer.xml -->
+
+<!-- Start of file using-d-i/modules/powerpc/quik-installer.xml -->
+
+  <sect3 arch="powerpc">
+  <title
+>Instalar o <command
+>Quik</command
+> num Disco Rígido</title>
+<para
+>O gestor de arranque para as máquinas OldWorld Power Macintosh é o <command
+>quik</command
+>. Pode também usá-lo em CHRP. O instalador irá tentar a configuração do <command
+>quik</command
+> automaticamente. Esta configuração é reconhecida como funcional em 7200, 7300, e 7600 Powermacs, e em alguns clones da Power Computing. </para>
+  </sect3>
+<!--   End of file using-d-i/modules/powerpc/quik-installer.xml -->
+
+<!-- Start of file using-d-i/modules/s390/zipl-installer.xml -->
+
+  <sect3 arch="s390">
+  <title
+><command
+>zipl</command
+>-installer</title>
+<para
+>O gestor de arranque em &arch-title; é o <quote
+>zipl</quote
+>. O <command
+>ZIPL</command
+> é similar na configuração e utilização ao <command
+>LILO</command
+>, com algumas excepções. Dê uma vista de olhos a <quote
+>LINUX for &arch-title; Device Drivers and Installation Commands</quote
+> da página web da IBM's developerWorks se quiser saber mais sobre <command
+>ZIPL</command
+>. </para>
+  </sect3>
+<!--   End of file using-d-i/modules/s390/zipl-installer.xml -->
+
+<!-- Start of file using-d-i/modules/sparc/silo-installer.xml -->
+
+  <sect3 arch="sparc">
+  <title
+>Instalar o gestor de arranque <command
+>SILO</command
+> num Disco Rígido</title>
+<para
+>O gestor de arranque standard para &architecture; é o <quote
+>silo</quote
+>. Este está documentado em <filename
+>/usr/share/doc/silo/</filename
+>. O <command
+>SILO</command
+> é muito idêntico na configuração e utilização ao <command
+>LILO</command
+>, com algumas excepções. Primeiro que tudo, o <command
+>SILO</command
+> permite-lhe arrancar a partir de qualquer imagem do kernel no seu disco, mesmo que não esteja listado em <filename
+>/etc/silo.conf</filename
+>. E isto porque o <command
+>SILO</command
+> pode na realidade ler partições Linux. O <filename
+>/etc/silo.conf</filename
+> é ainda lido durante o arranque de modo não sendo necessário voltar a correr o <command
+>silo</command
+> depois de instalar um novo kernel, o que teria que fazer com o <command
+>LILO</command
+>. O <command
+>SILO</command
+> pode também ler partições UFS, o que significa que pode arrancar partições SunOS/Solaris. Isto é útil se quiser instalar o GNU/Linux em companhia de uma  instalação SunOS/Solaris já existente. </para>
+  </sect3>
+<!--   End of file using-d-i/modules/sparc/silo-installer.xml -->
+
+<!-- Start of file using-d-i/modules/nobootloader.xml -->
+
+   <sect3 id="nobootloader">
+   <title
+>Continuar Sem Gestor de Arranque</title>
+
+<para
+>Esta opção pode ser usada para completar a instalação mesmo que o gestor de arranque não tenho sido instalado, ou pelo facto da arch/subarch não ter fornecido nenhum, ou porque nenhum ter sido desejado (p. ex. você irá usar o gestor de arranque existente). <phrase arch="m68k"
+> Esta opção é especialmente útil para sistemas Macintosh, Atari, e Amiga, onde o sistema operativo original terá que ser mantido inalterável e utilizado para arrancar o GNU/Linux.</phrase
+> </para
+><para
+>Se planeia configurar manualmente o gestor de arranque, deverá verificar o nome do kernel que está instalado em <filename
+>/target/boot</filename
+>. Deverá verificar também a presença na directoria de um <firstterm
+>initrd</firstterm
+>; se estiver um presente, provavelmente terá que instruir o gestor de arranque para que o utilize. Outro tipo de informação que irá necessitar é o disco e a partição que seleccionou para o seu sistema de ficheiros <filename
+>/</filename
+>, se escolher instalar a <filename
+>/boot</filename
+> numa partição separada. </para>
+   </sect3>
+<!--   End of file using-d-i/modules/nobootloader.xml -->
+  </sect2>
+
+  <sect2 id="di-finish">
+  <title
+>Finalizar a Primeira Etapa</title>
+<para
+>Estes são os últimos detalhes a efectuar antes de reiniciar o seu novo Debian. Consistem basicamente em agrupar as tarefas após o &d-i;. </para>
+
+
+<!-- Start of file using-d-i/modules/prebaseconfig.xml -->
+
+   <sect3 id="prebaseconfig">
+   <title
+>Finalizar a Instalação e Reiniciar</title>
+
+<para
+>Este é o último passo no processo inicial da instalação do Debian. Ser-lhe-á indicado que remova o meio de arranque (CD, floppy, etc) que usou para arrancar o instalador. O instalador irá efectuar as últimas tarefas, e então reiniciará já no seu novo sistema Debian. </para
+><para arch="s390"
+>Seleccione no menu <guimenuitem
+>Terminar a instalação</guimenuitem
+>, o que irá terminar o sistema pois a reinicialização não é suportada neste caso no &arch-title;. Deverá então carregar o GNU/Linux a partir do DASD que tiver escolhido para sistema de ficheiros root durante a fase de instalação. </para>
+   </sect3>
+<!--   End of file using-d-i/modules/prebaseconfig.xml -->
+  </sect2>
+
+  <sect2 id="di-miscellaneous">
+  <title
+>Miscelânea</title>
+<para
+>Os componentes listados nesta secção estão normalmente envolvidos no processo de instalação, mas encontram-se em pano de fundo para ajudar o utilizador no caso de algo correr mal. </para>
+
+
+<!-- Start of file using-d-i/modules/save-logs.xml -->
+
+   <sect3 id="save-logs">
+   <title
+>Gravar os logs de instalação</title>
+
+<para
+>Se a instalação tiver sido bem sucedida, os logfiles criados durante o processo de instalação serão automaticamente gravados em <filename
+>/var/log/debian-installer/</filename
+> no seu novo sistema Debian. </para
+><para
+>Ao escolher <guimenuitem
+>Guardar registos de debug</guimenuitem
+> do menu principal irá tornar possível a gravação dos ficheiros de log numa disquete <phrase condition="etch"
+>, na rede, disco rígido, ou outro suporte</phrase
+>. Isto pode ser útil se encontrar problemas graves durante a instalação e quiser estudar os relatórios noutro sistema ou incluí-los num relatório de instalação.  </para>
+   </sect3>
+<!--   End of file using-d-i/modules/save-logs.xml -->
+
+<!-- Start of file using-d-i/modules/cdrom-checker.xml -->
+<!--   End of file using-d-i/modules/cdrom-checker.xml -->
+
+<!-- Start of file using-d-i/modules/shell.xml -->
+
+   <sect3 id="shell">
+   <title
+>Utilizar a Shell e Ver os Logs</title>
+   <!-- TODO: There is nothing about logs in this section! -->
+
+<para
+>Existe o seguinte item no menu <guimenuitem
+>Executar uma Shell</guimenuitem
+>. Se o menu quando necessitar da shell , carregue em <keycombo
+><keycap
+>Left Alt</keycap
+> <keycap
+>F2</keycap
+></keycombo
+> (num teclado Mac, <keycombo
+><keycap
+>Option</keycap
+> <keycap
+>F2</keycap
+> </keycombo
+>) para mudar para a segunda <emphasis
+>consola virtual</emphasis
+>. Trata-se da tecla <keycap
+>Alt</keycap
+> do lado esquerdo da tecla <keycap
+>space bar</keycap
+>, e a tecla de função<keycap
+>F2</keycap
+>, ao mesmo tempo. Esta é uma janela separada a correr uma shell clonada de Bourne shell chamada de <command
+>ash</command
+>. </para
+><para
+>Nesta fase arrancou a partir do disco RAM e dispõe apenas de uma série de utilitários Unix limitada para uso. Você poderá ver que programas estão disponíveis com o comando <command
+>ls /bin /sbin /usr/bin /usr/sbin</command
+> e executando <command
+>help</command
+>. O editor de texto é o <command
+>nano</command
+>. A shell possuí algumas funcionalidades úteis como a autocompletion e o historial. </para
+><para
+>Utilize os menus para efectuar qualquer tarefa que seja possível fazer &mdash; a shell e os comandos encontram-se lá apenas para o caso de algo correr mal. Em particular deve usar sempre os menus e não a shell para activar a partição swap, pois o menu do software não consegue detectar o que fez através da shell. Carregue em <keycombo
+><keycap
+>Left Alt</keycap
+> <keycap
+>F1</keycap
+></keycombo
+> para voltar a ter os menus, ou digite <command
+>exit</command
+> se tiver usado um item de menu para abrir a shell. </para>
+   </sect3>
+<!--   End of file using-d-i/modules/shell.xml -->
+
+<!-- Start of file using-d-i/modules/network-console.xml -->
+
+   <sect3 id="network-console">
+   <title
+>Instalação Através da Rede</title>
+
+<para arch="not-s390"
+>Um dos componentes mais interessantes é o <firstterm
+>network-console</firstterm
+>. Permite-lhe fazer uma grande parte da instalação através da rede via SSH. A utilização da rede implica que tem de executar as primeiras etapas da instalação a partir da consola, pelo menos até ao ponto de configurar a rede. (Embora possa automatizar essa parte com <xref linkend="automatic-install"/>.) </para
+><para arch="not-s390"
+>Este componente não é carregado por omissão para o menu principal da instalação, por isso tem de o pedir explicitamente. Se está a instalar a partir de CD, necessita arrancar com prioridade média ou caso contrário invoque o menu principal de instalação e escolha <guimenuitem
+>Carregar do CD componentes do instalador</guimenuitem
+> e a partir da lista de componentes adicionais escolha <guimenuitem
+>network-console: Continuar a instalação remotamente com SSH</guimenuitem
+>. O sucesso do carregamento é indicado com uma nova opção no menu chamada <guimenuitem
+>Continuar instalação remotamente com SSH</guimenuitem
+>. </para
+><para arch="s390"
+>Para a instalação em &arch-title;. este é o método por omissão após configurar a rede. </para
+><para
+><phrase arch="not-s390"
+>Após escolher esta nova opção, ser-lhe-à</phrase
+> <phrase arch="s390"
+>Ser-lhe-à</phrase
+> pedida uma nova password e a sua confirmação para ser utilizada para ligar ao sistema de instalação. E é tudo. Agora deve ver um ecrã que lhe diz para fazer o login remotamente como o utilizador <emphasis
+>installer</emphasis
+> com a password que você acabou de indicar. Outro detalhe importante a notar é a impressão digital (fingerprint) deste sistema. Você precisa de transferir de forma segura a impressão digital para <quote
+>a pessoa que irá continuar a instalação remotamente</quote
+>. </para
+><para
+>Caso você decida continuar com a instalação localmente, você pode sempre pressionar &enterkey;, que o irá trazer de volta ao menu principal, onde poderá escolher outro componente. </para
+><para
+>Agora vamos mudar para o outro lado do cabo. Como pré-requisito, você precisa de configurar o seu terminal para utilizar a codificação UTF-8, porque é essa que o sistema de instalação utiliza. Se não o fizer, a instalação remota ainda será possível, mas poderão aparecer no ecrã símbolos estranhos tais como cantos de caixas de diálogo destruídos ou caracteres não-ascii ilegíveis. Establecer uma ligação com o sistema de instalação é tão simples como escrever: <informalexample
+><screen>
+<prompt
+>$</prompt
+> <userinput
+>ssh -l installer <replaceable
+>install_host</replaceable
+></userinput>
+</screen
+></informalexample
+> Onde <replaceable
+>install_host</replaceable
+> é o nome ou o endereço IP do computador a ser instalado. Antes do login ser-lhe-à mostrada a impressão digital (fingerprint) do sistema remoto e você terá de confirmar se é o correcto. </para
+><note
+><para
+>Se você instalar vários computadores de cada vez e estes tiverem o mesmo endereço IP ou hostname, o <command
+>ssh</command
+> irá recusar-se a ligar a esses hosts. A razão é que terão impressões digitais (fingerprints) diferentes, que normalmente é o sinal de um ataque de spoofing. Se você tiver a certza que não é o caso, você necessita apagar a linha relevante em <filename
+>~/.ssh/known_hosts</filename
+> e tentar novamente. </para
+></note
+><para
+>Após o login ser-lhe-à apresentado um ecrã inicial onde terá duas possibilidades chamadas <guimenuitem
+>Iniciar menu</guimenuitem
+> e <guimenuitem
+>Iniciar shell</guimenuitem
+>. A anterior leva-o para o menu principal do instalador, onde pode prosseguir normalmente com a instalação. A última inicia uma shell de onde a partir da qual você pode examinar e possivelmente reparar o sistema remoto. Você deve iniciar apenas uma sessão SSH para o menu de instalação, mas pode iniciar várias sessões para shells. </para
+><warning
+><para
+>Após ter iniciado a instalação remotamente por SSH, você não deve voltar atrás para a sessão da instalação que corre na consola local. Se o fizer você pode corromper a base de dados que mantém a configuração do novo sistema. Isto pode resultar numa instalação falhada ou em problemas com o sistema instalado. </para
+><para
+>Além disso, se estiver a correr a sessão SSH a partir de um terminal X, você não deve redimensionar a janela já que irá fazer com que a ligação seja terminada. </para
+></warning>
+
+   </sect3>
+<!--   End of file using-d-i/modules/network-console.xml -->
+
+<!-- Start of file using-d-i/modules/baseconfig.xml -->
+
+   <sect3 id="baseconfig">
+   <title
+>Correr o <command
+>base-config</command
+> a partir do &d-i;</title>
+
+<para
+>É possível configurar o sistema base dentro da primeira fase do instalador (antes de reinicializar a partir do disco rígido), correndo o comando <command
+>base-config</command
+> num ambiente <firstterm
+>chroot</firstterm
+>. Isto é principalmente útil para testar o instalador e normalmente deve ser evitado. </para>
+   </sect3>
+<!--   End of file using-d-i/modules/baseconfig.xml -->
+  </sect2>
+ </sect1>
+<!--   End of file using-d-i/components.xml -->
+
+</chapter>
+
+<!--   End of file using-d-i/using-d-i.xml -->

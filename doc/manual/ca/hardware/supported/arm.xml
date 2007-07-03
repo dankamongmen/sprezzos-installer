@@ -1,0 +1,98 @@
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 25809 -->
+
+
+  <sect2 arch="arm"><title>Suport de CPU, plaques base i vídeo</title>
+
+<para>
+
+Cada arquitectura ARM diferent necessita del seu propi nucli. Per açò
+la distribució de Debian estàndard tan sols suporta la instal·lació a
+uns quants dels sistemes més comuns. El mode d'usuari de Debian però,
+es pot utilitzar per <emphasis>qualsevol</emphasis> CPU ARM, incloent
+xscale.
+
+</para>
+
+<para>
+
+Quasi totes les CPU ARM poden funcionar amb els dos modes endian (big o
+little). Encara que quasi totes les implementacions dels sistemes actuals
+utilitzen el mode little endian. En aquest moment, Debian tan sols
+suporta sistemes ARM amb mode little endian.
+
+</para>
+
+<para>
+
+Els sistemes suportats normalment són
+
+<variablelist>
+<varlistentry>
+<term>Netwinder</term>
+<listitem><para>
+
+Aquest és el nom que rep el grup de màquines basades en la CPU
+StrongARM 110 i l'Intel 21285 Northbridge.
+Açò comprèn màquines com: Netwinder (possiblement una de les més
+comunes basades en ARM), CATS (també coneguda com EB110ATX), EBSA 285 i
+el servidor personal de Compaq (cps, àlies skiff).
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Bast</term>
+<listitem><para>
+
+Aquest és una targeta ARM 920 moderna amb un processador Samsung a 266MHz.
+Té integrats IDE, USB, serie, paral·lel, so, vídeo, flaix i dos ports
+ethernet. El sistema té un bon carregador que també és als CATS i als
+sistemes Riscstation.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>RiscPC</term>
+<listitem><para>
+
+Aquesta màquina és la que té el maquinari més antic suportat: es va
+llençar a 1994. Té un SO RISC en ROM, Linux pot arrencar-se des de
+eixe SO utilitzant linloader. El RiscPC té una targeta CPU modular i
+típicament integra una CPU que té un 610 a 30MHz, un 710 a 40MHz o un
+Strongarm110 a 233MHz. La placa base integra una IDE, vídeo SVGA, port
+paral·lel, un port serie, teclat PS/2 i un port de ratolí propietari.
+El mòdul d'ampliació del bus propietari permet més de 8 targetes d'expansió
+depenent de la configuració, i alguns d'aquests tenen controladors Linux.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Riscstation</term>
+<listitem><para>
+
+Aquesta és una màquina barata basada en el 7500FE a 56MHz amb
+targeta de vídeo, IDE, teclat PS/2, ratolí i dos ports serie.
+La seva falta de potència de procés fou per reduir el seu preu. Es
+podia trobar en dos configuracions, una amb SO RISC i un altra amb
+tan sols el carregador.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>LART</term>
+<listitem><para>
+
+Aquesta és una plataforma màquina oberta modular que pretén estar construïda
+per entusiastes. Per instal·lar Debian necessiteu la seva targeta d'expansió
+KSB.
+
+</para></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+  </sect2>

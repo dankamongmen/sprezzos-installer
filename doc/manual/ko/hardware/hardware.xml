@@ -1,0 +1,2502 @@
+<!-- Start of file hardware/hardware.xml -->
+
+<chapter id="hardware-req">
+ <title
+>시스템 요구사항</title>
+
+<para
+>여기에는 데비안을 처음 설치할 때 어떤 하드웨어가 필요한지 설명합니다. 또 GNU 및 리눅스에서 지원하는 하드웨어에 관한 더 자세한 정보가 들어 있는 웹페이지 주소도 있습니다. </para>
+
+
+<!-- Start of file hardware/hardware-supported.xml -->
+
+ <sect1 id="hardware-supported">
+ <title
+>지원하는 하드웨어</title>
+
+<para
+>리눅스 커널과 GNU 툴셋을 쓰는 데 필요한 것 외에는 데비안에 특별히 필요한 하드웨어는 따로 없습니다. 그러므로 리눅스 커널, libc, <command
+>gcc</command
+> 등이 포팅되어 있는 아키텍처나 플랫폼 중에서 데비안 포팅이 되어 있는 경우라면 데비안을 돌릴 수 있습니다. 데비안에서 테스트한 &arch-title; 아키텍처 시스템에 대한 자세한 정보는 <ulink url="&url-ports;"
+></ulink
+> 페이지에 있는 포팅 페이지를 참고하십시오. </para
+><para
+>여기서는 &arch-title; 아키텍처에서 지원하는 여러가지 하드웨어들을 모두 설명하지는 않고, 일반적인 정보만 설명한 다음 추가 정보가 들어 있는 웹사이트를 써 놓았습니다. </para>
+
+  <sect2
+><title
+>지원하는 아키텍처</title>
+
+<para
+>데비안 &release; 버전은 11개의 아키텍처를 지원하고 각 아키텍처별로 몇 가지 <quote
+>변종(flavor)</quote
+>을 지원합니다. </para
+><para>
+
+<informaltable>
+<tgroup cols="4">
+<thead>
+<row>
+  <entry
+>아키텍처</entry
+><entry
+>데비안 명칭</entry>
+  <entry
+>서브 아키텍처</entry
+><entry
+>변종</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry morerows="2"
+>인텔 x86 기반</entry>
+  <entry morerows="2"
+>i386</entry>
+  <entry morerows="2"
+></entry>
+  <entry
+>vanilla</entry>
+</row
+><row>
+  <entry
+>speakup</entry>
+</row
+><row>
+  <entry
+>linux26</entry>
+</row>
+
+<row>
+  <entry morerows="5"
+>모토로라 680x0</entry>
+  <entry morerows="5"
+>m68k</entry>
+  <entry
+>Atari</entry>
+  <entry
+>atari</entry>
+</row
+><row>
+  <entry
+>Amiga</entry>
+  <entry
+>amiga</entry>
+</row
+><row>
+  <entry
+>68k 매킨토시</entry>
+  <entry
+>mac</entry>
+</row
+><row>
+  <entry morerows="2"
+>VME</entry>
+  <entry
+>bvme6000</entry>
+</row
+><row>
+  <entry
+>mvme147</entry>
+</row
+><row>
+  <entry
+>mvme16x</entry>
+</row>
+
+<row>
+  <entry
+>DEC Alpha</entry>
+  <entry
+>alpha</entry>
+  <entry
+></entry>
+  <entry
+></entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>Sun SPARC</entry>
+  <entry morerows="1"
+>sparc</entry>
+  <entry morerows="1"
+></entry>
+  <entry
+>sun4cdm</entry>
+</row
+><row>
+  <entry
+>sun4u</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>ARM 및 StrongARM</entry>
+  <entry morerows="3"
+>arm</entry>
+  <entry morerows="3"
+></entry>
+  <entry
+>netwinder</entry>
+</row
+><row>
+  <entry
+>riscpc</entry>
+</row
+><row>
+  <entry
+>shark</entry>
+</row
+><row>
+  <entry
+>lart</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>IBM/모토로라 PowerPC</entry>
+  <entry morerows="3"
+>powerpc</entry>
+  <entry
+>CHRP</entry>
+  <entry
+>chrp</entry>
+</row
+><row>
+  <entry
+>PowerMac</entry>
+  <entry
+>pmac</entry>
+</row
+><row>
+  <entry
+>PReP</entry>
+  <entry
+>prep</entry>
+</row
+><row>
+  <entry
+>APUS</entry>
+  <entry
+>apus</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>HP PA-RISC</entry>
+  <entry morerows="1"
+>hppa</entry>
+  <entry
+>PA-RISC 1.1</entry>
+  <entry
+>32</entry>
+</row
+><row>
+  <entry
+>PA-RISC 2.0</entry>
+  <entry
+>64</entry>
+</row>
+
+<row>
+  <entry
+>인텔 ia64 기반</entry>
+  <entry
+>ia64</entry>
+  <entry
+></entry>
+  <entry
+></entry>
+</row>
+
+<row>
+  <entry morerows="2"
+>MIPS (big endian)</entry>
+  <entry morerows="2"
+>mips</entry>
+  <entry morerows="1"
+>SGI Indy/Indigo 2</entry>
+  <entry
+>r4k-ip22</entry>
+</row
+><row>
+  <entry
+>r5k-ip22</entry>
+</row
+><row>
+  <entry
+>Broadcom BCM91250A (SWARM)</entry>
+  <entry
+>sb1-swarm-bn</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>MIPS (little endian)</entry>
+  <entry morerows="3"
+>mipsel</entry>
+  <entry
+>Cobalt</entry>
+  <entry
+>cobalt</entry>
+</row
+><row>
+  <entry morerows="1"
+>DECstation</entry>
+  <entry
+>r4k-kn04</entry>
+</row
+><row>
+  <entry
+>r3k-kn02</entry>
+</row
+><row>
+  <entry
+>Broadcom BCM91250A (SWARM)</entry>
+  <entry
+>sb1-swarm-bn</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>IBM S/390</entry>
+  <entry morerows="1"
+>s390</entry>
+  <entry
+>VM-reader 및 DASD에서 IPL</entry>
+  <entry
+>generic</entry>
+</row
+><row>
+  <entry
+>테이프에서 IPL</entry>
+  <entry
+>tape</entry>
+</row>
+
+</tbody
+></tgroup
+></informaltable>
+
+</para
+><para
+>이 문서는 <emphasis
+>&arch-title;</emphasis
+> 아키텍처에서의 설치를 다루고 있습니다. 데비안이 지원하는 다른 아키텍처에 관한 정보를 찾으려면 <ulink url="http://www.debian.org/ports/"
+>데비안 포트</ulink
+> 페이지를 보십시오. </para
+><para condition="new-arch"
+>이 릴리스는 &arch-title; 아키텍처의 데비안 첫번째 공식 릴리스입니다. 우리는 이 아키텍처가 충분히 릴리스할 만 하다고 생각합니다. 하지만 다른 아키텍처만큼 널리 알려지지는 않았기 때문에 (그래서 사용자들의 테스트도 적었기 때문에), 몇몇 버그를 발견할 수도 있을 겁니다. 우리의 <ulink url="&url-bts;"
+>버그 추적 시스템</ulink
+>에 문제점을 알려 주십시오. <ulink url="&url-list-subscribe;"
+>debian-&architecture; 메일링 리스트</ulink
+>를 사용할 수도 있습니다. </para>
+
+  </sect2>
+
+<!-- supported cpu docs -->
+
+<!-- Start of file hardware/supported/alpha.xml -->
+
+
+  <sect2 arch="alpha" id="alpha-cpus"
+><title
+>CPU, 메인 보드, 비디오 지원</title>
+<para
+>지원하는 DEC Alpha 컴퓨터에 대한 완전한 정보는 <ulink url="&url-alpha-howto;"
+>Linux Alpha HOWTO</ulink
+>에 들어 있습니다. 여기서는 부트 디스크가 지원하는 시스템을 설명합니다. </para
+><para
+>Alpha 컴퓨터는 마더보드의 세대와 지원하는 칩셋에 따라 여러가지 시스템 종류로 나뉩니다. 각각의 시스템은 (<quote
+>서브시스템</quote
+>) 때때로 그 구조와 기능이 완전히 다릅니다. 그래서 설치하고 (특히 중요한) 부팅하는 부분이 시스템에 따라 다릅니다. </para
+><para
+>다음 표는 데비안 설치 시스템이 지원하는 시스템 종류입니다. 표를 보면 각 시스템 종류에 따른 <emphasis
+>코드명</emphasis
+>도 들어 있습니다. 실제 설치를 시작하려면 이 코드명을 알아둬야 합니다: </para>
+
+<informaltable>
+<tgroup cols="4">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<colspec colname="c3"/>
+<colspec colname="c4"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>하드웨어 종류</entry>
+  <entry
+>다른 이름</entry
+><entry
+>MILO 이미지</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry morerows="3"
+>ALCOR</entry>
+  <entry
+>AlphaStation 500 5/266.300</entry>
+  <entry
+>Maverick</entry>
+  <entry
+>alcor</entry>
+</row
+><row>
+  <entry
+>AlphaStation 500 5/333...500</entry>
+  <entry
+>Bret</entry>
+  <entry
+>alcor</entry>
+</row
+><row>
+  <entry
+>AlphaStation 600/266...300</entry>
+  <entry
+>Alcor</entry>
+  <entry
+>alcor</entry>
+</row
+><row>
+  <entry
+>AlphaStation 600/300...433</entry>
+  <entry
+>XLT</entry>
+  <entry
+>xlt</entry>
+</row>
+
+<row>
+  <entry
+>BOOK1</entry>
+  <entry
+>AlphaBook1 (노트북)</entry>
+  <entry
+>Alphabook1/Burns</entry>
+  <entry
+>book1</entry>
+</row>
+
+<row>
+  <entry morerows="7"
+>AVANTI</entry>
+  <entry
+>AlphaStation 200 4/100...166</entry>
+  <entry
+>Mustang</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 200 4/233</entry>
+  <entry
+>Mustang+</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 205 4/133...333</entry>
+  <entry
+>LX3</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 250 4/300</entry>
+  <entry
+>M3+</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 255 4/133...333</entry>
+  <entry
+>LX3+</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 300 4/266</entry>
+  <entry
+>Melmac</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 400 4/166</entry>
+  <entry
+>Chinet</entry>
+  <entry
+>avanti</entry>
+</row
+><row>
+  <entry
+>AlphaStation 400 4/233...300</entry>
+  <entry
+>Avanti</entry>
+  <entry
+>avanti</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>EB164</entry>
+  <entry
+>AlphaPC164</entry>
+  <entry
+>PC164</entry>
+  <entry
+>pc164</entry>
+</row
+><row>
+  <entry
+>AlphaPC164-LX</entry>
+  <entry
+>LX164</entry>
+  <entry
+>lx164</entry>
+</row
+><row>
+  <entry
+>AlphaPC164-SX</entry>
+  <entry
+>SX164</entry>
+  <entry
+>sx164</entry>
+</row
+><row>
+  <entry
+>EB164</entry>
+  <entry
+>EB164</entry>
+  <entry
+>eb164</entry>
+</row>
+
+<row>
+  <entry morerows="2"
+>EB64+</entry>
+  <entry
+>AlphaPC64</entry>
+  <entry
+>Cabriolet</entry>
+  <entry
+>cabriolet</entry>
+</row
+><row>
+  <entry
+>AlphaPCI64</entry>
+  <entry
+>Cabriolet</entry>
+  <entry
+>cabriolet</entry>
+</row
+><row>
+  <entry
+>EB64+</entry>
+  <entry
+>EB64+</entry>
+  <entry
+>eb64p</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>EB66</entry>
+  <entry
+>EB66</entry>
+  <entry
+>EB66</entry>
+  <entry
+>eb66</entry>
+</row
+><row>
+  <entry
+>EB66+</entry>
+  <entry
+>EB66+</entry>
+  <entry
+>eb66p</entry>
+</row>
+
+<row>
+  <entry morerows="2"
+>JENSEN</entry>
+  <entry
+>DEC 2000 Model 300(S)</entry>
+  <entry
+>Jensen</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>DEC 2000 Model 500</entry>
+  <entry
+>Culzen</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>DECpc 150</entry>
+  <entry
+>Jensen</entry>
+  <entry
+>해당 없음</entry>
+</row>
+
+<row>
+  <entry morerows="7"
+>MIATA</entry>
+  <entry
+>Personal WorkStation 433a</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 433au</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 466au</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 500a</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 500au</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 550au</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 600a</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row
+><row>
+  <entry
+>Personal WorkStation 600au</entry>
+  <entry
+>Miata</entry>
+  <entry
+>miata</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>MIKASA</entry>
+  <entry
+>AlphaServer 1000 4/200</entry>
+  <entry
+>Mikasa</entry>
+  <entry
+>mikasa</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000 4/233..266</entry>
+  <entry
+>Mikasa+</entry>
+  <entry
+>mikasa</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000 5/300</entry>
+  <entry
+>Mikasa-Pinnacle</entry>
+  <entry
+>mikasa</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000 5/300</entry>
+  <entry
+>Mikasa-Primo</entry>
+  <entry
+>mikasa</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>NAUTILUS</entry>
+  <entry
+>UP1000</entry>
+  <entry
+>Nautilus</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>UP1100</entry>
+  <entry
+>Galaxy-Train/Nautilus Jr.</entry>
+  <entry
+>해당 없음</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>NONAME</entry>
+  <entry
+>AXPpci33</entry>
+  <entry
+>Noname</entry>
+  <entry
+>noname</entry>
+</row
+><row>
+  <entry
+>UDB</entry>
+  <entry
+>Multia</entry>
+  <entry
+>noname</entry>
+</row>
+
+<row>
+  <entry morerows="6"
+>NORITAKE</entry>
+  <entry
+>AlphaServer 1000A 4/233...266</entry>
+  <entry
+>Noritake</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000A 5/300</entry>
+  <entry
+>Noritake-Pinnacle</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaServer 1000A 5/333...500</entry>
+  <entry
+>Noritake-Primo</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaServer 800 5/333...500</entry>
+  <entry
+>Corelle</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaStation 600 A</entry>
+  <entry
+>Alcor-Primo</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>Digital Server 3300</entry>
+  <entry
+>Corelle</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>Digital Server 3300R</entry>
+  <entry
+>Corelle</entry>
+  <entry
+>해당 없음</entry>
+</row>
+
+<row>
+  <entry
+>PLATFORM 2000</entry>
+  <entry
+>P2K</entry>
+  <entry
+>P2K</entry>
+  <entry
+>p2k</entry>
+</row>
+
+<row>
+  <entry morerows="4"
+>RAWHIDE</entry>
+  <entry
+>AlphaServer 1200 5/xxx</entry>
+  <entry
+>Tincup/DaVinci</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaServer 4000 5/xxx</entry>
+  <entry
+>Wrangler/Durango</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaServer 4100 5/xxx</entry>
+  <entry
+>Dodge</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>Digital Server 5300</entry>
+  <entry
+>Tincup/DaVinci</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>Digital Server 7300</entry>
+  <entry
+>Dodge</entry>
+  <entry
+>해당 없음</entry>
+</row>
+
+<row>
+  <entry morerows="5"
+>RUFFIAN</entry>
+  <entry
+>DeskStation AlphaPC164-UX</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row
+><row>
+  <entry
+>DeskStation RPL164-2</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row
+><row>
+  <entry
+>DeskStation RPL164-4</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row
+><row>
+  <entry
+>DeskStation RPX164-2</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row
+><row>
+  <entry
+>DeskStation RPX164-4</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row
+><row>
+  <entry
+>삼성 AlphaPC164-BX</entry>
+  <entry
+>Ruffian</entry>
+  <entry
+>ruffian</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>SABLE</entry>
+  <entry
+>AlphaServer 2000 4/xxx</entry>
+  <entry
+>Demi-Sable</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaServer 2000 5/xxx</entry>
+  <entry
+>Demi-Gamma-Sable</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaServer 2100 4/xxx</entry>
+  <entry
+>Sable</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaServer 2100 5/xxx</entry>
+  <entry
+>Gamma-Sable</entry>
+  <entry
+>해당 없음</entry>
+</row>
+
+<row>
+  <entry
+>TAKARA</entry>
+  <entry
+>21164 PICMG SBC</entry>
+  <entry
+>Takara</entry>
+  <entry
+>takara</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>TITAN</entry>
+  <entry
+>AlphaServer DS15</entry>
+  <entry
+>HyperBrick2</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS25</entry>
+  <entry
+>Granite</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaServer ES45</entry>
+  <entry
+>Privateer</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>알 수 없음</entry>
+  <entry
+>Yukon</entry>
+  <entry
+>해당 없음</entry>
+</row>
+
+<row>
+  <entry morerows="12"
+>TSUNAMI</entry>
+  <entry
+>AlphaServer DS10</entry>
+  <entry
+>Webbrick</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS10L</entry>
+  <entry
+>Slate</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS20</entry>
+  <entry
+>Catamaran/Goldrush</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS20E</entry>
+  <entry
+>Goldrack</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaServer DS20L</entry>
+  <entry
+>Shark</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaServer ES40</entry>
+  <entry
+>Clipper</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>DP264</entry>
+  <entry
+>DP264</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>SMARTengine 21264 PCI/ISA SBC</entry>
+  <entry
+>Eiger</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>알 수 없음</entry>
+  <entry
+>Warhol</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>알 수 없음</entry>
+  <entry
+>Windjammer</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>UP2000</entry>
+  <entry
+>Swordfish</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>XP1000</entry>
+  <entry
+>Monet/Brisbane</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>XP900</entry>
+  <entry
+>Webbrick</entry>
+  <entry
+>해당 없음</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>WILDFIRE</entry>
+  <entry
+>AlphaServer GS160</entry>
+  <entry
+>Wildfire</entry>
+  <entry
+>해당 없음</entry>
+</row
+><row>
+  <entry
+>AlphaServer GS320</entry>
+  <entry
+>Wildfire</entry>
+  <entry
+>해당 없음</entry>
+</row>
+
+<row>
+  <entry
+>XL</entry>
+  <entry
+>XL-233...266</entry>
+  <entry
+>XL</entry>
+  <entry
+>xl</entry>
+</row>
+
+</tbody
+></tgroup
+></informaltable>
+
+<para
+>데비안 &releasename; 릴리스는 몇 개를 제외하고 모든 Alpha 서브 아키텍처에서 설치를 지원합니다. 예외적으로 ARC 전용 Ruffian 및 XL 서브 아키텍처, Titan 서브 아키텍처는 지원하지 않습니다. 이 경우는 커널 컴파일 옵션이 달라져야 합니다. </para>
+  </sect2>
+<!--   End of file hardware/supported/alpha.xml -->
+
+<!-- Start of file hardware/supported/arm.xml -->
+
+
+  <sect2 arch="arm"
+><title
+>CPU, 메인 보드, 비디오 지원</title>
+
+<para
+>각 ARM 아키텍처는 그 아키텍처 전용의 커널이 필요합니다. 그 때문에 표준 데비안 배포판은 가장 널리 쓰이는 몇 개 시스템에 대해서만 설치를 지원합니다. 하지만 xscale 등 <emphasis
+>어떤</emphasis
+> ARM CPU라도 데비안 유저랜드를 사용할 수 있습니다. </para>
+
+<para
+>대부분의 ARM CPU는 어느 엔디안 모드든 (빅 엔디안과 리틀 엔디안) 둘 중 하나로 선택해서 동작할 수 있습니다. 하지만 현재의 거의 모든 시스템은 리틀 엔디안 모드로 구현되어 있습니다. 데비안도 리틀 엔디안 ARM 시스템만 지원합니다. </para>
+
+<para
+>주로 지원하는 시스템은 <variablelist>
+<varlistentry>
+<term
+>Netwinder</term>
+<listitem
+><para
+>StrongARM 110 CPU 및 인텔 21285 노스브릿지를 사용한 기계들을 일컫는 이름입니다. 다음이 포함됩니다: Netwinder (아마도 가장 널리 쓰이는 ARM 컴퓨터), CATS (EB110ATX라고도 합니다), EBSA 285, Compaq personal server (cps, 혹은 skiff). </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Bast</term>
+<listitem
+><para
+>266MHz 삼성 프로세서가 들어 있는 ARM 920 보드입니다. 여기에는 IDE, USB, Serial, Parallel, 오디오, 비디오, 플래시 및 두 개의 이더넷 포트가 들어 있습니다. 이 시스템에는 CATS와 Riscstation에도 들어 있는 훌륭한 부트로더가 들어 있습니다. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>RiscPC</term>
+<listitem
+><para
+>이 기계는 지원하는 하드웨어중에서 가장 오래되었습니다. (1994년에 릴리스되었습니다.) ROM에는 RISC OS가 들어 있고, linloader를 사용해 RISC OS에서 리눅스를 부팅합니다. RiscPC는 CPU 카드 모듈을 사용하는 방식이고 보통 30MHz 610, 40MHz 710 아니면 233MHz Strongarm 110 CPU를 사용합니다. 마더보드에는 IDE, SVGA 비디오, 패러렐 포트, 시리얼 포트 1개, PS/2 키보드와 전용 마우스 포트가 내장되어 있습니다. 전용 모듈 확장 버스에는 설정에 따라서 8개까지 확장 카드를 붙일 수 있고, 그 확장 모듈중에 일부는 리눅스 드라이버가 있습니다. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>Riscstation</term>
+<listitem
+><para
+>저렴한 56MHz 7500FE 기반 기계로 비디오, IDE, PS/2 키보드와 마우스, 시리얼 포트 2개가 내장되어 있습니다. 처리 속도가 떨어지는 대신에 가격이 저렴합니다. 설정이 두 가지 종류가 있는데 하나는 RISC OS가, 다른 하나는 간단한 부트로더가 들어 있습니다. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>LART</term>
+<listitem
+><para
+>아마추어들이 만든 모듈화된 오픈 하드웨어 플랫폼입니다. 데비안을 설치하려면 KSB 확장 보드가 필요합니다. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+  </sect2>
+<!--   End of file hardware/supported/arm.xml -->
+
+<!-- Start of file hardware/supported/hppa.xml -->
+
+
+  <sect2 arch="hppa"
+><title
+>CPU, 메인 보드, 비디오 지원</title>
+<para
+><emphasis
+>&architecture;</emphasis
+> 변종은 크게 두 가지를 지원합니다: PA-RISC 1.1과 PA-RISC 2.0입니다. PA-RISC 1.1 아키텍처는 32비트 프로세서를 사용하고, 2.0 아키텍처는 64비트 프로세서를 사용합니다. 시스템 중에서는 어떤 커널을 사용하든 간에 동작하기도 합니다. 두 경우 모두 유저랜드는 32비트입니다. 앞으로 64비트 유저랜드가 나올 수도 있습니다. </para>
+  </sect2>
+
+<!--   End of file hardware/supported/hppa.xml -->
+
+<!-- Start of file hardware/supported/i386.xml -->
+
+
+  <sect2 arch="i386"
+><title
+>CPU, 메인 보드, 비디오 지원</title>
+<para
+>지원하는 주변장치에 관한 완전한 정보는 <ulink url="&url-hardware-howto;"
+>리눅스 하드웨어 호환성 하우투(Linux Hardware Compatibility HOWTO)</ulink
+>에 들어 있습니다.  여기서는 대략적인 기본 사항만 다룹니다. </para>
+
+   <sect3
+><title
+>CPU</title>
+<para
+>거의 모든 x86 호환 프로세서를 지원합니다. AMD와 VIA (예전의 Cyrix) 프로세서도 물론 포함됩니다. 또 Athlon XP 및 인텔 P4 Xeon같은 최근의 프로세서들도 지원합니다. 하지만 286이나 그 전에 나온 CPU에서는 리눅스가 동작하지 <emphasis
+>않습니다</emphasis
+>. </para>
+   </sect3>
+
+   <sect3 id="bus"
+><title
+>입출력 버스</title>
+<para
+>시스템 버스는 메인보드에서 CPU와 다른 주변 장치들 (저장 장치 등) 사이의 통신을 담당하는 부분입니다. ISA, EISA, PCI, Microchannel Architecture (MCA와 IBM의 PS/2 제품군에 사용), 아니면 VESA Local Bus를 (VLB, VL bus라고도 합니다) 사용해야 합니다. </para>
+   </sect3>
+  </sect2>
+
+<!--   End of file hardware/supported/i386.xml -->
+
+<!-- Start of file hardware/supported/ia64.xml -->
+
+<!--   End of file hardware/supported/ia64.xml -->
+
+<!-- Start of file hardware/supported/m68k.xml -->
+
+  <sect2 arch="m68k"
+><title
+>CPU, 메인 보드, 비디오 지원</title>
+<para
+>지원하는 M68000 기반 (<emphasis
+>&architecture;</emphasis
+>) 시스템에 관한 완전한 정보는 <ulink url="&url-m68k-faq;"
+>Linux/m68k FAQ</ulink
+>에 있습니다. 여기서는 대략적인 기본 사항만 다룹니다. </para
+><para
+>리눅스 &architecture; 포트는 PMMU(Paged Memory Management Unit)와 FPU(floating-point unit)가 들어 있는 어떤 680x0에서도 동작합니다. 외부에 68851 PMMU가 들어 있는 68020 혹은 68030 이상의 CPU를 모두 포함합니다. 단 680x0 프로세서의 <quote
+>EC</quote
+> 제품군은 지원하지 않습니다. 자세한 정보는 <ulink url="&url-m68k-faq;"
+>Linux/m68k FAQ</ulink
+>를 보십시오. </para
+><para
+>지원하는 <emphasis
+>&architecture;</emphasis
+> 변종은 크게 네 가지입니다: Amiga, Atari, Macintosh 및 VME 기계입니다. Amiga와 Atari는 리눅스를 포팅한 첫 번째 시스템이고, 또 가장 잘 지원하는 데비안 포팅입니다. Macintosh 제품군은 데비안과 리눅스 커널에서 불완전하게 지원합니다. 프로젝트 상태와 지원 하드웨어에 관한 정보는 <ulink url="&url-m68k-mac;"
+>Linux m68k for Macintosh</ulink
+>를 참고하십시오. BVM과 Motorola single board VMEbus 컴퓨터는 데비안에서 지원하는 기계 중에서 가장 최근에 추가된 기계입니다. 그 밖의 &architecture; 아키텍처에 포팅들, 예를 들어 Sun3 아키텍처와 NeXT black box에 대한 포팅은 진행중이지만 아직 데비안이 지원하지 않습니다. </para>
+  </sect2>
+
+
+
+<!--   End of file hardware/supported/m68k.xml -->
+
+<!-- Start of file hardware/supported/mips.xml -->
+
+
+  <sect2 arch="mips"
+><title
+>CPU, 메인 보드, 비디오 지원</title>
+<para
+>&arch-title; 데비안은 현재 두 개의 서브 아키텍처를 지원합니다. <itemizedlist
+> <listitem
+><para
+> SGI IP22: 이 플랫폼은 SGI 머신 Indy, Indigo 2, Channelge S를 포함합니다. 이 기계들은 매우 비슷하기 때문에, 이 문서에서 SGI Indy라고 말할 때는 Indigo 2와 Challenge S도 같이 말하는 것입니다. </para
+></listitem
+> <listitem
+><para
+> Broadcom BCM91250A (SWARM): Broadcom에서 나온 SiByte 프로세서 패밀리에 기반한 ATX form factor 평가보드입니다. </para
+></listitem
+> </itemizedlist
+> 지원하는 mips/mipsel 머신에 대한 완전한 정보는 <ulink url="&url-linux-mips;"
+>Linux-MIPS 홈페이지</ulink
+>를 참고하십시오. 이 이후에는 데비안 설치 프로그램에서 지원하는 시스템만 다룹니다. 다른 서브 아키텍처에 대한 지원에 대해서는 <ulink url="&url-list-subscribe;"
+> debian-&architecture; 메일링 리스트</ulink
+>를 참고하십시오. </para>
+
+   <sect3
+><title
+>CPU</title>
+<para
+>빅 엔디안 MIPS중에서는 SGI IP22, SGI Indy, Indigo 2 및 R4000, R4400, R4600, R5000 프로세서를 사용한 Channelge S를 데비안 설치 시스템에서 지원합니다. Broadcom BCM91250A 평가보드에는 SB1250 칩에 두 개의 SB-1 코어가 들어 있어서 이 설치 프로그램에서 SMP 모드를 지원합니다. </para
+><para
+>일부 MIPS 기계는 빅 엔디안과 리틀 엔디안 모드 모두에서 동작할 수 있습니다. 리틀 엔디안 MIPS의 경우에는 mipsel 아키텍처에 대한 문서를 읽어보십시오. </para>
+   </sect3>
+  </sect2>
+
+<!--   End of file hardware/supported/mips.xml -->
+
+<!-- Start of file hardware/supported/mipsel.xml -->
+
+
+  <sect2 arch="mipsel"
+><title
+>CPU, 메인 보드, 비디오 지원</title>
+<para
+>&arch-title; 데비안은 현재 세 개의 서브 아키텍처를 지원합니다: <itemizedlist
+> <listitem
+><para
+> DECstation: 여러가지 모델의 DECstation을 지원합니다. </para
+></listitem
+> <listitem
+><para
+> Cobalt Microserver: 여기서는 MIPS 기반 Cobalt 기계만 다룹니다. Cobalt Qube, RaQ, Qube2, Raq2, Gateway Microserver가 포함됩니다. </para
+></listitem
+> <listitem
+><para
+> Broadcom BCM91250A (SWARM): ATX form factor 평가보드로 SiByte 프로세서 패밀리에 기반한 모델입니다. </para
+></listitem
+> </itemizedlist
+> 지원하는 mips/mipsel 머신에 대한 정보는 <ulink url="&url-linux-mips;"
+>Linux-MIPS 홈페이지</ulink
+>에 있습니다. 이 뒤에는 데비안 설치 프로그램이 지원하는 시스템만 다룹니다. 다른 서브 아키텍처에 대한 지원에 관해서는, <ulink url="&url-list-subscribe;"
+> debian-&architecture; 메일링 리스트</ulink
+>를 참고하십시오. </para>
+
+   <sect3
+><title
+>CPU/머신 종류</title>
+
+<para
+>현재는 데비안 설치 프로그램은 리틀 엔디안에서 MIPS에서 R3000 및 R4000/4400 CPU를 사용한 DECstation만 지원합니다. 데비안 설치 프로그램은 다음 컴퓨터에서 동작합니다: </para
+><para>
+
+<informaltable>
+<tgroup cols="4">
+<thead>
+<row>
+  <entry
+>시스템 종류</entry
+><entry
+>CPU</entry
+><entry
+>코드명</entry>
+  <entry
+>데비안 서브 아키텍처</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>DECstation 5000/1xx</entry>
+  <entry
+>R3000</entry>
+  <entry
+>3MIN</entry>
+  <entry
+>r3k-kn02</entry>
+</row
+><row>
+  <entry
+>DECstation 5000/150</entry>
+  <entry
+>R4000</entry>
+  <entry
+>3MIN</entry>
+  <entry
+>r4k-kn04</entry>
+</row
+><row>
+  <entry
+>DECstation 5000/200</entry>
+  <entry
+>R3000</entry>
+  <entry
+>3MAX</entry>
+  <entry
+>r3k-kn02</entry>
+</row
+><row>
+  <entry
+>DECstation 5000/240</entry>
+  <entry
+>R3000</entry>
+  <entry
+>3MAX+</entry>
+  <entry
+>r3k-kn02</entry>
+</row
+><row>
+  <entry
+>DECstation 5000/260</entry>
+  <entry
+>R4400</entry>
+  <entry
+>3MAX+</entry>
+  <entry
+>r4k-kn04</entry>
+</row
+><row>
+  <entry
+>Personal DECstation 5000/xx</entry>
+  <entry
+>R3000</entry>
+  <entry
+>Maxine</entry>
+  <entry
+>r3k-kn02</entry>
+</row
+><row>
+  <entry
+>Personal DECstation 5000/50</entry>
+  <entry
+>R4000</entry>
+  <entry
+>Maxine</entry>
+  <entry
+>r4k-kn04</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para
+><para
+>모든 Cobalt 컴퓨터는 시리얼 콘솔을 지원합니다 (설치할 때 필요합니다). </para
+><para
+>Broadcom BCM91250A 평가보드에는 SB1250 칩에 두 개의 SB-1 코어가 들어 있고, 이 설치 프로그램에서 SMP 모드를 지원합니다. </para>
+   </sect3>
+
+   <sect3
+><title
+>지원하는 콘솔 옵션</title>
+<para
+>지원하는 DECstation은 모두 시리얼 콘솔을 사용할 수 있습니다 (9600 bps, 8N1). 시리얼 콘솔을 사용하려면, <literal
+>console=ttyS</literal
+><replaceable
+>x</replaceable
+>  커널 파라미터로 설치 이미지를 부팅해야 합니다 (여기서 <replaceable
+>x</replaceable
+> 는 터미널을 연결할 시리얼 포트의 번호입니다. 보통은 <literal
+>2</literal
+>이지만 Personal DECstation의 경우에는 <literal
+>0</literal
+>입니다).  3MIN과 3MAX+(DECstation  5000/1xx, 5000/240 및 5000/260)에서는  PMAG-BA와 PMAGB-B 그래픽 옵션으로 로컬 콘솔을 사용할 수 있습니다. </para
+><para
+>리눅스 시스템을 시리얼 터미널로 사용하는 경우에 그 시스템에서 <command
+>cu</command
+>를 실행하는 게 쉬운 방법입니다<footnote
+> <para
+> Woody에서 이 명령은 <classname
+>uucp</classname
+> 꾸러미에 들어 있습니다. 하지만 그 뒤의 릴리스에서는 별도의 꾸러미에 들어 있습니다</para
+> </footnote
+>. 예를 들어서: <informalexample
+><screen>
+$ cu -l /dev/ttyS1 -s 9600
+</screen
+></informalexample
+> 여기서 <literal
+>-l</literal
+> (line) 옵션으로 어떤 시리얼 포트를 사용할 지를 지정하고 <literal
+>-s</literal
+> (speed) 옵션으로 연결 속도를 지정합니다 (9600 bps). </para
+><para
+>Cobalt와 Broadcom BCM91250A는 115200 bps를 사용합니다. </para>
+   </sect3>
+  </sect2>
+<!--   End of file hardware/supported/mipsel.xml -->
+
+<!-- Start of file hardware/supported/powerpc.xml -->
+
+
+  <sect2 arch="powerpc"
+><title
+>CPU, 메인 보드, 비디오 지원</title>
+<para
+>네 개의 <emphasis
+>&architecture;</emphasis
+> 서브 아키텍처를 지원합니다: PMac (Power-Macintosh), PReP, APUS (Amiga Power-UP System), 그리고 CHRP 기계입니다. 각 서브 아키텍처는 그 아키텍처마다 부팅 방법이 다릅니다. 또, 여러가지 CPU 변형들을 지원하기 위해 네 종류의 커널 변종이 있습니다. </para
+><para
+>Be-Box나 MBX 아키텍처같은 다른 <emphasis
+>&architecture;</emphasis
+> 아키텍처에 대한 포팅은 진행중이지만 아직 데비안이 지원하지 않습니다. 64비트 포팅이 나올 수도 있습니다. </para>
+
+   <sect3
+><title
+>커널 변종</title>
+
+<para
+>데비안의 powerpc 커널은 CPU 종류에 따라서 4가지의 변종이 있습니다: <variablelist>
+<varlistentry>
+<term
+>powerpc</term>
+<listitem
+><para
+>대부분의 시스템이 이 커널 변종을 사용하며, PowerPC 601, 603, 604, 740, 750, 7400  프로세서를 지원합니다. G4까지 모든 Power Macintosh 시스템은 이 프로세서들 중의 하나를 사용합니다. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>power3</term>
+<listitem
+><para
+>POWER3 프로세서는 예전의 IBM 64비트 서버 시스템에서 사용했습니다.  알려진 모델은 IntelliStation POWER Model 265, pSeries 610과 640, RS/6000 7044-170, 7044-260과 7044-270이 있습니다. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>power4</term>
+<listitem
+><para
+>POWER4 프로세서는 좀 더 최근의 IBM 64비트 서버 시스템에서 사용했습니다.  알려진 모델은 pSeries 615, 630, 650, 655, 670, 690이 있습니다. </para
+><para
+>Apple G5도 POWER4 아키텍처 기반이고, 이 커널 변종을 사용합니다. </para
+></listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+>apus</term>
+<listitem
+><para
+>이 커널 변종은 Amiga Power-UP System을 지원합니다. </para
+></listitem>
+</varlistentry>
+</variablelist>
+
+</para>
+
+   </sect3>
+
+   <sect3
+><title
+>Power Macintosh (pmac) 서브 아키텍처</title>
+
+<para
+>Apple은 (그리고 다른 몇 개 제조업체들, 예를 들어 Power Computing은) PowerPC 프로세서 기반의 Macintosh 컴퓨터를 만듭니다. 각 아키텍처 지원을 위해 NuBus, OldWorld PCI, NewWorld로 구분해 놓았습니다. </para
+><para
+>680x0 시리즈 프로세서를 사용하는 Macintosh 컴퓨터는 PowerPC가 아니라 m68k 기계입니다. 그 모델들은 <quote
+>Mac II</quote
+>로 시작하거나 모델 번호가 숫자 3개인 Centris 650이나 Quadra 950같은 것입니다. 애플의 iMAC 전에 나온 PowerPC 모델은 모델 번호가 숫자 4개입니다. </para
+><para
+>NuBus 시스템은 현재 데비안/powerpc가 지원하지 않습니다. 모노리딕 리눅스/PPC 커널은 이 기계를 지원하지 않습니다. 그 대신 MkLinux Mach 마이크로커널을 사용하면 되지만, 데비안은 아직 지원하지 않습니다. 이 컴퓨터는 다음과 같은 것들이 있습니다: <itemizedlist
+> <listitem
+><para
+> Power Macintosh 6100, 7100, 8100 </para
+></listitem
+> <listitem
+><para
+> Performa 5200, 6200, 6300 </para
+></listitem
+> <listitem
+><para
+> Powerbook 1400, 2300, and 5300 </para
+></listitem
+> <listitem
+><para
+> Workgroup Server 6150, 8150, 9150 </para
+></listitem
+> </itemizedlist
+> 이 기계에 쓸 수 있는 리눅스 커널과 (제한적이지만) 지원은 <ulink url="http://nubus-pmac.sourceforge.net/"
+></ulink
+>에서 구할 수 있습니다. </para
+><para
+>OldWorld 시스템은 플로피 드라이브와 PCI 버스가 있는 대부분의 Power Macintosh를 말합니다. 대부분의 603, 603e, 604, 604e 기반 Power Macintosh는 OldWorld 기계입니다. 베이지색의 G3 시스템도 OldWorld입니다. </para
+><para
+>NewWorld PowerMac이라고 하는 것은 투명한 플라스틱 케이스에 들어 있는 모든 PowerMac을 일컫습니다. 여기에는 모든 iMac, iBook, G4 시스템, 파란색 G3 시스템 및 1999년 이후 제조된 대부분의 PowerBook도 포함됩니다. NewWorld PowerMac은 MacOS용 <quote
+>ROM in RAM</quote
+> 시스템을 사용한 것으로 알려져 있고, 1998년 중반 이후에 제조되었습니다. </para
+><para
+>Apple 하드웨어에 관한 명세서는 <ulink url="http://www.info.apple.com/support/applespec.html"
+>AppleSpec</ulink
+>에 있습니다. 또 예전의 하드웨어에 관한 정보는 <ulink url="http://www.info.apple.com/support/applespec.legacy/index.html"
+>AppleSpec Legacy</ulink
+>에 있습니다. </para
+><para>
+
+<informaltable>
+<tgroup cols="3">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<colspec colname="c3"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>모델 이름/번호</entry>
+  <entry
+>세대</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry morerows="22"
+>Apple</entry>
+  <entry
+>iMac Bondi Blue, 5 Flavors, Slot Loading</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>iMac Summer 2000, Early 2001</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>iMac G5</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>iBook, iBook SE, iBook Dual USB</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>iBook2</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>iBook G4</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh Blue and White (B&amp;W) G3</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh G4 PCI, AGP, Cube</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh G4 Gigabit Ethernet</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh G4 Digital Audio, Quicksilver</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh G5</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook G3 FireWire Pismo (2000)</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook G3 Lombard (1999)</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook G4 Titanium</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook G4 Aluminum</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Xserve G5</entry>
+  <entry
+>NewWorld</entry>
+</row
+><row>
+  <entry
+>Performa 4400, 54xx, 5500</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Performa 6360, 6400, 6500</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh 4400, 5400</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh 7200, 7300, 7500, 7600</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh 8200, 8500, 8600</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh 9500, 9600</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh (Beige) G3 Minitower</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Power Macintosh (Beige) Desktop, All-in-One</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook 2400, 3400, 3500</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>PowerBook G3 Wallstreet (1998)</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Twentieth Anniversary Macintosh</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>Workgroup Server 7250, 7350, 8550, 9650, G3</entry>
+  <entry
+>OldWorld</entry>
+</row>
+
+<row>
+  <entry morerows="1"
+>Power Computing</entry>
+  <entry
+>PowerBase, PowerTower / Pro, PowerWave</entry>
+  <entry
+>OldWorld</entry>
+</row
+><row>
+  <entry
+>PowerCenter / Pro, PowerCurve</entry>
+  <entry
+>OldWorld</entry>
+</row>
+
+<row>
+  <entry
+>UMAX</entry>
+  <entry
+>C500, C600, J700, S900</entry>
+  <entry
+>OldWorld</entry>
+</row>
+
+<row>
+  <entry
+>APS</entry>
+  <entry
+>APS Tech M*Power 604e/2000</entry>
+  <entry
+>OldWorld</entry>
+</row>
+
+<row>
+  <entry
+>모토로라</entry>
+  <entry
+>Starmax 3000, 4000, 5000, 5500</entry>
+  <entry
+>OldWorld</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+
+   </sect3>
+
+   <sect3
+><title
+>PReP 서브 아키텍처</title>
+
+<para>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>모델 이름/번호</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry morerows="4"
+>모토로라</entry>
+  <entry
+>Firepower, PowerStack Series E, PowerStack II</entry>
+</row
+><row>
+  <entry
+>MPC 7xx, 8xx</entry>
+</row
+><row>
+  <entry
+>MTX, MTX+</entry>
+</row
+><row>
+  <entry
+>MVME2300(SC)/24xx/26xx/27xx/36xx/46xx</entry>
+</row
+><row>
+  <entry
+>MCP(N)750</entry>
+</row>
+
+<row>
+  <entry morerows="3"
+>IBM RS/6000</entry>
+  <entry
+>40P, 43P</entry>
+</row
+><row>
+  <entry
+>Power 830/850/860 (6070, 6050)</entry>
+</row
+><row>
+  <entry
+>6030, 7025, 7043</entry>
+</row
+><row>
+  <entry
+>p640</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+
+   </sect3>
+
+   <sect3
+><title
+>CHRP 서브 아키텍처</title>
+
+<para>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>모델 이름/번호</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>IBM RS/6000</entry>
+  <entry
+>B50, 43P-150, 44P</entry>
+</row>
+<row>
+  <entry
+>Genesi</entry>
+  <entry
+>Pegasos I, Pegasos II</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+
+   </sect3>
+
+   <sect3
+><title
+>APUS 서브 아키텍처</title>
+
+<para>
+
+<informaltable>
+<tgroup cols="2">
+<colspec colname="c1"/>
+<colspec colname="c2"/>
+<thead>
+<row>
+  <entry namest="c1" nameend="c2"
+>모델 이름/번호</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry
+>Amiga Power-UP Systems (APUS)</entry>
+  <entry
+>A1200, A3000, A4000</entry>
+</row>
+</tbody
+></tgroup
+></informaltable>
+
+</para>
+   </sect3>
+  </sect2>
+<!--   End of file hardware/supported/powerpc.xml -->
+
+<!-- Start of file hardware/supported/s390.xml -->
+
+
+  <sect2 arch="s390"
+><title
+>S/390 및 zSeries 기계 종류</title>
+<para
+>지원하는 S/390과 zSeries 기계에 대한 완전한 정보는 IBM의 레드북중에서 2.1장의 <ulink url="http://www.redbooks.ibm.com/pubs/pdfs/redbooks/sg246264.pdf"
+> Linux for IBM eServer zSeries and S/390: Distributions</ulink
+> 혹은 <ulink url="http://oss.software.ibm.com/developerworks/opensource/linux390/index.shtml"
+>developerWorks</ulink
+>의 <ulink url="http://oss.software.ibm.com/developerworks/opensource/linux390/documentation-2.4.shtml"
+>technical details web page</ulink
+>에 있습니다. 요약하면, G5, Multiprise 3000, G6와 모든 zSeries를 완전히 지원합니다. Multiprise 2000, G3와 G4 기계는 IEEE 부동소수점을 에뮬레이션해서 지원하므로 효율이 떨어집니다. </para>
+  </sect2>
+
+<!--   End of file hardware/supported/s390.xml -->
+
+<!-- Start of file hardware/supported/sparc.xml -->
+
+
+  <sect2 arch="sparc" id="sparc-cpus"
+><title
+>CPU, 메인 보드, 비디오 지원</title>
+<para
+><emphasis
+>&architecture;</emphasis
+> 포팅은 현재 몇 종류의 Sparc 시스템을 지원합니다. 가장 널리 쓰이는 Sparc 시스템 ID는 sun4, sun4c, sun4m, sun4d, sun4u입니다. 지금은 아주 오래된 sun4 하드웨어는 지원하지 않습니다만, 나머지 다른 시스템들은 지원합니다. 이 중에서 sun4d는 가장 조금 테스트되었으므로, 커널 안정성과 관련해 문제가 발생할 수도 있음을 주의하십시오. sun4c와 sun4m은 가장 널리 쓰이는 Sparc 하드웨어로 SparcStation 1, 1+, IPC, IPX 및 SparcStation LX, 5, 10, 20을 포함합니다. UltraSPARC 클래스 시스템은 sun4u ID에 속하고, 설치 이미지 중 sun4u 세트에서 지원합니다. 일부 시스템은 이 ID 중 하나에 해당하지만 지원하지 않습니다. 그런 지원하지 않는 시스템은 AP1000 multicomputer와 Tadpole Sparcbook 1이 있습니다. 완전한 정보는 <ulink url="&url-sparc-linux-faq;"
+>Linux for SPARCProcessors FAQ</ulink
+>를 참고하십시오. </para>
+
+   <sect3
+><title
+>메모리 설정</title>
+<para
+>오래된 Sun 워크스테이션들, 특히 Sun IPX와 Sun IPC의 각 메모리 뱅크는 물리 메모리에서 고정된 위치에 해당합니다. 그래서 뱅크를 완전히 채우지 않는 한, 물리 메모리 스페이스 중간에 빈 칸이 들어가게 됩니다. 리눅스를 설치하려면 커널과 최초 램디스크를 읽어들일 연속된 메모리 블록이 있어야 합니다. 그렇게 할 수 없다면 <quote
+>Data Access Exception</quote
+>이 발생하게 됩니다. </para
+><para
+>그러므로 가장 낮은 메모리 블록이 최소한 8MB가 연속적이도록 메모리를 설정해야 합니다. 위에서 언급한 IPX와 IPC에서는, 메모리 뱅크는 16MB 경계에서 매핑됩니다. 즉 커널과 램디스크가 들어갈 만큼 충분히 큰 SIMM이 뱅크 0에 들어 있어야 합니다. 4MB는 이렇게 하기에 충분하지 <emphasis
+>않습니다</emphasis
+>. </para
+><para
+>예를 들어 Sun IPX에서 16MB SIMM과 4MB SIMM을 가지고 있는 경우라고 하면. 4개의 SIMM 뱅크가 있습니다 (0,1,2,3). [뱅크 0가 SBUS 커넥터에서 가장 먼 곳에 있습니다]. 이 경우 16MB SIMM을 뱅크 0에 설치해야 합니다. 4MB SIMM은 뱅크 2에 설치하는 게 좋습니다. </para>
+   </sect3>
+
+   <sect3
+><title
+>그래픽 설정</title>
+<para
+>특히 오래된 Sun 워크스테이션의 경우, 온보드 프레임 버퍼가 우선하는 경우가 흔합니다 (예를 들어서 Sun IPC의 bwtwo). 그리고 그 다음에 SBUS 슬롯에 꼽는 SBUS 카드가 동작합니다. Solaris/SunOS에서는 카드 두 개가 모두 초기화되기 때문에 문제가 없습니다. </para
+><para
+>하지만 리눅스에서는 이게 문제가 됩니다. 부트 PROM 모니터가 그 출력을 추가 카드에 표시하기 때문입니다. 하지만 리눅스 커널 부트 메세지는 그 다음에 원래의 온보드 프레임 버퍼로 메세지를 출력하게 되고, 램 디스크를 읽어들일 때 멈춘 상태로 화면에 <emphasis
+>no</emphasis
+> 에러 메세지를 내보냅니다. </para
+><para
+>이 문제를 피하려면, 가장 낮은 번호의 SBUS 슬롯에 연결된 비디오 카드에 모니터를 연결하십시오. 아니면 시리얼 콘솔을 사용할 수도 있습니다. </para>
+   </sect3>
+  </sect2>
+<!--   End of file hardware/supported/sparc.xml -->
+
+  <sect2 id="gfx" arch="not-s390"
+><title
+>그래픽 카드</title>
+
+<para arch="i386"
+>콘솔 터미널에 사용할 VGA 호환 디스플레이 인터페이스를 사용해야 합니다. 요즘 거의 모든 디스플레이 카드는 VGA와 호환됩니다. 아주 옛날에 쓰였던 CGA, MDA, HGA도 동작하긴 하지만, X11에서는 지원하지 않습니다. 이 문서에서 설명하는 설치 과정에서는 X11이 필요없습니다. </para
+><para
+>데비안의 그래픽 인터페이스 지원 여부는 XFree86의 X11 시스템이 지원하느냐의 여부에 따라 결정됩니다. 대부분의 AGP, PCI 및 PCIe 비디오 카드를 XFree86에서 지원합니다. 지원하는 그래픽 버스, 카드, 모니터, 포인팅 장치에 대한 정보는 <ulink url="&url-xfree86;"
+></ulink
+>에 있습니다. 데비안 &release; 릴리스에는 XFree86 &x11ver; 버전이 들어 있습니다. </para
+><para arch="mips"
+>XFree86 X11 윈도우 시스템은 SGI Indy에서만 지원합니다. Broadcom BCM91250A 평가보드에는 표준 3.3v PCI 슬롯이 있어서 몇 가지 그래픽 카드에 대해 VGA 에뮬레이션과 리눅스 프레임버퍼를 지원합니다. BCM91250A에 대한 <ulink url="&url-bcm91250a-hardware;"
+>호환성 목록</ulink
+>이 있습니다. </para
+><para arch="mipsel"
+>일부 DECstation 모델에서는 XFree86 X11 윈도우 시스템을 지원합니다. Broadcom BCM91250A 평가보드에는 표준 3.3v PCI 슬롯이 있어서 몇 가지 그래픽 카드에 대해 VGA 에뮬레이션과 리눅스 프레임버퍼를 지원합니다.  BCM91250A에 대한 <ulink url="&url-bcm91250a-hardware;"
+>호환성 목록</ulink
+>이 있습니다. </para>
+
+  </sect2>
+
+  <sect2 arch="i386" id="laptops"
+><title
+>노트북</title>
+<para
+>노트북 컴퓨터도 지원합니다. 노트북 컴퓨터에는 노트북 전용의 하드웨어나 독점적인 하드웨어들이 붙어 있기도 합니다. 특정 노트북이 GNU/리눅스에서 잘 동작하는 지 여부를 확인하려면, <ulink url="&url-x86-laptop;"
+>리눅스 랩탑 페이지</ulink
+>를 참고하십시오 </para>
+   </sect2>
+
+
+  <sect2 condition="defaults-smp">
+<title
+>다중 프로세서</title>
+
+<para
+>이 아키텍쳐는 다중 프로세서를 (<quote
+>symmetric multi-processing</quote
+> 혹은 SMP라고도 합니다) 지원합니다. 표준 데비안 &release; 커널 이미지가 SMP 지원을 포함하고 있습니다. SMP가 없는 시스템에서도 SMP 커널이 부팅하기 때문에 설치에는 문제가 없습니다; 단 커널에 약간의 오버헤드가 더 있습니다. </para
+><para
+>CPU가 한 개인 시스템에서 커널을 최적화하려면, 표준 데비안 커널을 바꿔야 합니다. 어떻게 하는지에 대한 이야기는 <xref linkend="kernel-baking"/>에 있습니다. 현재 (커널 버전 &kernelversion;) SMP를 끄는 방법은 커널 설정에서 <quote
+>&smp-config-section;</quote
+>에서 <quote
+>&smp-config-option;</quote
+>를 끄는 방법입니다. </para>
+
+  </sect2>
+
+
+  <sect2 condition="supports-smp">
+ <title
+>다중 프로세서</title>
+<para
+>이 아키텍처는 다중 프로세서를 (<quote
+>symmetric multi-processing</quote
+>혹은 SMP라고도 합니다) 지원합니다. 하지만 표준 데비안 &release; 커널 이미지는 SMP를 지원하지 않습니다. SMP를 지원하지 않는 커널도 설치하는 데는 문제가 없습니다. SMP를 지원하지 않는 표준 커널도 SMP 시스템에서 부팅하고 첫번째 CPU만 사용하게 됩니다. </para
+><para
+>다중 프로세서의 성능을 이용하려면, 표준 데비안 커널을 다른 커널로 바꿔야 합니다. 어떻게 해야 하는지에 대한 이야기는 <xref linkend="kernel-baking"/>에 있습니다. 현재 (커널 버전 &kernelversion;) SMP를 켜는 방법은 커널 설정의 <quote
+>&smp-config-section;</quote
+>부분에 있는 <quote
+>&smp-config-option;</quote
+>를 켜는 것입니다. </para>
+  </sect2>
+
+  <sect2 condition="supports-smp-sometimes">
+ <title
+>다중 프로세서</title>
+<para
+>이 아키텍처는 다중 프로세서를 (<quote
+>symmetric multi-processing</quote
+> 혹은 SMP라고도 합니다) 지원하고, 데비안 커널 이미지에서 지원합니다. 설치 미디어에 따라서, 이 SMP 커널은 기본으로 설치할 수도 있고 아닐 수도 있습니다. SMP가 아닌 표준 커널도 SMP 시스템에서 동작하기 때문에 설치에는 문제가 없습니다. SMP가 아닌 커널의 경우 첫 번째 CPU만을 사용하게 됩니다. </para
+><para
+>다중 프로세서의 이득을 보려면, SMP를 지원하는 커널 꾸러미를 설치해야 합니다. SMP 커널이 아니라면, SMP를 지원하는 적절한 커널 꾸러미를 선택하십시오. SMP를 지원하는 자기만의 커널을 빌드할 수도 있습니다. 어떻게 하는 지에 관한 이야기는 <xref linkend="kernel-baking"/>에 있습니다. 현재 (커널 버전 &kernelversion;) SMP를 켜는 방법은 커널 설정의 <quote
+>&smp-config-section;</quote
+>에서 <quote
+>&smp-config-option;</quote
+>를 켜는 것입니다. </para>
+  </sect2>
+ </sect1>
+<!--   End of file hardware/hardware-supported.xml -->
+
+<!-- Start of file hardware/installation-media.xml -->
+
+ <sect1 id="installation-media">
+ <title
+>설치 미디어</title>
+
+<para
+>이 부분에서는 여러 가지 미디어 종류 중에서 어떤 미디어로 데비안을 설치해야 할 지에 대해 다룹니다. 예를 들어, 플로피 디스크 드라이브가 있다면, 그 드라이브로 데비안을 설치할 수 있습니다. 이 문서에는 미디어에 관해 설명한 장이 있습니다 (<xref linkend="install-methods"/>). 거기에 각 미디어에 따른 장단점이 쓰여 있습니다. 그 부분을 보시고 다시 이 페이지로 돌아오면 됩니다. </para>
+
+  <sect2 condition="supports-floppy-boot"
+><title
+>플로피</title>
+<para
+>어떤 경우에는 플로피 디스크에서 처음 부팅해야 할 수도 있습니다. 보통 고밀도 (high-density, 1440킬로바이트) 3.5인치 플로피 드라이브가 있어야 합니다. </para
+><para arch="powerpc"
+>CHRP에서는, 현재 플로피 지원이 동작하지 않는 상태입니다. </para>
+  </sect2>
+
+  <sect2
+><title
+>CD-ROM/DVD-ROM</title>
+
+<note
+><para
+>이 안내서에서 <quote
+>CD-ROM</quote
+>이라고 할 경우에는, CD-ROM과 DVD-ROM을 모두 포함합니다. 두 가지 모두 운영체제 입장에서는 같은 것이기 때문입니다. 단 예외는 표준적인 드라이브가 아닌, SCSI도 IDE/ATAPI도 아닌 CD-ROM 드라이브입니다. </para
+></note
+><para
+>어떤 아키텍처에서는 CD-ROM 설치를 지원합니다. CD-ROM 부팅을 지원하는 컴퓨터에서는, <phrase arch="not-s390"
+>플로피 없이</phrase
+><phrase arch="s390"
+>테이프 없이</phrase
+> 처음부터 끝까지 설치할 수 있습니다. 시스템에서 CD-ROM 부팅을 지원하지 않는 경우에라도, 다른 방법으로 부팅을 할 수만 있으면, CD-ROM을 사용해 시스템을 설치할 수 있습니다.  <xref linkend="boot-installer"/> 참고. </para
+><para arch="i386"
+>SCSI와 IDE/ATAPI CD-ROM을 모두 지원합니다. 또, 리눅스에서 지원하는 표준이 아닌 CD 인터페이스도 (예를 들어 Mitsumi나 Matsushita 드라이브) 부트 디스크에서 지원합니다. 하지만 이런 모델을 사용하려면 부트 파라미터나 그 밖의 다른 방법이 필요할 수도 있고, 이런 장치에서는 부팅을 할 수 없을 겁니다. <ulink url="&url-cd-howto;"
+>Linux CD-ROM HOWTO</ulink
+>에는 리눅스에서 CD-ROM 사용에 관한 자세한 정보가 들어 있습니다. </para
+><para arch="i386"
+>USB CD-ROM 드라이브도 지원합니다.  ohci1394와 sbp2 드라이버에서 지원하는 FireWire 장치도 지원합니다. </para
+><para arch="alpha"
+>SCSI와 IDE/ATAPI CD-ROM을 &arch-title; 아키텍처에서 지원합니다. 단 해당 컨트롤러를 SRM 콘솔이 지원해야 합니다. 그 때문에 많은 애드온 컨트롤러 카드는 지원하지 않지만, 제조업체에서 제공하는 대부분의 내장 IDE 및 SCSI 칩과 컨트롤러 카드는 동작할 것입니다. 여러분의 장치를 SRM 콘솔에서 지원하는 지 여부는 <ulink url="&url-srm-howto;"
+>SRM HOWTO</ulink
+>를 참고하십시오. </para
+><para arch="arm"
+>IDE/ATAPI CD-ROM은 모든 ARM 컴퓨터에서 지원합니다.  RiscPC에서는 SCSI CD-ROM도 지원합니다. </para
+><para arch="mips"
+>SGI 머신에서 CD-ROM 부팅을 하려면 논리 블록 크기가 512바이트인 SCSI CD-ROM 드라이브가 있어야 합니다. PC 시장에서 판매되는 많은 SCSI CD-ROM 드라이브는 이 조건을 만족시키지 못합니다. CD-ROM 드라이브에 <quote
+>Unix/PC</quote
+> 혹은 <quote
+>512/2048</quote
+>이라고 붙어 있는 점퍼가 있으시다면, <quote
+>Unix</quote
+>나 <quote
+>512</quote
+> 위치로 놓으십시오. 설치를 시작하려면, 펌웨어의<quote
+>System installtion</quote
+> 항목을 선택하십시오. Broadcom BCM91250A은표준 IDE 장치를 지원하고 CD-ROM 드라이브도 지원하지만, 펌웨어가 CD 드라이브를 인식하지 못하기 때문에 이 플랫폼용 CD 이미지는 없습니다. </para
+><para arch="mipsel"
+>DECstation에서 CD-ROM 부팅을 하려면 논리 블록 크기가 512바이트인 SCSI-CDROM 드라이브가 있어야 합니다. PC 시장에서 판매되고 있는 많은 SCSI CD-ROM 드라이브는 이 조건을 만족시키지 못합니다. CD-ROM 드라이브에 <quote
+>Unix/PC</quote
+> 혹은 <quote
+>512/2048</quote
+>이라고 붙어 있는 점퍼가 있으시다면, <quote
+>Unix</quote
+>나 <quote
+>512</quote
+> 위치로 놓으십시오. </para
+><para arch="mipsel"
+>CD1에는 r3k-kn02 서브 아키텍처의 (R3000기반 DECstations 5000/1xx와 5000/240 및 R3000기반 Personal DECstation 모델) 설치 프로그램이 들어 있습니다. CD2에는 r4k-kn04 서브 아키텍처의 (R4x00기반 DECstation 5000/150과 5000/260 및 Personal DECstation 5000/50) 설치 프로그램이 들어 있습니다. </para
+><para arch="mipsel"
+>CD에서 부팅하려면, 펌웨어 프롬프트에서 <userinput
+>boot <replaceable
+>#</replaceable
+>/rz<replaceable
+>id</replaceable
+></userinput
+> 명령을 사용하십시오. 여기에서 <replaceable
+>#</replaceable
+>은 부팅하는 TurboChannel 장치의 번호를 말하고 (DECstation은 대부분 3), <replaceable
+>id</replaceable
+>는 CD-ROM 드라이브의 SCSI ID를 말합니다. 추가로 파라미터를 넣어야 한다면, 다음 문법에 따라 추가할 수 있습니다: </para
+><para arch="mipsel">
+
+<userinput
+>boot <replaceable
+>#</replaceable
+>/rz<replaceable
+>id</replaceable
+> 파라미터1=값1 파라미터2=값2 ...</userinput>
+
+</para>
+  </sect2>
+
+  <sect2
+><title
+>하드디스크</title>
+
+<para
+>하드 디스크에서 직접 설치 시스템을 부팅하는 게 많은 아키텍처에서 할 수 있는 또 다른 방법입니다. 이렇게 하려면 설치 프로그램을 하드 디스크로 읽어들일 수 있는 다른 운영 체제가 있어야 합니다. </para
+><para arch="m68k"
+>로컬 디스크에서 설치하는 게 가장 대부분의 &architecture; 기계에서 사실 가장 많이 쓰이는 방법입니다. </para
+><para arch="sparc"
+>&arch-title; 아키텍처에서는 SunOS(Solaris)에서 부팅을 지원하지 않지만, SunOS 파티션(UFS 슬라이스)에서부터 설치할 수는 있습니다. </para>
+  </sect2>
+
+  <sect2 condition="bootable-usb"
+><title
+>USB 메모리</title>
+
+<para
+>많은 경우 데비안 컴퓨터에서는 플로피나 CD-ROM 드라이브를 설치와 응급복구 목적으로만 사용합니다. 서버를 여러 대 운영하는 경우, 이 드라이브들을 없애고 USB 메모리를 사용해 설치와 복구를 하는 게 좋다고 생각하게 될 겁니다. USB 메모리를 이렇게 이용하면 필요한 드라이브를 달 공간이 부족한 작은 시스템에서도 좋습니다. </para>
+  </sect2>
+
+  <sect2
+><title
+>네트워크</title>
+
+<para condition="supports-tftp"
+>네트워크에서 시스템을 <emphasis
+>부팅</emphasis
+>할 수도 있습니다. <phrase arch="mips"
+>MIPS에서 가장 좋은 설치 방법입니다.</phrase
+> </para
+><para condition="supports-nfsroot"
+>또 다른 방법으로 디스크가 없이 (diskless) 설치하고, 네트워크를 사용해 랜과 NFS 마운트에서 부팅할 수도 있습니다. </para
+><para
+>운영 체제 커널을 설치한 다음에는, 나머지 시스템은 (어떤 종류이건 간에, PPP 사용 포함) 네트워크 연결을 이용해 FTP나 HTTP를 통해 설치할 수 있습니다. </para>
+  </sect2>
+
+  <sect2
+><title
+>유닉스 계열 혹은 GNU 시스템</title>
+
+<para
+>다른 유닉스 계열 시스템이 있다면, 그 시스템을 이용해서 (이 안내서의 뒤에서 설명하는) &d-i; 없이도 데비안을 설치할 수 있습니다. 이렇게 다른 시스템을 이용하는 방법은 지원하지 않는 하드웨어에 설치할 경우 혹은 다운타임을 용납할 수 없는 호스트의 경우에 유용할 수 있습니다. 이러한 방법에 관심이 있다면, 바로 <xref linkend="linux-upgrade"/> 부분으로 넘어가십시오. </para>
+  </sect2>
+
+  <sect2
+><title
+>지원하는 저장 장치</title>
+
+<para
+>데비안 부트 디스크에는 가능한 한 여러가지 시스템에서 동작할 수 있도록 빌드한 커널이 들어 있습니다. 불행히도, 이렇게 하면 커널의 크기가 커져서 그렇게 많은 드라이버를 사용할 수는 없게 됩니다 (커널을 빌드하는 방법은 <xref linkend="kernel-baking"/> 참고). 가능한 여러가지 장치를 지원해야 데비안을 여러가지 하드웨어에 설치할 수 있습니다. </para
+><para arch="i386"
+>보통 데비안 설치 시스템은 플로피, IDE 드라이브, IDE 플로피, 패러렐 포트 IDE 장치, SCSI 컨트롤러 및 SCSI 드라이브, USB, FireWire를 지원합니다. 지원하는 파일 시스템은 여러 가지가 있지만, 몇 가지만 나열하면 FAT, Win-32 FAT 확장 기능 (VFAT), NTFS를 지원합니다. </para
+><para arch="i386"
+>MFM, RLL, IDE, ATA라고도 부르는 <quote
+>AT</quote
+> 하드 디스크 인터페이스를 에뮬레이션하는 디스크 인터페이스를 지원합니다. IBM XT 컴퓨터에서 사용되었던 아주 오래된 8비트 하드 디스크 컨트롤러는 모듈로만 지원합니다. 여러가지 제조사의 SCSI 디스크 컨트롤러를 지원합니다. 자세한 건 <ulink url="&url-hardware-howto;"
+>리눅스 하드웨어 호환성 HOWTO</ulink
+>를 참고하십시오. </para
+><para arch="m68k"
+>리눅스 커널이 지원하는 모든 저장 장치를 데비안 설치 시스템에서 지원합니다. 현재 리눅스 커널은 Macintosh의 플로피를 전혀 지원하지 않으며, 데비안 설치 시스템은 Amiga 플로피를 지원하지 않는다는 점에 주의하십시오. 또 Macintosh HFS 시스템과 AFFS를 모듈로 지원합니다. Mac은 Atari (FAT) 파일 시스템을 지원합니다. Amiga는 FAT 파일 시스템과 HFS를 모듈로 지원합니다. </para
+><para arch="sparc"
+>리눅스 커널이 지원하는 모든 저장 장치는 부트 시스템에서도 지원합니다. 다음 SCSI 드라이버는 기본 커널에서 지원합니다: <itemizedlist
+> <listitem
+><para
+> Sparc ESP </para
+></listitem
+> <listitem
+><para
+> PTI Qlogic,ISP </para
+></listitem
+> <listitem
+><para
+> Adaptec AIC7xxx </para
+></listitem
+> <listitem
+><para
+> NCR 및 Symbios 53C8XX </para
+></listitem
+> </itemizedlist
+> IDE 시스템도 (예를 들어 UltraSPARC 5) 지원합니다. 리눅스 커널이 지원하는 SPARC 하드웨어에 대한 정보는 <ulink url="&url-sparc-linux-faq;"
+>Linux for SPARC Processors FAQ</ulink
+>를 참고하십시오. </para
+><para arch="alpha"
+>리눅스 커널이 지원하는 저장 장치는 부트 시스템에서도 지원합니다. SCSI와 IDE 디스크를 모두 지원합니다. 하지만 많은 시스템에서는 SRM 콘솔을 IDE 드라이브에서 부팅할 수 없고, Jensen은 플로피에서 부팅할 수 없습니다. (Jesen에서 부팅하는 자세한 정보는 <ulink url="&url-jensen-howto;"
+></ulink
+> 참고) </para
+><para arch="powerpc"
+>리눅스 커널이 지원하는 저장 장치는 부트 시스템에서도 지원합니다. 현재 리눅스 커널은 CHRP 시스템의 플로피 드라이브를 전혀 지원하지 않는 다는 것에 주의하십시오. </para
+><para arch="hppa"
+>리눅스 커널이 지원하는 저장 장치는 시스템에서도 지원합니다. 현재 리눅스 커널은 플로피 드라이브를 전혀 지원하지 않는 다는 것에 주의하십시오. </para
+><para arch="mips"
+>리눅스 커널에서 지원하는 저장 장치는 부트 시스템에서도 지원합니다. </para
+><para arch="s390"
+>리눅스 커널이 지원하는 저장 장치는 부트 시스템에서도 지원합니다. FBA와 ECKD DASD는 과거의 Linux disk layout (ldl) 및 최근의 common S/390 disk layout과 (cdl) 함께 지원합니다. </para>
+
+  </sect2>
+
+ </sect1>
+<!--   End of file hardware/installation-media.xml -->
+
+<!-- Start of file hardware/supported-peripherals.xml -->
+
+ <sect1 id="supported-peripherals">
+ <title
+>주변 장치 및 기타 하드웨어</title>
+<para arch="not-s390"
+>리눅스는 마우스, 프린터, 스캐너, PCMCIA, USB 장치같은 여러가지 종류의 하드웨어 장치들을 지원합니다. 하지만 시스템을 설치할 때 이런 장치는 보통 필요 없습니다. </para
+><para arch="i386"
+>USB 하드웨어는 보통 잘 동작합니다. 일부 USB 키보드의 경우에만 설정이 더 필요합니다. (<xref linkend="usb-keyboard-config"/> 참고) </para
+><para arch="i386"
+>다시 말하지만, <ulink url="&url-hardware-howto;"
+>리눅스 하드웨어 호환성 HOWTO</ulink
+>를 참고해 하드웨어를 리눅스에서 지원하는 지 확인하십시오. </para
+><para arch="s390"
+>이 시스템은 XPRAM과 테이프에서 꾸러미 설치를 지원하지 않습니다. 설치하려는 꾸러미는 DASD 아니면 NFS, HTTP, FTP를 통해서 네트워크로 설치할 수 있어야 합니다. </para
+><para arch="mips"
+>Broadcom BCM91250A 평가보드에는 표준 3.3볼트 32비트 및 64비트 PCI 슬롯이 있고 USB 커넥터도 있습니다. </para
+><para arch="mipsel"
+>Broadcom BCM91250A 평가보드에는 표준 3.3볼트 32비트 및 64비트 PCI 슬롯이 있고 USB 커넥터도 있습니다. Cobalt RaQ에는 추가 장치를 달 수 없지만 Qube에는 PCI 슬롯이 한 개 있습니다. </para>
+</sect1>
+
+ <sect1 arch="not-s390"
+><title
+>GNU/리눅스를 위한 하드웨어 구입하기</title>
+
+<para
+>몇몇 업체에서는 데비안 혹은 다른 GNU/리눅스 배포판을 설치한 상태로 시스템을 판매합니다. 그것 때문에 돈을 더 지불해야 할 수도 있지만, 그 때문에 여러분은 안심할 수 있습니다. 구입한 하드웨어가 GNU/리눅스에서 지원하는 하드웨어라는 게 확실하기 때문입니다. </para
+><para arch="m68k"
+>불행히도, 새로운 &arch-title; 기계를 파는 회사를 찾기는 매우 힘듭니다. </para
+><para arch="i386"
+>Windows를 번들해서 판매하는 컴퓨터를 구입한 경우라면, Windows와 같이 나오는 소프트웨어 라이선스를 잘 읽어 보십시오. 그 라이선스를 거부하고 업체에서 환불을 받는 게 가능할 지도 모릅니다. 자세한 건 <quote
+>windows-refund</quote
+>사이트를 참고하십시오. </para
+><para
+>리눅스가 번들된 시스템을 구입하든 그렇지 않든 간에, 아니면 중고 시스템을 구입하든 간에, 리눅스 커널에서 여러분의 하드웨어를 지원하는 지 여부를 확인하는 게 중요합니다. 위에 언급된 참고 자료에 하드웨어가 언급되어 있는지 확인하십시오. 컴퓨터 영업사원에게 (있다면) 여러분이 리눅스 시스템을 구입하려고 한다는 사실을 알려 주십시오. 리눅스와 친한 하드웨어 업체를 지원해 주십시오. </para>
+
+  <sect2
+><title
+>독점적이거나 폐쇄된 하드웨어 피하기</title>
+<para
+>하드웨어 제조업체중에는 하드웨어의 드라이버를 어떻게 만들어야 하는 지 알려주지 않는 경우가 있습니다.  또 어떤 경우에는 비공개 협약을 맺지 않으면 문서조차도 볼 수 없게 해서 소스 코드를 공개할 수 없기도 합니다. </para
+><para arch="m68k"
+>한 가지 예는 과거의 매킨토시 제품군입니다. 사실 매킨토시 하드웨어에 대해서는 어떠한 종류의 하드웨어 명세서나 문서도 공개된 적이 없습니다.  특히 ADB 컨트롤러 (마우스 및 키보드가 사용), 플로피 컨트롤러, 비디오 하드웨어의 모든 가속 기능과 CLUT 처리는 (지금은 거의 모든 내장 비디오 칩에 대해서 CLUT 처리를 지원하지만) 공개된 적이 없습니다. 바로 그런 이유때문에 매킨토시 리눅스 포팅은 다른 리눅스 포팅에 비해서 한참 뒤져 있습니다. </para
+><para
+>이러한 장치들에 대한 문서를 볼 수 없기 때문에, 그 장치들은 리눅스에서 동작하지 않을 수밖에 없습니다. 그러한 하드웨어의 제조업체에 문서를 공개하라고 요구하십시오. 충분히 많은 사람이 요구한다면, 제조업체들도 자유 소프트웨어 커뮤니티가 중요한 시장이라는 걸 깨닫게 될 겁니다. </para>
+</sect2>
+
+
+  <sect2 arch="i386"
+><title
+>Windows 전용 하드웨어</title>
+<para
+>요즘의 짜증나는 추세로, Windows 전용 모뎀과 프린터가 넘쳐나고 있습니다. 어떤 경우 Microsoft Windows에서 동작하도록 설계되어 <quote
+>WinModem</quote
+>이나 <quote
+>Windows 기반 컴퓨터를 위해 만들어졌습니다</quote
+>라고 붙어 있습니다. 이런 하드웨어는 보통 하드웨어에 내장된 프로세서를 없애고 프로세서가 하던 작업을 Windows 드라이버로 옮겨서 컴퓨터의 메인 CPU에서 하도록 만들어 놓았습니다. 이런 방법을 사용하면 하드웨어 가격이 저렴해지지만, 그 절약한 비용이 항상 사용자에게 돌아가는 건 <emphasis
+>아닙니다</emphasis
+>. 심지어 그렇게 싸게 만든 하드웨어를 프로세서를 내장한 똑똑한 하드웨어들보다도 더 비싸게 판매하기도 합니다. </para
+><para
+>Windows 전용 하드웨어는 두 가지 이유로 피해야 합니다. 첫번째는 제조업체에서 리눅스 드라이버를 만드는 데 필요한 자료를 제공하지 않기 때문입니다. 보통 하드웨어와 소프트웨어 사이의 인터페이스는 독점적이고, 문서가 있다고 해도 비공계 협약을 맺지 않으면 볼 수 없습니다. 그것 때문에 자유 소프트웨어에서 사용할 수 없게 됩니다. 자유 소프트웨어 개발자들은 프로그램의 소스 코드를 공개하기 때문입니다. 두 번째 이유로, 그렇게 내장된 프로세서를 빼버린 하드웨어를 사용하려면, 운영체제에서 그 내장 프로세서가 하던 작업을 대신 해 줘야 합니다. 그 작업은 <emphasis
+>실시간</emphasis
+> 작업일 수도 있어서, 그 장치를 사용하고 있는 동안은 CPU에서 여러분의 프로그램을 실행할 수 없게 됩니다. 보통의 Windows 사용자들은 리눅스 사용자만큼 멀티 프로세스를 많이 이용하지 않기 때문에, 제조업체들은 하드웨어의 부담이 CPU에 가해진다는 사실을 사용자들이 눈치채지 않기를 희망합니다. 하지만, 어떤 멀티 프로세싱 운영 체제라고 해도, Windows 2000이나 XP라고 해도 하드웨어가 처리할 부담을 CPU에 옮겨 놓았기 때문에, 효율이 떨어질 수밖에 없습니다. </para
+><para
+>이 제조업체들에게 하드웨어에 관한 프로그래밍에 필요한 문서와 그 밖의 자료들을 공개하라고 요구하면 도움이 됩니다.  하지만 일단 가장 좋은 방법은 <ulink url="&url-hardware-howto;"
+>리눅스 하드웨어 호환성 HOWTO</ulink
+>에서 동작한다고 나올 때까지는 이런 종류의 하드웨어 사용을 피하는 것입니다. </para>
+</sect2>
+
+
+  <sect2 id="Parity-RAM">
+  <title
+>가짜 혹은 <quote
+>가상</quote
+> 패리티 RAM</title>
+<para
+>컴퓨터 상점에서 패리티 RAM을 사려고 하면, 아마도 <emphasis
+>진짜 패리티</emphasis
+>가 아니라 <emphasis
+>가상 패리티</emphasis
+> 메모리 모듈을 사게 될 겁니다. 가상 패리티 SIMM은 (항상 그런 건 아니지만) 일반 패리티 없는 SIMM보다 칩이 1개 더 많고 그 추가 칩이 다른 칩보다 작기 때문에 진짜 패리티 RAM과 구분할 수 있습니다. 가상 패리티 SIMM은 패리티가 없는 메모리와 완전히 똑같이 동작합니다. RAM에서 1비트가 애러가 발생하는 경우에 알 수가 없습니다. 패리티가 없는 SIMM 대신에 가상 패리티 SIMM을 구입하려고 돈을 낭비하지 마십시오. 진짜 패리티 SIMM은 패리티 없는 SIMM보다 훨씬 더 비쌉니다. 각 8비트 메모리마다 1개 비트를 더 구입하게 되는 꼴이기 때문입니다. </para
+><para
+>&arch-title; RAM에 관한 정보를 알고 싶으시거나, 어떤 RAM을 구입하는 게 가장 좋을 지에 대해 알고 싶으시면 <ulink url="&url-pc-hw-faq;"
+>PC Hardware FAQ</ulink
+>를 참고하십시오. </para
+><para arch="alpha"
+>전부 그런 것은 아니지만, 대부분의 Alpha 시스템에는 실제 패리티 RAM이 필요합니다. </para>
+
+  </sect2>
+
+ </sect1>
+<!--   End of file hardware/supported-peripherals.xml -->
+
+<!-- Start of file hardware/memory-disk-requirements.xml -->
+
+ <sect1 id="memory-disk-requirements">
+ <title
+>메모리 및 디스크 공간 요구사항</title>
+
+<para
+>최소한 &minimum-memory;의 메모리와 &minimum-fs-size;의 하드디스크 공간은 있어야 합니다. 최소한의 콘솔 기반 시스템이라면 (모든 표준 꾸러미를 포함해서) 250MB가 필요합니다. X 윈도우 시스템이나 개발 관련 프로그램과 라이브러리까지 쓸만한 정도로 소프트웨어를 설치하려면 400MB가 필요합니다. 완전한 데스크탑이라면 수 기가바이트가 있어야 할 것입니다. </para
+><para arch="m68k"
+>Amiga에서는 FastRAM의 크기가 전체 메모리 요구량과 관계가 있습니다.  또, 16비트 RAM이 들어 있는 Zorro 카드는 지원하지 않습니다. 32비트 RAM이 필요합니다. <command
+>amiboot</command
+> 프로그램으로 16비트 RAM을 사용하지 않을 수 있습니다. <ulink url="&url-m68k-faq;"
+>Linux/m68k FAQ</ulink
+>를 참고하십시오. 최근의 커널은 자동으로 16비트 RAM을 꺼 버립니다. </para
+><para arch="m68k"
+>Atari에서는 ST-RAM과 Fast RAM(TT-RAM)을 사용할 수 있습니다. 많은 사람들이 커널을 Fast RAM에서 실행할 때 문제를 겪었기 때문에, Atari에서는 ST-RAM에 들어 있는 커널에서만 부팅합니다. 최소한 ST-RAM은 2MB가 필요합니다. 추가로 TT-RAM이 12MB 이상이 필요합니다. </para
+><para arch="m68k"
+>Macintosh에서는, RAM-based video(RBV)를 사용한 기계에서는 주의를 기울여야 합니다. 물리 주소 0의 RAM 세그먼트를 스크린 메모리로 사용하기 때문에, 커널을 읽어들일 기본 위치로 사용할 수 없습니다. 커널에 사용할 RAM 세그먼트와 램디스크는 최소한 4MB는 되어야 합니다. </para
+><para arch="m68k">
+
+<emphasis condition="FIXME"
+>FIXME: is this still true?</emphasis>
+
+</para>
+
+ </sect1>
+<!--   End of file hardware/memory-disk-requirements.xml -->
+
+<!-- Start of file hardware/network-cards.xml -->
+
+ <sect1 id="network-cards">
+ <title
+>네트워크 연결 하드웨어</title>
+
+<para arch="i386"
+>대부분의 PCI와 여러가지 (오래된) ISA 네트워크 카드를 지원합니다. 일부 네트워크 인터페이스 카드는 데비안 설치 디스크에서 지원하지 않습니다. 예를 들어 AX.25 카드와 AX.25 프로토콜, NI16510 EtherBlaster 카드, Schneider &amp; Koch G16 카드, Zenith Z-Note 내장 네트워크 카드는 지원하지 않습니다. Microchannel (MCA) 네트워크 카드는 표준 설치 시스템에서는 지원하지 않지만, (좀 오래된) 사용 방법을 보시려면 <ulink url="&url-linux-mca;"
+>Linux on MCA</ulink
+>를 참고하십시오. FDDI 네트워크도 설치 디스크에서는 카드와 프로토콜을 지원하지 않습니다. </para
+><para arch="i386"
+>ISDN의 경우 (오래된) 독일 1TR6용 D-channel 프로토콜은 지원하지 않습니다. Spellcaster BRI ISDN 보드도 &d-i;에서 지원하지 않습니다. </para>
+
+<para arch="m68k"
+>리눅스 커널이 지원하는 어떠한 네트워크 인터페이스 카드도 부트 디스크에서도 지원합니다. 네트워크 드라이버를 모듈로 읽어들여야 할 수도 있습니다.  다시 말하지만, 완전한 정보는 <ulink url="&url-m68k-faq;"
+></ulink
+> 페이지를 참고하십시오. </para>
+
+<para arch="sparc"
+>다음 네트워크 인터페이스 카드를 부팅 커널에서 직접 지원합니다: <itemizedlist>
+ <listitem
+><para
+>Sun LANCE </para
+></listitem>
+ <listitem
+><para
+>Sun Happy Meal </para
+></listitem>
+</itemizedlist>
+
+</para
+><para arch="sparc"
+>다음 네트워크 인터페이스 카드는 모듈로 지원합니다. 설치할 때 드라이버를 읽어들이면 사용할 수 있습니다. 하지만, OpenPROM의 테크닉을 이용해 다음 장치에서도 부팅이 가능합니다. <itemizedlist>
+ <listitem
+><para
+>Sun BigMAC </para
+></listitem>
+ <listitem
+><para
+>Sun QuadEthernet </para
+></listitem>
+ <listitem
+><para
+>MyriCOM Gigabit Ethernet </para
+></listitem>
+</itemizedlist>
+
+</para
+><para arch="alpha"
+>리눅스 커널이 지원하는 네트워크 인터페이스 카드는 부트 디스크에서도 지원합니다. 네트워크 드라이버를 모듈로 읽어들여야 할 수도 있습니다. </para
+><para arch="powerpc"
+>리눅스 커널이 지원하는 네트워크 인터페이스 카드는 부트 디스크에서도 지원합니다. 네트워크 드라이버를 모듈로 읽어들여야 할 수도 있습니다. </para
+><para arch="hppa"
+>리눅스 커널이 지원하는 네트워크 인터페이스 카드는 부트 디스크에서도 지원합니다. 네트워크 드라이버를 모듈로 읽어들여야 할 수도 있습니다. </para
+><para arch="ia64"
+>리눅스 커널이 지원하는 네트워크 인터페이스 카드는 부트 디스크에서도 지원합니다. 네트워크 드라이버를 모듈로 읽어들여야 할 수도 있습니다. </para
+><para arch="mips"
+>리눅스 커널이 지원하는 네트워크 인터페이스 카드는 부트 디스크에서도 지원합니다. 네트워크 드라이버를 모듈로 읽어들여야 할 수도 있습니다. </para
+><para arch="mipsel"
+>커널의 한계 때문에 DECstation은 온보드 네트워크 인터페이스만 지원합니다. TurboChannel 옵션 네트워크 카드는 현재 동작하지 않습니다. </para
+><para arch="s390"
+>리눅스 커널이 지원하는 네트워크 인터페이스 카드는 부트 디스크에서도 지원합니다. 모든 네트워크 드라이버는 모듈로 컴파일되어 있어서 최초에 네트워크 설정을 하는 동안에 모듈을 하나 읽어들여야 합니다. 지원하는 네트워크 장치는: <itemizedlist>
+ <listitem
+><para
+>Channel to Channel (CTC) 및 ESCON 연결 (실제 혹은 에뮬레이션) </para
+></listitem>
+ <listitem
+><para
+>OSA-2 Token Ring/Ethernet 및 OSA-Express Fast Ethernet (QDIO 아님) </para
+></listitem>
+<listitem
+><para
+>Inter-User Communication Vehicle (IUCV) &mdash; VM guest 전용의 경우에만 사용 가능 </para
+></listitem>
+<listitem
+><para
+>OSA-Express (QDIO 모드), HiperSockets, Guest-LANs </para
+></listitem>
+</itemizedlist>
+
+</para>
+
+<para arch="arm"
+>NetWinder 및 CATS 기계에서는 부트 디스크에서 다음 네트워크 카드를 지원합니다: <itemizedlist>
+ <listitem
+><para
+>PCI용 NE2000 </para
+></listitem>
+ <listitem
+><para
+>DECchip Tulip </para
+></listitem>
+</itemizedlist>
+
+</para
+><para arch="arm"
+>RiscPC에서는 부트 디스크가 다음 네트워크 인터페이스 카드를 직접 지원합니다: <itemizedlist>
+ <listitem
+><para
+>Ether1 </para
+></listitem>
+ <listitem
+><para
+>Ether3 </para
+></listitem>
+ <listitem
+><para
+>EtherH </para
+></listitem>
+</itemizedlist>
+
+</para
+><para arch="arm"
+>여러분의 네트워크 카드가 위의 목록에 들어 있다면, CD-ROM이나 플로피 디스크 없이 네트워크를 통해서 설치를 완료할 수 있습니다. </para
+><para arch="arm"
+>리눅스 커널에서 지원하는 네트워크 인터페이스 카드는 부트 디스크에서도 지원합니다. 경우에 따라서는 네트워크 드라이버를 모듈로 따로 읽어들여야 할 수도 있습니다. 즉, 다른 미디어를 이용해서 운영체제 커널과 모듈을 설치해야 할 수도 있습니다. </para>
+
+ </sect1>
+<!--   End of file hardware/network-cards.xml -->
+
+</chapter>
+<!--   End of file hardware/hardware.xml -->

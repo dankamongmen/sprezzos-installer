@@ -1,0 +1,136 @@
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 28672 -->
+
+ <sect1 id="minimum-hardware-reqts">
+<title>Satisfer els requisits mínims de maquinari</title>
+<para>
+
+Un cop hàgiu recollit la informació necessària sobre el maquinari del
+vostre ordinador, comproveu que aquest us permet fer el tipus d'instal·lació
+que voleu.
+
+</para><para arch="not-s390">
+
+Depenent de les vostres necessitats, podeu aconseguir-ho amb menys
+maquinari del que es recomana a la taula que trobareu a continuació. De
+tota manera, la majoria d'usuaris s'arrisquen a tenir frustracions si
+ignoren aquests suggeriments.
+
+</para><para arch="i386">
+
+Un Pentium 100 és el mínim recomanat per a un sistema d'escriptori, i un
+Pentium II-300 per a un servidor.
+
+</para><para arch="m68k">
+
+Es recomana un processador 68030 o superior per a instal·lacions m68k.
+Us en podeu sortir amb una mica menys de l'espai de disc indicat.
+
+</para><para arch="powerpc">
+
+Qualsevol PowerPC OldWorld o NewWorld pot servir com a sistema
+d'escriptori. Per a servidors, es recomana una màquina 132-Mhz com
+a mínim.
+
+</para>
+
+<table>
+<title>Requisits mínims del sistema recomanats</title>
+<tgroup cols="3">
+<thead>
+<row>
+  <entry>Tipus d'instal·lació</entry><entry>RAM</entry><entry>Disc dur</entry>
+</row>
+</thead>
+
+<tbody>
+<row>
+  <entry>Sense escriptori</entry>
+  <entry>24 MiB</entry>
+  <entry>450 GiB</entry>
+</row><row>
+  <entry>Amb escriptori</entry>
+  <entry>64 MiB</entry>
+  <entry>1 GiB</entry>
+</row><row>
+  <entry>Servidor</entry>
+  <entry>128 MiB</entry>
+  <entry>4 GiB</entry>
+</row>
+
+</tbody></tgroup></table>
+
+<para>
+
+Aquí hi ha una mostra de configuracions usuals en sistemes Debian.
+Podeu fer-vos una idea de l'espai de disc utilitzat per grups de programes
+relacionats referint-vos a <xref linkend="tasksel-size-list"/>
+
+</para>
+<variablelist>
+
+<varlistentry>
+ <term>Servidor estàndard</term>
+ <listitem><para>
+
+Aquest és un perfil de servidor petit, útil per a servidors mínims que no
+tenen massa funcionalitats per a usuaris d'intèrpret d'ordres. Inclou un
+servidor FTP, un servidor web, DNS, NIS i POP. Per a aquests, 100 MiB
+d'espai de disc serien suficients, i després caldria afegir l'espai
+per a les dades que es volen servir.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry arch="not-s390">
+ <term>Escriptori</term>
+ <listitem><para>
+
+Un sistema d'escriptori estàndard, inclosos el sistema X Window, un
+entorn d'escriptori complet, so, editors, etc. Necessitareu uns 2 GiB
+utilitzant la tasca d'escriptori estàndard, tot i que es pot fer
+amb molt menys.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry arch="not-s390">
+ <term>Consola de treball</term>
+ <listitem><para>
+
+Una màquina d'usuari encara més reduïda, sense el sistema X Window o
+aplicacions d'X. Possiblement adient per a portàtils o ordinadors mòbils.
+La grandària és al voltant de 140 MiB.
+
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+ <term>Desenvolupador</term>
+ <listitem><para>
+
+Una configuració d'escriptori amb tots els paquets de desenvolupament,
+com ara Perl, C, C++, etc. La grandària és al voltant de 475 MiB. Suposant
+que afegireu l'X11 i alguns paquets addicionals per a altres usos, hauríeu
+de planificar uns 800 MiB per a aquest tipus de màquina.
+
+</para></listitem>
+</varlistentry>
+
+</variablelist><para>
+
+Recordeu que aquestes mides no inclouen tota la resta de materials
+que s'acostumen a trobar, com ara fitxers d'usuaris, correu, i dades.
+Sempre és millor ser generós quan s'està considerant l'espai per als propis
+fitxers i dades. Notablement, la partició <filename>/var</filename> conté
+molta informació d'estat específica de Debian, a més del contingut habitual
+com els fitxers de registre. Els fitxers de l'ordre
+<command>dpkg</command> (amb informació de tots els paquets instal·lats)
+fàcilment pot ocupar 20 MiB. A més, <command>apt-get</command> posa allà els
+paquets descarregats abans d'instal·lar-los. Hauríeu d'assignar com a mínim
+100 MiB per a <filename>/var</filename>.
+
+</para>
+
+ </sect1>
+

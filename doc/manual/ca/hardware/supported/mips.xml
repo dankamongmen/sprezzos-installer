@@ -1,0 +1,53 @@
+<!-- retain these comments for translator revision tracking -->
+<!-- original version: 22939 -->
+
+
+  <sect2 arch="mips"><title>Suport de CPU, plaques base i vídeo</title>
+<para>
+
+Debian en &arch-title; actualment suporta dues subarquitectures:
+
+<itemizedlist>
+<listitem><para>
+
+SGI IP22: aquesta plataforma inclou les màquines Indy SGI, Indigo 2 i
+Challenge S. Com que aquestes màquines són molt similars, sempre que
+aquest document es referisca a l'Indy SGI, tant l'Indigo 2 com el
+Challenge S tindran el mateix significat.
+
+</para></listitem>
+<listitem><para>
+
+Broadcom BCM91250A (SWARM): aquest és un factor d'avaluació ATX per a la
+targeta de la Broadcom basada en la seva família de processadors SiByte.
+
+</para></listitem>
+</itemizedlist>
+
+Es pot trobar informació mirant les màquines suportades per mips/mipsel
+en <ulink url="&url-linux-mips;">pàgina web de Linux-MIPS</ulink>. Només
+es cobreixen els sistemes suportats per l'instal·lador de Debian. Si esteu
+buscant suport per a altres subarquitectures, per favor contacteu amb la
+<ulink url="&url-list-subscribe;">llista de correu debian-&architecture;</ulink>.
+
+</para>
+
+   <sect3><title>CPU</title>
+<para>
+
+En SGI IP22, SGI Indy, Indigo 2 i Challenge S amb R4000, R4400, R4600 i
+R5000 els processadors estan suportats per l'instal·lació del sistema
+Debian en MIPS big endian. L'avaluació de la targeta del Broadcom
+BCM91250A esdevé amb el xip SB1250 amb dos nuclis SB-1 que són suportats
+en mode SMP per aquest instal·lador.
+
+</para><para>
+
+Algunes màquines MIPS poden operar en ambdós modes, little endian i big
+endian. Per al little endian del MIPS, per favor llegiu la documentació
+per a l'arquitectura mipsel.
+
+</para>
+   </sect3>
+  </sect2>
+
