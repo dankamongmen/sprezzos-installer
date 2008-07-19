@@ -1,0 +1,447 @@
+<!-- <chapter id="translators-level3"><title>Translating &d-i; - Level 3</title> -->
+
+<sect1 id="translators-level3">
+<title>
+Level 3
+</title>
+
+<sect2>
+<title>
+Contents
+</title>
+
+<para>
+The level 3 of translations groups together packages which prompt
+users during the installation of the <emphasis>desktop</emphasis> and
+<emphasis>desktop</emphasis> tasks of <classname>tasksel</classname>.
+</para>
+
+<para>
+Given its great importance in a localized desktop system, the
+<classname>menu</classname> package (menu sections) has been added to
+this list.</para>
+
+<para>This includes the following Debian packages:
+
+	    <itemizedlist>
+<!--
+	      <listitem>
+		<para>
+		  localization-config
+		</para>
+	      </listitem>
+-->
+	      <listitem>
+		<para>
+		  menu
+		</para>
+	      </listitem>
+	      <listitem>
+		<para>
+		  xorg
+		</para>
+	      </listitem>
+	    <listitem>
+	      <para>
+		exim4
+	      </para>
+	    </listitem>
+	    </itemizedlist>
+</para>
+
+</sect2>
+
+<!--
+
+<sect2>
+<title>
+Localization-config
+</title>
+
+<sect3>
+<title>
+Package description
+</title>
+
+<para>
+The localization-config package is a tool aimed at automatic
+configuration of locales-related settings in several packages, most
+often desktop-related packages. It also configures the X-Window
+keyboard settings.
+</para>
+
+<para>
+The only translatable string is the package description, used as a menu
+entry in d-i; main menu.
+</para>
+
+</sect3>
+
+<sect3>
+<title>
+Files location and access methods
+</title>
+
+<para>
+The localization-config package is maintained by the Debian-Edu
+project maintainers and is part of Debian-Edu's <acronym>SVN</acronym> repository.
+</para>
+
+<itemizedlist>
+  <listitem>
+    <para>
+      <acronym>SVN</acronym> access: &svn-localization-config;, <filename>debian/po</filename> directory
+    </para>
+  </listitem>
+  <listitem>
+    <para>
+      <acronym>HTTP</acronym> access: 
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          <ulink url="&url-level3-pot;/localization-config_debian_po.pot">&url-level3-pot;/localization-config_debian_po.pot</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          &url-level3-po;/localization-config_debian_po_&language;.po
+        </para>
+      </listitem>
+    </itemizedlist>
+  </listitem>
+</itemizedlist>
+
+</sect3>
+
+<sect3>
+<title>
+Updating/Adding translations
+</title>
+
+<para>
+Translations should be reported as bugs against the
+<classname>localization-config</classname> package.
+</para>
+
+</sect3>
+
+<sect3>
+<title>
+Specific recommendations
+</title>
+
+<para>
+The translatable part only includes the
+ menu entry. It must be kept short:
+below 70 columns.
+</para>
+
+
+</sect3>
+
+<sect3>
+<title>
+Contribute to language/locale support in <classname>localization-config</classname>
+</title>
+
+<para>
+As <classname>localization-config</classname> pre-configures several
+packages for locales-related settings, translators should help its
+maintainer to adjust settings for their language. See <xref
+linkend="localization-config"/> for details.
+</para>
+
+</sect3>
+
+</sect2>
+
+-->
+
+<sect2>
+<title>
+Menu
+</title>
+
+<sect3>
+<title>
+Package description
+</title>
+
+<para>
+The <classname>menu</classname> Debian package provides all window
+managers, in graphical environments, a standard menu to organize the
+applications launch shortcuts.
+</para>
+
+<para>
+The most important items to translate in <classname>menu</classname>
+are the menu section names.
+</para>
+
+</sect3>
+
+<sect3>
+<title>
+Files location and access methods
+</title>
+
+<para>
+This package is a <quote>regular</quote> Debian package. The
+package maintenance team uses a <acronym>CVS</acronym> repository.
+</para>
+
+<para>
+This package's localization material is spread over two files. These
+are, by order of importance:
+</para>
+
+<itemizedlist>
+<listitem>
+<para>
+<filename>po/*.po</filename>: program translations. The maintainers unfortunately do not keep a templates file in their repositories, so translators should pick up another PO file as a reference to create their own translation file.
+</para>
+</listitem>
+<listitem>
+<para>
+<filename>po-sections/po/menu-sections.pot</filename>: names of the menu sections, which group together the shortcuts for the various programs.
+</para>
+</listitem>
+</itemizedlist>
+
+<para>
+Access to these files:
+</para>
+
+<itemizedlist>
+  <listitem>
+Anonymous <acronym>CVS</acronym> access: <command>&cvs-menu;</command>
+   <para>The <filename>po-sections</filename> contains the menu sections translations. Translators may also work on the program translation (directory <filename>po/</filename>, though these translations are not counted in &d-i; statistics).</para>
+  </listitem>
+  <listitem>
+    <para>
+      <acronym>HTTP</acronym> access: 
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          <ulink url="&url-level3-pot;/menu_po.pot">&url-level3-pot;/menu_po.pot</ulink> and <ulink url="&url-level3-pot;/menu_po-sections.pot">&url-level3-pot;/menu_po-sections.pot</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          &url-level3-po;/menu_po-sections_&language;.po and &url-level3-po;/menu_po_&language;.po
+        </para>
+      </listitem>
+    </itemizedlist>
+  </listitem>
+</itemizedlist>
+
+</sect3>
+
+<sect3>
+<title>
+Updating/Adding translations
+</title>
+
+<para>
+Translations should be reported as bugs against the
+<classname>menu</classname> package.
+</para>
+
+</sect3>
+
+<sect3>
+<title>
+Specific recommendations
+</title>
+
+<para>
+N/A
+</para>
+
+</sect3>
+
+</sect2>
+
+
+<sect2>
+<title>
+xorg
+</title>
+
+<sect3>
+<title>
+Package description
+</title>
+
+<para>
+The <classname>xorg</classname> Debian package provides the
+X-Window System environment which is by far the most common graphical
+environment of Unix systems.
+</para>
+
+<para>
+This package is installed on all desktop systems. It asks, during its
+installation several questions to users about their hardware, in order
+to properly setup the X server configuration file.
+</para>
+
+</sect3>
+
+<sect3>
+<title>
+Files location and access methods
+</title>
+
+<para>
+This package is a <quote>regular</quote> Debian package. The
+package maintenance team uses a <acronym>GIT</acronym> repository.
+</para>
+
+<itemizedlist>
+  <listitem>
+    <para>
+      <acronym>GIT</acronym> access: 
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          git clone http://git.debian.org/git/pkg-xorg/debian/xorg.git/
+        </para>
+      </listitem>
+    </itemizedlist>
+  </listitem>
+</itemizedlist>
+
+</sect3>
+
+<sect3>
+<title>
+Updating/Adding translations
+</title>
+
+<para>
+Translations should be reported as bugs against the
+<classname>xorg</classname> package.
+</para>
+
+</sect3>
+
+<sect3>
+<title>
+Specific recommendations
+</title>
+
+<para>
+The screens are likely to be seen by all users installing desktop
+systems. Translators should avoid jargon in these translations.
+</para>
+
+</sect3>
+
+</sect2>
+
+<sect2>
+<title>
+Exim4
+</title>
+
+<sect3>
+<title>
+Package description
+</title>
+
+<para>
+The <classname>exim4</classname> package installs the Exim Mail
+Transport Agent (MTA). It is installed by default on all newly
+installed Debian GNU/Linux systems as Exim has always been the default
+Debian MTA (even if other MTA may be used and installed later by the
+system administrator).
+</para>
+
+<para>It is installed and configured for standard installs, which
+triggers some of its
+configuration steps and thus involves user input.
+</para>
+
+</sect3>
+
+<sect3>
+<title>
+Files location and access methods
+</title>
+
+<para>
+This package is a <quote>regular</quote> Debian package. The
+package maintainenane team uses a public <acronym>SVN</acronym> repository.
+</para>
+
+<itemizedlist>
+  <listitem>
+      Anonymous <acronym>SVN</acronym> access: <command>&svn-exim4;</command>
+  </listitem>
+  <listitem>
+    <para>
+      <acronym>HTTP</acronym> access: 
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          <ulink url="&url-level3-pot;/exim4_debian_po.pot">&url-level3-pot;/exim4_debian_po.pot</ulink>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          &url-level3-po;/exim4_debian_po_&language;.po
+        </para>
+      </listitem>
+    </itemizedlist>
+  </listitem>
+</itemizedlist>
+
+</sect3>
+
+<sect3>
+<title>
+Updating/Adding translations
+</title>
+
+<para>
+Translations should be reported as bugs against the
+<classname>exim4</classname> package.
+</para>
+
+</sect3>
+
+<sect3>
+<title>
+Specific recommendations
+</title>
+
+<para>The translation of some exim4 user input screens may be tricky.
+</para>
+
+<para>
+More particularly, the screen giving the choice between all possible
+types of configurations is not easy to handle for translators. Each
+individual choice contains a description of what this choice means:
+<emphasis>this must be kept shorter</emphasis> than 72 characters,
+otherwise, the display will be cut on most screens.
+</para>
+
+<para>
+Translators should also try to keep the long description of this
+specific screen as short as possible and still be clear and avoid
+jargon. This screen will be shown on every installation, even default
+ones (which are very likely to be used by low skilled users).
+</para>
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+
+<!-- </chapter> -->
