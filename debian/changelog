@@ -1,4 +1,4 @@
-debian-installer (2008xxxx) UNRELEASED; urgency=low
+debian-installer (2008xxxx) unstable; urgency=low
 
   [ Martin Michlmayr ]
   * Fix off-by-one: the QNAP initrd should be padded to exactly 4 MB,

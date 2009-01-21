@@ -71,14 +71,14 @@ other Debian packages:
 	  </itemizedlist>
 
 <para>
-iso-codes and console-data packages material is used by some level1
+Iso-codes and console-data packages material is used by some level1
 packages from &d-i; while others are packages installed as part of the
 base system and prompting users during installs (either default ones
 or in some conditions).
 </para>
 
 <para>
-Translators should translate these files in the same order that they appear
+Translators should translate these files in the same order they appear
 in this section.
 </para>
 
