@@ -1,10 +1,13 @@
-debian-installer (20090XXXlenny1) unstable; urgency=low
+debian-installer (20090XXXlenny1) UNRELEASED; urgency=low
 
-   [ Martin Michlmayr ]
+  [ Martin Michlmayr ]
   * Include minix-modules on the orion5x image for the D-Link DNS-323,
     thanks Matt Palmer.
   * Generate images for the D-Link DNS-323 and Conceptronic CH3SNAS,
     thanks Matt Palmer.  Closes: #503040.
+  
+  [ Otavio Salvador ]
+  * Bump kernel versions to 2.6.26-2.
 
  -- Martin Michlmayr <tbm@cyrius.com>  Mon, 09 Mar 2009 20:28:49 +0100
 
