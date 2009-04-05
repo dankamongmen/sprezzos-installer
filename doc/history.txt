@@ -1,0 +1,132 @@
+A few historical bits about d-i development
+-------------------------------------------
+
+No idea where this will lead us, but on a quiet morning in July 2005,
+I imagined it would be worth keeping track of D-I history, so I just
+started this document to keep the information I've found.
+
+Please throw in any interesting information you might have. We'll
+think about organizing this stuff as soon as we have enough material.
+
+
+
+Original announcement of the D-I project - June 20th 2000
+ First mention found: http://lists.debian.org/debian-boot/2000/06/msg00279.html
+
+ Interesting quote from it: Joey Hess said '..."debian-installer", or
+ some actual cool name someone comes up with. I hate naming
+ projects. :-)'. 
+
+ It seems that the name was quite good after all...as we kept it up to now.
+
+The "first" things
+------------------
+
+ First "weekly" status report - November 1st 2000: 
+    http://lists.debian.org/debian-boot/2000/11/msg00006.html
+
+ First udeb uploads - December 12th 2000:
+    http://lists.debian.org/debian-boot/2000/12/msg00336.html
+
+ First D-I team meeting - December 9th 2000:
+    http://lists.debian.org/debian-boot/2000/12/msg00276.html
+     No meeting minutes found up to now..:-)
+
+ First appearance of the graphical frontend - December 27th 2000:
+    http://lists.debian.org/debian-boot/2000/12/msg00547.html
+
+ First successful (cough) "installation report" - February 14th 2001:
+    http://lists.debian.org/debian-boot/2001/02/msg00503.html
+
+ First mention of devfs (aaaargh) - February 21st 2001
+    http://lists.debian.org/debian-boot/2001/02/msg00747.html
+
+ First "new" tasksel - May 9th 2001
+    http://lists.debian.org/debian-boot/2001/05/msg00162.html
+    http://lists.debian.org/debian-boot/2001/05/msg00513.html
+
+ First tzconfig using debconf - June 10th 2001
+    http://lists.debian.org/debian-boot/2001/06/msg00490.html
+
+ First Debian derived distribution wanting to use D-I - July 28th 2001
+    http://lists.debian.org/debian-boot/2001/07/msg00717.html
+
+ First message to debian-boot by Frans Pop - March 1st 2004
+    http://lists.debian.org/debian-boot/2004/03/msg00045.html
+
+ First political struggle around D-I - April 5th 2004
+    http://lists.debian.org/debian-boot/2004/04/msg00438.html
+
+ Second political struggle around D-I - Sep 23th 2004
+    http://lists.debian.org/debian-boot/2004/09/msg01324.html
+
+ First message to debian-boot by Attilio Fiandrotti and begin of
+    the "g-i aka graphical installer" revival story - March 31st 2005
+    http://lists.debian.org/debian-boot/2005/03/msg01184.html
+
+ Base-config commits suicide - Dec 21st 2005
+    http://lists.debian.org/debian-boot/2005/12/msg00917.html
+
+ First daily builds with the graphical installer included - May 17th 2006
+    http://lists.debian.org/debian-boot/2006/05/msg00659.html
+
+
+Status reports
+--------------
+
+First status report: 
+ http://lists.debian.org/debian-boot/2000/11/msg00006.html
+
+Following progress reports:
+ http://lists.debian.org/debian-boot/2000/12/msg00020.html (Dec 1st 2000)
+ http://lists.debian.org/debian-boot/2000/12/msg00338.html (Dec 12th 2000)
+ http://lists.debian.org/debian-boot/2001/02/msg00591.html (Feb 16th 2001)
+ http://lists.debian.org/debian-boot/2001/07/msg00714.html (Jul 26th 2001)
+ http://lists.debian.org/debian-devel-announce/2002/07/msg00013.html
+ http://lists.debian.org/debian-devel-announce/2002/08/msg00004.html
+ http://lists.debian.org/debian-devel-announce/2002/10/msg00007.html
+ http://lists.debian.org/debian-devel-announce/2002/11/msg00011.html
+ http://lists.debian.org/debian-devel-announce/2003/02/msg00013.html
+ <to be continued>
+
+Debian-installer releases:
+--------------------------
+
+First alpha: December 8th 2002
+  http://lists.debian.org/debian-devel-announce/2002/12/msg00002.html
+
+Sarge installer beta1: November 9th 2003
+  http://lists.debian.org/debian-devel-announce/2003/11/msg00003.html
+
+Sarge installer beta2: January 14th 2004
+  http://lists.debian.org/debian-devel-announce/2004/01/msg00006.html
+
+Sarge installer beta3: March 16th 2004
+  http://lists.debian.org/debian-devel-announce/2004/03/msg00013.html
+
+Sarge installer beta4: April 30th 2004
+  http://lists.debian.org/debian-devel-announce/2004/04/msg00025.html
+
+Sarge installer Release Candidate 1: August 7th 2004
+  http://lists.debian.org/debian-devel-announce/2004/08/msg00004.html
+
+Sarge installer Release Candidate 2: November 22th 2004
+  http://lists.debian.org/debian-devel-announce/2004/11/msg00010.html
+
+Sarge installer Release Candidate 3: March 23th 2004
+  http://lists.debian.org/debian-boot/2005/03/msg00764.html
+
+Sarge release: June 6th 2005
+  http://www.debian.org/News/2005/20050606
+
+Etch installer beta1: November 12th 2005
+  http://lists.debian.org/debian-devel-announce/2005/11/msg00008.html
+
+Etch installer beta2: March 15th 2006
+  http://lists.debian.org/debian-devel-announce/2006/03/msg00013.html
+
+Etch installer beta3: August 11th 2006
+  http://lists.debian.org/debian-devel-announce/2006/08/msg00009.html
+
+Etch installer Release Candidate 1: November 13th, 2006
+  http://lists.debian.org/debian-devel-announce/2006/11/msg00003.html
