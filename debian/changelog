@@ -1,15 +1,37 @@
-debian-installer (20090123lenny1) stable; urgency=low
+debian-installer (2009xxxx) UNRELEASED; urgency=low
+
+  [ Colin Watson ]
+  * Merge from Ubuntu:
+    - Document new $default_filesystem substitution and
+      $default_filesystem{ } internal specifier in partman recipes.
+  * Initial changes to target squeeze (see
+    http://lists.debian.org/debian-release/2009/01/msg00682.html for its
+    version number).
+  * Add cdebconf-newt-terminal to most images that include
+    cdebconf-newt-udeb (although not floppies).
+  * Introduce *_SUPPORTED_EXTRA variables, which can be used to define
+    "optional" supported targets. Use this to allow monolithic to be built
+    without having to edit configuration files and without bloating official
+    builds.
+  * Use os-prober-udeb rather than os-prober for powerpc monolithic target
+    (thanks, Wartan Hachaturow).
 
   [ Martin Michlmayr ]
+  * Remove support for the old arm port.
+  * Convert the Thecus N2100 image to an initramfs.
   * Include minix-modules on the orion5x image for the D-Link DNS-323,
     thanks Matt Palmer.
   * Generate images for the D-Link DNS-323 and Conceptronic CH3SNAS,
     thanks Matt Palmer.  Closes: #503040.
   
-  [ Otavio Salvador ]
-  * Bump kernel versions to 2.6.26-2.
+  [ Wartan Hachaturow ]
+  * Add CHRP boot structure on ISO images, Closes: #411728, #411203.
+  * Add monolithic support for powerpc64.
 
- -- Otavio Salvador <otavio@debian.org>  Wed, 08 Apr 2009 00:29:38 -0300
+  [ Otavio Salvador ]
+  * Bump kernels to use new 2.6.26-2 kernels.
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 23 Jan 2009 15:32:36 -0200
 
 debian-installer (20090123) unstable; urgency=low
 
