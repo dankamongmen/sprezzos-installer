@@ -28,15 +28,13 @@ translations.
 </para>
 
 <para>
-In order to make the translators work easy and simple, all
-translatable strings are assembled in a single file. Translators must
-work on this file and not on the various files dispersed in the &d-i;
-development tree (these files are automatically generated).
+Level 1 is the key for a language being fully integrated in &d-i;.
+A language will be <emphasis>activated</emphasis> by &i18n-coords; only when the first two sublevels are completely translated.
 </para>
 
 </sect2>
 
-<sect2>
+<sect2 id="sublevels">
 <title>
 Sublevels
 </title>
@@ -243,17 +241,6 @@ language. Translators can translate it but they should keep "Choose
 language" in English as an alternative so that users mistakenly
 choosing a language can still find the appropriate entry to change it
 back to their own language.
-</para>
-
-</sect3>
-
-<sect3>
-<title>
-Continent names' translations
-</title>
-
-<para>
-Some strings feature the world continent names, prepended by "-- " and followed by " --". Please take care keeping the leading "-- " string and the " --" trailer in translations. Do not use anything else or this is likely to break the country choosing module.
 </para>
 
 </sect3>
