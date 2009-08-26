@@ -1,4 +1,4 @@
-debian-installer (20090123lenny4) UNRELEASED; urgency=low
+debian-installer (20090123lenny4) stable; urgency=low
 
   [ Frans Pop ]
   * Use printf instead of 'echo -en' to create win32-loader.ini.
@@ -8,7 +8,7 @@ debian-installer (20090123lenny4) UNRELEASED; urgency=low
   * Rebuild to incorporate linux-kernel-di packages based upon
     linux-2.6 2.6.26-19
 
- -- Frans Pop <fjp@debian.org>  Tue, 04 Aug 2009 17:43:50 +0200
+ -- dann frazier <dannf@debian.org>  Tue, 25 Aug 2009 23:18:34 -0600
 
 debian-installer (20090123lenny3) stable; urgency=low
 
