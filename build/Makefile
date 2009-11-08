@@ -59,10 +59,9 @@ PATH := util:$(PATH):/usr/sbin:/sbin
 # We don't want this to be run each time we re-enter.
 ifndef DEB_HOST_ARCH
 DEB_HOST_ARCH = $(shell dpkg-architecture -qDEB_HOST_ARCH)
-DEB_HOST_ARCH_OS = $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
 DEB_HOST_GNU_CPU = $(shell dpkg-architecture -qDEB_HOST_GNU_CPU)
 DEB_HOST_GNU_SYSTEM = $(shell dpkg-architecture -qDEB_HOST_GNU_SYSTEM)
-export DEB_HOST_ARCH DEB_HOST_ARCH_OS DEB_HOST_GNU_CPU DEB_HOST_GNU_SYSTEM
+export DEB_HOST_ARCH DEB_HOST_GNU_CPU DEB_HOST_GNU_SYSTEM
 endif
 
 # We loop over all needed combinations of ARCH, SUBARCH, MEDIUM, FLAVOUR
@@ -94,15 +93,10 @@ include config/dir
 -include config/local
 
 export KEYRING
-export KERNELVERSION
-
-ifneq ($(shell id -u),0)
-  ROOTCMD ?= fakeroot
-endif
 
 # Useful command sequences
 define submake
-  $(ROOTCMD) $(MAKE) --no-print-directory
+  $(MAKE) --no-print-directory
 endef
 
 define recurse_once
@@ -110,11 +104,11 @@ define recurse_once
 endef
 
 define recurse_many
-  @set -e; $(foreach var,$($(1)_SUPPORTED) $(if $(RECURSE_EXTRA),$($(1)_SUPPORTED_EXTRA)),$(submake) $(2)_$(3) $(1)=$(var);)
+  @set -e; $(foreach var,$($(1)_SUPPORTED),$(submake) $(2)_$(3) $(1)=$(var);)
 endef
 
 define recurse
-  $(if $($(1)_SUPPORTED)$(if $(RECURSE_EXTRA),$($(1)_SUPPORTED_EXTRA)),$(call recurse_many,$(1),$(2),$(3)),$(call recurse_once,$(2),$(3)))
+  $(if $($(1)_SUPPORTED),$(call recurse_many,$(1),$(2),$(3)),$(call recurse_once,$(2),$(3)))
 endef
 
 define genext2fs
@@ -123,10 +117,6 @@ endef
 
 define mkinitramfs
   (cd $(TREE) && find . | cpio --quiet -o -H newc) > 
-endef
-
-define mkfs.ufs1
-  sh -c 'makefs -t ffs -s 30m -f 1000 -o minfree=0,version=1 $$0 ${TREE}'
 endef
 
 define e2fsck
@@ -167,7 +157,7 @@ validate_%:
 	@set -e; \
 	SUBARCH= var='$(subst _, ,$(subst validate_,,$@))'; \
 	tmp=$$(echo $$var |sed 's/[ ].*$$//'); \
-	[ -z '$(SUBARCH_SUPPORTED)$(SUBARCH_SUPPORTED_EXTRA)' ] || [ -z "$$tmp" ] || [ -z "$$(echo $(SUBARCH_SUPPORTED) $(SUBARCH_SUPPORTED_EXTRA) |grep -w $$tmp)" ] || SUBARCH=$$tmp; \
+	[ -z '$(SUBARCH_SUPPORTED)' ] || [ -z "$$tmp" ] || [ -z "$$(echo $(SUBARCH_SUPPORTED) |grep -w $$tmp)" ] || SUBARCH=$$tmp; \
 	$(submake) medium_validate SUBARCH=$$SUBARCH var="$$var"
 
 .PHONY: medium_validate
@@ -175,7 +165,7 @@ medium_validate:
 	@set -e; \
 	MEDIUM= var="$(strip $(patsubst $(SUBARCH)%,%,$(var)))"; \
 	tmp=$$(echo $$var |sed 's/[ ].*$$//'); \
-	[ -z '$(MEDIUM_SUPPORTED)$(MEDIUM_SUPPORTED_EXTRA)' ] || [ -z "$$tmp" ] || [ -z "$$(echo $(MEDIUM_SUPPORTED) $(MEDIUM_SUPPORTED_EXTRA) |grep -w $$tmp)" ] || MEDIUM=$$tmp; \
+	[ -z '$(MEDIUM_SUPPORTED)' ] || [ -z "$$tmp" ] || [ -z "$$(echo $(MEDIUM_SUPPORTED) |grep -w $$tmp)" ] || MEDIUM=$$tmp; \
 	$(submake) flavour_validate MEDIUM=$$MEDIUM var="$$var"
 
 .PHONY: flavour_validate
@@ -183,7 +173,7 @@ flavour_validate:
 	@set -e; \
 	FLAVOUR= var="$(strip $(patsubst $(MEDIUM)%,%,$(var)))"; \
 	tmp=$$(echo $$var |sed 's/[ ].*$$//'); \
-	[ -z '$(FLAVOUR_SUPPORTED)$(FLAVOUR_SUPPORTED_EXTRA)' ] || [ -z "$$tmp" ] || [ -z "$$(echo $(FLAVOUR_SUPPORTED) $(FLAVOUR_SUPPORTED_EXTRA) |grep -w $$tmp)" ] || FLAVOUR=$$tmp; \
+	[ -z '$(FLAVOUR_SUPPORTED)' ] || [ -z "$$tmp" ] || [ -z "$$(echo $(FLAVOUR_SUPPORTED) |grep -w $$tmp)" ] || FLAVOUR=$$tmp; \
 	$(submake) finish_validate FLAVOUR=$$FLAVOUR var="$$var"
 
 .PHONY: finish_validate
@@ -209,7 +199,7 @@ list:
 	@echo "all_clean"
 	@echo "reallyclean"
 	@echo
-	@$(submake) all_list RECURSE_EXTRA=1
+	@$(submake) all_list
 
 .PHONY: _list
 _list:
@@ -363,7 +353,6 @@ ifdef EXTRAFILES
 	done
 endif
 
-ifeq ($(DEB_HOST_ARCH_OS),linux)
 ifdef KERNELVERSION
 	# Set up modules.dep, ensure there is at least one standard dir (kernel
 	# in this case), so depmod will use its prune list for archs with no
@@ -407,7 +396,6 @@ ifdef KERNELVERSION
 			mv $(TREE)/usr/lib/linux-image-$(VERSION) \
 				$(TEMP)/lib; \
 		fi;)
-endif
 endif
 
 ifdef KERNELNAME
@@ -625,10 +613,6 @@ $(TEMP_INITRD): $(STAMPS)tree-$(targetstring)-stamp arch_tree
 	jffs2) \
 		$(mkjffs2) $(TEMP_INITRD); \
 	;; \
-	ufs1) \
-		$(mkfs.ufs1) $(TEMP)/initrd; \
-		gzip -v9f $(TEMP)/initrd; \
-	;; \
 	*) \
 		echo "Unsupported filesystem type"; \
 		exit 1 ;; \
@@ -636,34 +620,20 @@ $(TEMP_INITRD): $(STAMPS)tree-$(targetstring)-stamp arch_tree
 
 # Create the images for dest/. Those are the targets called from config.
 
-ifeq ($(SYMLINK_INITRD),)
 $(INITRD): $(TEMP_INITRD)
 	install -m 644 -D $< $@
 	update-manifest $@ $(MANIFEST-INITRD) $(UDEB_LISTS)
-else
-$(INITRD): $(realpath $(dir $(INITRD))/$(SYMLINK_INITRD))
-	mkdir -p $(dir $(INITRD))
-	ln -s $(SYMLINK_INITRD) $@
-	update-manifest $@ $(MANIFEST-INITRD) $(UDEB_LISTS)
-endif
 
 $(RAMDISK): $(TEMP_INITRD)
 	install -m 644 -D $< $@
 	update-manifest $@ $(MANIFEST-RAMDISK) $(UDEB_LISTS)
 
 # raw kernel images
-ifeq ($(SYMLINK_KERNEL),)
 $(KERNEL): TEMP_REAL_KERNEL = $(TEMP)/$(shell echo ./$@ |sed 's,$(SOME_DEST)/$(EXTRANAME),,')
 $(KERNEL):
 	@$(MAKE) $(STAMPS)tree-unpack-$(targetstring)-stamp $(TEMP_REAL_KERNEL)
 	install -m 644 -D $(TEMP_REAL_KERNEL) $@
 	update-manifest $@ $(MANIFEST-KERNEL)
-else
-$(KERNEL): $(realpath $(dir $(KERNEL))/$(SYMLINK_KERNEL))
-	mkdir -p $(dir $(KERNEL))
-	ln -s $(SYMLINK_KERNEL) $@
-	update-manifest $@ $(MANIFEST-KERNEL)
-endif
 
 # bootable images
 $(BOOT): $(TEMP_BOOT)
