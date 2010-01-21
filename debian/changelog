@@ -1,4 +1,4 @@
-debian-installer (20090123lenny6) UNRELEASED; urgency=low
+debian-installer (20090123lenny6) stable; urgency=low
 
   [ Frans Pop ]
   * gen-sources.list.udeb: allow for multiple spaces and tabs in a source line.
