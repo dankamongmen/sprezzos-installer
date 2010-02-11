@@ -111,7 +111,7 @@ is merely a hint. It could also have been named as $LEVEL1/$LEVEL2/LEVEL3.
 
 Note2: The resulting file tree in the dest/ directory has a similiar
 $SUBARCH/$MEDIUM/$FLAVOUR layout. It can be slightly adapted with the
-EXTRANAME and DEST_SOME variables.
+EXTRANAME and SOME_DEST variables.
 
 A example tree layout looks like this:
 
@@ -230,7 +230,7 @@ KERNEL
   Create the kernel image.
 
 BOOT
-  Create an optinally gzipped bootable image. This creates kernel,
+  Create an optionally gzipped bootable image. This creates kernel,
   initrd and boot screens, and depends on the arch_boot rule, where the
   image creation is handled.
 
@@ -282,6 +282,14 @@ TEMP_POWERPC_INITRD
 
 Other useful variables for configuration snippets:
 
+SUBARCH_SUPPORTED_EXTRA
+MEDIUM_SUPPORTED_EXTRA
+FLAVOUR_SUPPORTED_EXTRA
+  These are like SUBARCH_SUPPORTED (etc.), except that they are not built by
+  default with 'make all_build' but are only used when selected manually,
+  either by passing an explicit target to make or by defining RECURSE_EXTRA
+  to a non-empty value.
+
 EXTRANAME
   This allows to vary the name of the dest/ target a bit. Example:
   EXTRANAME = $(MEDIUM)/    leads to: floppy/netboot.img
@@ -308,11 +316,14 @@ TEMP
   for every leaf configuration appropriately.
 
 DROP_LANG
-  Purge unwanted locales. Mostly useful for space constrained media.
+  Purge unwanted languages. Mostly useful for space constrained media.
+
+KEEP_GI_LANGS
+  If set the languages in $(GI_LANGS) will NOT be dropped. Should only be
+  set in targets building graphical installer images.
 
 GI_LANGS
   List of languages only supported with the graphical cdebconf frontend.
-  Can be used to set DROP_LANG.
 
 VERSIONED_SYSTEM_MAP
   If set, the kernel's System.map is expected to have an unique
@@ -358,6 +369,22 @@ OMIT_RELEASE_INFO
 DOS_VOLUME_ID
 DOS_VOLUME_LABEL
   Volume ID and label for DOS filesystems.
+
+SYSLINUX_CFG (x86 only)
+  Determines how the syslinux configuration is created. Options are:
+  - prompt: non-graphical syslinux configuration allowing installation of
+    only a default desktop environment
+  - standard: as prompt, but graphical menu (using vesamenu)
+  - all-desktop: as standard, but also includes options to install alternative
+    desktop environments
+  - template: the available files are merely copied; the actual configuration
+    is created by debian-cd
+
+DESKTOP (x86 only)
+  Allows to specify that a specific desktop environment should be installed
+  when that option is selected in pkgsel. Modifies the syslinux configuration.
+  Ignored unless SYSLINUX_CFG is set to 'prompt' or 'standard'; the default
+  (gnome) does not need to be specified.
 
 BOOTMENU_BEEP
   Set to y to produce a beep when the boot menu is ready to accept commands
