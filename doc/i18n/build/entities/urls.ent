@@ -1,0 +1,116 @@
+<!-- 
+  These are standard URLs for well-known resources on the Internet.
+  You can redefine these to your taste in your install.XX.xml.
+  The Debian URLs do content negotiation so it's not necessary there.
+ -->
+
+
+<!-- ******************************************
+  Standard Debian URLs
+  -->
+
+<!ENTITY alioth "alioth.debian.org">
+<!ENTITY url-alioth "http://&alioth;/">
+<!ENTITY alioth-account-page '<ulink url="https://alioth.debian.org/account">https://alioth.debian.org/account</ulink>'>
+
+<!ENTITY svn-debian-auth "&lt;alioth_username&gt;@svn.debian.org">
+<!ENTITY svn-debian "svn.debian.org">
+
+<!ENTITY irc-server "irc.debian.org">
+<!ENTITY irc-channel "#debian-boot on &irc-server;">
+
+<!ENTITY backports "backports.debian.org">
+<!ENTITY url-backports "http://&backports;/">
+
+<!ENTITY url-status "http://d-i.alioth.debian.org/l10n-stats">
+
+<!ENTITY url-languagelist "http://d-i.alioth.debian.org/i18n-doc/languages.html">
+
+<!ENTITY url-spellchecker-status "http://d-i.alioth.debian.org/spellcheck/">
+
+<!ENTITY url-d-i-translation-status "&url-status;/translation-status.html">
+
+<!ENTITY url-d-i-checkout " &url-status;/checkouts.html">
+
+
+<!ENTITY url-checkouts "&url-status;/checkouts.html">
+
+<!ENTITY url-level1     "&url-status;/level1/master">
+<!ENTITY url-level1-pot     "&url-status;/level1/master/template.pot">
+<!ENTITY url-level1-po     "&url-status;/level1/master/&language;.po">
+<!ENTITY url-level1-pot-link     '<ulink url="&url-level1-pot;">&url-level1-pot;</ulink>'>
+<!ENTITY url-level1-po-link     '<ulink url="&url-level1-po;">&url-level1-po;</ulink>'>
+
+<!ENTITY url-level2     "&url-status;/level2/files">
+<!ENTITY url-level2-pot     "&url-status;/level2/POT">
+<!ENTITY url-level2-po     "&url-status;/level2/files/&language;">
+<!ENTITY url-level2-pot-link     '<ulink url="&url-level2-pot;">&url-level2-pot;</ulink>'>
+<!ENTITY url-level2-po-link     '<ulink url="&url-level2-po;">&url-level2-po;</ulink>'>
+
+<!ENTITY url-level3     "&url-status;/level3/files">
+<!ENTITY url-level3-pot     "&url-status;/level3/POT">
+<!ENTITY url-level3-po     "&url-status;/level3/files/&language;">
+<!ENTITY url-level3-pot-link     '<ulink url="&url-level3-pot;">&url-level3-pot;</ulink>'>
+<!ENTITY url-level3-po-link     '<ulink url="&url-level3-po;">&url-level3-po;</ulink>'>
+
+<!ENTITY url-level4     "&url-status;/level4/files">
+<!ENTITY url-level4-pot     "&url-status;/level4/POT">
+<!ENTITY url-level4-po     "&url-status;/level4/files/&language;">
+<!ENTITY url-level4-pot-link     '<ulink url="&url-level4-pot;">&url-level4-pot;</ulink>'>
+<!ENTITY url-level4-po-link     '<ulink url="&url-level4-po;">&url-level4-po;</ulink>'>
+
+<!ENTITY url-level5     "&url-status;/level4/files">
+<!ENTITY url-level5-pot     "&url-status;/level5/POT">
+<!ENTITY url-level5-po     "&url-status;/level5/files/&language;">
+<!ENTITY url-level5-pot-link     '<ulink url="&url-level5-pot;">&url-level5-pot;</ulink>'>
+<!ENTITY url-level5-po-link     '<ulink url="&url-level5-po;">&url-level5-po;</ulink>'>
+
+<!-- SVN/CVS URLs for various files locations -->
+<!ENTITY svn-level1 "svn co svn+ssh://&svn-debian-auth;/svn/d-i/trunk/packages/po debian-installer">
+<!ENTITY svn-level1-anon "svn co svn+ssh://&svn-debian;/d-i/trunk/packages/po debian-installer">
+
+<!ENTITY svn-di-sandbox "<classname>svn+ssh://&svn-debian-auth;/svn/d-i/people/sandbox</classname>">
+<!ENTITY svn-base-config "<classname>svn://&svn-debian;/base-config/trunk</classname>">
+<!ENTITY svn-tasksel-anon "svn co svn://&svn-debian;/tasksel/trunk tasksel">
+<!ENTITY svn-tasksel "svn co svn+ssh://&svn-debian-auth;/svn/tasksel/trunk tasksel">
+<!ENTITY svn-shadow "<classname>svn://&svn-debian;/pkg-shadow/trunk</classname>">
+<!ENTITY svn-samba "svn co svn://&svn-debian;/pkg-samba/trunk/po samba">
+<!ENTITY cvs-shadow-upstream "<classname>cvs://anoncvs.pld.org.pl/cvsroot/shadow</classname>">
+<!ENTITY svn-iso-codes "svn co svn://&svn-debian;/pkg-isocodes/trunk/iso-codes/iso-3166 iso-codes">
+<!ENTITY svn-console-data "svn co svn://&svn-debian;/console-data/trunk/console-data-1.01/debian/po console-data">
+<!ENTITY console-data-en     "&url-status;/level2/files/en/console-data_debian_po_en.po">
+<!ENTITY cvs-popcon "cvs -z3 -d:pserver:anonymous@alioth.debian.org/cvsroot/popcon co popularity-contest/debian/po">
+<!ENTITY darcs-aptitude "darcs get http://people.debian.org/~dburrows/darcs/aptitude">
+<!ENTITY svn-xdebconfigurator "<classname>svn://&svn-debian;/debian-edu/trunk/src/xdebconfigurator</classname>">
+<!ENTITY svn-localization-config "<classname>svn://&svn-debian;/debian-edu/trunk/src/localization-config</classname>">
+<!ENTITY svn-console-common "svn co svn://&svn-debian;/console-common/trunk/console-common/debian/po console-common">
+<!ENTITY svn-debconf "svn co svn://&svn-debian;/debconf/trunk/src/debconf debconf">
+<!ENTITY svn-dpkg "svn co svn://&svn-debian;/dpkg/trunk/po dpkg">
+<!ENTITY svn-discover1 "<classname>svn+ss://&svn-debian;/pkg-discover/discover1/trunk</classname>">
+<!ENTITY cvs-menu "cvs -z3 -d:pserver:anonymous@alioth.debian.org/cvsroot/menu co menu">
+<!ENTITY cvs-dictionaries-common "cvs -z3 -d:pserver:anonymous@alioth.debian.org/cvsroot/dict-common co dictionaries-common/debian/po">
+
+<!-- Wiki page for fonts -->
+<!ENTITY wiki-fonts "http://wiki.debian.org/DebianInstaller/GUIFonts">
+
+
+<!ENTITY svn-xorg "svn co svn://necrotic.deadbeast.net/xorg-x11/trunk/debian/xorg/debian/po xorg">
+<!ENTITY svn-exim4 "svn co svn://&svn-debian;/pkg-exim4/exim/trunk/debian/po exim4">
+
+
+<!ENTITY url-bts "http://bugs.debian.org/">
+<!ENTITY email-bts " <email>submit@bugs.debian.org</email>">
+
+<!ENTITY email-debian-boot-list "<email>debian-boot@lists.debian.org</email>">
+<!ENTITY email-debian-i18n-list "<email>debian-i18n@lists.debian.org</email>">
+
+<!ENTITY url-debian-list-archives "http://lists.debian.org/">
+
+<!ENTITY url-debian-l10n "http://www.debian.org/intl/l10n/">
+
+
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+End:
+-->
