@@ -1,66 +1,286 @@
-debian-installer (20090123lenny7) stable; urgency=low
+debian-installer (2010xxxx) UNRELEASED; urgency=low
 
-  * Rebuild to incorporate linux-kernel-di packages based upon
-    linux-2.6 2.6.26-23
+  [ Theppitak Karoonboonyanan ]
+  * Add needed characters for Thai.
 
- -- dann frazier <dannf@debian.org>  Fri, 18 Jun 2010 10:28:34 -0600
-
-debian-installer (20090123lenny6) stable; urgency=low
-
-  [ Frans Pop ]
-  * gen-sources.list.udeb: allow for multiple spaces and tabs in a source line.
-
-  [ dann frazier ]
-  * Rebuild to incorporate linux-kernel-di packages based upon
-    linux-2.6 2.6.26-21
-
- -- dann frazier <dannf@debian.org>  Thu, 21 Jan 2010 10:28:21 -0700
-
-debian-installer (20090123lenny5) stable; urgency=low
-
-  * Implement clean method to include udebs from proposed-updates for builds
-    for stable and testing (backported from trunk).
-  * Activate use of proposed-updates for official builds.
-
- -- Frans Pop <fjp@debian.org>  Wed, 23 Dec 2009 15:15:34 +0000
-
-debian-installer (20090123lenny4) stable; urgency=low
+  [ Christian Perrier ]
+  * Remove Thai from the list of languages only supported with the
+    graphical cdebconf frontend.
 
   [ Frans Pop ]
-  * Use printf instead of 'echo -en' to create win32-loader.ini.
-    Closes: #539933.
+  * sparc: add components needed to load firmware for netboot images.
+  * Update pkg-lists for changes in auto-install (1.7). Main benefit is that
+    netcfg will no longer get pulled in on images that shouldn't have it.
+  * ia64: add support for loading firmware to images. Closes: #572724.
+  * Fix building with alternative LOCALUDEBDIR.
+  * Ensure glyphs used in the translated right column of localechooser are
+    included in images to avoid incomplete display of the languagelist when
+    some translations are dropped through DROP_LANG.
+  * Drop auto-install from pkg-lists now that it has been integrated in
+    the preseed udebs.
 
-  [ dann frazier ]
-  * Rebuild to incorporate linux-kernel-di packages based upon
-    linux-2.6 2.6.26-19
-
- -- dann frazier <dannf@debian.org>  Tue, 25 Aug 2009 23:18:34 -0600
-
-debian-installer (20090123lenny3) stable; urgency=low
-
-  * Rebuild to incorporate linux-kernel-di packages based upon
-    linux-2.6 2.6.26-17
-
- -- dann frazier <dannf@debian.org>  Wed, 24 Jun 2009 23:21:14 -0600
-
-debian-installer (20090123lenny2) stable; urgency=low
-
-  * Rebuilt due cdebconf and kernel updates.
-
- -- Otavio Salvador <otavio@debian.org>  Tue, 16 Jun 2009 11:11:30 -0300
-
-debian-installer (20090123lenny1) stable; urgency=low
+  [ Otavio Salvador ]
+  * Switch amd64, i386, hppa, powerpc, mipsel, s390, ia64, mips, sparc to
+    2.6.32.
 
   [ Martin Michlmayr ]
+  * Switch armel to 2.6.32.
+  * QNAP: make the check for a valid MAC address more reliable.
+  * QNAP: add a check to ensure that the right installer files for the
+    user's QNAP model are used.
+  * OpenRD-Base and OpenRD-Client can use the same image, so provide
+    only one generic image for OpenRD.
+  * QNAP: Copy uLinux.conf in case it's not there so we can identify
+    the QNAP model.
+  * Generate images for GuruPlug.
+  * Generate an image for HP t5325 Thin Client (but it requires a
+    serial console).
+
+  [ Cyril Brulebois ]
+  * Warn if only the 'build' directory has been checked out instead of the
+    full source of the 'debian-installer' package.
+
+  [ Cyril Brulebois / Frans Pop ]
+  * Switch graphical installer from DirectFb to X.Org backend
+    - include xserver-xorg udebs for G-I images
+    - use console-setup instead of kbd-chooser for G-I images
+    - exclude X.Org modules from library reduction
+    - stop including libgcc_s.so.1 in G-I images; it's not needed with X.Org
+  * Enable graphical installer build targets again. With many thanks to
+    Cyril Brulebois, Julien Cristau and others who have contributed to
+    implementing the X.Org backend.
+
+  [ Frans Pop ]
+  * G-I: include gtk2-engines-udeb through pkg-lists.
+  * Add check for incorrect file attributes on device nodes, which can occur
+    when using fakeroot after restarting a (failed) build.
+  * x86: update info about disabling framebuffer in F8 syslinux help screen.
+
+  [ Aurelien Jarno ]
+  * mips/mipsel: re-enable Broadcom SWARM (sb1-bcm91250a) support.
+
+  [ Ryan Tandy ]
+  * Create images for Buffalo Linkstation Pro/Live. Closes: #580714
+
+  [ Otavio Salvador ]
+  * Move amd64, sparc, mipsel and i386 to linux 2.6.32 (ABI 5).
+
+  [ Samuel Thibault ]
+  * hurd-i386: Fix boot menu ramdisk support.
+
+  [ Otavio Salvador ]
+  * Move hppa, ia64, powerpc and s390 to linux 2.6.32 (ABI 5).
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 14 Feb 2010 17:06:27 +0100
+
+debian-installer (20100211) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Major update of Debian Installer Internals document.
+  * Move menu-item-numbers.txt and available-hooks.txt to D-I Internals.
+  * Exclude localechooser, kbd-chooser and auto-install for all installs
+    of type network-console.
+  * armel/orion5x: drop some additional languages as the image is too large.
+  * Drop languages only supported in graphical installer by default and only
+    keep them for targets that build graphical installer images.
+
+  [ Otavio Salvador ]
+  * Do not list dhcp3-client-udeb in pkg-lists since it is added, when
+    needed, as dependency in netcfg.
+
+ -- Otavio Salvador <otavio@ossystems.com.br>  Thu, 11 Feb 2010 18:03:22 -0200
+
+debian-installer (20100122) unstable; urgency=low
+
+  [ Otavio Salvador ]
+  * debian/copyright: clarify it is licensed in GPL 2 or later.
+
+  [ Frans Pop ]
+  * Include contents of fosdem07 talk as a tarball instead of loose files as
+    they confuse Lintian.
+  * get-packages: correctly restore original Packages files when script exits
+    after they have been filtered.
+  * x86: only include gtk related syslinux files in the cd_info tarball for
+    debian-cd if we're building both text and gtk images.
+  * Bump debhelper compat to 6; bump Standards-Version to 3.8.3.
+  * gen-sources.list.udeb: also use any mirrors defined in files in the
+    /etc/apt/sources.list.d directory; /etc/apt/sources.list can be empty.
+  * gen-sources.list.udeb: allow for multiple spaces and tabs in a source line.
+  * Remove unused references to socket-modules from pkg-lists.
+  * Drop no longer needed versioned build dependency on dpkg.
+
+  [ Aurelien Jarno ]
+  * Build GNU/kFreeBSD images using grub-mkrescue instead of grub-image, 
+    using patch from Robert Millan.
+
+  [ Samuel Thibault ]
+  * Add hurd-i386 configuration files.
+  * Add mtools, win32-loader, and grub-pc build-dependency on hurd-i386 too.
+
+  [ Colin Watson ]
+  * Upgrade to debhelper v7.
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 22 Jan 2010 17:58:49 -0200
+
+debian-installer (20091215) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Merge from Ubuntu:
+    - Document new $default_filesystem substitution and
+      $default_filesystem{ } internal specifier in partman recipes.
+  * Initial changes to target squeeze (see
+    http://lists.debian.org/debian-release/2009/01/msg00682.html for its
+    version number).
+  * Add cdebconf-newt-terminal to most images that include
+    cdebconf-newt-udeb (although not floppies).
+  * Introduce *_SUPPORTED_EXTRA variables, which can be used to define
+    "optional" supported targets. Use this to allow monolithic to be built
+    without having to edit configuration files and without bloating official
+    builds.
+  * Use os-prober-udeb rather than os-prober for powerpc monolithic target
+    (thanks, Wartan Hachaturow).
+  * Filter udeb dependencies based on Kernel-Version and Subarchitecture
+    (closes: #490634).
+  * Filter out packages that don't match KERNELVERSION from downloaded
+    Packages files. Despite the above change, apt still seems to want to
+    pull in multiple providers of virtual packages, which causes problems
+    otherwise.
+  * Clear Dir::Etc::sourceparts in build/util/pkg-list, to match
+    build/util/get-packages.
+  * Fix spelling of mdcfg in menu-item-numbers.txt.
+  * Update menu-item-numbers.txt to account for architectures moving towards
+    partman, and the merge of lvmcfg and mdcfg into partman-lvm and
+    partman-md respectively.
+  * Remove mention of autopartkit, removed in r52272.
+  * Update design.txt to account for base-config's removal (!).
+  * Add some notes on recommended use of debhelper in d-i, based on my
+    conversion of most packages to dh(1).
+  * Update porting.txt for partman changes (default_disk_label moved to
+    partman-partitioning/lib/disk-label.sh).
+  * Update references to svn.d-i.alioth.debian.org to refer to
+    svn.debian.org instead.
+  * cdebconf has had the PROGRESS extension nearly forever; update
+    retriever.txt to mention it.
+
+  [ Martin Michlmayr ]
+  * Remove support for the old arm port.
+  * Convert the Thecus N2100 image to an initramfs.
   * Include minix-modules on the orion5x image for the D-Link DNS-323,
     thanks Matt Palmer.
   * Generate images for the D-Link DNS-323 and Conceptronic CH3SNAS,
     thanks Matt Palmer.  Closes: #503040.
-  
-  [ Otavio Salvador ]
-  * Bump kernel versions to 2.6.26-2.
+  * Use the 2.6.29 kernel on armel, mips and mipsel.
+  * Use the 2.6.30-2 kernel on armel.
+  * Add images for the Marvell Kirkwood platform, including support for:
+    - QNAP TS-119, TS-219 and TS-219P
+    - Marvell OpenRD-Base and OpenRD-Client
+    - Marvell SheevaPlug
+  * Change the MAC address stored in the u-boot environment on the QNAP
+    TS-119, TS-219 and TS-219P.
+  * Remove Broadcom SWARM (sb1-bcm91250a) support since since few devices
+    remain out there and debian-installer support is likely broken anyway.
+  * Remove Broadcom Bigsur (sb1a-bcm91480b) support since debian-installer
+    support never worked.
 
- -- Otavio Salvador <otavio@debian.org>  Wed, 08 Apr 2009 00:29:38 -0300
+  [ Wartan Hachaturow ]
+  * Add CHRP boot structure on ISO images, Closes: #411728, #411203.
+  * Add monolithic support for powerpc64.
+  * Use 2.6.29 kernel on powerpc/powerpc64.
+
+  [ Otavio Salvador ]
+  * Bump kernels to use new 2.6.26-2 kernels.
+
+  [ Christian Perrier ]
+  * Add needed characters for Kirghiz.
+  * Take care to drop System.map after moving the kernel to the top of the
+    tree and before removing the /boot directory there.
+
+  [ Frans Pop ]
+  * Drop support for the ppc64 architecture.
+
+  [ Stephen R. Marenka ]
+  * Move m68k to 2.6.29-1.
+
+  [ dann frazier ]
+  * Use 2.6.29-2 kernel on ia64.
+
+  [ Frans Pop ]
+  * Switch to 2.6.29-2 kernel for hppa.
+
+  [ Ian Campbell ]
+  * Add netboot-xen images for amd64.
+  * Add cdrom-xen images for i386 and amd64.
+
+  [ Otavio Salvador ]
+  * Switch to 2.6.29-2 kernel for amd64 and i386.
+
+  [ Aurelien Jarno ]
+  * Use back mklibs instead of mklibs-copy on mips and mipsel now that
+    they work again.
+
+  [ Frans Pop ]
+  * Implement version 2.0 of syslinux framework for x86. Basically this
+    backports the structure already implemented in debian-cd before the
+    release of Lenny to D-I (allowing to simplify the code in debian-cd).
+    Main changes:
+    - enhance templates to support selecting a default desktop environment
+    - support four types of syslinux configuration by setting SYSLINUX_CFG
+    - allow to define alternative default desktop environment (DESKTOP)
+    - split out rescue options as those are independent of desktop selection
+    - simplify setting correct directory to kernel/initrd for debian-cd
+  * Using the new framework, users can now also select an alternative desktop
+    environments from the boot menu for netboot/miniiso-based installs.
+  * sparc: display message for unsupported subarchitectures (mini.iso).
+
+  [ Otavio Salvador ]
+  * Update alpha, amd64, armel, hppa, i386, mips, mipsel, powerpc and sparc
+    to 2.6.30-1.
+
+  [ Frans Pop ]
+  * Update s390 to 2.6.30-1 using -s390x (64-bits) kernel.
+  * Use printf instead of 'echo -en' to create win32-loader.ini.
+    Closes: #539933.
+
+  [ Max Vozeler ]
+  * build/Makefile: Support ROOTCMD with fallback to fakeroot unless
+    overriden or already running as root.
+
+  [ Luca Favatella ]
+  * Handle libc0.1 (GNU/kFreeBSD) and libc0.3 (GNU/Hurd) as libc6/libc6.1.
+  * Add ufs1 initrd support. Thanks to Robert Millan and Thorsten Glaser.
+  * Add kfreebsd-i386 monolithic config files. Thanks to Robert Millan.
+  * Use arch independent code for LSB_DISTRIB_DESCRIPTION.
+  * Use grub to boot kfreebsd-* d-i CD. Thanks to Robert Millan.
+  * Use makefs to generate the image. Thanks to Thorsten Glaser.
+
+  [ Aurelien Jarno ]
+  * Add kfreebsd-i386 netboot config files.
+  * Add kfreebsd-amd64 config files.
+  * Share code between kfreebsd-*
+  * Add a splash screen for kfreebsd-*.
+
+  [ Otavio Salvador ]
+  * Move hppa, i386, amd64, alpha, mipsel, s390, ia64, mips, powerpc
+    and sparc to Linux kernel 2.6.31-2 ABI.
+
+  [ Frans Pop ]
+  * Change default video mode for i386/amd64 to vga=788 for installations
+    using the "newt" frontend. This forces the framebuffer to VESA and will
+    thereby solve problems reported on various HP notebooks with the vga16fb
+    driver. It also increases the screen size and thus allows more information
+    to be displayed. Closes: #471505.
+  * [s390] Add localechooser to initrd for generic target (see #316006).
+  * Implement clean method to include udebs from proposed-updates for builds
+    for stable and testing.
+
+  [ Joey Hess ]
+  * Remove upx from build-deps, has not been used for over a year.
+
+  [ Otavio Salvador ]
+  * Disable GTK+ based images due #557387. This ought to be reverted
+    once GTK+ DFB backend is fixed.
+
+ -- Otavio Salvador <otavio@ossystems.com.br>  Tue, 15 Dec 2009 12:34:36 -0200
 
 debian-installer (20090123) unstable; urgency=low
 
