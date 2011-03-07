@@ -6,6 +6,8 @@ debian-installer (2011xxxx) UNRELEASED; urgency=low
 
   [ Martin Michlmayr ]
   * qnap-flash-debian: recognize QNAP TS-x12 devices.
+  * lspro-config-debian: Exit if the firmware version cannot be
+    determined.  Thanks John Bytheway.  Closes: #609476
 
  -- Jurij Smakov <jurij@debian.org>  Mon, 24 Jan 2011 21:27:36 +0000
 
