@@ -1,4 +1,4 @@
-debian-installer (2011xxxx) UNRELEASED; urgency=low
+debian-installer (20110106+squeeze1) UNRELEASED; urgency=low
 
   [ Jurij Smakov ]
   * Add pata-modules to cdrom config for sparc and sparc64.
