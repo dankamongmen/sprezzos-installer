@@ -1,8 +1,8 @@
-debian-installer (20110106+squeeze2) UNRELEASED; urgency=high
+debian-installer (20110106+squeeze2) squeeze; urgency=high
 
-  * Add pata-modules to cdrom config for ia64. Closes: #622187.
+  * Add pata-modules to cdrom config for ia64. Closes: #622187
 
- -- dann frazier <dannf@debian.org>  Fri, 17 Jun 2011 14:46:35 -0600
+ -- dann frazier <dannf@debian.org>  Fri, 17 Jun 2011 14:53:19 -0600
 
 debian-installer (20110106+squeeze1) squeeze; urgency=low
 
