@@ -1,3 +1,10 @@
+debian-installer (20110106+squeeze3) UNRELEASED; urgency=low
+
+  * Rebuild against updated linux-kernel-di-*-2.6, adding drivers
+    hpsa, pm8001 and bna.
+
+ -- dann frazier <dannf@debian.org>  Wed, 22 Jun 2011 07:32:34 -0600
+
 debian-installer (20110106+squeeze2) squeeze; urgency=high
 
   * Add pata-modules to cdrom config for ia64. Closes: #622187
