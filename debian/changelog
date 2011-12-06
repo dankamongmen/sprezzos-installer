@@ -1,3 +1,10 @@
+debian-installer (20110106+squeeze4) UNRELEASED; urgency=low
+
+  * Adjust syslinux menu layout to avoid it falling off the bottom of the
+    screen. Thanks, Flavio Stanchina. Closes: #650979
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 05 Dec 2011 23:48:21 -0400
+
 debian-installer (20110106+squeeze3) squeeze; urgency=high
 
   * Rebuild against updated linux-kernel-di-*-2.6, adding drivers
