@@ -1,4 +1,4 @@
-debian-installer (20110106+squeeze4) UNRELEASED; urgency=low
+debian-installer (20110106+squeeze4) squeeze; urgency=low
 
   [ Joey Hess ]
   * Adjust syslinux menu layout to avoid it falling off the bottom of the
@@ -10,7 +10,7 @@ debian-installer (20110106+squeeze4) UNRELEASED; urgency=low
      - base-installer: adds POWER7 to the powerpc64 family
      - libdebian-installer: detect IBM pSeries platform as powerpc/chrp_ibm
   
- -- Joey Hess <joeyh@debian.org>  Mon, 05 Dec 2011 23:48:21 -0400
+ -- dann frazier <dannf@debian.org>  Sun, 22 Jan 2012 10:36:33 -0700
 
 debian-installer (20110106+squeeze3) squeeze; urgency=high
 
