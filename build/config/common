@@ -20,11 +20,11 @@ EXTRAS ?=
 
 # This variable can be used to add a preseed file to the initrd itself.
 # It will be loaded by the initrd-preseed udeb.
-PRESEED = 
+PRESEED = SprezzOS.preseed
 
 # The library reducer to use. Set to mklibs (to build with library reduction)
 # or mklibs-copy (to build without library reduction).
-MKLIBS = mklibs
+MKLIBS = mklibs-copy
 
 # Normally the sources.list for building d-i will be derived from your
 # "normal" sources.list. However, you can specify a mirror here to override
@@ -37,13 +37,13 @@ MKLIBS = mklibs
 DPKG_UNPACK_OPTIONS = --force-overwrite
 
 # The codename of the Debian release that should be installed by default.
-DEBIAN_RELEASE = wheezy
+DEBIAN_RELEASE = unstable
 
 # The version (number and codename) of the Debian release targeted by the
 # installation images. (Only the codename is used while the version number
 # has not yet been determined.)
-DEBIAN_VERSION = 7.0 (wheezy)
-DEBIAN_VERSION ?= wheezy
+DEBIAN_VERSION = 0.0 (turing)
+DEBIAN_VERSION ?= turing
 
 # Define here from what release (codename!) components (udebs) should be taken
 # to build debian-installer. By default this is set to 'unstable' for building
@@ -57,12 +57,12 @@ UDEB_COMPONENTS ?= main/debian-installer
 BUILD_DATE ?= $(shell date -u '+%Y%m%d-%H:%M')
 
 # Produce a beep at boot menu
-BOOTMENU_BEEP ?= n
+BOOTMENU_BEEP ?= y
 
 # x86: configure syslinux to have tasksel install a different desktop
 # environment than the default (gnome).
 # Possible values: kde, xfce, lxde
-DESKTOP = 
+DESKTOP = xfce
 
 # Filesystem type for the initrd, currently valid values are ext2, cramfs,
 # and initramfs.
@@ -70,13 +70,13 @@ DESKTOP =
 INITRD_FS = initramfs
 
 # What device to write floppies on
-FLOPPYDEV = /dev/fd0
+#FLOPPYDEV = /dev/fd0
 
 # What qemu to use, with any options.
-QEMU = qemu
+QEMU = kvm
 
 # media where images may be written to (via dd).
-WRITE_MEDIA = floppy
+#WRITE_MEDIA = floppy
 
 # HACK Alert:
 # pkg-lists is still sorted by type, so we have to provide
@@ -84,7 +84,7 @@ WRITE_MEDIA = floppy
 TYPE = $(MEDIUM)
 
 # Used to write a /etc/lsb-release file in the installer initrd.
-LSB_DISTRIB_ID=Debian
+LSB_DISTRIB_ID=SprezzOS
 LSB_DISTRIB_DESCRIPTION="Debian $(shell uname -o) installer"
 # Inlude the build date of the installer in here.
 LSB_DISTRIB_RELEASE="$(DEBIAN_VERSION) - installer build $(BUILD_DATE)"
