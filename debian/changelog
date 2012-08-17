@@ -1,3 +1,10 @@
+debian-installer (20120817) unstable; urgency=high
+
+  [ Nick Black ]
+  * SprezzOS fork
+
+ -- Nick Black <nick.black@sprezzatech.com>  Fri, 17 Aug 2012 00:54:41 -0400
+
 debian-installer (20120804) UNRELEASED; urgency=low
 
   [ Robert Millan ]
