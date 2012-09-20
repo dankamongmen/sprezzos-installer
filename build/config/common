@@ -69,14 +69,8 @@ DESKTOP = xfce
 # NOTE: Your kernel must support this filesystem, not just a module. 
 INITRD_FS = initramfs
 
-# What device to write floppies on
-#FLOPPYDEV = /dev/fd0
-
 # What qemu to use, with any options.
 QEMU = kvm
-
-# media where images may be written to (via dd).
-#WRITE_MEDIA = floppy
 
 # HACK Alert:
 # pkg-lists is still sorted by type, so we have to provide

@@ -101,7 +101,7 @@ the other three, the requirement is you need to use at least one.
 $SUBARCH is supposed to be the subarchitecture. For e.g. m68k this
 would be something like "amiga" or "atari", i386 doesn't use it.
 
-$MEDIUM is the boot medium, like "cdrom", "floppy", "netboot".
+$MEDIUM is the boot medium, like "cdrom", "netboot".
 
 $FLAVOUR distinguishes between other differences, like 2.4 vs. 2.6
 kernels, or several floppy images.
@@ -123,11 +123,6 @@ config
 |   |   |-- isolinux-2.6.cfg
 |   |   `-- isolinux.cfg
 |   |-- cdrom.cfg
-|   |-- floppy
-|   |   |-- boot.cfg
-|   |   |-- cd-drivers.cfg
-|   |   `-- root.cfg
-|   |-- floppy.cfg
 |   |-- hd-media
 |   |   `-- 2.6.cfg
 |   |-- hd-media.cfg
@@ -329,8 +324,6 @@ VERSIONED_SYSTEM_MAP
   If set, the kernel's System.map is expected to have an unique
   filename for each kernel of this architecture.
 
-FLOPPY_SIZE
-  The size of a floppy image, in kilobytes.
 IMAGE_SIZE
   The size of a an image, in kilobytes. Only needed and supported for
   some types of images.
@@ -341,7 +334,7 @@ DISK_LABEL
 
 MEDIA_TYPE
   The type of media produced, currently used to make qemu boot the image
-  properly. Suggested values: "CD-ROM", "netboot image", "floppy", etc.
+  properly. Suggested values: "CD-ROM", "netboot image", etc.
 
 DEBIAN_RELEASE
   The codename of the debian release to be installed by default.
@@ -437,10 +430,6 @@ MKFS_JFFS2
   a command to use to create the image.
   For example: MKFS_JFFS2 = mkfs.jffs2 -f -p -b -e 0x20000
 
-WRITE_MEDIA
-  Add you configuration's name if it can be written to a raw device.
-  Mostly useful for floppies.
-
 UDEB_LISTS
   List of files listing udebs that were used to build the image.
 
@@ -456,9 +445,6 @@ TRANSSTATUS
 
 
 Variables useful for testing:
-
-FLOPPYDEV
-  The device name to use for writing a image to a raw device.
 
 QEMU
   The name of the qemu emulator binary.
