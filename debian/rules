@@ -25,7 +25,6 @@ clean:
 	dh_testroot
 	dh_clean
 	$(MAKE) -C build reallyclean
-	$(MAKE) -C doc/devel/partman clean
 	$(MAKE) -C doc/devel/internals clean
 
 # Must run as root, so is not run as part of regular build.
@@ -39,7 +38,6 @@ build: build-stamp
 build-stamp:
 	rm -f $@
 	$(MAKE) -C doc/devel/internals
-	$(MAKE) -C doc/devel/partman
 	touch $@
 
 install: build
@@ -59,7 +57,7 @@ binary-arch: install
 	dh_testroot
 	dh_installchangelogs
 	dh_installdocs doc/* -X Makefile -X build.sh -X .xsl \
-		-X internals.xml -X partman-doc.sgml
+		-X internals.xml
 	dh_compress
 	dh_fixperms
 
