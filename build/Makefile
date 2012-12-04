@@ -459,8 +459,29 @@ endif
 	# Create a dev tree.
 	mkdir -p $(TREE)/dev
 	# Always needed, in case udev is not mounted on boot.
-	mknod $(TREE)/dev/console c 5 1
+	mknod $(TREE)/dev/mem c 1 1
 	mknod $(TREE)/dev/null c 1 3
+	mknod $(TREE)/dev/port c 1 4
+	mknod $(TREE)/dev/zero c 1 5
+	mknod $(TREE)/dev/random c 1 8
+	mknod $(TREE)/dev/urandom c 1 9
+	mknod $(TREE)/dev/tty1 c 4 1
+	mknod $(TREE)/dev/tty2 c 4 2
+	mknod $(TREE)/dev/tty3 c 4 3
+	mknod $(TREE)/dev/tty4 c 4 4
+	mknod $(TREE)/dev/tty5 c 4 5
+	mknod $(TREE)/dev/tty6 c 4 6
+	mknod $(TREE)/dev/tty7 c 4 7
+	mknod $(TREE)/dev/tty c 5 0
+	mknod $(TREE)/dev/console c 5 1
+	mknod $(TREE)/dev/vcs c 7 0
+	mknod $(TREE)/dev/vcs1 c 7 1
+	mknod $(TREE)/dev/vcs2 c 7 2
+	mknod $(TREE)/dev/vcs3 c 7 3
+	mknod $(TREE)/dev/vcs4 c 7 4
+	mknod $(TREE)/dev/vcs5 c 7 5
+	mknod $(TREE)/dev/vcs6 c 7 6
+	mknod $(TREE)/dev/vcs7 c 7 7
 
 	mkdir -p $(EXTRAUDEBSDIR)
 	mkdir -p $(EXTRAUDEBSDPKGDIR)/info $(EXTRAUDEBSDPKGDIR)/updates
