@@ -417,10 +417,6 @@ UPX
 SYSLINUX_OPTS
   Additional syslinux options.
 
-SPLASH_RLE
-SPLASH_PNG
-  The syslinux splash screen file.
-
 INITRD_FS
   The filesystem to use for initrds, needs to be built into the kernel.
   ext2, initramfs, or jffs2.
