@@ -483,38 +483,6 @@ endif
 	mkdir -p $(EXTRAUDEBSDIR)
 	mkdir -p $(EXTRAUDEBSDPKGDIR)/info $(EXTRAUDEBSDPKGDIR)/updates
 	touch $(EXTRAUDEBSDPKGDIR)/status $(EXTRAUDEBSDPKGDIR)/available
-	# Collect the used UTF-8 strings, to know which glyphs to include in
-	# the font.
-	#cat needed-characters/*.utf > $(TEMP)/all.utf
-	if [ -n "`find $(EXTRAUDEBSDPKGDIR)/info/ -name \\*.templates`" ]; then \
-		cat $(EXTRAUDEBSDPKGDIR)/info/*.templates >> $(TEMP)/all.utf; \
-	fi
-	if [ -n "`find $(DPKGDIR)/info/ -name \\*.templates`" ]; then \
-		cat $(DPKGDIR)/info/*.templates >> $(TEMP)/all.utf; \
-	fi
-	if [ -f $(TREE)/usr/share/localechooser/languagelist.data.gz ]; then \
-		zcat $(TREE)/usr/share/localechooser/languagelist.data.gz >> $(TEMP)/all.utf; \
-	fi
-	# Strip all kernel modules, just in case they haven't already been
-	set -e; \
-	for module in `find $(TREE)/lib/modules/ -name '*.o' -or -name '*.ko'`; do \
-	    strip -R .comment -R .note -g $$module || true; \
-	done
-	# Remove some unnecessary dpkg files.
-	set -e; \
-	for file in `find $(TREE)/var/lib/dpkg/info -name '*.md5sums' -o \
-	    -name '*.postrm' -o -name '*.prerm' -o -name '*.preinst' -o \
-	    -name '*.list'`; do \
-		if echo $$file | grep -qv '\.list'; then \
-			echo "** Removing unnecessary control file $$file"; \
-		fi; \
-		rm $$file; \
-	done
-	rm -rf $(TREE)/var/lib/dpkg/triggers
-	# Remove extra udebs now that we're done with them.
-	rm -rf $(EXTRAUDEBSDIR)
-	# Tree target ends here. Whew!
-	@touch $@
 ifdef EXTRADRIVERS
 	# Unpack the udebs of additional driver disks, so mklibs runs on them too.
 	dpkg $(DPKG_UNPACK_OPTIONS) --log=/dev/null --root=$(EXTRAUDEBSDIR) --unpack \
@@ -559,6 +527,38 @@ ifeq ($(DEB_HOST_ARCH_OS),hurd)
 	touch $(TREE)/servers/exec
 endif
 endif
+	# Collect the used UTF-8 strings, to know which glyphs to include in
+	# the font.
+	#cat needed-characters/*.utf > $(TEMP)/all.utf
+	if [ -n "`find $(EXTRAUDEBSDPKGDIR)/info/ -name \\*.templates`" ]; then \
+		cat $(EXTRAUDEBSDPKGDIR)/info/*.templates >> $(TEMP)/all.utf; \
+	fi
+	if [ -n "`find $(DPKGDIR)/info/ -name \\*.templates`" ]; then \
+		cat $(DPKGDIR)/info/*.templates >> $(TEMP)/all.utf; \
+	fi
+	if [ -f $(TREE)/usr/share/localechooser/languagelist.data.gz ]; then \
+		zcat $(TREE)/usr/share/localechooser/languagelist.data.gz >> $(TEMP)/all.utf; \
+	fi
+	# Strip all kernel modules, just in case they haven't already been
+	set -e; \
+	for module in `find $(TREE)/lib/modules/ -name '*.o' -or -name '*.ko'`; do \
+	    strip -R .comment -R .note -g $$module || true; \
+	done
+	# Remove some unnecessary dpkg files.
+	set -e; \
+	for file in `find $(TREE)/var/lib/dpkg/info -name '*.md5sums' -o \
+	    -name '*.postrm' -o -name '*.prerm' -o -name '*.preinst' -o \
+	    -name '*.list'`; do \
+		if echo $$file | grep -qv '\.list'; then \
+			echo "** Removing unnecessary control file $$file"; \
+		fi; \
+		rm $$file; \
+	done
+	rm -rf $(TREE)/var/lib/dpkg/triggers
+	# Remove extra udebs now that we're done with them.
+	rm -rf $(EXTRAUDEBSDIR)
+	# Tree target ends here. Whew!
+	@touch $@
 	# Add missing symlinks for libraries
 	ldconfig -n $(TREE)/lib $(TREE)/usr/lib
 	# Remove any libraries that are present in both usr/lib and lib,
