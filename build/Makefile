@@ -454,7 +454,6 @@ ifndef OMIT_RELEASE_INFO
 	echo $(DEBIAN_RELEASE) >$(TREE)/etc/default-release
 	echo $(USE_UDEBS_FROM) >$(TREE)/etc/udebs-source
 endif
-
 	# Create a dev tree.
 	mkdir -p $(TREE)/dev
 	# Always needed, in case udev is not mounted on boot.
@@ -481,11 +480,9 @@ endif
 	mknod $(TREE)/dev/vcs5 c 7 5
 	mknod $(TREE)/dev/vcs6 c 7 6
 	mknod $(TREE)/dev/vcs7 c 7 7
-
 	mkdir -p $(EXTRAUDEBSDIR)
 	mkdir -p $(EXTRAUDEBSDPKGDIR)/info $(EXTRAUDEBSDPKGDIR)/updates
 	touch $(EXTRAUDEBSDPKGDIR)/status $(EXTRAUDEBSDPKGDIR)/available
-
 ifdef EXTRADRIVERS
 	# Unpack the udebs of additional driver disks, so mklibs runs on them too.
 	dpkg $(DPKG_UNPACK_OPTIONS) --log=/dev/null --root=$(EXTRAUDEBSDIR) --unpack \
@@ -497,7 +494,6 @@ ifdef EXTRAUDEBS
 	dpkg $(DPKG_UNPACK_OPTIONS) --log=/dev/null --root=$(EXTRAUDEBSDIR) --unpack \
 		$(foreach udeb,$(EXTRAUDEBS),$(UDEBDIR)/$(udeb).udeb)
 endif
-
 	# Library reduction. Existing libs from udebs are put in the udeblibs
 	# directory and mklibs is made to use those in preference to the
 	# system libs.
@@ -517,27 +513,22 @@ ifndef ONLY_KLIBC
 		$(addprefix -l,$(notdir $(wildcard $(TREE)/usr/lib/cdebconf/frontend/*.so))) \
 		`find $(TEMP) -type f -a \( -perm +0111 -o -name '*.so' -o -name '*.so.*' \) | \
 		 grep -v udeblibs | grep -v 'usr/lib/xorg/modules/.*\.so'`
-
 ifeq ($(DEB_HOST_ARCH),armhf)
 	# armhf has two linkers for now, while the world gets sorted
 	mkdir -p $(TREE)/lib/arm-linux-gnueabihf
 	ln -s /lib/ld-linux-armhf.so.3 $(TREE)/lib/arm-linux-gnueabihf/ld-linux.so.3
 endif
-
 ifeq ($(DEB_HOST_ARCH_OS),hurd)
 	# On Hurd the SONAME for the dynamic linker is ld.so.1, but binaries
 	# have the ld.so symlink as the interpreter. Ideally mklibs should
 	# be copying it along with the libraries.
 	ln -sf ld.so.1 $(TREE)/lib/ld.so
-
 	# We need /servers/exec at boot time
 	touch $(TREE)/servers/exec
 endif
 endif
-
 	# Add missing symlinks for libraries
 	ldconfig -n $(TREE)/lib $(TREE)/usr/lib
-
 	# Remove any libraries that are present in both usr/lib and lib,
 	# from lib. These were unnecessarily copied in by mklibs, and
 	# we want to use the ones in usr/lib instead since they came 
@@ -546,7 +537,6 @@ endif
 	for lib in `find $(TREE)/usr/lib/ -name "lib*" -type f -printf "%f\n" | cut -d . -f 1 | sort | uniq`; do \
 		rm -f $(TREE)/lib/$$lib.*; \
 	done
-
 	# Reduce status file to contain only the elements we care about.
 	egrep -i '^((Status|Provides|Depends|Package|Version|Description|installer-menu-item|Description-..):|$$)' \
 		$(DPKGDIR)/status > $(DPKGDIR)/status.new
@@ -559,11 +549,9 @@ endif
 	echo "Version: $(subst _,-,$(targetstring))-$(BUILD_DATE)" >> $(DPKGDIR)/status
 	echo "Description: debian installation image" >> $(DPKGDIR)/status
 	echo >> $(DPKGDIR)/status
-
 ifdef OMIT_DPKG
 	rm -rf $(DPKGDIR)
 endif
-
 define drop_lang
 	@echo "Dropping languages: $(1)"
 	@set -e; \
@@ -572,23 +560,20 @@ define drop_lang
 		mv temp $$FILE; \
 	done
 endef
-
 ifndef KEEP_GI_LANGS
 	# It makes no sense to include languages only supported by the
 	# graphical installer in regular images. This will also ensure
 	# their glyphs don't get included a bit lower down.
-	$(call drop_lang,$(GI_LANGS))
+	#$(call drop_lang,$(GI_LANGS))
 endif
-
 ifdef DROP_LANG
 	# Remove selected languages from the templates.
 	# Not ideal, but useful if you're very tight on space.
-	$(call drop_lang,$(DROP_LANG))
+	#$(call drop_lang,$(DROP_LANG))
 endif
-
 	# Collect the used UTF-8 strings, to know which glyphs to include in
 	# the font.
-	cat needed-characters/*.utf > $(TEMP)/all.utf
+	#cat needed-characters/*.utf > $(TEMP)/all.utf
 	if [ -n "`find $(EXTRAUDEBSDPKGDIR)/info/ -name \\*.templates`" ]; then \
 		cat $(EXTRAUDEBSDPKGDIR)/info/*.templates >> $(TEMP)/all.utf; \
 	fi
@@ -598,14 +583,11 @@ endif
 	if [ -f $(TREE)/usr/share/localechooser/languagelist.data.gz ]; then \
 		zcat $(TREE)/usr/share/localechooser/languagelist.data.gz >> $(TEMP)/all.utf; \
 	fi
-
-
 	# Strip all kernel modules, just in case they haven't already been
 	set -e; \
 	for module in `find $(TREE)/lib/modules/ -name '*.o' -or -name '*.ko'`; do \
 	    strip -R .comment -R .note -g $$module || true; \
 	done
-
 	# Remove some unnecessary dpkg files.
 	set -e; \
 	for file in `find $(TREE)/var/lib/dpkg/info -name '*.md5sums' -o \
@@ -617,10 +599,8 @@ endif
 		rm $$file; \
 	done
 	rm -rf $(TREE)/var/lib/dpkg/triggers
-
 	# Remove extra udebs now that we're done with them.
 	rm -rf $(EXTRAUDEBSDIR)
-
 	# Tree target ends here. Whew!
 	@touch $@
 
@@ -674,7 +654,7 @@ sources.list.udeb:
 $(TEMP)/unifont.bdf: $(TEMP)/all.utf
 	@set -e; \
 	CHARMAP=`LOCPATH=$(LOCALE_PATH) LC_ALL=C.UTF-8 locale charmap`; \
-            if [ UTF-8 != "$$CHARMAP" ]; then \
+	    if [ UTF-8 != "$$CHARMAP" ]; then \
 	        echo "error: Trying to build unifont.bgf without installation-locale!"; \
 		echo "(Alternatively, installation-locale may have been built against"; \
 		echo "a version of glibc with a different locale data format.)"; \
