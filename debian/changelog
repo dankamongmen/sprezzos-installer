@@ -1,9 +1,40 @@
-debian-installer (20130212) UNRELEASED; urgency=low
-  
-  [ Aurelien Jarno ]
-  * Build a vexpress image on armhf.
+debian-installer (20130415) unstable; urgency=low
 
- -- Aurelien Jarno <aurel32@debian.org>  Wed, 27 Feb 2013 13:49:57 +0100
+  [ Aurelien Jarno ]
+  * Include nic-modules in armhf/vexpress netboot image.
+
+ -- Cyril Brulebois <kibi@debian.org>  Mon, 15 Apr 2013 20:35:44 +0200
+
+debian-installer (20130412) unstable; urgency=low
+
+  [ Samuel Thibault ]
+  * internal.xml: Point at the repository README instead of duplicating
+    checkout information.
+
+  [ Ben Hutchings ]
+  * Include {ata,mtd,pata,sata}-modules in mx5 netboot image (Closes: #675017)
+  * Replace nic-modules with nic-{usb,wireless}-modules in armhf netboot
+    images (Closes: #705118)
+
+  [ Cyril Brulebois ]
+  * Amend previous changelog entry to mention that the added vexpress
+    image is a netboot one.
+
+ -- Cyril Brulebois <kibi@debian.org>  Fri, 12 Apr 2013 17:39:04 +0200
+
+debian-installer (20130409) unstable; urgency=low
+
+  [ Aurelien Jarno ]
+  * Build a netboot vexpress image on armhf.
+
+  [ Christian Perrier ]
+  * Update translation-status, computed with a fixed calc-release-status
+    script.
+
+  [ Cyril Brulebois ]
+  * For reference, build against linux 3.2.41-2.
+
+ -- Cyril Brulebois <kibi@debian.org>  Tue, 09 Apr 2013 16:45:49 +0200
 
 debian-installer (20130211) unstable; urgency=low
 
